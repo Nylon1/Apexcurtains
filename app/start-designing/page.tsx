@@ -186,6 +186,7 @@ const screenMeta = [
   },
 ] as const;
 
+export const dynamic = "force-dynamic";
 export default function StartDesigningPage() {
   const searchParams = useSearchParams();
 
