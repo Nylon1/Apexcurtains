@@ -1,5 +1,7 @@
 "use client";
+export const dynamic = "force-dynamic";
 
+import dynamicImport from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { ChangeEvent, useMemo, useState } from "react";
@@ -186,7 +188,7 @@ const screenMeta = [
   },
 ] as const;
 
-export const dynamic = "force-dynamic";
+
 export default function StartDesigningPage() {
   const searchParams = useSearchParams();
 
