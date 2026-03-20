@@ -119,21 +119,21 @@ export default function Navbar() {
       </header>
 
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-xl lg:hidden">
-          <div className="flex items-center justify-between px-4 py-4">
-            <div className="text-lg font-semibold text-white">Apex Curtains</div>
+        <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md lg:hidden">
+          <div className="flex items-center justify-between px-4 py-2">
+            <div className="text-base font-semibold text-white">Apex Curtains</div>
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white"
             >
               <X className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="px-4 pt-6">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-5">
-              <div className="mb-5 flex flex-col gap-3">
+          <div className="px-4 pt-3">
+            <div className="rounded-[28px] border border-white/10 bg-white/5 p-4">
+              <div className="mb-5 flex flex-col gap-2">
                 {navItems.map((item) => {
                   const active = isActive(item.href);
 

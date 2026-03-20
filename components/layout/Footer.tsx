@@ -27,11 +27,11 @@ const helpLinks = [
   },
   {
     label: "Measuring for Curtains for Apex Windows",
-    href: "/advice/measuring-for-curtains-for-apex-windows",
+    href: "/advice/how-to-measure-for-apex-curtains",
   },
   {
-    label: "How to Measure for Electric Blinds on Apex Windows",
-    href: "/advice/how-to-measure-for-electric-blinds-on-apex-windows",
+    label: "Best Curtains for Apex Windows",
+    href: "/advice/best-curtains-for-apex-windows-styles-that-actually-work",
   },
   {
     label: "Frequently Asked Questions",
@@ -152,7 +152,7 @@ export default function Footer() {
                 <div>
                   <div className="text-sm font-medium text-white">Email</div>
                   <div className="text-sm text-white/65">
-                    enquiries@apexcurtains.com
+                    hello@apexcurtains.com
                   </div>
                 </div>
               </div>
