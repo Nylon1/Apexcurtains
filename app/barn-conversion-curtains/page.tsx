@@ -169,7 +169,7 @@ export default function BarnConversionCurtainsPage() {
 
           <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
             <img
-              src="/window-types/barn-conversion.jpg"
+              src="/window-types/barn-conversion.jpeg"
               alt="Barn conversion curtains in a vaulted room with large glazed windows"
               className="h-full min-h-[460px] w-full object-cover"
             />
@@ -259,7 +259,7 @@ export default function BarnConversionCurtainsPage() {
           <div className="space-y-6">
             <div className="overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.04]">
               <img
-                src="/window-types/barn-conversion.jpg"
+                src="/window-types/barn-conversion.jpeg"
                 alt="Barn conversion curtain detail in a vaulted rustic room"
                 className="h-[280px] w-full object-cover"
               />

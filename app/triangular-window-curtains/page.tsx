@@ -138,7 +138,7 @@ export default function TriangularWindowCurtainsPage() {
 
           <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
             <img
-              src="/window-types/triangular.jpg"
+              src="/window-types/triangular.jpeg"
               alt="Triangular window curtains designed for unusual angled glazing"
               className="h-full min-h-[460px] w-full object-cover"
             />
@@ -216,7 +216,7 @@ export default function TriangularWindowCurtainsPage() {
           <div className="space-y-6">
             <div className="overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.04]">
               <img
-                src="/window-types/triangular.jpg"
+                src="/window-types/triangular.jpeg"
                 alt="Triangular window curtain detail"
                 className="h-[280px] w-full object-cover"
               />

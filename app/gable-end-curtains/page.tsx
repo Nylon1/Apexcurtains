@@ -137,7 +137,7 @@ export default function GableEndCurtainsPage() {
 
           <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
             <img
-              src="/window-types/gable-end.jpg"
+              src="/window-types/gable-end.jpeg"
               alt="Gable end curtains fitted to a large double-height glazed window"
               className="h-full min-h-[460px] w-full object-cover"
             />
@@ -215,7 +215,7 @@ export default function GableEndCurtainsPage() {
           <div className="space-y-6">
             <div className="overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.04]">
               <img
-                src="/window-types/gable-end.jpg"
+                src="/window-types/gable-end.jpeg"
                 alt="Gable end curtains in a dramatic glazed room"
                 className="h-[280px] w-full object-cover"
               />
