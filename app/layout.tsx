@@ -73,7 +73,40 @@ export default function RootLayout ({
     }),
   }}
 />
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: "Apex Curtains",
+      url: "https://apexcurtains.com",
+      description:
+        "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK, including coastal homes and sea-facing properties.",
+     areaServed: [
+  { "@type": "Country", name: "United Kingdom" },
+  { "@type": "City", name: "London" },
+  { "@type": "City", name: "Manchester" },
+  { "@type": "City", name: "Brighton" },
+  { "@type": "City", name: "Bournemouth" },
+  { "@type": "City", name: "Oxford" },
+  { "@type": "City", name: "Cambridge" }
+],
 
+      serviceType: [
+        "Apex window curtains",
+        "Triangular window curtains",
+        "Gable end curtains",
+        "Curtains for coastal homes",
+        "Curtains for sea-facing windows",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "GB",
+      },
+    }),
+  }}
+/>
         <Navbar />
 
         <main>
