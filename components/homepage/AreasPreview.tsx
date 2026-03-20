@@ -2,12 +2,12 @@ import Link from "next/link";
 import { ChevronRight, MapPin } from "lucide-react";
 
 const areaLinks = [
-  { label: "London", href: "/areas/london" },
+  { label: "Milton Keynes", href: "/areas/milton-keynes" },
   { label: "Manchester", href: "/areas/manchester" },
-  { label: "Birmingham", href: "/areas/birmingham" },
-  { label: "Leeds", href: "/areas/leeds" },
-  { label: "Glasgow", href: "/areas/glasgow" },
-  { label: "Edinburgh", href: "/areas/edinburgh" },
+  { label: "Tunbridge Wells", href: "/areas/tunbridge-wells" },
+  { label: "Oxford", href: "/areas/oxford" },
+  { label: "Cambridge", href: "/areas/cambridge" },
+  { label: "Basingstoke", href: "/areas/basingstoke" },
 ];
 
 export default function AreasPreview() {

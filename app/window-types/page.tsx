@@ -18,7 +18,7 @@ const windowTypes = [
     title: "Gable End",
     desc: "Tall double-height glazing",
     href: "/gable-end-curtains",
-    image: "/window-types/gable-end.jpg",
+    image: "/window-types/gable-end.jpeg",
     vibe: "Statement living",
   },
   {
@@ -26,7 +26,7 @@ const windowTypes = [
     title: "Triangular",
     desc: "Sharp angled windows",
     href: "/triangular-window-curtains",
-    image: "/window-types/triangular.jpg",
+    image: "/window-types/triangular.jpeg",
     vibe: "Geometric design",
   },
   {
@@ -34,7 +34,7 @@ const windowTypes = [
     title: "Barn Conversion",
     desc: "Vaulted rustic interiors",
     href: "/barn-conversion-curtains",
-    image: "/window-types/barn-conversion.jpg",
+    image: "/window-types/barn-conversion.jpeg",
     vibe: "Warm & character",
   },
   {
@@ -42,7 +42,7 @@ const windowTypes = [
     title: "Large Windows",
     desc: "Wide or floor-to-ceiling glass",
     href: "/large-window-curtains",
-    image: "/window-types/large-window.jpg",
+    image: "/window-types/large-window.jpeg",
     vibe: "Modern elegance",
   },
 ];
