@@ -16,19 +16,17 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#0a0a0d] text-white">
       <Hero />
+      <WhyDifferent />
       <WindowNavigator />
-       <HomeVisitProcess />
-       <WhyDifferent />
-       <GalleryShowcase />
+      <GalleryShowcase />
+      <HomeVisitProcess />
       <ApexInstallationJourney />
-      <FabricPersonalityQuiz />
-      <SolutionFinder />
-     
-   
       <ReviewsPreview />
+      <ArloPreview />
       <GuidesPreview />
       <AreasPreview />
-      <ArloPreview />
+      <SolutionFinder />
+      <FabricPersonalityQuiz />
       <FinalCta />
     </main>
   );
