@@ -14,6 +14,7 @@ const navItems = [
   { label: "Reviews", href: "/reviews" },
   { label: "Advice", href: "/advice" },
   { label: "Areas", href: "/areas" },
+  { label: "Get Advice", href: "/contact", highlight: true },
 ];
 
 export default function Navbar() {

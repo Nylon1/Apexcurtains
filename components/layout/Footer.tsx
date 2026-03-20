@@ -3,16 +3,15 @@ import Link from "next/link";
 
 const quickLinks = [
   { label: "Home", href: "/" },
-  { label: "Made in the UK Curtains", href: "/made-in-uk-curtains" },
-  { label: "Get Quote for Curtains", href: "/start-designing" },
-  { label: "Recent Projects", href: "/gallery" },
-  { label: "Apex Blinds", href: "/apex-blinds" },
-  { label: "About Apex Curtains", href: "/about-apex-curtains" },
-  { label: "Check Your City Here", href: "/areas" },
+  { label: "Window Types", href: "/window-types" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Advice", href: "/advice" },
+  { label: "Areas", href: "/areas" },
+  { label: "Contact", href: "/contact" },
+  { label: "Start Your Curtain Journey", href: "/start-designing" },
 ];
 
 const infoLinks = [
-  { label: "Our Price Promise", href: "/price-promise" },
   { label: "Press & Media Enquiries", href: "/press" },
   { label: "Seen on TV", href: "/seen-on-tv" },
   { label: "Privacy Policy", href: "/privacy-policy" },
@@ -22,151 +21,179 @@ const infoLinks = [
 ];
 
 const helpLinks = [
-  { label: "Arlo | Smart Apex Window Curtain Advisor", href: "/arlo-curtain-advisor" },
-  { label: "Hanging Curtains on Apex Windows", href: "/advice/hanging-curtains-on-apex-windows" },
-  { label: "Measuring for Curtains for Apex Windows", href: "/advice/measuring-for-curtains-for-apex-windows" },
-  { label: "Curtain Trends for Angled Windows in 2025", href: "/advice/curtain-trends-for-angled-windows-in-2025" },
-  { label: "How to Measure for Electric Blinds on Apex Windows", href: "/advice/how-to-measure-for-electric-blinds-on-apex-windows" },
-  { label: "Motorised Blinds for Apex Windows: The Ultimate Guide", href: "/advice/motorised-blinds-for-apex-windows-the-ultimate-guide" },
-  { label: "Frequently Asked Questions", href: "/advice" },
+  {
+    label: "Arlo | Smart Apex Window Curtain Advisor",
+    href: "/arlo-curtain-advisor",
+  },
+  {
+    label: "Measuring for Curtains for Apex Windows",
+    href: "/advice/measuring-for-curtains-for-apex-windows",
+  },
+  {
+    label: "How to Measure for Electric Blinds on Apex Windows",
+    href: "/advice/how-to-measure-for-electric-blinds-on-apex-windows",
+  },
+  {
+    label: "Frequently Asked Questions",
+    href: "/advice",
+  },
 ];
 
 export default function Footer() {
   return (
     <footer className="relative mt-24 overflow-hidden border-t border-white/10 bg-[#09090c] text-white">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(245,211,138,0.10),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(125,211,252,0.08),transparent_22%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.02),transparent_30%)]" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute left-[10%] top-[10%] h-40 w-40 rounded-full bg-[#f5d38a]/8 blur-[100px]" />
+        <div className="absolute right-[10%] bottom-[10%] h-40 w-40 rounded-full bg-white/5 blur-[100px]" />
+      </div>
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mb-10 flex flex-col gap-6 border-b border-white/10 pb-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-4 py-2 text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
-              <Sparkles className="h-4 w-4" />
-              Premium Apex Curtain Specialists
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.9fr_0.9fr_1fr_1fr]">
+          <div>
+            <div className="inline-flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm font-semibold">
+                AC
+              </div>
+              <div>
+                <div className="text-lg font-semibold">Apex Curtains</div>
+                <div className="text-sm text-white/55">
+                  Apex, triangular & architectural windows
+                </div>
+              </div>
             </div>
 
-            <h2 className="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Bespoke curtains for apex, angled and architectural windows
-            </h2>
-
-            <p className="mt-4 max-w-xl text-sm leading-7 text-white/65 sm:text-base">
-              Crafted for difficult windows, large glazing and luxury interiors
-              across the UK.
+            <p className="mt-6 max-w-md text-sm leading-8 text-white/65">
+              Specialists in curtains for apex, angled, triangular and large
+              architectural windows. Designed for difficult glazing, premium
+              spaces and considered interiors.
             </p>
-          </div>
 
-       
-             <div className="flex flex-wrap gap-3 pt-2">
+            <div className="mt-6">
               <Link
-                href="/arlo-curtain-advisor"
+                href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
               >
-                Ask Arlo 
-                
-              </Link>
-                 
-              <Link
-                href="/start-designing"
-                className="rounded-full bg-white px-5 py-2 text-sm font-medium text-black transition hover:bg-gray-100"
-              >
-                Start your Curtain Journey
+                <Sparkles className="h-4 w-4" />
+                Get Expert Advice
               </Link>
             </div>
-            
-        </div>
+          </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.9fr_0.95fr_1.1fr]">
-          <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-xl">
-            <h3 className="text-2xl font-semibold text-white">Contact us</h3>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#f5d38a]">
+              Explore
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/70 transition hover:text-[#f5d38a]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-            <div className="mt-6 space-y-4 text-white/72">
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#f5d38a]">
+              Information
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {infoLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/70 transition hover:text-[#f5d38a]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#f5d38a]">
+              Popular Guides
+            </h3>
+            <ul className="mt-5 space-y-3">
+              {helpLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-white/70 transition hover:text-[#f5d38a]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-[#f5d38a]">
+              Contact
+            </h3>
+
+            <div className="mt-5 space-y-4">
               <div className="flex items-start gap-3">
                 <Phone className="mt-1 h-4 w-4 text-[#f5d38a]" />
                 <div>
-                  <div className="text-sm text-white/45">Phone</div>
-                  <a
-                    href="tel:08007720367"
-                    className="mt-1 block text-base text-white transition hover:text-[#f5d38a]"
-                  >
-                    0800 772 0367
-                  </a>
+                  <div className="text-sm font-medium text-white">Call us</div>
+                  <div className="text-sm text-white/65">0800 772 0367</div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <Mail className="mt-1 h-4 w-4 text-[#f5d38a]" />
                 <div>
-                  <div className="text-sm text-white/45">Email</div>
-                  <a
-                    href="mailto:hello@apexcurtains.com"
-                    className="mt-1 block text-base text-white transition hover:text-[#f5d38a]"
-                  >
-                    hello@apexcurtains.com
-                  </a>
+                  <div className="text-sm font-medium text-white">Email</div>
+                  <div className="text-sm text-white/65">
+                    enquiries@apexcurtains.com
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin className="mt-1 h-4 w-4 text-[#f5d38a]" />
                 <div>
-                  <div className="text-sm text-white/45">Coverage</div>
-                  <div className="mt-1 text-base text-white">
-                    Nationwide UK Installation
+                  <div className="text-sm font-medium text-white">
+                    Service Area
+                  </div>
+                  <div className="text-sm text-white/65">
+                    Serving homes across the UK
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <FooterColumn title="Quick Links" items={quickLinks} highlight />
-          <FooterColumn title="Information" items={infoLinks} />
-          <FooterColumn title="Help" items={helpLinks} />
+            <div className="mt-6 rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
+              <div className="text-sm font-medium text-white">
+                Have a difficult window?
+              </div>
+              <p className="mt-2 text-sm leading-7 text-white/65">
+                Upload your window details and we’ll guide you toward the most
+                suitable curtain solution.
+              </p>
+              <div className="mt-4">
+                <Link
+                  href="/start-designing"
+                  className="text-sm font-medium text-[#f5d38a] transition hover:text-white"
+                >
+                  Start your curtain journey →
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
-          <div>© {new Date().getFullYear()} Apex Curtains. All rights reserved.</div>
-          <div className="flex flex-wrap gap-4">
-            <span>Luxury curtain solutions for apex shaped windows</span>
-            <span className="hidden sm:inline">•</span>
-            <span>Made to measure across the UK</span>
-          </div>
+        <div className="mt-12 border-t border-white/10 pt-6 text-sm text-white/45">
+          © {new Date().getFullYear()} Apex Curtains. All rights reserved.
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterColumn({
-  title,
-  items,
-  highlight,
-}: {
-  title: string
-  items: { label: string; href: string }[]
-  highlight?: boolean
-}) {
-  return (
-    <div>
-      <h3
-        className={`text-2xl font-semibold ${
-          highlight ? "text-[#d6ef58]" : "text-white"
-        }`}
-      >
-        {title}
-      </h3>
-
-      <ul className="mt-6 space-y-3">
-       {items.map((item) => (
-  <li key={item.href}>
-    <a
-      href={item.href}
-      className="text-white/70 hover:text-[#f5d38a] transition"
-    >
-      {item.label}
-    </a>
-  </li>
-))}
-      </ul>
-    </div>
   );
 }
