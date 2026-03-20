@@ -6,7 +6,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-4xl px-4 py-16 text-white">
+   <main className="mx-auto max-w-5xl px-4 pb-16 pt-32 text-white sm:pt-36">
       <h1 className="text-4xl font-semibold">
         Choosing the Right Curtain Fabrics for Your Space
       </h1>

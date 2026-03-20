@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-16 text-white">
+   <main className="mx-auto max-w-5xl px-4 pb-16 pt-32 text-white sm:pt-36">
       {/* HERO */}
       <section>
         <h1 className="text-4xl font-semibold leading-tight sm:text-5xl">
