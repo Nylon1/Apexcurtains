@@ -1,79 +1,21 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
 import path from "path";
-
-const baseUrl = "https://apexcurtains.com";
-
-function buildXml(
-  urls: Array<{
-    loc: string;
-    lastmod?: string;
-    changefreq?: string;
-    priority?: string;
-  }>
-) {
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${urls
-    .map(
-      (url) => `
-    <url>
-      <loc>${url.loc}</loc>
-      ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>` : ""}
-      ${url.changefreq ? `<changefreq>${url.changefreq}</changefreq>` : ""}
-      ${url.priority ? `<priority>${url.priority}</priority>` : ""}
-    </url>`
-    )
-    .join("")}
-</urlset>`;
-
-  return xml;
-}
-
-function isRealPageFolder(name: string) {
-  return (
-    !name.startsWith("(") &&
-    !name.startsWith("[") &&
-    !name.startsWith("_") &&
-    name !== "api" &&
-    name !== "page.tsx"
-  );
-}
-
-function hasPageFile(folderPath: string) {
-  return (
-    fs.existsSync(path.join(folderPath, "page.tsx")) ||
-    fs.existsSync(path.join(folderPath, "page.ts")) ||
-    fs.existsSync(path.join(folderPath, "page.jsx")) ||
-    fs.existsSync(path.join(folderPath, "page.js"))
-  );
-}
+import { buildXml, getChildPageRoutes, dedupeRoutes, fullUrl } from "@/lib/sitemap-utils";
 
 export async function GET() {
   const galleryDir = path.join(process.cwd(), "app", "gallery");
   const now = new Date().toISOString();
 
-  let routes: string[] = [];
-
-  if (fs.existsSync(galleryDir)) {
-    const entries = fs.readdirSync(galleryDir, { withFileTypes: true });
-
-    routes = entries
-      .filter((entry) => entry.isDirectory() && isRealPageFolder(entry.name))
-      .filter((entry) => hasPageFile(path.join(galleryDir, entry.name)))
-      .map((entry) => `/gallery/${entry.name}`);
-  }
+  const routes = dedupeRoutes(getChildPageRoutes(galleryDir, "/gallery"));
 
   const urls = routes.map((route) => ({
-    loc: `${baseUrl}${route}`,
+    loc: fullUrl(route),
     lastmod: now,
     changefreq: "monthly",
     priority: "0.82",
   }));
 
   return new NextResponse(buildXml(urls), {
-    headers: {
-      "Content-Type": "application/xml",
-    },
+    headers: { "Content-Type": "application/xml" },
   });
 }

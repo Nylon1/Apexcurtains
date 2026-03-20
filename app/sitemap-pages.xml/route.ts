@@ -1,43 +1,5 @@
 import { NextResponse } from "next/server";
-
-const baseUrl = "https://apexcurtains.com";
-
-function buildXml(
-  urls: Array<{
-    loc: string;
-    lastmod?: string;
-    changefreq?: string;
-    priority?: string;
-    images?: string[];
-  }>
-) {
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  ${urls
-    .map(
-      (url) => `
-    <url>
-      <loc>${url.loc}</loc>
-      ${url.lastmod ? `<lastmod>${url.lastmod}</lastmod>` : ""}
-      ${url.changefreq ? `<changefreq>${url.changefreq}</changefreq>` : ""}
-      ${url.priority ? `<priority>${url.priority}</priority>` : ""}
-      ${(url.images || [])
-        .map(
-          (img) => `
-      <image:image>
-        <image:loc>${img}</image:loc>
-      </image:image>`
-        )
-        .join("")}
-    </url>`
-    )
-    .join("")}
-</urlset>`;
-
-  return xml;
-}
+import { buildXml, baseUrl } from "@/lib/sitemap-utils";
 
 export async function GET() {
   const now = new Date().toISOString();
@@ -206,8 +168,6 @@ export async function GET() {
   ];
 
   return new NextResponse(buildXml(urls), {
-    headers: {
-      "Content-Type": "application/xml",
-    },
+    headers: { "Content-Type": "application/xml" },
   });
 }
