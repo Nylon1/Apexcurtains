@@ -1,23 +1,26 @@
-import { defaultProjects } from "../lib/gallery-projects";
+import type { MetadataRoute } from "next";
 
-export default function sitemap() {
-  const baseUrl = "https://apexcurtains.com";
+const baseUrl = "https://apexcurtains.com";
 
-  const staticPages = [
-    "",
-    "/gallery",
-    "/window-types",
-    "/advice",
-    "/contact",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-  }));
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
 
-  const projectPages = defaultProjects.map((project: any) => ({
-    url: `${baseUrl}/gallery/${project.slug}`,
-    lastModified: new Date(),
-  }));
-
-  return [...staticPages, ...projectPages];
+  return [
+    {
+      url: `${baseUrl}/sitemap-pages.xml`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/sitemap-advice.xml`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/sitemap-gallery.xml`,
+      lastModified: now,
+    },
+    {
+      url: `${baseUrl}/sitemap-areas.xml`,
+      lastModified: now,
+    },
+  ];
 }
