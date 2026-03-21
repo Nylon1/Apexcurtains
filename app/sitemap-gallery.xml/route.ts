@@ -21,9 +21,7 @@ export async function GET() {
 
   const urls = (data || []).map((project: any) => ({
     // Use slug if you add one later, otherwise fall back to id
-    loc: fullUrl(
-      project.slug ? `/gallery/${project.slug}` : `/gallery/${project.id}`
-    ),
+    loc: fullUrl(`/gallery/${project.slug || project.id}`) ,
     lastmod: project.created_at || new Date().toISOString(),
     changefreq: "monthly",
     priority: "0.80",
