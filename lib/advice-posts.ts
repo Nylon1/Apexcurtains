@@ -14,7 +14,7 @@ export type AdvicePost = {
   meta_description?: string;
   focus_keyword?: string;
   related_service?: string;
-  published_at?: string;
+  created_at?: string;
   updated_at?: string;
 };
 
@@ -28,7 +28,7 @@ export async function getAdvicePosts(): Promise<AdvicePost[]> {
     .from("advice_posts")
     .select("*")
     
-    .order("published_at", { ascending: false });
+    .order("created_at", { ascending: false });
 console.log("DATA:", data);
 console.log("ERROR:", error);
   if (error) {
