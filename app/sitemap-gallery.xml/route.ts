@@ -1,19 +1,38 @@
 import { NextResponse } from "next/server";
-import { defaultProjects } from "@/lib/gallery-projects";
-import { buildXml, dedupeByLoc, fullImageUrl, fullUrl } from "@/lib/sitemap-utils";
+import { createClient } from "@/lib/supabase/server";
+import { buildXml, fullImageUrl, fullUrl } from "@/lib/sitemap-utils";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
-  const urls = dedupeByLoc(
-    defaultProjects.map((project, index) => ({
-      loc: fullUrl(`/gallery#project-${project.id ?? index + 1}`),
-      lastmod: new Date().toISOString(),
-      changefreq: "monthly",
-      priority: "0.82",
-      images: project.image ? [fullImageUrl(project.image)] : [],
-    }))
-  );
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("gallery_projects")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Gallery sitemap error:", error);
+    return new NextResponse("Failed to load gallery sitemap", {
+      status: 500,
+    });
+  }
+
+  const urls = (data || []).map((project: any) => ({
+    // Use slug if you add one later, otherwise fall back to id
+    loc: fullUrl(
+      project.slug ? `/gallery/${project.slug}` : `/gallery/${project.id}`
+    ),
+    lastmod: project.created_at || new Date().toISOString(),
+    changefreq: "monthly",
+    priority: "0.80",
+    images: project.image_url ? [fullImageUrl(project.image_url)] : [],
+  }));
 
   return new NextResponse(buildXml(urls), {
-    headers: { "Content-Type": "application/xml" },
+    headers: {
+      "Content-Type": "application/xml",
+    },
   });
 }
