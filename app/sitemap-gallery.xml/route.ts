@@ -1,19 +1,17 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import { buildXml, getChildPageRoutes, dedupeRoutes, fullUrl } from "@/lib/sitemap-utils";
+import { defaultProjects } from "@/lib/gallery-projects";
+import { buildXml, dedupeByLoc, fullImageUrl, fullUrl } from "@/lib/sitemap-utils";
 
 export async function GET() {
-  const galleryDir = path.join(process.cwd(), "app", "gallery");
-  const now = new Date().toISOString();
-
-  const routes = dedupeRoutes(getChildPageRoutes(galleryDir, "/gallery"));
-
-  const urls = routes.map((route) => ({
-    loc: fullUrl(route),
-    lastmod: now,
-    changefreq: "monthly",
-    priority: "0.82",
-  }));
+  const urls = dedupeByLoc(
+    defaultProjects.map((project, index) => ({
+      loc: fullUrl(`/gallery#project-${project.id ?? index + 1}`),
+      lastmod: new Date().toISOString(),
+      changefreq: "monthly",
+      priority: "0.82",
+      images: project.image ? [fullImageUrl(project.image)] : [],
+    }))
+  );
 
   return new NextResponse(buildXml(urls), {
     headers: { "Content-Type": "application/xml" },

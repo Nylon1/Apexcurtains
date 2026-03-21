@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 export const baseUrl = "https://apexcurtains.com";
 
 export type XmlUrlItem = {
@@ -38,54 +35,21 @@ export function buildXml(urls: XmlUrlItem[]) {
 </urlset>`;
 }
 
-export function hasPageFile(folderPath: string) {
-  return (
-    fs.existsSync(path.join(folderPath, "page.tsx")) ||
-    fs.existsSync(path.join(folderPath, "page.ts")) ||
-    fs.existsSync(path.join(folderPath, "page.jsx")) ||
-    fs.existsSync(path.join(folderPath, "page.js"))
-  );
-}
-
-export function isRealPageFolder(name: string) {
-  return (
-    !name.startsWith("(") &&
-    !name.startsWith("[") &&
-    !name.startsWith("_") &&
-    name !== "api" &&
-    name !== "admin" &&
-    name !== "layout" &&
-    name !== "ui" &&
-    name !== "seo" &&
-    name !== "undefined"
-  );
-}
-
-export function getChildPageRoutes(folderPath: string, baseRoute: string): string[] {
-  if (!fs.existsSync(folderPath)) return [];
-
-  const entries = fs.readdirSync(folderPath, { withFileTypes: true });
-
-  return entries
-    .filter((entry) => entry.isDirectory() && isRealPageFolder(entry.name))
-    .filter((entry) => hasPageFile(path.join(folderPath, entry.name)))
-    .map((entry) => `${baseRoute}/${entry.name}`);
-}
-
-export function dedupeRoutes(routes: string[]) {
-  return [...new Set(routes)].filter(Boolean).filter((route) => !route.includes("undefined"));
-}
-
 export function fullUrl(route: string) {
   return `${baseUrl}${route}`;
 }
 
 export function fullImageUrl(imagePath: string) {
+  if (!imagePath) return "";
   if (imagePath.startsWith("http")) return imagePath;
   return `${baseUrl}${imagePath}`;
 }
 
-export function fileExistsInPublic(relativePath: string) {
-  const publicDir = path.join(process.cwd(), "public");
-  return fs.existsSync(path.join(publicDir, relativePath.replace(/^\//, "")));
+export function dedupeByLoc<T extends { loc: string }>(items: T[]): T[] {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    if (!item.loc || item.loc.includes("undefined") || seen.has(item.loc)) return false;
+    seen.add(item.loc);
+    return true;
+  });
 }

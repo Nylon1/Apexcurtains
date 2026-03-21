@@ -89,7 +89,6 @@ export async function GET() {
       lastmod: now,
       changefreq: "weekly",
       priority: "0.95",
-      images: [`${baseUrl}/apex-hero.jpg`],
     },
     {
       loc: `${baseUrl}/apex-blinds`,
@@ -102,14 +101,12 @@ export async function GET() {
       lastmod: now,
       changefreq: "weekly",
       priority: "0.92",
-      images: [`${baseUrl}/window-types/gable-end.jpeg`],
     },
     {
       loc: `${baseUrl}/barn-conversion-curtains`,
       lastmod: now,
       changefreq: "weekly",
       priority: "0.88",
-      images: [`${baseUrl}/window-types/barn-conversion.jpeg`],
     },
     {
       loc: `${baseUrl}/large-window-curtains`,
