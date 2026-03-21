@@ -153,13 +153,16 @@ export default async function GalleryPage({ params }: PageProps) {
         </div>
 
         {data.image_url && (
-          <div className="mb-10 overflow-hidden rounded-[28px] shadow-[0_10px_40px_rgba(0,0,0,0.08)] bg-white">
-            <img
-              src={data.image_url}
-              alt={`${data.title}${data.location ? ` in ${data.location}` : ""}`}
-              className="w-full h-auto object-cover"
-            />
-          </div>
+        <div className="mb-10 rounded-[28px] overflow-hidden bg-white shadow-[0_10px_40px_rgba(0,0,0,0.08)]">
+  <div className="relative w-full h-[320px] md:h-[420px] lg:h-[520px]">
+    <img
+      src={data.image_url}
+      alt={data.title}
+     
+      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+    />
+  </div>
+</div>
         )}
 
         <section className="bg-white rounded-[24px] p-6 md:p-8 shadow-sm border border-[#efe7d7] mb-8">

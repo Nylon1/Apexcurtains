@@ -6,8 +6,25 @@ import type { Project } from "@/lib/gallery-projects";
 
 const BUCKET_NAME = "Gallery";
 
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-{2,}/g, "-");
+}
+
+function buildProjectSlug(title: string, location: string) {
+  const base = slugify(title || "");
+  const place = slugify(location || "");
+  return place ? `${base}-${place}` : base;
+}
+
 const emptyForm = {
   title: "",
+  slug: "",
   location: "",
   category: "",
   room: "",
@@ -48,18 +65,20 @@ export default function AdminProjectsPage() {
       const mapped: Project[] = (data || []).map((item) => ({
         id: Number(item.id),
         title: item.title || "",
+        slug: item.slug || "",
         location: item.location || "",
         category: item.category || "",
         room: item.room || "",
         heading: item.heading || "",
         lining: item.lining || "",
-        image: item.image_url || "",
+        image_url: item.image_url || "",
         summary: item.summary || "",
         brief: item.brief || "",
         challenge: item.challenge || "",
         solution: item.solution || "",
         result: item.result || "",
         tags: Array.isArray(item.tags) ? item.tags : [],
+        created_at: item.created_at || "",
       }));
 
       setProjects(mapped);
@@ -77,7 +96,23 @@ export default function AdminProjectsPage() {
   }, [projects]);
 
   function updateField(name: string, value: string) {
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [name]: value };
+
+      if (name === "title" || name === "location") {
+        const oldAutoSlug = buildProjectSlug(prev.title, prev.location);
+        const currentSlugIsAuto = !prev.slug || prev.slug === oldAutoSlug;
+
+        if (currentSlugIsAuto) {
+          next.slug = buildProjectSlug(
+            name === "title" ? value : prev.title,
+            name === "location" ? value : prev.location
+          );
+        }
+      }
+
+      return next;
+    });
   }
 
   function resetForm() {
@@ -112,24 +147,60 @@ export default function AdminProjectsPage() {
     setEditingId(project.id);
     setForm({
       title: project.title,
-      location: project.location,
-      category: project.category,
-      room: project.room,
-      heading: project.heading,
-      lining: project.lining,
-      image: project.image,
-      summary: project.summary,
+      slug: project.slug || "",
+      location: project.location || "",
+      category: project.category || "",
+      room: project.room || "",
+      heading: project.heading || "",
+      lining: project.lining || "",
+      image: project.image_url || "",
+      summary: project.summary || "",
       brief: project.brief || "",
       challenge: project.challenge || "",
       solution: project.solution || "",
       result: project.result || "",
-      tags: project.tags.join(", "),
+      tags: (project.tags || []).join(", "),
     });
 
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+  }
+
+  async function ensureUniqueSlug(baseSlug: string, currentId?: number | null) {
+    if (!baseSlug) return "";
+
+    let finalSlug = baseSlug;
+    let counter = 2;
+
+    while (true) {
+      let query = supabase
+        .from("gallery_projects")
+        .select("id")
+        .eq("slug", finalSlug)
+        .limit(1);
+
+      if (currentId !== null && currentId !== undefined) {
+        query = query.neq("id", currentId);
+      }
+
+      const { data, error } = await query;
+
+      if (error) {
+        console.error(error);
+        break;
+      }
+
+      if (!data || data.length === 0) {
+        break;
+      }
+
+      finalSlug = `${baseSlug}-${counter}`;
+      counter++;
+    }
+
+    return finalSlug;
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -143,8 +214,19 @@ export default function AdminProjectsPage() {
     setSaving(true);
 
     try {
+      const baseSlug =
+        form.slug.trim() || buildProjectSlug(form.title, form.location);
+
+      if (!baseSlug) {
+        alert("Please add a title so the URL slug can be created.");
+        return;
+      }
+
+      const finalSlug = await ensureUniqueSlug(baseSlug, editingId);
+
       const payload = {
         title: form.title,
+        slug: finalSlug,
         location: form.location,
         category: form.category,
         room: form.room,
@@ -266,21 +348,29 @@ export default function AdminProjectsPage() {
           return;
         }
 
-        const normalized = parsed.map((item) => ({
-          title: item.title || "",
-          location: item.location || "",
-          category: item.category || "",
-          room: item.room || "",
-          heading: item.heading || "",
-          lining: item.lining || "",
-          image_url: item.image || item.image_url || "",
-          summary: item.summary || "",
-          brief: item.brief || "",
-          challenge: item.challenge || "",
-          solution: item.solution || "",
-          result: item.result || "",
-          tags: Array.isArray(item.tags) ? item.tags : [],
-        }));
+        const normalized = parsed.map((item) => {
+          const title = item.title || "";
+          const location = item.location || "";
+          const slug =
+            item.slug || buildProjectSlug(title, location);
+
+          return {
+            title,
+            slug,
+            location,
+            category: item.category || "",
+            room: item.room || "",
+            heading: item.heading || "",
+            lining: item.lining || "",
+            image_url: item.image || item.image_url || "",
+            summary: item.summary || "",
+            brief: item.brief || "",
+            challenge: item.challenge || "",
+            solution: item.solution || "",
+            result: item.result || "",
+            tags: Array.isArray(item.tags) ? item.tags : [],
+          };
+        });
 
         const { error } = await supabase
           .from("gallery_projects")
@@ -379,6 +469,20 @@ export default function AdminProjectsPage() {
                 value={form.title}
                 onChange={(v) => updateField("title", v)}
               />
+
+              <Field
+                label="Slug / URL"
+                value={form.slug}
+                onChange={(v) => updateField("slug", v)}
+                placeholder="coventry-cottage-wave-pleat-curtains"
+              />
+
+              <div className="rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white/60">
+                Public URL:{" "}
+                <span className="text-[#f5d38a]">
+                  /gallery/{form.slug || "your-project-slug"}
+                </span>
+              </div>
 
               <Field
                 label="Location"
@@ -506,10 +610,16 @@ export default function AdminProjectsPage() {
                         {project.location} • {project.category} • {project.room}
                       </div>
 
-                      {project.image && (
+                      {!!project.slug && (
+                        <div className="mt-2 text-xs text-[#f5d38a]">
+                          /gallery/{project.slug}
+                        </div>
+                      )}
+
+                      {project.image_url && (
                         <div className="mt-4 overflow-hidden rounded-xl border border-white/10">
                           <img
-                            src={project.image}
+                            src={project.image_url}
                             alt={project.title}
                             className="h-32 w-40 object-cover"
                           />

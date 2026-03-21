@@ -1,12 +1,13 @@
 export type Project = {
   id: number;
   title: string;
+  slug: string
   location: string;
   category: string;
   room: string;
   heading: string;
   lining: string;
-  image: string;
+  image_url: string;
   summary: string;
   brief: string;
   challenge: string;
@@ -19,12 +20,13 @@ export const defaultProjects: Project[] = [
   {
     id: 1,
     title: "Barn Conversion Apex Curtains",
+    slug: "barn-conversion-apex-curtains",
     location: "Yorkshire",
     category: "Apex",
     room: "Bedroom",
     heading: "Wave Pleat",
     lining: "Blackout",
-    image: "/gallery/barn-conversion-apex.jpg",
+    image_url: "/gallery/barn-conversion-apex.jpg",
     summary:
       "A dramatic apex installation designed to soften a tall glazed gable wall while keeping the room restful and luxurious.",
     brief:
@@ -40,12 +42,13 @@ export const defaultProjects: Project[] = [
   {
     id: 2,
     title: "Triangular Window Curtains",
+    slug: "triangular-window-curtains",
     location: "Surrey",
     category: "Triangular",
     room: "Lounge",
     heading: "Pencil Pleat",
     lining: "Thermal",
-    image: "/gallery/triangular-lounge.jpg",
+    image_url : "/gallery/triangular-lounge.jpg",
     summary:
       "Elegant tailored curtains for an unusual triangular glazing layout in a bright living space.",
     brief:
