@@ -27,9 +27,10 @@ export async function getAdvicePosts(): Promise<AdvicePost[]> {
   const { data, error } = await supabase
     .from("advice_posts")
     .select("*")
-    .eq("published", true)
+    
     .order("published_at", { ascending: false });
-
+console.log("DATA:", data);
+console.log("ERROR:", error);
   if (error) {
     console.error("Supabase error:", error);
     return [];
