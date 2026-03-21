@@ -59,3 +59,22 @@ export const defaultProjects: Project[] = [
     tags: ["Triangular", "Lounge", "Thermal"],
   },
 ];
+
+import { createClient } from "@/lib/supabase/server";
+
+export async function getGalleryProjectBySlug(slug: string) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from("gallery_projects")
+    .select("*")
+    .eq("slug", slug)
+    .single();
+
+  if (error) {
+    console.error("Gallery fetch error:", error);
+    return null;
+  }
+
+  return data;
+}
