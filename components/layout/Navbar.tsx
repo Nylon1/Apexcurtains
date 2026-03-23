@@ -35,17 +35,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+      <header className="fixed top-0 left-0 right-0 z-50 px-3 pt-2 sm:px-6 sm:pt-4 lg:px-8">
         <div
-          className={`mx-auto max-w-7xl rounded-full border transition-all duration-300 ${
+          className={`mx-auto max-w-7xl rounded-full border transition-all duration-300 h-[56px] sm:h-auto${
             scrolled
               ? "border-white/15 bg-black/55 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl"
               : "border-white/10 bg-white/5 backdrop-blur-md"
           }`}
         >
-          <div className="flex items-center justify-between px-5 py-3 sm:px-6">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold text-white">
+          <div className="flex items-center justify-between px-3 py-2 sm:px-6 sm:py-3">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3">
+              <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold text-white">
                 AC
               </div>
               <div>
