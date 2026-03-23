@@ -129,7 +129,7 @@ export default function ContactPage() {
     title="Email your enquiry"
     text="Useful if you want to send photos, notes or a quick overview of your room and window."
     value="Send details"
-    href="mailto:info@apexcurtains.com?subject=Curtain%20Enquiry"
+    href="mailto:hello@apexcurtains.com?subject=Curtain%20Enquiry"
   />
 
   <InfoPanel
