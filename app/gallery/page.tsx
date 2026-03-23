@@ -290,14 +290,15 @@ function ProjectModal({
           </button>
 
          <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
-  <div className="relative h-[70vh] lg:h-[85vh] overflow-hidden bg-black/20">
-    <Image
-      src={project.image}
-      alt={project.title}
-      fill
-      className="object-contain"
-      unoptimized
-    />
+ <div className="relative min-h-[420px] lg:min-h-[800px]">
+  <Image
+    src={project.image}
+    alt={project.title}
+    fill
+    className="object-contain"
+    unoptimized
+  />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
 
