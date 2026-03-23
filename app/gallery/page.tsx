@@ -290,12 +290,12 @@ function ProjectModal({
           </button>
 
           <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="relative h-[70vh] lg:h-[85vh] w-full">
+          <div className="relative flex items-center justify-center py-4 lg:py-6">
               <Image
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-contain scale-110"
+                className="object-contain scale-135"
                 unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
