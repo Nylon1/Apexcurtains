@@ -290,7 +290,7 @@ function ProjectModal({
           </button>
 
           <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
-          <div className="relative flex items-center justify-center py-4 lg:py-6">
+          <div className="relative h-[70vh] lg:h-[85vh] w-full">
               <Image
                 src={project.image}
                 alt={project.title}
