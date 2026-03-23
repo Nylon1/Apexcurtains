@@ -39,6 +39,8 @@ export const metadata = {
     "Get expert advice for apex, triangular and architectural windows. Upload your window details, ask questions or start your curtain journey.",
 };
 
+
+
 export default function ContactPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#0a0a0d] text-white">
@@ -113,35 +115,39 @@ export default function ContactPage() {
               Choose the route that suits you
             </h2>
 
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
-              <InfoPanel
-                icon={<Phone className="h-5 w-5" />}
-                title="Call for personalised advice"
-                text="Ideal if you want to discuss your window and get a clearer sense of what may be possible."
-                value="Call us"
-              />
+           <div className="mt-8 grid gap-5 sm:grid-cols-2">
+  <InfoPanel
+    icon={<Phone className="h-5 w-5" />}
+    title="Call for personalised advice"
+    text="Ideal if you want to discuss your window and get a clearer sense of what may be possible."
+    value="Call us"
+    href="tel:08007720367"
+  />
 
-              <InfoPanel
-                icon={<Mail className="h-5 w-5" />}
-                title="Email your enquiry"
-                text="Useful if you want to send photos, notes or a quick overview of your room and window."
-                value="Send details"
-              />
+  <InfoPanel
+    icon={<Mail className="h-5 w-5" />}
+    title="Email your enquiry"
+    text="Useful if you want to send photos, notes or a quick overview of your room and window."
+    value="Send details"
+    href="mailto:info@apexcurtains.com?subject=Curtain%20Enquiry"
+  />
 
-              <InfoPanel
-                icon={<Camera className="h-5 w-5" />}
-                title="Send a window photo"
-                text="Often the most useful first step for apex, angled and architectural windows."
-                value="Upload photo"
-              />
+  <InfoPanel
+    icon={<Camera className="h-5 w-5" />}
+    title="Send a window photo"
+    text="Often the most useful first step for apex, angled and architectural windows."
+    value="Upload photo"
+    href="/get-curtain-quote"
+  />
 
-              <InfoPanel
-                icon={<MapPin className="h-5 w-5" />}
-                title="UK-wide enquiries"
-                text="We work with shaped and unusual windows across the UK, including premium coastal and architectural homes."
-                value="Across the UK"
-              />
-            </div>
+  <InfoPanel
+    icon={<MapPin className="h-5 w-5" />}
+    title="UK-wide enquiries"
+    text="We work with shaped and unusual windows across the UK, including premium coastal and architectural homes."
+    value="Across the UK"
+    href="/areas"
+  />
+</div>
 
             <div className="mt-8 rounded-[26px] border border-[#f5d38a]/15 bg-[#f5d38a]/8 p-6">
               <div className="text-sm font-medium text-white">
@@ -317,22 +323,34 @@ function InfoPanel({
   title,
   text,
   value,
+  href,
 }: {
   icon: React.ReactNode;
   title: string;
   text: string;
   value: string;
+  href: string;
 }) {
   return (
-    <div className="rounded-[24px] border border-white/10 bg-black/20 p-5">
+    <Link
+      href={href}
+      className="group block rounded-[24px] border border-white/10 bg-black/20 p-5 transition duration-300 hover:-translate-y-1 hover:border-[#f5d38a]/20 hover:bg-white/[0.03]"
+    >
       <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 text-[#f5d38a]">
         {icon}
       </div>
 
-      <h3 className="mt-4 text-lg font-semibold text-white">{title}</h3>
+      <h3 className="mt-4 text-lg font-semibold text-white transition group-hover:text-[#f5d38a]">
+        {title}
+      </h3>
+
       <p className="mt-3 text-sm leading-7 text-white/70">{text}</p>
-      <div className="mt-4 text-sm font-medium text-[#f5d38a]">{value}</div>
-    </div>
+
+      <div className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-[#f5d38a]">
+        {value}
+        <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
+      </div>
+    </Link>
   );
 }
 

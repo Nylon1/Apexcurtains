@@ -172,13 +172,13 @@ export default function Navbar() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
 
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
-                >
-                  <Phone className="mr-2 h-4 w-4" />
-                  Speak to us
-                </Link>
+            <Link
+  href="tel:08007720367"
+  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
+>
+  <Phone className="mr-2 h-4 w-4" />
+  Speak to us
+</Link>
               </div>
             </div>
           </div>
