@@ -294,9 +294,8 @@ function ProjectModal({
               <Image
                 src={project.image}
                 alt={project.title}
-                width={1400}
-height={1000}
-                className="h-auto max-h-[78vh] w-full max-w-[720px] object-contain"
+                fill
+                className="object-contain scale-110"
                 unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
