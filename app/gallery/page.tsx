@@ -296,7 +296,7 @@ function ProjectModal({
                 alt={project.title}
                 width={1400}
 height={1000}
-                className="h-auto max-h-[75vh] w-auto object-contain"
+                className="h-auto max-h-[78vh] w-full max-w-[720px] object-contain"
                 unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
