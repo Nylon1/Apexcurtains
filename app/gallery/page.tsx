@@ -290,7 +290,7 @@ function ProjectModal({
           </button>
 
          <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
- <div className="relative min-h-[420px] lg:min-h-[1200px]">
+ <div className="relative min-h-[620px] lg:min-h-[1200px]">
   <Image
     src={project.image}
     alt={project.title}
