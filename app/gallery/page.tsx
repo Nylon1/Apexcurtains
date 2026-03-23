@@ -290,12 +290,13 @@ function ProjectModal({
           </button>
 
           <div className="grid lg:grid-cols-[1.02fr_0.98fr]">
-            <div className="relative min-h-[420px] lg:min-h-[920px]">
+          <div className="relative flex items-center justify-center py-4 lg:py-6">
               <Image
                 src={project.image}
                 alt={project.title}
-                fill
-                className="object-contain"
+                width={1400}
+height={1000}
+                className="h-auto max-h-[75vh] w-auto object-contain"
                 unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
