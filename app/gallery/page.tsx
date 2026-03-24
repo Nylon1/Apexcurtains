@@ -174,49 +174,50 @@ function ProjectShowcase({
           <div className="absolute inset-0 overflow-hidden opacity-0 transition duration-700 group-hover:opacity-100">
             <div className="absolute -left-[120%] top-0 h-full w-[120%] skew-x-[-25deg] bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-[shine_1.4s]" />
           </div>
+<div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-8 lg:p-10">
+  <div className="hidden sm:block">
+    <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-white/75">
+      {featured ? "Featured Project" : "Project Case Study"}
+    </div>
 
-          <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8 lg:p-10">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-white/75">
-              {featured ? "Featured Project" : "Project Case Study"}
-            </div>
+    <h2 className="text-3xl font-semibold leading-[1.05] sm:text-4xl lg:text-5xl">
+      {project.title}
+    </h2>
 
-            <h2 className="text-3xl font-semibold leading-[1.05] sm:text-4xl lg:text-5xl">
-              {project.title}
-            </h2>
+    <p className="mt-3 max-w-xl text-sm leading-7 text-white/80 sm:text-base sm:leading-8">
+      {project.summary}
+    </p>
 
-            <p className="mt-3 max-w-xl text-sm leading-7 text-white/80 sm:text-base sm:leading-8">
-              {project.summary}
-            </p>
+    <div className="mt-5 flex flex-wrap gap-2">
+      {project.tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[11px] text-white/80"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[11px] text-white/80"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+  <div className="mt-0 sm:mt-6 flex flex-col gap-3 sm:flex-row">
+    <Link
+      href="/start-designing"
+      className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f5d38a] px-5 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
+    >
+      Start designing
+      <ArrowRight className="h-4 w-4" />
+    </Link>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/start-designing"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f5d38a] px-5 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
-              >
-                Start designing
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-
-              <button
-                onClick={onOpen}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-black/20 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
-              >
-                View project
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
+    <button
+      onClick={onOpen}
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-black/20 px-5 py-3 text-sm font-medium text-white transition hover:bg-white/10"
+    >
+      View project
+      <ArrowRight className="h-4 w-4" />
+    </button>
+  </div>
+</div>
         </div>
 
         <div className="flex flex-col justify-between p-5 sm:p-8 lg:p-10">
