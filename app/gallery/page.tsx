@@ -293,14 +293,14 @@ function ProjectModal({
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover md:object-cover"
+                className="object-contain md:object-cover"
                 unoptimized
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8 lg:p-10">
+              <div className="absolute inset-x-0 bottom-0 z-10 p-4 sm:p-8 lg:p-10">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-4 py-2 text-[11px] uppercase tracking-[0.22em] text-white/80">
                   <MapPin className="h-4 w-4" />
                   {project.location}
