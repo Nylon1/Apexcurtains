@@ -6,6 +6,8 @@ import type { Project } from "@/lib/gallery-projects";
 
 const BUCKET_NAME = "Gallery";
 
+
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -444,7 +446,19 @@ export default function AdminProjectsPage() {
             />
           </div>
         </div>
+<a
+  href="/admin"
+  className="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm text-white/85 transition hover:bg-white/10"
+>
+  Admin Home
+</a>
 
+<a
+  href="/admin/posts"
+  className="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm text-white/85 transition hover:bg-white/10"
+>
+  Manage Posts
+</a>
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <section className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6">
             <div className="flex items-center justify-between gap-4">

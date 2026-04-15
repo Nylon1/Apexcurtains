@@ -23,7 +23,7 @@ export default function AdminLoginPage() {
       });
 
       if (error) throw error;
-      router.push("/admin/projects");
+      router.push("/admin/");
     } catch (error: any) {
       alert(error?.message || "Sign in failed.");
     } finally {
