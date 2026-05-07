@@ -11,9 +11,12 @@ import GuidesPreview from "@/components/homepage/GuidesPreview";
 import AreasPreview from "@/components/homepage/AreasPreview";
 import ArloPreview from "@/components/homepage/ArloPreview";
 import FinalCta from "@/components/homepage/FinalCta";
+import ApexEntryScreen from "@/components/ApexEntryScreen";
 
 export default function HomePage() {
   return (
+    <>
+      <ApexEntryScreen />
     <main className="min-h-screen bg-[#0a0a0d] text-white">
       <Hero />
       <WhyDifferent />
@@ -29,5 +32,6 @@ export default function HomePage() {
       <FabricPersonalityQuiz />
       <FinalCta />
     </main>
+    </>
   );
 }
