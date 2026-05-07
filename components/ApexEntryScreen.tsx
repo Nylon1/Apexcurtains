@@ -95,7 +95,7 @@ export default function ApexEntryScreen() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="max-w-[760px] font-serif text-5xl leading-[0.92] tracking-tight text-white sm:text-6xl lg:text-7xl"
               >
-                <span className="block">Bespoke Curtains</span>
+                <span className="block">Bespoke Luxury Curtains</span>
                 <span className="block italic text-[#d6b06d]">
                   for Extraordinary
                 </span>
