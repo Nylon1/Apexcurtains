@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, Sparkles, X, ArrowRight, Phone } from "lucide-react";
@@ -46,22 +47,21 @@ export default function Navbar() {
           }`}
         >
           <div className="flex items-center justify-between px-3 py-2 sm:px-5 sm:py-3">
-            <Link href="/" className="flex items-center gap-2 sm:gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm font-semibold text-white sm:h-10 sm:w-10">
-                AC
-              </div>
-
-              <div className="leading-tight">
-                <div className="text-sm font-semibold text-white sm:text-base">
-                  Apex Curtains
-                </div>
-                <div className="hidden text-[10px] tracking-wide text-white/60 sm:block">
-                  Apex, triangular &amp; architectural windows
-                </div>
+            {/* Logo */}
+            <Link href="/" className="flex items-center">
+              <div className="relative h-10 w-[170px] sm:h-12 sm:w-[210px]">
+                <Image
+                  src="/images/apex-logo-horizontal.svg"
+                  alt="Apex Curtains"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                />
               </div>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-2 xl:gap-3">
+            {/* Desktop Navigation */}
+            <div className="hidden items-center gap-2 lg:flex xl:gap-3">
               {navItems.map((item) => {
                 const active = isActive(item.href);
 
@@ -83,7 +83,8 @@ export default function Navbar() {
               })}
             </div>
 
-            <div className="hidden lg:flex items-center gap-3">
+            {/* Desktop Buttons */}
+            <div className="hidden items-center gap-3 lg:flex">
               <Link
                 href="/arlo-curtain-advisor"
                 className="inline-flex items-center justify-center rounded-full bg-[#E5C07B] px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-105"
@@ -99,6 +100,7 @@ export default function Navbar() {
               </Link>
             </div>
 
+            {/* Mobile Menu Button */}
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
@@ -111,17 +113,22 @@ export default function Navbar() {
         </div>
       </header>
 
+      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-lg lg:hidden">
           <div className="flex items-center justify-between px-4 py-3">
-            <div className="flex items-center gap-2">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm font-semibold text-white">
-                AC
+            {/* Mobile Logo */}
+            <Link href="/" className="flex items-center">
+              <div className="relative h-10 w-[180px]">
+                <Image
+                  src="/images/apex-logo-horizontal.svg"
+                  alt="Apex Curtains"
+                  fill
+                  className="object-contain object-left"
+                  priority
+                />
               </div>
-              <div className="text-base font-semibold text-white">
-                Apex Curtains
-              </div>
-            </div>
+            </Link>
 
             <button
               type="button"
@@ -172,13 +179,13 @@ export default function Navbar() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
 
-            <Link
-  href="tel:08007720367"
-  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
->
-  <Phone className="mr-2 h-4 w-4" />
-  Speak to us
-</Link>
+                <Link
+                  href="tel:08007720367"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  Speak to us
+                </Link>
               </div>
             </div>
           </div>

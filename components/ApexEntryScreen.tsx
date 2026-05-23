@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -67,23 +68,22 @@ export default function ApexEntryScreen() {
           {/* Main content */}
           <div className="relative z-10 flex min-h-screen items-center justify-center px-6">
             <div className="mx-auto -mt-6 flex max-w-[860px] flex-col items-center text-center sm:-mt-8">
+              
+              {/* Stacked Logo */}
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
-                className="mb-6 flex flex-col items-center"
+                className="mb-7 flex justify-center"
               >
-                <div className="mb-3 flex h-14 w-14 items-center justify-center border border-[#d6b06d]/70 text-2xl font-light text-[#d6b06d]">
-                  A
-                </div>
-
-                <p className="font-serif text-[2rem] leading-none tracking-[0.18em] text-white sm:text-[2.35rem]">
-                  APEX
-                </p>
-
-                <p className="mt-2 text-[10px] uppercase tracking-[0.45em] text-[#d6b06d] sm:text-xs">
-                  Curtains
-                </p>
+                <Image
+                  src="/images/apex-logo-stacked-light.svg"
+                  alt="Apex Curtains"
+                  width={260}
+                  height={260}
+                  className="h-auto w-[120px] sm:w-[145px] md:w-[170px]"
+                  priority
+                />
               </motion.div>
 
               <motion.p
