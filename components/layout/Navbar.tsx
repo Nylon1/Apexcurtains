@@ -8,11 +8,6 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Window Types", href: "/window-types" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Posts", href: "/advice" },
-  { label: "Areas", href: "/areas" },
   {
     label: "Services",
     href: "/services",
@@ -22,6 +17,12 @@ const navItems = [
       { label: "Premium Installation", href: "/services/premium-installation" },
     ],
   },
+  { label: "Window Types", href: "/window-types" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Posts", href: "/advice" },
+  { label: "Areas", href: "/areas" },
+  
   { label: "FAQ", href: "/faq", highlight: true },
 ];
 
