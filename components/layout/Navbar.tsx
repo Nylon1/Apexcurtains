@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, Sparkles, X, ArrowRight, Phone } from "lucide-react";
+import { Menu, Sparkles, X, ArrowRight, Phone, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -11,9 +11,18 @@ const navItems = [
   { label: "Window Types", href: "/window-types" },
   { label: "Gallery", href: "/gallery" },
   { label: "Reviews", href: "/reviews" },
-  { label: "Advice", href: "/advice" },
+  { label: "Posts", href: "/advice" },
   { label: "Areas", href: "/areas" },
-  { label: "Get Advice", href: "/contact", highlight: true },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "Measure + Consultation", href: "/services/measure-consultation" },
+      { label: "Design + Make Curtains", href: "/services/design-make-curtains" },
+      { label: "Premium Installation", href: "/services/premium-installation" },
+    ],
+  },
+  { label: "FAQ", href: "/faq", highlight: true },
 ];
 
 export default function Navbar() {
@@ -64,6 +73,40 @@ export default function Navbar() {
             <div className="hidden items-center gap-2 lg:flex xl:gap-3">
               {navItems.map((item) => {
                 const active = isActive(item.href);
+
+                if (item.children) {
+                  return (
+                    <div key={item.href} className="group relative">
+                      <Link
+                        href={item.href}
+                        className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition ${
+                          active
+                            ? "bg-[#E5C07B]/15 text-[#f1d48b]"
+                            : "text-white/85 hover:text-white"
+                        }`}
+                      >
+                        {item.label}
+                        <ChevronDown className="ml-1 h-4 w-4 transition group-hover:rotate-180" />
+                      </Link>
+
+                      <div className="invisible absolute left-0 top-full z-50 mt-3 w-[260px] rounded-3xl border border-white/10 bg-black/85 p-3 opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            className={`block rounded-2xl px-4 py-3 text-sm font-medium transition ${
+                              isActive(child.href)
+                                ? "bg-[#E5C07B]/15 text-[#f1d48b]"
+                                : "text-white/80 hover:bg-white/5 hover:text-white"
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
 
                 return (
                   <Link
@@ -147,17 +190,37 @@ export default function Navbar() {
                   const active = isActive(item.href);
 
                   return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                        active
-                          ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                          : "text-white hover:bg-white/5"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
+                    <div key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition ${
+                          active
+                            ? "bg-[#E5C07B]/15 text-[#f1d48b]"
+                            : "text-white hover:bg-white/5"
+                        }`}
+                      >
+                        {item.label}
+                        {item.children && <ChevronDown className="h-4 w-4" />}
+                      </Link>
+
+                      {item.children && (
+                        <div className="mt-2 space-y-1 border-l border-[#E5C07B]/30 pl-3">
+                          {item.children.map((child) => (
+                            <Link
+                              key={child.href}
+                              href={child.href}
+                              className={`block rounded-2xl px-4 py-2.5 text-sm transition ${
+                                isActive(child.href)
+                                  ? "bg-[#E5C07B]/15 text-[#f1d48b]"
+                                  : "text-white/70 hover:bg-white/5 hover:text-white"
+                              }`}
+                            >
+                              {child.label}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </div>
