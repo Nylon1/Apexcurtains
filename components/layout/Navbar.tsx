@@ -22,7 +22,7 @@ const navItems = [
   { label: "Reviews", href: "/reviews" },
   { label: "Posts", href: "/advice" },
   { label: "Areas", href: "/areas" },
-  
+  { label: "Commercial", href: "/commercial-curtain-track-installation" },
   { label: "FAQ", href: "/faq", highlight: true },
 ];
 

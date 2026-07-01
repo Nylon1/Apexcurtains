@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -9,6 +10,11 @@ import {
   MapPin,
   Sparkles,
   Tag,
+  Ruler,
+  Palette,
+  Hammer,
+  Moon,
+  Shield,
 } from "lucide-react";
 import { getGalleryProjectBySlug } from "@/lib/gallery-projects";
 
@@ -97,7 +103,7 @@ function DetailPill({
   icon,
   label,
 }: {
-  icon: React.ReactNode;
+  icon: ReactNode;
   label: string;
 }) {
   return (
@@ -113,7 +119,7 @@ function ContentSection({
   children,
 }: {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <section className="group relative overflow-hidden rounded-[28px] border border-[#efe7d7] bg-white p-6 shadow-[0_16px_45px_rgba(35,28,18,0.06)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_70px_rgba(35,28,18,0.10)] md:p-8">
@@ -125,6 +131,42 @@ function ContentSection({
 
       <div className="text-[17px] leading-8 text-[#4e463c]">{children}</div>
     </section>
+  );
+}
+
+function StoryStep({
+  number,
+  title,
+  text,
+  icon,
+}: {
+  number: string;
+  title: string;
+  text: string;
+  icon: ReactNode;
+}) {
+  return (
+    <div className="group relative overflow-hidden rounded-[28px] border border-[#efe7d7] bg-white p-6 shadow-[0_18px_55px_rgba(35,28,18,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(35,28,18,0.14)]">
+      <div className="absolute right-[-50px] top-[-50px] h-32 w-32 rounded-full bg-[#d4ab5a]/15 blur-2xl transition group-hover:bg-[#d4ab5a]/25" />
+
+      <div className="relative">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d4ab5a]/30 bg-[#f5efe2] text-[#b8954f] shadow-[inset_0_1px_0_rgba(255,255,255,0.7),0_10px_28px_rgba(180,137,57,0.18)]">
+            {icon}
+          </div>
+
+          <span className="rounded-full border border-[#e5dcc8] bg-[#f8f6f1] px-3 py-1 text-xs font-semibold tracking-[0.18em] text-[#8b7a54]">
+            {number}
+          </span>
+        </div>
+
+        <h3 className="text-xl font-semibold tracking-tight text-[#1f1f1f]">
+          {title}
+        </h3>
+
+        <p className="mt-3 text-sm leading-7 text-[#5b5142]">{text}</p>
+      </div>
+    </div>
   );
 }
 
@@ -172,7 +214,7 @@ export default async function GalleryPage({ params }: PageProps) {
           <div className="absolute right-[-160px] top-32 h-[380px] w-[380px] rounded-full bg-white/10 blur-[110px]" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl pb-16">
+        <div className="relative mx-auto max-w-6xl pb-20">
           <Link
             href="/gallery"
             className="mb-8 inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
@@ -230,99 +272,169 @@ export default async function GalleryPage({ params }: PageProps) {
       </section>
 
       <div className="mx-auto max-w-6xl px-6 pb-20 pt-10 md:px-8">
-        {/* Showcase Image + Intro */}
+        {/* Golden Gallery Image */}
         {data.image_url && (
-          <section className="-mt-20 mb-14">
-            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-              {/* Image Card */}
-              <div className="relative">
-                <div className="rounded-[32px] border border-[#e5dcc8] bg-white p-3 shadow-[0_24px_80px_rgba(20,15,8,0.18)]">
-                  <div className="relative flex h-[320px] items-center justify-center overflow-hidden rounded-[24px] bg-[#101010] sm:h-[380px] lg:h-[460px]">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#d4ab5a22,transparent_42%),linear-gradient(135deg,#ffffff08,transparent)]" />
+          <section className="-mt-24 mb-16">
+            <div className="mx-auto max-w-4xl">
+              <div className="relative rounded-[40px] bg-gradient-to-br from-[#f7e5ad] via-[#d4ab5a] to-[#8a6425] p-[2px] shadow-[0_35px_110px_rgba(88,60,20,0.32)]">
+                <div className="absolute -inset-4 -z-10 rounded-[48px] bg-[#d4ab5a]/25 blur-2xl" />
 
-                    <img
-                      src={data.image_url}
-                      alt={data.title}
-                      className="relative z-10 max-h-full max-w-full object-contain p-2 transition duration-700 hover:scale-[1.02]"
-                    />
+                <div className="rounded-[38px] bg-[#fffaf0] p-3 md:p-4">
+                  <div className="relative overflow-hidden rounded-[30px] border border-[#e7d6a6] bg-[#101010] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),inset_0_-20px_60px_rgba(0,0,0,0.45)]">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#d4ab5a33,transparent_42%),linear-gradient(135deg,#ffffff10,transparent_35%,#00000030)]" />
+
+                    <div className="absolute left-5 top-5 z-20 rounded-full border border-white/10 bg-black/40 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#f0d38b] backdrop-blur-md">
+                      Golden Gallery
+                    </div>
+
+                    <div className="flex h-[300px] items-center justify-center sm:h-[390px] md:h-[470px] lg:h-[540px]">
+                      <img
+                        src={data.image_url}
+                        alt={data.title}
+                        className="relative z-10 max-h-full max-w-full object-contain p-4 drop-shadow-[0_28px_45px_rgba(0,0,0,0.45)] transition duration-700 hover:scale-[1.025]"
+                      />
+                    </div>
                   </div>
                 </div>
-
-                <p className="mt-4 text-center text-sm leading-6 text-[#7a6c55]">
-                  Full project showcase — showing the curtain shape, window
-                  structure and finished installation clearly.
-                </p>
               </div>
 
-              {/* Text Card */}
-              <div className="rounded-[32px] border border-[#efe7d7] bg-white p-7 shadow-[0_18px_60px_rgba(35,28,18,0.07)] md:p-10">
-                <p className="mb-4 inline-flex items-center rounded-full border border-[#e5dcc8] bg-[#f8f6f1] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8b7a54]">
-                  Project Story
-                </p>
-
-                <h2 className="text-3xl font-semibold tracking-tight text-[#1f1f1f] md:text-4xl">
-                  A made-to-measure curtain project designed around the window,
-                  the room and daily comfort.
-                </h2>
-
-                <p className="mt-5 text-[17px] leading-8 text-[#4e463c]">
-                  This project showcases how carefully designed{" "}
-                  <Link
-                    href="/apex-curtains"
-                    className="text-[#b8954f] underline underline-offset-4"
-                  >
-                    apex curtains
-                  </Link>{" "}
-                  can completely transform a space, especially in homes with
-                  angled or{" "}
-                  <Link
-                    href="/gable-end-curtains"
-                    className="text-[#b8954f] underline underline-offset-4"
-                  >
-                    gable end windows
-                  </Link>
-                  . Every installation is tailored to the structure of the
-                  window, ensuring smooth operation, clean lines and a premium
-                  finish.
-                </p>
-
-                <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                  {[
-                    "Made-to-measure finish",
-                    "Designed for privacy",
-                    "Improved light control",
-                    "Premium bedroom comfort",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className="flex items-center gap-3 rounded-2xl border border-[#efe7d7] bg-[#f8f6f1] px-4 py-3 text-sm font-medium text-[#5b5142]"
-                    >
-                      <CheckCircle2 className="h-5 w-5 shrink-0 text-[#b8954f]" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link
-                    href="/get-curtain-quote"
-                    className="inline-flex items-center justify-center rounded-full bg-[#d4ab5a] px-5 py-3 text-sm font-semibold text-[#1f1f1f] transition hover:bg-[#c89d48]"
-                  >
-                    Get a Quote
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-
-                  <Link
-                    href="/advice"
-                    className="inline-flex items-center justify-center rounded-full border border-[#e5dcc8] bg-[#f8f6f1] px-5 py-3 text-sm font-semibold text-[#5b5142] transition hover:bg-[#eadfca]"
-                  >
-                    Read Curtain Advice
-                  </Link>
-                </div>
-              </div>
+              <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-6 text-[#7a6c55]">
+                Full project showcase — framed to show the curtain shape, window
+                structure and finished installation without cropping the main
+                feature.
+              </p>
             </div>
           </section>
         )}
+
+        {/* Guided Visual Story */}
+        <section className="mb-16">
+          <div className="mx-auto max-w-5xl text-center">
+            <p className="mb-4 inline-flex items-center rounded-full border border-[#e5dcc8] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8b7a54] shadow-sm">
+              Guided Visual Story
+            </p>
+
+            <h2 className="text-3xl font-semibold tracking-tight text-[#1f1f1f] md:text-5xl">
+              From problem window to premium finished room.
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-3xl text-[17px] leading-8 text-[#5b5142]">
+              This project shows how a shaped window can be transformed with
+              careful measuring, the right curtain design and a clean
+              installation approach.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            <StoryStep
+              number="01"
+              title="The Window"
+              text="A large shaped window needed a curtain solution that respected the height, angle and architecture of the room."
+              icon={<Ruler className="h-6 w-6" />}
+            />
+
+            <StoryStep
+              number="02"
+              title="The Need"
+              text="The room needed privacy, light control and a softer atmosphere, especially for daily comfort and restful use."
+              icon={<Shield className="h-6 w-6" />}
+            />
+
+            <StoryStep
+              number="03"
+              title="The Design"
+              text="The curtain was planned around the exact window shape, fabric choice, lining requirement and finished visual balance."
+              icon={<Palette className="h-6 w-6" />}
+            />
+
+            <StoryStep
+              number="04"
+              title="The Finish"
+              text="The finished installation helped frame the window beautifully while making the room feel warmer, calmer and more complete."
+              icon={<Hammer className="h-6 w-6" />}
+            />
+          </div>
+        </section>
+
+        {/* Project Story Text */}
+        <section className="mb-14">
+          <div className="mx-auto max-w-4xl rounded-[34px] border border-[#efe7d7] bg-white p-7 shadow-[0_22px_80px_rgba(35,28,18,0.08)] md:p-10">
+            <p className="mb-4 inline-flex items-center rounded-full border border-[#e5dcc8] bg-[#f8f6f1] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#8b7a54]">
+              Project Story
+            </p>
+
+            <h2 className="text-3xl font-semibold tracking-tight text-[#1f1f1f] md:text-4xl">
+              A made-to-measure curtain project designed around the window, the
+              room and daily comfort.
+            </h2>
+
+            <p className="mt-5 text-[17px] leading-8 text-[#4e463c]">
+              This project showcases how carefully designed{" "}
+              <Link
+                href="/apex-curtains"
+                className="text-[#b8954f] underline underline-offset-4"
+              >
+                apex curtains
+              </Link>{" "}
+              can completely transform a space, especially in homes with angled
+              or{" "}
+              <Link
+                href="/gable-end-curtains"
+                className="text-[#b8954f] underline underline-offset-4"
+              >
+                gable end windows
+              </Link>
+              . Every installation is tailored to the structure of the window,
+              ensuring smooth operation, clean lines and a premium finish.
+            </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {[
+                {
+                  label: "Made-to-measure finish",
+                  icon: <CheckCircle2 className="h-5 w-5" />,
+                },
+                {
+                  label: "Designed for privacy",
+                  icon: <Shield className="h-5 w-5" />,
+                },
+                {
+                  label: "Improved light control",
+                  icon: <Moon className="h-5 w-5" />,
+                },
+                {
+                  label: "Premium room comfort",
+                  icon: <Sparkles className="h-5 w-5" />,
+                },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center gap-3 rounded-2xl border border-[#efe7d7] bg-[#f8f6f1] px-4 py-3 text-sm font-medium text-[#5b5142]"
+                >
+                  <span className="text-[#b8954f]">{item.icon}</span>
+                  {item.label}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                href="/get-curtain-quote"
+                className="inline-flex items-center justify-center rounded-full bg-[#d4ab5a] px-5 py-3 text-sm font-semibold text-[#1f1f1f] transition hover:bg-[#c89d48]"
+              >
+                Get a Quote
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+
+              <Link
+                href="/advice"
+                className="inline-flex items-center justify-center rounded-full border border-[#e5dcc8] bg-[#f8f6f1] px-5 py-3 text-sm font-semibold text-[#5b5142] transition hover:bg-[#eadfca]"
+              >
+                Read Curtain Advice
+              </Link>
+            </div>
+          </div>
+        </section>
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Content */}

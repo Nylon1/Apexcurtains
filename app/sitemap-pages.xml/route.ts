@@ -49,6 +49,12 @@ export async function GET() {
       priority: "0.90",
     },
     {
+  loc: `${baseUrl}/commercial-curtain-track-installation`,
+  lastmod: now,
+  changefreq: "monthly",
+  priority: "0.90",
+},
+    {
       loc: `${baseUrl}/start-designing`,
       lastmod: now,
       changefreq: "weekly",
