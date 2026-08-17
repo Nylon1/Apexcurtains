@@ -4,7 +4,9 @@ on:
   pull_request:
     paths:
       - "app/**"
+      - "components/**"
       - "lib/**"
+      - "public/**"
       - "proxy.ts"
       - "next.config.ts"
       - "scripts/seo-foundation-check.mjs"
@@ -17,6 +19,10 @@ on:
 jobs:
   seo-foundation:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-key
+      SUPABASE_SERVICE_ROLE_KEY: ci-placeholder-service-role-key
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +38,9 @@ jobs:
 
       - name: SEO static acceptance checks
         run: npm run seo:check
+
+      - name: Production build
+        run: npm run build
 
       - name: Baseline lint audit
         continue-on-error: true
