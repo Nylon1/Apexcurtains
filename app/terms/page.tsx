@@ -11,7 +11,7 @@ export default function Page() {
       section2Title="Quotations and advice"
       section2Text="Indicative guidance does not replace a full assessment. Final recommendations may change depending on measurements, window conditions and client choices."
       section3Title="Limitations"
-      section3Text="We aim to provide clear and accurate information, but bespoke projects vary and final outcomes depend on confirmed details."
+      section3Text="We aim to provide clear and accurate information, but bespoke projects vary and final outcomes depend on confirmed details. All defects in made-to-measure products must be reported within 48 hours of installation."
     />
   );
 }
