@@ -1,26 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import RoomVisualiser from "@/components/visualiser/RoomVisualiser";
+import {
+  resolveRoomDesign,
+  type RoomDesignInput,
+} from "@/lib/visualiser/room-design";
 import { resolveLook } from "@/lib/visualiser/catalogue";
 import "./visualiser.css";
 
 export const metadata: Metadata = {
   title: "Apex Curtain Room Visualiser | Explore Oslo Colours",
   description:
-    "Explore Oslo curtain colours on real shaped Apex installations. See the folds, roofline and room together, then enquire about your look.",
+    "Explore Oslo curtain colours in furnished rooms inspired by shaped Apex installations. See the folds, roofline and room together, then enquire about your look.",
   alternates: { canonical: "https://www.apexcurtains.com/room-visualiser" },
   openGraph: {
     title: "Apex Curtains Room Visualiser",
     description:
-      "Your architecture. Your colour. Explore Oslo on real shaped curtains.",
+      "Your architecture. Your colour. Explore Oslo in illustrative shaped-curtain interiors.",
     url: "https://www.apexcurtains.com/room-visualiser",
-    images: ["/projects/wave-pleat-apex-curtains-milton-keynes.jpeg"],
+    images: ["/visualiser/double-pinch-gable-desktop.webp"],
   },
 };
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ room?: string; colour?: string }>;
+  searchParams: Promise<{ room?: string; colour?: string } & RoomDesignInput>;
 }) {
   const params = await searchParams;
   const { scene, colour } = resolveLook(params.room, params.colour);
@@ -36,7 +40,7 @@ export default async function Page({
             url: "https://www.apexcurtains.com/room-visualiser",
             name: "Apex Curtains Room Visualiser",
             description:
-              "Explore Oslo colours on real shaped curtain installations.",
+              "Explore Oslo colours in illustrative shaped-curtain interiors.",
             isPartOf: { "@id": "https://www.apexcurtains.com/#website" },
             publisher: { "@id": "https://www.apexcurtains.com/#organization" },
           }),
@@ -53,11 +57,15 @@ export default async function Page({
         </div>
         <p>
           See how a shade changes the feeling of a room. Explore plain Oslo
-          colours on real shaped curtains, with the folds and roofline kept
-          beautifully in view.
+          colours in illustrative shaped-curtain interiors, then bring walls,
+          flooring, furniture and warm lighting into the picture.
         </p>
       </header>
-      <RoomVisualiser initialRoom={scene.id} initialColour={colour.id} />
+      <RoomVisualiser
+        initialRoom={scene.id}
+        initialColour={colour.id}
+        initialDesign={resolveRoomDesign(params)}
+      />
       <section className="rv-editorial">
         <div>
           <p className="rv-eyebrow">Made for the shape of your home</p>
@@ -70,7 +78,7 @@ export default async function Page({
         <div>
           <p>
             Apex, gable-end, triangular and angled windows need curtains
-            designed around their particular geometry. These installation views
+            designed around their particular geometry. These illustrative rooms
             help you explore colour; a specialist survey establishes the track
             route, curtain dimensions, fixing points and access for your own
             room.

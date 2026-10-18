@@ -1,92 +1,62 @@
 [
   {
-    "id": "apex-bedroom",
-    "name": "Apex bedroom",
-    "shape": "apex",
-    "state": "tied-back",
-    "source": "/projects/wave-pleat-apex-curtains-milton-keynes.jpeg",
-    "width": 899,
-    "height": 1599,
-    "projectHref": "/gallery/wave-pleat-apex-curtains-milton-keynes",
-    "projectLabel": "See the Milton Keynes installation",
-    "description": "A soft sweep of cloth follows the roofline. Matching tiebacks frame the view, with long folds settling at the floor.",
-    "evidence": "Milton Keynes \u00b7 Apex bedroom \u00b7 Wave pleat \u00b7 Photographed tied back",
-    "paths": [
-      "M464 224 L424 261 L386 297 L350 334 L313 371 L276 412 L244 449 L207 487 L171 524 L135 560 L128 694 L122 836 L119 890 L115 899 L119 928 L102 1016 L88 1104 L68 1188 Q90 1199 116 1197 Q144 1208 160 1198 L183 1195 L202 1183 L219 1133 L211 1050 L205 971 L217 949 C284 869 350 752 402 608 C433 519 449 457 460 414 C463 359 454 279 464 224 Z",
-      "M464 224 L499 259 L536 297 L573 335 L608 372 L649 410 L686 449 L722 487 L759 524 L792 560 L799 709 L803 864 L806 897 L805 926 L813 1049 L824 1119 Q803 1133 796 1178 L792 1209 Q777 1215 759 1205 L731 1200 L717 1189 L693 1178 L681 1143 L685 1046 L696 972 L695 951 C623 862 562 746 518 607 C493 526 475 458 462 414 C454 351 447 281 464 224 Z"
-    ],
-    "heading": "Wave pleat"
-  },
-  {
-    "id": "gable-perspective",
-    "name": "Gable in perspective",
-    "shape": "gable",
-    "state": "tied-back",
-    "source": "/window-types/gable-end.jpeg",
-    "width": 1368,
-    "height": 1824,
-    "projectHref": "/gable-end-curtains",
-    "projectLabel": "See Apex gable installations",
-    "description": "Long folds, a visible shaped track and a view from within the room. The perspective is preserved, including the different apparent slopes.",
-    "evidence": "Apex installation \u00c2\u00b7 Gable glazing \u00c2\u00b7 Photographed tied back",
-    "paths": [
-      "M334 94 L352 89 L379 94 L394 86 L407 81 L411 97 L439 96 L448 85 L476 75 L486 67 L492 84 L515 83 L538 78 L541 70 L571 66 L584 58 L591 78 L620 72 L628 61 L641 57 L650 53 L654 68 L680 63 L687 55 L695 48 L701 62 L729 54 L737 50 L749 46 L761 51 L779 44 L792 47 L804 39 L816 39 L823 35 L837 43 L851 38 L865 38 L881 49 C864 242 802 468 720 640 C670 766 584 914 521 1008 L520 1030 L505 1075 C507 1230 536 1466 543 1647 L529 1755 L529 1824 L288 1824 L299 1610 L307 1415 L314 1170 L316 1029 L312 1002 L318 974 L310 969 L321 573 Z",
-      "M952 135 L968 143 L977 211 L993 249 L1007 251 L1019 291 L1037 327 L1040 352 L1054 355 L1059 386 L1074 409 L1080 448 L1095 453 L1104 491 L1128 516 L1131 548 L1155 572 L1168 951 L1173 972 L1164 1007 C1173 1100 1194 1222 1213 1294 L1215 1346 L1208 1367 L1192 1362 L1187 1366 L1167 1355 L1148 1345 L1143 1333 L1125 1324 L1104 1309 L1084 1286 C1073 1196 1087 1097 1114 1019 L1111 1000 C1077 941 1057 864 1040 789 C1011 652 976 490 948 350 L903 182 Z"
-    ],
-    "heading": null
-  },
-  {
-    "id": "country-gable",
-    "name": "Country gable",
-    "shape": "angled",
-    "state": "tied-back",
-    "source": "/images/barn-conversion-apex.jpeg",
-    "width": 1200,
-    "height": 1600,
-    "projectHref": "/barn-conversion-curtains",
-    "projectLabel": "Explore Apex barn installations",
-    "description": "Sweeping curtains frame the countryside, following both roof slopes and the short level section at the top of the glazing.",
-    "evidence": "Apex installation \u00c2\u00b7 Shaped gable \u00c2\u00b7 Photographed tied back",
-    "paths": [
-      "M597 663 L490 663 L345 769 L192 886 L37 1001 L34 1081 L38 1188 L28 1191 L30 1212 L21 1267 L0 1366 L0 1551 L11 1551 L23 1524 L26 1482 L34 1424 L43 1384 L49 1346 L58 1311 L72 1275 L82 1243 L96 1229 C208 1219 321 1122 409 1001 C489 895 550 765 597 671 Z",
-      "M601 663 L705 663 L851 777 L995 886 L1154 1000 L1167 1168 L1174 1179 L1168 1201 L1174 1240 L1200 1380 L1200 1526 L1189 1517 L1185 1480 L1177 1434 L1166 1382 L1160 1348 L1154 1318 L1141 1287 L1134 1247 L1127 1228 L1110 1207 C1010 1189 896 1096 815 990 C735 883 661 768 601 672 Z"
-    ],
-    "heading": null
-  },
-  {
     "id": "pencil-pleat-bedroom",
-    "name": "Pencil pleat bedroom",
+    "name": "Loft bedroom",
     "shape": "triangular",
     "state": "tied-back",
     "heading": "Pencil pleat",
-    "source": "/projects/peterborough-bedroom-blackout-curtains-peterborough.jpeg",
-    "width": 1200,
-    "height": 1600,
+    "source": "/visualiser/sources/pencil-pleat-room.webp",
+    "width": 1448,
+    "height": 1086,
     "projectHref": "/gallery/peterborough-bedroom-blackout-curtains-peterborough",
     "projectLabel": "See the Peterborough installation",
-    "description": "A gathered pencil pleat heading follows the triangular roofline, with long folds and matching tiebacks beside the doors.",
-    "evidence": "Peterborough \u00b7 Bedroom \u00b7 Pencil pleat \u00b7 Photographed tied back",
+    "description": "A calm loft bedroom with gathered pencil pleats following the steep roofline. Inspired by the triangular installation in Peterborough.",
+    "evidence": "Illustrative interior / Inspired by the Peterborough installation",
     "paths": [
-      "M550 0 L124 447 L130 490 L128 700 L128 854 L119 904 L128 918 L116 1110 L112 1477 L132 1469 L142 1478 L160 1462 L180 1465 L187 1455 L235 1434 L283 1422 C260 1319 245 1161 231 1014 L224 947 L235 927 L249 884 C321 772 404 585 459 387 C493 264 528 127 553 51 Z",
-      "M550 0 L976 466 L967 520 L959 705 L959 868 L969 916 L957 920 L970 1288 L969 1455 L959 1496 L947 1492 L931 1480 L917 1490 L905 1481 L896 1496 L885 1478 L869 1473 L856 1467 L835 1455 L805 1442 C820 1319 829 1154 841 1015 L845 964 L837 925 L824 886 C769 773 708 589 653 394 C608 235 575 109 556 52 Z"
-    ]
+      "M720 0 L438 264 L441 335 L439 507 L434 532 L442 543 L427 756 C460 757 487 772 510 788 L539 825 C530 753 520 659 514 573 L520 544 L525 531 C587 439 644 288 679 164 C699 98 710 51 720 20 Z",
+      "M720 0 L1005 271 L1000 346 L999 511 L1005 535 L998 544 L1010 709 L1024 843 L1011 849 L996 846 L981 853 L968 846 L955 851 L940 845 L927 850 L915 845 L897 841 L893 832 C904 737 910 656 914 579 L913 562 L906 535 C849 449 800 301 765 174 C744 99 730 49 722 20 Z"
+    ],
+    "referenceSource": "/projects/peterborough-bedroom-blackout-curtains-peterborough.jpeg",
+    "visualKind": "illustrative-room"
   },
   {
     "id": "double-pinch-gable",
-    "name": "Double pinch pleat gable",
+    "name": "Gable living room",
     "shape": "gable",
     "state": "tied-back",
     "heading": "Double pinch pleat",
-    "source": "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
-    "width": 1600,
-    "height": 1200,
+    "source": "/visualiser/sources/double-pinch-room.webp",
+    "width": 1448,
+    "height": 1086,
     "projectHref": "/gallery/pinch-pleat-curtains-oxford-oxford",
     "projectLabel": "See the Oxford installation",
-    "description": "Handmade double pinch pleats follow the broad gable, with tailored folds sweeping into matching tiebacks. The original room and curtain position are preserved.",
-    "evidence": "Oxford \u00b7 Bedroom \u00b7 Double pinch pleat \u00b7 Photographed tied back",
+    "description": "A warm, furnished living room with a broad gable and tailored double pinch pleat curtains. The shaped installation in Oxford provided the architectural reference.",
+    "evidence": "Illustrative interior / Inspired by the Oxford installation",
     "paths": [
-      "M789 180 L772 191.8 L770 189.8 L764 192.8 L762 197.8 L724 224.0 L722 222.0 L716 225.0 L714 230.0 L679 254.2 L677 252.2 L671 255.2 L669 260.2 L634 284.4 L632 282.4 L626 285.4 L624 290.4 L589 314.7 L587 312.7 L581 315.7 L579 320.7 L545 344.2 L543 342.2 L537 345.2 L535 350.2 L498 375.8 L496 373.8 L490 376.8 L488 381.8 L451 407.3 L449 405.3 L443 408.3 L441 413.3 L403 439.6 L401 437.6 L395 440.6 L393 445.6 L357 470.5 L355 468.5 L349 471.5 L347 476.5 L313 500.0 L311 498.0 L305 501.0 L303 506.0 L268 530.2 L266 528.2 L260 531.2 L258 536.2 L219 563.1 L217 561.1 L211 564.1 L209 569.1 L180 589.3 L178 587.3 L172 590.3 L170 595.3 L171 595 L181 622 L166 642 L179 651 L176 844 L202 854 L216 870 L214 954 L235 956 L254 952 L270 954 L289 949 L291 916 L306 904 L309 879 L319 870 L325 849 L336 827 L326 814 L331 804 L320 782 L331 774 L319 756 L329 747 L316 729 L312 717 L315 700 C471 674 621 552 706 389 C744 319 767 260 779 221 L789 217 Z",
-      "M789 180 L806 192.7 L808 190.7 L814 193.7 L816 198.7 L850 224.0 L852 222.0 L858 225.0 L860 230.0 L896 256.7 L898 254.7 L904 257.7 L906 262.7 L942 289.5 L944 287.5 L950 290.5 L952 295.5 L988 322.2 L990 320.2 L996 323.2 L998 328.2 L1032 353.5 L1034 351.5 L1040 354.5 L1042 359.5 L1075 384.2 L1077 382.2 L1083 385.2 L1085 390.2 L1122 417.6 L1124 415.6 L1130 418.6 L1132 423.6 L1165 448.2 L1167 446.2 L1173 449.2 L1175 454.2 L1210 480.3 L1212 478.3 L1218 481.3 L1220 486.3 L1251 509.5 L1253 507.5 L1259 510.5 L1261 515.5 L1293 539.4 L1295 537.4 L1301 540.4 L1303 545.4 L1338 571.4 L1340 569.4 L1346 572.4 L1348 577.4 L1386 605 L1370 628 L1383 644 L1370 651 L1376 798 L1355 788 L1343 786 L1341 957 L1327 958 L1310 949 L1295 947 L1281 940 L1277 904 L1266 897 L1264 869 L1255 856 L1259 838 L1247 827 L1250 805 L1255 791 L1246 783 L1244 761 L1254 738 L1249 722 L1251 708 C1102 685 960 558 868 381 C829 308 800 246 780 221 L790 217 Z"
-    ]
+      "M718 21 L699 32 L692 38 L656 63 L650 65 L648 74 L614 97 L609 97 L606 106 L574 131 L571 130 L568 139 L534 162 L528 163 L525 171 L490 195 L482 193 L477 205 L444 229 L439 224 L435 236 L403 260 L398 255 L394 266 L361 290 L353 287 L350 299 L318 322 L312 317 L308 331 L275 353 L269 349 L265 363 L235 386 L229 379 L226 393 L195 416 L189 411 L185 423 L151 446 L162 475 L153 489 L165 500 L151 652 L140 783 L148 789 L167 786 L176 792 L190 790 L204 793 L217 790 L231 792 L244 786 L260 785 L265 765 L278 755 L279 736 L291 727 L288 708 L299 695 L290 682 L295 673 L287 655 L293 642 L284 629 L288 617 L280 602 L284 591 L276 577 L272 566 L280 547 C430 508 579 381 652 209 C682 143 701 90 715 61 Z",
+      "M718 21 L744 39 L748 44 L782 69 L788 69 L791 78 L826 102 L830 101 L834 110 L869 135 L875 133 L880 147 L911 171 L916 163 L920 178 L955 202 L960 197 L966 212 L1000 235 L1007 228 L1009 241 L1043 267 L1051 261 L1055 275 L1086 297 L1091 291 L1095 305 L1127 329 L1133 323 L1136 336 L1170 360 L1176 352 L1179 367 L1214 391 L1220 383 L1224 399 L1251 420 L1257 414 L1260 431 L1286 450 L1271 477 L1280 492 L1267 504 L1282 701 C1267 719 1259 742 1253 785 L1237 790 L1218 792 L1201 788 L1190 791 L1178 785 L1174 769 L1160 756 L1166 744 L1156 731 L1163 716 L1152 701 L1157 688 L1149 676 L1156 661 L1148 646 L1155 635 L1147 623 L1155 609 L1149 594 L1157 582 L1158 569 L1153 552 C1014 527 878 408 799 239 C760 157 735 93 717 61 Z"
+    ],
+    "referenceSource": "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
+    "visualKind": "illustrative-room"
+  },
+  {
+    "id": "apex-bedroom",
+    "name": "Apex lounge",
+    "shape": "apex",
+    "state": "tied-back",
+    "source": "/visualiser/sources/wave-pleat-room.webp",
+    "width": 1448,
+    "height": 1086,
+    "projectHref": "/gallery/wave-pleat-apex-curtains-milton-keynes",
+    "projectLabel": "See the Milton Keynes installation",
+    "description": "A softly furnished lounge with flowing wave folds beneath a steep apex. The Milton Keynes installation provided the shaped-window reference.",
+    "evidence": "Illustrative interior / Inspired by the Milton Keynes installation",
+    "paths": [
+      "M730 25 L712 46 Q699 41 695 52 L695 60 L681 79 Q664 71 661 83 L660 94 L644 113 Q627 105 624 118 L623 129 L607 147 Q589 139 587 153 L587 163 L573 180 Q554 173 552 187 L552 197 L537 213 Q521 204 519 218 L519 228 L502 243 Q488 235 485 249 L484 260 L470 276 Q451 267 449 284 L448 291 L437 303 Q426 300 423 311 L403 326 L400 455 L400 581 L397 598 L404 607 L387 710 L369 834 L384 837 L396 839 L410 836 L425 840 L437 836 L452 838 L467 832 L481 832 L487 821 L502 813 C492 752 488 697 484 654 L491 632 C571 545 640 360 682 215 C703 148 719 91 729 69 Z",
+      "M730 25 L748 46 Q761 43 767 56 L768 66 L782 84 Q798 76 802 91 L803 103 L818 118 Q833 112 837 127 L837 139 L851 154 Q870 147 875 163 L875 175 L890 191 Q906 182 917 198 L917 209 L930 225 Q949 218 955 234 L956 247 L970 260 Q989 251 994 270 L994 280 L1008 291 Q1020 284 1023 300 L1025 310 L1059 329 L1059 483 L1064 582 L1067 597 L1060 606 L1076 738 L1090 835 L1074 839 L1061 837 L1048 840 L1036 836 L1022 840 L1007 838 L993 838 L977 835 L963 830 L955 820 L937 812 C949 753 957 695 961 653 L955 636 C888 558 824 386 780 231 C758 157 740 97 730 69 Z"
+    ],
+    "heading": "Wave pleat",
+    "referenceSource": "/projects/wave-pleat-apex-curtains-milton-keynes.jpeg",
+    "visualKind": "illustrative-room"
   }
 ]

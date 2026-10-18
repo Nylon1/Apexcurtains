@@ -3,12 +3,16 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Expand, X } from "lucide-react";
+import { scenes, resolveLook, lookUrl } from "@/lib/visualiser/catalogue";
+import RoomPaletteControls from "./RoomPaletteControls";
 import {
-  scenes,
-  osloColours,
-  resolveLook,
-  lookUrl,
-} from "@/lib/visualiser/catalogue";
+  resolveRoomDesign,
+  roomDesignFromParams,
+  roomDesignParams,
+  roomDesignSummary,
+  type RoomDesign,
+} from "@/lib/visualiser/room-design";
+import materials from "@/lib/visualiser/scene-materials.json";
 import { createResourceCache } from "@/lib/visualiser/resource-cache";
 import type { loadScene } from "@/lib/visualiser/scene-renderer";
 
@@ -26,24 +30,25 @@ function event(name: string, data: Record<string, string | number | boolean>) {
 export default function RoomVisualiser({
   initialRoom,
   initialColour,
+  initialDesign,
 }: {
   initialRoom: string;
   initialColour: string;
+  initialDesign: RoomDesign;
 }) {
   const [look, setLook] = useState(() =>
     resolveLook(initialRoom, initialColour),
   );
+  const [design, setDesign] = useState(() => resolveRoomDesign(initialDesign));
   const [status, setStatus] = useState<"loading" | "ready" | "error">(
     "loading",
   );
   const [original, setOriginal] = useState(false);
-  const [headingFilter, setHeadingFilter] = useState("All installations");
   const [retry, setRetry] = useState(0);
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
   const [failedImage, setFailedImage] = useState("");
   const canvas = useRef<HTMLCanvasElement>(null);
-  const colourList = useRef<HTMLDivElement>(null);
   const enlargedCanvas = useRef<HTMLCanvasElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const enlargeButton = useRef<HTMLButtonElement>(null);
@@ -56,20 +61,6 @@ export default function RoomVisualiser({
   const { scene, colour } = look;
 
   useEffect(() => {
-    const list = colourList.current;
-    const selected = list?.querySelector<HTMLElement>('[aria-pressed="true"]');
-    if (!list || !selected) return;
-    const item = selected.getBoundingClientRect();
-    const bounds = list.getBoundingClientRect();
-    // Scroll only the swatch strip, never the page or sticky room preview.
-    if (matchMedia("(max-width: 800px)").matches) {
-      list.scrollLeft += item.left - bounds.left - (list.clientWidth - item.width) / 2;
-    } else if (item.top < bounds.top || item.bottom > bounds.bottom) {
-      list.scrollTop += item.top - bounds.top - (list.clientHeight - item.height) / 2;
-    }
-  }, [colour.id]);
-
-  useEffect(() => {
     if (!opened.current) {
       event("opened", { room: initialRoom, colour: initialColour });
       opened.current = true;
@@ -77,8 +68,8 @@ export default function RoomVisualiser({
     function restore() {
       const params = new URLSearchParams(location.search);
       setLook(resolveLook(params.get("room"), params.get("colour")));
+      setDesign(roomDesignFromParams(params));
       setOriginal(false);
-      setHeadingFilter("All installations");
     }
     window.addEventListener("popstate", restore);
     return () => window.removeEventListener("popstate", restore);
@@ -89,7 +80,7 @@ export default function RoomVisualiser({
     let disposed = false;
     // Dynamic import keeps renderer work out of the initial server-rendered shell.
     async function render() {
-      setStatus("loading");
+      if (canvas.current?.dataset.room !== scene.id) setStatus("loading");
       try {
         const engine = await import("@/lib/visualiser/scene-renderer");
         if (!cache.current)
@@ -108,10 +99,16 @@ export default function RoomVisualiser({
         const loaded = await cache.current.get(`${scene.id}:${size}`);
         if (disposed || serial !== generation.current || !canvas.current)
           return;
-        const ms = engine.paintScene(canvas.current, loaded, colour.rgb);
+        const ms = engine.paintScene(
+          canvas.current,
+          loaded,
+          colour.rgb,
+          design,
+        );
         canvas.current.dataset.renderMs = String(Math.round(ms));
         canvas.current.dataset.colour = colour.id;
         canvas.current.dataset.room = scene.id;
+        canvas.current.dataset.design = JSON.stringify(design);
         setStatus("ready");
       } catch {
         if (!disposed && serial === generation.current) setStatus("error");
@@ -121,7 +118,7 @@ export default function RoomVisualiser({
     return () => {
       disposed = true;
     };
-  }, [scene, colour, retry]);
+  }, [scene, colour, design, retry]);
 
   function choose(
     room: string,
@@ -138,7 +135,7 @@ export default function RoomVisualiser({
     history.replaceState(
       history.state,
       "",
-      lookUrl(next.scene.id, next.colour.id),
+      lookUrl(next.scene.id, next.colour.id, design),
     );
     event(kind, {
       room: next.scene.id,
@@ -146,6 +143,14 @@ export default function RoomVisualiser({
       colourReference: next.colour.reference,
       coloursExplored: explored.current.size,
     });
+  }
+  function changeDesign(next: RoomDesign, changed: string) {
+    setDesign(next);
+    setOriginal(false);
+    setCopied(false);
+    setCopyError(false);
+    history.replaceState(history.state, "", lookUrl(scene.id, colour.id, next));
+    event("room_design_changed", { room: scene.id, surface: changed, ...next });
   }
   function enlarge() {
     if (!canvas.current || !enlargedCanvas.current || status !== "ready")
@@ -155,20 +160,22 @@ export default function RoomVisualiser({
     enlargedCanvas.current.getContext("2d")?.drawImage(canvas.current, 0, 0);
     dialog.current?.showModal();
   }
-  const enquiry = `/start-designing?visualiserRoom=${scene.id}&visualiserColour=${colour.id}`;
+  const enquiry = `/start-designing?${new URLSearchParams({ visualiserRoom: scene.id, visualiserColour: colour.id, ...roomDesignParams(design, "visualiser-") })}`;
+  const furnitureLabel =
+    materials[scene.id as keyof typeof materials].furnitureLabel;
 
   return (
     <section
       className="rv-workspace"
-      aria-label="Explore Oslo on shaped curtains"
+      aria-label="Design your room with shaped curtains"
     >
       <div className="rv-step-heading">
-        <span>01 / Choose your room</span>
-        <p>Real Apex installations. A new colour perspective.</p>
+        <span>01 / Choose your heading</span>
+        <p>Three interiors. Three curtain designs.</p>
       </div>
       <noscript>
         <p>
-          The original installation is shown below. Enable JavaScript to preview
+          The illustrative room is shown below. Enable JavaScript to preview
           Oslo colours, or{" "}
           <Link href="/curtain-colours-and-tones">
             explore our colour guidance
@@ -177,69 +184,38 @@ export default function RoomVisualiser({
         </p>
       </noscript>
       <div
-        className="rv-headings"
+        className="rv-rooms"
         role="group"
-        aria-label="Explore a curtain heading"
+        aria-label="Choose a curtain heading"
       >
-        {[
-          "All installations",
-          "Pencil pleat",
-          "Double pinch pleat",
-          "Wave pleat",
-        ].map((heading) => (
+        {scenes.map((room) => (
           <button
+            key={room.id}
             type="button"
-            key={heading}
-            aria-pressed={headingFilter === heading}
-            onClick={() => {
-              setHeadingFilter(heading);
-              const example = scenes.find((item) => item.heading === heading);
-              if (example) choose(example.id, colour.id, "room_selected");
-            }}
+            aria-pressed={room.id === scene.id}
+            onClick={() => choose(room.id, colour.id, "room_selected")}
           >
-            {heading}
+            {/* Local pre-sized photographic thumbnails. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`/visualiser/${room.id}-thumb.webp`}
+              width={70}
+              height={70}
+              alt=""
+              loading="lazy"
+            />
+            <span>
+              {room.heading}
+              <small>{room.name}</small>
+            </span>
+            {room.id === scene.id && <Check size={16} aria-hidden="true" />}
           </button>
         ))}
       </div>
       <p className="rv-heading-note">
-        Each heading opens a real installation, keeping your Oslo colour. The
-        room changes with it.
+        Explore a furnished room for each heading, keeping your Oslo colour.
+        These illustrative interiors are inspired by real Apex installations.
       </p>
-      <div className="rv-rooms" role="group" aria-label="Choose a room">
-        {scenes
-          .filter(
-            (room) =>
-              headingFilter === "All installations" ||
-              room.heading === headingFilter,
-          )
-          .map((room) => (
-            <button
-              key={room.id}
-              type="button"
-              aria-pressed={room.id === scene.id}
-              onClick={() => choose(room.id, colour.id, "room_selected")}
-            >
-              {/* Local pre-sized derivatives; no image optimisation round trip. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`/visualiser/${room.id}-thumb.webp`}
-                width={70}
-                height={70}
-                alt=""
-                loading="lazy"
-              />
-              <span>
-                {room.name}
-                <small>
-                  {room.state === "tied-back"
-                    ? "Tied-back curtains"
-                    : room.state}
-                </small>
-              </span>
-              {room.id === scene.id && <Check size={16} aria-hidden="true" />}
-            </button>
-          ))}
-      </div>
       <div className="rv-layout">
         <div className="rv-scene-column">
           <div
@@ -262,7 +238,7 @@ export default function RoomVisualiser({
                 }
                 width={scene.width}
                 height={scene.height}
-                alt={`Original Apex installation: ${scene.name}, curtains following the roofline and photographed tied back`}
+                alt={`Illustrative ${scene.name}: ${scene.heading} curtains following the roofline, inspired by an Apex installation`}
                 fetchPriority="high"
                 onError={() => setFailedImage(scene.id)}
               />
@@ -273,7 +249,7 @@ export default function RoomVisualiser({
                 original || status !== "ready" ? "rv-hidden-canvas" : ""
               }
               role="img"
-              aria-label={`${scene.name}: Oslo ${colour.name} colour visualisation, with the original shaped folds and tied-back position`}
+              aria-label={`${scene.name}: Oslo ${colour.name}, ${roomDesignSummary(design)}`}
             />
             <div className="rv-scene-tools">
               <button
@@ -281,7 +257,7 @@ export default function RoomVisualiser({
                 onClick={() => setOriginal(!original)}
                 aria-pressed={original}
               >
-                {original ? "Show selected colour" : "Original photograph"}
+                {original ? "Show my room" : "Neutral room scene"}
               </button>
               <button
                 ref={enlargeButton}
@@ -295,16 +271,16 @@ export default function RoomVisualiser({
             </div>
             <span className="rv-scene-caption">
               {original || status !== "ready"
-                ? "Original installation photograph"
+                ? "Illustrative room / neutral curtains"
                 : `Colour visualisation · Oslo ${colour.name}`}
             </span>
           </div>
           <div className="rv-status" role="status" aria-live="polite">
             {status === "loading" ? (
-              "Preparing your curtain colour…"
+              "Preparing your room…"
             ) : status === "error" ? (
               <>
-                The colour preview could not load. The original photograph is
+                The colour preview could not load. The neutral room scene is
                 shown.{" "}
                 <button
                   type="button"
@@ -317,56 +293,25 @@ export default function RoomVisualiser({
                 </button>
               </>
             ) : (
-              `${scene.name} · ${original ? "Original photograph" : `Oslo ${colour.name}`}`
+              `${scene.name} · ${original ? "Neutral room scene" : `Oslo ${colour.name}`}`
             )}
           </div>
         </div>
-        <aside className="rv-options" aria-label="Oslo colour selection">
-          <p className="rv-eyebrow">02 / Find your colour</p>
+        <aside className="rv-options" aria-label="Room design controls">
+          <p className="rv-eyebrow">02 / Make it your own</p>
           <h2>
-            A different shade.
+            Your room.
             <br />
-            <em>A different feeling.</em>
+            <em>Your palette.</em>
           </h2>
-          <div className="rv-selected">
-            <span
-              style={{ background: `rgb(${colour.rgb.join(",")})` }}
-              aria-hidden="true"
-            />
-            <div>
-              <strong>Oslo {colour.name}</strong>
-              <small>Prestigious Textiles · {colour.reference}</small>
-            </div>
-          </div>
-          <div
-            className="rv-colours"
-            ref={colourList}
-            role="group"
-            aria-label="Choose an Oslo colour"
-          >
-            {osloColours.map((fabric) => (
-              <button
-                type="button"
-                key={fabric.reference}
-                aria-pressed={fabric.id === colour.id}
-                aria-label={`Oslo ${fabric.name}`}
-                onClick={() => choose(scene.id, fabric.id, "colour_selected")}
-              >
-                <span
-                  className="rv-swatch"
-                  style={{ background: `rgb(${fabric.rgb.join(",")})` }}
-                  aria-hidden="true"
-                >
-                  {fabric.id === colour.id && <Check size={16} />}
-                </span>
-                <span>{fabric.name}</span>
-              </button>
-            ))}
-          </div>
-          <p className="rv-sample-note">
-            A colour impression, shaped by this room’s light. Always check a
-            physical Oslo sample in your own room before choosing.
-          </p>
+          <RoomPaletteControls
+            colour={colour}
+            design={design}
+            furnitureLabel={furnitureLabel}
+            onColour={(id) => choose(scene.id, id, "colour_selected")}
+            onDesign={changeDesign}
+          />
+          <p className="rv-scheme-summary">{roomDesignSummary(design)}</p>
           <div className="rv-next">
             <Link
               className="rv-primary"
@@ -389,7 +334,7 @@ export default function RoomVisualiser({
               onClick={async () => {
                 try {
                   await navigator.clipboard.writeText(
-                    `${location.origin}${lookUrl(scene.id, colour.id)}`,
+                    `${location.origin}${lookUrl(scene.id, colour.id, design)}`,
                   );
                   setCopied(true);
                   setCopyError(false);
@@ -404,7 +349,7 @@ export default function RoomVisualiser({
             {copyError && (
               <p role="status" className="rv-sample-note">
                 Copying is unavailable. Use your browser’s share menu; your room
-                and colour are saved in the address.
+                and palette are saved in the address.
               </p>
             )}
             <a href={colour.source}>View Oslo {colour.name} fabric details</a>
@@ -425,12 +370,12 @@ export default function RoomVisualiser({
         </Link>
       </div>
       <p className="rv-disclaimer">
-        Based on real Apex photography, digitally recoloured for inspiration.
-        The original project is not recorded as Oslo. Fabric texture, drape,
-        lining and room lighting affect the finished result; this preview
-        preserves the photographed heading, proportions and curtain position. It
-        is not a measured model of your window and does not predict opening or
-        blackout performance.
+        AI-assisted illustrative interiors, inspired by real Apex installation
+        photography. These are design scenes, not photographs of completed rooms
+        or exact fabric simulations. Oslo colour changes preserve the scene’s
+        folds and proportions. Room colours and lighting are illustrative.
+        Confirm fabric, heading and measurements with samples and a specialist
+        survey; the preview does not predict opening or blackout performance.
       </p>
       <dialog
         ref={dialog}
@@ -440,7 +385,7 @@ export default function RoomVisualiser({
       >
         <div>
           <p>
-            {scene.name} · Oslo {colour.name}
+            {scene.name} · Oslo {colour.name} · Lights {design.lights}
           </p>
           <button
             type="button"

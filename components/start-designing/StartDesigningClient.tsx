@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { roomDesignFromParams, roomDesignParams } from "@/lib/visualiser/room-design";
 import { visualiserContext } from "@/lib/visualiser/enquiry-context";
 import {
   ArrowLeft,
@@ -189,7 +190,7 @@ const screenMeta = [
 
 export default function StartDesigningPage() {
   const searchParams = useSearchParams();
-  const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(searchParams.get("visualiserRoom"), searchParams.get("visualiserColour")));
+  const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(searchParams.get("visualiserRoom"), searchParams.get("visualiserColour"), roomDesignFromParams(searchParams, "visualiser-")));
   useEffect(() => {
     if (!visualiserLook) return;
     const detail = { event: "room_visualiser_enquiry_context_received", room: visualiserLook.room, colour: visualiserLook.colour, colourReference: visualiserLook.reference };
@@ -333,6 +334,7 @@ export default function StartDesigningPage() {
       if (visualiserLook) {
         payload.append("visualiserRoom", visualiserLook.room);
         payload.append("visualiserColour", visualiserLook.colour);
+        for (const [key, value] of Object.entries(roomDesignParams(visualiserLook.design, "visualiser-"))) payload.append(key, value);
       }
 
       if (form.imageFile) {
@@ -494,8 +496,9 @@ export default function StartDesigningPage() {
           <aside className="mb-5 border border-[#f5d38a]/30 p-4 text-sm" aria-label="Your visualiser look">
             <p className="text-[#f5d38a]">Your visualiser look</p>
             <p className="mt-2">{visualiserLook.roomName} · {visualiserLook.colourName} · {visualiserLook.reference}</p>
-            {visualiserLook.heading && <p className="mt-1">Photographed heading: {visualiserLook.heading}</p>}
-            <p className="mt-2 text-white/70">We’ll include this colour inspiration with your enquiry. Tell us about your own window below.</p>
+            {visualiserLook.heading && <p className="mt-1">Visualised heading: {visualiserLook.heading}</p>}
+            <p className="mt-1 text-white/70">{visualiserLook.designSummary}</p>
+            <p className="mt-2 text-white/70">We’ll include this room inspiration with your enquiry. Tell us about your own window below.</p>
             <div className="mt-2 flex flex-wrap gap-4">
               <Link className="inline-flex min-h-11 items-center underline" href={visualiserLook.url.replace("https://www.apexcurtains.com", "")}>View this look</Link>
               <button className="min-h-11 underline" type="button" onClick={() => setVisualiserLook(null)}>Remove this look</button>

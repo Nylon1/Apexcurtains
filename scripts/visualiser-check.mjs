@@ -15,7 +15,11 @@ import {
   osloColours,
   scenes,
   resolveLook,
+  lookUrl,
 } from "../lib/visualiser/catalogue.ts";
+import { resolveRoomDesign, roomDesignFromParams, roomDesignParams, roomPalettes } from "../lib/visualiser/room-design.ts";
+import { prepareLighting, lightsOff } from "../lib/visualiser/room-lighting.ts";
+import materials from "../lib/visualiser/scene-materials.json" with { type: "json" };
 import manifest from "../lib/visualiser/assets.json" with { type: "json" };
 import palette from "../lib/visualiser/oslo-display-colours.json" with { type: "json" };
 
@@ -38,7 +42,8 @@ test("every governed Oslo colour has a traceable display sample, with unchanged 
   }
 });
 test("scene derivatives are complete, bounded and match recorded hashes", async () => {
-  assert.equal(scenes.length, 5);
+  assert.equal(scenes.length, 3);
+  assert.ok(scenes.some((scene) => scene.heading === "Wave pleat"));
   assert.ok(scenes.some((scene) => scene.heading === "Pencil pleat"));
   assert.ok(scenes.some((scene) => scene.heading === "Double pinch pleat"));
   for (const scene of scenes) {
@@ -110,7 +115,7 @@ test("enquiry accepts only real scene and Oslo IDs, derives labels and its own U
   assert.equal(visualiserContext("invented-height", "fern"), null);
   assert.equal(visualiserContext("apex-bedroom", "<script>"), null);
   assert.equal(visualiserContext(null, null), null);
-  assert.equal(resolveLook("wrong", "wrong").scene.id, "apex-bedroom");
+  assert.equal(resolveLook("wrong", "wrong").scene.id, "double-pinch-gable");
 });
 test("resource cache shares pending work, evicts failed requests and bounds retained resources", async () => {
   let calls = 0,
@@ -132,7 +137,7 @@ test("resource cache shares pending work, evicts failed requests and bounds reta
   await cache.get("a");
   assert.equal(calls, before + 1);
 });
-test("all photographed scene masks retain image variation across the complete Oslo palette", async () => {
+test("all three illustrative scenes retain fold variation across the complete Oslo palette", async () => {
   for (const scene of scenes) {
     const { data, info } = await sharp(
       `public/visualiser/${scene.id}-mobile.webp`,
@@ -170,6 +175,60 @@ test("all photographed scene masks retain image variation across the complete Os
       }
       assert.ok(unchanged > info.width * info.height * 0.4);
       assert.ok(max - min > 30, `${scene.id}/${colour.name} lacks tonal range`);
+    }
+  }
+});
+
+test("room schemes survive share and enquiry URLs while unknown values are rejected", () => {
+  const scheme = resolveRoomDesign({ wall: "sage", floor: "dark-walnut", furniture: "navy", lights: "off" });
+  const shared = new URL(lookUrl("apex-bedroom", "fern", scheme), "https://www.apexcurtains.com");
+  assert.deepEqual(roomDesignFromParams(shared.searchParams), scheme);
+  const enquiry = new URLSearchParams(roomDesignParams(scheme, "visualiser-"));
+  assert.deepEqual(roomDesignFromParams(enquiry, "visualiser-"), scheme);
+  const context = visualiserContext("apex-bedroom", "fern", scheme);
+  assert.deepEqual(roomDesignFromParams(new URL(context.url).searchParams), scheme);
+  assert.match(context.designSummary, /Walls: Sage.*Floor: Dark walnut.*Navy.*Lights off/);
+  assert.deepEqual(resolveRoomDesign({ wall: "<script>", floor: ["dark-walnut"], furniture: { id: "navy" }, lights: "javascript:" }),
+    { wall: "original", floor: "original", furniture: "original", lights: "on" });
+  assert.doesNotMatch(visualiserContext("apex-bedroom", "fern", { wall: "<script>" }).url, /script/);
+});
+
+test("independent material recolouring composes without resetting other surfaces", () => {
+  const source = new Uint8ClampedArray([190,170,140,255, 170,150,130,255, 160,140,120,255, 80,95,110,255]);
+  const maskA = new Uint8ClampedArray(16), maskB = new Uint8ClampedArray(16);
+  maskA[3] = 255; maskB[7] = 255;
+  const a = preparePixels(source, maskA), b = preparePixels(source, maskB);
+  const first = relight(a, [100,120,140]);
+  const combined = relight(b, [180,140,110], first.slice());
+  assert.deepEqual(combined.slice(0,4), first.slice(0,4));
+  assert.notDeepEqual(combined.slice(4,8), source.slice(4,8));
+  assert.deepEqual(combined.slice(8), source.slice(8));
+  const field = prepareLighting([maskA, maskB], 4, 1, 4, 1, [{x:0,y:0,rx:2,ry:2,strength:0.3}]);
+  const unlit = lightsOff(combined.slice(), field);
+  assert.ok(unlit[0] < combined[0]);
+  assert.deepEqual(unlit.slice(8), source.slice(8), "Daylight/window pixels changed");
+  assert.deepEqual(relight(a, [100,120,140]), first, "Lighting mutated cached source");
+});
+
+test("each furnished scene defines all material masks, bounded lights and useful interior palettes", async () => {
+  for (const scene of scenes) {
+    const material = materials[scene.id];
+    assert.ok(material.furnitureLabel);
+    for (const surface of ["wall", "floor", "furniture"]) {
+      assert.ok(material[surface].length);
+      assert.ok(roomPalettes[surface].length >= 6);
+      const commands = material[surface].map((path) => path.split(/(?=M)/).filter(Boolean)
+        .map((d, index) => `<path fill="${index ? "black" : "white"}" d="${d}"/>`).join("")).join("");
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="270" viewBox="0 0 1448 1086"><defs><mask id="material"><rect width="1448" height="1086" fill="black"/>${commands}</mask></defs><rect width="1448" height="1086" fill="white" mask="url(#material)"/></svg>`;
+      const mask = await sharp(Buffer.from(svg)).ensureAlpha().raw().toBuffer();
+      let covered = 0;
+      for (let i = 3; i < mask.length; i += 4) if (mask[i] > 128) covered++;
+      assert.ok(covered > 360 * 270 * 0.01, `${scene.id}/${surface} is empty`);
+      assert.ok(covered < 360 * 270 * 0.7, `${scene.id}/${surface} covers too much`);
+    }
+    for (const light of material.lights) {
+      assert.ok(light.x >= 0 && light.x <= scene.width && light.y >= 0 && light.y <= scene.height);
+      assert.ok(light.rx > 0 && light.ry > 0 && light.strength > 0 && light.strength < 1);
     }
   }
 });

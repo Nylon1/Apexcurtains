@@ -237,6 +237,84 @@
 .rv-options h2 {
   font-size: 2rem;
 }
+.rv-light-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d4d1c4;
+}
+.rv-light-control > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+}
+.rv-light-control small {
+  display: block;
+  font-size: 0.63rem;
+  color: #5c665a;
+  margin-top: 0.3rem;
+}
+.rv-light-control button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 76px;
+  min-height: 44px;
+  padding: 0.5rem;
+  border: 1px solid #7c8978;
+  background: transparent;
+  color: inherit;
+  font-size: 0.75rem;
+}
+.rv-light-control button > span {
+  width: 12px;
+  height: 12px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.rv-light-control button[aria-checked="true"] {
+  background: #203c35;
+  color: #fff9ed;
+}
+.rv-light-control button[aria-checked="true"] > span {
+  background: #e2c58b;
+}
+.rv-editor-sections {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid #c4c9ba;
+}
+.rv-editor-sections button {
+  min-height: 48px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #5c665a;
+  padding: 0.4rem 0.1rem;
+  font-size: 0.7rem;
+}
+.rv-editor-sections button[aria-pressed="true"] {
+  color: #203c35;
+  border-bottom-color: #203c35;
+  font-weight: 600;
+}
+.rv-palette-panel {
+  min-height: 350px;
+}
+.rv-page .rv-scheme-summary {
+  border-top: 1px solid #d4d1c4;
+  padding-top: 0.8rem;
+  margin: 0 0 1rem;
+  font-size: 0.65rem;
+  color: #5c665a;
+}
+.rv-original-swatch {
+  border: 1px dashed #697563;
+}
 .rv-selected {
   display: flex;
   gap: 0.8rem;
@@ -262,7 +340,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.5rem;
-  max-height: 355px;
+  max-height: 260px;
   overflow-y: auto;
   scrollbar-width: thin;
   padding: 5px;
@@ -441,11 +519,17 @@
     position: sticky;
     top: 80px;
     z-index: 5;
-    height: clamp(280px, 44svh, 420px);
+    height: min(42svh, 75vw);
     margin-inline: -1rem;
   }
   .rv-options {
     padding-top: 1rem;
+  }
+  .rv-palette-panel {
+    min-height: 215px;
+  }
+  .rv-editor-sections button {
+    font-size: 0.78rem;
   }
   .rv-options :is(button, a) {
     scroll-margin-top: calc(44svh + 110px);
@@ -458,7 +542,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     max-height: none;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: none;
     gap: 0.5rem;
     padding: 0.4rem;
   }
@@ -510,27 +594,8 @@
   }
 }
 
-.rv-headings {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-.rv-headings button {
-  min-height: 44px;
-  padding: 0.6rem 1rem;
-  border: 1px solid #b9bbae;
-  background: transparent;
-  color: #203c35;
-  font-size: 0.75rem;
-}
-.rv-headings button[aria-pressed="true"] {
-  background: #203c35;
-  color: #fffaf0;
-  border-color: #203c35;
-}
 .rv-page .rv-heading-note {
   font-size: 0.7rem;
   color: #526052;
-  margin: 0.6rem 0 0;
+  margin: 0 0 1rem;
 }

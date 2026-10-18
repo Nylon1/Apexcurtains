@@ -79,8 +79,11 @@ export function preparePixels(
   return { source, mask, illumination };
 }
 export type PreparedPixels = ReturnType<typeof preparePixels>;
-export function relight(pixels: PreparedPixels, rgb: number[]) {
-  const output = new Uint8ClampedArray(pixels.source);
+export function relight(
+  pixels: PreparedPixels,
+  rgb: number[],
+  output = new Uint8ClampedArray(pixels.source),
+) {
   const tables = rgb.map((channel) => {
     const table = new Uint8Array(4096),
       colour = linear(channel);
@@ -94,8 +97,7 @@ export function relight(pixels: PreparedPixels, rgb: number[]) {
     if (!alpha) continue;
     for (let c = 0; c < 3; c++)
       output[i + c] = Math.round(
-        pixels.source[i + c] * (1 - alpha) +
-          tables[c][pixels.illumination[p]] * alpha,
+        output[i + c] * (1 - alpha) + tables[c][pixels.illumination[p]] * alpha,
       );
   }
   return output;

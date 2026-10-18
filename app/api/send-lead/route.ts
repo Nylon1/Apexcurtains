@@ -49,7 +49,7 @@ export async function POST(req: Request) {
     const suggestedLining = String(formData.get("suggestedLining") || "");
     const recommendationTitle = String(formData.get("recommendationTitle") || "");
     const photoName = String(formData.get("photoName") || "");
-    const visualiserLook = visualiserContext(formData.get("visualiserRoom"), formData.get("visualiserColour"));
+    const visualiserLook = visualiserContext(formData.get("visualiserRoom"), formData.get("visualiserColour"), { wall: formData.get("visualiser-wall"), floor: formData.get("visualiser-floor"), furniture: formData.get("visualiser-furniture"), lights: formData.get("visualiser-lights") });
 
     const uploaded = formData.get("imageFile");
 
@@ -81,7 +81,8 @@ export async function POST(req: Request) {
 
         <h3>Design Details</h3>
         ${visualiserLook ? `<h3>Room Visualiser Inspiration</h3><p>${escapeHtml(visualiserLook.roomName)} · ${escapeHtml(visualiserLook.colourName)} · ${escapeHtml(visualiserLook.reference)}</p><p><a href="${escapeHtml(visualiserLook.url)}">View the selected look</a></p>` : ""}
-        ${visualiserLook?.heading ? `<p><strong>Visualiser photographed heading:</strong> ${escapeHtml(visualiserLook.heading)}</p>` : ""}
+        ${visualiserLook ? `<p>${escapeHtml(visualiserLook.designSummary)}</p>` : ""}
+        ${visualiserLook?.heading ? `<p><strong>Visualiser heading:</strong> ${escapeHtml(visualiserLook.heading)}</p>` : ""}
         <p><strong>Window Type:</strong> ${escapeHtml(windowType)}</p>
         <p><strong>Purpose:</strong> ${escapeHtml(purpose)}</p>
         <p><strong>Fabric Style:</strong> ${escapeHtml(fabricStyle)}</p>
@@ -109,7 +110,7 @@ Phone: ${phone}
 Postcode: ${postcode}
 
 Design Details
-${visualiserLook ? `Room Visualiser: ${visualiserLook.roomName}${visualiserLook.heading ? ` | ${visualiserLook.heading}` : ""} | ${visualiserLook.colourName} | ${visualiserLook.reference}\nSelected look: ${visualiserLook.url}\n` : ""}
+${visualiserLook ? `Room Visualiser: ${visualiserLook.roomName}${visualiserLook.heading ? ` | ${visualiserLook.heading}` : ""} | ${visualiserLook.colourName} | ${visualiserLook.reference}\n${visualiserLook.designSummary}\nSelected look: ${visualiserLook.url}\n` : ""}
 Window Type: ${windowType}
 Purpose: ${purpose}
 Fabric Style: ${fabricStyle}
