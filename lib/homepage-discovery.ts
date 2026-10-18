@@ -1,0 +1,141 @@
+export const homeWindowShapes = [
+  {
+    id: "apex",
+    name: "Apex",
+    outline: "M20 105V60L80 15L140 60V105Z",
+    title: "A curtain line that follows the peak.",
+    text: "Two roof slopes and changing drops need to be measured together. We plan shaped curtains, an aluminium track route and the way the panels gather around your window.",
+    challenge:
+      "The peak, side heights and stack-back must work as one design. Some upper sections may remain in place when the curtains are tied back.",
+    href: "/apex-curtains",
+    image: "/window-types/apex-hero.jpg",
+    alt: "Apex curtains following two roof slopes",
+    example: "/gallery/wave-pleat-apex-curtains-milton-keynes",
+    exampleLabel: "See the Milton Keynes apex project",
+  },
+  {
+    id: "gable",
+    name: "Gable end",
+    outline: "M28 110V40L80 8L132 40V110Z",
+    title: "Give a generous glazed wall a softer presence.",
+    text: "A gable can combine a roof-shaped top with full-height glazing below. Curtain weight, the number of panels and the open stacks all influence the right arrangement.",
+    challenge:
+      "The fixing structure and safe access need assessment before manufacture. The tallest point alone does not describe the installation.",
+    href: "/gable-end-curtains",
+    image: "/projects/cambridge-apex-curtains-cambridge.jpeg",
+    alt: "Tall gable-end glazing dressed with neutral curtains",
+    example: "/gallery/cambridge-apex-curtains-cambridge",
+    exampleLabel: "See the Cambridge gable project",
+  },
+  {
+    id: "triangular",
+    name: "Triangular",
+    outline: "M15 108L80 12L145 108Z",
+    title: "Make the angle part of the room.",
+    text: "A sharp triangular shape needs carefully planned panel geometry, heading depth and retention along the slope. Tiebacks can reveal the centre while leaving a soft frame above.",
+    challenge:
+      "A sloping track does not behave like a horizontal rail. Full glass clearance should never be assumed.",
+    href: "/triangular-window-curtains",
+    image: "/projects/peterborough-bedroom-blackout-curtains-peterborough.jpeg",
+    alt: "Triangular bedroom window framed by dark blue curtains",
+    example: "/gallery/peterborough-bedroom-blackout-curtains-peterborough",
+    exampleLabel: "See the Peterborough bedroom project",
+  },
+  {
+    id: "angled",
+    name: "Angled / sloping",
+    outline: "M20 108V65L140 15V108Z",
+    title: "Different drops. One considered composition.",
+    text: "Single slopes and asymmetric windows need their own measurements. We establish the true angle, track position and finished drop at each part of the curtain.",
+    challenge:
+      "Do not assume opposite sides are symmetrical. The opening route, retained sections and tiebacks must suit the actual shape.",
+    href: "/angled-window-curtains",
+    image: "/window-types/gable-end.jpeg",
+    alt: "Detail of a curtain following a sloping roofline",
+    example: "/curtain-tracks#apex-and-gable",
+    exampleLabel: "Understand sloping track arrangements",
+  },
+  {
+    id: "double-height",
+    name: "Double-height",
+    outline: "M40 8H120V112H40Z",
+    title: "Choose the cloth at the scale of the room.",
+    text: "On very tall windows, fabric drape, joins and the total lined curtain weight matter as much as colour. The track and fixing strategy are selected around the finished curtain.",
+    challenge:
+      "A sample cannot show the behaviour of a 4–6 metre drop. Safe installation and later maintenance access need planning too.",
+    href: "/large-window-curtains",
+    image: "/window-types/gable-end.jpeg",
+    alt: "Long curtain folds beside high architectural glazing",
+    example: "/curtain-fabrics",
+    exampleLabel: "Explore fabric for very tall curtains",
+  },
+  {
+    id: "large",
+    name: "Large glazing",
+    outline: "M10 35H150V105H10Z",
+    title: "A generous view, beautifully framed.",
+    text: "Wide rectangular glazing still needs the right track capacity, heading clearance and stack-back. We plan where the curtains will sit in relation to doors, handles and the view.",
+    challenge:
+      "More fullness means more cloth, weight and stack. The open curtain needs space as well as the closed curtain.",
+    href: "/large-window-curtains",
+    image: "/window-types/large-feature.jpeg",
+    alt: "Wide feature glazing with made-to-measure curtains",
+    example: "/curtain-headings",
+    exampleLabel: "Compare headings and fold styles",
+  },
+  {
+    id: "unsure",
+    name: "I’m not sure",
+    outline: "M25 105V58L77 17L135 44V105Z",
+    title: "Begin with a photograph. We’ll help with the shape.",
+    text: "You do not need to know the technical name for your window. A clear photograph and approximate dimensions help us understand the room and start the conversation.",
+    challenge:
+      "Approximate dimensions are for an initial discussion. The specialist survey establishes the final geometry, structure and manufacturing measurements.",
+    href: "/services/measure-consultation",
+    image: "/window-types/triangular.jpeg",
+    alt: "A shaped window dressed with olive curtains",
+    example: "/faq#what-is-possible",
+    exampleLabel: "Explore what is actually possible",
+  },
+];
+
+export const homeServiceSteps = [
+  {
+    title: "Consultation",
+    text: "Tell us about the room, the window and how you want it to feel. A photograph helps us understand where to begin.",
+    detail:
+      "Your priorities: privacy, light, warmth, the view and the interior.",
+    href: "/services/measure-consultation",
+  },
+  {
+    title: "Specialist survey",
+    text: "We assess dimensions, roof angles, fixing surfaces, working height and the space available for the curtains.",
+    detail: "Geometry, structure and safe access are considered together.",
+    href: "/services/measure-consultation",
+  },
+  {
+    title: "Design",
+    text: "Choose the cloth, lining and heading, then resolve the track, stack-back, tiebacks and finished floor line.",
+    detail: "The practical arrangement and the room palette become one scheme.",
+    href: "/curtain-design-guide",
+  },
+  {
+    title: "Manufacture",
+    text: "Curtains are made for the measured installation, with the agreed shaped panels, drops and finishing details.",
+    detail: "A bespoke construction for the window and chosen specification.",
+    href: "/services/design-make-curtains",
+  },
+  {
+    title: "Professional installation",
+    text: "Fit the specified track and curtains using suitable fixing points and a planned access method for the room.",
+    detail:
+      "MiTOWER or other high-level access where the site assessment requires it.",
+    href: "/services/premium-installation#mitower-access",
+  },
+  {
+    title: "Dress & handover",
+    text: "Dress the folds, check the agreed movement and clearances, and explain everyday use and aftercare.",
+    detail: "A considered finish, with guidance for living with your curtains.",
+    href: "/services/premium-installation#handover",
+  },
+];

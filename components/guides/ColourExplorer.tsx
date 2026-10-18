@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ColourFamilyWheel from "@/components/guides/ColourFamilyWheel";
 import fabrics from "@/lib/oslo-fabrics.json";
 import {
   colourFamilies,
@@ -32,14 +33,6 @@ const projects = [
     href: "/gallery/wave-pleat-apex-curtains-milton-keynes",
   },
 ];
-
-function wheelSector(index: number, total: number) {
-  const point = (angle: number, radius: number) =>
-    `${(200 + radius * Math.cos(angle)).toFixed(3)},${(200 + radius * Math.sin(angle)).toFixed(3)}`;
-  const start = -Math.PI / 2 + (index * 2 * Math.PI) / total;
-  const end = start + (2 * Math.PI) / total - 0.025;
-  return `M${point(start, 184)} A184,184 0 0 1 ${point(end, 184)} L${point(end, 100)} A100,100 0 0 0 ${point(start, 100)} Z`;
-}
 
 function FabricCards({ names }: { names: string[] }) {
   return (
@@ -100,104 +93,7 @@ export default function ColourExplorer() {
           </p>
         </div>
         <div className="colour-wheel-layout">
-          <div className="colour-wheel-controls">
-            <svg
-              viewBox="0 0 400 400"
-              className="colour-selector-wheel"
-              aria-label="Curtain colour family wheel"
-              role="group"
-            >
-              {colourFamilies.map((f, i) => (
-                <g key={f.id}>
-                  <path
-                    d={wheelSector(i, colourFamilies.length)}
-                    fill={f.colour}
-                    stroke={familyId === f.id ? "#203b35" : "transparent"}
-                    strokeWidth="4"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Explore ${f.name}`}
-                    aria-pressed={familyId === f.id}
-                    onClick={() => chooseFamily(f.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        chooseFamily(f.id);
-                      }
-                    }}
-                  />
-                  <text
-                    x={(
-                      200 +
-                      142 *
-                        Math.cos(
-                          -Math.PI / 2 +
-                            ((i + 0.5) * 2 * Math.PI) / colourFamilies.length,
-                        )
-                    ).toFixed(3)}
-                    y={(
-                      205 +
-                      142 *
-                        Math.sin(
-                          -Math.PI / 2 +
-                            ((i + 0.5) * 2 * Math.PI) / colourFamilies.length,
-                        )
-                    ).toFixed(3)}
-                    textAnchor="middle"
-                    fill={i === 8 || i === 9 ? "#fff" : "#172b2b"}
-                    fontSize="14"
-                    pointerEvents="none"
-                    aria-hidden="true"
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </text>
-                </g>
-              ))}
-              <text
-                x="200"
-                y="190"
-                textAnchor="middle"
-                fontSize="13"
-                letterSpacing="3"
-                fill="#6b695f"
-                aria-hidden="true"
-              >
-                YOUR PALETTE
-              </text>
-              <text
-                x="200"
-                y="222"
-                textAnchor="middle"
-                fontSize="20"
-                fontFamily="Georgia, serif"
-                fill="#203b35"
-                aria-hidden="true"
-              >
-                {family.name}
-              </text>
-            </svg>
-            <div className="colour-legend" aria-label="Choose a colour family">
-              {colourFamilies.map((f, i) => (
-                <button
-                  type="button"
-                  key={f.id}
-                  aria-pressed={familyId === f.id}
-                  onClick={() => chooseFamily(f.id)}
-                >
-                  <span
-                    style={{ backgroundColor: f.colour }}
-                    aria-hidden="true"
-                  />
-                  <small>{String(i + 1).padStart(2, "0")}</small>
-                  {f.name}
-                </button>
-              ))}
-            </div>
-            <p className="colour-note">
-              An interior palette selector. The wheel colours are illustrative,
-              not fabric colour matches.
-            </p>
-          </div>
+          <ColourFamilyWheel selected={familyId} onSelect={chooseFamily} />
           <div className="colour-selection" id="colour-selection">
             <p className="editorial-eyebrow" aria-live="polite">
               Now exploring / {family.name}
@@ -452,9 +348,7 @@ export default function ColourExplorer() {
               evening setting changes the surroundings; it does not predict how
               a particular fabric will react to your lamps.
             </p>
-            <Link href="/curtain-tiebacks">
-              How tiebacks change the view ↗
-            </Link>
+            <Link href="/curtain-tiebacks">How tiebacks change the view ↗</Link>
           </div>
         </div>
         <div className="colour-finish-notes">

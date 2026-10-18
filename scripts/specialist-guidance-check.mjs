@@ -6,15 +6,16 @@ import { colourFamilies } from "../lib/colour-interiors.ts";
 
 test("colour families resolve to sourced Oslo records and local swatches", () => {
   const fabrics = JSON.parse(fs.readFileSync("lib/oslo-fabrics.json", "utf8"));
-  assert.equal(new Set(colourFamilies.map(f => f.id)).size, 11);
-  assert.equal(new Set(fabrics.map(f => f.reference)).size, fabrics.length);
-  for (const family of colourFamilies) for (const name of family.fabrics) {
-    const fabric = fabrics.find(f => f.name === name);
-    assert.ok(fabric, `${family.id}: missing ${name}`);
-    assert.ok(fs.existsSync(`public${fabric.image}`), fabric.image);
-    assert.match(fabric.reference, /^7154\/\d{3}$/);
-    assert.equal(new URL(fabric.source).hostname, "www.prestigious.co.uk");
-  }
+  assert.equal(new Set(colourFamilies.map((f) => f.id)).size, 11);
+  assert.equal(new Set(fabrics.map((f) => f.reference)).size, fabrics.length);
+  for (const family of colourFamilies)
+    for (const name of family.fabrics) {
+      const fabric = fabrics.find((f) => f.name === name);
+      assert.ok(fabric, `${family.id}: missing ${name}`);
+      assert.ok(fs.existsSync(`public${fabric.image}`), fabric.image);
+      assert.match(fabric.reference, /^7154\/\d{3}$/);
+      assert.equal(new URL(fabric.source).hostname, "www.prestigious.co.uk");
+    }
 });
 
 const guides = await Promise.all(
@@ -200,6 +201,71 @@ test(
         assert.ok(
           body.includes("/gallery/wave-pleat-apex-curtains-milton-keynes"),
           "gallery must expose real project links in server HTML",
+        );
+    }
+  },
+);
+
+test(
+  "homepage keeps discovery crawlable, the sale scoped and specialist links valid",
+  { skip: !base },
+  async () => {
+    const response = await fetch(`${base}/`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const body = html.replace(/<script[\s\S]*?<\/script>/g, "");
+    const main = body.match(/<main[\s\S]*?<\/main>/)?.[0];
+    assert.ok(main, "homepage main content exists without JavaScript");
+    assert.match(
+      body,
+      /rel="canonical" href="https:\/\/www\.apexcurtains\.com\/?"/,
+    );
+    assert.equal((body.match(/<h1[\s>]/g) || []).length, 1);
+    assert.match(body, /Sale now on/);
+    assert.match(body, /25% off/);
+    assert.match(body, /custom-made curtains/);
+    for (const [dialog] of body.matchAll(/<dialog[^>]*>/g)) {
+      assert.doesNotMatch(dialog, /\bopen(?:\s|=|>)/, "dialogs must not block without JavaScript");
+    }
+    assert.match(body, /<noscript>[\s\S]*?home-shape-panel/);
+    for (const route of [
+      "/apex-curtains",
+      "/gable-end-curtains",
+      "/triangular-window-curtains",
+      "/angled-window-curtains",
+      "/curtain-tracks",
+      "/curtain-linings",
+      "/services/premium-installation",
+      "/curtain-tiebacks",
+      "/advice/how-to-measure-for-apex-curtains",
+      "/gallery",
+      "/curtain-colours-and-tones#colour-explorer",
+    ]) {
+      assert.ok(
+        main.includes(`href="${route}"`),
+        `missing crawlable specialist link: ${route}`,
+      );
+    }
+    const navigation = body.match(/<header[\s\S]*?<\/header>/)?.[0] || "";
+    const linkedContent = main + navigation;
+    const hrefs = [
+      ...new Set(
+        [...linkedContent.matchAll(/href="(\/[^"?]*|#[^"]+)"/g)].map((m) => m[1]),
+      ),
+    ];
+    const pages = new Map([["/", body]]);
+    for (const href of hrefs) {
+      const [path, hash] = href.split("#");
+      const route = path || "/";
+      if (!pages.has(route)) {
+        const linked = await fetch(`${base}${route}`);
+        assert.equal(linked.status, 200, `broken homepage link: ${href}`);
+        pages.set(route, await linked.text());
+      }
+      if (hash)
+        assert.ok(
+          pages.get(route).includes(`id="${hash}"`),
+          `missing fragment: ${href}`,
         );
     }
   },

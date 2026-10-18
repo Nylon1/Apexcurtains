@@ -4,6 +4,7 @@ import "./globals.css";
 import "./editorial.css";
 import "./collections.css";
 import "./colour-studio.css";
+import "./site-navigation.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import PublicPresentation from "@/components/layout/PublicPresentation";
