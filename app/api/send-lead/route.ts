@@ -81,6 +81,7 @@ export async function POST(req: Request) {
 
         <h3>Design Details</h3>
         ${visualiserLook ? `<h3>Room Visualiser Inspiration</h3><p>${escapeHtml(visualiserLook.roomName)} · ${escapeHtml(visualiserLook.colourName)} · ${escapeHtml(visualiserLook.reference)}</p><p><a href="${escapeHtml(visualiserLook.url)}">View the selected look</a></p>` : ""}
+        ${visualiserLook?.heading ? `<p><strong>Visualiser photographed heading:</strong> ${escapeHtml(visualiserLook.heading)}</p>` : ""}
         <p><strong>Window Type:</strong> ${escapeHtml(windowType)}</p>
         <p><strong>Purpose:</strong> ${escapeHtml(purpose)}</p>
         <p><strong>Fabric Style:</strong> ${escapeHtml(fabricStyle)}</p>

@@ -494,6 +494,7 @@ export default function StartDesigningPage() {
           <aside className="mb-5 border border-[#f5d38a]/30 p-4 text-sm" aria-label="Your visualiser look">
             <p className="text-[#f5d38a]">Your visualiser look</p>
             <p className="mt-2">{visualiserLook.roomName} · {visualiserLook.colourName} · {visualiserLook.reference}</p>
+            {visualiserLook.heading && <p className="mt-1">Photographed heading: {visualiserLook.heading}</p>}
             <p className="mt-2 text-white/70">We’ll include this colour inspiration with your enquiry. Tell us about your own window below.</p>
             <div className="mt-2 flex flex-wrap gap-4">
               <Link className="inline-flex min-h-11 items-center underline" href={visualiserLook.url.replace("https://www.apexcurtains.com", "")}>View this look</Link>

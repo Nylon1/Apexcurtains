@@ -100,6 +100,7 @@ test("enquiry accepts only real scene and Oslo IDs, derives labels and its own U
     for (const colour of osloColours) {
       const context = visualiserContext(scene.id, colour.id);
       assert.equal(context.reference, colour.reference);
+      assert.equal(context.heading, scene.heading);
       assert.equal(context.roomName, scene.name);
       assert.match(
         context.url,
