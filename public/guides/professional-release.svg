@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">From brief to handover</title><desc id="desc">The sequence connects brief, survey, agreed specification, manufacture, site readiness and installation. A changed dimension or product returns to specification review rather than automatically proceeding to manufacture.</desc>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10" fill="#496453"/></marker></defs>
+<rect width="960" height="540" fill="#eeece2"/>
+<g font-family="Arial,sans-serif" fill="#223f35"><text x="38" y="45" font-size="15" letter-spacing="2">A CLEAR RELEASE POINT</text><text x="38" y="87" font-size="30">From the first brief to the final fold.</text>
+<path d="M125 195H833" stroke="#8d9c86" stroke-width="3" marker-end="url(#a)"/>
+<g fill="#223f35"><circle cx="100" cy="195" r="24"/><circle cx="250" cy="195" r="24"/><circle cx="405" cy="195" r="24"/><circle cx="560" cy="195" r="24"/><circle cx="715" cy="195" r="24"/><circle cx="865" cy="195" r="24"/></g>
+<g fill="#fff" font-size="18" text-anchor="middle"><text x="100" y="201">1</text><text x="250" y="201">2</text><text x="405" y="201">3</text><text x="560" y="201">4</text><text x="715" y="201">5</text><text x="865" y="201">6</text></g>
+<g text-anchor="middle" font-size="17" font-weight="bold"><text x="100" y="250">Brief</text><text x="250" y="250">Survey</text><text x="405" y="250">Agree</text><text x="560" y="250">Make</text><text x="715" y="250">Prepare site</text><text x="865" y="250">Fit + hand over</text></g>
+<g text-anchor="middle" font-size="15"><text x="100" y="282">Intent + scope</text><text x="250" y="282">Geometry + site</text><text x="405" y="282">Specification</text><text x="560" y="282">Approved details</text><text x="715" y="282">Access + finishes</text><text x="865" y="282">Dress + check</text></g>
+<path d="M560 320V356H405V306" fill="none" stroke="#496453" stroke-width="2" marker-end="url(#a)"/>
+<rect x="192" y="391" width="576" height="80" fill="#e0dfcd"/>
+<text x="480" y="421" text-anchor="middle" font-size="18" font-weight="bold">A changed dimension or material returns for review.</text>
+<text x="480" y="449" text-anchor="middle" font-size="16">Confirm the effect on fit, support, price and programme.</text>
+<text x="38" y="511" font-size="15">Illustrative sequence. The survey process, responsibilities and dates are agreed for each project.</text></g></svg>

@@ -219,6 +219,10 @@ export const tracksGuide: SpecialistGuide = {
   ],
   related: [
     {
+      href: "/professionals/architects#recess-and-clearance",
+      label: "Coordinate recesses and curtain space",
+    },
+    {
       href: "/curtain-headings#tracks-and-space",
       label: "Fold depth and stack-back",
     },

@@ -164,6 +164,10 @@ export const installationGuide: SpecialistGuide = {
   ],
   related: [
     {
+      href: "/professionals/contractors-fit-out#site-readiness",
+      label: "Coordinate site readiness with your team",
+    },
+    {
       href: "/services/design-make-curtains",
       label: "The specification behind the finish",
     },

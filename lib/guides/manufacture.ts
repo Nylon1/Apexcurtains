@@ -194,6 +194,10 @@ export const manufactureGuide: SpecialistGuide = {
     },
   ],
   related: [
+    {
+      href: "/professionals/interior-designers#design-schedule",
+      label: "Prepare a professional curtain schedule",
+    },
     { href: "/curtain-headings", label: "Choose the rhythm of the folds" },
     { href: "/curtain-linings", label: "Consider the layers" },
     {

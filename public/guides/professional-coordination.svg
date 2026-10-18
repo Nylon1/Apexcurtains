@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+<title id="title">Allow for the whole curtain</title><desc id="desc">A plan separates gathered stack width along a window from fold depth in front of it. A section connects the fabric, track and bracket to suitable structural backing above the ceiling finish.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="none" stroke="#986c36" stroke-width="1.5"/></marker></defs>
+<rect width="960" height="540" fill="#eeece2"/>
+<g font-family="Arial,sans-serif" fill="#223f35"><text x="38" y="45" font-size="15" letter-spacing="2">COORDINATE SPACE + SUPPORT</text><text x="38" y="86" font-size="29">Allow for the whole curtain.</text>
+<path d="M500 120V464" stroke="#bcc4b7"/>
+<text x="38" y="133" font-size="16" font-weight="bold">PLAN / Looking down</text>
+<path d="M62 203H450" stroke="#749796" stroke-width="10"/><text x="62" y="184" font-size="16">Glazing and handles</text>
+<path d="M61 286H451" stroke="#324c40" stroke-width="3" stroke-dasharray="6 5"/>
+<path d="M65 286Q74 247 83 286T101 286T119 286T137 286T155 286T173 286" fill="none" stroke="#647a64" stroke-width="9"/>
+<path d="M448 286Q439 247 430 286T412 286T394 286T376 286T358 286T340 286" fill="none" stroke="#647a64" stroke-width="9"/>
+<path d="M65 355H173" stroke="#986c36" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="61" y="381" font-size="16">Stack width</text>
+<path d="M208 260V310" stroke="#986c36" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="229" y="289" font-size="16">Fold depth</text>
+<text x="62" y="428" font-size="16">Check the open view and door access.</text>
+<text x="538" y="133" font-size="16" font-weight="bold">SECTION / Supporting the load</text>
+<rect x="571" y="177" width="316" height="34" fill="#bca67d"/><text x="571" y="163" font-size="15">Confirmed supporting construction</text>
+<path d="M571 223H887" stroke="#9fa697" stroke-width="7"/>
+<path d="M719 183V251H753" fill="none" stroke="#223f35" stroke-width="6"/>
+<rect x="710" y="253" width="60" height="16" rx="3" fill="#fff" stroke="#223f35" stroke-width="2"/>
+<path d="M740 269V286Q707 317 736 347T735 409" fill="none" stroke="#647a64" stroke-width="16"/>
+<path d="M601 272V400" stroke="#749796" stroke-width="7"/>
+<path d="M609 330H711" stroke="#986c36" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+<text x="570" y="451" font-size="16">Finish ≠ evidence of structural support.</text>
+<path d="M785 261H883" stroke="#223f35"/><text x="788" y="249" font-size="15">Rail + bracket</text>
+<text x="38" y="506" font-size="15">Schematic only. Dimensions depend on the selected system, textiles, operation and site.</text></g></svg>

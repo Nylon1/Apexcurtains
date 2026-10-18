@@ -7,6 +7,7 @@ import { SITE_URL } from "@/lib/seo-metadata";
 import GuideInteraction from "./GuideInteraction";
 import DetailExplorer from "./DetailExplorer";
 import DetailsNavigation from "./DetailsNavigation";
+import ProfessionalNavigation from "@/components/professionals/ProfessionalNavigation";
 import "./details-guides.css";
 
 export function guideMetadata(guide: SpecialistGuide): Metadata {
@@ -39,6 +40,9 @@ export default function SpecialistGuidePage({
   feature?: ReactNode;
 }) {
   const url = `${SITE_URL}${guide.path}`;
+  const parent = guide.professional
+    ? { href: "/professionals", label: "Professionals" }
+    : { href: "/curtain-design-guide", label: "Curtain design guide" };
   const schema = {
     "@context": "https://schema.org",
     "@graph": [
@@ -62,13 +66,22 @@ export default function SpecialistGuidePage({
         "@id": `${url}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          ...(guide.path === parent.href
+            ? []
+            : [
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: parent.label,
+                  item: `${SITE_URL}${parent.href}`,
+                },
+              ]),
           {
             "@type": "ListItem",
-            position: 2,
-            name: "Curtain design guide",
-            item: `${SITE_URL}/curtain-design-guide`,
+            position: guide.path === parent.href ? 2 : 3,
+            name: guide.title,
+            item: url,
           },
-          { "@type": "ListItem", position: 3, name: guide.title, item: url },
         ],
       },
       {
@@ -85,7 +98,7 @@ export default function SpecialistGuidePage({
   };
   return (
     <main
-      className={`specialist-guide${guide.enhanced ? " details-guide" : ""}`}
+      className={`specialist-guide${guide.enhanced ? " details-guide" : ""}${guide.professional ? " professional-guide" : ""}`}
     >
       <script
         type="application/ld+json"
@@ -98,7 +111,7 @@ export default function SpecialistGuidePage({
           <nav aria-label="Breadcrumb" className="guide-breadcrumb">
             <Link href="/">Home</Link>
             <span>/</span>
-            <Link href="/curtain-design-guide">Design guide</Link>
+            <Link href={parent.href}>{guide.professional ? parent.label : "Design guide"}</Link>
           </nav>
           <p className="editorial-eyebrow">{guide.eyebrow}</p>
           <h1>{guide.title}</h1>
@@ -110,8 +123,9 @@ export default function SpecialistGuidePage({
             Explore the details <span aria-hidden="true">↓</span>
           </a>
           <p className="guide-byline">
-            Guidance from Apex Curtains · For architectural windows and
-            considered interiors
+            {guide.professional
+              ? "Apex Curtains · Professional specification guidance"
+              : "Guidance from Apex Curtains · For architectural windows and considered interiors"}
           </p>
         </div>
         <figure className="guide-hero-image">
@@ -126,7 +140,11 @@ export default function SpecialistGuidePage({
         </figure>
       </header>
       {feature}
-      {guide.enhanced && <DetailsNavigation path={guide.path} />}
+      {guide.professional ? (
+        <ProfessionalNavigation path={guide.path} />
+      ) : (
+        guide.enhanced && <DetailsNavigation path={guide.path} />
+      )}
       {guide.enhanced && (
         <details className="details-mobile-index">
           <summary>Explore this guide</summary>
@@ -171,6 +189,17 @@ export default function SpecialistGuidePage({
                     <li key={p}>{p}</li>
                   ))}
                 </ul>
+              )}
+              {section.checklist && (
+                <fieldset className="professional-checklist">
+                  <legend>Information to gather</legend>
+                  {section.checklist.map((item) => (
+                    <label key={item}>
+                      <input type="checkbox" />
+                      <span>{item}</span>
+                    </label>
+                  ))}
+                </fieldset>
               )}
               {section.table && (
                 <div
@@ -310,8 +339,16 @@ export default function SpecialistGuidePage({
         </div>
       </div>
       <section className="guide-related">
-        <p className="editorial-eyebrow">Consider the whole room</p>
-        <h2>Every detail has a part to play.</h2>
+        <p className="editorial-eyebrow">
+          {guide.professional
+            ? "Keep the project connected"
+            : "Consider the whole room"}
+        </p>
+        <h2>
+          {guide.professional
+            ? "The next decision, explained."
+            : "Every detail has a part to play."}
+        </h2>
         <div>
           {guide.related.map((link, i) => (
             <Link key={link.href} href={link.href}>
@@ -323,18 +360,41 @@ export default function SpecialistGuidePage({
         </div>
       </section>
       <section className="editorial-cta">
-        <p className="editorial-eyebrow">Made around your home</p>
+        <p className="editorial-eyebrow">
+          {guide.professional
+            ? "Professional project support"
+            : "Made around your home"}
+        </p>
         <h2>
-          Let’s find the right finish
-          <br />
-          for your window.
+          {guide.professional ? (
+            "Bring the curtain into the project conversation."
+          ) : (
+            <>
+              Let’s find the right finish
+              <br />
+              for your window.
+            </>
+          )}
         </h2>
         <p>
-          A photograph, the shape of the room and the way you want it to feel.
-          That’s where we begin.
+          {guide.professional
+            ? "Share your role, project stage and the decision you need to resolve. We can establish which drawings, samples or site information are needed next."
+            : "A photograph, the shape of the room and the way you want it to feel. That’s where we begin."}
         </p>
-        <Link className="editorial-button" href="/start-designing">
-          Discuss your curtains <span aria-hidden="true">↗</span>
+        <Link
+          className="editorial-button"
+          href={
+            guide.professional
+              ? guide.path === "/professionals/project-review"
+                ? "/contact"
+                : "/professionals/project-review"
+              : "/start-designing"
+          }
+        >
+          {guide.professional
+            ? "Discuss your project"
+            : "Discuss your curtains"}{" "}
+          <span aria-hidden="true">↗</span>
         </Link>
         <a href="tel:08007720367" className="editorial-text-link">
           Or call 0800 772 0367
