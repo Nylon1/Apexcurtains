@@ -11,6 +11,8 @@ on:
       - "next.config.ts"
       - "scripts/seo-foundation-check.mjs"
       - "scripts/specialist-guidance-check.mjs"
+      - "scripts/visualiser-check.mjs"
+      - "scripts/prepare-visualiser-assets.mjs"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -47,5 +49,9 @@ jobs:
         run: npm run test:specialist
 
       - name: Baseline lint audit
+        # Existing repository-wide lint findings are audited separately.
         continue-on-error: true
         run: npm run lint
+
+      - name: Visualiser rendering, asset and enquiry checks
+        run: npm run test:visualiser

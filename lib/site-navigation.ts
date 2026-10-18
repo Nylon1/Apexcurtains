@@ -75,6 +75,11 @@ export const navigationGroups: NavigationGroup[] = [
         note: "Prestigious Textiles samples and palettes",
       },
       {
+        label: "Room visualiser",
+        href: "/room-visualiser",
+        note: "Explore Oslo colours on shaped curtains",
+      },
+      {
         label: "Fabric for tall curtains",
         href: "/curtain-fabrics",
         note: "Drape, joins, scale and sunlight",

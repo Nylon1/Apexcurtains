@@ -1,0 +1,112 @@
+[
+  {
+    "id": "apex-bedroom",
+    "original": "/projects/wave-pleat-apex-curtains-milton-keynes.jpeg",
+    "originalSha256": "e02cbfabfea7d47c21534acdc27260e7f1668bd95dc39f979c6e01714b02f4fb",
+    "assets": [
+      {
+        "file": "/visualiser/apex-bedroom-mobile.webp",
+        "bytes": 62376,
+        "sha256": "9b4289dc127d7a3278dcb4d7200632e4ca347d09ee04bfd6ade339bc60a3c539"
+      },
+      {
+        "file": "/visualiser/apex-bedroom-desktop.webp",
+        "bytes": 98298,
+        "sha256": "98655456afc0205c4e7b13891b74afa83fdf34ccd49a5386662467382cc1a81b"
+      },
+      {
+        "file": "/visualiser/apex-bedroom-thumb.webp",
+        "bytes": 4734,
+        "sha256": "2bb7e303de7da5c4f7ee8415a757749672a67bc0e81258dda93f9477cffda906"
+      }
+    ]
+  },
+  {
+    "id": "gable-perspective",
+    "original": "/window-types/gable-end.jpeg",
+    "originalSha256": "48ea5ca1ae9e64c061c259ecfeda04140ab59fc8284b8334f2d3f008c0ae76ac",
+    "assets": [
+      {
+        "file": "/visualiser/gable-perspective-mobile.webp",
+        "bytes": 54086,
+        "sha256": "f92b8de0cd485b6d5a72b1a7fa4675943ec596986c37abce61a86f5097db8c15"
+      },
+      {
+        "file": "/visualiser/gable-perspective-desktop.webp",
+        "bytes": 151434,
+        "sha256": "a34994dc57fbe0349a2adbac752d50d7ddca882e6c33cfd17ea4a1a68a1533e8"
+      },
+      {
+        "file": "/visualiser/gable-perspective-thumb.webp",
+        "bytes": 3936,
+        "sha256": "43cc716a3145e4e9bf31005c8af3e93d125f2f107283667a6706c18deeb6a3dd"
+      }
+    ]
+  },
+  {
+    "id": "country-gable",
+    "original": "/images/barn-conversion-apex.jpeg",
+    "originalSha256": "ec5bf8f0fc56ee7c91103baa831e6c3814294dd443906b404ceb24ee5855c097",
+    "assets": [
+      {
+        "file": "/visualiser/country-gable-mobile.webp",
+        "bytes": 79280,
+        "sha256": "3b4a11ea2c99c553fbc3ce2ef531633ceb1b1caefb45fd0159e93f71949c9293"
+      },
+      {
+        "file": "/visualiser/country-gable-desktop.webp",
+        "bytes": 234482,
+        "sha256": "57ea02e25c23b7f97ce5433e2b3bd767a1012495494345cdb1e73187e708e3b1"
+      },
+      {
+        "file": "/visualiser/country-gable-thumb.webp",
+        "bytes": 3506,
+        "sha256": "d2372a74b2b5b18ac761b48c1f1192aaa420244fa805cfb4f9065c38dcec75cc"
+      }
+    ]
+  },
+  {
+    "id": "pencil-pleat-bedroom",
+    "original": "/projects/peterborough-bedroom-blackout-curtains-peterborough.jpeg",
+    "originalSha256": "aaeafabc41d54bb7e7dd7a82c9b4688bd101c6592dc7b72fd0a3f12e5a6be892",
+    "assets": [
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-mobile.webp",
+        "bytes": 70896,
+        "sha256": "6c2832e98cfd123cf21ca039121a225afa7088d552868e79d6cca7d58633f50b"
+      },
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-desktop.webp",
+        "bytes": 215168,
+        "sha256": "bf54e0f9e9457dba63a463411ff411b432ddf79a5b1c4cdb5cd799f015c674a5"
+      },
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-thumb.webp",
+        "bytes": 3370,
+        "sha256": "579e22e47ae8307a4f3f6c5f094f7ac67d8bd74c26d9b9395884914b67f333c6"
+      }
+    ]
+  },
+  {
+    "id": "double-pinch-gable",
+    "original": "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
+    "originalSha256": "da85afc6f09019015b749bcb3a99031c76112431a151c9b5af6928825bd77605",
+    "assets": [
+      {
+        "file": "/visualiser/double-pinch-gable-mobile.webp",
+        "bytes": 56700,
+        "sha256": "a698aeb66e4e3742fc0ec85044a3f8d73ff73b6ffc631bd4545e7f98500af4cd"
+      },
+      {
+        "file": "/visualiser/double-pinch-gable-desktop.webp",
+        "bytes": 183170,
+        "sha256": "8811dc604db1fdbd3108826cbe6963782a7eae4dd0397d625a06af33efb0974f"
+      },
+      {
+        "file": "/visualiser/double-pinch-gable-thumb.webp",
+        "bytes": 2704,
+        "sha256": "22047fb2e75e5e99ab1288a331e6f40878faf6f415ceb7e66665e64b0a1897c7"
+      }
+    ]
+  }
+]

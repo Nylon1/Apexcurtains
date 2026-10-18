@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { visualiserContext } from "@/lib/visualiser/enquiry-context";
 import {
   ArrowLeft,
   ArrowRight,
@@ -188,6 +189,13 @@ const screenMeta = [
 
 export default function StartDesigningPage() {
   const searchParams = useSearchParams();
+  const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(searchParams.get("visualiserRoom"), searchParams.get("visualiserColour")));
+  useEffect(() => {
+    if (!visualiserLook) return;
+    const detail = { event: "room_visualiser_enquiry_context_received", room: visualiserLook.room, colour: visualiserLook.colour, colourReference: visualiserLook.reference };
+    window.dataLayer?.push(detail);
+    window.dispatchEvent(new CustomEvent("apex:conversion", { detail }));
+  }, [visualiserLook]);
 
   const prefillWindowType = searchParams.get("windowType") || "";
   const prefillRoom = searchParams.get("room") || "";
@@ -322,6 +330,10 @@ export default function StartDesigningPage() {
       payload.append("suggestedLining", form.suggestedLining);
       payload.append("recommendationTitle", form.recommendationTitle);
       payload.append("photoName", form.photoName);
+      if (visualiserLook) {
+        payload.append("visualiserRoom", visualiserLook.room);
+        payload.append("visualiserColour", visualiserLook.colour);
+      }
 
       if (form.imageFile) {
         payload.append("imageFile", form.imageFile);
@@ -478,6 +490,17 @@ export default function StartDesigningPage() {
           </div>
         </div>
 
+        {visualiserLook && (
+          <aside className="mb-5 border border-[#f5d38a]/30 p-4 text-sm" aria-label="Your visualiser look">
+            <p className="text-[#f5d38a]">Your visualiser look</p>
+            <p className="mt-2">{visualiserLook.roomName} · {visualiserLook.colourName} · {visualiserLook.reference}</p>
+            <p className="mt-2 text-white/70">We’ll include this colour inspiration with your enquiry. Tell us about your own window below.</p>
+            <div className="mt-2 flex flex-wrap gap-4">
+              <Link className="inline-flex min-h-11 items-center underline" href={visualiserLook.url.replace("https://www.apexcurtains.com", "")}>View this look</Link>
+              <button className="min-h-11 underline" type="button" onClick={() => setVisualiserLook(null)}>Remove this look</button>
+            </div>
+          </aside>
+        )}
         {form.recommendationTitle && (
           <div className="mb-5 rounded-[24px] border border-[#f5d38a]/20 bg-[#f5d38a]/10 p-4 shadow-[0_0_30px_rgba(245,211,138,0.08)] sm:mb-6 sm:rounded-[28px] sm:p-5">
             <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">

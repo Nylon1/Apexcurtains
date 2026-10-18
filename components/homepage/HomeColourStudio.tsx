@@ -139,6 +139,15 @@ export default function HomeColourStudio() {
           >
             Enter the colour studio ↗
           </Link>
+          {chosen[0] && (
+            <div className="home-inline-links">
+              <Link
+                href={`/room-visualiser?colour=${chosen[0].name.toLowerCase().replace(/\s+/g, "-")}`}
+              >
+                View Oslo {chosen[0].name} on shaped curtains ↗
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <div className="home-colour-finishing">
