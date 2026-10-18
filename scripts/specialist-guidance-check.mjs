@@ -3,6 +3,22 @@ import { test } from "node:test";
 import fs from "node:fs";
 import { reconcileProject } from "../lib/project-editorial.ts";
 import { colourFamilies } from "../lib/colour-interiors.ts";
+import { headingStyles } from "../lib/curtain-headings.ts";
+import { resolveLook } from "../lib/visualiser/catalogue.ts";
+import { detailsNavigation } from "../lib/details-navigation.ts";
+
+test("heading guide project photographs and visualiser links resolve without falling back to another heading", () => {
+  for (const heading of headingStyles) {
+    assert.ok(fs.existsSync(`public${heading.image}`), heading.image);
+    const look = resolveLook(heading.room, "linen");
+    assert.equal(look.scene.id, heading.room, `${heading.name}: unknown scene`);
+    assert.equal(look.colour.id, "linen");
+    assert.equal(
+      new Set(headingStyles.map((h) => h.room)).size,
+      headingStyles.length,
+    );
+  }
+});
 
 test("colour families resolve to sourced Oslo records and local swatches", () => {
   const fabrics = JSON.parse(fs.readFileSync("lib/oslo-fabrics.json", "utf8"));
@@ -28,6 +44,9 @@ const guides = await Promise.all(
     "fabrics",
     "colours",
     "buying-online",
+    "survey",
+    "manufacture",
+    "accessories",
   ].map(
     async (name) => Object.values(await import(`../lib/guides/${name}.ts`))[0],
   ),
@@ -46,6 +65,7 @@ test("new guidance routes and their images exist; local guide fragments resolve"
     for (const src of [
       guide.image.src,
       ...guide.sections.flatMap((s) => (s.diagram ? [s.diagram.src] : [])),
+      ...guide.sections.flatMap((s) => (s.photo ? [s.photo.src] : [])),
     ])
       assert.ok(fs.existsSync(`public${src}`), src);
     for (const link of [
@@ -131,6 +151,47 @@ test("duplicate story blocks and total-darkness claims are corrected without bro
 
 const base = process.env.APEX_TEST_BASE_URL;
 test(
+  "heading and fitting guide links and fragments resolve from crawlable HTML",
+  { skip: !base },
+  async () => {
+    for (const route of new Set([
+      "/curtain-headings",
+      "/services",
+      ...detailsNavigation.map((link) => link.href.split("#")[0]),
+    ])) {
+      const response = await fetch(`${base}${route}`);
+      assert.equal(response.status, 200);
+      const html = await response.text();
+      const body = html.replace(/<script[\s\S]*?<\/script>/g, "");
+      const main = body.match(/<main[\s\S]*?<\/main>/)?.[0];
+      assert.ok(main);
+      const links = new Set(
+        [...main.matchAll(/href="([/#][^"]*)"/g)].map((m) =>
+          m[1].replace(/&amp;/g, "&"),
+        ),
+      );
+      const pages = new Map([[route, body]]);
+      for (const link of links) {
+        const target = new URL(link, `${base}${route}`);
+        const path = target.pathname;
+        if (!pages.has(path)) {
+          const result = await fetch(`${base}${path}`);
+          assert.equal(result.status, 200, `broken link on ${route}: ${link}`);
+          pages.set(
+            path,
+            (await result.text()).replace(/<script[\s\S]*?<\/script>/g, ""),
+          );
+        }
+        if (target.hash)
+          assert.ok(
+            pages.get(path).includes(`id="${target.hash.slice(1)}"`),
+            `missing fragment: ${link}`,
+          );
+      }
+    }
+  },
+);
+test(
   "rendered authority pages: canonical, unique H1, readable content, visible FAQ/schema parity and assets",
   { skip: !base },
   async () => {
@@ -146,6 +207,7 @@ test(
       "/curtain-design-guide",
       "/curtain-headings",
       "/curtain-accessories",
+      "/services",
     ];
     for (const route of routes) {
       const response = await fetch(`${base}${route}`);
@@ -225,7 +287,11 @@ test(
     assert.match(body, /25% off/);
     assert.match(body, /custom-made curtains/);
     for (const [dialog] of body.matchAll(/<dialog[^>]*>/g)) {
-      assert.doesNotMatch(dialog, /\bopen(?:\s|=|>)/, "dialogs must not block without JavaScript");
+      assert.doesNotMatch(
+        dialog,
+        /\bopen(?:\s|=|>)/,
+        "dialogs must not block without JavaScript",
+      );
     }
     assert.match(body, /<noscript>[\s\S]*?home-shape-panel/);
     for (const route of [
@@ -250,7 +316,9 @@ test(
     const linkedContent = main + navigation;
     const hrefs = [
       ...new Set(
-        [...linkedContent.matchAll(/href="(\/[^"?]*|#[^"]+)"/g)].map((m) => m[1]),
+        [...linkedContent.matchAll(/href="(\/[^"?]*|#[^"]+)"/g)].map(
+          (m) => m[1],
+        ),
       ),
     ];
     const pages = new Map([["/", body]]);

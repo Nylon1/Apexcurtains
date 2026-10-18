@@ -2,6 +2,7 @@ import type { SpecialistGuide } from "../specialist-guide-types";
 
 export const installationGuide: SpecialistGuide = {
   path: "/services/premium-installation",
+  enhanced: true,
   title: "Installation day. Beautifully finished.",
   metaTitle: "Installation Day & Curtain Aftercare for Apex Windows",
   description:
@@ -18,6 +19,7 @@ export const installationGuide: SpecialistGuide = {
   sections: [
     {
       id: "before-we-arrive",
+      detailInteraction: "installation-checklist",
       title: "Make room for the transformation",
       paragraphs: [
         "Before the visit, we review the agreed curtain specification, track route, fixing context and access requirements. Tell us about any changes since the survey: new flooring, a radiator, fitted furniture, ceiling work or a different door arrangement can affect the finished position.",
@@ -78,6 +80,16 @@ export const installationGuide: SpecialistGuide = {
     },
     {
       id: "dressing-and-steaming",
+      photo: {
+        src: "/projects/cambridge-apex-curtains-cambridge.jpeg",
+        alt: "Long dressed curtain folds with a matching tieback in a completed Cambridge installation",
+        width: 900,
+        height: 1600,
+        caption:
+          "Cambridge / Real Apex installation. The finished sweep and fold distribution are considered as part of the whole room.",
+        href: "/gallery/cambridge-apex-curtains-cambridge",
+        linkLabel: "Explore the finished room",
+      },
       title: "Dressing the cloth, revealing the room",
       paragraphs: [
         "Once hung, the curtains are dressed so the folds sit in the intended rhythm. We check the heading, straighten the layers and arrange the hem. A deep or textured fabric may settle differently from a lighter weave; the aim is a natural, balanced fall that respects the character of the cloth.",
@@ -101,6 +113,24 @@ export const installationGuide: SpecialistGuide = {
     },
     {
       id: "ongoing-care",
+      disclosures: [
+        {
+          title: "The curtain has started to snag",
+          text: "Stop pulling and check from a safe position whether a tieback is still engaged or the hem is catching. Do not climb to release a carrier or apply household lubricant. Contact Apex with the project details so the track, heading and access requirements can be considered.",
+        },
+        {
+          title: "There are creases after hanging",
+          text: "Some fabrics need time to settle after transport and fitting. Follow the dressing advice given at handover and raise persistent creases with Apex. Do not apply heat, water or tight binding without checking the care instructions for both face cloth and lining.",
+        },
+        {
+          title: "A spill or mark needs attention",
+          text: "Follow the supplied care information and seek advice before using a cleaning product. Different layers can react differently to moisture or solvents. A specialist cleaner should know the curtain construction; high-level removal and refitting may need a separate arrangement.",
+        },
+        {
+          title: "I can see a fixing move",
+          text: "Stop operating the affected curtain and keep clear of it. Contact Apex for an assessment. Do not try to tighten high fixings from furniture or continue pulling to test whether they will hold.",
+        },
+      ],
       title: "Keep the finish looking beautiful",
       paragraphs: [
         "Remove surface dust gently using a soft brush or a low-suction upholstery attachment only where the fabric care guidance allows. Support the cloth as you work and avoid catching trims or pulling at seams. Do not vacuum high headings from an unstable position.",
@@ -133,6 +163,10 @@ export const installationGuide: SpecialistGuide = {
     },
   ],
   related: [
+    {
+      href: "/services/design-make-curtains",
+      label: "The specification behind the finish",
+    },
     { href: "/curtain-tracks", label: "The line behind the curtain" },
     { href: "/curtain-linings", label: "Choose the right lining" },
     { href: "/gallery", label: "See the finished rooms" },

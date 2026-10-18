@@ -2,6 +2,7 @@ import type { SpecialistGuide } from "../specialist-guide-types";
 
 export const tracksGuide: SpecialistGuide = {
   path: "/curtain-tracks",
+  enhanced: true,
   title: "Curtain tracks. Quietly architectural.",
   metaTitle: "Aluminium Curtain Tracks for Apex Windows: Forest KS & CS",
   description:
@@ -18,6 +19,7 @@ export const tracksGuide: SpecialistGuide = {
   sections: [
     {
       id: "aluminium-and-finish",
+      detailInteraction: "track-finish",
       title: "Aluminium, with a considered finish",
       paragraphs: [
         "Apex supplies aluminium curtain tracks, including Forest KS and Forest CS. White is our normal finish: it sits quietly against many ceilings and pale walls. Black is an optional upgrade for a stronger line, darker joinery or a deliberate contrast. The finish and any upgrade cost are agreed in the project quotation.",
@@ -101,6 +103,21 @@ export const tracksGuide: SpecialistGuide = {
     },
     {
       id: "structure-and-brackets",
+      detailInteraction: "fixings",
+      disclosures: [
+        {
+          title: "What information helps on a renovation or new build?",
+          text: "Share the proposed curtain line, relevant wall or roof construction drawings and any planned backing before the surfaces are closed. The builder needs the intended position and load requirements; the curtain supplier needs confirmation of the support actually provided. Photographing backing before boarding can help record its location.",
+        },
+        {
+          title: "Can the window frame be left untouched?",
+          text: "Wall or ceiling support may allow the track to be independent of the frame, where suitable structure and clearance are available. This needs assessment rather than a blanket promise. Do not assume that drilling a glazing frame is acceptable; any proposed connection must respect the frame system and the agreed installation detail.",
+        },
+        {
+          title: "Why does the stack position matter to the fixings?",
+          text: "When a travelling curtain gathers, its mass occupies a shorter section of rail. The supporting arrangement must consider that concentration as well as the distributed closed position and the forces of operation. The published track rating alone does not assess the wall or ceiling.",
+        },
+      ],
       title: "Fixings, brackets and the structure behind the finish",
       paragraphs: [
         "A wall or ceiling can look perfectly sound without offering the support a heavy curtain needs. We assess the substrate, the condition of the fixing area and the forces created by the selected bracket. A longer projection increases leverage on the fixing; a curtain gathered into a small stack concentrates weight at that end.",
@@ -143,6 +160,16 @@ export const tracksGuide: SpecialistGuide = {
     },
     {
       id: "apex-and-gable",
+      photo: {
+        src: "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
+        alt: "Oxford gable curtains following two roof slopes and held in matching tiebacks",
+        width: 1600,
+        height: 1200,
+        caption:
+          "Oxford / The upper cloth follows the architecture while tiebacks reveal the central view. The photograph shows the arrangement; it does not identify a Forest model or concealed fixings.",
+        href: "/gallery/pinch-pleat-curtains-oxford-oxford",
+        linkLabel: "Explore the completed project",
+      },
       title: "Following a slope takes specialist planning",
       paragraphs: [
         "Apex, triangular and gable-end windows combine changing heights with an angled track route. The track can be shaped for the design, but a documented bend radius is not a claim that every sharp corner or slope will operate like a horizontal rail. The peak, junctions, retained curtain sections and intended opening positions need to be drawn together.",
@@ -191,6 +218,10 @@ export const tracksGuide: SpecialistGuide = {
     },
   ],
   related: [
+    {
+      href: "/curtain-headings#tracks-and-space",
+      label: "Fold depth and stack-back",
+    },
     { href: "/curtain-linings", label: "Cloth, weight and light" },
     { href: "/angled-window-curtains", label: "Follow the architecture" },
     {

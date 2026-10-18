@@ -2,6 +2,7 @@ import type { SpecialistGuide } from "../specialist-guide-types";
 
 export const liningsGuide: SpecialistGuide = {
   path: "/curtain-linings",
+  enhanced: true,
   title: "Curtain linings. The beauty beneath.",
   metaTitle: "Curtain Linings: Standard, Blackout, Thermal & Coloured",
   description:
@@ -60,6 +61,7 @@ export const liningsGuide: SpecialistGuide = {
     },
     {
       id: "blackout-lining",
+      detailInteraction: "light-paths",
       title: "Blackout lining: understand the whole window",
       paragraphs: [
         "Blackout lining is selected to restrict light through the curtain fabric. It does not seal a room. Daylight can travel above the heading, around side edges, between panels and below the hem. On apex and gable glazing, a sloping track or a change in plane can make those paths especially noticeable.",
@@ -88,6 +90,16 @@ export const liningsGuide: SpecialistGuide = {
     },
     {
       id: "coloured-lining",
+      photo: {
+        src: "/projects/cambridge-apex-curtains-cambridge.jpeg",
+        alt: "Curtain folds turned into a tieback in a real Cambridge installation",
+        width: 900,
+        height: 1600,
+        caption:
+          "Cambridge / The sweep of a tieback turns the cloth and brings edges and reverse surfaces into view. Consider how your chosen lining will appear when the fabric turns.",
+        href: "/gallery/cambridge-apex-curtains-cambridge",
+        linkLabel: "See the real installation",
+      },
       title: "Coloured lining: a beautiful reverse",
       paragraphs: [
         "A matching or complementary coloured lining can be particularly effective where the back of the curtain is visible from outside, through a side window or in the sweep of a tieback. It can give a darker curtain a more continuous appearance, or bring a quiet contrast to the folds.",
@@ -99,6 +111,20 @@ export const liningsGuide: SpecialistGuide = {
     },
     {
       id: "quality-and-geometry",
+      disclosures: [
+        {
+          title: "How should I compare lining samples?",
+          text: "View the face fabric and lining together against the actual window, then compare them with room lights on. Look at transmitted light, the shade of the face cloth, the reverse and how the two materials bend together. A screen swatch cannot demonstrate light-blocking performance or care compatibility.",
+        },
+        {
+          title: "Can lining be changed on an existing curtain?",
+          text: "Sometimes, but assess the original construction, shaped top, heading, seams and available material first. A heavier replacement may change the drape, stack and complete load. Removing and refitting high curtains also needs planned access.",
+        },
+        {
+          title: "What about fading and condensation?",
+          text: "Lining can reduce direct sunlight exposure of the face cloth, but it does not prevent all fading. Curtains also do not resolve a damp or poorly ventilated room. Avoid trapping the hem against wet surfaces and follow ventilation and fabric-care advice for the space.",
+        },
+      ],
       title: "Good cloth needs good geometry",
       paragraphs: [
         "Lining quality includes its consistency, handle, stability and compatibility with the face fabric and care method. The making matters too: tension between layers, seam placement and allowances for the lining to hang independently can affect the final fall. A sample that looks beautiful in the hand still needs to work across the full curtain drop.",
@@ -136,6 +162,7 @@ export const liningsGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-headings#fullness", label: "How layers change the fold" },
     { href: "/curtain-tracks", label: "The right foundation" },
     { href: "/curtain-tiebacks", label: "The finishing touch" },
     {
