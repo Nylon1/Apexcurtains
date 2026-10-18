@@ -2,6 +2,7 @@ import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 const exploreLinks = [
+  { label: "Room Visualiser", href: "/room-visualiser" },
   { label: "Colour & Interiors", href: "/curtain-colours-and-tones" },
   { label: "Curtain Design Guide", href: "/curtain-design-guide" },
   { label: "Window Types", href: "/window-types" },
@@ -62,6 +63,7 @@ function LinkGroup({
           <li key={link.href}>
             <Link
               href={link.href}
+              prefetch={false}
               className="text-sm text-white/70 transition hover:text-[#f5d38a]"
             >
               {link.label}
@@ -104,11 +106,11 @@ export default function Footer() {
 
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/curtain-design-guide"
+                href="/room-visualiser"
                 className="inline-flex items-center gap-2 rounded-full bg-[#f5d38a] px-5 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
               >
                 <Sparkles className="h-4 w-4" />
-                Build your curtain specification
+                Explore your room in colour
               </Link>
               <Link
                 href="/start-designing"
@@ -181,7 +183,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 text-sm text-white/45 sm:grid-cols-[1fr_auto] sm:items-center">
+        <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 text-sm text-white/70 sm:grid-cols-[1fr_auto] sm:items-center">
           <span>
             © {new Date().getFullYear()} Apex Curtains. All rights reserved.
           </span>
@@ -190,6 +192,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 className="transition hover:text-white"
               >
                 {link.label}

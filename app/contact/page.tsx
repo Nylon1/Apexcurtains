@@ -34,6 +34,7 @@ const faqs = [
 ];
 
 export const metadata = {
+  alternates: { canonical: "https://www.apexcurtains.com/contact" },
   title: "Contact Apex Curtains",
   description:
     "Get expert advice for apex, triangular and architectural windows. Upload your window details, ask questions or start your curtain journey.",

@@ -16,3 +16,8 @@ export default function Page() {
     />
   );
 }
+export const metadata = {
+  title: "Press & Media Enquiries",
+  description: "Contact Apex Curtains for editorial information, approved installation photography and specialist commentary on curtains for unusual windows.",
+  alternates: { canonical: "https://www.apexcurtains.com/press" },
+};

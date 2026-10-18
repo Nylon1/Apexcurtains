@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "https://www.apexcurtains.com/advice/curtains-discussing-fabrics" },
   title: "Choosing Curtain Fabrics: What Happens During a Home Consultation",
   description:
     "Learn how curtain fabrics are discussed during a home visit and how to choose the right material for apex, bay and large windows.",

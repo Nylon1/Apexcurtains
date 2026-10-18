@@ -1,6 +1,7 @@
 import TrackedLink from "@/components/analytics/TrackedLink";
 
 export const metadata = {
+  alternates: { canonical: "https://www.apexcurtains.com/get-curtain-quote" },
   title: "Get a Curtain Quote | Apex Curtains",
   description:
     "Send your window details for a made-to-measure curtain quotation for apex, angled, triangular, gable-end and other difficult glazing.",

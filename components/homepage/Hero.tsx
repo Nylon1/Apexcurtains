@@ -8,8 +8,8 @@ export default function Hero() {
         src="/window-types/apex-hero.jpg"
         alt="Real Apex installation: full-height pale curtains following a wide gable roofline"
         fill
-        priority
         loading="eager"
+        fetchPriority="high"
         sizes="100vw"
       />
       <div className="home-hero-copy">

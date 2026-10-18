@@ -35,3 +35,8 @@ export default function ArloPage() {
     </main>
   )
 }
+export const metadata = {
+  title: "Ask Arlo | Specialist Curtain Advice",
+  description: "Explore curtain options for apex, triangular and unusual windows with Arlo, then share your project with the Apex team.",
+  alternates: { canonical: "https://www.apexcurtains.com/arlo-curtain-advisor" },
+};

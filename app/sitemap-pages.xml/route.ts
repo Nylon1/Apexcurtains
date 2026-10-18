@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 import { buildXml, baseUrl } from "@/lib/sitemap-utils";
 
+// This inventory changes with a deployment, not with each crawler request.
+export const dynamic = "force-static";
+
 export async function GET() {
   const urls = [
-    { loc: `${baseUrl}/room-visualiser`, changefreq: "monthly", priority: "0.80" },
+    {
+      loc: `${baseUrl}/room-visualiser`,
+      lastmod: "2026-10-18",
+      changefreq: "monthly",
+      priority: "0.80",
+      images: [`${baseUrl}/visualiser/double-pinch-gable-desktop.webp`],
+    },
     {
       loc: `${baseUrl}/`,
       changefreq: "weekly",
@@ -127,16 +136,6 @@ export async function GET() {
       priority: "0.75",
     },
     {
-      loc: `${baseUrl}/advice/how-to-measure-for-apex-curtains`,
-      changefreq: "monthly",
-      priority: "0.80",
-    },
-    {
-      loc: `${baseUrl}/advice/how-much-do-apex-window-curtains-cost-in-the-uk-full-2026-pricing-guide`,
-      changefreq: "monthly",
-      priority: "0.80",
-    },
-    {
       loc: `${baseUrl}/advice/curtains-discussing-fabrics`,
       changefreq: "monthly",
       priority: "0.70",
@@ -220,6 +219,6 @@ export async function GET() {
   ];
 
   return new NextResponse(buildXml(urls), {
-    headers: { "Content-Type": "application/xml" },
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
   });
 }

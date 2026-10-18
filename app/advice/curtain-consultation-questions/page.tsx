@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
+  alternates: { canonical: "https://www.apexcurtains.com/advice/curtain-consultation-questions" },
   title:
     "Curtain Consultation Questions | Expert Advice for Apex & Shaped Windows",
   description:
