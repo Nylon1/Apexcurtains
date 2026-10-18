@@ -43,6 +43,7 @@ export default function RoomVisualiser({
   const [copyError, setCopyError] = useState(false);
   const [failedImage, setFailedImage] = useState("");
   const canvas = useRef<HTMLCanvasElement>(null);
+  const colourList = useRef<HTMLDivElement>(null);
   const enlargedCanvas = useRef<HTMLCanvasElement>(null);
   const dialog = useRef<HTMLDialogElement>(null);
   const enlargeButton = useRef<HTMLButtonElement>(null);
@@ -53,6 +54,20 @@ export default function RoomVisualiser({
     typeof createResourceCache<LoadedScene>
   > | null>(null);
   const { scene, colour } = look;
+
+  useEffect(() => {
+    const list = colourList.current;
+    const selected = list?.querySelector<HTMLElement>('[aria-pressed="true"]');
+    if (!list || !selected) return;
+    const item = selected.getBoundingClientRect();
+    const bounds = list.getBoundingClientRect();
+    // Scroll only the swatch strip, never the page or sticky room preview.
+    if (matchMedia("(max-width: 800px)").matches) {
+      list.scrollLeft += item.left - bounds.left - (list.clientWidth - item.width) / 2;
+    } else if (item.top < bounds.top || item.bottom > bounds.bottom) {
+      list.scrollTop += item.top - bounds.top - (list.clientHeight - item.height) / 2;
+    }
+  }, [colour.id]);
 
   useEffect(() => {
     if (!opened.current) {
@@ -325,6 +340,7 @@ export default function RoomVisualiser({
           </div>
           <div
             className="rv-colours"
+            ref={colourList}
             role="group"
             aria-label="Choose an Oslo colour"
           >
