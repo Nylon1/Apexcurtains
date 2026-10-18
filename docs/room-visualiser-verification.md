@@ -1,6 +1,6 @@
 # Room visualiser review record
 
-18 October 2026. Feature branch: `feature/apex-room-visualiser`; draft PR #15.
+18 October 2026. Feature branch: `feature/apex-room-visualiser`; PR #15.
 
 ## Current implemented scope
 
@@ -24,11 +24,16 @@ Checked the furnished-room editor locally at desktop 1440px, phone widths 390px 
 
 Checked lights on/off, a clean URL load restoring the full scheme, enquiry context and return link, heading changes, native enlarged view and Escape/focus return. Sample colour/material repaints measured 24–44ms in this browser; this is not a physical-iPhone performance measurement. No enquiry was submitted.
 
-## Outstanding release gates
+## Owner-approved launch refinement
 
-- Owner visual review of the new furnished rooms, edge quality and light/dark colour rendering.
-- Physical iPhone Safari test: record device/iOS, all three headings, light/dark Oslo, material controls, lighting, swiping, portrait/landscape, sticky image, enlargement and enquiry hand-off. Browser emulation does not satisfy this explicit owner requirement.
-- Required PR checks and Vercel development preview must pass on the exact reviewed commit.
-- Production release only after those gates and approval, followed by live checks.
+The owner reviewed the furnished visualiser and explicitly requested live deployment, a dedicated header entry and a visual homepage feature. Follow-up screenshots requested removal of the preview's empty side bands and a visible Home link.
+
+- Added Home and Room visualiser as desktop navigation links, a prominent visualiser entry in the mobile menu, and an editorial homepage room preview with links into all three headings. The homepage uses a lazy image, without loading the canvas renderer.
+- Reduced the sale banner and fitted the hero to the laptop viewport without removing the existing headline, supporting copy or consultation actions. Checked 1366 × 768 and 1280 × 720; the latter's hero finishes at approximately 714px, with both buttons visible.
+- The preview now uses the room's 4:3 proportions and a viewport-height-aware grid column. Full room geometry is preserved without side bands. The enlarged view is centred and follows the same proportions. Sticky behaviour remains in place.
+- Checked 1440px and 1280px desktop navigation, 390px and 320px phone widths, and 740 × 390 landscape. Landscape now uses side-by-side preview and controls. No horizontal page overflow; the full mobile image stays within the visible page width, including browsers with a scrollbar.
+- Checked Home navigation, homepage heading deep links, room colour changes, material selection, sticky preview and enlarged view. Production build, targeted ESLint, 18 SEO checks, 10 visualiser checks and 7 specialist checks passed locally.
+
+Release follows the owner's latest explicit deployment instruction, after exact-commit PR/preview checks. **Physical iPhone Safari testing has not been performed**; responsive browser checks are not a substitute and this remains a disclosed verification limitation. Production deployment and live checks must be confirmed separately.
 
 CurtainsUK was inspected read-only. Its files, production visualiser and runtime dependencies remain unchanged. Interior colours and lighting are inspiration, not a calibrated paint/fabric match or measured illumination model.

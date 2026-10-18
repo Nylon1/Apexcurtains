@@ -126,9 +126,13 @@
 }
 .rv-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 330px;
+  /* Match the room's 4:3 proportions to the available screen height. */
+  grid-template-columns:
+    minmax(0, min(1133px, calc((100svh - 174px) * 4 / 3)))
+    330px;
   gap: 3vw;
   align-items: start;
+  justify-content: center;
 }
 .rv-scene-column {
   min-width: 0;
@@ -137,7 +141,8 @@
 }
 .rv-stage {
   position: relative;
-  height: min(73svh, calc(100svh - 160px), 850px);
+  width: 100%;
+  aspect-ratio: 4 / 3;
   background: #d9d6cc;
   isolation: isolate;
 }
@@ -445,8 +450,9 @@
 }
 .rv-dialog {
   padding: 1rem;
+  margin: auto;
   border: 0;
-  width: min(1400px, 96vw);
+  width: min(1400px, 96vw, calc((96dvh - 120px) * 4 / 3 + 2rem));
   max-height: 96dvh;
   background: #f5f1e9;
   color: #203c35;
@@ -469,9 +475,10 @@
   place-items: center;
 }
 .rv-dialog canvas {
+  display: block;
   width: 100%;
-  height: calc(90dvh - 125px);
-  object-fit: contain;
+  height: auto;
+  aspect-ratio: 4 / 3;
   background: #d9d6cc;
 }
 .rv-dialog p {
@@ -480,7 +487,7 @@
 }
 @media (max-width: 1000px) {
   .rv-layout {
-    grid-template-columns: minmax(0, 1fr) 280px;
+    grid-template-columns: minmax(0, calc((100svh - 174px) * 4 / 3)) 280px;
     gap: 2vw;
   }
   .rv-scene-description {
@@ -519,8 +526,8 @@
     position: sticky;
     top: 80px;
     z-index: 5;
-    height: min(42svh, 75vw);
-    margin-inline: -1rem;
+    width: min(calc(100% + 2rem), 56svh);
+    margin-inline: max(-1rem, calc((100% - 56svh) / 2));
   }
   .rv-options {
     padding-top: 1rem;
@@ -584,13 +591,51 @@
     font-size: 0.6rem;
   }
 }
-/* Keep a useful view and reachable controls when a phone turns sideways. */
+/* A side-by-side workspace makes better use of a phone held sideways. */
 @media (max-height: 600px) and (max-width: 800px) {
   .rv-stage {
-    height: 38svh;
+    width: min(calc(100% + 2rem), 50.667svh);
+    margin-inline: max(-1rem, calc((100% - 50.667svh) / 2));
   }
   .rv-options :is(button, a) {
     scroll-margin-top: calc(38svh + 100px);
+  }
+}
+@media (min-width: 600px) and (max-width: 800px) and (max-height: 600px) {
+  .rv-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .rv-scene-column {
+    display: block;
+    position: sticky;
+    top: 80px;
+  }
+  .rv-stage {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .rv-options {
+    padding-top: 0;
+  }
+  .rv-options :is(button, a) {
+    scroll-margin-top: 100px;
+  }
+  .rv-options h2 {
+    font-size: 1.5rem;
+  }
+  .rv-light-control {
+    margin-top: 1rem;
+  }
+  .rv-colours {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-height: 180px;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 }
 
