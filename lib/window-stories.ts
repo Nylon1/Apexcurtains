@@ -25,7 +25,7 @@ export const windowStories: Record<string, WindowStory> = {
     path: "/apex-curtains",
     title: "Apex curtains. Softness on a grand scale.",
     intro:
-      "Made-to-measure curtains for a distinctive roofline. Beautiful cloth, carefully shaped tracking and a finish that brings the whole room into balance.",
+      "Made-to-measure curtains for apex windows, surveyed, designed and professionally installed across the UK. Beautiful cloth and a carefully shaped curtain line bring the whole room into balance.",
     image: "/window-types/apex-hero.jpg",
     alt: "Full-length pale curtains arranged along two slopes of an apex window",
     caption: "Warm ivory, generous folds and a quiet line along the ceiling.",
@@ -55,7 +55,7 @@ export const windowStories: Record<string, WindowStory> = {
     path: "/triangular-window-curtains",
     title: "Triangular curtains. Framing the light.",
     intro:
-      "A steep slope can become a beautiful feature. Individually shaped curtains bring softness, privacy and a sense of proportion to triangular glazing.",
+      "Made-to-measure curtains for triangular windows, planned around the peak, side drops and how the panels open. From survey to professional installation, we bring softness, privacy and a sense of proportion to the glazing.",
     image: "/window-types/triangular.jpeg",
     alt: "Olive green curtains with matching tiebacks framing steep triangular glazing and a garden view",
     caption:
@@ -88,7 +88,7 @@ export const windowStories: Record<string, WindowStory> = {
     path: "/gable-end-curtains",
     title: "Gable-end curtains. A room in balance.",
     intro:
-      "Tall glazing gives a room its presence. Beautifully proportioned curtains add softness and intimacy while keeping that architectural character in view.",
+      "Made-to-measure gable-end curtains for tall glazing and double-height rooms. We plan the fabric, track, fixing structure and high-level installation together, so a generous space feels balanced and inviting.",
     image: "/window-types/gable-end.jpeg",
     alt: "Pale curtains and matching tiebacks framing tall gable-end glazing",
     caption:

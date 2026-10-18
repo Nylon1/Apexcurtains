@@ -1,9 +1,9 @@
 import WindowEditorialPage from "@/components/guides/WindowEditorialPage";
 import { windowStories } from "@/lib/window-stories";
 export const metadata = {
-  title: "Apex Curtains | Curtains for Angled & Triangular Windows",
+  title: "Apex Window Curtains | Measured & Installed",
   description:
-    "Specialists in apex curtains for angled, triangular and architectural windows. Bespoke design, made-to-measure curtains and expert guidance across the UK.",
+    "Made-to-measure curtains for apex windows, surveyed and professionally installed across the UK. Explore shaped tracks, fabric, linings and real Apex projects.",
 };
 const faqs = [
   {

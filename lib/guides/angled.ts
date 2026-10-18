@@ -2,13 +2,13 @@ import type { SpecialistGuide } from "../specialist-guide-types";
 
 export const angledGuide: SpecialistGuide = {
   path: "/angled-window-curtains",
-  title: "Angled windows. A softer line.",
-  metaTitle: "Angled Window Curtains & Curtains for Sloping Ceilings",
+  title: "Angled window curtains. A softer line.",
+  metaTitle: "Angled Window Curtains for Sloping Windows",
   description:
-    "Made-to-measure curtains for single slopes, asymmetric windows and sloping ceilings. Plan unequal drops, track retention, stacking, light control and safe fitting.",
+    "Made-to-measure curtains for angled and sloping windows, with specialist survey and fitting. Explore unequal drops, shaped tracks, tiebacks and light control.",
   eyebrow: "Architectural windows / Angled glazing",
   intro:
-    "A single slope, an off-centre peak or a window tucked beneath the roof. Curtains can bring softness to these distinctive spaces when every drop and fold is designed around the geometry.",
+    "Apex designs, makes and professionally installs curtains for angled and sloping windows across the UK. A single slope or an off-centre peak can become a beautiful feature when the curtain drops, track and opening positions are designed together.",
   image: {
     src: "/window-types/gable-end.jpeg",
     alt: "Soft ivory curtains following an angled ceiling, gathered to frame tall glazing",
@@ -53,6 +53,16 @@ export const angledGuide: SpecialistGuide = {
     {
       id: "opening-and-stacking",
       title: "Design the open curtain as carefully as the closed one",
+      photo: {
+        src: "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
+        alt: "Oxford gable curtains gathered into matching tiebacks, with fabric remaining along the upper slopes",
+        width: 1600,
+        height: 1200,
+        caption:
+          "Oxford / A real Apex installation showing the relationship between the sloping curtain line, tiebacks and visible glass. The opening arrangement for your window is agreed at survey.",
+        href: "/gallery/pinch-pleat-curtains-oxford-oxford",
+        linkLabel: "See the Oxford installation",
+      },
       paragraphs: [
         "Gravity affects curtain carriers on an incline. A bespoke arrangement may retain selected sections along the slope, with the lower fabric gathered into tiebacks. It should not be assumed that the whole curtain will glide freely up and down like one on a horizontal rail.",
         "The open position changes the view. Cloth may remain across the upper corners, and a full curtain needs space when gathered. We plan where each panel rests, what glass remains visible and how the curtain can be handled from the floor. A door opening under the slope also needs clear passage when the curtains are open.",
@@ -93,6 +103,10 @@ export const angledGuide: SpecialistGuide = {
           label: "Arrange a measured consultation",
         },
         {
+          href: "/advice/how-to-measure-for-apex-curtains",
+          label: "Prepare photographs and initial measurements",
+        },
+        {
           href: "/services/premium-installation",
           label: "Installation day and high-level access",
         },
@@ -100,6 +114,11 @@ export const angledGuide: SpecialistGuide = {
     },
   ],
   questions: [
+    {
+      question: "Can you put curtains on angled windows?",
+      answer:
+        "Often, yes. Made-to-measure panels and a suitable track can follow the slope where the fixing structure, clearance and access allow. The design must establish the different drops and where the curtains will gather; retained upper sections may stay over part of the glass when tied back. A survey confirms what is practical for the individual window.",
+    },
     {
       question: "Can curtains fit a window with only one sloping side?",
       answer:

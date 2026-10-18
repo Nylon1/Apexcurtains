@@ -57,7 +57,7 @@
     { "source": "/our-price-promise", "destination": "/get-curtain-quote", "reason": "Retain existing price-promise migration redirect." },
     { "source": "/meetarlo", "destination": "/arlo-curtain-advisor", "reason": "Retain existing advisor migration redirect." },
     { "source": "/advice/what-curtain-track-is-best-for-apex-windows", "destination": "/curtain-tracks", "reason": "Retain existing track-advice consolidation." },
-    { "source": "/advice/can-you-put-curtains-on-angled-windows", "destination": "/apex-curtains", "reason": "Retain existing angled-advice consolidation." }
+    { "source": "/advice/can-you-put-curtains-on-angled-windows", "destination": "/angled-window-curtains", "reason": "Dedicated angled-window guide answers the original question and covers sloping tracks, unequal drops, opening and installation." }
   ],
   "unmapped": [
     { "source": "/apex-window-curtains-in-newport-custom-fit-for-angled-gable-end-windows", "reason": "No existing Newport replacement. Review before restoring content; do not create a generic location page." },
