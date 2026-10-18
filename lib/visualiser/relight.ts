@@ -3,6 +3,9 @@ export function linear(value: number) {
   const c = value / 255;
   return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 }
+// Source pixels are 8-bit integers: compute the same transfer function once
+// per possible byte, rather than three exponentiations for every masked pixel.
+const linearBytes = Float64Array.from({ length: 256 }, (_, value) => linear(value));
 export function srgb(value: number) {
   const c = Math.max(0, Math.min(0.985, value));
   return Math.round(
@@ -29,9 +32,9 @@ export function preparePixels(
     const i = p * 4;
     if (!mask[i + 3]) continue;
     const value =
-      0.2126 * linear(source[i]) +
-      0.7152 * linear(source[i + 1]) +
-      0.0722 * linear(source[i + 2]);
+      0.2126 * linearBytes[source[i]] +
+      0.7152 * linearBytes[source[i + 1]] +
+      0.0722 * linearBytes[source[i + 2]];
     luminance[p] = value;
     if (mask[i + 3] > 250) {
       histogram[Math.min(1023, Math.floor(value * 1023))]++;
@@ -71,11 +74,13 @@ export function preparePixels(
     }
   }
   const illumination = new Uint16Array(luminance.length);
-  for (let p = 0; p < luminance.length; p++)
+  for (let p = 0; p < luminance.length; p++) {
+    if (!mask[p * 4 + 3]) continue;
     illumination[p] = Math.min(
       4095,
       Math.round((luminance[p] / anchor) ** 0.88 * 2048),
     );
+  }
   return { source, mask, illumination };
 }
 export type PreparedPixels = ReturnType<typeof preparePixels>;

@@ -35,7 +35,7 @@
   margin: 1rem 0;
 }
 .home-experience .editorial-eyebrow {
-  color: #66705e;
+  color: #465243;
   font-size: 0.65rem;
   letter-spacing: 0.19em;
   line-height: 1.6;
@@ -44,7 +44,7 @@
 }
 .home-experience .home-note,
 .home-experience figcaption {
-  color: #626a5e;
+  color: #465243;
   font-size: 0.73rem;
   line-height: 1.75;
 }
@@ -864,7 +864,7 @@
 .home-enquiry-notes li > span {
   font-family: Georgia, serif;
   font-size: 1.3rem;
-  color: #61715b;
+  color: #465243;
 }
 .home-enquiry-notes strong {
   font-size: 0.85rem;

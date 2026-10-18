@@ -28,7 +28,9 @@ const RETIRED_ADVICE_SLUGS = new Set([
   "can-you-put-curtains-on-angled-windows",
 ]);
 
-export async function getAdvicePosts(): Promise<AdvicePost[]> {
+export async function getAdvicePosts(
+  { throwOnError = false }: { throwOnError?: boolean } = {},
+): Promise<AdvicePost[]> {
   const { data, error } = await supabase
     .from("advice_posts")
     .select("*")
@@ -37,6 +39,7 @@ export async function getAdvicePosts(): Promise<AdvicePost[]> {
 
   if (error) {
     console.error("Supabase error:", error);
+    if (throwOnError) throw new Error("Published advice unavailable");
     return [];
   }
 

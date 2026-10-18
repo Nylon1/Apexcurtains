@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { buildXml, fullImageUrl, fullUrl } from "@/lib/sitemap-utils";
+import { buildXml, formatSitemapDate, fullImageUrl, fullUrl } from "@/lib/sitemap-utils";
 
 export const dynamic = "force-dynamic";
 
@@ -10,15 +10,6 @@ type GalleryProjectRow = {
   created_at?: string | null;
   image_url?: string | null;
 };
-
-function formatSitemapDate(dateValue?: string | Date | null) {
-  if (!dateValue) return undefined;
-
-  const date = new Date(dateValue);
-  if (Number.isNaN(date.getTime())) return undefined;
-
-  return date.toISOString().split("T")[0];
-}
 
 export async function GET() {
   const supabase = await createClient();

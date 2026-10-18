@@ -92,7 +92,7 @@
 }
 .colour-legend button small {
   font-size: 0.65rem;
-  color: #726c5f;
+  color: #514d43;
 }
 .colour-legend button[aria-pressed="true"] {
   border-color: #68796b;

@@ -10,10 +10,19 @@ const redirectedAdviceSlugs = new Set([
 ]);
 
 export async function GET() {
-  const posts = await getAdvicePosts();
+  let posts;
+  try {
+    posts = await getAdvicePosts({ throwOnError: true });
+  } catch {
+    // Never advertise an empty inventory when the database request failed.
+    return new NextResponse("Failed to load advice sitemap", {
+      status: 503,
+      headers: { "Cache-Control": "no-store", "Retry-After": "300" },
+    });
+  }
 
   const urls = posts
-    .filter((post) => !redirectedAdviceSlugs.has(post.slug))
+    .filter((post) => post.slug && !redirectedAdviceSlugs.has(post.slug))
     .map((post) => ({
       loc: fullUrl(`/advice/${post.slug}`),
       lastmod: post.updated_at || post.created_at,
@@ -24,7 +33,7 @@ export async function GET() {
 
   return new NextResponse(buildXml(urls), {
     headers: {
-      "Content-Type": "application/xml",
+      "Content-Type": "application/xml; charset=utf-8",
     },
   });
 }

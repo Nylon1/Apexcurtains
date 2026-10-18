@@ -2,6 +2,7 @@ import Link from "next/link";
 import RelatedWindowTypes from "@/components/seo/RelatedWindowTypes";
 
 export const metadata = {
+  alternates: { canonical: "https://www.apexcurtains.com/barn-conversion-curtains" },
   title: "Barn Conversion Curtains | Curtains for Vaulted & Rustic Homes UK",
   description:
     "Specialists in barn conversion curtains for vaulted ceilings, exposed beams, apex glazing and large feature windows. Bespoke design, made-to-measure curtains and expert guidance across the UK.",

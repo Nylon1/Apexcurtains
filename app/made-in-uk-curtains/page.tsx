@@ -15,3 +15,8 @@ export default function Page() {
     />
   );
 }
+export const metadata = {
+  title: "Made in the UK Curtains",
+  description: "Discover Apex’s approach to bespoke curtain manufacture, heading details and lining choices for shaped and architectural windows.",
+  alternates: { canonical: "https://www.apexcurtains.com/made-in-uk-curtains" },
+};

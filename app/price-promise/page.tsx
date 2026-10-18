@@ -15,3 +15,8 @@ export default function Page() {
     />
   );
 }
+export const metadata = {
+  title: "Our Price Promise",
+  description: "Understand what affects bespoke curtain pricing, from fabric and lining to shaped tracks, window geometry and specialist fitting.",
+  alternates: { canonical: "https://www.apexcurtains.com/price-promise" },
+};

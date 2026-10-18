@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import "./editorial.css";
 import "./collections.css";
@@ -13,11 +13,6 @@ const SITE_URL = "https://www.apexcurtains.com";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -61,6 +56,9 @@ const globalSchema = {
       "@id": `${SITE_URL}/#organization`,
       name: "Apex Curtains",
       url: SITE_URL,
+      logo: `${SITE_URL}/images/apex-logo-horizontal.svg`,
+      telephone: "+448007720367",
+      email: "hello@apexcurtains.com",
       description:
         "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK.",
       areaServed: {
@@ -87,7 +85,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={geistSans.variable}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}

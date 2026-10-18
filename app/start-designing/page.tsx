@@ -20,3 +20,8 @@ export default function StartDesigningPage() {
     </>
   );
 }
+export const metadata = {
+  title: "Start Your Curtain Project",
+  description: "Tell Apex about your window, room and preferred curtain style. Share photos and approximate dimensions to begin a specialist consultation.",
+  alternates: { canonical: "https://www.apexcurtains.com/start-designing" },
+};

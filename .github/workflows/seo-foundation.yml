@@ -10,6 +10,8 @@ on:
       - "proxy.ts"
       - "next.config.ts"
       - "scripts/seo-foundation-check.mjs"
+      - "scripts/sitemap-check.mjs"
+      - "scripts/public-seo-audit.mjs"
       - "scripts/specialist-guidance-check.mjs"
       - "scripts/visualiser-check.mjs"
       - "scripts/prepare-visualiser-assets.mjs"
@@ -41,6 +43,9 @@ jobs:
 
       - name: SEO static acceptance checks
         run: npm run seo:check
+
+      - name: Sitemap serialization checks
+        run: npm run test:sitemap
 
       - name: Production build
         run: npm run build

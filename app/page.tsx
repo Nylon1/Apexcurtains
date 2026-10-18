@@ -19,6 +19,19 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  openGraph: {
+    title: "Apex Curtains | Curtains for Extraordinary Windows",
+    description: "Specialist survey, design, manufacture and installation for apex, triangular, angled and gable-end curtains across the UK.",
+    url: "https://www.apexcurtains.com",
+    type: "website",
+    images: [{ url: "/window-types/apex-hero.jpg", alt: "A completed Apex gable curtain installation" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Apex Curtains | Curtains for Extraordinary Windows",
+    description: "Made-to-measure curtains for apex, triangular, angled and gable-end windows.",
+    images: ["/window-types/apex-hero.jpg"],
+  },
 };
 
 export default function HomePage() {

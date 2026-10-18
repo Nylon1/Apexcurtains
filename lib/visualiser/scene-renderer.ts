@@ -21,6 +21,12 @@ type Materials = {
   lights: SceneLight[];
 };
 
+// Let input and paint run between preparation stages, including on browsers
+// without scheduler.yield(). Completed scenes remain cached for colour changes.
+function yieldToBrowser() {
+  return new Promise<void>((resolve) => setTimeout(resolve, 0));
+}
+
 export async function loadScene(scene: Scene, size: "mobile" | "desktop") {
   const image = new Image();
   image.decoding = "async";
@@ -71,6 +77,7 @@ export async function loadScene(scene: Scene, size: "mobile" | "desktop") {
   ) as Record<RoomSurface, Uint8ClampedArray>;
   const wallOcclusion = maskFor(material.wallOcclusions);
   const floorOcclusion = maskFor(material.floorOcclusions);
+  await yieldToBrowser();
   // Exclude leaves and stems in bounded decorative areas, preserving wall between them.
   const foliage: ["wall" | "floor", number[]][] = [
     ...material.foliageRegions.map((bounds): ["wall", number[]] => ["wall", bounds]),
@@ -102,24 +109,31 @@ export async function loadScene(scene: Scene, size: "mobile" | "desktop") {
     surfaceMasks.floor[i] *= 1 - surfaceMasks.furniture[i] / 255;
     surfaceMasks.floor[i] *= 1 - floorOcclusion[i] / 255;
   }
-  const surfaces = Object.fromEntries(
-    roomSurfaces.map((key) => [key, preparePixels(source, surfaceMasks[key])]),
-  ) as Record<RoomSurface, ReturnType<typeof preparePixels>>;
+  await yieldToBrowser();
+  const surfaces = {} as Record<RoomSurface, ReturnType<typeof preparePixels>>;
+  for (const key of roomSurfaces) {
+    surfaces[key] = preparePixels(source, surfaceMasks[key]);
+    await yieldToBrowser();
+  }
+  const pixels = preparePixels(source, curtainMask, canvas.width);
+  await yieldToBrowser();
+  const lighting = prepareLighting(
+    [curtainMask, ...Object.values(surfaceMasks)],
+    canvas.width,
+    canvas.height,
+    scene.width,
+    scene.height,
+    material.lights,
+  );
+  await yieldToBrowser();
   return {
     width: canvas.width,
     height: canvas.height,
     sourceWidth: scene.width,
     sourceHeight: scene.height,
-    pixels: preparePixels(source, curtainMask, canvas.width),
+    pixels,
     surfaces,
-    lighting: prepareLighting(
-      [curtainMask, ...Object.values(surfaceMasks)],
-      canvas.width,
-      canvas.height,
-      scene.width,
-      scene.height,
-      material.lights,
-    ),
+    lighting,
     lights: material.lights,
   };
 }
