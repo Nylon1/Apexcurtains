@@ -8,7 +8,7 @@ export const angledGuide: SpecialistGuide = {
     "Made-to-measure curtains for angled and sloping windows, with specialist survey and fitting. Explore unequal drops, shaped tracks, tiebacks and light control.",
   eyebrow: "Architectural windows / Angled glazing",
   intro:
-    "Apex designs, makes and professionally installs curtains for angled and sloping windows across the UK. A single slope or an off-centre peak can become a beautiful feature when the curtain drops, track and opening positions are designed together.",
+    "Apex designs, makes and professionally installs curtains for angled and sloping windows across England and Wales. A single slope or an off-centre peak can become a beautiful feature when the curtain drops, track and opening positions are designed together.",
   image: {
     src: "/window-types/gable-end.jpeg",
     alt: "Soft ivory curtains following an angled ceiling, gathered to frame tall glazing",

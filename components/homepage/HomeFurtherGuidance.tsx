@@ -50,7 +50,7 @@ export default function HomeFurtherGuidance() {
           <Link href="/faq">What is actually possible? ↗</Link>
           <Link href="/advice">Specialist advice ↗</Link>
           <Link href="/about-apex-curtains">Meet Apex ↗</Link>
-          <Link href="/areas">UK service areas ↗</Link>
+          <Link href="/areas">Service areas ↗</Link>
           <Link href="/arlo-curtain-advisor">Explore ideas with Arlo ↗</Link>
         </div>
       </nav>

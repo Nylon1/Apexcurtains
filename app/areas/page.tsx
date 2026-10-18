@@ -9,12 +9,12 @@ const canonicalUrl = `${SITE_URL}/areas`;
 export const metadata: Metadata = {
   title: { absolute: "Areas We Cover | Apex Curtains" },
   description:
-    "Explore UK service areas for specialist curtains for apex, angled, triangular, gable-end and unusual architectural windows.",
+    "Specialist curtain surveys and installation throughout England and Wales for apex, angled, triangular, gable-end and unusual architectural windows.",
   alternates: { canonical: canonicalUrl },
   openGraph: {
     title: "Areas We Cover | Apex Curtains",
     description:
-      "Find Apex Curtains service areas and local specialist guidance for difficult architectural windows across the UK.",
+      "Find Apex Curtains service areas and local specialist guidance for difficult architectural windows across England and Wales.",
     url: canonicalUrl,
     siteName: "Apex Curtains",
     type: "website",
@@ -74,15 +74,22 @@ export default function AreasPage() {
         <div className="max-w-4xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#d6b56b]/25 bg-[#d6b56b]/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#d6b56b]">
             <MapPin className="h-4 w-4" />
-            UK service areas
+            England and Wales
           </div>
 
           <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
-            Specialist curtains for difficult windows across the UK
+            Specialist curtains for difficult windows across England and Wales
           </h1>
 
           <p className="mt-6 max-w-3xl text-base leading-8 text-[#C8D1D8] sm:text-lg">
-            Our area pages connect local enquiries to the same specialist process used across Apex Curtains: identify the window shape, build the curtain specification, plan the track and installation, then review relevant project evidence where it is actually recorded.
+            We survey, design, manufacture and professionally install curtains throughout England and Wales, from city homes to rural properties. Wherever your project is based, we plan the window geometry, fabric, track, fixing points and installation access together.
+          </p>
+          <p className="mt-4 max-w-3xl text-base leading-8 text-[#C8D1D8] sm:text-lg">
+            Your town does not need to be listed below. {" "}
+            <Link href="/start-designing" className="underline underline-offset-4 hover:text-white">
+              Tell us about your window
+            </Link>{" "}
+            and include your postcode so we can discuss a survey and the installation requirements.
           </p>
         </div>
 

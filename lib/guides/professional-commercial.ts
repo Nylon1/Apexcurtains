@@ -14,7 +14,7 @@ export const commercialGuide = professionalGuide({
     "Commercial curtain and track supply and installation for airport lounges, hotels and premium interiors. Manchester Airport project evidence, specification and fit-out coordination.",
   eyebrow: "Apex Curtains Commercial / Designed around the site",
   intro:
-    "Specialist curtain and track packages for commercial interiors across the UK, subject to project scope and location. Connect the room's visual character with daily operation, site coordination and a carefully dressed finish.",
+    "Specialist curtain and track packages for commercial interiors across England and Wales, subject to project scope and location. Connect the room's visual character with daily operation, site coordination and a carefully dressed finish.",
   image: airportProfessionalImage,
   sections: [
     {
@@ -202,9 +202,9 @@ export const commercialGuide = professionalGuide({
   ],
   questions: [
     {
-      question: "Do you provide commercial curtain installation across the UK?",
+      question: "Where do you provide commercial curtain installation?",
       answer:
-        "Apex can support commercial curtain and track projects across the UK, depending on the location, size and scope. Discuss the site, programme and package requirements to confirm suitability and availability.",
+        "Apex can support commercial curtain and track projects across England and Wales, depending on the location, size and scope. Discuss the site, programme and package requirements to confirm suitability and availability.",
     },
     {
       question: "Have you completed work at Manchester Airport?",

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Apex Curtains | Architectural Window Specialists",
     description:
-      "Specialist curtain design, track planning and installation for difficult architectural windows across the UK.",
+      "Specialist curtain design, track planning and installation for difficult architectural windows across England and Wales.",
     url: `${SITE_URL}/about-apex-curtains`,
     siteName: "Apex Curtains",
     type: "website",

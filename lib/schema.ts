@@ -1,4 +1,5 @@
 import { SITE_URL } from "@/lib/seo-metadata";
+import { SERVICE_AREAS } from "@/lib/service-area";
 
 export function serviceSchema({
   name,
@@ -21,10 +22,7 @@ export function serviceSchema({
       name: "Apex Curtains",
       url: SITE_URL,
     },
-    areaServed: {
-      "@type": "Country",
-      name: "United Kingdom",
-    },
+    areaServed: SERVICE_AREAS,
     url: `${SITE_URL}${url}`,
   };
 }
