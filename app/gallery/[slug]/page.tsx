@@ -37,10 +37,22 @@ function evidenceLinks(category?: string | null, lining?: string | null) {
     });
   } else if (categoryText.includes("gable")) {
     links.unshift({ href: "/gable-end-curtains", label: "Gable-end guidance" });
+  } else if (/angled|sloping|asymmetric/.test(categoryText)) {
+    links.unshift({
+      href: "/angled-window-curtains",
+      label: "Angled-window curtain guidance",
+    });
   } else {
     links.unshift({
       href: "/window-types",
       label: "Architectural window types",
+    });
+  }
+
+  if (/apex|triang|gable/.test(categoryText)) {
+    links.push({
+      href: "/angled-window-curtains#opening-and-stacking",
+      label: "Opening curtains on a slope",
     });
   }
 

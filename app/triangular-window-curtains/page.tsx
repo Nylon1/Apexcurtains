@@ -1,9 +1,9 @@
 import WindowEditorialPage from "@/components/guides/WindowEditorialPage";
 import { windowStories } from "@/lib/window-stories";
 export const metadata = {
-  title: "Triangular Window Curtains | Curtains for Angled Windows",
+  title: "Triangular Window Curtains | Made to Measure",
   description:
-    "Specialists in triangular window curtains for angled, pointed and unusual shaped glazing. Bespoke design, made-to-measure curtains and expert guidance across the UK.",
+    "Made-to-measure triangular window curtains with specialist survey and fitting. Explore shaped panels, opening positions, blackout lining and real installations.",
 };
 const faqs = [
   {

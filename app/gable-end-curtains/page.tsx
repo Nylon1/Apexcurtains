@@ -1,9 +1,9 @@
 import WindowEditorialPage from "@/components/guides/WindowEditorialPage";
 import { windowStories } from "@/lib/window-stories";
 export const metadata = {
-  title: "Gable End Curtains | Curtains for Tall Feature Windows",
+  title: "Gable End Curtains | Tall & Double-Height Windows",
   description:
-    "Specialists in gable end curtains for tall glazed spaces, double-height rooms and dramatic feature windows. Bespoke design, made-to-measure curtains and expert guidance across the UK.",
+    "Bespoke gable-end curtains for tall glazing and double-height rooms. Explore fabric weight, shaped tracks, fixing support and professional high-level installation.",
 };
 const faqs = [
   {
