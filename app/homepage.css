@@ -148,34 +148,89 @@
   cursor: pointer;
 }
 .home-sale {
-  background: #e4d4b4;
-  padding: 0.9rem 5vw;
+  background: #b00000;
+  color: #ffffff;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 0;
+  text-align: center;
 }
-.home-sale p,
 .home-sale > div {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
   margin: 0;
+  padding: 0 1rem 1.25rem;
+}
+.home-sale .home-sale-season {
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: #ffe20b;
+  color: #a30000;
+  font-size: clamp(0.75rem, 1.5vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.home-sale .home-sale-offer {
+  width: min(680px, calc(100% - 2.5rem));
+  margin: 1.25rem 0 1rem;
 }
 .home-sale strong {
-  font-family: Georgia, serif;
-  font-size: 1.8rem;
-  font-weight: 400;
+  display: block;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
 }
-.home-sale span {
-  font-size: 0.86rem;
+.home-sale-offer span {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #ffffffb3;
+  font-size: clamp(0.78rem, 1.6vw, 1.15rem);
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 .home-sale a {
   font-size: 0.77rem;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  border-bottom: 1px solid #8e8c76;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.8rem;
+  text-decoration: none;
+  border-radius: 2px;
+}
+.home-sale a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.home-sale .home-sale-primary {
+  color: #8c0000;
+  background: #ffe20b;
+  border: 1px solid #ffe20b;
+  font-weight: 700;
+}
+.home-sale .home-sale-primary:hover {
+  background: #fff092;
+  text-decoration: none;
+}
+.home-experience .home-sale a:focus-visible {
+  outline-color: #ffffff;
+}
+.home-sale svg {
+  flex-shrink: 0;
 }
 .home-hero {
   position: relative;
@@ -820,10 +875,6 @@
   .home-expertise-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .home-sale p,
-  .home-sale > div {
-    gap: 0.8rem;
-  }
   .home-project-pair img {
     height: 500px;
   }
@@ -864,28 +915,12 @@
   .home-section-heading > p {
     margin: 0;
   }
-  .home-sale {
-    padding: 0.6rem 1.25rem;
-    align-items: start;
-    gap: 0.4rem;
-    flex-direction: column;
-  }
-  .home-sale p {
-    gap: 0.6rem;
-  }
-  .home-sale strong {
-    font-size: 1.5rem;
-  }
-  .home-sale span {
-    font-size: 0.8rem;
-  }
   .home-sale > div {
-    width: 100%;
-    justify-content: space-between;
+    gap: 0.4rem;
   }
   .home-sale a {
-    min-height: 44px;
-    font-size: 0.69rem;
+    font-size: 0.72rem;
+    padding-inline: 0.65rem;
   }
   .home-hero {
     min-height: 0;
