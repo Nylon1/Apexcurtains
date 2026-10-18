@@ -1,5 +1,11 @@
 import InfoPageTemplate from "@/components/layout/InfoPageTemplate";
 
+export const metadata = {
+  title: "Data Subject Request",
+  description: "Information about requesting access to, correction of or deletion of personal data held by Apex Curtains.",
+  alternates: { canonical: "https://www.apexcurtains.com/data-request" },
+};
+
 export default function Page() {
   return (
     <InfoPageTemplate

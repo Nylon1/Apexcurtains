@@ -12,6 +12,7 @@ on:
       - "scripts/seo-foundation-check.mjs"
       - "scripts/sitemap-check.mjs"
       - "scripts/public-seo-audit.mjs"
+      - "scripts/legacy-redirect-check.mjs"
       - "scripts/specialist-guidance-check.mjs"
       - "scripts/visualiser-check.mjs"
       - "scripts/prepare-visualiser-assets.mjs"
@@ -49,6 +50,9 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Legacy URL migration and destination checks
+        run: npm run test:redirects
 
       - name: Specialist guidance and project consistency checks
         run: npm run test:specialist

@@ -11,6 +11,7 @@
     "test:specialist": "node --test scripts/specialist-guidance-check.mjs",
     "test:visualiser": "node --test scripts/visualiser-check.mjs",
     "test:sitemap": "node --test scripts/sitemap-check.mjs",
+    "test:redirects": "node --test scripts/legacy-redirect-check.mjs",
     "seo:crawl": "node scripts/public-seo-audit.mjs"
   },
   "dependencies": {

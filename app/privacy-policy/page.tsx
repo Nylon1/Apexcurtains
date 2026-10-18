@@ -1,5 +1,11 @@
 import InfoPageTemplate from "@/components/layout/InfoPageTemplate";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description: "How Apex Curtains uses information supplied through website enquiries, including contact details and project information.",
+  alternates: { canonical: "https://www.apexcurtains.com/privacy-policy" },
+};
+
 export default function Page() {
   return (
     <InfoPageTemplate
