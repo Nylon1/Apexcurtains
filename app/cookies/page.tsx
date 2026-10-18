@@ -1,5 +1,11 @@
 import InfoPageTemplate from "@/components/layout/InfoPageTemplate";
 
+export const metadata = {
+  title: "Cookies Policy",
+  description: "Information about cookies, similar technologies and browser cookie preferences on the Apex Curtains website.",
+  alternates: { canonical: "https://www.apexcurtains.com/cookies" },
+};
+
 export default function Page() {
   return (
     <InfoPageTemplate

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import legacyUrls from "./lib/legacy-redirects.json";
 
 const nextConfig: NextConfig = {
   async redirects() {
@@ -9,36 +10,13 @@ const nextConfig: NextConfig = {
         destination: "https://www.apexcurtains.com/:path*",
         permanent: true,
       },
-      {
-        source: "/curtains-in-birmingham",
-        destination: "/areas/birmingham",
+      // Exact legacy paths only. Encode the former emoji slugs as browsers do.
+      // Next preserves query parameters and its existing slash normalization.
+      ...legacyUrls.redirects.map(({ source, destination }) => ({
+        source: encodeURI(source),
+        destination,
         permanent: true,
-      },
-      {
-        source: "/wave-pleat-curtains-on-apex-windows-elegant-solutions-for-modern-homes",
-        destination: "/curtain-headings",
-        permanent: true,
-      },
-      {
-        source: "/our-price-promise",
-        destination: "/get-curtain-quote",
-        permanent: true,
-      },
-      {
-        source: "/meetarlo",
-        destination: "/arlo-curtain-advisor",
-        permanent: true,
-      },
-      {
-        source: "/advice/what-curtain-track-is-best-for-apex-windows",
-        destination: "/curtain-tracks",
-        permanent: true,
-      },
-      {
-        source: "/advice/can-you-put-curtains-on-angled-windows",
-        destination: "/apex-curtains",
-        permanent: true,
-      },
+      })),
     ];
   },
 };
