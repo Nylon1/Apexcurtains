@@ -5,6 +5,9 @@ import type { ReactNode } from "react";
 import type { SpecialistGuide } from "@/lib/specialist-guide-types";
 import { SITE_URL } from "@/lib/seo-metadata";
 import GuideInteraction from "./GuideInteraction";
+import DetailExplorer from "./DetailExplorer";
+import DetailsNavigation from "./DetailsNavigation";
+import "./details-guides.css";
 
 export function guideMetadata(guide: SpecialistGuide): Metadata {
   const url = `${SITE_URL}${guide.path}`;
@@ -81,7 +84,9 @@ export default function SpecialistGuidePage({
     ],
   };
   return (
-    <main className="specialist-guide">
+    <main
+      className={`specialist-guide${guide.enhanced ? " details-guide" : ""}`}
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -121,6 +126,20 @@ export default function SpecialistGuidePage({
         </figure>
       </header>
       {feature}
+      {guide.enhanced && <DetailsNavigation path={guide.path} />}
+      {guide.enhanced && (
+        <details className="details-mobile-index">
+          <summary>Explore this guide</summary>
+          <nav aria-label="Mobile guide contents">
+            {guide.sections.map((s) => (
+              <a key={s.id} href={`#${s.id}`}>
+                {s.title}
+              </a>
+            ))}
+            <a href="#questions">Your questions</a>
+          </nav>
+        </details>
+      )}
       <div className="guide-layout">
         <aside className="guide-index">
           <nav aria-label="On this page">
@@ -141,9 +160,11 @@ export default function SpecialistGuidePage({
                 {String(i + 1).padStart(2, "0")} / The details
               </p>
               <h2>{section.title}</h2>
-              {section.paragraphs.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
+              {section.paragraphs
+                .slice(0, guide.enhanced ? 1 : undefined)
+                .map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
               {section.points && (
                 <ul>
                   {section.points.map((p) => (
@@ -189,19 +210,65 @@ export default function SpecialistGuidePage({
               )}
               {section.diagram && (
                 <figure className="guide-diagram">
-                  <Image
-                    src={section.diagram.src}
-                    alt={section.diagram.alt}
-                    width={960}
-                    height={540}
-                    sizes="(max-width: 900px) 100vw, 750px"
-                  />
-                  <figcaption>{section.diagram.caption}</figcaption>
+                  <div className="guide-diagram-stage">
+                    <Image
+                      src={section.diagram.src}
+                      alt={section.diagram.alt}
+                      width={960}
+                      height={540}
+                      sizes="(max-width: 900px) 100vw, 750px"
+                    />
+                  </div>
+                  <figcaption>
+                    {section.diagram.caption}
+                    {guide.enhanced && (
+                      <a
+                        className="detail-diagram-link"
+                        href={section.diagram.src}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Open full-size diagram ↗
+                      </a>
+                    )}
+                  </figcaption>
                 </figure>
               )}
               {section.interaction && (
                 <GuideInteraction kind={section.interaction} />
               )}
+              {section.detailInteraction && (
+                <DetailExplorer kind={section.detailInteraction} />
+              )}
+              {section.disclosures && (
+                <div className="detail-disclosures">
+                  {section.disclosures.map((item) => (
+                    <details key={item.title}>
+                      <summary>{item.title}</summary>
+                      <p>{item.text}</p>
+                    </details>
+                  ))}
+                </div>
+              )}
+              {section.photo && (
+                <figure className="detail-project-photo">
+                  <Image
+                    src={section.photo.src}
+                    alt={section.photo.alt}
+                    width={section.photo.width}
+                    height={section.photo.height}
+                    sizes="(max-width: 900px) 100vw, 760px"
+                  />
+                  <figcaption>
+                    <p>{section.photo.caption}</p>
+                    <Link href={section.photo.href}>
+                      {section.photo.linkLabel} ↗
+                    </Link>
+                  </figcaption>
+                </figure>
+              )}
+              {guide.enhanced &&
+                section.paragraphs.slice(1).map((p) => <p key={p}>{p}</p>)}
               {section.links && (
                 <div className="guide-inline-links">
                   {section.links.map((link) => (
