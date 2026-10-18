@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 const SITE_URL = "https://www.apexcurtains.com";
 const canonicalUrl = `${SITE_URL}/faq`;
@@ -20,6 +21,43 @@ export const metadata: Metadata = {
 };
 
 const groups = [
+  {
+    title: "What is actually possible?",
+    items: [
+      {
+        q: "Can every triangular window have curtains?",
+        a: "Many can, but not every window supports a practical curtain arrangement. We need suitable fixing points, a workable panel layout, safe access and enough space for folds and stacks. Obstructions or a very restricted room can limit the options.",
+      },
+      {
+        q: "Can apex curtains open completely, and where do they stack?",
+        a: "That depends on the track route and available space beside the glazing. On a slope, retained upper sections may remain over the glass while the lower fabric gathers into tiebacks. We agree the open position before manufacture; completely clear glazing is not always achievable.",
+      },
+      {
+        q: "Can the curtains follow both roof slopes?",
+        a: "Often, provided both sides can be measured and supported appropriately. We measure each slope independently rather than assuming symmetry. The peak connection, panel divisions, retention points and intended opening positions all need planning.",
+      },
+      {
+        q: "Can shaped curtain tracks be motorised?",
+        a: "Do not assume a motor for a straight track can drive carriers up a shaped slope. Motorisation depends on a system explicitly suited to the geometry, curtain weight and operating route. The standard Forest KS and CS tracks described in our track guide are hand drawn. Any motorised proposal needs separate technical confirmation before quotation.",
+      },
+      {
+        q: "Will blackout lining mean total darkness?",
+        a: "Blackout lining reduces light passing through the cloth. Light can still enter above the track, at the sides, at meeting edges and near the floor. Track projection, overlaps and curtain length help manage these gaps, but the room and window geometry can prevent total darkness.",
+      },
+      {
+        q: "Can curtains be fitted five metres high?",
+        a: "Five-metre installations can be possible, subject to the window, structure and access assessment. Height alone does not establish safety. We plan the working platform, room footprint, obstructions and material handling before confirming the installation; a normal ladder is not automatically suitable.",
+      },
+      {
+        q: "Can curtains be fitted without drilling the window frames?",
+        a: "Wall or ceiling fixing may avoid the frames where there is suitable structure and clearance. This cannot be guaranteed for every room. The proposed fixing positions are agreed at survey; a frame should not be drilled without checking its construction, permissions and warranty implications.",
+      },
+      {
+        q: "Do apex curtains have to reach the floor?",
+        a: "No. Length is a design and practical decision, although floor-length curtains often give a tall window a coherent vertical line and reduce the open light path below a shorter curtain. Radiators, doors, furniture, floor levels and cleaning requirements influence the final length.",
+      },
+    ],
+  },
   {
     title: "Apex & shaped windows",
     items: [
@@ -117,68 +155,94 @@ export default function FAQPage() {
   };
 
   return (
-    <main className="min-h-screen bg-apex-navy-950 text-white">
+    <main className="window-editorial">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+        }}
       />
-
-      <section className="mx-auto max-w-6xl px-4 pb-14 pt-32 sm:px-6 lg:px-8 lg:pt-40">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#d6b56b]">
-          Specialist answers
-        </p>
-        <h1 className="mt-4 max-w-4xl text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
-          Frequently asked questions about apex and difficult-window curtains
-        </h1>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-[#C8D1D8]">
-          Straight answers about shaped windows, specialist tracks, blackout, measuring and installation. For a deeper explanation, follow the links to our track, solution and window-type guides.
-        </p>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="grid gap-4 md:grid-cols-3">
-          <Link href="/curtain-tracks" className="rounded-[26px] border border-white/10 bg-[#1B405B] p-6 transition hover:border-[#d6b56b]/35">
-            <h2 className="text-xl font-semibold text-[#F4F0E8]">Curtain tracks</h2>
-            <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">Track choice, sloping routes, curtain weight and fixing considerations.</p>
-          </Link>
-          <Link href="/curtain-solutions" className="rounded-[26px] border border-white/10 bg-[#1B405B] p-6 transition hover:border-[#d6b56b]/35">
-            <h2 className="text-xl font-semibold text-[#F4F0E8]">Curtain solutions</h2>
-            <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">Blackout, privacy, thermal comfort and layered voile solutions.</p>
-          </Link>
-          <Link href="/window-types" className="rounded-[26px] border border-white/10 bg-[#1B405B] p-6 transition hover:border-[#d6b56b]/35">
-            <h2 className="text-xl font-semibold text-[#F4F0E8]">Window types</h2>
-            <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">Apex, triangular, gable-end, barn conversion and large-window guidance.</p>
-          </Link>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl space-y-12 px-4 pb-20 sm:px-6 lg:px-8">
-        {groups.map((group) => (
-          <div key={group.title}>
-            <h2 className="text-3xl font-semibold text-[#F4F0E8]">{group.title}</h2>
-            <div className="mt-6 grid gap-5 lg:grid-cols-2">
-              {group.items.map((item) => (
-                <article key={item.q} className="rounded-[28px] border border-white/10 bg-[#1B405B] p-6 sm:p-7">
-                  <h3 className="text-xl font-semibold text-[#F4F0E8]">{item.q}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[#C8D1D8] sm:text-base sm:leading-8">{item.a}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="rounded-[32px] border border-[#d6b56b]/25 bg-[#d6b56b]/10 p-7 sm:p-9">
-          <h2 className="text-3xl font-semibold">Have a window that does not fit the standard categories?</h2>
-          <p className="mt-4 max-w-3xl leading-8 text-[#C8D1D8]">
-            Send the shape, approximate dimensions and a clear photo. That gives us a much better basis for discussing the curtain route, track position and installation requirements.
+      <section className="guide-hero">
+        <div className="guide-hero-copy">
+          <p className="editorial-eyebrow">Specialist curtain questions</p>
+          <h1>What is actually possible?</h1>
+          <p className="guide-intro">
+            Beautiful curtains begin with clear expectations. Explore how the
+            shape, structure and scale of your window influence what we can
+            create.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/start-designing" className="rounded-full bg-[#d6b56b] px-6 py-3 text-sm font-semibold text-apex-navy-950">Start your project</Link>
-            <Link href="/gallery" className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold">View real projects</Link>
+          <a href="#what-is-possible" className="editorial-button">
+            Explore the possibilities ↓
+          </a>
+        </div>
+        <figure className="guide-hero-image">
+          <Image
+            src="/window-types/apex-hero.jpg"
+            alt="Full-height apex curtains tied back to frame a garden view"
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 55vw"
+          />
+          <figcaption>
+            Apex installation photography · The open position is part of the
+            design.
+          </figcaption>
+        </figure>
+      </section>
+      <div className="guide-layout">
+        <aside className="guide-index">
+          <nav aria-label="Question topics">
+            <p className="editorial-eyebrow">Find your answer</p>
+            {groups.map((g, i) => (
+              <a
+                key={g.title}
+                href={`#${i === 0 ? "what-is-possible" : `questions-${i}`}`}
+              >
+                {g.title}
+              </a>
+            ))}
+          </nav>
+        </aside>
+        <div>
+          {groups.map((group, i) => (
+            <section
+              className="guide-section guide-faq"
+              id={i === 0 ? "what-is-possible" : `questions-${i}`}
+              key={group.title}
+            >
+              <h2>{group.title}</h2>
+              {group.items.map((item) => (
+                <details key={item.q}>
+                  <summary>{item.q}</summary>
+                  <p>{item.a}</p>
+                </details>
+              ))}
+            </section>
+          ))}
+          <div className="guide-inline-links">
+            <Link href="/curtain-tracks#structure-and-brackets">
+              Fixings and structural support ↗
+            </Link>
+            <Link href="/curtain-linings">Lining and light control ↗</Link>
+            <Link href="/services/premium-installation#mitower-access">
+              High-level installation ↗
+            </Link>
+            <Link href="/advice/buying-apex-curtains-online">
+              Measuring and DIY risks ↗
+            </Link>
           </div>
         </div>
+      </div>
+      <section className="editorial-cta">
+        <p className="editorial-eyebrow">Start with your window</p>
+        <h2>Let’s find the right approach.</h2>
+        <p>
+          A clear photograph, approximate dimensions and your priorities help us
+          begin a useful conversation.
+        </p>
+        <Link href="/start-designing" className="editorial-button">
+          Discuss your project ↗
+        </Link>
       </section>
     </main>
   );

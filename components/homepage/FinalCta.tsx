@@ -1,4 +1,4 @@
-import { ArrowRight, Phone, Upload } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import Link from "next/link";
 
 export default function FinalCta() {
@@ -18,47 +18,45 @@ export default function FinalCta() {
             </h2>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
-              Upload a photo, speak to a specialist, or start your guided curtain
-              journey with Arlo. We’ll help you find the right solution for your
-              apex, triangular or architectural window.
+              Upload a photo, speak to a specialist, or start your guided
+              curtain journey with Arlo. We’ll help you find the right solution
+              for your apex, triangular or architectural window.
             </p>
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
+            {/* PRIMARY CTA */}
+            <div className="flex flex-col items-start">
+              <Link
+                href="/start-designing"
+                className="inline-flex items-center rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition duration-300 hover:scale-[1.02] hover:bg-[#e6c476]"
+              >
+                Start Your Curtain Journey
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
 
-  {/* PRIMARY CTA */}
-  <div className="flex flex-col items-start">
-    <Link
-      href="/start-designing"
-      className="inline-flex items-center rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition duration-300 hover:scale-[1.02] hover:bg-[#e6c476]"
-    >
-      Start Your Curtain Journey
-      <ArrowRight className="ml-2 h-4 w-4" />
-    </Link>
+              <span className="mt-1 text-xs text-white/50">
+                A considered consultation • No obligation
+              </span>
+            </div>
 
-    <span className="mt-1 text-xs text-white/50">
-      Takes less than a minute • No obligation
-    </span>
-  </div>
+            {/* ASK ARLO */}
+            <Link
+              href="/arlo-curtain-advisor"
+              className="inline-flex items-center rounded-full border border-[#f5d38a]/25 bg-white/5 px-6 py-3 text-sm text-white transition duration-300 hover:scale-[1.02] hover:bg-white/10"
+            >
+              Ask Arlo
+            </Link>
 
-  {/* ASK ARLO */}
-  <Link
-    href="/arlo-curtain-advisor"
-    className="inline-flex items-center rounded-full border border-[#f5d38a]/25 bg-white/5 px-6 py-3 text-sm text-white transition duration-300 hover:scale-[1.02] hover:bg-white/10"
-  >
-    Ask Arlo
-  </Link>
-
-  {/* PHONE */}
-  <a
-    href="tel:08007720367"
-    className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm text-white transition duration-300 hover:scale-[1.02] hover:bg-white/10"
-  >
-    <Phone className="mr-2 h-4 w-4" />
-    0800 772 0367
-  </a>
-
-</div>
+            {/* PHONE */}
+            <a
+              href="tel:08007720367"
+              className="inline-flex items-center rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm text-white transition duration-300 hover:scale-[1.02] hover:bg-white/10"
+            >
+              <Phone className="mr-2 h-4 w-4" />
+              0800 772 0367
+            </a>
+          </div>
         </div>
       </div>
     </section>

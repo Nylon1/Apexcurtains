@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import GuidesPreview from "@/components/homepage/GuidesPreview";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
@@ -16,7 +17,6 @@ import {
 } from "lucide-react";
 
 import { type AdvicePost } from "@/lib/advice-posts";
-import { createClient } from "@/lib/supabase/client";
 
 type FaqItem = {
   question: string;
@@ -105,7 +105,8 @@ const faqs: FaqItem[] = [
   },
   {
     category: "Installation",
-    question: "Should curtains sit inside the apex shape or frame the whole space?",
+    question:
+      "Should curtains sit inside the apex shape or frame the whole space?",
     answer:
       "Both approaches can work. Framing the broader wall area often produces a more elegant result, while following the apex exactly can emphasize the architecture more strongly.",
   },
@@ -150,12 +151,8 @@ type Props = {
 };
 
 export default function AdvicePageClient({ posts }: Props) {
-  
   const [activeCategory, setActiveCategory] = useState("All");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  
-
- 
 
   const featuredPosts = posts.filter((post) => post.featured).slice(0, 4);
   const libraryPosts = posts.slice(0, 9);
@@ -234,14 +231,15 @@ export default function AdvicePageClient({ posts }: Props) {
           <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
             Expert advice for
             <span className="bg-gradient-to-r from-[#f5d38a] via-white to-[#f5d38a] bg-clip-text text-transparent">
-              {" "}apex, angled and feature windows
+              {" "}
+              apex, angled and feature windows
             </span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
-            Explore guides, practical answers and curtain design advice for difficult
-            window shapes. Built to help visitors trust the process and move toward the
-            right solution.
+            Explore guides, practical answers and curtain design advice for
+            difficult window shapes. Built to help visitors trust the process
+            and move toward the right solution.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -263,10 +261,22 @@ export default function AdvicePageClient({ posts }: Props) {
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-4">
-          <MiniStat icon={<Ruler className="h-5 w-5" />} label="Measuring guides" />
-          <MiniStat icon={<Layers3 className="h-5 w-5" />} label="Track advice" />
-          <MiniStat icon={<PenTool className="h-5 w-5" />} label="Style comparisons" />
-          <MiniStat icon={<ShieldCheck className="h-5 w-5" />} label="Practical answers" />
+          <MiniStat
+            icon={<Ruler className="h-5 w-5" />}
+            label="Measuring guides"
+          />
+          <MiniStat
+            icon={<Layers3 className="h-5 w-5" />}
+            label="Track advice"
+          />
+          <MiniStat
+            icon={<PenTool className="h-5 w-5" />}
+            label="Style comparisons"
+          />
+          <MiniStat
+            icon={<ShieldCheck className="h-5 w-5" />}
+            label="Practical answers"
+          />
         </div>
       </section>
 
@@ -403,8 +413,14 @@ export default function AdvicePageClient({ posts }: Props) {
           {[
             { href: "/apex-curtains", label: "Apex Curtains" },
             { href: "/gable-end-curtains", label: "Gable End Curtains" },
-            { href: "/triangular-window-curtains", label: "Triangular Window Curtains" },
-            { href: "/barn-conversion-curtains", label: "Barn Conversion Curtains" },
+            {
+              href: "/triangular-window-curtains",
+              label: "Triangular Window Curtains",
+            },
+            {
+              href: "/barn-conversion-curtains",
+              label: "Barn Conversion Curtains",
+            },
             { href: "/large-window-curtains", label: "Large Window Curtains" },
           ].map((item) => (
             <Link
@@ -521,7 +537,8 @@ export default function AdvicePageClient({ posts }: Props) {
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/65">
             If your window is unusual, don’t guess. Start your design journey,
-            upload a photo and we’ll guide you towards the most suitable curtain solution.
+            upload a photo and we’ll guide you towards the most suitable curtain
+            solution.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -542,17 +559,12 @@ export default function AdvicePageClient({ posts }: Props) {
           </div>
         </div>
       </section>
+      <GuidesPreview />
     </main>
   );
 }
 
-function MiniStat({
-  icon,
-  label,
-}: {
-  icon: React.ReactNode;
-  label: string;
-}) {
+function MiniStat({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
     <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_14px_50px_rgba(0,0,0,0.22)]">
       <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 text-[#f5d38a]">
@@ -563,13 +575,7 @@ function MiniStat({
   );
 }
 
-function ExpertTip({
-  title,
-  text,
-}: {
-  title: string;
-  text: string;
-}) {
+function ExpertTip({ title, text }: { title: string; text: string }) {
   return (
     <div className="rounded-[26px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.25)]">
       <div className="text-xs uppercase tracking-[0.2em] text-[#f5d38a]">

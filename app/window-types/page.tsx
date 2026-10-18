@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const windowTypes = [
+  {
+    id: "angled",
+    title: "Angled Windows",
+    desc: "Single slopes and asymmetric glazing",
+    href: "/angled-window-curtains",
+    image: "/window-types/apex-hero.jpg",
+    vibe: "Follow the roofline",
+  },
   {
     id: "apex",
     title: "Apex Windows",
@@ -42,7 +51,7 @@ const windowTypes = [
     title: "Large Windows",
     desc: "Wide or floor-to-ceiling glass",
     href: "/large-window-curtains",
-    image: "/window-types/large-window.jpeg",
+    image: "/window-types/large-feature.jpeg",
     vibe: "Modern elegance",
   },
 ];
@@ -64,7 +73,9 @@ export default function WindowTypesPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
-          Select your window type to see the specialist curtain route, then explore the track system and room solution that sit behind the finished design.
+          Select your window type to see the specialist curtain route, then
+          explore the track system and room solution that sit behind the
+          finished design.
         </p>
       </section>
 
@@ -74,6 +85,7 @@ export default function WindowTypesPage() {
             <button
               key={item.id}
               onClick={() => setActive(item)}
+              aria-pressed={active.id === item.id}
               className={`w-full rounded-2xl border p-5 text-left transition ${
                 active.id === item.id
                   ? "border-[#f5d38a] bg-[#f5d38a]/10"
@@ -88,9 +100,12 @@ export default function WindowTypesPage() {
         </div>
 
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]">
-          <img
+          <Image
             src={active.image}
             alt={`${active.title} curtain solution example`}
+            width={1200}
+            height={900}
+            sizes="(max-width: 1024px) 100vw, 50vw"
             className="h-[350px] w-full object-cover"
           />
 
@@ -102,7 +117,9 @@ export default function WindowTypesPage() {
             <h2 className="mt-2 text-3xl font-semibold">{active.title}</h2>
 
             <p className="mt-4 leading-7 text-white/70">
-              {active.desc}. This type of window often needs a tailored curtain solution that considers geometry, track route, light control, privacy and how the curtains will operate day to day.
+              {active.desc}. This type of window often needs a tailored curtain
+              solution that considers geometry, track route, light control,
+              privacy and how the curtains will operate day to day.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -137,7 +154,9 @@ export default function WindowTypesPage() {
               How do curtains follow apex and angled windows?
             </h2>
             <p className="mt-4 leading-8 text-white/68">
-              The track route, fixing position, curtain weight and opening direction need to be designed together. Our track guide explains the practical options for shaped and tall windows.
+              The track route, fixing position, curtain weight and opening
+              direction need to be designed together. Our track guide explains
+              the practical options for shaped and tall windows.
             </p>
             <span className="mt-6 inline-flex items-center text-sm font-semibold text-[#f5d38a]">
               Explore curtain tracks
@@ -156,7 +175,9 @@ export default function WindowTypesPage() {
               Blackout, privacy, warmth or layered voile?
             </h2>
             <p className="mt-4 leading-8 text-white/68">
-              The same window can need a very different curtain specification depending on the room. Explore the main solution types and the trade-offs behind each one.
+              The same window can need a very different curtain specification
+              depending on the room. Explore the main solution types and the
+              trade-offs behind each one.
             </p>
             <span className="mt-6 inline-flex items-center text-sm font-semibold text-[#f5d38a]">
               Explore curtain solutions
@@ -168,10 +189,13 @@ export default function WindowTypesPage() {
 
       <section className="mx-auto max-w-7xl px-4 pb-20">
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-10 text-center">
-          <h2 className="text-3xl font-semibold">Not sure what your window is?</h2>
+          <h2 className="text-3xl font-semibold">
+            Not sure what your window is?
+          </h2>
 
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Upload a photo and use our guided assistant, or start the design journey manually.
+            Upload a photo and use our guided assistant, or start the design
+            journey manually.
           </p>
 
           <div className="mt-6 flex flex-wrap justify-center gap-4">
@@ -193,10 +217,16 @@ export default function WindowTypesPage() {
       </section>
 
       <section className="mx-auto max-w-4xl px-4 pb-24 text-center">
-        <h2 className="text-3xl font-semibold">Curtains for architectural windows</h2>
+        <h2 className="text-3xl font-semibold">
+          Curtains for architectural windows
+        </h2>
 
         <p className="mt-6 leading-8 text-white/70">
-          We specialise in curtains for apex windows, gable-end glazing, triangular windows, barn conversions and large feature windows across the UK. Each solution is designed around the shape, scale, room use, track requirements and desired level of privacy, light control and comfort.
+          We specialise in curtains for apex windows, gable-end glazing,
+          triangular windows, barn conversions and large feature windows across
+          the UK. Each solution is designed around the shape, scale, room use,
+          track requirements and desired level of privacy, light control and
+          comfort.
         </p>
       </section>
     </main>

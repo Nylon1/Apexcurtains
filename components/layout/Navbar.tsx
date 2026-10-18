@@ -3,64 +3,108 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, Sparkles, X, ArrowRight, Phone, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  Sparkles,
+  X,
+  ArrowRight,
+  Phone,
+  ChevronDown,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { label: "Home", href: "/" },
   {
     label: "Services",
     href: "/services",
     children: [
-      { label: "Measure + Consultation", href: "/services/measure-consultation" },
-      { label: "Design + Make Curtains", href: "/services/design-make-curtains" },
+      {
+        label: "Measure + Consultation",
+        href: "/services/measure-consultation",
+      },
+      {
+        label: "Design + Make Curtains",
+        href: "/services/design-make-curtains",
+      },
       { label: "Curtain Design Guide", href: "/curtain-design-guide" },
       { label: "Curtain Headings", href: "/curtain-headings" },
       { label: "Curtain Linings", href: "/curtain-linings" },
       { label: "Curtain Fabrics", href: "/curtain-fabrics" },
+      { label: "Colours & Tones", href: "/curtain-colours-and-tones" },
       { label: "Curtain Accessories", href: "/curtain-accessories" },
+      { label: "Curtain Tiebacks", href: "/curtain-tiebacks" },
       { label: "Curtain Tracks", href: "/curtain-tracks" },
-      { label: "Premium Installation", href: "/services/premium-installation" },
+      {
+        label: "Installation & Aftercare",
+        href: "/services/premium-installation",
+      },
     ],
   },
   { label: "Window Types", href: "/window-types" },
+  {
+    label: "Colour & Interiors",
+    href: "/curtain-colours-and-tones",
+    highlight: true,
+  },
   {
     label: "Professionals",
     href: "/professionals",
     children: [
       { label: "Professional & Specifier Hub", href: "/professionals" },
-      { label: "Interior Designers", href: "/professionals/interior-designers" },
+      {
+        label: "Interior Designers",
+        href: "/professionals/interior-designers",
+      },
       { label: "Architects", href: "/professionals/architects" },
-      { label: "Developers + Housebuilders", href: "/professionals/developers-housebuilders" },
-      { label: "Contractors + Fit-out", href: "/professionals/contractors-fit-out" },
-      { label: "Specifier Resources", href: "/professionals/specifier-resources" },
-      { label: "Project Information Checklist", href: "/professionals/specifier-resources/project-information-checklist" },
-      { label: "Professional Project Review", href: "/professionals/project-review" },
-      { label: "Professional Workspace", href: "/professionals/workspace/login" },
-      { label: "Commercial Installation", href: "/commercial-curtain-track-installation" },
+      {
+        label: "Developers + Housebuilders",
+        href: "/professionals/developers-housebuilders",
+      },
+      {
+        label: "Contractors + Fit-out",
+        href: "/professionals/contractors-fit-out",
+      },
+      {
+        label: "Specifier Resources",
+        href: "/professionals/specifier-resources",
+      },
+      {
+        label: "Project Information Checklist",
+        href: "/professionals/specifier-resources/project-information-checklist",
+      },
+      {
+        label: "Professional Project Review",
+        href: "/professionals/project-review",
+      },
+      {
+        label: "Professional Workspace",
+        href: "/professionals/workspace/login",
+      },
+      {
+        label: "Commercial Installation",
+        href: "/commercial-curtain-track-installation",
+      },
     ],
   },
   { label: "Gallery", href: "/gallery" },
   { label: "Reviews", href: "/reviews" },
   { label: "Advice", href: "/advice" },
-  { label: "Areas", href: "/areas" },
-  { label: "FAQ", href: "/faq", highlight: true },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  return <Navigation key={pathname} pathname={pathname} />;
+}
+
+function Navigation({ pathname }: { pathname: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
 
   function isActive(href: string) {
     if (href === "/") return pathname === "/";
@@ -79,7 +123,7 @@ export default function Navbar() {
         >
           <div className="flex items-center justify-between px-3 py-2 sm:px-5 sm:py-3">
             <Link href="/" className="flex items-center">
-              <div className="relative h-10 w-[170px] sm:h-12 sm:w-[210px]">
+              <div className="relative h-10 w-[170px] sm:h-12 sm:w-[170px]">
                 <Image
                   src="/images/apex-logo-horizontal.svg"
                   alt="Apex Curtains"
@@ -109,7 +153,7 @@ export default function Navbar() {
                         <ChevronDown className="ml-1 h-4 w-4 transition group-hover:rotate-180" />
                       </Link>
 
-                      <div className="invisible absolute left-0 top-full z-50 mt-3 max-h-[70vh] w-[310px] overflow-y-auto rounded-3xl border border-white/10 bg-apex-navy-950/95 p-3 opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                      <div className="invisible absolute left-0 top-full z-50 mt-3 max-h-[70vh] w-[310px] overflow-y-auto rounded-3xl border border-white/10 bg-apex-navy-950/95 p-3 opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -136,8 +180,8 @@ export default function Navbar() {
                       active
                         ? "bg-[#E5C07B]/15 text-[#f1d48b]"
                         : item.highlight
-                        ? "text-white hover:text-[#f1d48b]"
-                        : "text-white/85 hover:text-white"
+                          ? "text-white hover:text-[#f1d48b]"
+                          : "text-white/85 hover:text-white"
                     }`}
                   >
                     {item.label}
@@ -158,7 +202,7 @@ export default function Navbar() {
                 href="/start-designing"
                 className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
               >
-                Start your Curtain Journey
+                Start your project
               </Link>
             </div>
 
@@ -268,7 +312,7 @@ export default function Navbar() {
                   href="/start-designing"
                   className="inline-flex items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-semibold text-black"
                 >
-                  Start your Curtain Journey
+                  Start your project
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
 

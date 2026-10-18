@@ -1,4 +1,4 @@
-const SITE_URL = "https://apexcurtains.com";
+import { SITE_URL } from "@/lib/seo-metadata";
 
 export function serviceSchema({
   name,
@@ -16,7 +16,8 @@ export function serviceSchema({
     name,
     description,
     provider: {
-      "@type": "LocalBusiness",
+      "@id": `${SITE_URL}/#organization`,
+      "@type": "Organization",
       name: "Apex Curtains",
       url: SITE_URL,
     },
@@ -47,19 +48,19 @@ export function articleSchema({
     url: `${SITE_URL}${url}`,
     image: image ? `${SITE_URL}${image}` : undefined,
     author: {
+      "@id": `${SITE_URL}/#organization`,
       "@type": "Organization",
       name: "Apex Curtains",
     },
     publisher: {
+      "@id": `${SITE_URL}/#organization`,
       "@type": "Organization",
       name: "Apex Curtains",
     },
   };
 }
 
-export function faqSchema(
-  faqs: Array<{ question: string; answer: string }>
-) {
+export function faqSchema(faqs: Array<{ question: string; answer: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -74,9 +75,7 @@ export function faqSchema(
   };
 }
 
-export function breadcrumbSchema(
-  items: Array<{ name: string; url: string }>
-) {
+export function breadcrumbSchema(items: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -108,6 +107,7 @@ export function projectSchema({
     url: `${SITE_URL}${url}`,
     image: image ? `${SITE_URL}${image}` : undefined,
     creator: {
+      "@id": `${SITE_URL}/#organization`,
       "@type": "Organization",
       name: "Apex Curtains",
     },

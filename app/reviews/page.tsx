@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, GalleryVertical, Quote } from "lucide-react";
+import Image from "next/image";
 
 const SITE_URL = "https://www.apexcurtains.com";
 
@@ -86,75 +86,109 @@ export const metadata: Metadata = {
 
 export default function ReviewsPage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute left-[8%] top-[8%] h-[320px] w-[320px] rounded-full bg-[#f5d38a]/10 blur-[120px]" />
-        <div className="absolute right-[10%] top-[22%] h-[280px] w-[280px] rounded-full bg-sky-400/10 blur-[120px]" />
-      </div>
-
-      <section className="relative mx-auto max-w-7xl px-4 pb-24 pt-28 sm:px-6 lg:px-8 lg:pt-36">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#f5d38a]">
-            Selected customer feedback
-          </div>
-
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
-            Real feedback from customers with
-            <span className="text-[#f5d38a]"> difficult and beautiful windows</span>
-          </h1>
-
-          <p className="mt-6 max-w-3xl text-base leading-8 text-white/70 sm:text-lg">
-            We have a larger review archive, but this page intentionally shows a smaller selection
-            so the feedback remains useful, readable and connected to the kind of specialist window
-            projects we undertake.
+    <main className="reviews-editorial">
+      <header className="guide-hero">
+        <div className="guide-hero-copy">
+          <p className="editorial-eyebrow">
+            The experience / In our customers’ words
           </p>
+          <h1>
+            A beautiful room.
+            <br />A lasting impression.
+          </h1>
+          <p className="guide-intro">
+            Thoughtful advice, careful making and the moment a room feels
+            complete. A selection of customer reflections on their Apex Curtains
+            experience.
+          </p>
+          <a href="#customer-stories" className="editorial-button">
+            Read their stories ↓
+          </a>
         </div>
-
-        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {reviews.map((review) => (
+        <figure className="guide-hero-image">
+          <Image
+            src="/window-types/triangular.jpeg"
+            alt="Olive curtains framing triangular glazing and a garden view"
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 52vw"
+          />
+          <figcaption>
+            From the Apex installation collection. Photography illustrates our
+            work and is not attributed to an individual testimonial.
+          </figcaption>
+        </figure>
+      </header>
+      <section id="customer-stories" className="review-stories">
+        <p className="editorial-eyebrow">Selected customer feedback</p>
+        <h2>The details people remember.</h2>
+        <div className="review-grid">
+          {reviews.map((review, index) => (
             <article
-              key={`${review.name}-${review.location}`}
-              className="relative rounded-[28px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]"
+              key={review.name}
+              className={index === 0 || index === 5 ? "review-featured" : ""}
             >
-              <Quote className="h-8 w-8 text-[#f5d38a]/45" />
-              <p className="mt-5 text-sm leading-8 text-white/76">{review.text}</p>
-
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <div className="font-medium text-white">{review.name}</div>
-                <div className="mt-1 text-sm text-white/52">{review.location}</div>
-                <div className="mt-3 text-xs uppercase tracking-[0.16em] text-[#f5d38a]">
-                  {review.project}
-                </div>
-              </div>
+              <span className="review-number">
+                {String(index + 1).padStart(2, "0")} / {review.project}
+              </span>
+              <blockquote>
+                <p>“{review.text}”</p>
+              </blockquote>
+              <footer>
+                <strong>{review.name}</strong>
+                <span>{review.location}</span>
+              </footer>
             </article>
           ))}
         </div>
-
-        <div className="mt-14 rounded-[32px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_24px_80px_rgba(0,0,0,0.32)] md:p-9">
-          <h2 className="text-2xl font-semibold sm:text-3xl">See the installations behind the feedback</h2>
-          <p className="mt-4 max-w-3xl text-sm leading-8 text-white/68 sm:text-base">
-            Browse completed projects to see the window types, design choices and installation
-            challenges that sit behind our specialist work.
+      </section>
+      <section className="editorial-photo-story">
+        <figure>
+          <Image
+            src="/projects/wave-pleat-apex-curtains-milton-keynes.jpeg"
+            alt="Wave pleat apex curtains in the Milton Keynes project"
+            width={1200}
+            height={900}
+          />
+          <figcaption>
+            A separate project story: wave pleat apex curtains in Milton Keynes.
+          </figcaption>
+        </figure>
+        <div>
+          <p className="editorial-eyebrow">See the work for yourself</p>
+          <h2>
+            From kind words
+            <br />
+            to considered details.
+          </h2>
+          <p>
+            Explore completed rooms, the shapes that made them distinctive and
+            the curtain choices recorded for each installation.
           </p>
-
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
-            >
-              <GalleryVertical className="h-4 w-4" />
-              View project case studies
-            </Link>
-
-            <Link
-              href="/start-designing"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white/85 transition hover:bg-white/10"
-            >
-              Start your project
-              <ArrowRight className="h-4 w-4" />
+          <Link
+            className="editorial-button"
+            href="/gallery/wave-pleat-apex-curtains-milton-keynes"
+          >
+            Inside the Milton Keynes project ↗
+          </Link>
+          <div className="guide-inline-links">
+            <Link href="/gallery">Explore the gallery ↗</Link>
+            <Link href="/services/premium-installation">
+              Discover the fitting experience ↗
             </Link>
           </div>
         </div>
+      </section>
+      <section className="editorial-cta">
+        <p className="editorial-eyebrow">Your next chapter</p>
+        <h2>
+          Let’s make your room
+          <br />
+          feel complete.
+        </h2>
+        <Link href="/start-designing" className="editorial-button">
+          Discuss your curtains ↗
+        </Link>
       </section>
     </main>
   );

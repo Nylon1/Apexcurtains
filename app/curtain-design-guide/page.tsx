@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 const SITE_URL = "https://www.apexcurtains.com";
 const canonicalUrl = `${SITE_URL}/curtain-design-guide`;
 
 export const metadata: Metadata = {
-  title: { absolute: "Curtain Design Guide | Specify Headings, Linings, Fabrics & Tracks | Apex Curtains" },
+  title: {
+    absolute:
+      "Curtain Design Guide | Specify Headings, Linings, Fabrics & Tracks | Apex Curtains",
+  },
   description:
     "Plan a made-to-measure curtain specification from window type and heading through fabric, lining, accessories, track and installation.",
   alternates: { canonical: canonicalUrl },
@@ -20,6 +24,13 @@ export const metadata: Metadata = {
 };
 
 const steps = [
+  {
+    number: "00",
+    title: "Find your colour direction",
+    text: "Connect the curtain to the room through undertones, texture and the balance of light and dark. A large expanse of cloth becomes part of the architecture.",
+    href: "/curtain-colours-and-tones",
+    cta: "Explore colour and tone",
+  },
   {
     number: "01",
     title: "Start with the window",
@@ -52,8 +63,8 @@ const steps = [
     number: "05",
     title: "Add finishing details",
     text: "Tiebacks, tieback hooks and other finishing details should support the room and the way the curtains are actually used.",
-    href: "/curtain-accessories",
-    cta: "View curtain accessories",
+    href: "/curtain-tiebacks",
+    cta: "Explore curtain tiebacks",
   },
   {
     number: "06",
@@ -90,53 +101,75 @@ export default function CurtainDesignGuidePage() {
   };
 
   return (
-    <main className="min-h-screen bg-apex-navy-950 text-white">
+    <main className="window-editorial">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-
-      <section className="mx-auto max-w-7xl px-4 pb-16 pt-32 sm:px-6 lg:px-8 lg:pt-40">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#d6b56b]">
-          Curtain specification journey
-        </p>
-        <h1 className="mt-4 max-w-5xl text-4xl font-semibold tracking-tight text-[#F4F0E8] sm:text-5xl lg:text-7xl">
-          Design the curtain as one complete system
-        </h1>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-[#C8D1D8]">
-          A successful made-to-measure curtain is not just a fabric choice. Window geometry, heading, fabric, lining, accessories, track, fixing and installation all affect one another. This guide connects those decisions in the order they should be considered.
-        </p>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="grid gap-5 md:grid-cols-2">
-          {steps.map((step) => (
-            <article key={step.number} className="rounded-[30px] border border-white/10 bg-[#1B405B] p-7">
-              <p className="text-sm font-semibold tracking-[0.2em] text-[#d6b56b]">STEP {step.number}</p>
-              <h2 className="mt-3 text-2xl font-semibold text-[#F4F0E8]">{step.title}</h2>
-              <p className="mt-4 leading-8 text-[#C8D1D8]">{step.text}</p>
-              <Link
-                href={step.href}
-                className="mt-6 inline-flex rounded-full border border-[#d6b56b]/30 bg-[#d6b56b]/10 px-5 py-3 text-sm font-semibold text-[#F4F0E8] transition hover:bg-[#d6b56b]/15"
-              >
-                {step.cta}
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-        <div className="rounded-[34px] border border-[#d6b56b]/25 bg-[#d6b56b]/10 p-7 sm:p-10">
-          <h2 className="text-3xl font-semibold text-[#F4F0E8]">Ready to turn the specification into a project?</h2>
-          <p className="mt-4 max-w-3xl leading-8 text-[#C8D1D8]">
-            Send the window shape, approximate dimensions and a clear photo. We can then discuss the curtain route, heading, lining, track and installation requirements together rather than as isolated choices.
+      <section className="guide-hero">
+        <div className="guide-hero-copy">
+          <p className="editorial-eyebrow">The curtain design guide</p>
+          <h1>
+            A room, considered
+            <br />
+            in every detail.
+          </h1>
+          <p className="guide-intro">
+            Start with a feeling. Then bring the colour, cloth, heading and
+            practical details together around the architecture of your home.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link href="/start-designing" className="rounded-full bg-[#d6b56b] px-6 py-3 text-sm font-semibold text-apex-navy-950">Start your curtain journey</Link>
-            <Link href="/get-curtain-quote" className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold">Get a quote</Link>
-          </div>
+          <a href="#design-decisions" className="editorial-button">
+            Explore the design journey ↓
+          </a>
         </div>
+        <figure className="guide-hero-image">
+          <Image
+            src="/window-types/triangular.jpeg"
+            alt="Muted green curtains framing triangular glazing"
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 55vw"
+          />
+          <figcaption>
+            Grounded greens and soft pale walls · A gentle connection to the
+            garden.
+          </figcaption>
+        </figure>
+      </section>
+      <section
+        className="design-steps"
+        id="design-decisions"
+        aria-label="Curtain design decisions"
+      >
+        {steps.map((step, i) => (
+          <article key={step.number}>
+            <p className="editorial-eyebrow">
+              {String(i + 1).padStart(2, "0")} / A considered decision
+            </p>
+            <h2>{step.title}</h2>
+            <p>{step.text}</p>
+            <Link href={step.href} className="editorial-text-link">
+              {step.cta} ↗
+            </Link>
+          </article>
+        ))}
+      </section>
+      <section className="editorial-cta">
+        <p className="editorial-eyebrow">Bring the ideas together</p>
+        <h2>Your window. Your way of living.</h2>
+        <p>
+          A photograph and a conversation are the starting point for a curtain
+          designed around your room.
+        </p>
+        <Link href="/start-designing" className="editorial-button">
+          Begin your curtain project ↗
+        </Link>
+        <Link
+          href="/advice/buying-apex-curtains-online"
+          className="editorial-text-link"
+        >
+          Why the complete specification matters
+        </Link>
       </section>
     </main>
   );

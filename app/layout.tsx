@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "./editorial.css";
+import "./collections.css";
+import "./colour-studio.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import PublicPresentation from "@/components/layout/PublicPresentation";
 
 const SITE_URL = "https://www.apexcurtains.com";
 
@@ -19,7 +23,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Apex Curtains | Curtains for Apex, Triangular & Architectural Windows",
+    default:
+      "Apex Curtains | Curtains for Apex, Triangular & Architectural Windows",
     template: "%s | Apex Curtains",
   },
   description:
@@ -86,9 +91,11 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
         />
-        <Navbar />
-        {children}
-        <Footer />
+        <PublicPresentation>
+          <Navbar />
+          {children}
+          <Footer />
+        </PublicPresentation>
       </body>
     </html>
   );

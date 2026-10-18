@@ -1,0 +1,278 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import type { SpecialistGuide } from "@/lib/specialist-guide-types";
+import { SITE_URL } from "@/lib/seo-metadata";
+import GuideInteraction from "./GuideInteraction";
+
+export function guideMetadata(guide: SpecialistGuide): Metadata {
+  const url = `${SITE_URL}${guide.path}`;
+  return {
+    title: { absolute: `${guide.metaTitle} | Apex Curtains` },
+    description: guide.description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: guide.metaTitle,
+      description: guide.description,
+      url,
+      type: "article",
+      images: [{ url: guide.image.src, alt: guide.image.alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: guide.metaTitle,
+      description: guide.description,
+      images: [guide.image.src],
+    },
+  };
+}
+
+export default function SpecialistGuidePage({
+  guide,
+  feature,
+}: {
+  guide: SpecialistGuide;
+  feature?: ReactNode;
+}) {
+  const url = `${SITE_URL}${guide.path}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${url}#webpage`,
+        url,
+        name: guide.title,
+        description: guide.description,
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          contentUrl: `${SITE_URL}${guide.image.src}`,
+          caption: guide.image.caption,
+        },
+        breadcrumb: { "@id": `${url}#breadcrumb` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${url}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Curtain design guide",
+            item: `${SITE_URL}/curtain-design-guide`,
+          },
+          { "@type": "ListItem", position: 3, name: guide.title, item: url },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${url}#questions`,
+        isPartOf: { "@id": `${url}#webpage` },
+        mainEntity: guide.questions.map(({ question, answer }) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      },
+    ],
+  };
+  return (
+    <main className="specialist-guide">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
+        }}
+      />
+      <header className="guide-hero">
+        <div className="guide-hero-copy">
+          <nav aria-label="Breadcrumb" className="guide-breadcrumb">
+            <Link href="/">Home</Link>
+            <span>/</span>
+            <Link href="/curtain-design-guide">Design guide</Link>
+          </nav>
+          <p className="editorial-eyebrow">{guide.eyebrow}</p>
+          <h1>{guide.title}</h1>
+          <p className="guide-intro">{guide.intro}</p>
+          <a
+            href={feature ? "#colour-explorer" : `#${guide.sections[0].id}`}
+            className="editorial-button"
+          >
+            Explore the details <span aria-hidden="true">↓</span>
+          </a>
+          <p className="guide-byline">
+            Guidance from Apex Curtains · For architectural windows and
+            considered interiors
+          </p>
+        </div>
+        <figure className="guide-hero-image">
+          <Image
+            src={guide.image.src}
+            alt={guide.image.alt}
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 52vw"
+          />
+          <figcaption>{guide.image.caption}</figcaption>
+        </figure>
+      </header>
+      {feature}
+      <div className="guide-layout">
+        <aside className="guide-index">
+          <nav aria-label="On this page">
+            <p className="editorial-eyebrow">In this guide</p>
+            {guide.sections.map((s, i) => (
+              <a key={s.id} href={`#${s.id}`}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {s.title}
+              </a>
+            ))}
+            <a href="#questions">Your questions</a>
+          </nav>
+        </aside>
+        <div className="guide-body">
+          {guide.sections.map((section, i) => (
+            <section id={section.id} key={section.id} className="guide-section">
+              <p className="editorial-eyebrow">
+                {String(i + 1).padStart(2, "0")} / The details
+              </p>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+              {section.points && (
+                <ul>
+                  {section.points.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              )}
+              {section.table && (
+                <div
+                  className="guide-table-scroll"
+                  role="region"
+                  aria-label={section.table.caption}
+                  tabIndex={0}
+                >
+                  <table>
+                    <caption>{section.table.caption}</caption>
+                    <thead>
+                      <tr>
+                        {section.table.headings.map((h) => (
+                          <th scope="col" key={h}>
+                            {h}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {section.table.rows.map((row) => (
+                        <tr key={row[0]}>
+                          {row.map((cell, index) =>
+                            index === 0 ? (
+                              <th scope="row" key={index}>
+                                {cell}
+                              </th>
+                            ) : (
+                              <td key={index}>{cell}</td>
+                            ),
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {section.diagram && (
+                <figure className="guide-diagram">
+                  <Image
+                    src={section.diagram.src}
+                    alt={section.diagram.alt}
+                    width={960}
+                    height={540}
+                    sizes="(max-width: 900px) 100vw, 750px"
+                  />
+                  <figcaption>{section.diagram.caption}</figcaption>
+                </figure>
+              )}
+              {section.interaction && (
+                <GuideInteraction kind={section.interaction} />
+              )}
+              {section.links && (
+                <div className="guide-inline-links">
+                  {section.links.map((link) => (
+                    <Link key={link.href} href={link.href}>
+                      {link.label} <span aria-hidden="true">↗</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </section>
+          ))}
+          <section id="questions" className="guide-section guide-faq">
+            <p className="editorial-eyebrow">A little more clarity</p>
+            <h2>Your questions, answered</h2>
+            {guide.questions.map((qa) => (
+              <details key={qa.question}>
+                <summary>{qa.question}</summary>
+                <p>{qa.answer}</p>
+              </details>
+            ))}
+          </section>
+          {guide.sources && (
+            <section className="guide-sources">
+              <h2>Technical references</h2>
+              <p>
+                Manufacturer and safety guidance checked on 18 October 2026. The
+                current instructions for the supplied system govern the
+                installation.
+              </p>
+              <ul>
+                {guide.sources.map((s) => (
+                  <li key={s.href}>
+                    <a href={s.href}>{s.label} ↗</a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+      </div>
+      <section className="guide-related">
+        <p className="editorial-eyebrow">Consider the whole room</p>
+        <h2>Every detail has a part to play.</h2>
+        <div>
+          {guide.related.map((link, i) => (
+            <Link key={link.href} href={link.href}>
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <h3>{link.label}</h3>
+              <span aria-hidden="true">↗</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+      <section className="editorial-cta">
+        <p className="editorial-eyebrow">Made around your home</p>
+        <h2>
+          Let’s find the right finish
+          <br />
+          for your window.
+        </h2>
+        <p>
+          A photograph, the shape of the room and the way you want it to feel.
+          That’s where we begin.
+        </p>
+        <Link className="editorial-button" href="/start-designing">
+          Discuss your curtains <span aria-hidden="true">↗</span>
+        </Link>
+        <a href="tel:08007720367" className="editorial-text-link">
+          Or call 0800 772 0367
+        </a>
+      </section>
+    </main>
+  );
+}

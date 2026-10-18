@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seo:check": "node scripts/seo-foundation-check.mjs"
+    "seo:check": "node scripts/seo-foundation-check.mjs",
+    "test:specialist": "node --test scripts/specialist-guidance-check.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.9.0",
