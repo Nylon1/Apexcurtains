@@ -26,6 +26,7 @@ export type GuideSection = {
     linkLabel: string;
   };
   disclosures?: { title: string; text: string }[];
+  checklist?: string[];
 };
 export type SpecialistGuide = {
   path: string;
@@ -40,4 +41,5 @@ export type SpecialistGuide = {
   related: GuideLink[];
   sources?: GuideLink[];
   enhanced?: boolean;
+  professional?: boolean;
 };

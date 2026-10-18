@@ -51,6 +51,18 @@ const guides = await Promise.all(
     async (name) => Object.values(await import(`../lib/guides/${name}.ts`))[0],
   ),
 );
+const professionalGuides = (
+  await Promise.all(
+    [
+      "professional-roles",
+      "professional-resources",
+      "professional-commercial",
+    ].map(async (name) =>
+      Object.values(await import(`../lib/guides/${name}.ts`)),
+    ),
+  )
+).flat();
+guides.push(...professionalGuides);
 const byPath = new Map(guides.map((g) => [g.path, g]));
 
 test("new guidance routes and their images exist; local guide fragments resolve", () => {
@@ -151,13 +163,15 @@ test("duplicate story blocks and total-darkness claims are corrected without bro
 
 const base = process.env.APEX_TEST_BASE_URL;
 test(
-  "heading and fitting guide links and fragments resolve from crawlable HTML",
+  "heading, fitting and professional guide links and fragments resolve from crawlable HTML",
   { skip: !base },
   async () => {
+    const pages = new Map();
     for (const route of new Set([
       "/curtain-headings",
       "/services",
       ...detailsNavigation.map((link) => link.href.split("#")[0]),
+      ...professionalGuides.map((guide) => guide.path),
     ])) {
       const response = await fetch(`${base}${route}`);
       assert.equal(response.status, 200);
@@ -170,7 +184,7 @@ test(
           m[1].replace(/&amp;/g, "&"),
         ),
       );
-      const pages = new Map([[route, body]]);
+      pages.set(route, body);
       for (const link of links) {
         const target = new URL(link, `${base}${route}`);
         const path = target.pathname;

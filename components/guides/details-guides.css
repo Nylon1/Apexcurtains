@@ -2,6 +2,98 @@
   min-height: 650px;
   grid-template-columns: 0.9fr 1.1fr;
 }
+.professional-checklist {
+  border: 1px solid #cbd0c1;
+  padding: 1.4rem;
+  margin: 1.5rem 0;
+}
+.professional-checklist legend {
+  padding: 0 0.5rem;
+  font-weight: 600;
+}
+.professional-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  line-height: 1.7;
+}
+.professional-checklist input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 4px;
+  accent-color: #244638;
+}
+.professional-checklist input:focus-visible {
+  outline: 2px solid #244638;
+  outline-offset: 4px;
+}
+.professional-checklist input:checked + span {
+  color: #325b48;
+}
+@media print {
+  body:has(.professional-guide.details-guide) .site-header,
+  body:has(.professional-guide.details-guide) footer,
+  .professional-guide.details-guide::before,
+  .professional-guide.details-guide .guide-hero-image,
+  .professional-guide.details-guide .guide-byline,
+  .professional-guide.details-guide .editorial-button,
+  .professional-guide.details-guide .details-navigation,
+  .professional-guide.details-guide .details-mobile-index,
+  .professional-guide.details-guide .guide-index,
+  .professional-guide.details-guide .guide-related,
+  .professional-guide.details-guide .editorial-cta {
+    display: none !important;
+  }
+  .professional-guide.details-guide {
+    padding-top: 0 !important;
+    background: white;
+    color: black;
+  }
+  .professional-guide.details-guide .guide-hero,
+  .professional-guide.details-guide .guide-layout {
+    display: block;
+    min-height: 0;
+    padding: 0;
+  }
+  .professional-guide.details-guide .guide-hero-copy {
+    padding: 0;
+  }
+  .professional-guide.details-guide .guide-section {
+    break-inside: avoid;
+    margin-top: 20px;
+  }
+  .professional-guide.details-guide h1 {
+    font-size: 30px !important;
+  }
+  .professional-guide.details-guide h2 {
+    font-size: 24px !important;
+  }
+  .professional-guide.details-guide p,
+  .professional-guide.details-guide li,
+  .professional-checklist {
+    font-size: 11pt;
+  }
+}
+@media screen and (max-width: 600px) {
+  .professional-guide.details-guide .guide-hero-image {
+    order: -1;
+    aspect-ratio: 16/10;
+  }
+  .professional-guide.details-guide .guide-hero-copy {
+    padding: 24px 6vw;
+  }
+  .professional-guide.details-guide .guide-hero h1 {
+    font-size: 2.35rem;
+  }
+  .professional-guide.details-guide .guide-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+}
 .details-guide::before {
   content: "";
   position: fixed;
