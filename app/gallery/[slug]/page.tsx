@@ -221,6 +221,9 @@ export default async function GalleryPage({ params }: PageProps) {
           <Link href="/start-designing" className="editorial-button">
             Discuss a similar window ↗
           </Link>
+          {data.slug === "wave-pleat-apex-curtains-milton-keynes" && (
+            <Link href="/room-visualiser?room=apex-bedroom" className="editorial-text-link">Visualise a similar look ↗</Link>
+          )}
         </aside>
         <div>
           {story.map(([title, text]) => (

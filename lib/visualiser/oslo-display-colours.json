@@ -1,0 +1,311 @@
+{
+  "method": "Median sRGB of central 60% of each governed Oslo swatch. Display approximation, not a measured fabric colour.",
+  "colours": [
+    {
+      "reference": "7154/995",
+      "rgb": [
+        184,
+        140,
+        134
+      ],
+      "swatchSha256": "c064918494da6520186217ae079189aad202159af9c829867b4ca5d99843347e"
+    },
+    {
+      "reference": "7154/946",
+      "rgb": [
+        168,
+        172,
+        176
+      ],
+      "swatchSha256": "ecea0fccd08fbdc820050d06a3988aa2e5b46db0c6c44c035596b32a0c845f8f"
+    },
+    {
+      "reference": "7154/945",
+      "rgb": [
+        146,
+        145,
+        140
+      ],
+      "swatchSha256": "cf59a6de6ea9fd9adad7f337039cf9c573734ecf8e8c7a9034bf3cbb04a974d4"
+    },
+    {
+      "reference": "7154/920",
+      "rgb": [
+        132,
+        124,
+        99
+      ],
+      "swatchSha256": "806f48bf5b0383c5ad1c7dcae13793a2b286f8a5923d8ddc7818a34a759d3d59"
+    },
+    {
+      "reference": "7154/912",
+      "rgb": [
+        60,
+        55,
+        50
+      ],
+      "swatchSha256": "0ba945baccb4e4c4a383459ef541696a9d85b2680bb1db03d1c4a8ec58eb85de"
+    },
+    {
+      "reference": "7154/714",
+      "rgb": [
+        168,
+        187,
+        186
+      ],
+      "swatchSha256": "a326a5e5f00cce8c026e18bd61304424d79a9382e0216294b1a2fbbbe639f08c"
+    },
+    {
+      "reference": "7154/585",
+      "rgb": [
+        61,
+        75,
+        86
+      ],
+      "swatchSha256": "ddaca1b9b73971aa1be95ac006bacb997cbdf1fc0cb649c77eb7397433dc965d"
+    },
+    {
+      "reference": "7154/261",
+      "rgb": [
+        207,
+        168,
+        161
+      ],
+      "swatchSha256": "56f4780b9916a3785418e9a1a8c93584068ac2f9e63924c6a123996c74abad16"
+    },
+    {
+      "reference": "7154/153",
+      "rgb": [
+        163,
+        107,
+        96
+      ],
+      "swatchSha256": "66cbdebb716d8c512085f210e4cd3bf99b3241f113bd11c510ecf37e83a913bb"
+    },
+    {
+      "reference": "7154/077",
+      "rgb": [
+        226,
+        209,
+        183
+      ],
+      "swatchSha256": "9cb359f714b1de7fcc17d2aebbaf87fc61a41cb48e7341c531f3f2e95a57258d"
+    },
+    {
+      "reference": "7154/036",
+      "rgb": [
+        222,
+        210,
+        185
+      ],
+      "swatchSha256": "880b7b04ef49ed5bb7aa11946c0040a5d3a53a76863fb801626d6221aa150354"
+    },
+    {
+      "reference": "7154/007",
+      "rgb": [
+        238,
+        237,
+        232
+      ],
+      "swatchSha256": "e91d0ef0830d821e654ffa4b57740ee02d300c84d250b3ea62b5e7d881fe107f"
+    },
+    {
+      "reference": "7154/031",
+      "rgb": [
+        173,
+        161,
+        144
+      ],
+      "swatchSha256": "a8f33d4d9595b7429c910c7782f7d3ba37119c55314fc90bf411a027a9b2b866"
+    },
+    {
+      "reference": "7154/981",
+      "rgb": [
+        123,
+        53,
+        67
+      ],
+      "swatchSha256": "ce061e0f2843348aa8f8ab24c520bce37f664655f04edd28890b98302dc083f3"
+    },
+    {
+      "reference": "7154/924",
+      "rgb": [
+        162,
+        154,
+        149
+      ],
+      "swatchSha256": "1160c1975c512cb1a6b2c9a842a69a931182a03d11da972385dc882a0187f27c"
+    },
+    {
+      "reference": "7154/942",
+      "rgb": [
+        131,
+        113,
+        103
+      ],
+      "swatchSha256": "9c57b0b424fc58846e8487d4528ecb23dfa366d42c6d81e9a98f8c8b3d5d4326"
+    },
+    {
+      "reference": "7154/900",
+      "rgb": [
+        35,
+        31,
+        30
+      ],
+      "swatchSha256": "5cf6ee37b16c3bee2f466fdaff32a47fc4d5e59e6facf86a0a2c6e8667341d0e"
+    },
+    {
+      "reference": "7154/659",
+      "rgb": [
+        174,
+        168,
+        113
+      ],
+      "swatchSha256": "df7e6d50e41eea3a3aa39b1a35b4273067a9c8cd0ccad949cc3e55cccfd1bd84"
+    },
+    {
+      "reference": "7154/625",
+      "rgb": [
+        165,
+        123,
+        114
+      ],
+      "swatchSha256": "9359c0d822458331d707d3ab81674b324294242826c289eb04a051f0d9098042"
+    },
+    {
+      "reference": "7154/620",
+      "rgb": [
+        110,
+        106,
+        69
+      ],
+      "swatchSha256": "6e27b1525a11e12a0dfc9119680533a7961b088e7441cd2b8aa2dc659c4dd4cd"
+    },
+    {
+      "reference": "7154/604",
+      "rgb": [
+        137,
+        177,
+        170
+      ],
+      "swatchSha256": "7003e5bcdefb239bbbac6e6fa0c46b6e6de181152062cde466bb1fc4da3bb5b5"
+    },
+    {
+      "reference": "7154/505",
+      "rgb": [
+        198,
+        164,
+        105
+      ],
+      "swatchSha256": "bf53999055e889fd75849cc2aeeee0a8fae36f182be13bb6e5d22a17ef6db23c"
+    },
+    {
+      "reference": "7154/529",
+      "rgb": [
+        163,
+        129,
+        99
+      ],
+      "swatchSha256": "4040f919a814ca627798a1d2f8a1451e4ed2ca80417361a391e6d2779b070cd3"
+    },
+    {
+      "reference": "7154/510",
+      "rgb": [
+        192,
+        158,
+        125
+      ],
+      "swatchSha256": "821c27ea462cc4d13b9c9725a1799a4e686bb6ecb00e36373f644cb2255339e7"
+    },
+    {
+      "reference": "7154/404",
+      "rgb": [
+        211,
+        94,
+        58
+      ],
+      "swatchSha256": "72a33e14a604927cdda704665af4135f773264b38ae47fa01009e712258c53f8"
+    },
+    {
+      "reference": "7154/334",
+      "rgb": [
+        174,
+        38,
+        45
+      ],
+      "swatchSha256": "cdb2262f9243d1d99cf46c5b40838e85fea7166296317e641899f0ce7c7bcb23"
+    },
+    {
+      "reference": "7154/179",
+      "rgb": [
+        140,
+        124,
+        99
+      ],
+      "swatchSha256": "af7cd543ce6d2336e5db0c7a074ba9d8f561429e07e1c5c4689f2e9fcc99d947"
+    },
+    {
+      "reference": "7154/198",
+      "rgb": [
+        148,
+        116,
+        87
+      ],
+      "swatchSha256": "c8c0ac8cf571474c47175a642f7aa0dc0fa381d106daefa7a650d3dd8b2fe92a"
+    },
+    {
+      "reference": "7154/152",
+      "rgb": [
+        61,
+        48,
+        33
+      ],
+      "swatchSha256": "db670510e6abeb5e8c7b6e8f77bc1c0942b86f05ba7646b45307214775f51803"
+    },
+    {
+      "reference": "7154/114",
+      "rgb": [
+        117,
+        76,
+        51
+      ],
+      "swatchSha256": "19de640a2679901c0c8da6516b6a899c16a6d4cf2e3a5fce6490acb954823450"
+    },
+    {
+      "reference": "7154/134",
+      "rgb": [
+        111,
+        83,
+        59
+      ],
+      "swatchSha256": "9a96d39b566c8783a1e070176bdda97d3458833a5a40124407f29e448df10950"
+    },
+    {
+      "reference": "7154/113",
+      "rgb": [
+        64,
+        41,
+        25
+      ],
+      "swatchSha256": "dd36ce5f4e341b8a88348b18cb0604be4ae5ef0989cc0739337a865ec3662c07"
+    },
+    {
+      "reference": "7154/022",
+      "rgb": [
+        184,
+        181,
+        168
+      ],
+      "swatchSha256": "d78855a9927ed3ec6f181d8cd7ec5c49f9f085f41a09ca8794626c48cc01575b"
+    },
+    {
+      "reference": "7154/021",
+      "rgb": [
+        232,
+        227,
+        215
+      ],
+      "swatchSha256": "f27b6a9102fb51af2fff16835b5c37a53abc73519e35d0b492abaa67dd2486d9"
+    }
+  ]
+}

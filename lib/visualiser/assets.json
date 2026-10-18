@@ -1,0 +1,68 @@
+[
+  {
+    "id": "pencil-pleat-bedroom",
+    "original": "/visualiser/sources/pencil-pleat-room.webp",
+    "originalSha256": "c281ce17be654c26b4a37f9476704cd999cd866bf234a78359ee1c16aff008c9",
+    "assets": [
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-mobile.webp",
+        "bytes": 54718,
+        "sha256": "76ef3e203d61e09dd040d157d6e1df186ec7d84367922f0eb6ce58e49631321d"
+      },
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-desktop.webp",
+        "bytes": 154478,
+        "sha256": "f947409141692628cf53c1c28dbf04b8a245bef6bea499266e469bc29d0db705"
+      },
+      {
+        "file": "/visualiser/pencil-pleat-bedroom-thumb.webp",
+        "bytes": 2580,
+        "sha256": "65f3a19727042322d3080edfd26f9a39dc6f81f37f281891650006345119a2dd"
+      }
+    ]
+  },
+  {
+    "id": "double-pinch-gable",
+    "original": "/visualiser/sources/double-pinch-room.webp",
+    "originalSha256": "0d2be9282cc3b0ae2fa2212445d49b41d2d3efbc2078552507687a81c115a691",
+    "assets": [
+      {
+        "file": "/visualiser/double-pinch-gable-mobile.webp",
+        "bytes": 67312,
+        "sha256": "d84772712830183001d6d38214b68522db0d50ac034dcfae819e7ebfcc907e9a"
+      },
+      {
+        "file": "/visualiser/double-pinch-gable-desktop.webp",
+        "bytes": 192004,
+        "sha256": "04503a90b4412b10b42f05846febfb9403be30e8a8ce110aa8b688e4dcb210d4"
+      },
+      {
+        "file": "/visualiser/double-pinch-gable-thumb.webp",
+        "bytes": 3506,
+        "sha256": "db0dcd4f7c1b4425452238da235c0caa398793222aac7b978ffc5739e99828b6"
+      }
+    ]
+  },
+  {
+    "id": "apex-bedroom",
+    "original": "/visualiser/sources/wave-pleat-room.webp",
+    "originalSha256": "c4e65bf5bbbae7f3f0ca3477e96eb1b6534ced2040dd3c688de880bec0641313",
+    "assets": [
+      {
+        "file": "/visualiser/apex-bedroom-mobile.webp",
+        "bytes": 69304,
+        "sha256": "0ea7cc64a3877589f3a6bcf2aabc1fd1dba67cb5a3a35dc8fea19e7803c5b82b"
+      },
+      {
+        "file": "/visualiser/apex-bedroom-desktop.webp",
+        "bytes": 195104,
+        "sha256": "cd5723511078f2020669a310fb4886c46707fb61925dd0a2e58338e8b5836754"
+      },
+      {
+        "file": "/visualiser/apex-bedroom-thumb.webp",
+        "bytes": 3482,
+        "sha256": "4d347c141b93507f1038420e4e6e2a47168b57acc4b1d83e4e29654d65462fdb"
+      }
+    ]
+  }
+]

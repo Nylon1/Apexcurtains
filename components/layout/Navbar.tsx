@@ -88,6 +88,13 @@ function Navigation({ pathname }: { pathname: string }) {
             />
           </Link>
           <nav className="site-desktop-nav" aria-label="Main navigation">
+            <Link
+              href="/"
+              className="site-home-link"
+              aria-current={current("/")}
+            >
+              Home
+            </Link>
             {navigationGroups.map((group) => (
               <details
                 key={group.id}
@@ -161,6 +168,13 @@ function Navigation({ pathname }: { pathname: string }) {
                 </div>
               </details>
             ))}
+            <Link
+              href="/room-visualiser"
+              className="site-visualiser-link"
+              aria-current={current("/room-visualiser")}
+            >
+              Room visualiser <ArrowUpRight size={14} aria-hidden="true" />
+            </Link>
           </nav>
           <div className="site-header-actions">
             <a href="tel:08007720367" className="site-header-call">
@@ -192,6 +206,8 @@ function Navigation({ pathname }: { pathname: string }) {
         <nav className="site-nojs-nav" aria-label="Browse Apex pages">
           <details>
             <summary>Explore Apex pages</summary>
+            <Link href="/">Home</Link>
+            <Link href="/room-visualiser">Room visualiser</Link>
             {navigationGroups.map((group) => (
               <div key={group.id}>
                 <h2>
@@ -231,8 +247,31 @@ function Navigation({ pathname }: { pathname: string }) {
           </button>
         </div>
         <nav aria-label="Mobile navigation">
-          <Link href="/" onClick={closeMobile} className="site-mobile-home">
+          <Link
+            href="/"
+            onClick={closeMobile}
+            className="site-mobile-home"
+            aria-current={current("/")}
+          >
             Home ↗
+          </Link>
+          <Link
+            href="/room-visualiser"
+            onClick={closeMobile}
+            className="site-mobile-visualiser"
+            aria-current={current("/room-visualiser")}
+          >
+            <Image
+              src="/visualiser/double-pinch-gable-thumb.webp"
+              alt=""
+              width={160}
+              height={120}
+              sizes="88px"
+            />
+            <span>
+              Room visualiser <small>Design your whole room</small>
+            </span>
+            <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
           {navigationGroups.map((group) => (
             <details key={group.id} name="apex-mobile-navigation">

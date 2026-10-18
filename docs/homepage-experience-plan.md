@@ -42,3 +42,11 @@ Use six customer-facing groups: Window types; Colour & style; Details & fitting;
 - Header checks covered keyboard opening, Escape, one category open at a time, mobile grouped disclosures, navigation to Reviews, dismissal and restoring page scrolling. Confirmed no horizontal page overflow at 390 px.
 - Production-browser check confirmed the intro photograph/logo and curtain-only sale copy, immediate dismissal, no repeated intro after reload in the same session and no console errors. Desktop menus use native details; the mobile dialog has a native HTML navigation fallback without JavaScript.
 - No dependency, API, form-processing, authentication, CMS or deployment-configuration changes. Field Core Web Vitals and a physical iPhone/Safari run have not been measured here; complete these before release. The enquiry handoff uses the established form; approximate dimensions are discussed during consultation rather than introducing a second submission flow.
+
+# Visualiser launch and opening-screen refinement
+
+Approved scope: publish the furnished room visualiser, give it a dedicated main-navigation position, and add an editorial homepage introduction. Preserve the existing homepage copy, URLs, sale colours and enquiry journeys.
+
+Component plan: keep the yellow Christmas-sale heading above a compact red offer row; size the desktop hero to the remaining viewport with intrinsic content height as a minimum. Place a new server-rendered `HomeRoomVisualiser` section between window discovery and colour inspiration. Use the existing furnished gable scene, clearly labelled as an illustration, with three heading links and a primary visualiser CTA. Load its image lazily without mounting the canvas renderer on the homepage. Add a direct desktop navigation link and a prominent mobile-menu preview. Retain the visualiser's sticky preview and existing editing controls.
+
+Release through PR #15 after local checks, responsive browser review and successful preview checks. The owner has approved the visualiser and explicitly requested production deployment; physical iPhone validation remains unperformed and must not be represented as completed.

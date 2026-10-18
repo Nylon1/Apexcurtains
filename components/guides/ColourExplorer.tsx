@@ -41,17 +41,25 @@ function FabricCards({ names }: { names: string[] }) {
         const fabric = fabrics.find((f) => f.name === name);
         if (!fabric) return null;
         return (
-          <a key={name} href={fabric.source} className="oslo-swatch">
-            <Image
-              src={fabric.image}
-              width={300}
-              height={300}
-              alt={`Prestigious Textiles Oslo ${name} fabric swatch`}
-              sizes="(max-width: 600px) 40vw, 200px"
-            />
-            <span>Oslo {name}</span>
-            <small>{fabric.reference} · PT details ↗</small>
-          </a>
+          <div key={name} className="oslo-swatch">
+            <a className="oslo-fabric-link" href={fabric.source}>
+              <Image
+                src={fabric.image}
+                width={300}
+                height={300}
+                alt={`Prestigious Textiles Oslo ${name} fabric swatch`}
+                sizes="(max-width: 600px) 40vw, 200px"
+              />
+              <span>Oslo {name}</span>
+              <small>{fabric.reference} · PT details ↗</small>
+            </a>
+            <Link
+              href={`/room-visualiser?colour=${fabric.name.toLowerCase().replace(/\s+/g, "-")}`}
+              className="oslo-room-link"
+            >
+              View {name} in a room ↗
+            </Link>
+          </div>
         );
       })}
     </div>

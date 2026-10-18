@@ -2,6 +2,7 @@ import ApexEntryScreen from "@/components/ApexEntryScreen";
 import Hero from "@/components/homepage/Hero";
 import SaleBanner from "@/components/homepage/SaleBanner";
 import HomeWindowDiscovery from "@/components/homepage/HomeWindowDiscovery";
+import HomeRoomVisualiser from "@/components/homepage/HomeRoomVisualiser";
 import HomeColourStudio from "@/components/homepage/HomeColourStudio";
 import HomeProjectStories from "@/components/homepage/HomeProjectStories";
 import HomeExpertise from "@/components/homepage/HomeExpertise";
@@ -28,6 +29,7 @@ export default function HomePage() {
         <SaleBanner />
         <Hero />
         <HomeWindowDiscovery />
+        <HomeRoomVisualiser />
         <HomeColourStudio />
         <HomeProjectStories />
         <HomeExpertise />

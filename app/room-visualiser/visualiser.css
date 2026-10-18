@@ -1,0 +1,646 @@
+.rv-page {
+  padding: 140px 4vw 0;
+  background: #f5f1e9;
+  color: #203c35;
+  overflow: clip;
+}
+/* Match the layer of the legacy important main background without changing other pages. */
+@layer base {
+  .public-presentation main.rv-page {
+    background-color: #f5f1e9 !important;
+  }
+}
+.rv-page * {
+  box-sizing: border-box;
+}
+.rv-page button,
+.rv-page a {
+  touch-action: manipulation;
+}
+.rv-page button {
+  cursor: pointer;
+  font: inherit;
+}
+.rv-page button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.rv-page :is(a, button):focus-visible {
+  outline: 2px solid #a06b38;
+  outline-offset: 4px;
+}
+.rv-page h1,
+.rv-page h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  margin: 0;
+}
+.rv-page h1 {
+  font-size: clamp(2.7rem, 4.5vw, 4.7rem);
+}
+.rv-page h2 {
+  font-size: clamp(1.7rem, 2.5vw, 2.5rem);
+}
+.rv-page p {
+  line-height: 1.75;
+}
+.rv-page .rv-eyebrow {
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  margin: 0 0 1rem;
+}
+.rv-intro {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 4vw;
+  align-items: end;
+  max-width: 1440px;
+  margin: 0 auto 2.5rem;
+}
+.rv-intro > p {
+  max-width: 480px;
+  font-size: 0.9rem;
+  margin: 0;
+}
+.rv-workspace {
+  max-width: 1440px;
+  margin: auto;
+}
+.rv-step-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #cfcbbb;
+  padding-top: 1rem;
+  gap: 1rem;
+  font-size: 0.75rem;
+}
+.rv-step-heading > span {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.rv-step-heading p {
+  margin: 0;
+}
+.rv-rooms {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.7rem;
+  padding: 1rem 0 1.4rem;
+  scroll-snap-type: x proximity;
+}
+.rv-rooms button {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: inherit;
+  text-align: left;
+  padding: 0.35rem 0.8rem 0.35rem 0.35rem;
+  min-height: 64px;
+  scroll-snap-align: start;
+}
+.rv-rooms button[aria-pressed="true"] {
+  border-color: #203c35;
+  background: #ece9df;
+}
+.rv-rooms img {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+}
+.rv-rooms span {
+  font-size: 0.8rem;
+}
+.rv-rooms small {
+  display: block;
+  font-size: 0.63rem;
+  color: #61665c;
+  margin-top: 4px;
+}
+.rv-layout {
+  display: grid;
+  /* Match the room's 4:3 proportions to the available screen height. */
+  grid-template-columns:
+    minmax(0, min(1133px, calc((100svh - 174px) * 4 / 3)))
+    330px;
+  gap: 3vw;
+  align-items: start;
+  justify-content: center;
+}
+.rv-scene-column {
+  min-width: 0;
+  position: sticky;
+  top: 110px;
+}
+.rv-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #d9d6cc;
+  isolation: isolate;
+}
+.rv-stage > picture,
+.rv-stage > picture img,
+.rv-stage > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.rv-stage .rv-hidden-canvas {
+  visibility: hidden;
+}
+.rv-scene-tools {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 2;
+}
+.rv-scene-tools button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 0.8rem;
+  border: 0;
+  background: #fffdf7ed;
+  color: #203c35;
+  font-size: 0.7rem;
+}
+.rv-scene-tools button[aria-pressed="true"] {
+  background: #203c35;
+  color: white;
+}
+.rv-scene-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #17342ded;
+  color: #fffdf6;
+  padding: 0.5rem 0.8rem;
+  text-align: center;
+  font-size: 0.65rem;
+  white-space: nowrap;
+  max-width: calc(100% - 24px);
+}
+.rv-status {
+  min-height: 32px;
+  font-size: 0.7rem;
+  padding: 0.4rem 0;
+  color: #526052;
+}
+.rv-status button {
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  min-height: 44px;
+}
+.rv-scene-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+.rv-scene-description h2 {
+  font-size: 1.7rem;
+}
+.rv-scene-description .rv-eyebrow {
+  font-size: 0.56rem;
+  margin-bottom: 0.5rem;
+}
+.rv-scene-description p:not(.rv-eyebrow) {
+  font-size: 0.8rem;
+  max-width: 450px;
+  margin: 0.5rem 0 0;
+}
+.rv-scene-description > a {
+  font-size: 0.7rem;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  min-height: 44px;
+  max-width: 180px;
+  flex-shrink: 0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rv-options h2 {
+  font-size: 2rem;
+}
+.rv-light-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d4d1c4;
+}
+.rv-light-control > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+}
+.rv-light-control small {
+  display: block;
+  font-size: 0.63rem;
+  color: #5c665a;
+  margin-top: 0.3rem;
+}
+.rv-light-control button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 76px;
+  min-height: 44px;
+  padding: 0.5rem;
+  border: 1px solid #7c8978;
+  background: transparent;
+  color: inherit;
+  font-size: 0.75rem;
+}
+.rv-light-control button > span {
+  width: 12px;
+  height: 12px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+.rv-light-control button[aria-checked="true"] {
+  background: #203c35;
+  color: #fff9ed;
+}
+.rv-light-control button[aria-checked="true"] > span {
+  background: #e2c58b;
+}
+.rv-editor-sections {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid #c4c9ba;
+}
+.rv-editor-sections button {
+  min-height: 48px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #5c665a;
+  padding: 0.4rem 0.1rem;
+  font-size: 0.7rem;
+}
+.rv-editor-sections button[aria-pressed="true"] {
+  color: #203c35;
+  border-bottom-color: #203c35;
+  font-weight: 600;
+}
+.rv-palette-panel {
+  min-height: 350px;
+}
+.rv-page .rv-scheme-summary {
+  border-top: 1px solid #d4d1c4;
+  padding-top: 0.8rem;
+  margin: 0 0 1rem;
+  font-size: 0.65rem;
+  color: #5c665a;
+}
+.rv-original-swatch {
+  border: 1px dashed #697563;
+}
+.rv-selected {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 1.4rem 0;
+}
+.rv-selected > span {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #0002;
+}
+.rv-selected strong {
+  font:
+    1.2rem Georgia,
+    serif;
+}
+.rv-selected small {
+  display: block;
+  font-size: 0.6rem;
+  margin-top: 0.35rem;
+}
+.rv-colours {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  max-height: 260px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  padding: 5px;
+}
+.rv-colours button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 3px;
+  color: #203c35;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6rem;
+}
+.rv-colours button[aria-pressed="true"] {
+  border-color: #203c35;
+  background: #e5e6db;
+}
+.rv-swatch {
+  height: 34px;
+  width: 100%;
+  max-width: 52px;
+  border: 1px solid #0002;
+  display: grid;
+  place-items: center;
+}
+.rv-swatch svg {
+  background: #fff;
+  color: #203c35;
+  border-radius: 50%;
+  padding: 2px;
+  width: 20px;
+  height: 20px;
+}
+.rv-sample-note {
+  font-size: 0.7rem;
+  color: #526052;
+  margin: 1rem 0;
+}
+.rv-next {
+  display: grid;
+  gap: 0.35rem;
+}
+.rv-next a,
+.rv-next button {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  text-align: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+.rv-next .rv-primary {
+  background: #203c35;
+  color: #fffaf0;
+  padding: 1rem 0.7rem;
+}
+.rv-next .rv-primary:hover {
+  background: #31574b;
+}
+.rv-next a:not(.rv-primary) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rv-disclaimer {
+  font-size: 0.7rem;
+  color: #596052;
+  max-width: 850px;
+  margin: 2rem 0 0;
+}
+.rv-editorial {
+  max-width: 1440px;
+  margin: 4rem auto 0;
+  padding: 3rem 0 4rem;
+  border-top: 1px solid #cfcbbb;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4vw;
+}
+.rv-editorial p {
+  font-size: 0.85rem;
+  margin-top: 0;
+}
+.rv-editorial nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.3rem;
+}
+.rv-editorial a {
+  font-size: 0.75rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.rv-dialog {
+  padding: 1rem;
+  margin: auto;
+  border: 0;
+  width: min(1400px, 96vw, calc((96dvh - 120px) * 4 / 3 + 2rem));
+  max-height: 96dvh;
+  background: #f5f1e9;
+  color: #203c35;
+}
+.rv-dialog::backdrop {
+  background: #0c1c18dc;
+}
+.rv-dialog > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.rv-dialog button {
+  border: 0;
+  background: transparent;
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+}
+.rv-dialog canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  background: #d9d6cc;
+}
+.rv-dialog p {
+  font-size: 0.75rem;
+  margin: 0.5rem 0;
+}
+@media (max-width: 1000px) {
+  .rv-layout {
+    grid-template-columns: minmax(0, calc((100svh - 174px) * 4 / 3)) 280px;
+    gap: 2vw;
+  }
+  .rv-scene-description {
+    display: block;
+  }
+  .rv-scene-description > a {
+    max-width: none;
+    margin-top: 0.5rem;
+  }
+  .rv-options h2 {
+    font-size: 1.7rem;
+  }
+}
+@media (max-width: 800px) {
+  .rv-page {
+    padding: 105px 1rem 0;
+  }
+  .rv-intro {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .rv-intro > p {
+    font-size: 0.8rem;
+  }
+  .rv-step-heading > p {
+    display: none;
+  }
+  .rv-layout {
+    display: block;
+  }
+  .rv-scene-column {
+    display: contents;
+  }
+  .rv-stage {
+    position: sticky;
+    top: 80px;
+    z-index: 5;
+    width: min(calc(100% + 2rem), 56svh);
+    margin-inline: max(-1rem, calc((100% - 56svh) / 2));
+  }
+  .rv-options {
+    padding-top: 1rem;
+  }
+  .rv-palette-panel {
+    min-height: 215px;
+  }
+  .rv-editor-sections button {
+    font-size: 0.78rem;
+  }
+  .rv-options :is(button, a) {
+    scroll-margin-top: calc(44svh + 110px);
+  }
+  .rv-scene-description {
+    margin-top: 1.5rem;
+  }
+  .rv-colours {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: none;
+    scroll-snap-type: none;
+    gap: 0.5rem;
+    padding: 0.4rem;
+  }
+  .rv-colours button {
+    flex: 0 0 68px;
+    scroll-snap-align: start;
+    font-size: 0.65rem;
+  }
+  .rv-options h2 {
+    font-size: 1.75rem;
+  }
+  .rv-selected {
+    padding: 1rem 0 0.3rem;
+  }
+  .rv-swatch {
+    height: 40px;
+  }
+  .rv-next {
+    grid-template-columns: 1fr 1fr;
+  }
+  .rv-next .rv-primary {
+    grid-column: 1/-1;
+  }
+  .rv-next a {
+    font-size: 0.65rem;
+  }
+  .rv-disclaimer {
+    margin-top: 1rem;
+  }
+  .rv-editorial {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .rv-rooms button {
+    min-width: 190px;
+  }
+  .rv-scene-caption {
+    font-size: 0.6rem;
+  }
+}
+/* A side-by-side workspace makes better use of a phone held sideways. */
+@media (max-height: 600px) and (max-width: 800px) {
+  .rv-stage {
+    width: min(calc(100% + 2rem), 50.667svh);
+    margin-inline: max(-1rem, calc((100% - 50.667svh) / 2));
+  }
+  .rv-options :is(button, a) {
+    scroll-margin-top: calc(38svh + 100px);
+  }
+}
+@media (min-width: 600px) and (max-width: 800px) and (max-height: 600px) {
+  .rv-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+  .rv-scene-column {
+    display: block;
+    position: sticky;
+    top: 80px;
+  }
+  .rv-stage {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin: 0;
+  }
+  .rv-options {
+    padding-top: 0;
+  }
+  .rv-options :is(button, a) {
+    scroll-margin-top: 100px;
+  }
+  .rv-options h2 {
+    font-size: 1.5rem;
+  }
+  .rv-light-control {
+    margin-top: 1rem;
+  }
+  .rv-colours {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-height: 180px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.rv-page .rv-heading-note {
+  font-size: 0.7rem;
+  color: #526052;
+  margin: 0 0 1rem;
+}

@@ -3,6 +3,7 @@ import { buildXml, baseUrl } from "@/lib/sitemap-utils";
 
 export async function GET() {
   const urls = [
+    { loc: `${baseUrl}/room-visualiser`, changefreq: "monthly", priority: "0.80" },
     {
       loc: `${baseUrl}/`,
       changefreq: "weekly",
