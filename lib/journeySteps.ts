@@ -24,7 +24,7 @@ export const journeySteps: JourneyStep[] = [
       "This step removes guesswork. It helps us quickly understand whether the room needs softness, privacy, blackout, architectural framing or a more statement-led curtain treatment.",
     body3:
       "For the customer, this is the easy part. You send the challenge. We begin turning it into a plan.",
-    image: "/journey/show-window.jpeg,"
+    image: "/journey/show-window.jpeg",
   },
   {
     slug: "we-decode-the-shape",

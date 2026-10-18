@@ -2,6 +2,11 @@ import Link from "next/link";
 
 const windowTypeLinks = [
   {
+    href: "/angled-window-curtains",
+    title: "Angled Window Curtains",
+    desc: "Single slopes, unequal drops and off-centre peaks.",
+  },
+  {
     href: "/apex-curtains",
     title: "Apex Curtains",
     desc: "Curtains for angled, triangular and apex windows.",
@@ -42,14 +47,14 @@ export default function RelatedWindowTypes({
       <div className="rounded-[34px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)] sm:p-8">
         <div className="max-w-3xl">
           <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">
-            Internal navigation
+            Find your window
           </div>
           <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
             {title}
           </h2>
           <p className="mt-4 text-sm leading-8 text-white/68 sm:text-base">
-            Explore related curtain solutions for other architectural and unusual
-            window shapes.
+            Explore related curtain solutions for other architectural and
+            unusual window shapes.
           </p>
         </div>
 
@@ -61,7 +66,9 @@ export default function RelatedWindowTypes({
               className="rounded-[24px] border border-white/10 bg-black/20 p-5 transition hover:border-[#f5d38a]/25 hover:bg-black/30"
             >
               <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-white/68">{item.desc}</p>
+              <p className="mt-3 text-sm leading-7 text-white/68">
+                {item.desc}
+              </p>
             </Link>
           ))}
         </div>

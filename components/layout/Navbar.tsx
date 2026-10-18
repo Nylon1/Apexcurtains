@@ -2,288 +2,284 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Menu, Sparkles, X, ArrowRight, Phone, ChevronDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  { label: "Home", href: "/" },
-  {
-    label: "Services",
-    href: "/services",
-    children: [
-      { label: "Measure + Consultation", href: "/services/measure-consultation" },
-      { label: "Design + Make Curtains", href: "/services/design-make-curtains" },
-      { label: "Curtain Design Guide", href: "/curtain-design-guide" },
-      { label: "Curtain Headings", href: "/curtain-headings" },
-      { label: "Curtain Linings", href: "/curtain-linings" },
-      { label: "Curtain Fabrics", href: "/curtain-fabrics" },
-      { label: "Curtain Accessories", href: "/curtain-accessories" },
-      { label: "Curtain Tracks", href: "/curtain-tracks" },
-      { label: "Premium Installation", href: "/services/premium-installation" },
-    ],
-  },
-  { label: "Window Types", href: "/window-types" },
-  {
-    label: "Professionals",
-    href: "/professionals",
-    children: [
-      { label: "Professional & Specifier Hub", href: "/professionals" },
-      { label: "Interior Designers", href: "/professionals/interior-designers" },
-      { label: "Architects", href: "/professionals/architects" },
-      { label: "Developers + Housebuilders", href: "/professionals/developers-housebuilders" },
-      { label: "Contractors + Fit-out", href: "/professionals/contractors-fit-out" },
-      { label: "Specifier Resources", href: "/professionals/specifier-resources" },
-      { label: "Project Information Checklist", href: "/professionals/specifier-resources/project-information-checklist" },
-      { label: "Professional Project Review", href: "/professionals/project-review" },
-      { label: "Professional Workspace", href: "/professionals/workspace/login" },
-      { label: "Commercial Installation", href: "/commercial-curtain-track-installation" },
-    ],
-  },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Reviews", href: "/reviews" },
-  { label: "Advice", href: "/advice" },
-  { label: "Areas", href: "/areas" },
-  { label: "FAQ", href: "/faq", highlight: true },
-];
+import TrackedLink from "@/components/analytics/TrackedLink";
+import { navigationGroups } from "@/lib/site-navigation";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  return <Navigation key={pathname} pathname={pathname} />;
+}
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
-
-  function isActive(href: string) {
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(href + "/");
+function Navigation({ pathname }: { pathname: string }) {
+  const header = useRef<HTMLElement>(null);
+  const mobile = useRef<HTMLDialogElement>(null);
+  const previousOverflow = useRef<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  function restoreScroll() {
+    if (previousOverflow.current !== null) {
+      document.body.style.overflow = previousOverflow.current;
+      previousOverflow.current = null;
+    }
   }
-
+  useEffect(() => {
+    const node = header.current;
+    function closeDesktop() {
+      node
+        ?.querySelectorAll<HTMLDetailsElement>("details[open]")
+        .forEach((d) => {
+          d.open = false;
+        });
+    }
+    function outside(event: PointerEvent) {
+      if (!node?.contains(event.target as Node)) closeDesktop();
+    }
+    function escape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        const open = node?.querySelector<HTMLDetailsElement>("details[open]");
+        if (open) {
+          closeDesktop();
+          open.querySelector("summary")?.focus();
+        }
+      }
+    }
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    const desktopSize = window.matchMedia("(min-width: 1280px)");
+    const closeMobileAtDesktop = () => {
+      if (desktopSize.matches) mobile.current?.close();
+    };
+    desktopSize.addEventListener("change", closeMobileAtDesktop);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", escape);
+      desktopSize.removeEventListener("change", closeMobileAtDesktop);
+      if (previousOverflow.current !== null)
+        document.body.style.overflow = previousOverflow.current;
+    };
+  }, []);
+  function openMobile() {
+    previousOverflow.current = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    mobile.current?.showModal();
+    setMobileOpen(true);
+  }
+  function closeMobile() {
+    mobile.current?.close();
+    restoreScroll();
+    setMobileOpen(false);
+  }
+  function current(href: string) {
+    return pathname === href.split("#")[0] ? ("page" as const) : undefined;
+  }
   return (
     <>
-      <header className="fixed left-0 right-0 top-0 z-50 px-3 pt-2 sm:px-6 sm:pt-4 lg:px-8">
-        <div
-          className={`mx-auto max-w-7xl rounded-full border transition-all duration-300 ${
-            scrolled
-              ? "border-white/15 bg-apex-navy-950/85 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl"
-              : "border-white/10 bg-white/5 backdrop-blur-md"
-          }`}
-        >
-          <div className="flex items-center justify-between px-3 py-2 sm:px-5 sm:py-3">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-10 w-[170px] sm:h-12 sm:w-[210px]">
-                <Image
-                  src="/images/apex-logo-horizontal.svg"
-                  alt="Apex Curtains"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
-              </div>
-            </Link>
-
-            <div className="hidden items-center gap-2 lg:flex xl:gap-3">
-              {navItems.map((item) => {
-                const active = isActive(item.href);
-
-                if (item.children) {
-                  return (
-                    <div key={item.href} className="group relative">
+      <header ref={header} className="site-header">
+        <div className="site-header-bar">
+          <Link href="/" className="site-logo" aria-label="Apex Curtains home">
+            <Image
+              src="/images/apex-logo-horizontal.svg"
+              alt="Apex Curtains"
+              width={170}
+              height={48}
+              priority
+            />
+          </Link>
+          <nav className="site-desktop-nav" aria-label="Main navigation">
+            {navigationGroups.map((group) => (
+              <details
+                key={group.id}
+                name="apex-main-navigation"
+                className="site-nav-group"
+                onToggle={(event) => {
+                  if (event.currentTarget.open)
+                    header.current
+                      ?.querySelectorAll<HTMLDetailsElement>("details[open]")
+                      .forEach((d) => {
+                        if (d !== event.currentTarget) d.open = false;
+                      });
+                }}
+              >
+                <summary
+                  aria-controls={`nav-${group.id}`}
+                  className={
+                    group.links.some((l) => current(l.href)) ||
+                    current(group.href)
+                      ? "is-active"
+                      : undefined
+                  }
+                >
+                  {group.label}
+                  <ChevronDown size={13} />
+                </summary>
+                <div
+                  id={`nav-${group.id}`}
+                  className="site-mega-panel"
+                  onClick={(event) => {
+                    if ((event.target as HTMLElement).closest("a")) {
+                      const groupElement =
+                        event.currentTarget.closest("details");
+                      if (groupElement) groupElement.open = false;
+                    }
+                  }}
+                >
+                  <div className="site-mega-intro">
+                    <p className="site-nav-eyebrow">Explore / {group.label}</p>
+                    <h2>{group.title}</h2>
+                    <p>{group.description}</p>
+                    <Image
+                      src={group.image}
+                      alt={group.imageAlt}
+                      width={600}
+                      height={350}
+                      sizes="320px"
+                      className={
+                        group.image.endsWith(".svg") ? "is-diagram" : undefined
+                      }
+                    />
+                    <Link href={group.href} aria-current={current(group.href)}>
+                      {group.overview} ↗
+                    </Link>
+                  </div>
+                  <div className="site-mega-links">
+                    {group.links.map((link) => (
                       <Link
-                        href={item.href}
-                        className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-medium transition ${
-                          active
-                            ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                            : "text-white/85 hover:text-white"
-                        }`}
+                        href={link.href}
+                        key={link.label}
+                        aria-current={current(link.href)}
                       >
-                        {item.label}
-                        <ChevronDown className="ml-1 h-4 w-4 transition group-hover:rotate-180" />
+                        <span>
+                          {link.label}
+                          <span aria-hidden="true">↗</span>
+                        </span>
+                        <small>{link.note}</small>
                       </Link>
-
-                      <div className="invisible absolute left-0 top-full z-50 mt-3 max-h-[70vh] w-[310px] overflow-y-auto rounded-3xl border border-white/10 bg-apex-navy-950/95 p-3 opacity-0 shadow-[0_20px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={`block rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                              isActive(child.href)
-                                ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                                : "text-white/80 hover:bg-white/5 hover:text-white"
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-                      active
-                        ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                        : item.highlight
-                        ? "text-white hover:text-[#f1d48b]"
-                        : "text-white/85 hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-
-            <div className="hidden items-center gap-3 lg:flex">
-              <Link
-                href="/arlo-curtain-advisor"
-                className="inline-flex items-center justify-center rounded-full bg-[#E5C07B] px-5 py-2.5 text-sm font-semibold text-black transition hover:brightness-105"
-              >
-                Ask Arlo
-              </Link>
-
-              <Link
-                href="/start-designing"
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-white/90"
-              >
-                Start your Curtain Journey
-              </Link>
-            </div>
-
+                    ))}
+                  </div>
+                </div>
+              </details>
+            ))}
+          </nav>
+          <div className="site-header-actions">
+            <a href="tel:08007720367" className="site-header-call">
+              Call us
+            </a>
+            <TrackedLink
+              href="/start-designing"
+              eventName="curtain_journey_start_click"
+              eventData={{ source: "main_navigation" }}
+              className="site-project-button"
+            >
+              Start your project <span aria-hidden="true">↗</span>
+            </TrackedLink>
             <button
               type="button"
-              onClick={() => setMobileOpen(true)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
+              className="site-menu-toggle"
               aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="site-mobile-menu"
+              onClick={openMobile}
             >
-              <Menu className="h-5 w-5" />
+              <Menu size={22} />
             </button>
           </div>
         </div>
       </header>
-
-      {mobileOpen && (
-        <div className="fixed inset-0 z-[60] overflow-y-auto bg-apex-navy-950/95 backdrop-blur-lg lg:hidden">
-          <div className="flex items-center justify-between px-4 py-3">
-            <Link href="/" className="flex items-center">
-              <div className="relative h-10 w-[180px]">
-                <Image
-                  src="/images/apex-logo-horizontal.svg"
-                  alt="Apex Curtains"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
+      <noscript>
+        <style>{`.site-menu-toggle{display:none}`}</style>
+        <nav className="site-nojs-nav" aria-label="Browse Apex pages">
+          <details>
+            <summary>Explore Apex pages</summary>
+            {navigationGroups.map((group) => (
+              <div key={group.id}>
+                <h2>
+                  <Link href={group.href}>{group.label}</Link>
+                </h2>
+                {group.links.map((link) => (
+                  <Link key={link.label} href={link.href}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
-            </Link>
-
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white"
-              aria-label="Close menu"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-
-          <div className="px-4 pb-8 pt-2">
-            <div className="rounded-[28px] border border-white/10 bg-white/5 p-4">
-              <div className="mb-4 flex flex-col gap-2">
-                {navItems.map((item) => {
-                  const active = isActive(item.href);
-
-                  return (
-                    <div key={item.href}>
-                      <Link
-                        href={item.href}
-                        className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-medium transition ${
-                          active
-                            ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                            : "text-white hover:bg-white/5"
-                        }`}
-                      >
-                        {item.label}
-                        {item.children && <ChevronDown className="h-4 w-4" />}
-                      </Link>
-
-                      {item.children && (
-                        <div className="mt-2 space-y-1 border-l border-[#E5C07B]/30 pl-3">
-                          {item.children.map((child) => (
-                            <Link
-                              key={child.href}
-                              href={child.href}
-                              className={`block rounded-2xl px-4 py-2.5 text-sm transition ${
-                                isActive(child.href)
-                                  ? "bg-[#E5C07B]/15 text-[#f1d48b]"
-                                  : "text-white/70 hover:bg-white/5 hover:text-white"
-                              }`}
-                            >
-                              {child.label}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Link
-                  href="/professionals/workspace/login"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
-                >
-                  Professional Workspace
-                </Link>
-
-                <Link
-                  href="/professionals/project-review"
-                  className="inline-flex items-center justify-center rounded-full border border-[#E5C07B]/30 bg-[#E5C07B]/10 px-4 py-3 text-sm font-semibold text-[#f1d48b]"
-                >
-                  Professional project review
-                </Link>
-
-                <Link
-                  href="/arlo-curtain-advisor"
-                  className="inline-flex items-center justify-center rounded-full bg-[#E5C07B] px-4 py-3 text-sm font-semibold text-black"
-                >
-                  <Sparkles className="mr-2 h-4 w-4" />
-                  Ask Arlo
-                </Link>
-
-                <Link
-                  href="/start-designing"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-4 py-3 text-sm font-semibold text-black"
-                >
-                  Start your Curtain Journey
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-
-                <Link
-                  href="tel:08007720367"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-4 py-3 text-sm font-semibold text-white"
-                >
-                  <Phone className="mr-2 h-4 w-4" />
-                  Speak to us
-                </Link>
-              </div>
-            </div>
-          </div>
+            ))}
+          </details>
+        </nav>
+      </noscript>
+      <dialog
+        ref={mobile}
+        id="site-mobile-menu"
+        className="site-mobile-menu"
+        aria-label="Apex Curtains navigation"
+        onClose={() => {
+          restoreScroll();
+          setMobileOpen(false);
+        }}
+      >
+        <div className="site-mobile-top">
+          <Link href="/" onClick={closeMobile}>
+            <Image
+              src="/images/apex-logo-horizontal.svg"
+              alt="Apex Curtains home"
+              width={150}
+              height={43}
+            />
+          </Link>
+          <button type="button" aria-label="Close menu" onClick={closeMobile}>
+            <X size={22} />
+          </button>
         </div>
-      )}
+        <nav aria-label="Mobile navigation">
+          <Link href="/" onClick={closeMobile} className="site-mobile-home">
+            Home ↗
+          </Link>
+          {navigationGroups.map((group) => (
+            <details key={group.id} name="apex-mobile-navigation">
+              <summary>
+                {group.label}
+                <ChevronDown size={18} />
+              </summary>
+              <p>{group.description}</p>
+              <Link
+                href={group.href}
+                onClick={closeMobile}
+                aria-current={current(group.href)}
+                className="site-mobile-overview"
+              >
+                {group.overview} ↗
+              </Link>
+              {group.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={closeMobile}
+                  aria-current={current(link.href)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </details>
+          ))}
+        </nav>
+        <div className="site-mobile-contact">
+          <TrackedLink
+            href="/start-designing"
+            eventName="curtain_journey_start_click"
+            eventData={{ source: "mobile_navigation" }}
+            className="site-project-button"
+            onClick={closeMobile}
+          >
+            Start your project ↗
+          </TrackedLink>
+          <a href="tel:08007720367">Call 0800 772 0367</a>
+          <p>
+            Specialist advice for your window,
+            <br />
+            from the first idea to the final fold.
+          </p>
+        </div>
+      </dialog>
     </>
   );
 }

@@ -2,6 +2,21 @@ import Link from "next/link";
 
 const details = [
   {
+    href: "/curtain-colours-and-tones",
+    title: "Colours and tones",
+    text: "Bring the room together with undertones, colour relationships and real interiors.",
+  },
+  {
+    href: "/curtain-tracks",
+    title: "Curtain tracks",
+    text: "A discreet foundation, planned around the shape and weight of the curtains.",
+  },
+  {
+    href: "/services/premium-installation",
+    title: "Installation & aftercare",
+    text: "From fitting and dressing to the care that preserves the finish.",
+  },
+  {
     href: "/curtain-headings",
     title: "Curtain headings",
     text: "Compare wave, pinch pleat, pencil pleat and other heading directions.",
@@ -17,8 +32,8 @@ const details = [
     text: "Explore weight, drape, pattern, light response and practical suitability.",
   },
   {
-    href: "/curtain-accessories",
-    title: "Curtain accessories",
+    href: "/curtain-tiebacks",
+    title: "Curtain tiebacks",
     text: "See how tiebacks, tieback hooks and finishing details complete the scheme.",
   },
 ];
@@ -35,7 +50,9 @@ export default function DesignDetailLinks() {
             Heading, lining, fabric and finishing details all work together
           </h2>
           <p className="mt-5 text-base leading-8 text-[#C8D1D8]">
-            The window shape is only one part of the design. The finished result also depends on how the curtain is headed, what it is made from, how it is lined and which finishing details are used.
+            The window shape is only one part of the design. The finished result
+            also depends on how the curtain is headed, what it is made from, how
+            it is lined and which finishing details are used.
           </p>
           <Link
             href="/curtain-design-guide"
@@ -52,8 +69,12 @@ export default function DesignDetailLinks() {
               href={item.href}
               className="rounded-[26px] border border-white/10 bg-[#1B405B] p-6 transition hover:border-[#d6b56b]/35 hover:-translate-y-0.5"
             >
-              <h3 className="text-xl font-semibold text-[#F4F0E8]">{item.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">{item.text}</p>
+              <h3 className="text-xl font-semibold text-[#F4F0E8]">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">
+                {item.text}
+              </p>
             </Link>
           ))}
         </div>

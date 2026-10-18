@@ -1,39 +1,51 @@
 import ApexEntryScreen from "@/components/ApexEntryScreen";
 import Hero from "@/components/homepage/Hero";
-import WindowNavigator from "@/components/homepage/WindowNavigator";
-import WhyDifferent from "@/components/homepage/WhyDifferent";
-import HomeVisitProcess from "@/components/homepage/HomeVisitProcess";
-import GalleryShowcase from "@/components/homepage/GalleryShowcase";
-import ApexInstallationJourney from "@/components/homepage/ApexInstallationJourney";
-import SolutionFinder from "@/components/homepage/SolutionFinder";
+import SaleBanner from "@/components/homepage/SaleBanner";
+import HomeWindowDiscovery from "@/components/homepage/HomeWindowDiscovery";
+import HomeColourStudio from "@/components/homepage/HomeColourStudio";
+import HomeProjectStories from "@/components/homepage/HomeProjectStories";
+import HomeExpertise from "@/components/homepage/HomeExpertise";
+import HomeDetailComparisons from "@/components/homepage/HomeDetailComparisons";
+import HomeServiceJourney from "@/components/homepage/HomeServiceJourney";
+import HomeSpecialistStory from "@/components/homepage/HomeSpecialistStory";
 import ReviewsPreview from "@/components/homepage/ReviewsPreview";
-import GuidesPreview from "@/components/homepage/GuidesPreview";
-import AreasPreview from "@/components/homepage/AreasPreview";
-import ArloPreview from "@/components/homepage/ArloPreview";
+import HomeFurtherGuidance from "@/components/homepage/HomeFurtherGuidance";
 import FinalCta from "@/components/homepage/FinalCta";
-import ProfessionalsPreview from "@/components/homepage/ProfessionalsPreview";
+import HomeAdviceDock from "@/components/homepage/HomeAdviceDock";
 import LazyFabricQuiz from "@/components/performance/LazyFabricQuiz";
+import "./homepage.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
     <>
       <ApexEntryScreen />
-      <main className="min-h-screen bg-apex-navy-900 text-white">
+      <main className="home-experience">
+        <SaleBanner />
         <Hero />
-        <WhyDifferent />
-        <ProfessionalsPreview />
-        <WindowNavigator />
-        <GalleryShowcase />
-        <HomeVisitProcess />
-        <ApexInstallationJourney />
+        <HomeWindowDiscovery />
+        <HomeColourStudio />
+        <HomeProjectStories />
+        <HomeExpertise />
+        <HomeDetailComparisons />
+        <HomeServiceJourney />
+        <HomeSpecialistStory />
         <ReviewsPreview />
-        <ArloPreview />
-        <GuidesPreview />
-        <AreasPreview />
-        <SolutionFinder />
-        <LazyFabricQuiz />
+        <HomeFurtherGuidance />
+        <details className="home-quiz">
+          <summary>
+            Still finding your style? Explore the fabric personality quiz{" "}
+            <span aria-hidden="true">+</span>
+          </summary>
+          <LazyFabricQuiz />
+        </details>
         <FinalCta />
       </main>
+      <HomeAdviceDock />
     </>
   );
 }

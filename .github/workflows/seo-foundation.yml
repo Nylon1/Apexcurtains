@@ -10,6 +10,7 @@ on:
       - "proxy.ts"
       - "next.config.ts"
       - "scripts/seo-foundation-check.mjs"
+      - "scripts/specialist-guidance-check.mjs"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -41,6 +42,9 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Specialist guidance and project consistency checks
+        run: npm run test:specialist
 
       - name: Baseline lint audit
         continue-on-error: true
