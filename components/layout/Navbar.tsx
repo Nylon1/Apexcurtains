@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 import TrackedLink from "@/components/analytics/TrackedLink";
 import { navigationGroups } from "@/lib/site-navigation";
@@ -172,7 +172,7 @@ function Navigation({ pathname }: { pathname: string }) {
               eventData={{ source: "main_navigation" }}
               className="site-project-button"
             >
-              Start your project <span aria-hidden="true">↗</span>
+              Start your project <ArrowUpRight size={16} aria-hidden="true" />
             </TrackedLink>
             <button
               type="button"
@@ -270,7 +270,7 @@ function Navigation({ pathname }: { pathname: string }) {
             className="site-project-button"
             onClick={closeMobile}
           >
-            Start your project ↗
+            Start your project <ArrowUpRight size={16} aria-hidden="true" />
           </TrackedLink>
           <a href="tel:08007720367">Call 0800 772 0367</a>
           <p>
