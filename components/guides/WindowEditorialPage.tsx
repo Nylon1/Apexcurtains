@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { WindowStory } from "@/lib/window-stories";
 import { SITE_URL } from "@/lib/seo-metadata";
+import { SERVICE_AREAS } from "@/lib/service-area";
 
 export default function WindowEditorialPage({
   story,
@@ -27,7 +28,7 @@ export default function WindowEditorialPage({
         name: story.title,
         url,
         provider: { "@id": `${SITE_URL}/#organization` },
-        areaServed: "United Kingdom",
+        areaServed: SERVICE_AREAS,
       },
       {
         "@type": "FAQPage",

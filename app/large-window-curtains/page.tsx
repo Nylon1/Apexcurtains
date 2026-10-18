@@ -1,10 +1,11 @@
 import Link from "next/link";
 import RelatedWindowTypes from "@/components/seo/RelatedWindowTypes";
+import { SERVICE_AREAS } from "@/lib/service-area";
 
 export const metadata = {
   title: "Curtains for Large Windows | Floor to Ceiling & Wide Window Curtains UK",
   description:
-    "Specialists in curtains for large windows, floor-to-ceiling glazing, wide patio doors and expansive glass walls. Bespoke design, made-to-measure curtains and expert guidance across the UK.",
+    "Made-to-measure curtains for large windows, floor-to-ceiling glazing and wide patio doors. Specialist survey and installation across England and Wales.",
 };
 
 const faqs = [
@@ -32,8 +33,8 @@ export default function LargeWindowCurtainsPage() {
     "@type": "Service",
     name: "Large Window Curtains",
     description:
-      "Specialists in curtains for large windows, floor-to-ceiling glazing and wide architectural openings across the UK.",
-    areaServed: "United Kingdom",
+      "Specialists in curtains for large windows, floor-to-ceiling glazing and wide architectural openings across England and Wales.",
+    areaServed: SERVICE_AREAS,
     provider: {
       "@type": "Organization",
       name: "Apex Curtains",

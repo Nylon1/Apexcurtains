@@ -3,7 +3,7 @@ import { windowStories } from "@/lib/window-stories";
 export const metadata = {
   title: "Apex Window Curtains | Measured & Installed",
   description:
-    "Made-to-measure curtains for apex windows, surveyed and professionally installed across the UK. Explore shaped tracks, fabric, linings and real Apex projects.",
+    "Curtains for apex windows, measured and installed across England and Wales. Explore made-to-measure designs, shaped tracks, linings and real Apex projects.",
 };
 const faqs = [
   {

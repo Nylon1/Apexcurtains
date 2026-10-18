@@ -1,11 +1,12 @@
 import Link from "next/link";
 import RelatedWindowTypes from "@/components/seo/RelatedWindowTypes";
+import { SERVICE_AREAS } from "@/lib/service-area";
 
 export const metadata = {
   alternates: { canonical: "https://www.apexcurtains.com/barn-conversion-curtains" },
   title: "Barn Conversion Curtains | Curtains for Vaulted & Rustic Homes UK",
   description:
-    "Specialists in barn conversion curtains for vaulted ceilings, exposed beams, apex glazing and large feature windows. Bespoke design, made-to-measure curtains and expert guidance across the UK.",
+    "Bespoke curtains for barn conversions, vaulted ceilings and apex glazing. Specialist survey, design and installation across England and Wales.",
 };
 
 const faqs = [
@@ -33,8 +34,8 @@ export default function BarnConversionCurtainsPage() {
     "@type": "Service",
     name: "Barn Conversion Curtains",
     description:
-      "Specialists in curtains for barn conversions, vaulted ceilings, exposed beams and unusual glazed spaces across the UK.",
-    areaServed: "United Kingdom",
+      "Specialists in curtains for barn conversions, vaulted ceilings, exposed beams and unusual glazed spaces across England and Wales.",
+    areaServed: SERVICE_AREAS,
     provider: {
       "@type": "Organization",
       name: "Apex Curtains",

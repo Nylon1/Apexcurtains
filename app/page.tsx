@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     title: "Apex Curtains | Curtains for Extraordinary Windows",
-    description: "Specialist survey, design, manufacture and installation for apex, triangular, angled and gable-end curtains across the UK.",
+    description: "Specialist survey, design, manufacture and installation for apex, triangular, angled and gable-end curtains across England and Wales.",
     url: "https://www.apexcurtains.com",
     type: "website",
     images: [{ url: "/window-types/apex-hero.jpg", alt: "A completed Apex gable curtain installation" }],

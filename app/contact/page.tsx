@@ -143,9 +143,9 @@ export default function ContactPage() {
 
   <InfoPanel
     icon={<MapPin className="h-5 w-5" />}
-    title="UK-wide enquiries"
-    text="We work with shaped and unusual windows across the UK, including premium coastal and architectural homes."
-    value="Across the UK"
+    title="England and Wales"
+    text="We survey and install curtains for shaped and unusual windows throughout England and Wales, including coastal and rural homes."
+    value="Explore our service areas"
     href="/areas"
   />
 </div>

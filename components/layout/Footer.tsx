@@ -160,7 +160,7 @@ export default function Footer() {
                   <strong className="block font-medium text-white">
                     Service area
                   </strong>
-                  Serving homes across the UK
+                  Serving homes across England and Wales
                 </span>
               </div>
             </div>

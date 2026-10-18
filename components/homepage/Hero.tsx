@@ -22,7 +22,7 @@ export default function Hero() {
         <p>
           We survey, design, manufacture and professionally install
           made-to-measure curtains for apex, triangular, angled and gable-end
-          windows across the UK.
+          windows across England and Wales.
         </p>
         <div className="home-actions">
           <a

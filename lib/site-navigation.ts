@@ -171,9 +171,9 @@ export const navigationGroups: NavigationGroup[] = [
         note: "The team behind your curtains",
       },
       {
-        label: "UK service areas",
+        label: "Service areas",
         href: "/areas",
-        note: "Find out about your area",
+        note: "Surveys and installation across England and Wales",
       },
     ],
   },

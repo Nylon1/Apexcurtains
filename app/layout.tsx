@@ -8,6 +8,7 @@ import "./site-navigation.css";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import PublicPresentation from "@/components/layout/PublicPresentation";
+import { SERVICE_AREAS } from "@/lib/service-area";
 
 const SITE_URL = "https://www.apexcurtains.com";
 
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     template: "%s | Apex Curtains",
   },
   description:
-    "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK.",
+    "Specialists in curtains for apex, triangular, gable end and architectural windows across England and Wales.",
   keywords: [
     "apex curtains",
     "triangular window curtains",
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Apex Curtains",
     description:
-      "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK.",
+      "Specialists in curtains for apex, triangular, gable end and architectural windows across England and Wales.",
     siteName: "Apex Curtains",
     type: "website",
   },
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Apex Curtains",
     description:
-      "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK.",
+      "Specialists in curtains for apex, triangular, gable end and architectural windows across England and Wales.",
   },
 };
 
@@ -60,11 +61,8 @@ const globalSchema = {
       telephone: "+448007720367",
       email: "hello@apexcurtains.com",
       description:
-        "Specialists in curtains for apex, triangular, gable end and architectural windows across the UK.",
-      areaServed: {
-        "@type": "Country",
-        name: "United Kingdom",
-      },
+        "Specialists in curtains for apex, triangular, gable end and architectural windows across England and Wales.",
+      areaServed: SERVICE_AREAS,
     },
     {
       "@type": "WebSite",

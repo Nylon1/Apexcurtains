@@ -25,7 +25,7 @@ export const windowStories: Record<string, WindowStory> = {
     path: "/apex-curtains",
     title: "Apex curtains. Softness on a grand scale.",
     intro:
-      "Made-to-measure curtains for apex windows, surveyed, designed and professionally installed across the UK. Beautiful cloth and a carefully shaped curtain line bring the whole room into balance.",
+      "Made-to-measure curtains for apex windows, surveyed, designed and professionally installed across England and Wales. Beautiful cloth and a carefully shaped curtain line bring the whole room into balance.",
     image: "/window-types/apex-hero.jpg",
     alt: "Full-length pale curtains arranged along two slopes of an apex window",
     caption: "Warm ivory, generous folds and a quiet line along the ceiling.",
