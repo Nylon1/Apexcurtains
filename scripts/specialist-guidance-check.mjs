@@ -297,8 +297,8 @@ test(
       /rel="canonical" href="https:\/\/www\.apexcurtains\.com\/?"/,
     );
     assert.equal((body.match(/<h1[\s>]/g) || []).length, 1);
-    assert.match(body, /Sale now on/);
-    assert.match(body, /25% off/);
+    assert.match(body, /Seasonal sale now on/);
+    assert.match(body, /Up to 25% off/);
     assert.match(body, /custom-made curtains/);
     for (const [dialog] of body.matchAll(/<dialog[^>]*>/g)) {
       assert.doesNotMatch(

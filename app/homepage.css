@@ -211,6 +211,13 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+.home-sale-offer small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  letter-spacing: normal;
+  text-transform: none;
+}
 .home-sale a {
   font-size: 0.77rem;
   min-height: 44px;
