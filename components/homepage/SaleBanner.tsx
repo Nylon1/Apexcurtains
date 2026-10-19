@@ -2,12 +2,12 @@ import TrackedLink from "@/components/analytics/TrackedLink";
 import { ArrowUpRight } from "lucide-react";
 export default function SaleBanner() {
   return (
-    <aside className="home-sale" aria-label="Christmas season curtain sale">
-      <p className="home-sale-season">Christmas season sale now on</p>
+    <aside className="home-sale" aria-label="Seasonal curtain sale">
+      <p className="home-sale-season">Seasonal sale now on</p>
       <div className="home-sale-body">
         <p className="home-sale-offer">
-          <strong>25% off</strong>
-          <span>custom-made curtains</span>
+          <strong>Up to 25% off</strong>
+          <span>custom-made curtains<small>T&amp;C apply</small></span>
         </p>
         <div className="home-sale-actions">
           <TrackedLink

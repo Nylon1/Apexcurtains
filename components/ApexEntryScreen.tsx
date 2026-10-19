@@ -55,15 +55,16 @@ export default function ApexEntryScreen() {
           height={145}
           loading="eager"
         />
-        <p className="apex-entry-kicker">Sale now on</p>
+        <p className="apex-entry-kicker">Seasonal sale now on</p>
         <h2 id="apex-entry-title">
           Extraordinary windows.
           <br />
           Beautifully dressed.
         </h2>
         <p className="apex-entry-offer" id="apex-entry-offer">
-          <strong>25% off</strong>
+          <strong>Up to 25% off</strong>
           <span>custom-made curtains</span>
+          <small>T&amp;C apply</small>
         </p>
         <button
           type="button"
