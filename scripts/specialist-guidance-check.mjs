@@ -298,7 +298,7 @@ test(
     );
     assert.equal((body.match(/<h1[\s>]/g) || []).length, 1);
     assert.doesNotMatch(body, /sale now on|25% off|class="home-sale"/i);
-    assert.match(body, /custom-made curtains/);
+    assert.match(main, /made-to-measure curtains/);
     for (const [dialog] of body.matchAll(/<dialog[^>]*>/g)) {
       assert.doesNotMatch(
         dialog,
