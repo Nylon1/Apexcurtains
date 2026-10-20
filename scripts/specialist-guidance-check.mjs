@@ -283,7 +283,7 @@ test(
 );
 
 test(
-  "homepage keeps discovery crawlable, the sale scoped and specialist links valid",
+  "homepage keeps discovery crawlable, the sale paused and specialist links valid",
   { skip: !base },
   async () => {
     const response = await fetch(`${base}/`);
@@ -297,8 +297,7 @@ test(
       /rel="canonical" href="https:\/\/www\.apexcurtains\.com\/?"/,
     );
     assert.equal((body.match(/<h1[\s>]/g) || []).length, 1);
-    assert.match(body, /Seasonal sale now on/);
-    assert.match(body, /Up to 25% off/);
+    assert.doesNotMatch(body, /sale now on|25% off|class="home-sale"/i);
     assert.match(body, /custom-made curtains/);
     for (const [dialog] of body.matchAll(/<dialog[^>]*>/g)) {
       assert.doesNotMatch(

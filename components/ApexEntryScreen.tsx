@@ -36,7 +36,7 @@ export default function ApexEntryScreen() {
       onClose={rememberDismissal}
       className="apex-entry"
       aria-labelledby="apex-entry-title"
-      aria-describedby="apex-entry-offer"
+      aria-describedby="apex-entry-description"
     >
       <Image
         src="/images/apex-entry-poster.jpeg"
@@ -55,16 +55,14 @@ export default function ApexEntryScreen() {
           height={145}
           loading="eager"
         />
-        <p className="apex-entry-kicker">Seasonal sale now on</p>
+        <p className="apex-entry-kicker">Made for your architecture</p>
         <h2 id="apex-entry-title">
           Extraordinary windows.
           <br />
           Beautifully dressed.
         </h2>
-        <p className="apex-entry-offer" id="apex-entry-offer">
-          <strong>Up to 25% off</strong>
-          <span>custom-made curtains</span>
-          <small>T&amp;C apply</small>
+        <p className="apex-entry-offer" id="apex-entry-description">
+          Specialist curtains, made for your home.
         </p>
         <button
           type="button"
