@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { navigationChecks } from "../lib/atelier/navigation";
+import { selectedTrack } from "../lib/atelier/tracks";
 import {
   brochurePalette,
   brochureSpecification,
@@ -10,9 +12,103 @@ import {
   sampleJob,
   jobDataSchema,
   approvalIssues,
+  approvalChecklist,
   selectedFabricPhoto,
   type Asset,
 } from "../lib/atelier/model";
+
+test("guided survey blocks missing prerequisites and points to the right window and section", () => {
+  const data = sampleJob().data;
+  data.customerEmail = "client@example.invalid";
+  data.workshopEmail = "workroom@example.invalid";
+  data.fitterEmail = "fitter@example.invalid";
+  for (const w of data.windows) {
+    w.measuredConfirmed = true;
+    w.careSource = "Approved supplier care sheet";
+    w.careInstructions =
+      "Use the supplier-approved specialist cleaning service.";
+  }
+  const assets = data.windows.map((w, i) => ({
+    id: `photo-${i}`,
+    job_id: "test",
+    window_id: w.id,
+    kind: "window" as const,
+    path: "test",
+    caption: "",
+  }));
+  assert.equal(navigationChecks(data, assets, { step: "documents" }).length, 0);
+  // Optional appointments, notes and fabric photos do not prevent progress.
+  assert.equal(data.fittingDate, "");
+  data.windows[0].widthMm = 0;
+  data.windows[0].measuredConfirmed = false;
+  let checks = navigationChecks(data, assets, {
+    step: "windows",
+    windowId: data.windows[0].id,
+    section: "fabric",
+  });
+  assert.ok(checks.length > 0);
+  assert.ok(
+    checks.every(
+      (c) => c.windowId === data.windows[0].id && c.section === "measure",
+    ),
+  );
+  assert.ok(
+    navigationChecks(data, assets, {
+      step: "windows",
+      windowId: data.windows[1].id,
+    }).length > 0,
+  );
+  assert.equal(navigationChecks(data, assets, { step: "customer" }).length, 0);
+  assert.equal(navigationChecks(data, assets, { step: "delivery" }).length, 0);
+  data.customerEmail = "unfinished@";
+  checks = navigationChecks(data, assets, {
+    step: "windows",
+    windowId: data.windows[0].id,
+  });
+  assert.ok(checks.some((c) => c.step === "customer"));
+});
+
+test("pattern, lining and photo requirements are routed to actionable sections", () => {
+  const data = sampleJob().data;
+  const w = data.windows[0];
+  w.pattern = "half-drop";
+  w.repeatMm = 0;
+  w.liningDropMm = 0;
+  const checks = approvalChecklist(data).filter((c) => c.windowId === w.id);
+  assert.ok(
+    checks.some((c) => c.section === "fabric" && c.message.includes("repeat")),
+  );
+  assert.ok(
+    checks.some(
+      (c) => c.section === "fabric" && c.message.includes("matching plan"),
+    ),
+  );
+  assert.ok(
+    checks.some(
+      (c) => c.section === "finish" && c.message.includes("lining width"),
+    ),
+  );
+  assert.ok(checks.some((c) => c.section === "photos"));
+  assert.deepEqual(
+    approvalIssues(data),
+    approvalChecklist(data).map((c) => c.message),
+  );
+  const live = navigationChecks(data, [], { step: "documents" });
+  const demo = navigationChecks(data, [], { step: "documents" }, true);
+  assert.ok(live.some((c) => c.section === "photos"));
+  assert.ok(!demo.some((c) => c.section === "photos"));
+});
+
+test("Forest KS illustration is explicit and legacy tracks remain unchanged", () => {
+  const data = sampleJob().data;
+  const { trackProduct, ...legacy } = data.windows[1];
+  void trackProduct;
+  const restored = jobDataSchema.parse({ ...data, windows: [legacy] })
+    .windows[0];
+  assert.equal(restored.trackProduct, "custom");
+  assert.equal(selectedTrack(restored), undefined);
+  assert.equal(selectedTrack(data.windows[1])?.id, "forest-ks");
+});
 
 test("apex material uses a full rectangle at the longest drop", () => {
   const w = sampleJob().data.windows[0];

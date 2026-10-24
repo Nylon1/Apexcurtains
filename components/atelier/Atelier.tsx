@@ -31,7 +31,10 @@ import {
   newWindow,
   sampleJob,
   calculateWindow,
-  approvalIssues,
+  approvalChecklist,
+  windowSections,
+  type WindowSection,
+  type SurveyCheck,
   checklist,
   type Job,
   type JobData,
@@ -43,6 +46,10 @@ import {
 import { Button, Field, Section, Toggle, request } from "./Fields";
 import WindowEditor from "./WindowEditor";
 import BrochurePreview from "./BrochurePreview";
+import {
+  navigationChecks,
+  type SurveyDestination,
+} from "@/lib/atelier/navigation";
 const hero = "/visualiser/double-pinch-gable-desktop.webp";
 const steps = [
   { id: "customer", name: "The client", icon: Home },
@@ -82,7 +89,89 @@ export default function Atelier({
     [preview, setPreview] = useState(false);
   const [savingFailed, setSavingFailed] = useState(false);
   const savingRef = useRef(false);
+  const stepNavigation = useRef<HTMLElement>(null);
+  const [windowSection, setWindowSection] = useState<
+    Record<string, WindowSection>
+  >({});
+  const [navigationAttempt, setNavigationAttempt] =
+    useState<SurveyDestination | null>(null);
   const dirty = !!draft && JSON.stringify(draft) !== saved;
+  const saveStatus = saving
+    ? "Saving…"
+    : savingFailed
+      ? "Changes not saved — retry Save changes"
+      : dirty
+        ? "Changes waiting to save…"
+        : demo
+          ? "Saved in this preview"
+          : "All changes saved";
+  function showMissing(destination: SurveyDestination) {
+    if (!draft || !navigationChecks(draft, assets, destination, demo).length) {
+      setNavigationAttempt(null);
+      return false;
+    }
+    setNavigationAttempt(destination);
+    requestAnimationFrame(() =>
+      document.getElementById("atelier-missing")?.focus(),
+    );
+    return true;
+  }
+  function goToStep(next: Step, reviewDetail = false) {
+    if (
+      !reviewDetail &&
+      steps.findIndex((s) => s.id === next) >
+        steps.findIndex((s) => s.id === step) &&
+      showMissing({
+        step: next,
+        windowId,
+        section: windowSection[windowId] ?? "measure",
+      })
+    )
+      return;
+    setNavigationAttempt(null);
+    setStep(next);
+    requestAnimationFrame(() => {
+      stepNavigation.current?.scrollIntoView({ block: "start" });
+      stepNavigation.current?.focus({ preventScroll: true });
+    });
+  }
+  function selectWindow(id: string) {
+    if (
+      draft &&
+      draft.windows.findIndex((w) => w.id === id) >
+        draft.windows.findIndex((w) => w.id === windowId) &&
+      showMissing({
+        step: "windows",
+        windowId: id,
+        section: windowSection[id] ?? "measure",
+      })
+    )
+      return;
+    setWindowId(id);
+    goToStep("windows", step === "windows");
+  }
+  function selectSection(section: WindowSection) {
+    if (
+      windowSections.findIndex((s) => s.id === section) >
+        windowSections.findIndex(
+          (s) => s.id === (windowSection[windowId] ?? "measure"),
+        ) &&
+      showMissing({ step: "windows", windowId, section })
+    )
+      return;
+    setNavigationAttempt(null);
+    setWindowSection((current) => ({ ...current, [windowId]: section }));
+  }
+  function openCheck(check: SurveyCheck) {
+    if (check.windowId) {
+      setWindowId(check.windowId);
+      setWindowSection((current) => ({
+        ...current,
+        [check.windowId!]: check.section ?? "measure",
+      }));
+    }
+    goToStep(check.step, true);
+  }
   const save = useCallback(async () => {
     if (!job || !draft || savingRef.current) return null;
     const snapshot = JSON.stringify(draft);
@@ -151,6 +240,10 @@ export default function Atelier({
                 ? {
                     ...w,
                     [key]: value,
+                    ...(key === "track" &&
+                    !/\bforest\b.*\bks\b/i.test(String(value))
+                      ? { trackProduct: "custom" as const }
+                      : {}),
                     ...(key === "colour" && w.tiebacks === "Matching fabric"
                       ? { tiebackColour: value as string }
                       : {}),
@@ -236,6 +329,7 @@ export default function Atelier({
   }
   function addWindow(type: "apex" | "standard") {
     if (!draft) return;
+    if (showMissing({ step: "documents" })) return;
     const next = newWindow(crypto.randomUUID(), type);
     next.room = active?.room || "Living room";
     next.name = `Window ${draft.windows.length + 1}`;
@@ -245,6 +339,7 @@ export default function Atelier({
   }
   function copyDesign() {
     if (!draft || !active) return;
+    if (showMissing({ step: "documents" })) return;
     const next = {
       ...active,
       id: crypto.randomUUID(),
@@ -393,7 +488,11 @@ export default function Atelier({
       setBusy(false);
     }
   }
-  const issues = draft ? approvalIssues(draft, assets) : [];
+  const issues = draft ? approvalChecklist(draft, assets) : [];
+  const navigationIssues =
+    draft && navigationAttempt
+      ? navigationChecks(draft, assets, navigationAttempt, demo)
+      : [];
   const jf = (
     key: keyof JobData,
     label: string,
@@ -409,6 +508,13 @@ export default function Atelier({
         type={type}
         wide={wide}
         hint={hint}
+        required={[
+          "customerName",
+          "customerEmail",
+          "address",
+          "workshopEmail",
+          "fitterEmail",
+        ].includes(key)}
         onChange={(v) => update(key, v as never)}
       />
     ) : null;
@@ -434,7 +540,7 @@ export default function Atelier({
                 <button
                   key={s.id}
                   className={step === s.id ? "active" : ""}
-                  onClick={() => setStep(s.id)}
+                  onClick={() => goToStep(s.id)}
                 >
                   <s.icon size={18} />
                   {s.name}
@@ -449,10 +555,7 @@ export default function Atelier({
             {draft.windows.map((w) => (
               <button
                 key={w.id}
-                onClick={() => {
-                  setStep("windows");
-                  setWindowId(w.id);
-                }}
+                onClick={() => selectWindow(w.id)}
                 className={
                   active?.id === w.id && step === "windows" ? "selected" : ""
                 }
@@ -696,11 +799,17 @@ export default function Atelier({
                         : "All changes saved"}
                 </button>
               </div>
-              <nav className="at-steps" aria-label="Project steps">
+              <nav
+                className="at-steps"
+                aria-label="Project steps"
+                ref={stepNavigation}
+                tabIndex={-1}
+              >
                 {steps.map((s, i) => (
                   <button
                     key={s.id}
-                    onClick={() => setStep(s.id)}
+                    onClick={() => goToStep(s.id)}
+                    aria-current={step === s.id ? "step" : undefined}
                     className={step === s.id ? "active" : ""}
                   >
                     <span>0{i + 1}</span>
@@ -709,6 +818,51 @@ export default function Atelier({
                   </button>
                 ))}
               </nav>
+              {navigationIssues.length ? (
+                <div
+                  className="at-navigation-alert"
+                  id="atelier-missing"
+                  role="alert"
+                  tabIndex={-1}
+                >
+                  <h2>Complete these details to continue</h2>
+                  <p>
+                    Your entries are kept. Choose an item below to finish it,
+                    then press Next again.
+                  </p>
+                  <ul>
+                    {navigationIssues.map((check, i) => (
+                      <li key={i}>
+                        <button type="button" onClick={() => openCheck(check)}>
+                          {check.message}
+                          <ArrowRight size={14} />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              {step === "customer" || step === "windows" ? (
+                <div className="at-workflow-note">
+                  <span>
+                    <b>Your onsite survey</b>
+                    <small>
+                      Complete the required details before continuing. Go back
+                      whenever you need.
+                    </small>
+                  </span>
+                  <button
+                    type="button"
+                    className="at-text-link"
+                    onClick={() => goToStep("delivery")}
+                  >
+                    {issues.length
+                      ? `${issues.length} checks remaining`
+                      : "Ready for review"}
+                    <ArrowRight size={15} />
+                  </button>
+                </div>
+              ) : null}
               {step === "customer" ? (
                 <div className="at-editor-columns">
                   <div>
@@ -721,7 +875,7 @@ export default function Atelier({
                         {jf("title", "Project name", "text", true)}
                         {jf("customerName", "Customer name")}
                         {jf("customerEmail", "Customer email", "email")}
-                        {jf("phone", "Telephone")}
+                        {jf("phone", "Telephone", "tel")}
                         {jf("surveyor", "Surveyed by")}
                         {jf(
                           "address",
@@ -756,10 +910,15 @@ export default function Atelier({
                         )}
                       </div>
                     </Section>
-                    <Button onClick={() => setStep("windows")}>
-                      Continue to the windows
-                      <ArrowRight size={16} />
-                    </Button>
+                    <div className="at-survey-footer">
+                      <span className="at-survey-save" role="status">
+                        {saveStatus}
+                      </span>
+                      <Button onClick={() => goToStep("windows")}>
+                        Continue to the windows
+                        <ArrowRight size={16} />
+                      </Button>
+                    </div>
                   </div>
                   <aside className="at-editor-aside">
                     <img
@@ -789,18 +948,23 @@ export default function Atelier({
               {step === "windows" && active ? (
                 <>
                   <div className="at-window-toolbar">
-                    <div className="at-window-tabs">
-                      {draft.windows.map((w) => (
-                        <button
-                          key={w.id}
-                          className={w.id === active.id ? "active" : ""}
-                          onClick={() => setWindowId(w.id)}
-                        >
-                          {w.room}
-                          <small>{w.name}</small>
-                        </button>
-                      ))}
-                    </div>
+                    <label className="at-field at-window-picker">
+                      <span>
+                        Choose a room & window · {draft.windows.length} in this
+                        project
+                      </span>
+                      <select
+                        value={active.id}
+                        onChange={(e) => selectWindow(e.target.value)}
+                      >
+                        {draft.windows.map((w, index) => (
+                          <option key={w.id} value={w.id}>
+                            {index + 1}. {w.room || "Room to name"} ·{" "}
+                            {w.name || "Window to name"}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
                     <div className="at-window-actions">
                       <Button
                         secondary
@@ -808,7 +972,7 @@ export default function Atelier({
                         disabled={draft.windows.length >= 30}
                       >
                         <Plus size={15} />
-                        Apex
+                        Add apex
                       </Button>
                       <Button
                         secondary
@@ -816,13 +980,48 @@ export default function Atelier({
                         disabled={draft.windows.length >= 30}
                       >
                         <Plus size={15} />
-                        Standard
+                        Add standard
                       </Button>
                     </div>
                   </div>
                   <WindowEditor
                     key={active.id}
                     w={active}
+                    tab={windowSection[active.id] ?? "measure"}
+                    onSection={selectSection}
+                    checks={issues.filter(
+                      (issue) => issue.windowId === active.id,
+                    )}
+                    windowNumber={
+                      draft.windows.findIndex((w) => w.id === active.id) + 1
+                    }
+                    windowCount={draft.windows.length}
+                    onPreviousWindow={
+                      draft.windows.findIndex((w) => w.id === active.id) > 0
+                        ? () =>
+                            selectWindow(
+                              draft.windows[
+                                draft.windows.findIndex(
+                                  (w) => w.id === active.id,
+                                ) - 1
+                              ].id,
+                            )
+                        : () => goToStep("customer")
+                    }
+                    onNextWindow={
+                      draft.windows.findIndex((w) => w.id === active.id) <
+                      draft.windows.length - 1
+                        ? () =>
+                            selectWindow(
+                              draft.windows[
+                                draft.windows.findIndex(
+                                  (w) => w.id === active.id,
+                                ) + 1
+                              ].id,
+                            )
+                        : undefined
+                    }
+                    saveStatus={saveStatus}
                     assets={assets}
                     update={updateWindow}
                     onCopy={copyDesign}
@@ -843,7 +1042,7 @@ export default function Atelier({
                           }
                         : undefined
                     }
-                    onDocuments={() => setStep("documents")}
+                    onDocuments={() => goToStep("documents")}
                     onUpload={upload}
                     busy={busy}
                     demo={demo}
@@ -1097,7 +1296,19 @@ export default function Atelier({
                           <summary>{issues.length} details to complete</summary>
                           <ul>
                             {issues.map((s, i) => (
-                              <li key={i}>{s}</li>
+                              <li key={i}>
+                                {s.step === "delivery" ? (
+                                  s.message
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => openCheck(s)}
+                                  >
+                                    {s.message}
+                                    <ArrowRight size={14} />
+                                  </button>
+                                )}
+                              </li>
                             ))}
                           </ul>
                         </details>

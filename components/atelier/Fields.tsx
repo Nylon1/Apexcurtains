@@ -1,5 +1,5 @@
 "use client";
-import type { ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import type { SurveyWindow } from "@/lib/atelier/model";
 export function Button({
   children,
@@ -33,6 +33,8 @@ export function Field({
   hint,
   wide = false,
   options,
+  showZero = false,
+  required = false,
 }: {
   label: string;
   value: string | number;
@@ -41,12 +43,29 @@ export function Field({
   hint?: string;
   wide?: boolean;
   options?: readonly string[];
+  showZero?: boolean;
+  required?: boolean;
 }) {
+  const hintId = useId();
   return (
     <label className={`at-field ${wide ? "at-wide" : ""}`}>
-      <span>{label}</span>
+      <span>
+        {label}
+        {required ? (
+          <span className="at-required" aria-hidden="true">
+            {" "}
+            *
+          </span>
+        ) : null}
+      </span>
       {options ? (
-        <select value={value} onChange={(e) => onChange(e.target.value)}>
+        <select
+          aria-label={label}
+          aria-required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          aria-describedby={hint ? hintId : undefined}
+        >
           {options.map((v) => (
             <option value={v} key={v}>
               {v}
@@ -55,20 +74,27 @@ export function Field({
         </select>
       ) : type === "textarea" ? (
         <textarea
+          aria-label={label}
+          aria-required={required}
           rows={3}
+          aria-describedby={hint ? hintId : undefined}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
       ) : (
         <input
+          aria-label={label}
+          aria-required={required}
           type={type}
           min={type === "number" ? 0 : undefined}
           step={type === "number" ? "any" : undefined}
-          value={value === 0 && type === "number" ? "" : value}
+          inputMode={type === "number" ? "decimal" : undefined}
+          aria-describedby={hint ? hintId : undefined}
+          value={value === 0 && type === "number" && !showZero ? "" : value}
           onChange={(e) => onChange(e.target.value)}
         />
       )}{" "}
-      {hint ? <small>{hint}</small> : null}
+      {hint ? <small id={hintId}>{hint}</small> : null}
     </label>
   );
 }

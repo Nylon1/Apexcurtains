@@ -79,6 +79,8 @@ try {
   data.customerEmail = "client@example.invalid";
   data.workshopEmail = "workroom@example.invalid";
   data.fitterEmail = "fitter@example.invalid";
+  data.windows[0].trackProduct = "forest-ks";
+  data.windows[0].track = "Forest Group KS® Klick System";
   let job = (await (await call("/api/atelier/jobs", "POST", data, 201)).json())
     .job;
   jobId = job.id;
@@ -161,6 +163,7 @@ try {
     ).json()
   ).job;
   assert.equal(job.data.windows[0].trackColour, data.windows[0].trackColour);
+  assert.equal(job.data.windows[0].trackProduct, "forest-ks");
   assert.equal(job.data.windows[0].paletteMode, "auto");
   await call(
     `/api/atelier/jobs/${jobId}`,

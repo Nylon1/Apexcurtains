@@ -1,5 +1,6 @@
 /* Photographs are served through the staff-checked asset endpoint. */
 /* eslint-disable @next/next/no-img-element */
+import { selectedTrack } from "@/lib/atelier/tracks";
 import {
   selectedFabricPhoto,
   type JobData,
@@ -123,6 +124,7 @@ export default function BrochurePreview({
           (a) => a.window_id === w.id && a.kind === "window",
         );
         const fabric = selectedFabricPhoto(assets, w.id);
+        const track = selectedTrack(w);
         return (
           <section
             className="at-brochure-page at-brochure-window"
@@ -156,6 +158,22 @@ export default function BrochurePreview({
             <p className="at-brochure-intro">{roomIntroduction(w)}</p>
             <span className="at-eyebrow">YOUR CHOSEN DETAILS</span>
             <Details items={brochureSpecification(w)} />
+            {track ? (
+              <figure className="at-brochure-track">
+                <img
+                  src={track.image}
+                  alt={track.name + ", shown in white"}
+                  loading="lazy"
+                />
+                <figcaption>
+                  <b>{track.name}</b>
+                  <span>
+                    Your chosen finish: {w.trackColour || "To be confirmed"}
+                  </span>
+                  <small>{track.caption} Photograph: Forest Group.</small>
+                </figcaption>
+              </figure>
+            ) : null}
             {fabric ? (
               <figure className="at-brochure-fabric">
                 <img

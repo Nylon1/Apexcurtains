@@ -10,6 +10,7 @@ import {
   selectedFabricPhoto,
 } from "./model";
 import { renderJobPdf } from "./pdf";
+import { forestKs, selectedTrack } from "./tracks";
 import { service, getAssets, AtelierError } from "./server";
 
 export async function documentSource(job: Job, revision?: number) {
@@ -81,5 +82,14 @@ export async function generateDocument(
     .resize(1200, 1000, { fit: "inside" })
     .jpeg({ quality: 85 })
     .toBuffer();
-  return renderJobPdf(kind, { ...source, photos, inspiration });
+  const trackPhotos: Record<string, Buffer> = {};
+  if (source.job.data.windows.some(selectedTrack)) {
+    trackPhotos[forestKs.id] = await sharp(
+      await readFile(path.join(process.cwd(), "public", forestKs.image)),
+    )
+      .flatten({ background: "#ffffff" })
+      .jpeg({ quality: 90 })
+      .toBuffer();
+  }
+  return renderJobPdf(kind, { ...source, photos, inspiration, trackPhotos });
 }
