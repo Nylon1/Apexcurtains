@@ -11,6 +11,7 @@ import {
 } from "./model";
 import { renderJobPdf } from "./pdf";
 import { forestTracks } from "./tracks";
+import { loadBrochureImages } from "./brochure-assets";
 import { service, getAssets, AtelierError } from "./server";
 
 export async function documentSource(job: Job, revision?: number) {
@@ -95,5 +96,12 @@ export async function generateDocument(
         .toBuffer();
     }),
   );
-  return renderJobPdf(kind, { ...source, photos, inspiration, trackPhotos });
+  const illustrations = kind === "brochure" ? await loadBrochureImages() : {};
+  return renderJobPdf(kind, {
+    ...source,
+    photos,
+    inspiration,
+    trackPhotos,
+    illustrations,
+  });
 }

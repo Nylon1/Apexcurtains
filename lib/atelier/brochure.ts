@@ -236,3 +236,95 @@ export const installationGuide: BrochureDetail[] = [
 
 export const paletteSampleNote =
   "These swatches suggest complementary interior colours; they are not exact fabric or paint matches. Compare physical samples in your room in daylight and evening light before choosing.";
+
+export const apexWebsite = "https://www.apexcurtains.com";
+export const brochureImages = {
+  swatches: "/atelier-images/fabric-swatch-still-life.webp",
+  voucher: "/atelier-images/apex-voucher.webp",
+  making: "/journey/make-beautifully.jpeg",
+  colour: "/guides/colour-wheel.svg",
+  fabric: "/fabrics/oslo/linen.jpg",
+  pencil: "/headings/pencil-pleat.jpeg",
+  pinch: "/headings/pinch-pleat.jpg",
+  wave: "/headings/wave-pleat.jpg",
+} as const;
+
+export const homePromise = {
+  title: "Respect for your home.",
+  introduction:
+    "Your home holds the things that matter to you. Being invited into it is a privilege, and the care we give your surroundings should be as considered as the curtains we create.",
+  details: [
+    {
+      label: "Care before the first fixing",
+      value:
+        "We agree the working area and access with you, protect nearby surfaces and consider the furniture, flooring and treasured things around your window.",
+    },
+    {
+      label: "Consideration in every detail",
+      value:
+        "We check the fitting positions and work carefully around your room. If anything needs to change, we talk it through with you before proceeding.",
+    },
+    {
+      label: "A thoughtful finish",
+      value:
+        "We leave the working area tidy, dress the curtains and take you through their operation and care, so you can feel at home with every detail.",
+    },
+  ],
+};
+
+export const headingGallery = [
+  {
+    id: "pencil",
+    name: "Pencil pleat",
+    image: brochureImages.pencil,
+    description:
+      "Slender, closely gathered folds with a relaxed, softly tailored character.",
+  },
+  {
+    id: "pinch",
+    name: "Double pinch pleat",
+    image: brochureImages.pinch,
+    description:
+      "Paired, sewn pleats bring definition and a composed rhythm to the heading.",
+  },
+  {
+    id: "wave",
+    name: "Wave",
+    image: brochureImages.wave,
+    description: "Smooth, continuous folds create a clean and flowing line.",
+  },
+] as const;
+
+export const websiteFeatures = [
+  {
+    id: "making",
+    title: "The art of making",
+    path: "/services/design-make-curtains",
+    image: brochureImages.making,
+    alt: "Fabric, sewing tools and cloth in the workroom image from the Apex website",
+    description:
+      "Follow the details that turn a measured window into an individually made curtain.",
+    caption: "From the Apex design & manufacture pages",
+  },
+  {
+    id: "fabric",
+    title: "A world of texture",
+    path: "/curtain-fabrics",
+    image: brochureImages.fabric,
+    alt: "Oslo Linen fabric texture from the Apex fabric guide",
+    description:
+      "Explore fabric, drape and the Oslo collection, then compare physical samples in your own light.",
+    caption:
+      "Oslo Linen · Prestigious Textiles · an example, not your selection",
+  },
+  {
+    id: "colour",
+    title: "Colour for the whole room",
+    path: "/curtain-colours-and-tones",
+    image: brochureImages.colour,
+    alt: "The colour wheel from the Apex Colour & Interiors guide",
+    description:
+      "Discover complementary tones and practical ideas for walls, furnishings and finishing touches.",
+    caption: "The Apex colour guide · illustrative colour relationships",
+  },
+] as const;

@@ -3,6 +3,7 @@ import sharp from "sharp";
 import { sampleJob, type DocumentKind } from "../lib/atelier/model";
 import { renderJobPdf } from "../lib/atelier/pdf";
 import { forestTracks } from "../lib/atelier/tracks";
+import { loadBrochureImages } from "../lib/atelier/brochure-assets";
 
 async function main() {
   const out = ".next/atelier-qa";
@@ -14,7 +15,33 @@ async function main() {
     .jpeg({ quality: 85 })
     .toBuffer();
   const job = sampleJob();
+  const illustrations = await loadBrochureImages();
   const shapes = process.argv.includes("--shapes");
+  const long = process.argv.includes("--long");
+  if (long) {
+    job.data.customerEmail = "alexandra@example.com";
+    job.data.phone = "0800 000 0000";
+    job.data.customerName =
+      "Alexandra & Christopher Montgomery-Wellington and family";
+    job.data.address =
+      "The Old Rectory, Garden Wing\n14 Long Meadow Lane\nLittle Wetherington\nWestshire\nAB12 3CD\nFictional pagination sample only";
+    job.data.welcomeNote =
+      "This collection brings quiet texture and thoughtful detail to the rooms you share. ".repeat(
+        20,
+      ) + "WELCOME END";
+    job.data.windows[0].designNotes =
+      "A gentle palette of warm flax and soft chalk connects the window with the garden. Compare the cloth with your furnishings in daylight and evening light. ".repeat(
+        11,
+      ) + "DESIGN END";
+    job.data.windows[0].careInstructions =
+      "Please refer to the sewn-in label and contact Apex before any professional treatment. Keep this advice with the collection for future reference. ".repeat(
+        15,
+      ) + "CARE END";
+    job.data.voucherDetails =
+      "Please quote the personal code when discussing your next order. ".repeat(
+        10,
+      ) + "VOUCHER END";
+  }
   if (shapes) {
     Object.assign(job.data.windows[0], {
       apexShape: "flat-top",
@@ -35,6 +62,7 @@ async function main() {
       assets: [],
       photos: {},
       inspiration,
+      illustrations,
       trackPhotos: Object.fromEntries(
         await Promise.all(
           forestTracks.map(async (track) => [
@@ -48,7 +76,10 @@ async function main() {
       ),
       draft: true,
     });
-    await writeFile(`${out}/${shapes ? "shapes-" : ""}${kind}.pdf`, bytes);
+    await writeFile(
+      `${out}/${long ? "long-" : shapes ? "shapes-" : ""}${kind}.pdf`,
+      bytes,
+    );
     console.log(`${kind}: ${bytes.length} bytes`);
   }
 }
