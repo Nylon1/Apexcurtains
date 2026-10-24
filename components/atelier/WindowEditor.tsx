@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Camera, Copy, Trash2, ArrowRight } from "lucide-react";
 import { Field, Section, Toggle, WindowDiagram } from "./Fields";
+import { brochurePalette } from "@/lib/atelier/brochure";
 import {
   palettes,
   calculateWindow,
@@ -52,6 +53,7 @@ export default function WindowEditor({
     [caption, setCaption] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const q = calculateWindow(w);
+  const palette = brochurePalette(w);
   function fields(config: Config[]) {
     return (
       <div className="at-form-grid">
@@ -346,6 +348,12 @@ export default function WindowEditor({
             <Section number="02" title="A considered installation">
               {fields([
                 ["track", "Track specification"],
+                [
+                  "trackColour",
+                  "Track colour / finish",
+                  "text",
+                  "For example: matt white, black or brushed brass. Included in all three documents.",
+                ],
                 ["accessHeightMm", "Working / access height", "number"],
                 ["mountingSurface", "Mounting surface"],
                 ["tiebackPosition", "Tieback and hook positions"],
@@ -388,14 +396,32 @@ export default function WindowEditor({
               ])}
             </Section>
             <Section number="04" title="The room beyond the curtains">
+              <Toggle
+                checked={w.paletteMode === "auto"}
+                onChange={(v) => {
+                  if (!v) update("palette", palette.key);
+                  update("paletteMode", v ? "auto" : "manual");
+                }}
+              >
+                Suggest a palette from the chosen fabric colour
+              </Toggle>
+              <p className="at-palette-help" aria-live="polite">
+                {palette.basis}{" "}
+                {palette.needsReview
+                  ? "Choose a palette below if you have a more specific direction in mind."
+                  : "Select any palette below to use your own choice."}
+              </p>
               <div className="at-palette-options">
                 {Object.entries(palettes).map(([key, p]) => (
                   <button
                     key={key}
-                    className={w.palette === key ? "active" : ""}
-                    onClick={() =>
-                      update("palette", key as SurveyWindow["palette"])
-                    }
+                    type="button"
+                    aria-pressed={palette.key === key}
+                    className={palette.key === key ? "active" : ""}
+                    onClick={() => {
+                      update("palette", key as SurveyWindow["palette"]);
+                      update("paletteMode", "manual");
+                    }}
                   >
                     <span>
                       {p.colours.map((c) => (

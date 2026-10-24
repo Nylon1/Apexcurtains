@@ -136,6 +136,8 @@ try {
       })
     ).json()
   ).job;
+  assert.equal(job.data.windows[0].trackColour, data.windows[0].trackColour);
+  assert.equal(job.data.windows[0].paletteMode, "auto");
   await call(
     `/api/atelier/jobs/${jobId}`,
     "PUT",
@@ -167,6 +169,11 @@ try {
     .select("*")
     .eq("job_id", jobId);
   assert.equal(revision.data?.length, 1);
+  assert.equal(
+    revision.data?.[0].data.windows[0].trackColour,
+    data.windows[0].trackColour,
+  );
+  assert.equal(revision.data?.[0].data.windows[0].paletteMode, "auto");
   const queues = await db
     .from("apex_atelier_deliveries")
     .select("kind,recipient,status")

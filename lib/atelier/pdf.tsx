@@ -16,13 +16,21 @@ import {
 import {
   calculateWindow,
   lengthLabel,
-  palettes,
   checklist,
   type Job,
   type Asset,
   type DocumentKind,
   type SurveyWindow,
 } from "./model";
+
+import {
+  customerDetails,
+  brochureSpecification,
+  brochurePalette,
+  roomIntroduction,
+  paletteSampleNote,
+  generalAftercare,
+} from "./brochure";
 
 const C = {
   navy: "#102C3B",
@@ -286,7 +294,7 @@ function IntroPage(p: Props) {
       </Text>
       <Image
         src={p.inspiration}
-        style={{ width: "100%", height: 330, objectFit: "cover" }}
+        style={{ width: "100%", height: 290, objectFit: "cover" }}
       />
       <Text style={{ fontSize: 7, color: "#C5C7C0", marginTop: 8 }}>
         Interior inspiration from the Apex collection
@@ -299,7 +307,7 @@ function IntroPage(p: Props) {
           marginTop: 24,
         }}
       >
-        Prepared for {safe(p.job.data.customerName) || "you"}
+        Prepared exclusively for {safe(p.job.data.customerName) || "you"}
       </Text>
       <Text style={{ fontSize: 9, color: "#C5C7C0", marginTop: 10 }}>
         {p.job.reference} · Version {p.job.version}
@@ -308,6 +316,89 @@ function IntroPage(p: Props) {
     </Page>
   );
 }
+function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
+  const palette = brochurePalette(w);
+  const sitePhoto = p.job.data.photoPermission && imageFor(p, w);
+  return (
+    <>
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <Text style={s.kicker}>
+          {w.name} · {w.type === "apex" ? "Apex window" : "Standard window"}
+        </Text>
+        <Text style={s.title}>{w.room}</Text>
+        <Image
+          src={sitePhoto || p.inspiration}
+          style={{ ...s.photo, height: 180 }}
+        />
+        {!sitePhoto ? (
+          <Text style={s.small}>
+            Interior inspiration · not your completed installation
+          </Text>
+        ) : null}
+        <Text style={s.h2}>{palette.name}</Text>
+        <Text style={s.body}>{palette.basis}</Text>
+        <View style={[s.swatches, { gap: 14 }]} wrap={false}>
+          {palette.colours.map((col, i) => (
+            <View key={col} style={{ width: "31%" }}>
+              <View
+                style={[
+                  s.swatch,
+                  { width: "100%", height: 62, backgroundColor: col },
+                ]}
+              />
+              <Text style={s.value}>{palette.names[i]}</Text>
+              <Text style={s.small}>
+                {
+                  [
+                    "Walls & larger surfaces",
+                    "Upholstery & soft layers",
+                    "Accents & small details",
+                  ][i]
+                }
+              </Text>
+            </View>
+          ))}
+        </View>
+        <Text style={s.body}>{palette.advice}</Text>
+        <Text style={s.body}>{palette.finishingAdvice}</Text>
+        <Text style={s.small}>{paletteSampleNote}</Text>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <Text style={s.kicker}>
+          {w.room} · {w.name}
+        </Text>
+        <Text style={s.title}>Your chosen details.</Text>
+        <Text style={s.body}>{roomIntroduction(w)}</Text>
+        <View style={s.grid}>
+          {brochureSpecification(w).map((detail) => (
+            <Field key={detail.label} {...detail} />
+          ))}
+        </View>
+        {imageFor(p, w, "fabric") ? (
+          <View
+            style={{ flexDirection: "row", gap: 12, marginTop: 18 }}
+            wrap={false}
+          >
+            <Image
+              src={imageFor(p, w, "fabric")!}
+              style={{ width: 65, height: 65, objectFit: "cover" }}
+            />
+            <Text style={[s.small, { width: 370, marginTop: 10 }]}>
+              {w.fabric} · {w.colour}
+              {"\n"}Your physical fabric sample is the closest guide to colour
+              and texture.
+            </Text>
+          </View>
+        ) : null}
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+    </>
+  );
+}
+
 function Brochure(p: Props) {
   const d = p.job.data;
   return (
@@ -330,7 +421,14 @@ function Brochure(p: Props) {
           record the choices made for your home, with a little inspiration to
           help you carry the look into the rest of the room.
         </Text>
-        <Text style={s.h2}>Your rooms</Text>
+        <View style={s.grid}>
+          {customerDetails(d).map((detail) => (
+            <Field key={detail.label} {...detail} />
+          ))}
+        </View>
+        <Text style={s.h2} minPresenceAhead={70}>
+          Your rooms
+        </Text>
         {d.windows.map((w) => (
           <View
             key={w.id}
@@ -356,135 +454,16 @@ function Brochure(p: Props) {
             </Text>
           </View>
         ))}
-        <Text style={[s.body, { marginTop: 22 }]}>
-          Keep this collection close when choosing paint, furniture or finishing
-          touches. Physical fabric and paint samples remain the best guide to
-          colour in your own light.
-        </Text>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => (
-        <Page size="A4" style={s.page} key={w.id}>
-          <Brand />
-          <Text style={s.kicker}>
-            {w.type === "apex" ? "Architectural windows" : "Made to measure"} ·{" "}
-            {w.name}
-          </Text>
-          <Text style={s.title}>{w.room}</Text>
-          {d.photoPermission && imageFor(p, w) ? (
-            <Image src={imageFor(p, w)!} style={s.photo} />
-          ) : (
-            <>
-              <Image src={p.inspiration} style={s.photo} />
-              <Text style={s.small}>
-                Interior inspiration · not your completed installation
-              </Text>
-            </>
-          )}
-          <Text style={s.body}>
-            {w.designNotes ||
-              `In ${w.room.toLowerCase()}, ${w.colour.toLowerCase() || "your chosen colour"} brings a considered softness to the window. The ${w.heading.toLowerCase() || "chosen heading"} gives the fabric its rhythm, while the selected finish completes the look.`}
-          </Text>
-          <View style={s.grid}>
-            <Field
-              label="Fabric"
-              value={`${w.supplier} · ${w.fabric} · ${w.fabricCode}`}
-            />
-            <Field
-              label="Colour and heading"
-              value={`${w.colour} · ${w.heading}`}
-            />
-            <Field
-              label="Lining"
-              value={
-                w.lining === "none"
-                  ? "Unlined"
-                  : `${w.lining} · ${w.liningColour} · ${w.liningCode}`
-              }
-            />
-            <Field
-              label="Length"
-              value={`${lengthLabel(w)} · longest drop ${w.longDropMm} mm`}
-            />
-            <Field
-              label="Tiebacks"
-              value={
-                w.tiebackCount
-                  ? `${w.tiebackCount} × ${w.tiebacks} · ${w.tiebackColour}`
-                  : "None selected"
-              }
-            />
-            <Field
-              label="Hooks and track"
-              value={`${w.hookCount ? `${w.hookCount} × ${w.hooks} · ${w.hookColour}; ` : ""}${w.track}`}
-            />
-          </View>
-          {imageFor(p, w, "fabric") ? (
-            <View
-              style={{ flexDirection: "row", gap: 12, marginTop: 18 }}
-              wrap={false}
-            >
-              <Image
-                src={imageFor(p, w, "fabric")!}
-                style={{ width: 65, height: 65, objectFit: "cover" }}
-              />
-              <Text style={[s.small, { width: 300, marginTop: 14 }]}>
-                Your chosen fabric. Screen and printed colours are indicative;
-                refer to your physical sample for the closest match.
-              </Text>
-            </View>
-          ) : null}
-          <Footer job={p.job} draft={p.draft} />
-        </Page>
+        <BrochureWindow key={w.id} p={p} w={w} />
       ))}
-      <Page size="A4" style={s.page}>
-        <Brand />
-        <Text style={s.kicker}>Colour and interiors</Text>
-        <Text style={s.title}>A palette to live with.</Text>
-        <Text style={s.body}>
-          Let your curtains be the starting point for a room that feels
-          collected over time. The suggestions below offer a direction for other
-          choices, rather than an exact colour match.
-        </Text>
-        {[...new Set(d.windows.map((w) => w.palette))].map((k) => (
-          <View key={k} wrap={false}>
-            <Text style={s.h2}>{palettes[k].name}</Text>
-            <View style={s.swatches}>
-              {palettes[k].colours.map((col, i) => (
-                <View key={col}>
-                  <View style={[s.swatch, { backgroundColor: col }]} />
-                  <Text style={s.small}>{palettes[k].names[i]}</Text>
-                </View>
-              ))}
-            </View>
-            <Text style={s.body}>{palettes[k].advice}</Text>
-          </View>
-        ))}
-        <Text style={s.h2}>Let the light have a say</Text>
-        <Text style={s.body}>
-          Look at fabric, paint and flooring samples together in the room, both
-          by the window and further inside. Revisit them in morning, afternoon
-          and evening light before deciding. Warm and cool undertones can change
-          how neighbouring colours feel.
-        </Text>
-        <Text style={s.body}>
-          If the curtains carry a pattern, give it space beside quieter
-          surfaces. Mix a larger motif with a smaller texture rather than
-          several patterns of the same scale. Repeating one accent in two or
-          three small details helps the room feel connected.
-        </Text>
-        <Footer job={p.job} draft={p.draft} />
-      </Page>
       <Page size="A4" style={s.page}>
         <Brand />
         <Text style={s.kicker}>Caring for your collection</Text>
         <Text style={s.title}>Beautiful today.{"\n"}Cared for over time.</Text>
-        <Text style={s.body}>
-          Keep the complete fabric and lining specification with these
-          instructions. Different materials and blackout coatings can require
-          different care, so follow the guidance for the finished curtain rather
-          than the face fabric alone.
-        </Text>
+        <Text style={s.body}>{generalAftercare}</Text>
         {d.windows.map((w) => (
           <View key={w.id}>
             <Text style={s.h2} minPresenceAhead={60}>
@@ -499,15 +478,17 @@ function Brochure(p: Props) {
             ) : null}
           </View>
         ))}
-        <Text style={s.h2}>Here when you need us</Text>
-        <Text style={s.body}>
-          If you are unsure about cleaning, operating your track or adjusting a
-          tieback, speak to our team before proceeding. We can refer to your
-          original specification and help you find the appropriate next step.
-        </Text>
-        <Text style={s.body}>
-          hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
-        </Text>
+        <View wrap={false}>
+          <Text style={s.h2}>Here when you need us</Text>
+          <Text style={s.body}>
+            If you are unsure about cleaning, operating your track or adjusting a
+            tieback, speak to our team before proceeding. We can refer to your
+            original specification and help you find the appropriate next step.
+          </Text>
+          <Text style={s.body}>
+            hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
+          </Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       <Page size="A4" style={s.page}>
@@ -524,8 +505,9 @@ function Brochure(p: Props) {
         <Text style={s.kicker}>With our thanks</Text>
         <Text style={s.title}>For the next chapter{"\n"}of your home.</Text>
         <Text style={s.body}>
-          Thank you for choosing Apex Curtains. Whether you are finishing
-          another room or returning with a new idea, we would love to help.
+          {d.customerName ? `${d.customerName}, thank you` : "Thank you"} for
+          choosing Apex Curtains. Whether you are finishing another room or
+          returning with a new idea, we would love to help.
         </Text>
         <View style={s.voucher}>
           <Text
@@ -667,7 +649,7 @@ function Workroom(p: Props) {
               />
               <Field
                 label="Apex and track"
-                value={`${w.type === "apex" ? `Apex offset ${w.apexOffsetMm} mm; slopes ${w.leftSlopeMm} / ${w.rightSlopeMm} mm. ` : ""}${w.track}`}
+                value={`${w.type === "apex" ? `Apex offset ${w.apexOffsetMm} mm; slopes ${w.leftSlopeMm} / ${w.rightSlopeMm} mm. ` : ""}${w.track} · ${w.trackColour || "Track colour to be confirmed"}`}
               />
               <Field
                 label="Fabric"
@@ -776,7 +758,7 @@ function Fitter(p: Props) {
           <View style={s.grid}>
             <Field
               label="Track and opening"
-              value={`${w.track} · ${w.opening}`}
+              value={`${w.track} · ${w.trackColour || "Track colour to be confirmed"} · ${w.opening}`}
             />
             <Field
               label="Dimensions"
