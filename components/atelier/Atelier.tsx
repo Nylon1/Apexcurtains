@@ -91,6 +91,7 @@ export default function Atelier({
     [preview, setPreview] = useState(false);
   const [savingFailed, setSavingFailed] = useState(false);
   const savingRef = useRef(false);
+  const saveErrorRef = useRef("");
   const stepNavigation = useRef<HTMLElement>(null);
   const [windowSection, setWindowSection] = useState<
     Record<string, WindowSection>
@@ -200,9 +201,13 @@ export default function Atelier({
         prev.map((j) => (j.id === result.job.id ? result.job : j)),
       );
       setSavingFailed(false);
+      const resolvedError = saveErrorRef.current;
+      setError((current) => (current === resolvedError ? "" : current));
+      saveErrorRef.current = "";
       return result.job;
     } catch (e) {
-      setError((e as Error).message);
+      saveErrorRef.current = (e as Error).message;
+      setError(saveErrorRef.current);
       setSavingFailed(true);
       return null;
     } finally {

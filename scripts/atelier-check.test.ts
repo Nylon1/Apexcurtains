@@ -287,7 +287,7 @@ test("pattern, lining and photo requirements are routed to actionable sections",
   const w = data.windows[0];
   w.pattern = "half-drop";
   w.repeatMm = 0;
-  w.liningDropMm = 0;
+  w.liningWidthMm = 0;
   const checks = approvalChecklist(data).filter((c) => c.windowId === w.id);
   assert.ok(
     checks.some((c) => c.section === "fabric" && c.message.includes("repeat")),
@@ -366,7 +366,7 @@ test("apex material uses a full rectangle at the longest drop", () => {
   assert.equal(q.widths, 6);
   assert.equal(q.cutMm, 3860);
   assert.equal(q.fabricMetres, 23.16);
-  assert.equal(q.liningMetres, 22.2);
+  assert.equal(q.liningMetres, 23.16);
   assert.equal(
     calculateWindow({ ...w, leftDropMm: 1000, rightDropMm: 1500 }).fabricMetres,
     q.fabricMetres,
@@ -563,7 +563,7 @@ test("complex patterns require a matching plan covering the rectangular baseline
     false,
   );
 });
-test("lining has its own width and does not receive face fabric pattern repeats", () => {
+test("lining cutting uses its roll width while ordering matches curtain fabric including pattern allowance", () => {
   const w = {
     ...sampleJob().data.windows[0],
     pattern: "straight" as const,
@@ -572,8 +572,63 @@ test("lining has its own width and does not receive face fabric pattern repeats"
   };
   const q = calculateWindow(w);
   assert.equal(q.liningWidths, 4);
-  assert.equal(q.liningMetres, 14.8);
+  assert.equal(q.liningDropMm, 3600);
+  assert.equal(q.liningAllowanceMm, 260);
+  assert.equal(q.liningCutMm, 3860);
+  assert.equal(q.liningCuttingMetres, 15.44);
+  assert.equal(q.liningMetres, q.fabricMetres);
+  assert.equal(q.liningMetres, 26.88);
   assert.equal(calculateWindow({ ...w, lining: "none" }).liningMetres, 0);
+});
+
+test("lining follows changed curtain drop and allowance, checks narrow rolls and preserves historical approved figures", () => {
+  const data = sampleJob().data;
+  const w = {
+    ...data.windows[0],
+    type: "standard" as const,
+    longDropMm: 3000,
+    hemAllowanceMm: 300,
+  };
+  const q = calculateWindow(w);
+  assert.equal(q.liningDropMm, 3000);
+  assert.equal(q.liningAllowanceMm, 300);
+  assert.equal(q.liningCutMm, 3300);
+  assert.equal(q.liningMetres, q.fabricMetres);
+  const narrow = { ...w, liningWidthMm: 1000 };
+  const nq = calculateWindow(narrow);
+  assert.ok(
+    nq.checks.some(
+      (c) => c.section === "finish" && c.message.includes("more metres"),
+    ),
+  );
+  assert.deepEqual(
+    calculateWindow({
+      ...narrow,
+      extraLiningMetres: nq.liningCuttingMetres - nq.liningMetres,
+    }).issues,
+    [],
+  );
+  const legacy = jobDataSchema.parse({
+    ...data,
+    windows: [
+      {
+        ...w,
+        automaticLining: null,
+        liningDropMm: 2950,
+        liningAllowanceMm: 150,
+      },
+    ],
+  });
+  assert.equal(calculateWindow(legacy.windows[0]).liningCutMm, 3100);
+  assert.equal(
+    calculateWindow(legacy.windows[0]).liningMetres,
+    Math.ceil(18.6 * 100) / 100,
+  );
+  const draft = applyDraftAllowances(legacy);
+  assert.equal(draft.windows[0].liningDropMm, 3000);
+  assert.equal(draft.windows[0].liningAllowanceMm, 300);
+  assert.equal(calculateWindow(draft.windows[0]).liningMetres, 19.8);
+  assert.equal(legacy.windows[0].liningDropMm, 2950);
 });
 test("an oversized width blocks navigation with a usable units message", () => {
   const d = sampleJob().data;

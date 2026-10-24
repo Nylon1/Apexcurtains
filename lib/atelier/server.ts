@@ -95,6 +95,18 @@ export function apiError(error: unknown) {
             const index = v.path.find((part) => typeof part === "number");
             return `Window ${typeof index === "number" ? index + 1 : "measurement"}: full width exceeds 30,000 mm (30 metres). Check the units: 3.4 metres is 3400 mm. Correct the width in Measurements, then save again.`;
           }
+          if (
+            [
+              "longDropMm",
+              "middleDropMm",
+              "leftDropMm",
+              "rightDropMm",
+            ].includes(String(v.path.at(-1))) &&
+            v.code === "too_big"
+          ) {
+            const index = v.path.find((part) => typeof part === "number");
+            return `Window ${typeof index === "number" ? index + 1 : "measurement"}: a height exceeds 30,000 mm (30 metres). Check the heights in Measurements: 3.29 metres is 3290 mm, then save again.`;
+          }
           return `${v.path.join(".")}: ${v.message}`;
         }),
       },

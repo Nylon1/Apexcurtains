@@ -1,5 +1,6 @@
 /* Photographs are served through the staff-checked asset endpoint. */
 /* eslint-disable @next/next/no-img-element */
+import { Fragment } from "react";
 import { selectedTrack } from "@/lib/atelier/tracks";
 import { careGuide, additionalCareWindows } from "@/lib/atelier/care";
 import { shapeName } from "@/lib/atelier/geometry";
@@ -14,6 +15,9 @@ import {
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
+  designStory,
+  interiorGuide,
+  installationGuide,
   type BrochureDetail,
 } from "@/lib/atelier/brochure";
 
@@ -120,110 +124,187 @@ export default function BrochurePreview({
       </section>
       {data.windows.map((w, index) => {
         const palette = brochurePalette(w);
-        const photo = assets.find(
-          (a) => a.window_id === w.id && a.kind === "window",
-        );
+        const photo =
+          data.photoPermission &&
+          assets.find((a) => a.window_id === w.id && a.kind === "window");
         const fabric = selectedFabricPhoto(assets, w.id);
         const track = selectedTrack(w);
         return (
-          <section
-            className="at-brochure-page at-brochure-window"
-            id={`brochure-${w.id}`}
-            key={w.id}
-          >
-            <span className="at-eyebrow">
-              {String(index + 1).padStart(2, "0")} / {w.name} · {shapeName(w)}
-            </span>
-            <h3>{w.room || "Your room"}</h3>
-            <img
-              className="at-brochure-room"
-              src={
-                photo && data.photoPermission
-                  ? `/api/atelier/photos/${photo.id}`
-                  : "/visualiser/double-pinch-gable-desktop.webp"
-              }
-              alt={
-                photo && data.photoPermission
-                  ? `${w.room} · ${w.name}`
-                  : "Apex interior inspiration"
-              }
-              loading="lazy"
-            />
-            {!(photo && data.photoPermission) ? (
-              <p className="at-fine-print">
-                Interior inspiration · not your completed installation
-              </p>
-            ) : null}
-            <p className="at-brochure-intro">{roomIntroduction(w)}</p>
-            <span className="at-eyebrow">YOUR CHOSEN DETAILS</span>
-            <Details items={brochureSpecification(w)} />
-            {w.type === "apex" && w.apexShape === "other" ? (
-              <div className="at-custom-shape-notes">
-                <span className="at-eyebrow">
-                  YOUR WINDOW · RECORDED MEASUREMENTS
+          <Fragment key={w.id}>
+            <section
+              className="at-brochure-page at-brochure-window at-brochure-story"
+              id={`brochure-${w.id}`}
+            >
+              <div className="at-brochure-chapter">
+                <span>THE ROOMS / {String(index + 1).padStart(2, "0")}</span>
+                <span>
+                  {w.name} · {shapeName(w)}
                 </span>
-                <p>{w.otherShapeMeasurements}</p>
               </div>
-            ) : null}
-            {track ? (
-              <figure className="at-brochure-track">
+              <h3>{w.room || "Your room"}</h3>
+              <figure className="at-brochure-room-figure">
                 <img
-                  src={track.image}
-                  alt={track.name + ", shown in white"}
+                  className={`at-brochure-room ${photo ? "at-site-photograph" : ""}`}
+                  src={
+                    photo
+                      ? `/api/atelier/photos/${photo.id}`
+                      : "/visualiser/double-pinch-gable-desktop.webp"
+                  }
+                  alt={
+                    photo
+                      ? `${w.room} · ${w.name}`
+                      : "Apex interior inspiration"
+                  }
                   loading="lazy"
                 />
                 <figcaption>
-                  <b>{track.name}</b>
-                  <span>
-                    Your chosen finish: {w.trackColour || "To be confirmed"}
+                  {photo
+                    ? "Your window · photographed during your consultation"
+                    : "Interior inspiration from Apex · not your completed installation"}
+                </figcaption>
+              </figure>
+              <p className="at-brochure-intro">{roomIntroduction(w)}</p>
+              <div className="at-brochure-design-story">
+                {designStory(w).map((item) => (
+                  <div key={item.label}>
+                    <h4>{item.label}</h4>
+                    <p>{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className="at-brochure-page at-brochure-record">
+              <span className="at-eyebrow">
+                {w.room} / THE INDIVIDUAL SPECIFICATION
+              </span>
+              <h3>Every choice, together.</h3>
+              <p>
+                The fabric, proportions and finishing details selected for{" "}
+                {w.name.toLowerCase() || "your window"}. Keep this record with
+                your collection for future advice and additions.
+              </p>
+              <Details items={brochureSpecification(w)} />
+              {track ? (
+                <figure className="at-brochure-track">
+                  <img
+                    src={track.image}
+                    alt={track.name + ", shown in white"}
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    <b>{track.name}</b>
+                    <span>
+                      Your chosen finish: {w.trackColour || "To be confirmed"}
+                    </span>
+                    <small>{track.caption} Photograph: Forest Group.</small>
+                  </figcaption>
+                </figure>
+              ) : null}
+              {w.type === "apex" && w.apexShape === "other" ? (
+                <div className="at-custom-shape-notes">
+                  <span className="at-eyebrow">
+                    YOUR WINDOW · RECORDED MEASUREMENTS
                   </span>
-                  <small>{track.caption} Photograph: Forest Group.</small>
-                </figcaption>
-              </figure>
-            ) : null}
-            {fabric ? (
-              <figure className="at-brochure-fabric">
-                <img
-                  src={`/api/atelier/photos/${fabric.id}`}
-                  alt={`Chosen fabric: ${w.fabric} in ${w.colour}`}
-                  loading="lazy"
-                />
-                <figcaption>
-                  {w.fabric} · {w.colour}
-                  <br />
-                  {w.fabricCode}
-                  <br />
-                  Your physical sample is the closest guide to colour and
-                  texture.
-                </figcaption>
-              </figure>
-            ) : null}
-            <span className="at-eyebrow">COLOUR & INTERIORS / {w.room}</span>
-            <h3>{palette.name}</h3>
-            <p>{palette.basis}</p>
-            <div className="at-brochure-swatches">
-              {palette.colours.map((c, i) => (
-                <div key={c}>
-                  <span style={{ background: c }} />
-                  <small>{palette.names[i]}</small>
-                  <small>
-                    {
-                      [
-                        "Walls & larger surfaces",
-                        "Upholstery & soft layers",
-                        "Accents & small details",
-                      ][i]
-                    }
-                  </small>
+                  <p>{w.otherShapeMeasurements}</p>
                 </div>
-              ))}
-            </div>
-            <p>{palette.advice}</p>
-            <p>{palette.finishingAdvice}</p>
-            <p className="at-fine-print">{paletteSampleNote}</p>
-          </section>
+              ) : null}
+            </section>
+            <section className="at-brochure-page at-brochure-mood">
+              <span className="at-eyebrow">
+                {w.room} / COLOUR, TEXTURE & ATMOSPHERE
+              </span>
+              <h3>
+                The room beyond
+                <br />
+                <em>the curtains.</em>
+              </h3>
+              <h4 className="at-palette-title">{palette.name}</h4>
+              <p>{palette.basis}</p>
+              <div className="at-brochure-moodboard">
+                <figure className="at-brochure-cloth">
+                  {fabric ? (
+                    <img
+                      src={`/api/atelier/photos/${fabric.id}`}
+                      alt={`Chosen fabric: ${w.fabric} in ${w.colour}`}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="at-brochure-cloth-label">
+                      <strong>{w.fabric || "Your chosen cloth"}</strong>
+                      <span>{w.colour}</span>
+                    </div>
+                  )}
+                  <figcaption>
+                    <span className="at-eyebrow">
+                      {fabric
+                        ? "YOUR ACTUAL FABRIC PHOTOGRAPH"
+                        : "YOUR FABRIC SELECTION"}
+                    </span>
+                    <b>
+                      {w.fabric} · {w.colour}
+                    </b>
+                    <small>
+                      {w.supplier} · {w.fabricCode}
+                    </small>
+                  </figcaption>
+                </figure>
+                <div className="at-brochure-palette-strips">
+                  {palette.colours.map((colour, i) => (
+                    <div key={colour}>
+                      <span style={{ background: colour }} />
+                      <div>
+                        <b>{palette.names[i]}</b>
+                        <small>
+                          {
+                            [
+                              "The backdrop",
+                              "The soft layers",
+                              "The finishing accent",
+                            ][i]
+                          }
+                        </small>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="at-brochure-intro">{palette.advice}</p>
+              <div className="at-interior-guide">
+                {interiorGuide(w).map((item) => (
+                  <div key={item.label}>
+                    <h4>{item.label}</h4>
+                    <p>{item.value}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="at-fine-print">{paletteSampleNote}</p>
+            </section>
+          </Fragment>
         );
       })}
+      <section className="at-brochure-page at-brochure-arrival">
+        <span className="at-eyebrow">FROM OUR WORKROOM TO YOUR HOME</span>
+        <h3>
+          The day it all
+          <br />
+          <em>comes together.</em>
+        </h3>
+        <p>
+          {data.fittingDate
+            ? `Your recorded installation arrangements: ${data.fittingDate}.`
+            : "Your installation arrangements will be confirmed with Apex."}{" "}
+          A little preparation makes space for the final details.
+        </p>
+        {installationGuide.map((item, i) => (
+          <div className="at-arrival-step" key={item.label}>
+            <span>0{i + 1}</span>
+            <div>
+              <h4>{item.label}</h4>
+              <p>{item.value}</p>
+            </div>
+          </div>
+        ))}
+      </section>
       {careGuide.map((group) => (
         <section className="at-brochure-page" key={group.id}>
           <span className="at-eyebrow">{group.eyebrow}</span>

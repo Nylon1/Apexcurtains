@@ -6,6 +6,7 @@ import { createServerClient } from "@supabase/ssr";
 import sharp from "sharp";
 import {
   sampleJob,
+  calculateWindow,
   checklist,
   selectedFabricPhoto,
   type Asset,
@@ -213,6 +214,15 @@ try {
   assert.equal(job.data.windows[1].trackProduct, "forest-ks");
   assert.equal(job.data.windows[1].trackColour, "White");
   assert.equal(job.data.windows[0].paletteMode, "auto");
+  for (const w of job.data.windows) {
+    assert.equal(w.liningDropMm, w.longDropMm);
+    assert.equal(w.liningAllowanceMm, w.hemAllowanceMm);
+    assert.equal(w.liningAllowanceMm, 260);
+    assert.equal(
+      calculateWindow(w).liningMetres,
+      calculateWindow(w).fabricMetres,
+    );
+  }
   assert.equal(job.data.windows[0].leftSlopeMm, 1562);
   assert.equal(job.data.windows[0].rightSlopeMm, 1844);
   assert.equal(

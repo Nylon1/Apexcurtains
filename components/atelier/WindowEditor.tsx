@@ -118,7 +118,12 @@ export default function WindowEditor({
             label={key.endsWith("Mm") ? `${label} (mm)` : label}
             value={w[key] as string | number}
             type={type}
-            hint={hint}
+            hint={
+              hint ??
+              (key === "fabricWidthMm" || key === "liningWidthMm"
+                ? "Enter millimetres: 137 cm = 1370 mm; 140 cm = 1400 mm."
+                : undefined)
+            }
             options={options}
             wide={wide}
             showZero={key === "tiebackCount" || key === "hookCount"}
@@ -541,16 +546,6 @@ export default function WindowEditor({
                       ["liningCode", "Lining reference"],
                       ["liningColour", "Lining / blackout colour"],
                       ["liningWidthMm", "Usable lining width", "number"],
-                      [
-                        "liningDropMm",
-                        "Longest finished lining drop",
-                        "number",
-                      ],
-                      [
-                        "liningAllowanceMm",
-                        "Lining making allowance",
-                        "number",
-                      ],
                     ] as Config[])
                   : []),
                 ["interlining", "Interlining reference, if chosen"],
@@ -564,6 +559,43 @@ export default function WindowEditor({
                     ] as Config[])
                   : []),
               ])}
+              {w.lining !== "none" ? (
+                <div className="at-form-grid">
+                  <label className="at-field">
+                    <span>Finished lining drop (mm)</span>
+                    <input
+                      aria-label="Finished lining drop (mm)"
+                      readOnly
+                      value={q.liningDropMm || ""}
+                    />
+                    <small>
+                      {w.automaticLining
+                        ? "The lining uses the same finished length as the curtain at its tallest point. Filled in automatically."
+                        : "Previously recorded lining drop."}
+                    </small>
+                  </label>
+                  <label className="at-field">
+                    <span>Total lining hem allowance (mm)</span>
+                    <input
+                      aria-label="Total lining hem allowance (mm)"
+                      readOnly
+                      value={q.liningAllowanceMm}
+                    />
+                    <small>
+                      {w.automaticLining
+                        ? "Matches the curtain making allowance: the total extra length for the top and bottom hems of every width."
+                        : "Previously recorded lining allowance."}
+                    </small>
+                  </label>
+                  <p className="at-palette-help">
+                    Lining cut length: {q.liningDropMm} + {q.liningAllowanceMm}{" "}
+                    = {q.liningCutMm} mm per width.
+                    {w.automaticLining
+                      ? ` Order ${q.liningMetres.toFixed(2)} m of lining to match the curtain fabric${w.extraLiningMetres ? `, including ${w.extraLiningMetres} m extra lining` : ""}.`
+                      : ""}
+                  </p>
+                </div>
+              ) : null}
             </Section>
             <Section
               number="02"

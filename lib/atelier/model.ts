@@ -79,6 +79,7 @@ export const windowSchema = z
     liningWidthMm: mm,
     liningDropMm: mm,
     liningAllowanceMm: mm,
+    automaticLining: z.boolean().nullable().default(null),
     interlining: text(150),
     interliningMetres: z.number().min(0).max(2000).default(0),
     extraFabricMetres: z.number().min(0).max(100).default(0),
@@ -105,7 +106,12 @@ export const windowSchema = z
   })
   .transform((w) => {
     const track = selectedTrack(w);
-    return { ...normaliseGeometry(w), ...(track ? { track: track.name } : {}) };
+    const measured = normaliseGeometry(w);
+    return {
+      ...measured,
+      ...liningMeasurements(measured),
+      ...(track ? { track: track.name } : {}),
+    };
   });
 export const jobDataSchema = z.object({
   title: text(160),
@@ -137,13 +143,34 @@ export const jobDataSchema = z.object({
 export type SurveyWindow = z.infer<typeof windowSchema>;
 export type JobData = z.infer<typeof jobDataSchema>;
 export const standardHemAllowanceMm = 260;
+export function liningMeasurements(w: {
+  automaticLining: boolean | null;
+  longDropMm: number;
+  hemAllowanceMm: number | null;
+  topAllowanceMm: number;
+  bottomAllowanceMm: number;
+  liningDropMm: number;
+  liningAllowanceMm: number;
+}) {
+  return w.automaticLining
+    ? {
+        liningDropMm: w.longDropMm,
+        liningAllowanceMm:
+          w.hemAllowanceMm ?? w.topAllowanceMm + w.bottomAllowanceMm,
+      }
+    : { liningDropMm: w.liningDropMm, liningAllowanceMm: w.liningAllowanceMm };
+}
 export function applyDraftAllowances(data: JobData): JobData {
   return {
     ...data,
-    windows: data.windows.map((w) => ({
-      ...w,
-      hemAllowanceMm: w.hemAllowanceMm ?? standardHemAllowanceMm,
-    })),
+    windows: data.windows.map((w) => {
+      const next = {
+        ...w,
+        hemAllowanceMm: w.hemAllowanceMm ?? standardHemAllowanceMm,
+        automaticLining: w.automaticLining ?? true,
+      };
+      return { ...next, ...liningMeasurements(next) };
+    }),
   };
 }
 export type DocumentKind = "brochure" | "workroom" | "fitter";
@@ -203,7 +230,8 @@ export function newWindow(
     hemAllowanceMm: standardHemAllowanceMm,
     sideHemMm: 40,
     seamMm: 15,
-    liningAllowanceMm: 150,
+    liningAllowanceMm: standardHemAllowanceMm,
+    automaticLining: true,
     paletteMode: "auto",
     tiebacks: "Matching fabric",
   });
@@ -417,15 +445,29 @@ export function calculateWindow(w: SurveyWindow) {
     w.lining !== "none" && liningEffective > 0 && w.widthMm > 0
       ? Math.ceil(flatWidthPerPanel / liningEffective) * w.panelCount
       : 0;
-  const liningCutMm = w.liningDropMm + w.liningAllowanceMm;
-  if (w.lining !== "none" && (!liningWidths || !w.liningDropMm))
+  const { liningDropMm, liningAllowanceMm } = liningMeasurements(w);
+  const liningCutMm = liningDropMm + liningAllowanceMm;
+  if (w.lining !== "none" && (!liningWidths || !liningDropMm))
     add("finish", "Enter the lining width and finished drop.");
+  const liningCuttingMetres =
+    w.lining === "none"
+      ? 0
+      : Math.ceil((liningWidths * liningCutMm) / 10) / 100;
   const liningMetres =
     w.lining === "none"
       ? 0
-      : Math.ceil(
-          ((liningWidths * liningCutMm) / 1000 + w.extraLiningMetres) * 100,
-        ) / 100;
+      : w.automaticLining
+        ? (Math.round(fabricMetres * 100) +
+            Math.ceil(w.extraLiningMetres * 100)) /
+          100
+        : Math.ceil(
+            ((liningWidths * liningCutMm) / 1000 + w.extraLiningMetres) * 100,
+          ) / 100;
+  if (w.automaticLining && liningMetres < liningCuttingMetres)
+    add(
+      "finish",
+      "The lining roll needs more metres than the curtain fabric. Confirm its usable width and add extra lining to cover the cutting requirement.",
+    );
   return {
     widths,
     hemAllowanceMm,
@@ -433,7 +475,10 @@ export function calculateWindow(w: SurveyWindow) {
     baseMetres,
     fabricMetres,
     liningWidths,
+    liningDropMm,
+    liningAllowanceMm,
     liningCutMm,
+    liningCuttingMetres,
     liningMetres,
     manual,
     issues,
