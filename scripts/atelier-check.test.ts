@@ -12,6 +12,9 @@ import { selectedTrack } from "../lib/atelier/tracks";
 import {
   brochurePalette,
   brochureSpecification,
+  brochureSpecificationSections,
+  brochureRooms,
+  interiorExample,
   customerDetails,
 } from "../lib/atelier/brochure";
 import {
@@ -480,6 +483,13 @@ test("client brochure includes personal details and chosen finishes without inte
   const spec = brochureSpecification(w)
     .map((d) => d.value)
     .join("\n");
+  assert.deepEqual(
+    brochureSpecificationSections(w)
+      .flatMap((section) => section.items)
+      .sort((a, b) => a.label.localeCompare(b.label)),
+    brochureSpecification(w).sort((a, b) => a.label.localeCompare(b.label)),
+    "Every specification value appears exactly once in the grouped boxes",
+  );
   for (const value of [
     w.supplier,
     w.fabricCode,
@@ -520,6 +530,33 @@ test("client brochure includes personal details and chosen finishes without inte
     none.find((d) => d.label === "Hooks / holdbacks")?.value,
     "None selected",
   );
+});
+test("brochure groups interleaved rooms without losing windows or their own colour advice", () => {
+  const [first, second] = sampleJob().data.windows;
+  const windows = [
+    first,
+    second,
+    {
+      ...first,
+      id: "third",
+      room: ` ${first.room.toUpperCase()} `,
+      name: "Side window",
+      colour: "Deep blue",
+    },
+  ];
+  const rooms = brochureRooms(windows);
+  assert.equal(rooms.length, 2);
+  assert.deepEqual(
+    rooms.flatMap((room) => room.windows).map((w) => w.id),
+    [first.id, "third", second.id],
+  );
+  assert.equal(
+    windows[1].id,
+    second.id,
+    "Grouping must not mutate the survey order",
+  );
+  assert.ok(interiorExample(windows[2]).text.includes("Deep blue curtains"));
+  assert.ok(interiorExample(second).text.includes("bedding"));
 });
 test("straight repeats round every cut up and include extra allowances", () => {
   const w = {

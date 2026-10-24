@@ -70,7 +70,9 @@ Lining automatically uses **the same finished drop and total making allowance as
 
 ## Verification
 
-The brochure cover uses a bundled screenshot of the Apex homepage. The three heading examples follow the customer dedication on page 3. Fabric and workroom photography separate the editorial sections, and three illustrated care spreads use concise cards from `brochure-care.ts`; the full standard policy remains in `care.ts`. HTML and generated PDFs share the same content and icons. Customer photographs and recorded specifications still take precedence in the individual room pages.
+Brochures with multiple windows include a separate linked contents section, grouped by room in first-seen order. Each window retains its own numbered design, specification and interior palette pages; the room/window name appears on the detail pages. Shared care, installation advice and the voucher appear once. Specifications use separate green-accented boxes for fabric, heading and fit, lining, finishing touches and the track; optional notes flow separately without losing recorded choices. Each window's interior advice includes a concrete example using its current palette, with bedding suggestions for bedrooms and upholstery/rug suggestions for other rooms. Survey order and client-selected colours are not changed by presentation grouping.
+
+The brochure cover uses a bundled screenshot of the Apex homepage. The three heading examples follow the customer dedication on page 3. Fabric styling photography and a screenshot of the website colour studio replace workshop imagery, and three illustrated care spreads use concise cards from `brochure-care.ts`; the full standard policy remains in `care.ts`. HTML and generated PDFs share the same content and icons, with website forest-green branding and sage care panels. Customer photographs and recorded specifications still take precedence in the individual room pages.
 
 `npm run test:atelier` checks the core calculations and release validation. `npm run build` and targeted ESLint check the application.
 

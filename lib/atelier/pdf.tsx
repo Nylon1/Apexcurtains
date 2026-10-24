@@ -40,12 +40,13 @@ import {
 
 import {
   customerDetails,
-  brochureSpecification,
+  brochureSpecificationSections,
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
   designStory,
-  interiorGuide,
+  interiorExample,
+  brochureRooms,
   installationGuide,
   apexWebsite,
   homePromise,
@@ -56,11 +57,11 @@ import { brochureCareGuide } from "./brochure-care";
 import { brochureIcons, type BrochureIconName } from "./brochure-icons";
 
 const C = {
-  navy: "#102C3B",
-  ink: "#263C43",
+  forest: "#1B3430",
+  ink: "#2B4038",
   gold: "#B59B6A",
   paper: "#F7F3EC",
-  muted: "#667271",
+  muted: "#62746A",
   line: "#DED8CD",
 };
 const s = StyleSheet.create({
@@ -74,7 +75,7 @@ const s = StyleSheet.create({
     lineHeight: 1.5,
   },
   cover: {
-    backgroundColor: C.navy,
+    backgroundColor: C.forest,
     padding: 42,
     color: C.paper,
     fontFamily: "Helvetica",
@@ -98,7 +99,7 @@ const s = StyleSheet.create({
     fontSize: 34,
     lineHeight: 1.08,
     marginBottom: 18,
-    color: C.navy,
+    color: C.forest,
   },
   heroTitle: {
     fontFamily: "Times-Roman",
@@ -114,7 +115,7 @@ const s = StyleSheet.create({
     lineHeight: 1.2,
     marginTop: 14,
     marginBottom: 8,
-    color: C.navy,
+    color: C.forest,
   },
   body: { fontSize: 10, lineHeight: 1.5, marginBottom: 12 },
   small: { fontSize: 8, color: C.muted, lineHeight: 1.5, marginBottom: 8 },
@@ -158,7 +159,7 @@ const s = StyleSheet.create({
   },
   tableHead: {
     flexDirection: "row",
-    backgroundColor: C.navy,
+    backgroundColor: C.forest,
     color: C.paper,
     padding: 8,
     fontSize: 8,
@@ -379,12 +380,20 @@ function IntroPage(p: Props) {
     </Page>
   );
 }
-function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
+function BrochureWindow({
+  p,
+  w,
+  index,
+}: {
+  p: Props;
+  w: SurveyWindow;
+  index: number;
+}) {
   const palette = brochurePalette(w);
   const track = selectedTrack(w);
   const sitePhoto = p.job.data.photoPermission && imageFor(p, w);
   const fabricPhoto = imageFor(p, w, "fabric");
-  const index = p.job.data.windows.findIndex((item) => item.id === w.id) + 1;
+  const example = interiorExample(w);
   return (
     <>
       <Page size="A4" style={s.page}>
@@ -405,7 +414,10 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             {w.name} · {shapeName(w)}
           </Text>
         </View>
-        <Text style={[s.title, { fontSize: 42, marginBottom: 14 }]}>
+        <Text
+          id={`window-${w.id}`}
+          style={[s.title, { fontSize: 42, marginBottom: 14 }]}
+        >
           {w.room}
         </Text>
         {sitePhoto ? (
@@ -451,9 +463,10 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
               wrap={false}
               style={{
                 width: "50%",
-                paddingRight: i % 2 === 0 ? 18 : 0,
-                paddingLeft: i % 2 === 1 ? 10 : 0,
-                paddingBottom: 13,
+                padding: 12,
+                borderWidth: 3,
+                borderColor: C.paper,
+                backgroundColor: i === 0 ? "#E1E7DA" : "#EDF0E7",
               }}
             >
               <Text style={[s.label, { color: C.gold, marginBottom: 6 }]}>
@@ -470,46 +483,103 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
       <Page size="A4" style={s.page}>
         <Brand />
         <Motif name="scroll" />
-        <Text style={s.kicker}>{w.room} / THE INDIVIDUAL SPECIFICATION</Text>
+        <Text style={s.kicker}>
+          {String(index).padStart(2, "0")} / {w.room} / {w.name} / SPECIFICATION
+        </Text>
         <Text style={s.title}>Every choice, together.</Text>
         <Text style={s.body}>
           The fabric, proportions and finishing details selected for{" "}
           {w.name.toLowerCase() || "your window"}. Keep this record with your
           collection for future advice and additions.
         </Text>
-        <View style={s.grid}>
-          {brochureSpecification(w).map((detail) => (
-            <Field key={detail.label} {...detail} />
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            gap: 12,
+            marginTop: 7,
+          }}
+        >
+          {brochureSpecificationSections(w).map((section) => (
+            <View
+              key={section.id}
+              wrap={section.id === "notes"}
+              style={{
+                width:
+                  section.id === "track" || section.id === "notes"
+                    ? "100%"
+                    : 249,
+                padding: 14,
+                borderWidth: 0.6,
+                borderColor: "#CFD9CB",
+                borderTopWidth: 3,
+                borderTopColor: C.forest,
+                backgroundColor: "#FFFFFF",
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Times-Roman",
+                  fontSize: 19,
+                  lineHeight: 1.2,
+                  color: C.forest,
+                  marginBottom: 10,
+                }}
+                minPresenceAhead={45}
+              >
+                {section.title}
+              </Text>
+              <View
+                style={{
+                  flexDirection: section.id === "track" ? "row" : "column",
+                  gap: section.id === "track" ? 18 : 0,
+                }}
+              >
+                {section.id === "track" &&
+                track &&
+                p.trackPhotos?.[track.id] ? (
+                  <Image
+                    src={p.trackPhotos[track.id]}
+                    style={{ width: 115, height: 83, objectFit: "contain" }}
+                  />
+                ) : null}
+                <View style={{ flex: section.id === "track" ? 1 : undefined }}>
+                  {section.items.map((detail) => (
+                    <View key={detail.label} style={{ marginBottom: 8 }}>
+                      <Text
+                        style={{
+                          fontSize: 7,
+                          lineHeight: 1.2,
+                          textTransform: "uppercase",
+                          letterSpacing: 0.4,
+                          color: "#62746A",
+                          marginBottom: 3,
+                        }}
+                        minPresenceAhead={20}
+                      >
+                        {detail.label}
+                      </Text>
+                      <Text
+                        style={{ fontSize: 9.5, lineHeight: 1.4, color: C.ink }}
+                      >
+                        {detail.value}
+                      </Text>
+                    </View>
+                  ))}
+                  {section.id === "track" &&
+                  track &&
+                  p.trackPhotos?.[track.id] ? (
+                    <Text
+                      style={{ fontSize: 7, lineHeight: 1.4, color: C.muted }}
+                    >
+                      {track.caption} Photograph: Forest Group.
+                    </Text>
+                  ) : null}
+                </View>
+              </View>
+            </View>
           ))}
         </View>
-        {track && p.trackPhotos?.[track.id] ? (
-          <View
-            wrap={false}
-            style={{
-              flexDirection: "row",
-              gap: 18,
-              marginTop: 20,
-              padding: 16,
-              backgroundColor: "#FFFFFF",
-            }}
-          >
-            <Image
-              src={p.trackPhotos[track.id]}
-              style={{ width: 115, height: 95, objectFit: "contain" }}
-            />
-            <View style={{ flex: 1 }}>
-              <Text style={[s.h2, { marginTop: 0, fontSize: 19 }]}>
-                {track.name}
-              </Text>
-              <Text style={s.body}>
-                Your chosen finish: {w.trackColour || "To be confirmed"}
-              </Text>
-              <Text style={s.small}>
-                {track.caption} Photograph: Forest Group.
-              </Text>
-            </View>
-          </View>
-        ) : null}
         {w.type === "apex" && w.apexShape === "other" ? (
           <View style={{ marginTop: 18 }}>
             <Text style={s.h2} minPresenceAhead={45}>
@@ -523,14 +593,17 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
       <Page size="A4" style={s.page}>
         <Brand />
         <Motif name="palette" />
-        <Text style={s.kicker}>{w.room} / COLOUR, TEXTURE & ATMOSPHERE</Text>
+        <Text style={s.kicker}>
+          {String(index).padStart(2, "0")} / {w.room} / {w.name} / COLOUR &
+          INTERIORS
+        </Text>
         <Text style={s.title}>The room beyond the curtains.</Text>
         <Text style={[s.h2, { marginTop: 0, fontSize: 20 }]}>
           {palette.name}
         </Text>
         <Text style={s.body}>{palette.basis}</Text>
         <View
-          style={{ flexDirection: "row", gap: 16, marginVertical: 12 }}
+          style={{ flexDirection: "row", gap: 16, marginVertical: 8 }}
           wrap={false}
         >
           <View style={{ width: "46%" }}>
@@ -539,7 +612,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
                 src={fabricPhoto}
                 style={{
                   width: "100%",
-                  height: 140,
+                  height: 115,
                   objectFit: "contain",
                   backgroundColor: "#E9E5DD",
                 }}
@@ -547,9 +620,9 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             ) : (
               <View
                 style={{
-                  height: 140,
+                  height: 115,
                   padding: 22,
-                  backgroundColor: C.navy,
+                  backgroundColor: C.forest,
                   justifyContent: "center",
                 }}
               >
@@ -584,9 +657,9 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             {palette.colours.map((col, i) => (
               <View
                 key={col}
-                style={{ flexDirection: "row", gap: 12, marginBottom: 10 }}
+                style={{ flexDirection: "row", gap: 12, marginBottom: 7 }}
               >
-                <View style={{ width: 58, height: 48, backgroundColor: col }} />
+                <View style={{ width: 58, height: 36, backgroundColor: col }} />
                 <View style={{ flex: 1, paddingTop: 3 }}>
                   <Text style={s.value}>{palette.names[i]}</Text>
                   <Text style={s.small}>
@@ -611,25 +684,43 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
         >
           {palette.advice}
         </Text>
-        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
-          {interiorGuide(w).map((item, i) => (
+        <View
+          wrap={false}
+          style={{
+            backgroundColor: "#E1E7DA",
+            borderLeftWidth: 3,
+            borderLeftColor: C.forest,
+            padding: 14,
+            marginTop: 5,
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: "Times-Roman",
+              fontSize: 19,
+              lineHeight: 1.2,
+              color: C.forest,
+              marginBottom: 8,
+            }}
+          >
+            {example.title}
+          </Text>
+          <Text style={{ fontSize: 10, lineHeight: 1.5 }}>{example.text}</Text>
+        </View>
+        <View style={{ flexDirection: "row", gap: 12, marginTop: 12 }}>
+          {[
+            { title: "Try it in your light", text: example.light },
+            { title: "Connect the finishing details", text: example.finish },
+          ].map((item) => (
             <View
-              key={item.label}
+              key={item.title}
               wrap={false}
-              style={{
-                borderTopWidth: 0.5,
-                borderColor: C.line,
-                paddingTop: 8,
-                paddingBottom: 5,
-                width: "50%",
-                paddingRight: i % 2 === 0 ? 18 : 0,
-                paddingLeft: i % 2 === 1 ? 10 : 0,
-              }}
+              style={{ width: 249, padding: 12, backgroundColor: "#EDF0E7" }}
             >
-              <Text style={[s.label, { marginBottom: 5 }]}>{item.label}</Text>
-              <Text style={{ fontSize: 9.2, lineHeight: 1.45 }}>
-                {item.value}
+              <Text style={[s.label, { color: C.forest, marginBottom: 6 }]}>
+                {item.title}
               </Text>
+              <Text style={{ fontSize: 9, lineHeight: 1.45 }}>{item.text}</Text>
             </View>
           ))}
         </View>
@@ -642,6 +733,8 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
 
 function Brochure(p: Props) {
   const d = p.job.data;
+  const rooms = brochureRooms(d.windows);
+  const orderedWindows = rooms.flatMap((room) => room.windows);
   const [client, address, ...contactDetails] = customerDetails(d);
   return (
     <Document
@@ -689,7 +782,7 @@ function Brochure(p: Props) {
               fontSize: client.value.length > 80 ? 21 : 25,
               lineHeight: 1.2,
               textAlign: "center",
-              color: C.navy,
+              color: C.forest,
               marginBottom: 18,
             }}
           >
@@ -774,7 +867,7 @@ function Brochure(p: Props) {
         ))}
         <Link
           src={`${apexWebsite}/curtain-headings`}
-          style={[s.small, { marginTop: 12, color: C.navy }]}
+          style={[s.small, { marginTop: 12, color: C.forest }]}
         >
           Explore the heading guide at apexcurtains.com/curtain-headings
         </Link>
@@ -846,33 +939,6 @@ function Brochure(p: Props) {
             }}
           />
         ) : null}
-        <Text style={s.h2} minPresenceAhead={70}>
-          Your rooms
-        </Text>
-        {d.windows.map((w) => (
-          <View
-            key={w.id}
-            style={{
-              paddingVertical: 12,
-              borderBottomWidth: 0.5,
-              borderColor: C.line,
-            }}
-            wrap={false}
-          >
-            <Text
-              style={{
-                fontFamily: "Times-Roman",
-                fontSize: 19,
-                lineHeight: 1.2,
-              }}
-            >
-              {w.room}
-            </Text>
-            <Text style={s.small}>
-              {w.name} · {shapeName(w)} · {w.colour}
-            </Text>
-          </View>
-        ))}
         {contactDetails.length ? (
           <View style={s.grid}>
             {contactDetails.map((detail) => (
@@ -882,8 +948,67 @@ function Brochure(p: Props) {
         ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
-      {d.windows.map((w) => (
-        <BrochureWindow key={w.id} p={p} w={w} />
+      {d.windows.length > 1 ? (
+        <Page size="A4" style={s.page}>
+          <Brand />
+          <Motif name="home" />
+          <Text style={s.kicker}>YOUR COLLECTION AT A GLANCE</Text>
+          <Text style={s.title}>Your home, room by room.</Text>
+          <Text style={s.body}>
+            {rooms.length} {rooms.length === 1 ? "room" : "rooms"} ·{" "}
+            {d.windows.length} individually considered windows. Select a window
+            below to turn to its design, specification and colour advice.
+            Aftercare and your voucher follow at the end.
+          </Text>
+          {rooms.map((room) => (
+            <View key={room.room} style={{ marginTop: 10 }}>
+              <Text
+                style={[s.h2, { marginTop: 0, fontSize: 22 }]}
+                minPresenceAhead={70}
+              >
+                {room.room}
+              </Text>
+              {room.windows.map((w) => (
+                <View
+                  key={w.id}
+                  wrap={false}
+                  style={{
+                    backgroundColor: "#E1E7DA",
+                    padding: 10,
+                    marginBottom: 8,
+                    borderLeftWidth: 3,
+                    borderLeftColor: C.forest,
+                  }}
+                >
+                  <Link
+                    src={`#window-${w.id}`}
+                    style={{
+                      color: C.forest,
+                      fontSize: 14,
+                      lineHeight: 1.3,
+                      fontFamily: "Times-Roman",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {String(
+                      orderedWindows.findIndex((item) => item.id === w.id) + 1,
+                    ).padStart(2, "0")}{" "}
+                    / {w.name}
+                  </Link>
+                  <Text
+                    style={{ fontSize: 8.5, lineHeight: 1.4, marginTop: 5 }}
+                  >
+                    {shapeName(w)} · {w.fabric} · {w.colour} · {w.heading}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          ))}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ) : null}
+      {orderedWindows.map((w, index) => (
+        <BrochureWindow key={w.id} p={p} w={w} index={index + 1} />
       ))}
       <Page size="A4" style={s.page}>
         <Brand />
@@ -896,9 +1021,9 @@ function Brochure(p: Props) {
             : "Your installation arrangements will be confirmed with Apex."}{" "}
           A little preparation makes space for the final details.
         </Text>
-        {p.illustrations?.making ? (
+        {p.illustrations?.swatches ? (
           <Image
-            src={p.illustrations.making}
+            src={p.illustrations.swatches}
             style={{
               width: "100%",
               height: 165,
@@ -961,7 +1086,7 @@ function Brochure(p: Props) {
                   width: 248,
                   padding: group.id === "living" ? 12 : 18,
                   minHeight: group.id === "living" ? 165 : 245,
-                  backgroundColor: index === 0 ? "#E5E0D4" : "#EEEAE2",
+                  backgroundColor: index === 0 ? "#E1E7DA" : "#EDF0E7",
                   borderTopWidth: 2,
                   borderColor: C.gold,
                 }}
@@ -1050,7 +1175,10 @@ function Brochure(p: Props) {
                 style={{
                   width: 205,
                   height: 125,
-                  objectFit: item.id === "colour" ? "contain" : "cover",
+                  objectFit:
+                    item.id === "colour" || item.id === "studio"
+                      ? "contain"
+                      : "cover",
                 }}
               />
             ) : null}
@@ -1063,7 +1191,7 @@ function Brochure(p: Props) {
               </Text>
               <Link
                 src={`${apexWebsite}${item.path}`}
-                style={{ fontSize: 8.5, color: C.navy, marginBottom: 6 }}
+                style={{ fontSize: 8.5, color: C.forest, marginBottom: 6 }}
               >
                 Visit this page
               </Link>
@@ -1129,14 +1257,14 @@ function Brochure(p: Props) {
               fontFamily: "Times-Roman",
               fontSize: 25,
               lineHeight: 1.3,
-              color: C.navy,
+              color: C.forest,
               textDecoration: "none",
               marginBottom: 10,
             }}
           >
             <Link
               src={apexWebsite}
-              style={{ color: C.navy, textDecoration: "none" }}
+              style={{ color: C.forest, textDecoration: "none" }}
             >
               www.apexcurtains.com
             </Link>

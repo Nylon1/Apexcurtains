@@ -18,6 +18,25 @@ async function main() {
   const illustrations = await loadBrochureImages();
   const shapes = process.argv.includes("--shapes");
   const long = process.argv.includes("--long");
+  const multi = process.argv.includes("--multi");
+  if (multi) {
+    const [apex, standard] = job.data.windows;
+    job.data.windows = Array.from({ length: 6 }, (_, i) => ({
+      ...(i % 2 ? standard : apex),
+      id: `multi-window-${i + 1}`,
+      room: ["Drawing room", "Principal bedroom", "Garden room"][i % 3],
+      name: i < 3 ? "Main window" : "Side window",
+      colour: [
+        "Warm flax",
+        "Soft sage",
+        "Deep blue",
+        "Terracotta",
+        "Dusky rose",
+        "Charcoal",
+      ][i],
+      designNotes: "",
+    }));
+  }
   if (long) {
     job.data.customerEmail = "alexandra@example.com";
     job.data.phone = "0800 000 0000";
@@ -41,6 +60,10 @@ async function main() {
       "Please quote the personal code when discussing your next order. ".repeat(
         10,
       ) + "VOUCHER END";
+    job.data.windows[0].patternNotes =
+      "Keep the chosen motif aligned across the panels and confirm the sample before cutting. ".repeat(
+        12,
+      ) + "SPECIFICATION END";
   }
   if (shapes) {
     Object.assign(job.data.windows[0], {
@@ -77,7 +100,7 @@ async function main() {
       draft: true,
     });
     await writeFile(
-      `${out}/${long ? "long-" : shapes ? "shapes-" : ""}${kind}.pdf`,
+      `${out}/${multi ? "multi-" : long ? "long-" : shapes ? "shapes-" : ""}${kind}.pdf`,
       bytes,
     );
     console.log(`${kind}: ${bytes.length} bytes`);

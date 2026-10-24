@@ -10,3 +10,5 @@ Existing website imagery is reused directly: `/headings/pencil-pleat.jpeg`, `/he
 # Homepage cover
 
 `apex-homepage.webp` is an actual screenshot of https://www.apexcurtains.com/ captured on 24 October 2026 using the connected browser. It includes the website masthead and opening hero, with the introduction overlay closed. The screenshot is presented as the homepage, not as the client's chosen curtain design.
+
+`apex-colour-studio.webp` is a screenshot of the colour wheel and neutral palette on https://www.apexcurtains.com/curtain-colours-and-tones#colour-explorer, captured on 24 October 2026. It replaces the generic workshop photograph. The brochure uses the website navigation green (#1B3430), soft sage reading panels and retained gold accents. Customer fabric and palette selections are unchanged.

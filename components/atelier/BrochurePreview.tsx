@@ -16,12 +16,13 @@ import {
 } from "@/lib/atelier/model";
 import {
   customerDetails,
-  brochureSpecification,
+  brochureSpecificationSections,
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
   designStory,
-  interiorGuide,
+  interiorExample,
+  brochureRooms,
   installationGuide,
   apexWebsite,
   brochureImages,
@@ -75,6 +76,8 @@ export default function BrochurePreview({
   reference: string;
 }) {
   const [client, address, ...contactDetails] = customerDetails(data);
+  const rooms = brochureRooms(data.windows);
+  const orderedWindows = rooms.flatMap((room) => room.windows);
   return (
     <article
       className="at-brochure"
@@ -207,22 +210,51 @@ export default function BrochurePreview({
           alt="An arrangement of fabric swatches, an invitation to explore texture and colour"
           loading="lazy"
         />
-        <ol className="at-brochure-contents">
-          {data.windows.map((w) => (
-            <li key={w.id}>
-              <a href={`#brochure-${w.id}`}>
-                <b>{w.room || "Room"}</b>
-                <span>
-                  {w.name || "Window"} · {shapeName(w)}
-                </span>
-              </a>
-            </li>
-          ))}
-        </ol>
         {contactDetails.length ? <Details items={contactDetails} /> : null}
       </section>
-      {data.windows.map((w, index) => {
+      {data.windows.length > 1 ? (
+        <section className="at-brochure-page at-brochure-directory">
+          <Motif name="home" />
+          <span className="at-eyebrow">YOUR COLLECTION AT A GLANCE</span>
+          <h3>Your home, room by room.</h3>
+          <p>
+            {rooms.length} {rooms.length === 1 ? "room" : "rooms"} ·{" "}
+            {data.windows.length} individually considered windows. Select a
+            window to turn to its collection.
+          </p>
+          {rooms.map((room) => (
+            <div key={room.room} className="at-brochure-directory-room">
+              <h4>{room.room}</h4>
+              <ol className="at-brochure-contents">
+                {room.windows.map((w) => (
+                  <li key={w.id}>
+                    <a href={`#brochure-${w.id}`}>
+                      <b>
+                        {String(
+                          orderedWindows.findIndex((item) => item.id === w.id) +
+                            1,
+                        ).padStart(2, "0")}{" "}
+                        / {w.name}
+                      </b>
+                      <span>
+                        {shapeName(w)} · {w.fabric} · {w.colour} · {w.heading}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
+          <p>
+            Every window has its own design, specification and colour advice.
+            Installation guidance, aftercare and your future-order voucher
+            follow once at the end.
+          </p>
+        </section>
+      ) : null}
+      {orderedWindows.map((w, index) => {
         const palette = brochurePalette(w);
+        const example = interiorExample(w);
         const photo =
           data.photoPermission &&
           assets.find((a) => a.window_id === w.id && a.kind === "window");
@@ -304,7 +336,8 @@ export default function BrochurePreview({
             <section className="at-brochure-page at-brochure-record">
               <Motif name="scroll" />
               <span className="at-eyebrow">
-                {w.room} / THE INDIVIDUAL SPECIFICATION
+                {String(index + 1).padStart(2, "0")} / {w.room} / {w.name} /
+                SPECIFICATION
               </span>
               <h3>Every choice, together.</h3>
               <p>
@@ -312,23 +345,40 @@ export default function BrochurePreview({
                 {w.name.toLowerCase() || "your window"}. Keep this record with
                 your collection for future advice and additions.
               </p>
-              <Details items={brochureSpecification(w)} />
-              {track ? (
-                <figure className="at-brochure-track">
-                  <img
-                    src={track.image}
-                    alt={track.name + ", shown in white"}
-                    loading="lazy"
-                  />
-                  <figcaption>
-                    <b>{track.name}</b>
-                    <span>
-                      Your chosen finish: {w.trackColour || "To be confirmed"}
-                    </span>
-                    <small>{track.caption} Photograph: Forest Group.</small>
-                  </figcaption>
-                </figure>
-              ) : null}
+              <div className="at-brochure-choice-grid">
+                {brochureSpecificationSections(w).map((section) => (
+                  <section
+                    key={section.id}
+                    className={`at-brochure-choice-box at-choice-${section.id}`}
+                    aria-label={section.title}
+                  >
+                    <h4>{section.title}</h4>
+                    <div
+                      className={
+                        section.id === "track"
+                          ? "at-brochure-track-choice"
+                          : undefined
+                      }
+                    >
+                      {section.id === "track" && track ? (
+                        <img
+                          src={track.image}
+                          alt={track.name + ", shown in white"}
+                          loading="lazy"
+                        />
+                      ) : null}
+                      <div>
+                        <Details items={section.items} />
+                        {section.id === "track" && track ? (
+                          <small>
+                            {track.caption} Photograph: Forest Group.
+                          </small>
+                        ) : null}
+                      </div>
+                    </div>
+                  </section>
+                ))}
+              </div>
               {w.type === "apex" && w.apexShape === "other" ? (
                 <div className="at-custom-shape-notes">
                   <span className="at-eyebrow">
@@ -341,7 +391,8 @@ export default function BrochurePreview({
             <section className="at-brochure-page at-brochure-mood">
               <Motif name="palette" />
               <span className="at-eyebrow">
-                {w.room} / COLOUR, TEXTURE & ATMOSPHERE
+                {String(index + 1).padStart(2, "0")} / {w.room} / {w.name} /
+                COLOUR & INTERIORS
               </span>
               <h3>
                 The room beyond
@@ -399,13 +450,19 @@ export default function BrochurePreview({
                 </div>
               </div>
               <p className="at-brochure-intro">{palette.advice}</p>
+              <div className="at-brochure-interior-example">
+                <h4>{example.title}</h4>
+                <p>{example.text}</p>
+              </div>
               <div className="at-interior-guide">
-                {interiorGuide(w).map((item) => (
-                  <div key={item.label}>
-                    <h4>{item.label}</h4>
-                    <p>{item.value}</p>
-                  </div>
-                ))}
+                <div>
+                  <h4>Try it in your light</h4>
+                  <p>{example.light}</p>
+                </div>
+                <div>
+                  <h4>Connect the finishing details</h4>
+                  <p>{example.finish}</p>
+                </div>
               </div>
               <p className="at-fine-print">{paletteSampleNote}</p>
             </section>
@@ -428,8 +485,8 @@ export default function BrochurePreview({
         </p>
         <img
           className="at-brochure-editorial"
-          src={brochureImages.making}
-          alt="Fabric and sewing tools in the Apex website workroom photograph"
+          src={brochureImages.swatches}
+          alt="Softly layered fabric swatches in cream, sage and deeper tones"
           loading="lazy"
         />
         {installationGuide.map((item, i) => (
@@ -499,7 +556,12 @@ export default function BrochurePreview({
               src={item.image}
               alt={item.alt}
               loading="lazy"
-              style={{ objectFit: item.id === "colour" ? "contain" : "cover" }}
+              style={{
+                objectFit:
+                  item.id === "colour" || item.id === "studio"
+                    ? "contain"
+                    : "cover",
+              }}
             />
             <figcaption>
               <h4>{item.title}</h4>
