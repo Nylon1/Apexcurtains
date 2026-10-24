@@ -47,6 +47,7 @@ import { Button, Field, Section, Toggle, request } from "./Fields";
 import WindowEditor from "./WindowEditor";
 import BrochurePreview from "./BrochurePreview";
 import { normaliseGeometry } from "@/lib/atelier/geometry";
+import { selectedTrack } from "@/lib/atelier/tracks";
 import {
   navigationChecks,
   type SurveyDestination,
@@ -90,6 +91,7 @@ export default function Atelier({
     [preview, setPreview] = useState(false);
   const [savingFailed, setSavingFailed] = useState(false);
   const savingRef = useRef(false);
+  const saveErrorRef = useRef("");
   const stepNavigation = useRef<HTMLElement>(null);
   const [windowSection, setWindowSection] = useState<
     Record<string, WindowSection>
@@ -199,9 +201,13 @@ export default function Atelier({
         prev.map((j) => (j.id === result.job.id ? result.job : j)),
       );
       setSavingFailed(false);
+      const resolvedError = saveErrorRef.current;
+      setError((current) => (current === resolvedError ? "" : current));
+      saveErrorRef.current = "";
       return result.job;
     } catch (e) {
-      setError((e as Error).message);
+      saveErrorRef.current = (e as Error).message;
+      setError(saveErrorRef.current);
       setSavingFailed(true);
       return null;
     } finally {
@@ -226,6 +232,13 @@ export default function Atelier({
     setDraft((d) => (d ? { ...d, [key]: value } : d));
     setSavingFailed(false);
     setMessage("");
+    clearSaveError();
+  }
+  function clearSaveError() {
+    const previous = saveErrorRef.current;
+    if (!previous) return;
+    setError((current) => (current === previous ? "" : current));
+    saveErrorRef.current = "";
   }
   function updateWindow<K extends keyof SurveyWindow>(
     key: K,
@@ -256,9 +269,12 @@ export default function Atelier({
                     ].includes(key)
                       ? { automaticSlants: true }
                       : {}),
-                    ...(key === "track" &&
-                    !/\bforest\b.*\bks\b/i.test(String(value))
-                      ? { trackProduct: "custom" as const }
+                    ...(key === "trackProduct"
+                      ? {
+                          track:
+                            selectedTrack({ trackProduct: String(value) })
+                              ?.name ?? w.track,
+                        }
                       : {}),
                     ...(key === "colour" && w.tiebacks === "Matching fabric"
                       ? { tiebackColour: value as string }
@@ -293,6 +309,7 @@ export default function Atelier({
     );
     setSavingFailed(false);
     setMessage("");
+    clearSaveError();
   }
   const active =
     draft?.windows.find((w) => w.id === windowId) ?? draft?.windows[0];
@@ -386,11 +403,18 @@ export default function Atelier({
     setWindowId(next.id);
   }
   async function upload(file: File, photoKind: string, caption: string) {
-    if (!job || !active || demo) return;
+    if (!job || !active || demo) return false;
     setBusy(true);
     setError("");
     try {
-      if (dirty && !(await save())) return;
+      if (savingRef.current)
+        throw new Error(
+          "Window details are still saving. Please select the photograph again once Saved appears.",
+        );
+      // Photos can be safely attached to an existing window even when another
+      // survey field has a save error. A newly added window must be saved first.
+      if (!job.data.windows.some((w) => w.id === active.id) && !(await save()))
+        return false;
       const bitmap = await createImageBitmap(file);
       const ratio = Math.min(1, 1600 / Math.max(bitmap.width, bitmap.height));
       const canvas = document.createElement("canvas");
@@ -421,8 +445,10 @@ export default function Atelier({
       );
       setAssets((a) => [...a, r.asset]);
       setMessage("Photograph saved privately to this window.");
+      return true;
     } catch (e) {
       setError((e as Error).message);
+      return false;
     } finally {
       setBusy(false);
     }
@@ -1047,6 +1073,8 @@ export default function Atelier({
                         : undefined
                     }
                     saveStatus={saveStatus}
+                    feedback={error || message}
+                    feedbackError={!!error}
                     assets={assets}
                     update={updateWindow}
                     onCopy={copyDesign}
@@ -1070,6 +1098,7 @@ export default function Atelier({
                     onDocuments={() => goToStep("documents")}
                     onUpload={upload}
                     busy={busy}
+                    saving={saving}
                     demo={demo}
                     approved={job.status !== "draft"}
                     photoPermission={draft.photoPermission}

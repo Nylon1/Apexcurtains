@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { jobDataSchema } from "@/lib/atelier/model";
+import { jobDataSchema, applyDraftAllowances } from "@/lib/atelier/model";
 import {
   requireStaff,
   apiError,
@@ -40,7 +40,7 @@ export async function PUT(req: Request, ctx: Context) {
     const { data, error } = await db
       .from("apex_atelier_jobs")
       .update({
-        data: input.data,
+        data: applyDraftAllowances(input.data),
         version: input.version + 1,
         status: "draft",
         updated_at: new Date().toISOString(),

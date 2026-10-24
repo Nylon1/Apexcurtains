@@ -1,5 +1,12 @@
+import { Fragment } from "react";
 import React from "react";
 import { selectedTrack } from "./tracks";
+import {
+  careGuide,
+  standardCareSummary,
+  careHandover,
+  additionalCareWindows,
+} from "./care";
 import {
   shapeName,
   windowOutline,
@@ -37,7 +44,9 @@ import {
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
-  generalAftercare,
+  designStory,
+  interiorGuide,
+  installationGuide,
 } from "./brochure";
 
 const C = {
@@ -162,7 +171,7 @@ const s = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 9,
-    marginBottom: 5,
+    marginBottom: 3,
     fontSize: 9,
     lineHeight: 1.3,
   },
@@ -340,101 +349,107 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
   const palette = brochurePalette(w);
   const track = selectedTrack(w);
   const sitePhoto = p.job.data.photoPermission && imageFor(p, w);
+  const fabricPhoto = imageFor(p, w, "fabric");
+  const index = p.job.data.windows.findIndex((item) => item.id === w.id) + 1;
   return (
     <>
       <Page size="A4" style={s.page}>
         <Brand />
-        <Text style={s.kicker}>
-          {w.name} · {shapeName(w)}
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            borderTopWidth: 1,
+            borderColor: C.gold,
+            paddingTop: 12,
+          }}
+        >
+          <Text style={s.kicker}>
+            THE ROOMS / {String(index).padStart(2, "0")}
+          </Text>
+          <Text style={s.small}>
+            {w.name} · {shapeName(w)}
+          </Text>
+        </View>
+        <Text style={[s.title, { fontSize: 42, marginBottom: 14 }]}>
+          {w.room}
         </Text>
-        <Text style={s.title}>{w.room}</Text>
         <Image
           src={sitePhoto || p.inspiration}
-          style={{ ...s.photo, height: 180 }}
+          style={{
+            width: "100%",
+            height: 235,
+            objectFit: sitePhoto ? "contain" : "cover",
+            backgroundColor: "#E9E5DD",
+          }}
         />
-        {!sitePhoto ? (
-          <Text style={s.small}>
-            Interior inspiration · not your completed installation
-          </Text>
-        ) : null}
-        <Text style={s.h2}>{palette.name}</Text>
-        <Text style={s.body}>{palette.basis}</Text>
-        <View style={[s.swatches, { gap: 14 }]} wrap={false}>
-          {palette.colours.map((col, i) => (
-            <View key={col} style={{ width: "31%" }}>
-              <View
-                style={[
-                  s.swatch,
-                  { width: "100%", height: 62, backgroundColor: col },
-                ]}
-              />
-              <Text style={s.value}>{palette.names[i]}</Text>
-              <Text style={s.small}>
-                {
-                  [
-                    "Walls & larger surfaces",
-                    "Upholstery & soft layers",
-                    "Accents & small details",
-                  ][i]
-                }
+        <Text style={[s.small, { marginTop: 7 }]}>
+          {sitePhoto
+            ? "Your window · photographed during your consultation"
+            : "Interior inspiration from Apex · not your completed installation"}
+        </Text>
+        <Text
+          style={[
+            s.quote,
+            { fontSize: 16, lineHeight: 1.4, marginTop: 12, marginBottom: 14 },
+          ]}
+        >
+          {roomIntroduction(w)}
+        </Text>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          {designStory(w).map((item, i) => (
+            <View
+              key={item.label}
+              wrap={false}
+              style={{
+                width: "50%",
+                paddingRight: i % 2 === 0 ? 18 : 0,
+                paddingLeft: i % 2 === 1 ? 10 : 0,
+                paddingBottom: 13,
+              }}
+            >
+              <Text style={[s.label, { color: C.gold, marginBottom: 6 }]}>
+                {item.label}
+              </Text>
+              <Text style={{ fontSize: 9.2, lineHeight: 1.45 }}>
+                {item.value}
               </Text>
             </View>
           ))}
         </View>
-        <Text style={s.body}>{palette.advice}</Text>
-        <Text style={s.body}>{palette.finishingAdvice}</Text>
-        <Text style={s.small}>{paletteSampleNote}</Text>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       <Page size="A4" style={s.page}>
         <Brand />
-        <Text style={s.kicker}>
-          {w.room} · {w.name}
+        <Text style={s.kicker}>{w.room} / THE INDIVIDUAL SPECIFICATION</Text>
+        <Text style={s.title}>Every choice, together.</Text>
+        <Text style={s.body}>
+          The fabric, proportions and finishing details selected for{" "}
+          {w.name.toLowerCase() || "your window"}. Keep this record with your
+          collection for future advice and additions.
         </Text>
-        <Text style={s.title}>Your chosen details.</Text>
-        <Text style={s.body}>{roomIntroduction(w)}</Text>
         <View style={s.grid}>
           {brochureSpecification(w).map((detail) => (
             <Field key={detail.label} {...detail} />
           ))}
         </View>
-        {imageFor(p, w, "fabric") ? (
-          <View
-            style={{ flexDirection: "row", gap: 12, marginTop: 18 }}
-            wrap={false}
-          >
-            <Image
-              src={imageFor(p, w, "fabric")!}
-              style={{ width: 110, height: 110, objectFit: "contain" }}
-            />
-            <Text style={[s.body, { width: 340, marginTop: 10 }]}>
-              {w.fabric} · {w.colour}
-              {"\n"}
-              {w.fabricCode}
-              {"\n"}Your physical fabric sample is the closest guide to colour
-              and texture.
-            </Text>
-          </View>
-        ) : null}
-        {track && p.trackPhotos?.[track.id] && !imageFor(p, w, "fabric") ? (
+        {track && p.trackPhotos?.[track.id] ? (
           <View
             wrap={false}
             style={{
               flexDirection: "row",
-              gap: 16,
-              marginTop: 16,
-              padding: 14,
+              gap: 18,
+              marginTop: 20,
+              padding: 16,
               backgroundColor: "#FFFFFF",
             }}
           >
             <Image
               src={p.trackPhotos[track.id]}
-              style={{ width: 130, height: 100, objectFit: "contain" }}
+              style={{ width: 115, height: 95, objectFit: "contain" }}
             />
-            <View style={{ width: 325 }}>
-              <Text
-                style={[s.h2, { marginTop: 5, fontSize: 17, lineHeight: 1.2 }]}
-              >
+            <View style={{ flex: 1 }}>
+              <Text style={[s.h2, { marginTop: 0, fontSize: 19 }]}>
                 {track.name}
               </Text>
               <Text style={s.body}>
@@ -446,57 +461,131 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             </View>
           </View>
         ) : null}
+        {w.type === "apex" && w.apexShape === "other" ? (
+          <View style={{ marginTop: 18 }}>
+            <Text style={s.h2} minPresenceAhead={45}>
+              Your window, in detail.
+            </Text>
+            <Text style={s.body}>{w.otherShapeMeasurements}</Text>
+          </View>
+        ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
-      {w.type === "apex" && w.apexShape === "other" ? (
-        <Page size="A4" style={s.page}>
-          <Brand />
-          <Text style={s.kicker}>
-            {w.room} · {w.name}
-          </Text>
-          <Text style={s.title}>Your window, in detail.</Text>
-          <Text style={s.body}>
-            The individual proportions recorded for your bespoke window.
-          </Text>
-          <Text style={s.h2} minPresenceAhead={40}>
-            Other shape measurements
-          </Text>
-          <Text style={s.body}>{w.otherShapeMeasurements}</Text>
-          <Footer job={p.job} draft={p.draft} />
-        </Page>
-      ) : null}
-      {track && p.trackPhotos?.[track.id] && imageFor(p, w, "fabric") ? (
-        <Page size="A4" style={s.page}>
-          <Brand />
-          <Text style={s.kicker}>
-            {w.room} · {w.name}
-          </Text>
-          <Text style={s.title}>The finishing touch.</Text>
-          <Text style={s.body}>
-            A considered detail, chosen to complement the fall of your curtains.
-          </Text>
-          <View
-            style={{
-              backgroundColor: "#FFFFFF",
-              padding: 24,
-              marginVertical: 26,
-            }}
-          >
-            <Image
-              src={p.trackPhotos[track.id]}
-              style={{ width: "100%", height: 310, objectFit: "contain" }}
-            />
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <Text style={s.kicker}>{w.room} / COLOUR, TEXTURE & ATMOSPHERE</Text>
+        <Text style={s.title}>The room beyond the curtains.</Text>
+        <Text style={[s.h2, { marginTop: 0, fontSize: 20 }]}>
+          {palette.name}
+        </Text>
+        <Text style={s.body}>{palette.basis}</Text>
+        <View
+          style={{ flexDirection: "row", gap: 16, marginVertical: 12 }}
+          wrap={false}
+        >
+          <View style={{ width: "46%" }}>
+            {fabricPhoto ? (
+              <Image
+                src={fabricPhoto}
+                style={{
+                  width: "100%",
+                  height: 164,
+                  objectFit: "contain",
+                  backgroundColor: "#E9E5DD",
+                }}
+              />
+            ) : (
+              <View
+                style={{
+                  height: 164,
+                  padding: 22,
+                  backgroundColor: C.navy,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "Times-Roman",
+                    fontSize: 23,
+                    lineHeight: 1.3,
+                    color: C.paper,
+                  }}
+                >
+                  {w.fabric || "Your chosen cloth"}
+                </Text>
+                <Text style={{ color: "#DACCAD", fontSize: 12, marginTop: 14 }}>
+                  {w.colour}
+                </Text>
+              </View>
+            )}
+            <Text style={[s.label, { marginTop: 10 }]}>
+              {fabricPhoto
+                ? "YOUR ACTUAL FABRIC PHOTOGRAPH"
+                : "YOUR FABRIC SELECTION"}
+            </Text>
+            <Text style={s.value}>
+              {w.fabric} · {w.colour}
+            </Text>
+            <Text style={s.small}>
+              {w.supplier} · {w.fabricCode}
+            </Text>
           </View>
-          <Text style={[s.h2, { fontSize: 24, lineHeight: 1.2 }]}>
-            {track.name}
-          </Text>
-          <Text style={s.body}>
-            Your chosen finish: {w.trackColour || "To be confirmed"}
-          </Text>
-          <Text style={s.small}>{track.caption} Photograph: Forest Group.</Text>
-          <Footer job={p.job} draft={p.draft} />
-        </Page>
-      ) : null}
+          <View style={{ flex: 1 }}>
+            {palette.colours.map((col, i) => (
+              <View
+                key={col}
+                style={{ flexDirection: "row", gap: 12, marginBottom: 10 }}
+              >
+                <View style={{ width: 58, height: 48, backgroundColor: col }} />
+                <View style={{ flex: 1, paddingTop: 3 }}>
+                  <Text style={s.value}>{palette.names[i]}</Text>
+                  <Text style={s.small}>
+                    {
+                      [
+                        "The backdrop",
+                        "The soft layers",
+                        "The finishing accent",
+                      ][i]
+                    }
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </View>
+        <Text
+          style={[
+            s.quote,
+            { fontSize: 14, lineHeight: 1.45, marginTop: 4, marginBottom: 14 },
+          ]}
+        >
+          {palette.advice}
+        </Text>
+        <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+          {interiorGuide(w).map((item, i) => (
+            <View
+              key={item.label}
+              wrap={false}
+              style={{
+                borderTopWidth: 0.5,
+                borderColor: C.line,
+                paddingTop: 10,
+                paddingBottom: 7,
+                width: "50%",
+                paddingRight: i % 2 === 0 ? 18 : 0,
+                paddingLeft: i % 2 === 1 ? 10 : 0,
+              }}
+            >
+              <Text style={[s.label, { marginBottom: 5 }]}>{item.label}</Text>
+              <Text style={{ fontSize: 9.2, lineHeight: 1.45 }}>
+                {item.value}
+              </Text>
+            </View>
+          ))}
+        </View>
+        <Text style={[s.small, { marginTop: 14 }]}>{paletteSampleNote}</Text>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
     </>
   );
 }
@@ -640,36 +729,125 @@ function Brochure(p: Props) {
       ))}
       <Page size="A4" style={s.page}>
         <Brand />
-        <Text style={s.kicker}>Caring for your collection</Text>
-        <Text style={s.title}>Beautiful today.{"\n"}Cared for over time.</Text>
-        <Text style={s.body}>{generalAftercare}</Text>
-        {d.windows.map((w) => (
-          <View key={w.id}>
-            <Text style={s.h2} minPresenceAhead={60}>
-              {w.room} · {w.name}
+        <Text style={s.kicker}>FROM OUR WORKROOM TO YOUR HOME</Text>
+        <Text style={s.title}>The day it all comes together.</Text>
+        <Image
+          src={p.inspiration}
+          style={{
+            width: "100%",
+            height: 180,
+            objectFit: "cover",
+            marginBottom: 8,
+          }}
+        />
+        <Text style={s.small}>Interior inspiration · the Apex collection</Text>
+        <Text style={s.body}>
+          {d.fittingDate
+            ? `Your recorded installation arrangements: ${d.fittingDate}.`
+            : "Your installation arrangements will be confirmed with Apex."}{" "}
+          A little preparation makes space for the final details.
+        </Text>
+        {installationGuide.map((item, i) => (
+          <View
+            key={item.label}
+            wrap={false}
+            style={{
+              flexDirection: "row",
+              gap: 18,
+              paddingVertical: 15,
+              borderTopWidth: 0.5,
+              borderColor: C.line,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Times-Roman",
+                fontSize: 30,
+                color: C.gold,
+                width: 35,
+              }}
+            >
+              0{i + 1}
             </Text>
-            <Text style={s.body}>
-              {w.careInstructions ||
-                "Care instructions are awaiting confirmation from the selected fabric and lining suppliers. Contact Apex Curtains before cleaning, steaming or applying heat."}
-            </Text>
-            {w.careSource ? (
-              <Text style={s.small}>Care reference: {w.careSource}</Text>
-            ) : null}
+            <View style={{ flex: 1 }}>
+              <Text style={[s.h2, { fontSize: 20, marginTop: 0 }]}>
+                {item.label}
+              </Text>
+              <Text style={[s.body, { marginBottom: 0 }]}>{item.value}</Text>
+            </View>
           </View>
         ))}
-        <View wrap={false}>
-          <Text style={s.h2}>Here when you need us</Text>
-          <Text style={s.body}>
-            If you are unsure about cleaning, operating your track or adjusting
-            a tieback, speak to our team before proceeding. We can refer to your
-            original specification and help you find the appropriate next step.
-          </Text>
-          <Text style={s.body}>
-            hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
-          </Text>
-        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
+      {careGuide.map((group) => (
+        <Page size="A4" style={s.page} key={group.id}>
+          <Brand />
+          <Text
+            style={[
+              s.kicker,
+              { borderTopWidth: 1, borderColor: C.gold, paddingTop: 15 },
+            ]}
+          >
+            {group.eyebrow}
+          </Text>
+          <Text style={s.title}>{group.title}</Text>
+          <Text style={s.body}>{group.introduction}</Text>
+          {group.sections.map((section, index) => (
+            <View
+              key={section.title}
+              wrap={false}
+              style={{
+                marginTop: 10,
+                paddingTop: 12,
+                borderTopWidth: 0.6,
+                borderColor: C.line,
+                ...(group.id === "cleaning" && index === 0
+                  ? { padding: 17, backgroundColor: "#EDE7DB", marginBottom: 4 }
+                  : {}),
+              }}
+            >
+              <Text
+                style={[s.h2, { fontSize: 19, marginTop: 0, marginBottom: 7 }]}
+              >
+                {section.title}
+              </Text>
+              <Text style={[s.body, { marginBottom: 5 }]}>{section.text}</Text>
+            </View>
+          ))}
+          {group.id === "living" ? (
+            <Text style={[s.small, { marginTop: 18 }]}>
+              Here when you need us: hello@apexcurtains.com · 0800 772 0367
+            </Text>
+          ) : null}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ))}
+      {additionalCareWindows(d.windows).length ? (
+        <Page size="A4" style={s.page}>
+          <Brand />
+          <Text style={s.kicker}>NOTES FOR YOUR COLLECTION</Text>
+          <Text style={s.title}>A little more detail.</Text>
+          <Text style={s.body}>
+            The following notes have been recorded for individual windows. If
+            any instruction differs from the standard guide or a sewn-in label,
+            ask Apex before treatment.
+          </Text>
+          {additionalCareWindows(d.windows).map((w) => (
+            <View key={w.id}>
+              <Text style={s.h2} minPresenceAhead={60}>
+                {w.room} · {w.name}
+              </Text>
+              {w.careInstructions ? (
+                <Text style={s.body}>{w.careInstructions}</Text>
+              ) : null}
+              {w.careSource ? (
+                <Text style={s.small}>Care reference: {w.careSource}</Text>
+              ) : null}
+            </View>
+          ))}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ) : null}
       <Page size="A4" style={s.page}>
         <Brand />
         <Image
@@ -793,105 +971,220 @@ function Workroom(p: Props) {
           before ordering. Full-width panel allocation is conservative; any
           alternative layout must be reviewed by the workroom.
         </Text>
+        <View wrap={false}>
+          <Text style={s.h2}>Standard curtain care</Text>
+          <Text style={s.body}>{standardCareSummary}</Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => {
         const q = calculateWindow(w);
+        const notes = [
+          w.direction,
+          w.patternNotes,
+          w.cuttingPlan,
+          w.offcutNotes,
+          w.measurementNotes,
+          w.designNotes,
+        ].filter(Boolean);
+        const photos = p.assets.filter(
+          (a) => a.window_id === w.id && p.photos[a.id],
+        );
+        const details = [
+          [
+            "Fabric",
+            `${w.supplier} · ${w.fabric} · ${w.fabricCode} · ${w.colour}`,
+          ],
+          [
+            "Heading & panels",
+            `${w.heading} · ${w.fullness}× fullness · ${w.panelCount} panel(s) · ${w.opening}`,
+          ],
+          [
+            "Pattern",
+            `${w.pattern}; vertical repeat ${w.repeatMm} mm; horizontal ${w.horizontalRepeatMm} mm; motif allowance ${w.motifAllowanceMm} mm${q.manual ? ". Use the approved matching plan in the reference notes." : ""}`,
+          ],
+          [
+            "Width allowances",
+            `Side hems ${w.sideHemMm} mm; seams ${w.seamMm} mm; returns ${w.returnsMm} mm; overlap ${w.overlapMm} mm`,
+          ],
+          [
+            "Length & lining",
+            `${lengthLabel(w)} · ${w.lining} · ${w.liningCode} · ${w.liningColour}${w.interlining ? ` · Interlining: ${w.interlining}, ${w.interliningMetres} m` : ""}`,
+          ],
+          [
+            "Tiebacks",
+            `${w.tiebackCount} × ${w.tiebacks || "None"}${w.tiebackCount ? ` · ${w.tiebackColour}` : ""}${w.tiebackPosition ? ` · ${w.tiebackPosition}` : ""}`,
+          ],
+          [
+            "Hooks / holdbacks",
+            `${w.hookCount} × ${w.hooks || "None"}${w.hookCount ? ` · ${w.hookColour}` : ""}`,
+          ],
+          [
+            "Track",
+            `${w.track} · ${w.trackColour}${w.trackComponents ? ` · ${w.trackComponents}` : ""}`,
+          ],
+        ];
         return (
-          <Page size="A4" style={s.page} key={w.id}>
-            <Brand />
-            <Text style={s.kicker}>
-              {w.type} · {w.id.slice(0, 8)}
-            </Text>
-            <Text style={s.title}>
-              {w.room}
-              {"\n"}
-              {w.name}
-            </Text>
-            {imageFor(p, w) ? (
-              <Image
-                src={imageFor(p, w)!}
+          <Fragment key={w.id}>
+            <Page size="A4" style={[s.page, { backgroundColor: "#FFFFFF" }]}>
+              <Brand />
+              <Text style={s.kicker}>WORKROOM / {w.name}</Text>
+              <Text style={[s.title, { fontSize: 28, marginBottom: 12 }]}>
+                {w.room}
+              </Text>
+              <Text style={s.small}>
+                {p.job.data.customerName} · {p.job.reference} · All cutting
+                dimensions in millimetres
+              </Text>
+              <View
                 style={{
-                  width: "100%",
-                  height: 150,
-                  objectFit: "contain",
-                  marginBottom: 12,
+                  flexDirection: "row",
+                  gap: 14,
+                  marginTop: 8,
+                  marginBottom: 20,
                 }}
-              />
-            ) : (
-              <WindowDrawing w={w} compact />
-            )}
-            <View style={s.grid}>
-              <Field
-                label="Coverage and finished drops"
-                value={geometryMeasurements(w)}
-              />
-              <Field
-                label="Slants and track"
-                value={`${geometrySlants(w)} ${w.track} · ${w.trackColour || "Track colour to be confirmed"}`}
-              />
-              <Field
-                label="Fabric"
-                value={`${w.supplier} · ${w.fabric} · ${w.fabricCode} · ${w.colour}; roll ${w.fabricWidthMm} mm`}
-              />
-              <Field
-                label="Heading and fullness"
-                value={`${w.heading} · ${w.fullness}× · ${w.panelCount} panel(s) · ${w.opening}`}
-              />
-              <Field
-                label="Face fabric cutting"
-                value={`${q.widths} widths × ${q.cutMm} mm; ${q.fabricMetres.toFixed(2)} m total${q.manual ? " · approved matching plan" : ""}`}
-              />
-              <Field
-                label="Pattern"
-                value={`${w.pattern}; vertical ${w.repeatMm} mm; horizontal ${w.horizontalRepeatMm} mm; motif allowance ${w.motifAllowanceMm} mm`}
-              />
-              <Field
-                label="Making allowances"
-                value={`Top ${w.topAllowanceMm}; bottom ${w.bottomAllowanceMm}; side hem ${w.sideHemMm}; seam ${w.seamMm} mm. Returns ${w.returnsMm}; overlap ${w.overlapMm} mm. Extra face fabric ${w.extraFabricMetres} m.`}
-              />
-              <Field
-                label="Lining"
-                value={
-                  w.lining === "none"
-                    ? "None"
-                    : `${w.lining} · ${w.liningCode} · ${w.liningColour}; roll ${w.liningWidthMm} mm; ${q.liningWidths} widths × ${q.liningCutMm} mm; ${q.liningMetres.toFixed(2)} m. Finished drop ${w.liningDropMm} + allowance ${w.liningAllowanceMm} mm; extra ${w.extraLiningMetres} m.`
-                }
-              />
-              <Field
-                label="Length and interlining"
-                value={`${lengthLabel(w)}; ${w.interlining ? `${w.interlining} · ${w.interliningMetres} m` : "No interlining"}`}
-              />
-              <Field
-                label="Tiebacks and hooks"
-                value={`${w.tiebackCount} × ${w.tiebacks} ${w.tiebackColour}; ${w.hookCount} × ${w.hooks} ${w.hookColour}`}
-              />
-            </View>
-            {w.type === "apex" && w.apexShape === "other" ? (
-              <>
-                <Text style={s.h2} minPresenceAhead={40}>
-                  Other shape measurements
-                </Text>
-                <Text style={s.body}>{w.otherShapeMeasurements}</Text>
-              </>
-            ) : null}
-            {[
-              w.direction,
-              w.patternNotes,
-              w.cuttingPlan,
-              w.offcutNotes,
-              w.measurementNotes,
-              w.designNotes,
-            ]
-              .filter(Boolean)
-              .map((t, i) => (
-                <Text key={i} style={[s.body, { marginTop: 10 }]}>
-                  {t}
-                </Text>
+              >
+                {[
+                  {
+                    label: "FACE FABRIC",
+                    metres: q.fabricMetres,
+                    widths: q.widths,
+                    cut: q.cutMm,
+                    drop: w.longDropMm,
+                    allowance: q.hemAllowanceMm,
+                    roll: w.fabricWidthMm,
+                    extra: w.extraFabricMetres,
+                  },
+                  {
+                    label: "LINING",
+                    metres: q.liningMetres,
+                    widths: q.liningWidths,
+                    cut: q.liningCutMm,
+                    drop: q.liningDropMm,
+                    allowance: q.liningAllowanceMm,
+                    roll: w.liningWidthMm,
+                    extra: w.extraLiningMetres,
+                  },
+                ].map((item) => (
+                  <View
+                    key={item.label}
+                    style={{
+                      flex: 1,
+                      padding: 17,
+                      backgroundColor: "#F4F3EF",
+                      borderTopWidth: 2,
+                      borderColor: C.gold,
+                    }}
+                    wrap={false}
+                  >
+                    <Text style={s.label}>{item.label} / ORDER</Text>
+                    <Text
+                      style={{
+                        fontFamily: "Helvetica-Bold",
+                        fontSize: 25,
+                        lineHeight: 1.3,
+                        marginVertical: 9,
+                      }}
+                    >
+                      {item.metres.toFixed(2)} m
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 12,
+                        fontFamily: "Helvetica-Bold",
+                        marginBottom: 8,
+                      }}
+                    >
+                      {item.widths} widths × {item.cut} mm
+                    </Text>
+                    <Text style={{ fontSize: 9, lineHeight: 1.6 }}>
+                      {`Roll width: ${item.roll} mm\nFinished drop: ${item.drop} mm\nTop + bottom allowance: ${item.allowance} mm\nExtra ordered: ${item.extra} m`}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+              <Text style={s.small}>
+                {w.automaticLining
+                  ? `Lining order matches face fabric${w.extraLiningMetres ? " plus the recorded extra lining" : ""}. Lining cutting requirement: ${q.liningCuttingMetres.toFixed(2)} m. `
+                  : ""}
+                Use the longest drop across the full rectangle. Do not deduct
+                apex offcuts. Pattern cuts include the recorded matching
+                allowance.
+              </Text>
+              <Text style={[s.h2, { fontSize: 18, marginTop: 12 }]}>
+                01 / Window measurements
+              </Text>
+              <Text style={s.body}>{geometryMeasurements(w)}.</Text>
+              <Text style={s.small}>{geometrySlants(w)}</Text>
+              <Text style={[s.h2, { fontSize: 18, marginTop: 10 }]}>
+                02 / Making & finishing
+              </Text>
+              {details.map(([label, value]) => (
+                <View
+                  key={label}
+                  wrap={false}
+                  style={{
+                    flexDirection: "row",
+                    paddingVertical: 8,
+                    borderBottomWidth: 0.5,
+                    borderColor: C.line,
+                  }}
+                >
+                  <Text style={{ width: 120, fontSize: 9, color: C.muted }}>
+                    {label}
+                  </Text>
+                  <Text style={{ flex: 1, fontSize: 10, lineHeight: 1.45 }}>
+                    {value}
+                  </Text>
+                </View>
               ))}
-            <AdditionalPhotos p={p} w={w} />
-            <Footer job={p.job} draft={p.draft} />
-          </Page>
+              <Footer job={p.job} draft={p.draft} />
+            </Page>
+            {notes.length || photos.length || w.apexShape === "other" ? (
+              <Page size="A4" style={[s.page, { backgroundColor: "#FFFFFF" }]}>
+                <Brand />
+                <Text style={s.kicker}>WORKROOM REFERENCE / {w.name}</Text>
+                <Text style={[s.title, { fontSize: 28 }]}>
+                  {w.room} · notes & photographs
+                </Text>
+                {w.apexShape === "other" && w.otherShapeMeasurements ? (
+                  <View wrap={false}>
+                    <Text style={s.h2}>Other shape measurements</Text>
+                    <Text style={s.body}>{w.otherShapeMeasurements}</Text>
+                  </View>
+                ) : null}
+                {notes.map((note, i) => (
+                  <View
+                    key={i}
+                    wrap={false}
+                    style={{
+                      paddingVertical: 12,
+                      borderBottomWidth: 0.5,
+                      borderColor: C.line,
+                    }}
+                  >
+                    <Text style={s.body}>{note}</Text>
+                  </View>
+                ))}
+                {photos.map((a) => (
+                  <View key={a.id} wrap={false} style={{ marginTop: 20 }}>
+                    <Text style={s.label}>{a.kind} photograph</Text>
+                    <Image
+                      src={p.photos[a.id]}
+                      style={{
+                        width: "100%",
+                        height: 230,
+                        objectFit: "contain",
+                        marginTop: 8,
+                      }}
+                    />
+                    <Text style={s.small}>{a.caption}</Text>
+                  </View>
+                ))}
+                <Footer job={p.job} draft={p.draft} />
+              </Page>
+            ) : null}
+          </Fragment>
         );
       })}
     </Document>
@@ -924,6 +1217,10 @@ function Fitter(p: Props) {
             <Text>{t}</Text>
           </View>
         ))}
+        <View wrap={false}>
+          <Text style={[s.h2, { fontSize: 19 }]}>Care at handover</Text>
+          <Text style={s.body}>{careHandover}</Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => (

@@ -2,7 +2,13 @@ import "server-only";
 import { createClient as createSupabase } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { z } from "zod";
-import { jobDataSchema, type Job, type Asset, type Delivery } from "./model";
+import {
+  jobDataSchema,
+  applyDraftAllowances,
+  type Job,
+  type Asset,
+  type Delivery,
+} from "./model";
 
 export class AtelierError extends Error {
   constructor(
@@ -84,7 +90,25 @@ export function apiError(error: unknown) {
     return Response.json(
       {
         error: "Please check the highlighted details.",
-        issues: error.issues.map((v) => `${v.path.join(".")}: ${v.message}`),
+        issues: error.issues.map((v) => {
+          if (v.path.at(-1) === "widthMm" && v.code === "too_big") {
+            const index = v.path.find((part) => typeof part === "number");
+            return `Window ${typeof index === "number" ? index + 1 : "measurement"}: full width exceeds 30,000 mm (30 metres). Check the units: 3.4 metres is 3400 mm. Correct the width in Measurements, then save again.`;
+          }
+          if (
+            [
+              "longDropMm",
+              "middleDropMm",
+              "leftDropMm",
+              "rightDropMm",
+            ].includes(String(v.path.at(-1))) &&
+            v.code === "too_big"
+          ) {
+            const index = v.path.find((part) => typeof part === "number");
+            return `Window ${typeof index === "number" ? index + 1 : "measurement"}: a height exceeds 30,000 mm (30 metres). Check the heights in Measurements: 3.29 metres is 3290 mm, then save again.`;
+          }
+          return `${v.path.join(".")}: ${v.message}`;
+        }),
       },
       { status: 400 },
     );
@@ -102,7 +126,11 @@ export function apiError(error: unknown) {
 }
 export function parseJob(raw: unknown): Job {
   const row = raw as Job;
-  return { ...row, data: jobDataSchema.parse(row.data) };
+  const data = jobDataSchema.parse(row.data);
+  return {
+    ...row,
+    data: row.status === "draft" ? applyDraftAllowances(data) : data,
+  };
 }
 export async function getJob(id: string, db = service()) {
   const { data, error } = await db

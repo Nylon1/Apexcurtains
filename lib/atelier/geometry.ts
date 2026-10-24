@@ -72,6 +72,10 @@ export function windowGeometry(w: GeometryInput) {
   let leftSlant: number | null = null,
     rightSlant: number | null = null;
   if (!(w.widthMm > 0)) issues.push("Enter the full window width.");
+  if (w.widthMm > 30000)
+    issues.push(
+      "Full window width exceeds 30,000 mm (30 metres). Check the units: 3.4 metres is 3400 mm.",
+    );
   if (w.type === "standard" || w.apexShape === "other") {
     if (!(w.longDropMm > 0)) issues.push("Enter the longest finished drop.");
     if (w.type === "apex" && !w.otherShapeMeasurements.trim())

@@ -166,7 +166,73 @@ export function roomIntroduction(w: SurveyWindow) {
   );
 }
 
+export function designStory(w: SurveyWindow): BrochureDetail[] {
+  const heading = /wave/i.test(w.heading)
+    ? "A continuous sequence of soft folds brings a clean, architectural rhythm to the window. Keep the forward and backward folds in sequence when dressing."
+    : /pinch|pleat/i.test(w.heading)
+      ? "The sewn pleats give the top of the curtain a tailored structure, allowing the cloth below to fall in generous, organised folds."
+      : "The chosen heading shapes the way the fabric gathers and falls. Follow its natural folds when opening, closing and dressing the curtains.";
+  return [
+    {
+      label: "The cloth & colour",
+      value: `${w.fabric || "Your chosen fabric"} in ${w.colour || "your selected colour"} is the starting point for this room. ${w.pattern === "plain" ? "With no pattern repeat to compete for attention, the colour, texture and fall of the cloth become the focus." : "The recorded pattern repeat and positioning guide the composition across the curtain panels."}`,
+    },
+    {
+      label: "The shape of the folds",
+      value: `${w.heading || "Your selected heading"}, with ${w.fullness}× fullness. ${heading}`,
+    },
+    {
+      label: "Light & privacy",
+      value:
+        w.lining === "blackout"
+          ? `Your ${w.liningColour || "chosen-colour"} blackout lining helps limit light passing through the fabric. Light may still enter around the edges and centre opening; the overall effect also depends on the window and fitting.`
+          : w.lining === "none"
+            ? "An unlined finish keeps the chosen cloth as the single layer at the window. Light transmission and privacy depend on the fabric and the light on either side."
+            : `The ${w.liningColour || "chosen-colour"} ${w.lining} lining forms the inner layer of your curtains. View the physical sample against the light to judge the combined fabric's appearance and privacy.`,
+    },
+    {
+      label: "The final silhouette",
+      value: `${lengthLabel(w)}. ${w.lengthStyle === "puddle" ? "Let the extra cloth rest in loose folds on a clean floor, with space around the curtain to preserve its shape." : w.lengthStyle === "mid" ? "The shorter finish keeps the lower part of the window arrangement open and follows the endpoint recorded in your specification." : "The hem is intended to meet the floor gently, completing a long, continuous line from the heading."} ${w.tiebackCount ? `${w.tiebackCount} ${w.tiebacks.toLowerCase()} tiebacks in ${w.tiebackColour || "the selected colour"} complete the open arrangement.` : "The open arrangement is designed without tiebacks."}`,
+    },
+  ];
+}
+
+export function interiorGuide(w: SurveyWindow): BrochureDetail[] {
+  const p = brochurePalette(w);
+  return [
+    {
+      label: "01 / Begin with the backdrop",
+      value: `Consider ${p.names[0].toLowerCase()} for walls and larger surfaces. Test a generous paint sample beside your ${w.colour || "chosen"} curtain fabric, checking both window light and the lamps you use in the evening.`,
+    },
+    {
+      label: "02 / Build a softer middle layer",
+      value: `Explore ${p.names[1].toLowerCase()} in upholstery, a rug or a throw. ${w.pattern === "plain" ? "Use contrasting textures to add depth: a smooth cushion beside a more tactile weave can be enough." : "Give the curtain pattern room to breathe by pairing it with quieter plains or a different, smaller pattern scale."}`,
+    },
+    {
+      label: "03 / Repeat one considered accent",
+      value: `Bring ${p.names[2].toLowerCase()} into a small detail such as artwork, a cushion edge or ceramics. A restrained repetition across the room will feel more coherent than matching every item.`,
+    },
+    { label: "04 / Connect the finishing touches", value: p.finishingAdvice },
+  ];
+}
+
+export const installationGuide: BrochureDetail[] = [
+  {
+    label: "Before we arrive",
+    value:
+      "Keep the route to each window clear and move small furniture, ornaments and fragile items away from the working area. Let Apex know about access restrictions or any changes to the room since the survey. Leave high-level work and heavy curtains to the fitting team.",
+  },
+  {
+    label: "At your handover",
+    value:
+      "Ask your fitter to show you how your particular track operates, which panels move and which remain fixed, and how to release the tiebacks and dress the folds. Review the heading, opening and hem position together against your chosen specification.",
+  },
+  {
+    label: "As the curtains settle",
+    value:
+      "Allow the fabric to hang naturally and follow the dressing guide in this collection. If the hem, folds or movement need attention, send Apex a full-window photograph and a close-up, quoting your collection reference. Keep this booklet with your fabric details for future advice.",
+  },
+];
+
 export const paletteSampleNote =
   "These swatches suggest complementary interior colours; they are not exact fabric or paint matches. Compare physical samples in your room in daylight and evening light before choosing.";
-export const generalAftercare =
-  "Draw curtains gently using the intended cord, wand or leading edge, keeping hands clean and dry. Keep the folds free of furniture and sharp edges. Follow the supplier-approved instructions below before cleaning, steaming or applying heat, and ask Apex if anything is unclear.";

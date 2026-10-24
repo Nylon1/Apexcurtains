@@ -4,7 +4,13 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { createClient } from "@supabase/supabase-js";
 import { createServerClient } from "@supabase/ssr";
 import sharp from "sharp";
-import { sampleJob, checklist } from "../lib/atelier/model";
+import {
+  sampleJob,
+  calculateWindow,
+  checklist,
+  selectedFabricPhoto,
+  type Asset,
+} from "../lib/atelier/model";
 
 // Explicitly opt in: creates and removes a disposable, fictitious fixture. Never sends email.
 if (process.env.ATELIER_INTEGRATION !== "1")
@@ -79,8 +85,10 @@ try {
   data.customerEmail = "client@example.invalid";
   data.workshopEmail = "workroom@example.invalid";
   data.fitterEmail = "fitter@example.invalid";
-  data.windows[0].trackProduct = "forest-ks";
-  data.windows[0].track = "Forest Group KS® Klick System";
+  data.photoPermission = true;
+  data.windows[0].trackProduct = "forest-cs";
+  data.windows[0].track = "Forest Group CS® Contract System";
+  data.windows[0].trackColour = "Black";
   data.windows[0].apexShape = "flat-top";
   data.windows[0].flatTopWidthMm = 800;
   data.windows[0].apexPosition = "offset";
@@ -115,6 +123,7 @@ try {
     .jpeg()
     .toBuffer();
   const assetIds: string[] = [];
+  const uploadedAssets: Asset[] = [];
   for (const w of data.windows) {
     const form = new FormData();
     form.set("file", new Blob([photo], { type: "image/jpeg" }), "fixture.jpg");
@@ -128,10 +137,11 @@ try {
     ).asset;
     storagePaths.push(asset.path);
     assetIds.push(asset.id);
+    uploadedAssets.push(asset);
     w.measuredConfirmed = true;
-    w.careInstructions =
-      "Use only the care method confirmed by the fabric and lining supplier. Test fixture instructions.";
-    w.careSource = "Fixture supplier record";
+    // The standard care guide must allow approval without per-fabric text.
+    w.careInstructions = "";
+    w.careSource = "";
   }
   await call(`/api/atelier/photos/${assetIds[0]}`, "GET", undefined, 401, true);
   // A later fabric photograph is the one used in the brochure; both remain private.
@@ -156,8 +166,36 @@ try {
       ).json()
     ).asset;
     storagePaths.push(asset.path);
+    uploadedAssets.push(asset);
     await call(`/api/atelier/photos/${asset.id}`, "GET", undefined, 401, true);
   }
+  // Reopening must read every photo from persistent storage, with its original
+  // window, category and caption. Test the decoded images, not only the headers.
+  const reopened = await (await call(`/api/atelier/jobs/${jobId}`)).json();
+  assert.equal(reopened.assets.length, uploadedAssets.length);
+  for (const expected of uploadedAssets) {
+    const restored = reopened.assets.find((a: Asset) => a.id === expected.id);
+    assert.ok(restored, "Uploaded photograph missing after reopening the job");
+    for (const key of [
+      "job_id",
+      "window_id",
+      "kind",
+      "path",
+      "caption",
+    ] as const)
+      assert.equal(restored[key], expected[key]);
+    const image = await call(`/api/atelier/photos/${restored.id}`);
+    const metadata = await sharp(
+      Buffer.from(await image.arrayBuffer()),
+    ).metadata();
+    assert.equal(metadata.format, "jpeg");
+    assert.ok(metadata.width && metadata.height);
+  }
+  const currentFabric = selectedFabricPhoto(
+    reopened.assets,
+    data.windows[0].id,
+  );
+  assert.equal(currentFabric?.id, uploadedAssets.at(-1)?.id);
   const photoResponse = await call(`/api/atelier/photos/${assetIds[0]}`);
   assert.equal(photoResponse.headers.get("content-type"), "image/jpeg");
   data.choicesConfirmed = true;
@@ -172,8 +210,19 @@ try {
     ).json()
   ).job;
   assert.equal(job.data.windows[0].trackColour, data.windows[0].trackColour);
-  assert.equal(job.data.windows[0].trackProduct, "forest-ks");
+  assert.equal(job.data.windows[0].trackProduct, "forest-cs");
+  assert.equal(job.data.windows[1].trackProduct, "forest-ks");
+  assert.equal(job.data.windows[1].trackColour, "White");
   assert.equal(job.data.windows[0].paletteMode, "auto");
+  for (const w of job.data.windows) {
+    assert.equal(w.liningDropMm, w.longDropMm);
+    assert.equal(w.liningAllowanceMm, w.hemAllowanceMm);
+    assert.equal(w.liningAllowanceMm, 260);
+    assert.equal(
+      calculateWindow(w).liningMetres,
+      calculateWindow(w).fabricMetres,
+    );
+  }
   assert.equal(job.data.windows[0].leftSlopeMm, 1562);
   assert.equal(job.data.windows[0].rightSlopeMm, 1844);
   assert.equal(
@@ -216,6 +265,10 @@ try {
     data.windows[0].trackColour,
   );
   assert.equal(revision.data?.[0].data.windows[0].paletteMode, "auto");
+  assert.deepEqual(
+    revision.data?.[0].assets.map((a: Asset) => a.id),
+    uploadedAssets.map((a) => a.id),
+  );
   const queues = await db
     .from("apex_atelier_deliveries")
     .select("kind,recipient,status")
@@ -245,7 +298,20 @@ try {
     ).json()
   ).job;
   assert.equal(job.status, "complete");
-  const changed = { ...data, title: "Fixture revised" };
+  const changed = {
+    ...data,
+    title: "Fixture revised",
+    windows: data.windows.map((w, i) =>
+      i === 0
+        ? {
+            ...w,
+            careInstructions:
+              "Protect the decorative leading edge from snagging.",
+            careSource: "Fixture trim reference",
+          }
+        : w,
+    ),
+  };
   job = (
     await (
       await call(`/api/atelier/jobs/${jobId}`, "PUT", {
@@ -255,6 +321,7 @@ try {
     ).json()
   ).job;
   assert.equal(job.status, "draft");
+  assert.equal(job.data.windows[0].careSource, "Fixture trim reference");
   await call(`/api/atelier/jobs/${jobId}/send`, "POST", {}, 409);
   const immutable = await db
     .from("apex_atelier_revisions")
@@ -262,8 +329,9 @@ try {
     .eq("job_id", jobId)
     .single();
   assert.equal(immutable.data?.data.title, data.title);
+  assert.equal(immutable.data?.data.windows[0].careInstructions, "");
   console.log(
-    "PASS: anonymous and non-staff denial, private photos, save/reload, optimistic concurrency, origin checks, approval validation, immutable revision, exactly three email queues, three PDF endpoints, handover and revision invalidation. No email sent.",
+    "PASS: anonymous and non-staff denial; every photo reloaded, decoded and matched to its window; latest fabric selection; saved photos frozen in approval; save/reload, concurrency, origin checks, standard-care approval, exactly three email queues, three PDFs, handover and revision invalidation. No email sent.",
   );
 } finally {
   if (storagePaths.length) {

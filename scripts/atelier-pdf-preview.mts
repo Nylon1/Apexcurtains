@@ -2,6 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import sharp from "sharp";
 import { sampleJob, type DocumentKind } from "../lib/atelier/model";
 import { renderJobPdf } from "../lib/atelier/pdf";
+import { forestTracks } from "../lib/atelier/tracks";
 
 async function main() {
   const out = ".next/atelier-qa";
@@ -34,12 +35,17 @@ async function main() {
       assets: [],
       photos: {},
       inspiration,
-      trackPhotos: {
-        "forest-ks": await sharp("public/atelier-products/forest-ks-white.webp")
-          .flatten({ background: "#ffffff" })
-          .jpeg()
-          .toBuffer(),
-      },
+      trackPhotos: Object.fromEntries(
+        await Promise.all(
+          forestTracks.map(async (track) => [
+            track.id,
+            await sharp(`public${track.image}`)
+              .flatten({ background: "#ffffff" })
+              .jpeg()
+              .toBuffer(),
+          ]),
+        ),
+      ),
       draft: true,
     });
     await writeFile(`${out}/${shapes ? "shapes-" : ""}${kind}.pdf`, bytes);

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { additionalCareWindows } from "../lib/atelier/care";
 import {
   windowGeometry,
   normaliseGeometry,
@@ -15,6 +16,7 @@ import {
 } from "../lib/atelier/brochure";
 import {
   calculateWindow,
+  applyDraftAllowances,
   sampleJob,
   jobDataSchema,
   approvalIssues,
@@ -106,7 +108,7 @@ test("single slopes require all three heights and use the longest drop for fabri
   assert.equal(g.leftSlant, 5000);
   assert.equal(g.rightSlant, null);
   assert.equal(normaliseGeometry(base).longDropMm, 5000);
-  assert.equal(calculateWindow(base).cutMm, 5300);
+  assert.equal(calculateWindow(base).cutMm, 5260);
   const right = windowGeometry({
     ...base,
     apexShape: "single-right",
@@ -167,7 +169,7 @@ test("Other shape preserves typed measurements without inventing a diagram or sl
   assert.deepEqual(windowGeometry(w).issues, []);
   assert.equal(windowGeometry(w).leftSlant, null);
   assert.equal(windowOutline(w), null);
-  assert.equal(calculateWindow(w).fabricMetres, 23.4);
+  assert.equal(calculateWindow(w).fabricMetres, 23.16);
   assert.equal(
     jobDataSchema.parse({ ...data, windows: [w] }).windows[0]
       .otherShapeMeasurements,
@@ -239,9 +241,6 @@ test("guided survey blocks missing prerequisites and points to the right window 
   data.fitterEmail = "fitter@example.invalid";
   for (const w of data.windows) {
     w.measuredConfirmed = true;
-    w.careSource = "Approved supplier care sheet";
-    w.careInstructions =
-      "Use the supplier-approved specialist cleaning service.";
   }
   const assets = data.windows.map((w, i) => ({
     id: `photo-${i}`,
@@ -288,7 +287,7 @@ test("pattern, lining and photo requirements are routed to actionable sections",
   const w = data.windows[0];
   w.pattern = "half-drop";
   w.repeatMm = 0;
-  w.liningDropMm = 0;
+  w.liningWidthMm = 0;
   const checks = approvalChecklist(data).filter((c) => c.windowId === w.id);
   assert.ok(
     checks.some((c) => c.section === "fabric" && c.message.includes("repeat")),
@@ -314,7 +313,7 @@ test("pattern, lining and photo requirements are routed to actionable sections",
   assert.ok(!demo.some((c) => c.section === "photos"));
 });
 
-test("Forest KS illustration is explicit and legacy tracks remain unchanged", () => {
+test("Forest track illustrations follow the chosen system and legacy tracks remain unchanged", () => {
   const data = sampleJob().data;
   const { trackProduct, ...legacy } = data.windows[1];
   void trackProduct;
@@ -323,19 +322,77 @@ test("Forest KS illustration is explicit and legacy tracks remain unchanged", ()
   assert.equal(restored.trackProduct, "custom");
   assert.equal(selectedTrack(restored), undefined);
   assert.equal(selectedTrack(data.windows[1])?.id, "forest-ks");
+  assert.equal(selectedTrack(data.windows[0])?.id, "forest-cs");
+  for (const trackProduct of ["forest-cs", "forest-ks"] as const) {
+    for (const trackColour of ["Black", "White"]) {
+      const saved = jobDataSchema.parse({
+        ...data,
+        windows: [
+          {
+            ...data.windows[0],
+            trackProduct,
+            trackColour,
+            track: "Stale track name",
+          },
+        ],
+      });
+      assert.equal(
+        saved.windows[0].track,
+        selectedTrack({ trackProduct })?.name,
+      );
+      assert.ok(!approvalChecklist(saved).some((c) => c.section === "fitting"));
+    }
+  }
+  const legacyColour = jobDataSchema.parse({
+    ...data,
+    windows: [{ ...data.windows[0], trackColour: "Warm white" }],
+  });
+  assert.equal(legacyColour.windows[0].trackColour, "Warm white");
+  assert.ok(
+    approvalIssues(legacyColour).some((message) =>
+      message.includes("choose Black or White"),
+    ),
+  );
+  assert.ok(
+    approvalIssues({ ...data, windows: [restored] }).some((message) =>
+      message.includes("choose Forest CS or Forest KS"),
+    ),
+  );
 });
 
 test("apex material uses a full rectangle at the longest drop", () => {
   const w = sampleJob().data.windows[0];
   const q = calculateWindow(w);
   assert.equal(q.widths, 6);
-  assert.equal(q.cutMm, 3900);
-  assert.equal(q.fabricMetres, 23.4);
-  assert.equal(q.liningMetres, 22.2);
+  assert.equal(q.cutMm, 3860);
+  assert.equal(q.fabricMetres, 23.16);
+  assert.equal(q.liningMetres, 23.16);
   assert.equal(
     calculateWindow({ ...w, leftDropMm: 1000, rightDropMm: 1500 }).fabricMetres,
     q.fabricMetres,
   );
+});
+
+test("26 cm is added once per width before pattern rounding and historic approved allowances remain intact", () => {
+  const data = sampleJob().data;
+  const w = data.windows[0];
+  const q = calculateWindow(w);
+  assert.equal(q.hemAllowanceMm, 260);
+  assert.equal(q.baseMetres, (q.widths * (w.longDropMm + 260)) / 1000);
+  assert.equal(
+    calculateWindow({ ...w, pattern: "straight", repeatMm: 200 }).cutMm,
+    4000,
+  );
+  const legacy = jobDataSchema.parse({
+    ...data,
+    windows: [{ ...w, hemAllowanceMm: null }],
+  });
+  assert.equal(calculateWindow(legacy.windows[0]).hemAllowanceMm, 300);
+  assert.equal(
+    calculateWindow(applyDraftAllowances(legacy).windows[0]).hemAllowanceMm,
+    260,
+  );
+  assert.equal(legacy.windows[0].hemAllowanceMm, null);
 });
 
 test("brochure palette follows the current colour and preserves consultant overrides", () => {
@@ -506,7 +563,7 @@ test("complex patterns require a matching plan covering the rectangular baseline
     false,
   );
 });
-test("lining has its own width and does not receive face fabric pattern repeats", () => {
+test("lining cutting uses its roll width while ordering matches curtain fabric including pattern allowance", () => {
   const w = {
     ...sampleJob().data.windows[0],
     pattern: "straight" as const,
@@ -515,9 +572,85 @@ test("lining has its own width and does not receive face fabric pattern repeats"
   };
   const q = calculateWindow(w);
   assert.equal(q.liningWidths, 4);
-  assert.equal(q.liningMetres, 14.8);
+  assert.equal(q.liningDropMm, 3600);
+  assert.equal(q.liningAllowanceMm, 260);
+  assert.equal(q.liningCutMm, 3860);
+  assert.equal(q.liningCuttingMetres, 15.44);
+  assert.equal(q.liningMetres, q.fabricMetres);
+  assert.equal(q.liningMetres, 26.88);
   assert.equal(calculateWindow({ ...w, lining: "none" }).liningMetres, 0);
 });
+
+test("lining follows changed curtain drop and allowance, checks narrow rolls and preserves historical approved figures", () => {
+  const data = sampleJob().data;
+  const w = {
+    ...data.windows[0],
+    type: "standard" as const,
+    longDropMm: 3000,
+    hemAllowanceMm: 300,
+  };
+  const q = calculateWindow(w);
+  assert.equal(q.liningDropMm, 3000);
+  assert.equal(q.liningAllowanceMm, 300);
+  assert.equal(q.liningCutMm, 3300);
+  assert.equal(q.liningMetres, q.fabricMetres);
+  const narrow = { ...w, liningWidthMm: 1000 };
+  const nq = calculateWindow(narrow);
+  assert.ok(
+    nq.checks.some(
+      (c) => c.section === "finish" && c.message.includes("more metres"),
+    ),
+  );
+  assert.deepEqual(
+    calculateWindow({
+      ...narrow,
+      extraLiningMetres: nq.liningCuttingMetres - nq.liningMetres,
+    }).issues,
+    [],
+  );
+  const legacy = jobDataSchema.parse({
+    ...data,
+    windows: [
+      {
+        ...w,
+        automaticLining: null,
+        liningDropMm: 2950,
+        liningAllowanceMm: 150,
+      },
+    ],
+  });
+  assert.equal(calculateWindow(legacy.windows[0]).liningCutMm, 3100);
+  assert.equal(
+    calculateWindow(legacy.windows[0]).liningMetres,
+    Math.ceil(18.6 * 100) / 100,
+  );
+  const draft = applyDraftAllowances(legacy);
+  assert.equal(draft.windows[0].liningDropMm, 3000);
+  assert.equal(draft.windows[0].liningAllowanceMm, 300);
+  assert.equal(calculateWindow(draft.windows[0]).liningMetres, 19.8);
+  assert.equal(legacy.windows[0].liningDropMm, 2950);
+});
+test("an oversized width blocks navigation with a usable units message", () => {
+  const d = sampleJob().data;
+  for (const type of ["apex", "standard"] as const) {
+    const w = { ...d.windows[0], type, widthMm: 34000 };
+    assert.equal(
+      jobDataSchema.safeParse({ ...d, windows: [w] }).success,
+      false,
+    );
+    assert.ok(
+      approvalChecklist({ ...d, windows: [w] }).some(
+        (c) => c.section === "measure" && c.message.includes("3400 mm"),
+      ),
+    );
+    assert.equal(
+      jobDataSchema.safeParse({ ...d, windows: [{ ...w, widthMm: 3400 }] })
+        .success,
+      true,
+    );
+  }
+});
+
 test("invalid measurements and duplicate window identities cannot be saved", () => {
   const d = sampleJob().data;
   assert.equal(
@@ -534,20 +667,34 @@ test("invalid measurements and duplicate window identities cannot be saved", () 
   );
   assert.equal(jobDataSchema.safeParse({ ...d, windows: [] }).success, false);
 });
-test("release requires recipients, confirmed measurements, care and photographs", () => {
+test("release requires recipients, confirmed measurements and photographs", () => {
   const issues = approvalIssues(sampleJob().data);
   for (const fragment of [
     "Customer:",
     "Workshop:",
     "Fitter:",
     "confirm the measurements",
-    "care instructions",
     "photograph",
   ])
     assert.ok(
       issues.some((i) => i.includes(fragment)),
       fragment,
     );
+});
+
+test("standard care needs no per-window input and preserves optional saved notes", () => {
+  const data = sampleJob().data;
+  assert.equal(additionalCareWindows(data.windows).length, 0);
+  assert.ok(!approvalChecklist(data).some((c) => c.section === "care"));
+  const notes = "Protect the decorative leading edge from snagging.";
+  data.windows[0].careInstructions = notes;
+  data.windows[0].careSource = "Supplier trim reference";
+  const saved = jobDataSchema.parse(data);
+  assert.equal(additionalCareWindows(saved.windows).length, 1);
+  assert.equal(saved.windows[0].careInstructions, notes);
+  assert.equal(saved.windows[0].careSource, "Supplier trim reference");
+  assert.equal(saved.windows[1].careInstructions, "");
+  assert.ok(!approvalChecklist(saved).some((c) => c.section === "care"));
 });
 
 test("brochure uses the most recent fabric photo for the correct window and keeps snapshots stable", () => {
