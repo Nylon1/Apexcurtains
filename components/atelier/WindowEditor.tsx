@@ -10,6 +10,8 @@ import {
   Check,
 } from "lucide-react";
 import { Field, Section, Toggle, WindowDiagram } from "./Fields";
+import ApexMeasurements from "./ApexMeasurements";
+import { shapeName } from "@/lib/atelier/geometry";
 import { brochurePalette } from "@/lib/atelier/brochure";
 import { forestKs, selectedTrack } from "@/lib/atelier/tracks";
 import {
@@ -237,8 +239,20 @@ export default function WindowEditor({
             {fields([
               ["room", "Room name"],
               ["name", "Window name"],
-              ["type", "Window type", "text", undefined, ["apex", "standard"]],
             ])}
+            <label className="at-field">
+              <span>Window category</span>
+              <select
+                aria-label="Window category"
+                value={w.type}
+                onChange={(e) =>
+                  update("type", e.target.value as SurveyWindow["type"])
+                }
+              >
+                <option value="apex">Apex or other shape</option>
+                <option value="standard">Standard window</option>
+              </select>
+            </label>
             <div className="at-inline-actions">
               <button className="at-text-link" onClick={onCopy}>
                 <Copy size={14} />
@@ -259,29 +273,15 @@ export default function WindowEditor({
             title="Measured with precision"
             description="All dimensions in millimetres. Finished drops include the chosen puddle or floor clearance."
           >
+            {w.type === "apex" ? (
+              <ApexMeasurements w={w} update={update} />
+            ) : (
+              fields([
+                ["widthMm", "Full window width", "number"],
+                ["longDropMm", "Finished curtain drop", "number"],
+              ])
+            )}
             {fields([
-              [
-                "widthMm",
-                "Approved horizontal coverage",
-                "number",
-                "Full rectangular width used for material calculations.",
-              ],
-              [
-                "longDropMm",
-                w.type === "apex"
-                  ? "Longest finished drop at apex"
-                  : "Finished curtain drop",
-                "number",
-              ],
-              ...(w.type === "apex"
-                ? ([
-                    ["leftDropMm", "Left short drop", "number"],
-                    ["rightDropMm", "Right short drop", "number"],
-                    ["apexOffsetMm", "Apex position from left", "number"],
-                    ["leftSlopeMm", "Left sloping track length", "number"],
-                    ["rightSlopeMm", "Right sloping track length", "number"],
-                  ] as Config[])
-                : []),
               ["trackHeightMm", "Track mounting height", "number"],
               ["returnsMm", "Total returns allowance", "number"],
               ["overlapMm", "Total overlap allowance", "number"],
@@ -899,9 +899,7 @@ export default function WindowEditor({
         </div>
       </div>
       <aside className="at-window-summary">
-        <span className="at-eyebrow">
-          {w.type === "apex" ? "APEX WINDOW" : "STANDARD WINDOW"}
-        </span>
+        <span className="at-eyebrow">{shapeName(w)}</span>
         <WindowDiagram w={w} />
         <h3>
           {w.room}

@@ -1,5 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import {
+  windowGeometry,
+  normaliseGeometry,
+  windowOutline,
+  geometrySlants,
+} from "../lib/atelier/geometry";
 import { navigationChecks } from "../lib/atelier/navigation";
 import { selectedTrack } from "../lib/atelier/tracks";
 import {
@@ -16,6 +22,215 @@ import {
   selectedFabricPhoto,
   type Asset,
 } from "../lib/atelier/model";
+
+test("two-sided apex and flat tops use each horizontal run and side height", () => {
+  const base = {
+    ...sampleJob().data.windows[0],
+    widthMm: 6000,
+    longDropMm: 5000,
+    leftDropMm: 1000,
+    rightDropMm: 1000,
+  };
+  const symmetric = windowGeometry(base);
+  assert.deepEqual(symmetric.issues, []);
+  assert.equal(symmetric.leftSlant, 5000);
+  assert.equal(symmetric.rightSlant, 5000);
+  const offset = windowGeometry({
+    ...base,
+    apexPosition: "offset",
+    apexOffsetMm: 2000,
+    rightDropMm: 2000,
+  });
+  assert.equal(offset.leftSlant, 4472);
+  assert.equal(offset.rightSlant, 5000);
+  const flat = windowGeometry({
+    ...base,
+    apexShape: "flat-top",
+    flatTopWidthMm: 2000,
+  });
+  assert.equal(flat.offset, 2000);
+  assert.equal(flat.leftSlant, 4472);
+  assert.equal(flat.rightSlant, 4472);
+  const unequal = windowGeometry({
+    ...base,
+    apexShape: "flat-top",
+    flatTopWidthMm: 1000,
+    apexPosition: "offset",
+    apexOffsetMm: 2000,
+  });
+  assert.equal(unequal.leftSlant, 4472);
+  assert.equal(unequal.rightSlant, 5000);
+});
+
+test("triangles distinguish a required explicit zero from a missing side height", () => {
+  const triangle = {
+    ...sampleJob().data.windows[0],
+    apexShape: "triangle" as const,
+    widthMm: 6000,
+    longDropMm: 4000,
+    leftDropMm: 0,
+    rightDropMm: 0,
+  };
+  const g = windowGeometry(triangle);
+  assert.deepEqual(g.issues, []);
+  assert.equal(g.leftSlant, 5000);
+  assert.equal(g.rightSlant, 5000);
+  assert.equal(
+    windowGeometry({ ...triangle, leftDropMm: null }).leftSlant,
+    null,
+  );
+  assert.ok(
+    windowGeometry({ ...triangle, leftDropMm: null }).issues.some((i) =>
+      i.includes("left-side"),
+    ),
+  );
+  assert.ok(
+    windowGeometry({ ...triangle, rightDropMm: 100 }).issues.some((i) =>
+      i.includes("triangle"),
+    ),
+  );
+});
+
+test("single slopes require all three heights and use the longest drop for fabric", () => {
+  const base = {
+    ...sampleJob().data.windows[0],
+    widthMm: 3000,
+    longDropMm: 1,
+    leftDropMm: 5000,
+    rightDropMm: 1000,
+    middleDropMm: 3000,
+    apexShape: "single-left" as const,
+  };
+  const g = windowGeometry(base);
+  assert.deepEqual(g.issues, []);
+  assert.equal(g.leftSlant, 5000);
+  assert.equal(g.rightSlant, null);
+  assert.equal(normaliseGeometry(base).longDropMm, 5000);
+  assert.equal(calculateWindow(base).cutMm, 5300);
+  const right = windowGeometry({
+    ...base,
+    apexShape: "single-right",
+    leftDropMm: 1000,
+    rightDropMm: 5000,
+  });
+  assert.equal(right.leftSlant, null);
+  assert.equal(right.rightSlant, 5000);
+  assert.ok(
+    windowGeometry({ ...base, middleDropMm: null }).issues.some((i) =>
+      i.includes("middle"),
+    ),
+  );
+  assert.equal(windowGeometry({ ...base, middleDropMm: 6000 }).leftSlant, null);
+  assert.ok(windowGeometry({ ...base, middleDropMm: 3100 }).warnings.length);
+  assert.ok(
+    windowGeometry({ ...base, apexShape: "single-right" }).issues.length,
+  );
+});
+
+test("invalid apex geometry clears slants and blocks the next section", () => {
+  const data = sampleJob().data;
+  const base = data.windows[0];
+  for (const edit of [
+    { widthMm: 0 },
+    { leftDropMm: null },
+    { rightDropMm: null },
+    { longDropMm: 0 },
+    { longDropMm: 2000 },
+    { apexPosition: "offset" as const, apexOffsetMm: 4000 },
+    { apexShape: "flat-top" as const, flatTopWidthMm: 0 },
+    { apexShape: "flat-top" as const, flatTopWidthMm: 4000 },
+  ]) {
+    const w = { ...base, ...edit };
+    assert.equal(normaliseGeometry(w).leftSlopeMm, 0);
+    assert.equal(normaliseGeometry(w).rightSlopeMm, 0);
+    const checks = approvalChecklist({ ...data, windows: [w] });
+    assert.ok(
+      checks.some(
+        (c) =>
+          c.section === "measure" &&
+          !c.message.includes("confirm the measurements"),
+      ),
+    );
+  }
+});
+
+test("Other shape preserves typed measurements without inventing a diagram or slants", () => {
+  const data = sampleJob().data;
+  const w = {
+    ...data.windows[0],
+    apexShape: "other" as const,
+    leftDropMm: null,
+    rightDropMm: null,
+    otherShapeMeasurements:
+      "Arched top: 3200 mm wide; spring line 2400 mm; crown 3600 mm.",
+  };
+  assert.deepEqual(windowGeometry(w).issues, []);
+  assert.equal(windowGeometry(w).leftSlant, null);
+  assert.equal(windowOutline(w), null);
+  assert.equal(calculateWindow(w).fabricMetres, 23.4);
+  assert.equal(
+    jobDataSchema.parse({ ...data, windows: [w] }).windows[0]
+      .otherShapeMeasurements,
+    w.otherShapeMeasurements,
+  );
+  assert.ok(
+    approvalChecklist({
+      ...data,
+      windows: [{ ...w, otherShapeMeasurements: "" }],
+    }).some(
+      (c) =>
+        c.section === "measure" && c.message.includes("Type the measurements"),
+    ),
+  );
+  assert.ok(geometrySlants(w).includes("no automatic"));
+});
+
+test("server recomputes automatic slants but preserves historical manually recorded values", () => {
+  const data = sampleJob().data;
+  const w = data.windows[0];
+  const parsed = jobDataSchema.parse({
+    ...data,
+    windows: [{ ...w, leftSlopeMm: 999, rightSlopeMm: 999 }],
+  }).windows[0];
+  assert.equal(parsed.leftSlopeMm, 2000);
+  assert.equal(parsed.rightSlopeMm, 2000);
+  const large = jobDataSchema.parse({
+    ...data,
+    windows: [
+      {
+        ...w,
+        widthMm: 30000,
+        longDropMm: 30000,
+        leftDropMm: 0,
+        rightDropMm: 0,
+      },
+    ],
+  });
+  assert.equal(large.windows[0].leftSlopeMm, 33541);
+  assert.equal(jobDataSchema.parse(large).windows[0].leftSlopeMm, 33541);
+  const legacy = { ...w } as Record<string, unknown>;
+  for (const key of [
+    "apexShape",
+    "apexPosition",
+    "automaticSlants",
+    "middleDropMm",
+    "flatTopWidthMm",
+    "otherShapeMeasurements",
+  ])
+    delete legacy[key];
+  legacy.leftSlopeMm = 2015;
+  const restored = jobDataSchema.parse({ ...data, windows: [legacy] })
+    .windows[0];
+  assert.equal(restored.automaticSlants, false);
+  assert.equal(restored.apexPosition, "offset");
+  assert.equal(restored.leftSlopeMm, 2015);
+  assert.ok(geometrySlants(restored).includes("2015 mm"));
+  assert.ok(
+    approvalChecklist({ ...data, windows: [restored] }).some((c) =>
+      c.message.includes("apply automatic"),
+    ),
+  );
+});
 
 test("guided survey blocks missing prerequisites and points to the right window and section", () => {
   const data = sampleJob().data;

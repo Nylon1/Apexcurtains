@@ -13,6 +13,21 @@ async function main() {
     .jpeg({ quality: 85 })
     .toBuffer();
   const job = sampleJob();
+  const shapes = process.argv.includes("--shapes");
+  if (shapes) {
+    Object.assign(job.data.windows[0], {
+      apexShape: "flat-top",
+      flatTopWidthMm: 800,
+      apexPosition: "offset",
+      apexOffsetMm: 1000,
+    });
+    Object.assign(job.data.windows[1], {
+      type: "apex",
+      apexShape: "other",
+      otherShapeMeasurements:
+        "Arched top. Overall width 2200 mm; crown 2600 mm; spring line 2200 mm. Dimensions from the same level baseline.\nConfirm the curved track template against the site photograph.",
+    });
+  }
   for (const kind of ["brochure", "workroom", "fitter"] as DocumentKind[]) {
     const bytes = await renderJobPdf(kind, {
       job,
@@ -27,7 +42,7 @@ async function main() {
       },
       draft: true,
     });
-    await writeFile(`${out}/${kind}.pdf`, bytes);
+    await writeFile(`${out}/${shapes ? "shapes-" : ""}${kind}.pdf`, bytes);
     console.log(`${kind}: ${bytes.length} bytes`);
   }
 }

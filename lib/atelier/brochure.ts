@@ -4,6 +4,7 @@ import {
   type JobData,
   type SurveyWindow,
 } from "./model";
+import { shapeName } from "./geometry";
 
 export type BrochureDetail = { label: string; value: string };
 const join = (...values: string[]) => values.filter(Boolean).join(" · ");
@@ -48,7 +49,7 @@ export function brochureSpecification(w: SurveyWindow): BrochureDetail[] {
     { label: "Length finish", value: lengthLabel(w) },
     {
       label: "Finished measurements",
-      value: `${w.widthMm || "TBC"} mm coverage · ${w.longDropMm || "TBC"} mm ${w.type === "apex" ? "longest " : ""}drop`,
+      value: `${shapeName(w)} · ${w.widthMm || "TBC"} mm coverage · ${w.longDropMm || "TBC"} mm ${w.type === "apex" ? "longest " : ""}drop`,
     },
     { label: "Track design", value: recorded(w.track) },
     { label: "Track colour / finish", value: recorded(w.trackColour) },

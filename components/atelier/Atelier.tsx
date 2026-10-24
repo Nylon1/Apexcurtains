@@ -46,6 +46,7 @@ import {
 import { Button, Field, Section, Toggle, request } from "./Fields";
 import WindowEditor from "./WindowEditor";
 import BrochurePreview from "./BrochurePreview";
+import { normaliseGeometry } from "@/lib/atelier/geometry";
 import {
   navigationChecks,
   type SurveyDestination,
@@ -237,9 +238,24 @@ export default function Atelier({
             workroomConfirmed: false,
             windows: d.windows.map((w) =>
               w.id === windowId
-                ? {
+                ? normaliseGeometry({
                     ...w,
                     [key]: value,
+                    ...([
+                      "type",
+                      "apexShape",
+                      "apexPosition",
+                      "widthMm",
+                      "longDropMm",
+                      "middleDropMm",
+                      "leftDropMm",
+                      "rightDropMm",
+                      "apexOffsetMm",
+                      "flatTopWidthMm",
+                      "measuredConfirmed",
+                    ].includes(key)
+                      ? { automaticSlants: true }
+                      : {}),
                     ...(key === "track" &&
                     !/\bforest\b.*\bks\b/i.test(String(value))
                       ? { trackProduct: "custom" as const }
@@ -256,6 +272,12 @@ export default function Atelier({
                       "apexOffsetMm",
                       "leftSlopeMm",
                       "rightSlopeMm",
+                      "apexShape",
+                      "apexPosition",
+                      "flatTopWidthMm",
+                      "middleDropMm",
+                      "otherShapeMeasurements",
+                      "automaticSlants",
                       "lengthStyle",
                       "lengthDetail",
                     ].includes(key)
@@ -263,7 +285,7 @@ export default function Atelier({
                       : key === "measuredConfirmed"
                         ? (value as boolean)
                         : w.measuredConfirmed,
-                  }
+                  })
                 : w,
             ),
           }
@@ -346,8 +368,11 @@ export default function Atelier({
       name: `${active.name} copy`,
       widthMm: 0,
       longDropMm: 0,
-      leftDropMm: 0,
-      rightDropMm: 0,
+      leftDropMm: null,
+      rightDropMm: null,
+      middleDropMm: null,
+      flatTopWidthMm: 0,
+      otherShapeMeasurements: "",
       leftSlopeMm: 0,
       rightSlopeMm: 0,
       apexOffsetMm: 0,

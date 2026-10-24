@@ -14,6 +14,16 @@ The onsite workflow requires an internet connection. Unsaved changes are shown a
 
 Each window has six sections: **Measurements**, **Fabric & pattern**, **Lining & tiebacks**, **Track & fitting**, **Colour & care**, and **Window photos**. Required details are marked with an asterisk and checked before advancing to later sections/windows. Missing-item links take you to the section to complete. Back navigation, the review checklist and saving an unfinished draft remain available. Optional notes and an unconfirmed fitting appointment may remain blank. The room/window selector remembers the last section visited for each window during the session. In the public demo only, window-photo requirements do not block navigation because uploads are unavailable; approval remains disabled.
 
+### Window shapes and slants
+
+Choose **Apex or other shape**, then **Two-sided apex**, **Flat-top apex**, **Triangular window**, **Single apex (high left or high right)**, or **Other shape**. Standard windows retain width and finished drop fields. Defined apex shapes require full width and left, middle and right heights from the same level bottom baseline, viewed from inside the room. A triangular window requires an explicit zero for both side heights. The middle is the peak/flat-top height; on a single slope it is measured halfway across the width.
+
+Slants calculate automatically using the horizontal run and height difference, rounded to the nearest millimetre. Two-sided/triangular shapes can have a centred or off-centre peak; an off-centre peak requires its horizontal position from the left. Flat tops also require their horizontal width, and their start position when off-centre. A single slant uses the full width and the difference between the side heights. Its measured middle must lie between the sides; a mismatch from the straight-line midpoint is flagged for site review. Invalid/incomplete geometry does not produce a slant and blocks progression.
+
+**Other shape** has a required free-text measurements box for custom outlines, curves, sides and units, plus overall width and longest finished drop for the full rectangular fabric allowance. Its typed measurements appear in the brochure, workroom sheet and fitter sheet. No shape or slant is invented. Each room/window keeps its own shape and measurements.
+
+Existing saved surveys retain their recorded manual slants until the consultant reviews the shape and applies automatic calculation (or edits geometry). Historical approved revisions retain their original measurements. All shape changes require measurement reconfirmation before release.
+
 ### Personalised brochures
 
 The customer's name and installation address have a dedicated page with a personal dedication, separate from the room and window specifications.

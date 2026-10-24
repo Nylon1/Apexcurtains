@@ -1,84 +1,104 @@
 import { z } from "zod";
+import { normaliseGeometry, windowGeometry } from "./geometry";
 
 const text = (max = 500) => z.string().trim().max(max).default("");
 const mm = z.number().finite().min(0).max(30000).default(0);
+// A diagonal can exceed either of the two permitted 30 m dimensions.
+const slantMm = z.number().finite().min(0).max(42427).default(0);
 const yes = z.boolean().default(false);
-export const windowSchema = z.object({
-  id: z.string().uuid(),
-  room: text(100),
-  name: text(100),
-  type: z.enum(["apex", "standard"]).default("apex"),
-  widthMm: mm,
-  longDropMm: mm,
-  leftDropMm: mm,
-  rightDropMm: mm,
-  apexOffsetMm: mm,
-  leftSlopeMm: mm,
-  rightSlopeMm: mm,
-  trackHeightMm: mm,
-  returnsMm: mm,
-  overlapMm: mm,
-  measuredConfirmed: yes,
-  measurementNotes: text(2500),
-  track: text(),
-  trackProduct: z.enum(["custom", "forest-ks"]).default("custom"),
-  trackColour: text(150),
-  trackComponents: text(2000),
-  panelCount: z.union([z.literal(1), z.literal(2)]).default(2),
-  opening: text(150),
-  heading: text(150),
-  fullness: z.number().min(1).max(4).default(2),
-  lengthStyle: z.enum(["touching", "puddle", "mid"]).default("touching"),
-  lengthDetail: text(200),
-  supplier: text(150),
-  fabric: text(200),
-  fabricCode: text(150),
-  colour: text(150),
-  fabricWidthMm: mm,
-  sideHemMm: mm,
-  seamMm: mm,
-  topAllowanceMm: mm,
-  bottomAllowanceMm: mm,
-  pattern: z.enum(["plain", "straight", "half-drop"]).default("plain"),
-  repeatMm: mm,
-  horizontalRepeatMm: mm,
-  motifAllowanceMm: mm,
-  patternNotes: text(2000),
-  direction: text(300),
-  manualFabricMetres: z.number().min(0).max(2000).default(0),
-  cuttingPlan: text(2500),
-  lining: z
-    .enum(["none", "standard", "blackout", "thermal"])
-    .default("blackout"),
-  liningCode: text(150),
-  liningColour: text(100),
-  liningWidthMm: mm,
-  liningDropMm: mm,
-  liningAllowanceMm: mm,
-  interlining: text(150),
-  interliningMetres: z.number().min(0).max(2000).default(0),
-  extraFabricMetres: z.number().min(0).max(100).default(0),
-  extraLiningMetres: z.number().min(0).max(100).default(0),
-  tiebacks: text(200),
-  tiebackColour: text(100),
-  tiebackCount: z.number().int().min(0).max(20).default(0),
-  hooks: text(200),
-  hookColour: text(100),
-  hookCount: z.number().int().min(0).max(200).default(0),
-  tiebackPosition: text(300),
-  offcutNotes: text(1000),
-  accessHeightMm: mm,
-  mountingSurface: text(200),
-  fittingNotes: text(2500),
-  careInstructions: text(2500),
-  careSource: text(300),
-  palette: z
-    .enum(["linen", "sage", "clay", "ink", "rose", "slate", "plum", "ochre"])
-    .default("linen"),
-  // Preserve the explicitly selected palette in older saved collections.
-  paletteMode: z.enum(["auto", "manual"]).default("manual"),
-  designNotes: text(2000),
-});
+export const windowSchema = z
+  .object({
+    id: z.string().uuid(),
+    room: text(100),
+    name: text(100),
+    type: z.enum(["apex", "standard"]).default("apex"),
+    apexShape: z
+      .enum([
+        "double",
+        "flat-top",
+        "triangle",
+        "single-left",
+        "single-right",
+        "other",
+      ])
+      .default("double"),
+    apexPosition: z.enum(["centre", "offset"]).default("offset"),
+    automaticSlants: yes,
+    flatTopWidthMm: mm,
+    middleDropMm: mm.nullable().default(null),
+    otherShapeMeasurements: text(2000),
+    widthMm: mm,
+    longDropMm: mm,
+    leftDropMm: mm.nullable().default(null),
+    rightDropMm: mm.nullable().default(null),
+    apexOffsetMm: mm,
+    leftSlopeMm: slantMm,
+    rightSlopeMm: slantMm,
+    trackHeightMm: mm,
+    returnsMm: mm,
+    overlapMm: mm,
+    measuredConfirmed: yes,
+    measurementNotes: text(2500),
+    track: text(),
+    trackProduct: z.enum(["custom", "forest-ks"]).default("custom"),
+    trackColour: text(150),
+    trackComponents: text(2000),
+    panelCount: z.union([z.literal(1), z.literal(2)]).default(2),
+    opening: text(150),
+    heading: text(150),
+    fullness: z.number().min(1).max(4).default(2),
+    lengthStyle: z.enum(["touching", "puddle", "mid"]).default("touching"),
+    lengthDetail: text(200),
+    supplier: text(150),
+    fabric: text(200),
+    fabricCode: text(150),
+    colour: text(150),
+    fabricWidthMm: mm,
+    sideHemMm: mm,
+    seamMm: mm,
+    topAllowanceMm: mm,
+    bottomAllowanceMm: mm,
+    pattern: z.enum(["plain", "straight", "half-drop"]).default("plain"),
+    repeatMm: mm,
+    horizontalRepeatMm: mm,
+    motifAllowanceMm: mm,
+    patternNotes: text(2000),
+    direction: text(300),
+    manualFabricMetres: z.number().min(0).max(2000).default(0),
+    cuttingPlan: text(2500),
+    lining: z
+      .enum(["none", "standard", "blackout", "thermal"])
+      .default("blackout"),
+    liningCode: text(150),
+    liningColour: text(100),
+    liningWidthMm: mm,
+    liningDropMm: mm,
+    liningAllowanceMm: mm,
+    interlining: text(150),
+    interliningMetres: z.number().min(0).max(2000).default(0),
+    extraFabricMetres: z.number().min(0).max(100).default(0),
+    extraLiningMetres: z.number().min(0).max(100).default(0),
+    tiebacks: text(200),
+    tiebackColour: text(100),
+    tiebackCount: z.number().int().min(0).max(20).default(0),
+    hooks: text(200),
+    hookColour: text(100),
+    hookCount: z.number().int().min(0).max(200).default(0),
+    tiebackPosition: text(300),
+    offcutNotes: text(1000),
+    accessHeightMm: mm,
+    mountingSurface: text(200),
+    fittingNotes: text(2500),
+    careInstructions: text(2500),
+    careSource: text(300),
+    palette: z
+      .enum(["linen", "sage", "clay", "ink", "rose", "slate", "plum", "ochre"])
+      .default("linen"),
+    // Preserve the explicitly selected palette in older saved collections.
+    paletteMode: z.enum(["auto", "manual"]).default("manual"),
+    designNotes: text(2000),
+  })
+  .transform(normaliseGeometry);
 export const jobDataSchema = z.object({
   title: text(160),
   customerName: text(160),
@@ -154,6 +174,8 @@ export function newWindow(
   return windowSchema.parse({
     id,
     type,
+    apexPosition: "centre",
+    automaticSlants: true,
     name: "Main window",
     room: "Living room",
     heading: "Double pinch pleat",
@@ -319,6 +341,7 @@ export type SurveyCheck = {
 };
 
 export function calculateWindow(w: SurveyWindow) {
+  w = normaliseGeometry(w);
   const issues: string[] = [];
   const checks: { section: WindowSection; message: string }[] = [];
   const add = (section: WindowSection, message: string) => {
@@ -434,17 +457,11 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
       add("measure", "use a unique room and window name.");
     labels.add(key);
     if (!w.measuredConfirmed) add("measure", "confirm the measurements.");
-    if (
-      w.type === "apex" &&
-      (!w.leftDropMm ||
-        !w.rightDropMm ||
-        !w.leftSlopeMm ||
-        !w.rightSlopeMm ||
-        w.longDropMm < Math.max(w.leftDropMm, w.rightDropMm) ||
-        w.apexOffsetMm <= 0 ||
-        w.apexOffsetMm >= w.widthMm)
-    )
-      add("measure", "check the apex drops, position and both slopes.");
+    if (w.type === "apex") {
+      windowGeometry(w).issues.forEach((message) => add("measure", message));
+      if (w.apexShape !== "other" && !w.automaticSlants)
+        add("measure", "review the window shape and apply automatic slants.");
+    }
     if (!w.fabric || !w.fabricCode || !w.supplier || !w.colour)
       add("fabric", "complete the fabric specification.");
     if (!Number.isFinite(w.fullness) || w.fullness < 1 || w.fullness > 4)

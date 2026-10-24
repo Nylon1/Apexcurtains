@@ -1229,6 +1229,91 @@
     sans-serif;
   fill: #9a845c;
 }
+.at-apex-measurements {
+  margin-bottom: 28px;
+}
+.at-apex-measurements textarea {
+  min-height: 180px;
+}
+.at-shape-guide {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+  gap: 24px;
+  margin: 22px 0;
+  padding: 20px 24px;
+  background: #f3efe6;
+  border: 1px solid #ded6c8;
+}
+.at-shape-guide .at-window-diagram {
+  margin: 0;
+}
+.at-shape-guide p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 10px 0;
+}
+.at-shape-guide small {
+  display: block;
+  color: #65706b;
+  line-height: 1.65;
+}
+.at-geometry-position {
+  margin-top: 22px;
+}
+.at-calculated-slants {
+  padding: 24px;
+  margin-top: 24px;
+  border: 1px solid #b7a17d;
+  background: #f8f5ee;
+}
+.at-calculated-slants .at-form-grid {
+  margin-top: 16px;
+}
+.at-calculated-slants input {
+  color: #173a43;
+  background: #ece8dc;
+  font-weight: 600;
+}
+.at-calculated-slants p,
+.at-calculated-slants small {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #65706b;
+}
+.at-geometry-warning,
+.at-geometry-legacy {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: #f5ecd6;
+  color: #6f5126;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.at-custom-shape-notes {
+  margin: 28px 0;
+  padding: 24px;
+  background: #f3efe6;
+}
+.at-custom-shape-notes p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .at-shape-guide {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 18px;
+  }
+  .at-shape-guide .at-window-diagram {
+    width: 180px;
+    justify-self: center;
+  }
+  .at-calculated-slants {
+    padding: 18px;
+  }
+}
 .at-window-summary h3 {
   font-size: 26px;
   margin: 7px 0 20px;

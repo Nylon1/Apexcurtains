@@ -81,6 +81,15 @@ try {
   data.fitterEmail = "fitter@example.invalid";
   data.windows[0].trackProduct = "forest-ks";
   data.windows[0].track = "Forest Group KS® Klick System";
+  data.windows[0].apexShape = "flat-top";
+  data.windows[0].flatTopWidthMm = 800;
+  data.windows[0].apexPosition = "offset";
+  data.windows[0].apexOffsetMm = 1000;
+  data.windows[0].leftSlopeMm = 999; // Server must replace stale automatic values.
+  data.windows[1].type = "apex";
+  data.windows[1].apexShape = "other";
+  data.windows[1].otherShapeMeasurements =
+    "Arched top. Overall width 2200 mm; crown 2600 mm; spring line 2200 mm. Dimensions from the same level baseline.";
   let job = (await (await call("/api/atelier/jobs", "POST", data, 201)).json())
     .job;
   jobId = job.id;
@@ -165,6 +174,12 @@ try {
   assert.equal(job.data.windows[0].trackColour, data.windows[0].trackColour);
   assert.equal(job.data.windows[0].trackProduct, "forest-ks");
   assert.equal(job.data.windows[0].paletteMode, "auto");
+  assert.equal(job.data.windows[0].leftSlopeMm, 1562);
+  assert.equal(job.data.windows[0].rightSlopeMm, 1844);
+  assert.equal(
+    job.data.windows[1].otherShapeMeasurements,
+    data.windows[1].otherShapeMeasurements,
+  );
   await call(
     `/api/atelier/jobs/${jobId}`,
     "PUT",
