@@ -3,6 +3,8 @@ import { normaliseGeometry, windowGeometry } from "./geometry";
 
 const text = (max = 500) => z.string().trim().max(max).default("");
 const mm = z.number().finite().min(0).max(30000).default(0);
+// A diagonal can exceed either of the two permitted 30 m dimensions.
+const slantMm = z.number().finite().min(0).max(42427).default(0);
 const yes = z.boolean().default(false);
 export const windowSchema = z
   .object({
@@ -30,8 +32,8 @@ export const windowSchema = z
     leftDropMm: mm.nullable().default(null),
     rightDropMm: mm.nullable().default(null),
     apexOffsetMm: mm,
-    leftSlopeMm: mm,
-    rightSlopeMm: mm,
+    leftSlopeMm: slantMm,
+    rightSlopeMm: slantMm,
     trackHeightMm: mm,
     returnsMm: mm,
     overlapMm: mm,

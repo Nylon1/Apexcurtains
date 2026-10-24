@@ -194,6 +194,20 @@ test("server recomputes automatic slants but preserves historical manually recor
   }).windows[0];
   assert.equal(parsed.leftSlopeMm, 2000);
   assert.equal(parsed.rightSlopeMm, 2000);
+  const large = jobDataSchema.parse({
+    ...data,
+    windows: [
+      {
+        ...w,
+        widthMm: 30000,
+        longDropMm: 30000,
+        leftDropMm: 0,
+        rightDropMm: 0,
+      },
+    ],
+  });
+  assert.equal(large.windows[0].leftSlopeMm, 33541);
+  assert.equal(jobDataSchema.parse(large).windows[0].leftSlopeMm, 33541);
   const legacy = { ...w } as Record<string, unknown>;
   for (const key of [
     "apexShape",
