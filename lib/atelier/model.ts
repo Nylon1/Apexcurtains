@@ -126,6 +126,16 @@ export type Asset = {
   path: string;
   caption: string;
 };
+export const liningOptions = ["standard", "blackout"] as const;
+export const hookFinishes = ["Bronze", "Silver chrome", "Black"] as const;
+
+// Assets arrive in upload order; a new fabric photo replaces the brochure swatch.
+// Approved revisions retain their original asset list.
+export function selectedFabricPhoto(assets: Asset[], windowId: string) {
+  return assets
+    .filter((a) => a.window_id === windowId && a.kind === "fabric")
+    .at(-1);
+}
 export type Delivery = {
   id: string;
   revision: number;
@@ -153,6 +163,7 @@ export function newWindow(
     seamMm: 15,
     liningAllowanceMm: 150,
     paletteMode: "auto",
+    tiebacks: "Matching fabric",
   });
 }
 export function newJobData(id: string): JobData {
@@ -384,12 +395,21 @@ export function approvalIssues(data: JobData, assets: Asset[] = []) {
       );
     if (w.lining !== "none" && (!w.liningCode || !w.liningColour))
       issues.push(`${label}: add the lining reference and colour.`);
+    if (!(liningOptions as readonly string[]).includes(w.lining))
+      issues.push(`${label}: choose Standard or Blackout lining.`);
     if (w.interlining && !w.interliningMetres)
       issues.push(`${label}: enter the interlining metres.`);
     if (w.tiebackCount && (!w.tiebacks || !w.tiebackColour))
       issues.push(`${label}: complete the tieback details.`);
     if (w.hookCount && (!w.hooks || !w.hookColour))
       issues.push(`${label}: complete the hook details.`);
+    if (
+      w.hookCount &&
+      !(hookFinishes as readonly string[]).includes(w.hookColour)
+    )
+      issues.push(
+        `${label}: choose Bronze, Silver chrome or Black for the tieback hooks.`,
+      );
     if (w.careInstructions.length < 20 || !w.careSource)
       issues.push(
         `${label}: add supplier-approved care instructions and their source.`,
@@ -431,7 +451,7 @@ export function sampleJob(): Job {
     tiebackColour: "Warm flax",
     tiebackCount: 2,
     hooks: "Classic holdback",
-    hookColour: "Antique brass",
+    hookColour: "Bronze",
     hookCount: 2,
     palette: "linen",
     designNotes:
@@ -452,7 +472,7 @@ export function sampleJob(): Job {
     track: "Ceiling-mounted track",
     trackColour: "Matt white",
     designNotes:
-      "Gentle sage and beautifully structured folds bring a restful rhythm to the bedroom. Ivory blackout lining completes the specification, with matching tiebacks and antique brass details.",
+      "Gentle sage and beautifully structured folds bring a restful rhythm to the bedroom. Ivory blackout lining completes the specification, with matching tiebacks and bronze details.",
   };
   Object.assign(data, {
     title: "The garden house",

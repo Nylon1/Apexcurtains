@@ -10,6 +10,8 @@ import {
   sampleJob,
   jobDataSchema,
   approvalIssues,
+  selectedFabricPhoto,
+  type Asset,
 } from "../lib/atelier/model";
 
 test("apex material uses a full rectangle at the longest drop", () => {
@@ -235,4 +237,60 @@ test("release requires recipients, confirmed measurements, care and photographs"
       issues.some((i) => i.includes(fragment)),
       fragment,
     );
+});
+
+test("brochure uses the most recent fabric photo for the correct window and keeps snapshots stable", () => {
+  const [first, second] = sampleJob().data.windows;
+  const photo = (
+    id: string,
+    window_id: string,
+    kind: Asset["kind"],
+  ): Asset => ({
+    id,
+    window_id,
+    kind,
+    job_id: "fixture",
+    path: id,
+    caption: "Fixture",
+  });
+  const frozen = [
+    photo("old", first.id, "fabric"),
+    photo("window", first.id, "window"),
+    photo("other-room", second.id, "fabric"),
+  ];
+  const draft = [...frozen, photo("new", first.id, "fabric")];
+  assert.equal(selectedFabricPhoto(draft, first.id)?.id, "new");
+  assert.equal(selectedFabricPhoto(draft, second.id)?.id, "other-room");
+  assert.equal(selectedFabricPhoto(frozen, first.id)?.id, "old");
+  assert.equal(selectedFabricPhoto([], first.id), undefined);
+});
+
+test("new releases accept only the chosen lining and tieback hook options", () => {
+  const data = sampleJob().data;
+  const w = data.windows[0];
+  for (const lining of ["standard", "blackout"] as const) {
+    assert.ok(
+      !approvalIssues({ ...data, windows: [{ ...w, lining }] }).some((s) =>
+        s.includes("choose Standard"),
+      ),
+    );
+  }
+  assert.ok(
+    approvalIssues({ ...data, windows: [{ ...w, lining: "thermal" }] }).some(
+      (s) => s.includes("choose Standard"),
+    ),
+  );
+  for (const hookColour of ["Bronze", "Silver chrome", "Black"]) {
+    assert.ok(
+      !approvalIssues({ ...data, windows: [{ ...w, hookColour }] }).some((s) =>
+        s.includes("choose Bronze"),
+      ),
+    );
+  }
+  assert.ok(
+    approvalIssues({
+      ...data,
+      windows: [{ ...w, hookColour: "Antique brass" }],
+    }).some((s) => s.includes("choose Bronze")),
+  );
 });

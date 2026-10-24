@@ -151,6 +151,9 @@ export default function Atelier({
                 ? {
                     ...w,
                     [key]: value,
+                    ...(key === "colour" && w.tiebacks === "Matching fabric"
+                      ? { tiebackColour: value as string }
+                      : {}),
                     measuredConfirmed: [
                       "type",
                       "widthMm",

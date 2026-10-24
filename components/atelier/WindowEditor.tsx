@@ -6,6 +6,9 @@ import { Field, Section, Toggle, WindowDiagram } from "./Fields";
 import { brochurePalette } from "@/lib/atelier/brochure";
 import {
   palettes,
+  hookFinishes,
+  liningOptions,
+  selectedFabricPhoto,
   calculateWindow,
   type SurveyWindow,
   type Asset,
@@ -52,8 +55,10 @@ export default function WindowEditor({
     [photoKind, setPhotoKind] = useState("window"),
     [caption, setCaption] = useState("");
   const input = useRef<HTMLInputElement>(null);
+  const fabricInput = useRef<HTMLInputElement>(null);
   const q = calculateWindow(w);
   const palette = brochurePalette(w);
+  const fabricPhoto = selectedFabricPhoto(assets, w.id);
   function fields(config: Config[]) {
     return (
       <div className="at-form-grid">
@@ -222,6 +227,74 @@ export default function WindowEditor({
                   "Puddle allowance or mid-length endpoint, in mm.",
                 ],
               ])}
+              <div className="at-fabric-upload">
+                <span className="at-eyebrow">
+                  THE ACTUAL FABRIC, BEAUTIFULLY RECORDED
+                </span>
+                <h3>Your fabric photograph</h3>
+                <p>
+                  Upload the customer&apos;s chosen fabric. Its picture appears in
+                  the brochure beside the fabric name, reference and colour
+                  entered above.
+                </p>
+                {fabricPhoto ? (
+                  <figure className="at-fabric-upload-preview">
+                    <img
+                      src={`/api/atelier/photos/${fabricPhoto.id}`}
+                      alt={`Selected fabric: ${w.fabric || "Fabric"} ${w.colour}`}
+                    />
+                    <figcaption>
+                      <b>{w.fabric || "Add the fabric name above"}</b>
+                      <span>
+                        {[w.fabricCode, w.colour].filter(Boolean).join(" · ")}
+                      </span>
+                      <small>
+                        This is the fabric photograph used in the brochure.
+                      </small>
+                    </figcaption>
+                  </figure>
+                ) : null}
+                <input
+                  ref={fabricInput}
+                  hidden
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file)
+                      void onUpload(
+                        file,
+                        "fabric",
+                        [w.fabric, w.fabricCode, w.colour]
+                          .filter(Boolean)
+                          .join(" · "),
+                      );
+                    e.target.value = "";
+                  }}
+                />
+                <button
+                  type="button"
+                  className="at-upload"
+                  onClick={() => fabricInput.current?.click()}
+                  disabled={busy || demo || approved}
+                >
+                  <Camera size={25} />
+                  <b>
+                    {busy
+                      ? "Preparing your photograph…"
+                      : fabricPhoto
+                        ? "Upload a new fabric photograph"
+                        : "Upload fabric photograph"}
+                  </b>
+                  <span>
+                    {demo
+                      ? "Photo uploads are available in the staff workspace."
+                      : approved
+                        ? "Edit and save a new draft before adding photos."
+                        : "Choose or take a photo. JPG, PNG or WebP. The latest fabric photo is used."}
+                  </span>
+                </button>
+              </div>
               <details className="at-details">
                 <summary>
                   Making allowances <span>Review with the workroom</span>
@@ -290,14 +363,28 @@ export default function WindowEditor({
               ])}
             </Section>
             <Section number="04" title="The finishing layers">
+              <div className="at-form-grid">
+                <label className="at-field">
+                  <span>Lining type</span>
+                  <select
+                    value={
+                      (liningOptions as readonly string[]).includes(w.lining)
+                        ? w.lining
+                        : ""
+                    }
+                    onChange={(e) =>
+                      update("lining", e.target.value as SurveyWindow["lining"])
+                    }
+                  >
+                    <option value="" disabled>
+                      Choose Standard or Blackout
+                    </option>
+                    <option value="standard">Standard</option>
+                    <option value="blackout">Blackout</option>
+                  </select>
+                </label>
+              </div>
               {fields([
-                [
-                  "lining",
-                  "Lining type",
-                  "text",
-                  undefined,
-                  ["none", "standard", "blackout", "thermal"],
-                ],
                 ...(w.lining !== "none"
                   ? ([
                       ["liningCode", "Lining reference"],
@@ -325,12 +412,75 @@ export default function WindowEditor({
                       ],
                     ] as Config[])
                   : []),
-                ["tiebacks", "Tieback design"],
-                ["tiebackColour", "Tieback colour"],
+              ])}
+              <div className="at-form-grid">
+                <label className="at-field">
+                  <span>Tieback option</span>
+                  <select
+                    value={
+                      w.tiebacks === "Matching fabric" ? "matching" : "other"
+                    }
+                    onChange={(e) => {
+                      update(
+                        "tiebacks",
+                        e.target.value === "matching" ? "Matching fabric" : "",
+                      );
+                      if (e.target.value === "matching")
+                        update("tiebackColour", w.colour);
+                    }}
+                  >
+                    <option value="matching">Matching</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <small>
+                    Set the quantity to 0 if no tiebacks are wanted.
+                  </small>
+                </label>
+                {w.tiebacks === "Matching fabric" ? (
+                  <div className="at-field">
+                    <span>Matching tieback colour</span>
+                    <p className="at-selection-note">
+                      {w.tiebackColour ||
+                        w.colour ||
+                        "Choose the fabric colour above"}
+                    </p>
+                  </div>
+                ) : null}
+              </div>
+              {fields([
+                ...(w.tiebacks !== "Matching fabric"
+                  ? ([
+                      ["tiebacks", "Other tieback design"],
+                      ["tiebackColour", "Tieback colour"],
+                    ] as Config[])
+                  : []),
                 ["tiebackCount", "Tieback quantity", "number"],
                 ["hooks", "Hook / holdback style"],
-                ["hookColour", "Hook / holdback finish"],
                 ["hookCount", "Hook / holdback quantity", "number"],
+              ])}
+              <div className="at-form-grid">
+                <label className="at-field">
+                  <span>Tieback hook finish</span>
+                  <select
+                    value={
+                      (hookFinishes as readonly string[]).includes(w.hookColour)
+                        ? w.hookColour
+                        : ""
+                    }
+                    onChange={(e) => update("hookColour", e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Choose a finish
+                    </option>
+                    {hookFinishes.map((finish) => (
+                      <option value={finish} key={finish}>
+                        {finish}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              {fields([
                 [
                   "offcutNotes",
                   "Offcuts and tieback plan",
