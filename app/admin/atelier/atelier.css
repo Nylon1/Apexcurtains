@@ -2080,6 +2080,8 @@
   border-top: 1px solid #ded8cd;
 }
 .at-arrival-step > span {
+  flex: 0 0 44px;
+  white-space: nowrap;
   font:
     38px/1.2 Georgia,
     serif;
