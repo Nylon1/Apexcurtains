@@ -1,6 +1,7 @@
 /* Photographs are served through the staff-checked asset endpoint. */
 /* eslint-disable @next/next/no-img-element */
 import { selectedTrack } from "@/lib/atelier/tracks";
+import { careGuide, additionalCareWindows } from "@/lib/atelier/care";
 import { shapeName } from "@/lib/atelier/geometry";
 import {
   selectedFabricPhoto,
@@ -13,7 +14,6 @@ import {
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
-  generalAftercare,
   type BrochureDetail,
 } from "@/lib/atelier/brochure";
 
@@ -224,33 +224,52 @@ export default function BrochurePreview({
           </section>
         );
       })}
-      <section className="at-brochure-page">
-        <span className="at-eyebrow">CARING FOR YOUR COLLECTION</span>
-        <h3>
-          Beautiful today.
-          <br />
-          Cared for over time.
-        </h3>
-        <p>{generalAftercare}</p>
-        {data.windows.map((w) => (
-          <div className="at-brochure-care" key={w.id}>
-            <h4>
-              {w.room} · {w.name}
-            </h4>
+      {careGuide.map((group) => (
+        <section className="at-brochure-page" key={group.id}>
+          <span className="at-eyebrow">{group.eyebrow}</span>
+          <h3>{group.title}</h3>
+          <p>{group.introduction}</p>
+          {group.sections.map((section, index) => (
+            <div
+              className={`at-brochure-care ${group.id === "cleaning" && index === 0 ? "at-care-highlight" : ""}`}
+              key={section.title}
+            >
+              <h4>{section.title}</h4>
+              <p>{section.text}</p>
+            </div>
+          ))}
+          {group.id === "living" ? (
             <p>
-              {w.careInstructions ||
-                "Your fabric and lining care instructions are awaiting supplier confirmation. Contact Apex Curtains before cleaning, steaming or applying heat."}
+              Here when you need us.
+              <br />
+              hello@apexcurtains.com · 0800 772 0367
             </p>
-            {w.careSource ? (
-              <small>Care reference: {w.careSource}</small>
-            ) : null}
-          </div>
-        ))}
-        <p>
-          We are here when you need us.
-          <br />
-          hello@apexcurtains.com · 0800 772 0367
-        </p>
+          ) : null}
+        </section>
+      ))}
+      {additionalCareWindows(data.windows).length ? (
+        <section className="at-brochure-page">
+          <span className="at-eyebrow">NOTES FOR YOUR COLLECTION</span>
+          <h3>A little more detail.</h3>
+          <p>
+            The following notes have been recorded for individual windows. If
+            any instruction differs from the standard guide or a sewn-in label,
+            ask Apex before treatment.
+          </p>
+          {additionalCareWindows(data.windows).map((w) => (
+            <div className="at-brochure-care" key={w.id}>
+              <h4>
+                {w.room} · {w.name}
+              </h4>
+              {w.careInstructions ? <p>{w.careInstructions}</p> : null}
+              {w.careSource ? (
+                <small>Care reference: {w.careSource}</small>
+              ) : null}
+            </div>
+          ))}
+        </section>
+      ) : null}
+      <section className="at-brochure-page">
         <div className="at-brochure-voucher">
           <span className="at-eyebrow">
             WITH OUR THANKS, {data.customerName || "FROM APEX"}

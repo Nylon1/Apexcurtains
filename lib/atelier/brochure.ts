@@ -168,5 +168,3 @@ export function roomIntroduction(w: SurveyWindow) {
 
 export const paletteSampleNote =
   "These swatches suggest complementary interior colours; they are not exact fabric or paint matches. Compare physical samples in your room in daylight and evening light before choosing.";
-export const generalAftercare =
-  "Draw curtains gently using the intended cord, wand or leading edge, keeping hands clean and dry. Keep the folds free of furniture and sharp edges. Follow the supplier-approved instructions below before cleaning, steaming or applying heat, and ask Apex if anything is unclear.";

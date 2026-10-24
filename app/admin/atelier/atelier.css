@@ -1774,6 +1774,50 @@
   padding: 22px 0;
   border-bottom: 1px solid #ded8cd;
 }
+.at-standard-care {
+  padding: 26px;
+  background: #f1ecdf;
+  border: 1px solid #cab997;
+}
+.at-standard-care h3 {
+  margin: 12px 0;
+  font:
+    32px/1.15 Georgia,
+    serif;
+  color: #102c3b;
+}
+.at-standard-care p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.at-standard-care .at-care-included {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #d6cbb6;
+  font-size: 13px;
+  color: #58665f;
+}
+.at-care-guide > div {
+  padding: 18px 0;
+}
+.at-care-guide h3 {
+  font:
+    27px/1.2 Georgia,
+    serif;
+  margin: 10px 0 20px;
+}
+.at-care-guide h4 {
+  font-size: 15px;
+  margin: 18px 0 8px;
+}
+.at-care-guide p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.at-care-highlight {
+  background: #ede7db;
+  padding: 24px;
+}
 .at-brochure-care h4 {
   font:
     23px/1.3 Georgia,

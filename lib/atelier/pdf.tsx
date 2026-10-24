@@ -1,6 +1,12 @@
 import React from "react";
 import { selectedTrack } from "./tracks";
 import {
+  careGuide,
+  standardCareSummary,
+  careHandover,
+  additionalCareWindows,
+} from "./care";
+import {
   shapeName,
   windowOutline,
   geometryMeasurements,
@@ -37,7 +43,6 @@ import {
   brochurePalette,
   roomIntroduction,
   paletteSampleNote,
-  generalAftercare,
 } from "./brochure";
 
 const C = {
@@ -162,7 +167,7 @@ const s = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 9,
-    marginBottom: 5,
+    marginBottom: 3,
     fontSize: 9,
     lineHeight: 1.3,
   },
@@ -638,38 +643,68 @@ function Brochure(p: Props) {
       {d.windows.map((w) => (
         <BrochureWindow key={w.id} p={p} w={w} />
       ))}
-      <Page size="A4" style={s.page}>
-        <Brand />
-        <Text style={s.kicker}>Caring for your collection</Text>
-        <Text style={s.title}>Beautiful today.{"\n"}Cared for over time.</Text>
-        <Text style={s.body}>{generalAftercare}</Text>
-        {d.windows.map((w) => (
-          <View key={w.id}>
-            <Text style={s.h2} minPresenceAhead={60}>
-              {w.room} · {w.name}
+      {careGuide.map((group) => (
+        <Page size="A4" style={s.page} key={group.id}>
+          <Brand />
+          <Text style={s.kicker}>{group.eyebrow}</Text>
+          <Text style={s.title}>{group.title}</Text>
+          <Text style={s.body}>{group.introduction}</Text>
+          {group.sections.map((section, index) => (
+            <View
+              key={section.title}
+              wrap={false}
+              style={{
+                marginTop: 10,
+                paddingTop: 12,
+                borderTopWidth: 0.6,
+                borderColor: C.line,
+                ...(group.id === "cleaning" && index === 0
+                  ? { padding: 17, backgroundColor: "#EDE7DB", marginBottom: 4 }
+                  : {}),
+              }}
+            >
+              <Text
+                style={[s.h2, { fontSize: 19, marginTop: 0, marginBottom: 7 }]}
+              >
+                {section.title}
+              </Text>
+              <Text style={[s.body, { marginBottom: 5 }]}>{section.text}</Text>
+            </View>
+          ))}
+          {group.id === "living" ? (
+            <Text style={[s.small, { marginTop: 18 }]}>
+              Here when you need us: hello@apexcurtains.com · 0800 772 0367
             </Text>
-            <Text style={s.body}>
-              {w.careInstructions ||
-                "Care instructions are awaiting confirmation from the selected fabric and lining suppliers. Contact Apex Curtains before cleaning, steaming or applying heat."}
-            </Text>
-            {w.careSource ? (
-              <Text style={s.small}>Care reference: {w.careSource}</Text>
-            ) : null}
-          </View>
-        ))}
-        <View wrap={false}>
-          <Text style={s.h2}>Here when you need us</Text>
+          ) : null}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ))}
+      {additionalCareWindows(d.windows).length ? (
+        <Page size="A4" style={s.page}>
+          <Brand />
+          <Text style={s.kicker}>NOTES FOR YOUR COLLECTION</Text>
+          <Text style={s.title}>A little more detail.</Text>
           <Text style={s.body}>
-            If you are unsure about cleaning, operating your track or adjusting
-            a tieback, speak to our team before proceeding. We can refer to your
-            original specification and help you find the appropriate next step.
+            The following notes have been recorded for individual windows. If
+            any instruction differs from the standard guide or a sewn-in label,
+            ask Apex before treatment.
           </Text>
-          <Text style={s.body}>
-            hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
-          </Text>
-        </View>
-        <Footer job={p.job} draft={p.draft} />
-      </Page>
+          {additionalCareWindows(d.windows).map((w) => (
+            <View key={w.id}>
+              <Text style={s.h2} minPresenceAhead={60}>
+                {w.room} · {w.name}
+              </Text>
+              {w.careInstructions ? (
+                <Text style={s.body}>{w.careInstructions}</Text>
+              ) : null}
+              {w.careSource ? (
+                <Text style={s.small}>Care reference: {w.careSource}</Text>
+              ) : null}
+            </View>
+          ))}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ) : null}
       <Page size="A4" style={s.page}>
         <Brand />
         <Image
@@ -793,6 +828,10 @@ function Workroom(p: Props) {
           before ordering. Full-width panel allocation is conservative; any
           alternative layout must be reviewed by the workroom.
         </Text>
+        <View wrap={false}>
+          <Text style={s.h2}>Standard curtain care</Text>
+          <Text style={s.body}>{standardCareSummary}</Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => {
@@ -848,7 +887,7 @@ function Workroom(p: Props) {
               />
               <Field
                 label="Making allowances"
-                value={`Top ${w.topAllowanceMm}; bottom ${w.bottomAllowanceMm}; side hem ${w.sideHemMm}; seam ${w.seamMm} mm. Returns ${w.returnsMm}; overlap ${w.overlapMm} mm. Extra face fabric ${w.extraFabricMetres} m.`}
+                value={`Heading and hem: ${q.hemAllowanceMm} mm total per fabric width. Side hem ${w.sideHemMm}; seam ${w.seamMm} mm. Returns ${w.returnsMm}; overlap ${w.overlapMm} mm. Extra face fabric ${w.extraFabricMetres} m.`}
               />
               <Field
                 label="Lining"
@@ -924,6 +963,10 @@ function Fitter(p: Props) {
             <Text>{t}</Text>
           </View>
         ))}
+        <View wrap={false}>
+          <Text style={[s.h2, { fontSize: 19 }]}>Care at handover</Text>
+          <Text style={s.body}>{careHandover}</Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => (

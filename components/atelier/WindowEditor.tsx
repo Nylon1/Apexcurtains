@@ -12,8 +12,13 @@ import {
 import { Field, Section, Toggle, WindowDiagram } from "./Fields";
 import ApexMeasurements from "./ApexMeasurements";
 import { shapeName } from "@/lib/atelier/geometry";
+import { careGuide, standardCareSummary } from "@/lib/atelier/care";
 import { brochurePalette } from "@/lib/atelier/brochure";
-import { forestKs, selectedTrack } from "@/lib/atelier/tracks";
+import {
+  forestTracks,
+  selectedTrack,
+  trackFinishes,
+} from "@/lib/atelier/tracks";
 import {
   windowSections,
   type WindowSection,
@@ -43,6 +48,7 @@ export default function WindowEditor({
   onDocuments,
   onUpload,
   busy,
+  saving,
   demo,
   approved,
   photoPermission,
@@ -55,6 +61,8 @@ export default function WindowEditor({
   onPreviousWindow,
   onNextWindow,
   saveStatus,
+  feedback,
+  feedbackError,
 }: {
   tab: WindowSection;
   onSection: (section: WindowSection) => void;
@@ -64,6 +72,8 @@ export default function WindowEditor({
   onPreviousWindow?: () => void;
   onNextWindow?: () => void;
   saveStatus: string;
+  feedback: string;
+  feedbackError: boolean;
   w: SurveyWindow;
   assets: Asset[];
   update: <K extends keyof SurveyWindow>(
@@ -73,8 +83,9 @@ export default function WindowEditor({
   onCopy: () => void;
   onRemove?: () => void;
   onDocuments: () => void;
-  onUpload: (file: File, kind: string, caption: string) => Promise<void>;
+  onUpload: (file: File, kind: string, caption: string) => Promise<boolean>;
   busy: boolean;
+  saving: boolean;
   demo: boolean;
   approved: boolean;
   photoPermission: boolean;
@@ -140,8 +151,6 @@ export default function WindowEditor({
               "trackColour",
               "accessHeightMm",
               "mountingSurface",
-              "careSource",
-              "careInstructions",
               ...(w.lengthStyle !== "touching" ? ["lengthDetail"] : []),
               ...(w.tiebackCount > 0 ? ["tiebacks", "tiebackColour"] : []),
               ...(w.hookCount > 0 ? ["hooks"] : []),
@@ -403,15 +412,17 @@ export default function WindowEditor({
                   type="button"
                   className="at-upload"
                   onClick={() => fabricInput.current?.click()}
-                  disabled={busy || demo || approved}
+                  disabled={busy || saving || demo || approved}
                 >
                   <Camera size={25} />
                   <b>
-                    {busy
-                      ? "Preparing your photograph…"
-                      : fabricPhoto
-                        ? "Upload a new fabric photograph"
-                        : "Upload fabric photograph"}
+                    {saving
+                      ? "Saving window details…"
+                      : busy
+                        ? "Preparing your photograph…"
+                        : fabricPhoto
+                          ? "Upload a new fabric photograph"
+                          : "Upload fabric photograph"}
                   </b>
                   <span>
                     {demo
@@ -426,9 +437,14 @@ export default function WindowEditor({
                 <summary>
                   Making allowances <span>Review with the workroom</span>
                 </summary>
+                <Field
+                  label="Total heading & hem allowance (mm)"
+                  type="number"
+                  value={String(q.hemAllowanceMm)}
+                  onChange={(value) => update("hemAllowanceMm", Number(value))}
+                  hint="26 cm = 260 mm total extra for every fabric width, including heading and bottom hem. Added to the longest finished drop before pattern matching."
+                />
                 {fields([
-                  ["topAllowanceMm", "Heading allowance", "number"],
-                  ["bottomAllowanceMm", "Bottom hem allowance", "number"],
                   ["sideHemMm", "Each outside side hem", "number"],
                   ["seamMm", "Each joining seam", "number"],
                   ["extraFabricMetres", "Additional fabric metres", "number"],
@@ -644,57 +660,94 @@ export default function WindowEditor({
         {tab === "fitting" ? (
           <>
             <Section number="02" title="A considered installation">
-              <div className="at-track-card">
-                <img
-                  src={forestKs.image}
-                  alt="Forest Group KS curtain track with carriers, shown in white"
-                  width={640}
-                  height={489}
-                />
-                <div>
-                  <span className="at-eyebrow">FOREST GROUP</span>
-                  <h3>KS® Klick System</h3>
-                  <p>A compact, hand-operated curtain track.</p>
-                  <small>{forestKs.caption}</small>
-                  <button
-                    type="button"
-                    className={`at-button ${selectedTrack(w) ? "at-button-secondary" : ""}`}
-                    aria-pressed={!!selectedTrack(w)}
-                    onClick={() => {
-                      update(
-                        "trackProduct",
-                        selectedTrack(w) ? "custom" : "forest-ks",
-                      );
-                      update("track", selectedTrack(w) ? "" : forestKs.name);
-                    }}
-                  >
-                    {selectedTrack(w) ? (
-                      <>
-                        <Check size={16} />
-                        Forest KS selected · change
-                      </>
-                    ) : (
-                      "Choose Forest KS"
-                    )}
-                  </button>
-                  <a
-                    href={forestKs.source}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="at-text-link"
-                  >
-                    View manufacturer details
-                  </a>
+              <span className="at-eyebrow">CHOOSE YOUR TRACK *</span>
+              {forestTracks.map((track) => (
+                <div className="at-track-card" key={track.id}>
+                  <img
+                    src={track.image}
+                    alt={`${track.name}, shown in white`}
+                    width={640}
+                    height={489}
+                  />
+                  <div>
+                    <span className="at-eyebrow">FOREST GROUP</span>
+                    <h3>{track.label}</h3>
+                    <p>{track.description}</p>
+                    <small>{track.caption}</small>
+                    <button
+                      type="button"
+                      className={`at-button ${w.trackProduct === track.id ? "at-button-secondary" : ""}`}
+                      aria-pressed={w.trackProduct === track.id}
+                      onClick={() => update("trackProduct", track.id)}
+                    >
+                      {w.trackProduct === track.id ? (
+                        <>
+                          <Check size={16} />
+                          {track.label} selected
+                        </>
+                      ) : (
+                        `Choose ${track.label}`
+                      )}
+                    </button>
+                    <a
+                      href={track.source}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="at-text-link"
+                    >
+                      View manufacturer details
+                    </a>
+                  </div>
                 </div>
+              ))}
+              {!selectedTrack(w) && w.track ? (
+                <p className="at-palette-help">
+                  Previously recorded: {w.track}. Choose Forest CS or Forest KS
+                  for this order.
+                </p>
+              ) : null}
+              <div className="at-form-grid">
+                <label className="at-field">
+                  <span>
+                    Track colour / finish <span className="at-required">*</span>
+                  </span>
+                  <select
+                    aria-label="Track colour / finish"
+                    aria-required="true"
+                    value={
+                      (trackFinishes as readonly string[]).includes(
+                        w.trackColour,
+                      )
+                        ? w.trackColour
+                        : ""
+                    }
+                    onChange={(e) => update("trackColour", e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Choose Black or White
+                    </option>
+                    {trackFinishes.map((finish) => (
+                      <option key={finish} value={finish}>
+                        {finish}
+                      </option>
+                    ))}
+                  </select>
+                  <small>
+                    Included in the brochure, workroom sheet and fitter
+                    worksheet.
+                  </small>
+                  {w.trackColour &&
+                  !(trackFinishes as readonly string[]).includes(
+                    w.trackColour,
+                  ) ? (
+                    <small>
+                      Previously recorded: {w.trackColour}. Please confirm Black
+                      or White.
+                    </small>
+                  ) : null}
+                </label>
               </div>
               {fields([
-                ["track", "Track specification"],
-                [
-                  "trackColour",
-                  "Track colour / finish",
-                  "text",
-                  "For example: matt white, black or brushed brass. Included in all three documents.",
-                ],
                 ["accessHeightMm", "Working / access height", "number"],
                 ["mountingSurface", "Mounting surface"],
                 ["tiebackPosition", "Tieback and hook positions"],
@@ -720,27 +773,68 @@ export default function WindowEditor({
         ) : null}
         {tab === "care" ? (
           <>
-            <Section number="01" title="Care that belongs to this fabric">
-              {fields([
-                [
-                  "careSource",
-                  "Care guidance source",
-                  "text",
-                  "Supplier reference, document or approved specification.",
-                  undefined,
-                  true,
-                ],
-                [
-                  "careInstructions",
-                  "Approved aftercare instructions",
-                  "textarea",
-                  "Check face fabric, lining, coatings and trims together.",
-                  undefined,
-                  true,
-                ],
-              ])}
+            <Section
+              number="01"
+              title="Beautifully cared for"
+              description="Your standard Apex care guide is included automatically for every curtain."
+            >
+              <div className="at-standard-care">
+                <span className="at-eyebrow">INCLUDED FOR EVERY WINDOW</span>
+                <h3>Dry clean only</h3>
+                <p>{standardCareSummary}</p>
+                <p className="at-care-included">
+                  Cleaning, dressing the folds and everyday questions are
+                  covered in the customer brochure. No care text is required to
+                  continue.
+                </p>
+              </div>
+              <details className="at-details at-care-guide">
+                <summary>
+                  Read the standard care guide{" "}
+                  <span>Cleaning, dressing & everyday care</span>
+                </summary>
+                {careGuide.map((group) => (
+                  <div key={group.id}>
+                    <h3>{group.title}</h3>
+                    {group.sections.map((section) => (
+                      <article key={section.title}>
+                        <h4>{section.title}</h4>
+                        <p>{section.text}</p>
+                      </article>
+                    ))}
+                  </div>
+                ))}
+              </details>
+              <details className="at-details">
+                <summary>
+                  Additional care notes{" "}
+                  <span>
+                    {w.careInstructions || w.careSource
+                      ? "Saved notes for this window"
+                      : "Optional"}
+                  </span>
+                </summary>
+                {fields([
+                  [
+                    "careSource",
+                    "Additional care reference (optional)",
+                    "text",
+                    "Only needed if you want to record a particular supplier reference.",
+                    undefined,
+                    true,
+                  ],
+                  [
+                    "careInstructions",
+                    "Additional care notes (optional)",
+                    "textarea",
+                    "Any extra instructions for this window appear alongside the standard guide. Previously saved notes are kept here.",
+                    undefined,
+                    true,
+                  ],
+                ])}
+              </details>
             </Section>
-            <Section number="04" title="The room beyond the curtains">
+            <Section number="02" title="The room beyond the curtains">
               <Toggle
                 checked={w.paletteMode === "auto"}
                 onChange={(v) => {
@@ -813,19 +907,25 @@ export default function WindowEditor({
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file)
-                  void onUpload(file, photoKind, caption).then(() =>
-                    setCaption(""),
-                  );
+                  void onUpload(file, photoKind, caption).then((saved) => {
+                    if (saved) setCaption("");
+                  });
                 e.target.value = "";
               }}
             />
             <button
               className="at-upload"
               onClick={() => input.current?.click()}
-              disabled={busy || demo || approved}
+              disabled={busy || saving || demo || approved}
             >
               <Camera size={28} />
-              <b>{busy ? "Preparing your photograph…" : "Add a photograph"}</b>
+              <b>
+                {saving
+                  ? "Saving window details…"
+                  : busy
+                    ? "Preparing your photograph…"
+                    : "Add a photograph"}
+              </b>
               <span>
                 {demo
                   ? "Photo uploads are available in the staff workspace."
@@ -854,6 +954,15 @@ export default function WindowEditor({
               personal brochure.
             </Toggle>
           </Section>
+        ) : null}
+        {feedback ? (
+          <div
+            className={`at-notice ${feedbackError ? "at-error" : ""}`}
+            role="status"
+            style={{ whiteSpace: "pre-line" }}
+          >
+            {feedback}
+          </div>
         ) : null}
         <div className="at-survey-footer">
           <span className="at-survey-save" role="status">

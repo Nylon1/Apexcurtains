@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { normaliseGeometry, windowGeometry } from "./geometry";
+import { selectedTrack, trackFinishes } from "./tracks";
 
 const text = (max = 500) => z.string().trim().max(max).default("");
 const mm = z.number().finite().min(0).max(30000).default(0);
@@ -40,7 +41,9 @@ export const windowSchema = z
     measuredConfirmed: yes,
     measurementNotes: text(2500),
     track: text(),
-    trackProduct: z.enum(["custom", "forest-ks"]).default("custom"),
+    trackProduct: z
+      .enum(["custom", "forest-ks", "forest-cs"])
+      .default("custom"),
     trackColour: text(150),
     trackComponents: text(2000),
     panelCount: z.union([z.literal(1), z.literal(2)]).default(2),
@@ -58,6 +61,8 @@ export const windowSchema = z
     seamMm: mm,
     topAllowanceMm: mm,
     bottomAllowanceMm: mm,
+    // Null retains historical split allowances in previously approved work.
+    hemAllowanceMm: mm.nullable().default(null),
     pattern: z.enum(["plain", "straight", "half-drop"]).default("plain"),
     repeatMm: mm,
     horizontalRepeatMm: mm,
@@ -98,7 +103,10 @@ export const windowSchema = z
     paletteMode: z.enum(["auto", "manual"]).default("manual"),
     designNotes: text(2000),
   })
-  .transform(normaliseGeometry);
+  .transform((w) => {
+    const track = selectedTrack(w);
+    return { ...normaliseGeometry(w), ...(track ? { track: track.name } : {}) };
+  });
 export const jobDataSchema = z.object({
   title: text(160),
   customerName: text(160),
@@ -128,6 +136,16 @@ export const jobDataSchema = z.object({
 });
 export type SurveyWindow = z.infer<typeof windowSchema>;
 export type JobData = z.infer<typeof jobDataSchema>;
+export const standardHemAllowanceMm = 260;
+export function applyDraftAllowances(data: JobData): JobData {
+  return {
+    ...data,
+    windows: data.windows.map((w) => ({
+      ...w,
+      hemAllowanceMm: w.hemAllowanceMm ?? standardHemAllowanceMm,
+    })),
+  };
+}
 export type DocumentKind = "brochure" | "workroom" | "fitter";
 export type Job = {
   id: string;
@@ -182,6 +200,7 @@ export function newWindow(
     opening: "Centre opening",
     topAllowanceMm: 150,
     bottomAllowanceMm: 150,
+    hemAllowanceMm: standardHemAllowanceMm,
     sideHemMm: 40,
     seamMm: 15,
     liningAllowanceMm: 150,
@@ -356,7 +375,9 @@ export function calculateWindow(w: SurveyWindow) {
     effectiveWidth > 0 && w.widthMm > 0
       ? Math.ceil(flatWidthPerPanel / effectiveWidth) * w.panelCount
       : 0;
-  const baseCut = w.longDropMm + w.topAllowanceMm + w.bottomAllowanceMm;
+  const hemAllowanceMm =
+    w.hemAllowanceMm ?? w.topAllowanceMm + w.bottomAllowanceMm;
+  const baseCut = w.longDropMm + hemAllowanceMm;
   const cutMm =
     w.pattern === "plain"
       ? baseCut
@@ -407,6 +428,7 @@ export function calculateWindow(w: SurveyWindow) {
         ) / 100;
   return {
     widths,
+    hemAllowanceMm,
     cutMm,
     baseMetres,
     fabricMetres,
@@ -457,8 +479,8 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
       add("measure", "use a unique room and window name.");
     labels.add(key);
     if (!w.measuredConfirmed) add("measure", "confirm the measurements.");
+    windowGeometry(w).issues.forEach((message) => add("measure", message));
     if (w.type === "apex") {
-      windowGeometry(w).issues.forEach((message) => add("measure", message));
       if (w.apexShape !== "other" && !w.automaticSlants)
         add("measure", "review the window shape and apply automatic slants.");
     }
@@ -469,7 +491,9 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
     if (!w.heading.trim()) add("fabric", "choose the heading design.");
     if (!w.track.trim() || !w.mountingSurface.trim() || !w.accessHeightMm)
       add("fitting", "complete the track, fixing surface and access height.");
-    if (!w.trackColour) add("fitting", "confirm the track colour or finish.");
+    if (!selectedTrack(w)) add("fitting", "choose Forest CS or Forest KS.");
+    if (!(trackFinishes as readonly string[]).includes(w.trackColour))
+      add("fitting", "choose Black or White for the track colour.");
     if (w.lengthStyle !== "touching" && !w.lengthDetail)
       add("measure", "specify the puddle allowance or mid-length endpoint.");
     if (w.lining !== "none" && (!w.liningCode || !w.liningColour))
@@ -490,8 +514,6 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
         "finish",
         "choose Bronze, Silver chrome or Black for the tieback hooks.",
       );
-    if (w.careInstructions.length < 20 || !w.careSource)
-      add("care", "add supplier-approved care instructions and their source.");
     if (!assets.some((a) => a.window_id === w.id && a.kind === "window"))
       add("photos", "add a window photograph.");
     calculateWindow(w).checks.forEach(({ section, message }) =>
@@ -528,8 +550,9 @@ export function sampleJob(): Job {
     liningColour: "Ivory",
     liningWidthMm: 1400,
     liningDropMm: 3550,
-    track: "Made-to-measure apex track",
-    trackColour: "Warm white",
+    track: "Forest Group CS® Contract System",
+    trackProduct: "forest-cs",
+    trackColour: "White",
     mountingSurface: "To be confirmed onsite",
     tiebacks: "Matching fabric",
     tiebackColour: "Warm flax",
@@ -555,7 +578,7 @@ export function sampleJob(): Job {
     palette: "sage" as const,
     track: "Forest Group KS® Klick System",
     trackProduct: "forest-ks" as const,
-    trackColour: "Matt white",
+    trackColour: "White",
     designNotes:
       "Gentle sage and beautifully structured folds bring a restful rhythm to the bedroom. Ivory blackout lining completes the specification, with matching tiebacks and bronze details.",
   };

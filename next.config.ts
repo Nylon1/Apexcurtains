@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
     "/api/atelier/**/*": [
       "./public/visualiser/double-pinch-gable-desktop.webp",
       "./public/atelier-products/forest-ks-white.webp",
+      "./public/atelier-products/forest-cs-white.webp",
     ],
   },
   async redirects() {
