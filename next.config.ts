@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/atelier/**/*": [
       "./public/visualiser/double-pinch-gable-desktop.webp",
+      "./public/atelier-products/forest-ks-white.webp",
     ],
   },
   async redirects() {

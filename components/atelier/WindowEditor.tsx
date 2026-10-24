@@ -1,10 +1,21 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { useRef, useState } from "react";
-import { Camera, Copy, Trash2, ArrowRight } from "lucide-react";
+import {
+  Camera,
+  Copy,
+  Trash2,
+  ArrowRight,
+  ArrowLeft,
+  Check,
+} from "lucide-react";
 import { Field, Section, Toggle, WindowDiagram } from "./Fields";
 import { brochurePalette } from "@/lib/atelier/brochure";
+import { forestKs, selectedTrack } from "@/lib/atelier/tracks";
 import {
+  windowSections,
+  type WindowSection,
+  type SurveyCheck,
   palettes,
   hookFinishes,
   liningOptions,
@@ -34,7 +45,23 @@ export default function WindowEditor({
   approved,
   photoPermission,
   onPermission,
+  tab,
+  onSection,
+  checks,
+  windowNumber,
+  windowCount,
+  onPreviousWindow,
+  onNextWindow,
+  saveStatus,
 }: {
+  tab: WindowSection;
+  onSection: (section: WindowSection) => void;
+  checks: SurveyCheck[];
+  windowNumber: number;
+  windowCount: number;
+  onPreviousWindow?: () => void;
+  onNextWindow?: () => void;
+  saveStatus: string;
   w: SurveyWindow;
   assets: Asset[];
   update: <K extends keyof SurveyWindow>(
@@ -51,11 +78,21 @@ export default function WindowEditor({
   photoPermission: boolean;
   onPermission: (v: boolean) => void;
 }) {
-  const [tab, setTab] = useState("measure"),
-    [photoKind, setPhotoKind] = useState("window"),
+  const [photoKind, setPhotoKind] = useState("window"),
     [caption, setCaption] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const fabricInput = useRef<HTMLInputElement>(null);
+  const sectionHeading = useRef<HTMLDivElement>(null);
+  const index = windowSections.findIndex((section) => section.id === tab);
+  const completed = windowSections.filter(
+    (section) => !checks.some((check) => check.section === section.id),
+  ).length;
+  const remaining = checks.filter((check) => check.section === tab);
+  function changeSection(section: WindowSection) {
+    onSection(section);
+    sectionHeading.current?.scrollIntoView({ block: "start" });
+    sectionHeading.current?.focus({ preventScroll: true });
+  }
   const q = calculateWindow(w);
   const palette = brochurePalette(w);
   const fabricPhoto = selectedFabricPhoto(assets, w.id);
@@ -65,12 +102,48 @@ export default function WindowEditor({
         {config.map(([key, label, type = "text", hint, options, wide]) => (
           <Field
             key={key}
-            label={label}
+            label={key.endsWith("Mm") ? `${label} (mm)` : label}
             value={w[key] as string | number}
             type={type}
             hint={hint}
             options={options}
             wide={wide}
+            showZero={key === "tiebackCount" || key === "hookCount"}
+            required={[
+              "room",
+              "name",
+              "widthMm",
+              "longDropMm",
+              "leftDropMm",
+              "rightDropMm",
+              "apexOffsetMm",
+              "leftSlopeMm",
+              "rightSlopeMm",
+              "fabric",
+              "fabricCode",
+              "supplier",
+              "colour",
+              "fabricWidthMm",
+              "heading",
+              "fullness",
+              "repeatMm",
+              "manualFabricMetres",
+              "cuttingPlan",
+              "liningCode",
+              "liningColour",
+              "liningWidthMm",
+              "liningDropMm",
+              "interliningMetres",
+              "track",
+              "trackColour",
+              "accessHeightMm",
+              "mountingSurface",
+              "careSource",
+              "careInstructions",
+              ...(w.lengthStyle !== "touching" ? ["lengthDetail"] : []),
+              ...(w.tiebackCount > 0 ? ["tiebacks", "tiebackColour"] : []),
+              ...(w.hookCount > 0 ? ["hooks"] : []),
+            ].includes(key)}
             onChange={(v) =>
               update(
                 key,
@@ -86,46 +159,100 @@ export default function WindowEditor({
   }
   return (
     <div className="at-editor-columns">
-      <div>
-        <Section
-          number="01"
-          title="The window"
-          description="A name that follows this window from survey to fitting."
-        >
-          {fields([
-            ["room", "Room name"],
-            ["name", "Window name"],
-            ["type", "Window type", "text", undefined, ["apex", "standard"]],
-          ])}
-          <div className="at-inline-actions">
-            <button className="at-text-link" onClick={onCopy}>
-              <Copy size={14} />
-              Copy design to a new window
-            </button>
-            {onRemove ? (
-              <button className="at-delete" onClick={onRemove}>
-                <Trash2 size={14} />
-                Remove window
-              </button>
-            ) : null}
+      <div className="at-survey-main">
+        <div className="at-survey-guide" ref={sectionHeading} tabIndex={-1}>
+          <div className="at-survey-heading">
+            <div>
+              <span className="at-eyebrow">
+                WINDOW {windowNumber} OF {windowCount}
+              </span>
+              <h2>
+                {w.room || "Room name to add"}
+                <span>{w.name || "Window name to add"}</span>
+              </h2>
+            </div>
+            <span className="at-survey-completion">
+              {completed} of {windowSections.length} sections complete
+            </span>
           </div>
-        </Section>
-        <nav className="at-subtabs" aria-label="Window details">
-          {[
-            ["measure", "Measurements"],
-            ["design", "Fabric & finish"],
-            ["fitting", "Fitting & care"],
-            ["photos", "Photographs"],
-          ].map(([id, label]) => (
-            <button
-              key={id}
-              className={tab === id ? "active" : ""}
-              onClick={() => setTab(id)}
-            >
-              {label}
-            </button>
-          ))}
-        </nav>
+          <nav className="at-survey-sections" aria-label="Window sections">
+            {windowSections.map((section, i) => {
+              const count = checks.filter(
+                (check) => check.section === section.id,
+              ).length;
+              return (
+                <button
+                  key={section.id}
+                  type="button"
+                  aria-current={tab === section.id ? "step" : undefined}
+                  className={tab === section.id ? "active" : ""}
+                  onClick={() => changeSection(section.id)}
+                >
+                  <span
+                    className={`at-section-count ${count ? "" : "complete"}`}
+                  >
+                    {count ? i + 1 : <Check size={15} />}
+                  </span>
+                  <span>
+                    <b>{section.name}</b>
+                    <small>{count ? `${count} to complete` : "Complete"}</small>
+                  </span>
+                </button>
+              );
+            })}
+          </nav>
+          <p className="at-survey-help">
+            Fields marked * are required before moving on. Your draft saves as
+            you go.
+          </p>
+        </div>
+        <div className="at-survey-current" aria-live="polite">
+          <span className="at-eyebrow">
+            SECTION {index + 1} OF {windowSections.length}
+          </span>
+          <h2>{windowSections[index].name}</h2>
+          <p>{windowSections[index].detail}</p>
+        </div>
+        {remaining.length ? (
+          <details className="at-section-checks">
+            <summary>
+              {remaining.length} {remaining.length === 1 ? "detail" : "details"}{" "}
+              to complete in this section
+            </summary>
+            <ul>
+              {remaining.map((check, i) => (
+                <li key={i}>
+                  {check.message.slice(check.message.indexOf(": ") + 2)}
+                </li>
+              ))}
+            </ul>
+          </details>
+        ) : null}
+        {tab === "measure" ? (
+          <Section
+            number="01"
+            title="The window"
+            description="A name that follows this window from survey to fitting."
+          >
+            {fields([
+              ["room", "Room name"],
+              ["name", "Window name"],
+              ["type", "Window type", "text", undefined, ["apex", "standard"]],
+            ])}
+            <div className="at-inline-actions">
+              <button className="at-text-link" onClick={onCopy}>
+                <Copy size={14} />
+                Copy design to a new window
+              </button>
+              {onRemove ? (
+                <button className="at-delete" onClick={onRemove}>
+                  <Trash2 size={14} />
+                  Remove window
+                </button>
+              ) : null}
+            </div>
+          </Section>
+        ) : null}
         {tab === "measure" ? (
           <Section
             number="02"
@@ -159,6 +286,19 @@ export default function WindowEditor({
               ["returnsMm", "Total returns allowance", "number"],
               ["overlapMm", "Total overlap allowance", "number"],
               [
+                "lengthStyle",
+                "Length finish",
+                "text",
+                undefined,
+                ["touching", "puddle", "mid"],
+              ],
+              [
+                "lengthDetail",
+                "Exact finish detail",
+                "text",
+                "Puddle allowance or mid-length endpoint, in mm.",
+              ],
+              [
                 "measurementNotes",
                 "Site measurements and shape notes",
                 "textarea",
@@ -175,7 +315,7 @@ export default function WindowEditor({
             </Toggle>
           </Section>
         ) : null}
-        {tab === "design" ? (
+        {tab === "fabric" ? (
           <>
             <Section number="02" title="The fabric story">
               {fields([
@@ -213,19 +353,6 @@ export default function WindowEditor({
                   ["1", "2"],
                 ],
                 ["opening", "Opening arrangement"],
-                [
-                  "lengthStyle",
-                  "Length finish",
-                  "text",
-                  undefined,
-                  ["touching", "puddle", "mid"],
-                ],
-                [
-                  "lengthDetail",
-                  "Exact finish detail",
-                  "text",
-                  "Puddle allowance or mid-length endpoint, in mm.",
-                ],
               ])}
               <div className="at-fabric-upload">
                 <span className="at-eyebrow">
@@ -233,8 +360,8 @@ export default function WindowEditor({
                 </span>
                 <h3>Your fabric photograph</h3>
                 <p>
-                  Upload the customer&apos;s chosen fabric. Its picture appears in
-                  the brochure beside the fabric name, reference and colour
+                  Upload the customer&apos;s chosen fabric. Its picture appears
+                  in the brochure beside the fabric name, reference and colour
                   entered above.
                 </p>
                 {fabricPhoto ? (
@@ -362,11 +489,19 @@ export default function WindowEditor({
                   : []),
               ])}
             </Section>
-            <Section number="04" title="The finishing layers">
+          </>
+        ) : null}
+        {tab === "finish" ? (
+          <>
+            <Section number="01" title="The finishing layers">
               <div className="at-form-grid">
                 <label className="at-field">
-                  <span>Lining type</span>
+                  <span>
+                    Lining type <span className="at-required">*</span>
+                  </span>
                   <select
+                    aria-label="Lining type"
+                    aria-required="true"
                     value={
                       (liningOptions as readonly string[]).includes(w.lining)
                         ? w.lining
@@ -413,6 +548,12 @@ export default function WindowEditor({
                     ] as Config[])
                   : []),
               ])}
+            </Section>
+            <Section
+              number="02"
+              title="Tiebacks & hooks"
+              description="Choose the style and finish. Set quantities to 0 where none are needed."
+            >
               <div className="at-form-grid">
                 <label className="at-field">
                   <span>Tieback option</span>
@@ -442,7 +583,7 @@ export default function WindowEditor({
                     <p className="at-selection-note">
                       {w.tiebackColour ||
                         w.colour ||
-                        "Choose the fabric colour above"}
+                        "Choose the colour in Fabric & pattern"}
                     </p>
                   </div>
                 ) : null}
@@ -460,8 +601,15 @@ export default function WindowEditor({
               ])}
               <div className="at-form-grid">
                 <label className="at-field">
-                  <span>Tieback hook finish</span>
+                  <span>
+                    Tieback hook finish{" "}
+                    {w.hookCount > 0 ? (
+                      <span className="at-required">*</span>
+                    ) : null}
+                  </span>
                   <select
+                    aria-label="Tieback hook finish"
+                    aria-required={w.hookCount > 0}
                     value={
                       (hookFinishes as readonly string[]).includes(w.hookColour)
                         ? w.hookColour
@@ -496,6 +644,49 @@ export default function WindowEditor({
         {tab === "fitting" ? (
           <>
             <Section number="02" title="A considered installation">
+              <div className="at-track-card">
+                <img
+                  src={forestKs.image}
+                  alt="Forest Group KS curtain track with carriers, shown in white"
+                  width={640}
+                  height={489}
+                />
+                <div>
+                  <span className="at-eyebrow">FOREST GROUP</span>
+                  <h3>KS® Klick System</h3>
+                  <p>A compact, hand-operated curtain track.</p>
+                  <small>{forestKs.caption}</small>
+                  <button
+                    type="button"
+                    className={`at-button ${selectedTrack(w) ? "at-button-secondary" : ""}`}
+                    aria-pressed={!!selectedTrack(w)}
+                    onClick={() => {
+                      update(
+                        "trackProduct",
+                        selectedTrack(w) ? "custom" : "forest-ks",
+                      );
+                      update("track", selectedTrack(w) ? "" : forestKs.name);
+                    }}
+                  >
+                    {selectedTrack(w) ? (
+                      <>
+                        <Check size={16} />
+                        Forest KS selected · change
+                      </>
+                    ) : (
+                      "Choose Forest KS"
+                    )}
+                  </button>
+                  <a
+                    href={forestKs.source}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="at-text-link"
+                  >
+                    View manufacturer details
+                  </a>
+                </div>
+              </div>
               {fields([
                 ["track", "Track specification"],
                 [
@@ -525,7 +716,11 @@ export default function WindowEditor({
                 ],
               ])}
             </Section>
-            <Section number="03" title="Care that belongs to this fabric">
+          </>
+        ) : null}
+        {tab === "care" ? (
+          <>
+            <Section number="01" title="Care that belongs to this fabric">
               {fields([
                 [
                   "careSource",
@@ -660,6 +855,48 @@ export default function WindowEditor({
             </Toggle>
           </Section>
         ) : null}
+        <div className="at-survey-footer">
+          <span className="at-survey-save" role="status">
+            {saveStatus}
+          </span>
+          <div>
+            <button
+              type="button"
+              className="at-button at-button-secondary"
+              disabled={index === 0 && !onPreviousWindow}
+              onClick={() =>
+                index > 0
+                  ? changeSection(windowSections[index - 1].id)
+                  : onPreviousWindow?.()
+              }
+            >
+              <ArrowLeft size={16} />
+              {index === 0 && onPreviousWindow
+                ? windowNumber > 1
+                  ? "Previous window"
+                  : "Client details"
+                : "Back"}
+            </button>
+            <button
+              type="button"
+              className="at-button"
+              onClick={() =>
+                index < windowSections.length - 1
+                  ? changeSection(windowSections[index + 1].id)
+                  : onNextWindow
+                    ? onNextWindow()
+                    : onDocuments()
+              }
+            >
+              {index < windowSections.length - 1
+                ? `Next: ${windowSections[index + 1].name}`
+                : onNextWindow
+                  ? "Next window"
+                  : "View the collection"}
+              <ArrowRight size={16} />
+            </button>
+          </div>
+        </div>
       </div>
       <aside className="at-window-summary">
         <span className="at-eyebrow">

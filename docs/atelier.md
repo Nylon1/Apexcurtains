@@ -12,11 +12,15 @@ Private staff workspace: `/admin/atelier`. The fictional, local-only walkthrough
 
 The onsite workflow requires an internet connection. Unsaved changes are shown and browser navigation warns before leaving them.
 
+Each window has six sections: **Measurements**, **Fabric & pattern**, **Lining & tiebacks**, **Track & fitting**, **Colour & care**, and **Window photos**. Required details are marked with an asterisk and checked before advancing to later sections/windows. Missing-item links take you to the section to complete. Back navigation, the review checklist and saving an unfinished draft remain available. Optional notes and an unconfirmed fitting appointment may remain blank. The room/window selector remembers the last section visited for each window during the session. In the public demo only, window-photo requirements do not block navigation because uploads are unavailable; approval remains disabled.
+
 ### Personalised brochures
 
 The customer's name and installation address have a dedicated page with a personal dedication, separate from the room and window specifications.
 
-Use **Fabric & finish → Your fabric photograph** to upload the customer's actual fabric image. The most recent fabric photo for that window appears beside its name, reference and colour in the brochure. Older images remain attached to the project and approved revisions keep their original selection. JPG, PNG and WebP are supported, within the existing six-photo limit per window.
+Use **Fabric & pattern → Your fabric photograph** to upload the customer's actual fabric image. The most recent fabric photo for that window appears beside its name, reference and colour in the brochure. Older images remain attached to the project and approved revisions keep their original selection. JPG, PNG and WebP are supported, within the existing six-photo limit per window.
+
+**Track & fitting → Choose Forest KS** selects the Forest Group KS Klick System and includes its manufacturer photograph in the client brochure. Record the selected finish separately; the photograph is labelled as the white product illustration. Selecting a different track removes the KS illustration. Existing custom track records retain their original specification. Brochures with both a fabric photograph and KS illustration give the track its own styled page.
 
 New selections offer **Standard** or **Blackout** lining, with a separate lining colour. Tiebacks are **Matching** (following the chosen fabric colour) or **Other** (enter the design and colour); quantity zero means none required. Tieback hook finishes are **Bronze**, **Silver chrome** or **Black**. Historical specifications remain readable, with current choices required before a new release.
 

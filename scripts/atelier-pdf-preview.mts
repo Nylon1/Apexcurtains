@@ -19,6 +19,12 @@ async function main() {
       assets: [],
       photos: {},
       inspiration,
+      trackPhotos: {
+        "forest-ks": await sharp("public/atelier-products/forest-ks-white.webp")
+          .flatten({ background: "#ffffff" })
+          .jpeg()
+          .toBuffer(),
+      },
       draft: true,
     });
     await writeFile(`${out}/${kind}.pdf`, bytes);

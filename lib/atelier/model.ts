@@ -21,6 +21,7 @@ export const windowSchema = z.object({
   measuredConfirmed: yes,
   measurementNotes: text(2500),
   track: text(),
+  trackProduct: z.enum(["custom", "forest-ks"]).default("custom"),
   trackColour: text(150),
   trackComponents: text(2000),
   panelCount: z.union([z.literal(1), z.literal(2)]).default(2),
@@ -281,8 +282,49 @@ export function lengthLabel(w: SurveyWindow) {
   );
 }
 
+export const windowSections = [
+  {
+    id: "measure",
+    name: "Measurements",
+    detail: "Shape, size & finished drop",
+  },
+  {
+    id: "fabric",
+    name: "Fabric & pattern",
+    detail: "Fabric, photograph & matching",
+  },
+  {
+    id: "finish",
+    name: "Lining & tiebacks",
+    detail: "Layers, accessories & finishes",
+  },
+  {
+    id: "fitting",
+    name: "Track & fitting",
+    detail: "Hardware, access & installation",
+  },
+  { id: "care", name: "Colour & care", detail: "Room palette & aftercare" },
+  {
+    id: "photos",
+    name: "Window photos",
+    detail: "The window & fitting details",
+  },
+] as const;
+export type WindowSection = (typeof windowSections)[number]["id"];
+export type SurveyCheck = {
+  message: string;
+  step: "customer" | "windows" | "delivery";
+  windowId?: string;
+  section?: WindowSection;
+};
+
 export function calculateWindow(w: SurveyWindow) {
   const issues: string[] = [];
+  const checks: { section: WindowSection; message: string }[] = [];
+  const add = (section: WindowSection, message: string) => {
+    issues.push(message);
+    checks.push({ section, message });
+  };
   const effectiveWidth = w.fabricWidthMm - 2 * w.seamMm;
   const flatWidthPerPanel =
     ((w.widthMm + w.returnsMm + w.overlapMm) / w.panelCount) * w.fullness +
@@ -301,18 +343,24 @@ export function calculateWindow(w: SurveyWindow) {
   const manual =
     w.pattern === "half-drop" ||
     (w.pattern !== "plain" && w.horizontalRepeatMm > 0);
-  if (!widths) issues.push("Enter the coverage and usable roll width.");
-  if (!w.longDropMm) issues.push("Enter the longest finished drop.");
+  if (!widths)
+    add(
+      w.widthMm > 0 ? "fabric" : "measure",
+      "Enter the coverage and usable roll width.",
+    );
+  if (!w.longDropMm) add("measure", "Enter the longest finished drop.");
   if (w.pattern !== "plain" && !w.repeatMm)
-    issues.push("Confirm the vertical pattern repeat.");
+    add("fabric", "Confirm the vertical pattern repeat.");
   if (manual && (!w.manualFabricMetres || !w.cuttingPlan.trim()))
-    issues.push(
+    add(
+      "fabric",
       "Add the approved matching plan and fabric metres for this pattern.",
     );
   const baseMetres =
     (widths * cutMm + (w.pattern === "plain" ? 0 : w.motifAllowanceMm)) / 1000;
   if (manual && w.manualFabricMetres > 0 && w.manualFabricMetres < baseMetres)
-    issues.push(
+    add(
+      "fabric",
       "The matching-plan metres must cover the full rectangular allowance.",
     );
   const fabricMetres =
@@ -327,7 +375,7 @@ export function calculateWindow(w: SurveyWindow) {
       : 0;
   const liningCutMm = w.liningDropMm + w.liningAllowanceMm;
   if (w.lining !== "none" && (!liningWidths || !w.liningDropMm))
-    issues.push("Enter the lining width and finished drop.");
+    add("finish", "Enter the lining width and finished drop.");
   const liningMetres =
     w.lining === "none"
       ? 0
@@ -344,32 +392,48 @@ export function calculateWindow(w: SurveyWindow) {
     liningMetres,
     manual,
     issues,
+    checks,
   };
 }
 
-export function approvalIssues(data: JobData, assets: Asset[] = []) {
-  const issues: string[] = [];
-  if (!data.customerName.trim()) issues.push("Add the customer's name.");
-  if (!data.address.trim()) issues.push("Add the installation address.");
+export function approvalChecklist(data: JobData, assets: Asset[] = []) {
+  const issues: SurveyCheck[] = [];
+  const client = (message: string) =>
+    issues.push({ step: "customer", message });
+  if (!data.customerName.trim()) client("Add the customer's name.");
+  if (!data.address.trim()) client("Add the installation address.");
   for (const [label, value] of [
     ["Customer", data.customerEmail],
     ["Workshop", data.workshopEmail],
     ["Fitter", data.fitterEmail],
   ])
     if (!z.email().safeParse(value).success)
-      issues.push(`${label}: enter a valid email address.`);
-  if (!data.choicesConfirmed) issues.push("Confirm the customer's choices.");
+      client(`${label}: enter a valid email address.`);
+  if (!data.choicesConfirmed)
+    issues.push({
+      step: "delivery",
+      message: "Confirm the customer's choices.",
+    });
   if (!data.workroomConfirmed)
-    issues.push("Confirm the workroom has reviewed the cutting allowances.");
+    issues.push({
+      step: "delivery",
+      message: "Confirm the workroom has reviewed the cutting allowances.",
+    });
   const labels = new Set<string>();
   for (const w of data.windows) {
     const label = windowLabel(w),
       key = `${w.room.trim().toLowerCase()}|${w.name.trim().toLowerCase()}`;
-    if (!w.room || !w.name || labels.has(key))
-      issues.push(`${label}: use a unique room and window name.`);
+    const add = (section: WindowSection, message: string) =>
+      issues.push({
+        step: "windows",
+        windowId: w.id,
+        section,
+        message: `${label}: ${message}`,
+      });
+    if (!w.room.trim() || !w.name.trim() || labels.has(key))
+      add("measure", "use a unique room and window name.");
     labels.add(key);
-    if (!w.measuredConfirmed)
-      issues.push(`${label}: confirm the measurements.`);
+    if (!w.measuredConfirmed) add("measure", "confirm the measurements.");
     if (
       w.type === "apex" &&
       (!w.leftDropMm ||
@@ -380,45 +444,48 @@ export function approvalIssues(data: JobData, assets: Asset[] = []) {
         w.apexOffsetMm <= 0 ||
         w.apexOffsetMm >= w.widthMm)
     )
-      issues.push(`${label}: check the apex drops, position and both slopes.`);
+      add("measure", "check the apex drops, position and both slopes.");
     if (!w.fabric || !w.fabricCode || !w.supplier || !w.colour)
-      issues.push(`${label}: complete the fabric specification.`);
-    if (!w.heading || !w.track || !w.mountingSurface || !w.accessHeightMm)
-      issues.push(
-        `${label}: complete the heading, track, fixing surface and access height.`,
-      );
-    if (!w.trackColour)
-      issues.push(`${label}: confirm the track colour or finish.`);
+      add("fabric", "complete the fabric specification.");
+    if (!Number.isFinite(w.fullness) || w.fullness < 1 || w.fullness > 4)
+      add("fabric", "enter a fullness multiplier from 1 to 4.");
+    if (!w.heading.trim()) add("fabric", "choose the heading design.");
+    if (!w.track.trim() || !w.mountingSurface.trim() || !w.accessHeightMm)
+      add("fitting", "complete the track, fixing surface and access height.");
+    if (!w.trackColour) add("fitting", "confirm the track colour or finish.");
     if (w.lengthStyle !== "touching" && !w.lengthDetail)
-      issues.push(
-        `${label}: specify the puddle allowance or mid-length endpoint.`,
-      );
+      add("measure", "specify the puddle allowance or mid-length endpoint.");
     if (w.lining !== "none" && (!w.liningCode || !w.liningColour))
-      issues.push(`${label}: add the lining reference and colour.`);
+      add("finish", "add the lining reference and colour.");
     if (!(liningOptions as readonly string[]).includes(w.lining))
-      issues.push(`${label}: choose Standard or Blackout lining.`);
+      add("finish", "choose Standard or Blackout lining.");
     if (w.interlining && !w.interliningMetres)
-      issues.push(`${label}: enter the interlining metres.`);
+      add("finish", "enter the interlining metres.");
     if (w.tiebackCount && (!w.tiebacks || !w.tiebackColour))
-      issues.push(`${label}: complete the tieback details.`);
+      add("finish", "complete the tieback details.");
     if (w.hookCount && (!w.hooks || !w.hookColour))
-      issues.push(`${label}: complete the hook details.`);
+      add("finish", "complete the hook details.");
     if (
       w.hookCount &&
       !(hookFinishes as readonly string[]).includes(w.hookColour)
     )
-      issues.push(
-        `${label}: choose Bronze, Silver chrome or Black for the tieback hooks.`,
+      add(
+        "finish",
+        "choose Bronze, Silver chrome or Black for the tieback hooks.",
       );
     if (w.careInstructions.length < 20 || !w.careSource)
-      issues.push(
-        `${label}: add supplier-approved care instructions and their source.`,
-      );
+      add("care", "add supplier-approved care instructions and their source.");
     if (!assets.some((a) => a.window_id === w.id && a.kind === "window"))
-      issues.push(`${label}: add a window photograph.`);
-    issues.push(...calculateWindow(w).issues.map((s) => `${label}: ${s}`));
+      add("photos", "add a window photograph.");
+    calculateWindow(w).checks.forEach(({ section, message }) =>
+      add(section, message),
+    );
   }
   return issues;
+}
+
+export function approvalIssues(data: JobData, assets: Asset[] = []) {
+  return approvalChecklist(data, assets).map(({ message }) => message);
 }
 
 export function sampleJob(): Job {
@@ -469,7 +536,8 @@ export function sampleJob(): Job {
     colour: "Soft sage",
     tiebackColour: "Soft sage",
     palette: "sage" as const,
-    track: "Ceiling-mounted track",
+    track: "Forest Group KS® Klick System",
+    trackProduct: "forest-ks" as const,
     trackColour: "Matt white",
     designNotes:
       "Gentle sage and beautifully structured folds bring a restful rhythm to the bedroom. Ivory blackout lining completes the specification, with matching tiebacks and bronze details.",

@@ -1,4 +1,5 @@
 import React from "react";
+import { selectedTrack } from "./tracks";
 /* React PDF images are not HTML elements. */
 /* eslint-disable jsx-a11y/alt-text */
 import {
@@ -181,6 +182,7 @@ type Props = {
   assets: Asset[];
   photos: Photos;
   inspiration: Buffer;
+  trackPhotos?: Record<string, Buffer>;
   draft?: boolean;
 };
 const safe = (v: string | number | undefined | null) =>
@@ -322,6 +324,7 @@ function IntroPage(p: Props) {
 }
 function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
   const palette = brochurePalette(w);
+  const track = selectedTrack(w);
   const sitePhoto = p.job.data.photoPermission && imageFor(p, w);
   return (
     <>
@@ -399,8 +402,70 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             </Text>
           </View>
         ) : null}
+        {track && p.trackPhotos?.[track.id] && !imageFor(p, w, "fabric") ? (
+          <View
+            wrap={false}
+            style={{
+              flexDirection: "row",
+              gap: 16,
+              marginTop: 16,
+              padding: 14,
+              backgroundColor: "#FFFFFF",
+            }}
+          >
+            <Image
+              src={p.trackPhotos[track.id]}
+              style={{ width: 130, height: 100, objectFit: "contain" }}
+            />
+            <View style={{ width: 325 }}>
+              <Text
+                style={[s.h2, { marginTop: 5, fontSize: 17, lineHeight: 1.2 }]}
+              >
+                {track.name}
+              </Text>
+              <Text style={s.body}>
+                Your chosen finish: {w.trackColour || "To be confirmed"}
+              </Text>
+              <Text style={s.small}>
+                {track.caption} Photograph: Forest Group.
+              </Text>
+            </View>
+          </View>
+        ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
+      {track && p.trackPhotos?.[track.id] && imageFor(p, w, "fabric") ? (
+        <Page size="A4" style={s.page}>
+          <Brand />
+          <Text style={s.kicker}>
+            {w.room} · {w.name}
+          </Text>
+          <Text style={s.title}>The finishing touch.</Text>
+          <Text style={s.body}>
+            A considered detail, chosen to complement the fall of your curtains.
+          </Text>
+          <View
+            style={{
+              backgroundColor: "#FFFFFF",
+              padding: 24,
+              marginVertical: 26,
+            }}
+          >
+            <Image
+              src={p.trackPhotos[track.id]}
+              style={{ width: "100%", height: 310, objectFit: "contain" }}
+            />
+          </View>
+          <Text style={[s.h2, { fontSize: 24, lineHeight: 1.2 }]}>
+            {track.name}
+          </Text>
+          <Text style={s.body}>
+            Your chosen finish: {w.trackColour || "To be confirmed"}
+          </Text>
+          <Text style={s.small}>{track.caption} Photograph: Forest Group.</Text>
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ) : null}
     </>
   );
 }
