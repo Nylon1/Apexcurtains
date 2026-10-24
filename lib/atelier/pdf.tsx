@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import React from "react";
 import { selectedTrack } from "./tracks";
 import {
-  careGuide,
   standardCareSummary,
   careHandover,
   additionalCareWindows,
@@ -53,6 +52,7 @@ import {
   websiteFeatures,
   headingGallery,
 } from "./brochure";
+import { brochureCareGuide } from "./brochure-care";
 import { brochureIcons, type BrochureIconName } from "./brochure-icons";
 
 const C = {
@@ -349,11 +349,17 @@ function IntroPage(p: Props) {
         {safe(p.job.data.title)}
       </Text>
       <Image
-        src={p.illustrations?.swatches || p.inspiration}
-        style={{ width: "100%", height: 290, objectFit: "cover" }}
+        src={p.illustrations?.homepage || p.inspiration}
+        style={{
+          width: 595.28,
+          height: 245,
+          objectFit: "contain",
+          marginLeft: -42,
+          marginTop: 12,
+        }}
       />
       <Text style={{ fontSize: 7, color: "#C5C7C0", marginTop: 8 }}>
-        Fabric inspiration · textures to begin a conversation
+        Our homepage · www.apexcurtains.com
       </Text>
       <Text
         hyphenationCallback={(word) => [word]}
@@ -361,7 +367,7 @@ function IntroPage(p: Props) {
           fontFamily: "Times-Roman",
           fontSize: p.job.data.customerName.length > 80 ? 18 : 24,
           lineHeight: 1.2,
-          marginTop: 24,
+          marginTop: 42,
         }}
       >
         Prepared exclusively for {safe(p.job.data.customerName) || "you"}
@@ -724,6 +730,58 @@ function Brochure(p: Props) {
       </Page>
       <Page size="A4" style={s.page}>
         <Brand />
+        <Motif name="cloth" />
+        <Text style={s.kicker}>THE LANGUAGE OF FOLDS</Text>
+        <Text style={s.title}>
+          Three headings. Each with its own character.
+        </Text>
+        <Text style={s.body}>
+          A small guide to the finishing styles on our website. These examples
+          illustrate the headings; your selected style, cloth and colour remain
+          those recorded in your room specification.
+        </Text>
+        {headingGallery.map((item, i) => (
+          <View
+            key={item.id}
+            wrap={false}
+            style={{
+              flexDirection: "row",
+              gap: 20,
+              paddingVertical: 13,
+              borderTopWidth: 0.6,
+              borderColor: C.line,
+            }}
+          >
+            {p.illustrations?.[item.id] ? (
+              <Image
+                src={p.illustrations[item.id]}
+                style={{
+                  width: 210,
+                  height: 130,
+                  objectFit: "cover",
+                  objectPositionY: item.id === "pencil" ? "70%" : "50%",
+                }}
+              />
+            ) : null}
+            <View style={{ flex: 1, paddingTop: 8 }}>
+              <Text style={s.label}>0{i + 1} / HEADING STUDY</Text>
+              <Text style={[s.h2, { fontSize: 21, marginTop: 6 }]}>
+                {item.name}
+              </Text>
+              <Text style={s.body}>{item.description}</Text>
+            </View>
+          </View>
+        ))}
+        <Link
+          src={`${apexWebsite}/curtain-headings`}
+          style={[s.small, { marginTop: 12, color: C.navy }]}
+        >
+          Explore the heading guide at apexcurtains.com/curtain-headings
+        </Link>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+      <Page size="A4" style={s.page}>
+        <Brand />
         <View
           style={{
             alignItems: "center",
@@ -777,6 +835,17 @@ function Brochure(p: Props) {
           record the choices made for your home, with a little inspiration to
           help you carry the look into the rest of the room.
         </Text>
+        {p.illustrations?.swatches ? (
+          <Image
+            src={p.illustrations.swatches}
+            style={{
+              width: "100%",
+              height: 155,
+              objectFit: "cover",
+              marginVertical: 12,
+            }}
+          />
+        ) : null}
         <Text style={s.h2} minPresenceAhead={70}>
           Your rooms
         </Text>
@@ -827,6 +896,17 @@ function Brochure(p: Props) {
             : "Your installation arrangements will be confirmed with Apex."}{" "}
           A little preparation makes space for the final details.
         </Text>
+        {p.illustrations?.making ? (
+          <Image
+            src={p.illustrations.making}
+            style={{
+              width: "100%",
+              height: 165,
+              objectFit: "cover",
+              marginBottom: 16,
+            }}
+          />
+        ) : null}
         {installationGuide.map((item, i) => (
           <View
             key={item.label}
@@ -859,42 +939,60 @@ function Brochure(p: Props) {
         ))}
         <Footer job={p.job} draft={p.draft} />
       </Page>
-      {careGuide.map((group) => (
+      {brochureCareGuide.map((group) => (
         <Page size="A4" style={s.page} key={group.id}>
           <Brand />
-          <Motif name={group.id === "cleaning" ? "care" : "cloth"} />
-          <Text
-            style={[
-              s.kicker,
-              { borderTopWidth: 1, borderColor: C.gold, paddingTop: 15 },
-            ]}
-          >
-            {group.eyebrow}
-          </Text>
+          <Text style={s.kicker}>{group.eyebrow}</Text>
           <Text style={s.title}>{group.title}</Text>
           <Text style={s.body}>{group.introduction}</Text>
-          {group.sections.map((section, index) => (
-            <View
-              key={section.title}
-              wrap={false}
-              style={{
-                marginTop: 10,
-                paddingTop: 12,
-                borderTopWidth: 0.6,
-                borderColor: C.line,
-                ...(group.id === "cleaning" && index === 0
-                  ? { padding: 17, backgroundColor: "#EDE7DB", marginBottom: 4 }
-                  : {}),
-              }}
-            >
-              <Text
-                style={[s.h2, { fontSize: 19, marginTop: 0, marginBottom: 7 }]}
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              gap: 14,
+              marginTop: 12,
+            }}
+          >
+            {group.sections.map((section, index) => (
+              <View
+                key={section.title}
+                wrap={false}
+                style={{
+                  width: 248,
+                  padding: group.id === "living" ? 12 : 18,
+                  minHeight: group.id === "living" ? 165 : 245,
+                  backgroundColor: index === 0 ? "#E5E0D4" : "#EEEAE2",
+                  borderTopWidth: 2,
+                  borderColor: C.gold,
+                }}
               >
-                {section.title}
-              </Text>
-              <Text style={[s.body, { marginBottom: 5 }]}>{section.text}</Text>
-            </View>
-          ))}
+                <Motif
+                  name={section.icon}
+                  size={group.id === "living" ? 30 : 42}
+                />
+                <Text
+                  style={[
+                    s.h2,
+                    {
+                      fontSize: group.id === "living" ? 16 : 19,
+                      marginTop: 2,
+                      marginBottom: 9,
+                    },
+                  ]}
+                >
+                  {section.title}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: group.id === "living" ? 9 : 9.5,
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {section.text}
+                </Text>
+              </View>
+            ))}
+          </View>
           <Footer job={p.job} draft={p.draft} />
         </Page>
       ))}
@@ -924,58 +1022,6 @@ function Brochure(p: Props) {
           <Footer job={p.job} draft={p.draft} />
         </Page>
       ) : null}
-      <Page size="A4" style={s.page}>
-        <Brand />
-        <Motif name="cloth" />
-        <Text style={s.kicker}>THE LANGUAGE OF FOLDS</Text>
-        <Text style={s.title}>
-          Three headings. Each with its own character.
-        </Text>
-        <Text style={s.body}>
-          A small guide to the finishing styles on our website. These examples
-          illustrate the headings; your selected style, cloth and colour remain
-          those recorded in your room specification.
-        </Text>
-        {headingGallery.map((item, i) => (
-          <View
-            key={item.id}
-            wrap={false}
-            style={{
-              flexDirection: "row",
-              gap: 20,
-              paddingVertical: 13,
-              borderTopWidth: 0.6,
-              borderColor: C.line,
-            }}
-          >
-            {p.illustrations?.[item.id] ? (
-              <Image
-                src={p.illustrations[item.id]}
-                style={{
-                  width: 210,
-                  height: 130,
-                  objectFit: "cover",
-                  objectPositionY: item.id === "pencil" ? "70%" : "50%",
-                }}
-              />
-            ) : null}
-            <View style={{ flex: 1, paddingTop: 8 }}>
-              <Text style={s.label}>0{i + 1} / HEADING STUDY</Text>
-              <Text style={[s.h2, { fontSize: 21, marginTop: 6 }]}>
-                {item.name}
-              </Text>
-              <Text style={s.body}>{item.description}</Text>
-            </View>
-          </View>
-        ))}
-        <Link
-          src={`${apexWebsite}/curtain-headings`}
-          style={[s.small, { marginTop: 12, color: C.navy }]}
-        >
-          Explore the heading guide at apexcurtains.com/curtain-headings
-        </Link>
-        <Footer job={p.job} draft={p.draft} />
-      </Page>
       <Page size="A4" style={s.page}>
         <Brand />
         <Motif name="globe" />

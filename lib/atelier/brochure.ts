@@ -239,6 +239,7 @@ export const paletteSampleNote =
 
 export const apexWebsite = "https://www.apexcurtains.com";
 export const brochureImages = {
+  homepage: "/atelier-images/apex-homepage.webp",
   swatches: "/atelier-images/fabric-swatch-still-life.webp",
   voucher: "/atelier-images/apex-voucher.webp",
   making: "/journey/make-beautifully.jpeg",
