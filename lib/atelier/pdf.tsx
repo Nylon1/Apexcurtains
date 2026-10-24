@@ -454,11 +454,6 @@ function Brochure(p: Props) {
             </Text>
           </View>
         ))}
-        <Text style={[s.body, { marginTop: 22 }]}>
-          Keep this collection close when choosing paint, furniture or finishing
-          touches. Physical fabric and paint samples remain the best guide to
-          colour in your own light.
-        </Text>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => (
@@ -483,15 +478,17 @@ function Brochure(p: Props) {
             ) : null}
           </View>
         ))}
-        <Text style={s.h2}>Here when you need us</Text>
-        <Text style={s.body}>
-          If you are unsure about cleaning, operating your track or adjusting a
-          tieback, speak to our team before proceeding. We can refer to your
-          original specification and help you find the appropriate next step.
-        </Text>
-        <Text style={s.body}>
-          hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
-        </Text>
+        <View wrap={false}>
+          <Text style={s.h2}>Here when you need us</Text>
+          <Text style={s.body}>
+            If you are unsure about cleaning, operating your track or adjusting a
+            tieback, speak to our team before proceeding. We can refer to your
+            original specification and help you find the appropriate next step.
+          </Text>
+          <Text style={s.body}>
+            hello@apexcurtains.com · 0800 772 0367{"\n"}www.apexcurtains.com
+          </Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
       <Page size="A4" style={s.page}>
