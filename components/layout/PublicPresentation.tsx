@@ -17,7 +17,15 @@ export default function PublicPresentation({
     "/arlo-curtain-advisor",
   ].some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
   return (
-    <div className={operational ? undefined : "public-presentation"}>
+    <div
+      className={
+        path.startsWith("/admin/atelier")
+          ? "atelier-presentation"
+          : operational
+            ? undefined
+            : "public-presentation"
+      }
+    >
       {children}
     </div>
   );

@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 import legacyUrls from "./lib/legacy-redirects.json";
 
 const nextConfig: NextConfig = {
+  turbopack: { root: process.cwd() },
+  outputFileTracingRoot: process.cwd(),
+  outputFileTracingIncludes: {
+    "/api/atelier/**/*": [
+      "./public/visualiser/double-pinch-gable-desktop.webp",
+    ],
+  },
   async redirects() {
     return [
       {
