@@ -3067,3 +3067,55 @@
     scroll-behavior: auto !important;
   }
 }
+.at-brochure-cover > img {
+  object-fit: contain;
+  height: auto;
+  aspect-ratio: 1506 / 619;
+}
+.at-brochure-editorial {
+  display: block;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  margin: 28px 0;
+}
+.at-brochure-care-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+.at-brochure-care-card {
+  padding: 26px;
+  background: #eeeae2;
+  border-top: 2px solid #b59b6a;
+  break-inside: avoid;
+}
+.at-brochure-care-card:first-child {
+  background: #e5e0d4;
+}
+.at-brochure-care-card .at-brochure-icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 18px;
+}
+.at-brochure-care-card h4 {
+  margin: 0 0 14px;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+.at-brochure-care-card p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+@media (max-width: 600px) {
+  .at-brochure-care-grid {
+    grid-template-columns: 1fr;
+  }
+  .at-brochure-editorial {
+    height: 180px;
+  }
+}

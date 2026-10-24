@@ -7,3 +7,6 @@ The brochure keeps the three general curtain examples together in the heading gu
 - Both original PNGs are preserved in the task's generated-images folder; the project copies are compressed WebP assets.
 
 Existing website imagery is reused directly: `/headings/pencil-pleat.jpeg`, `/headings/pinch-pleat.jpg`, `/headings/wave-pleat.jpg`, `/journey/make-beautifully.jpeg`, `/guides/colour-wheel.svg`, and `/fabrics/oslo/linen.jpg`. The latter is labelled Oslo Linen by Prestigious Textiles and clearly identified as an example, not the customer's selection. Website image captions and links are shared by the PDF and HTML preview in `lib/atelier/brochure.ts`.
+# Homepage cover
+
+`apex-homepage.webp` is an actual screenshot of https://www.apexcurtains.com/ captured on 24 October 2026 using the connected browser. It includes the website masthead and opening hero, with the introduction overlay closed. The screenshot is presented as the homepage, not as the client's chosen curtain design.

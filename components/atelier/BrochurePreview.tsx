@@ -2,7 +2,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from "react";
 import { selectedTrack } from "@/lib/atelier/tracks";
-import { careGuide, additionalCareWindows } from "@/lib/atelier/care";
+import { additionalCareWindows } from "@/lib/atelier/care";
+import { brochureCareGuide } from "@/lib/atelier/brochure-care";
 import { shapeName, windowOutline } from "@/lib/atelier/geometry";
 import {
   brochureIcons,
@@ -95,10 +96,10 @@ export default function BrochurePreview({
           </p>
         </div>
         <img
-          src={brochureImages.swatches}
-          alt="An editorial arrangement of curtain fabric swatches in soft neutrals, sage and navy"
+          src={brochureImages.homepage}
+          alt="The Apex Curtains homepage, featuring a real architectural curtain installation"
         />
-        <small>FABRIC INSPIRATION · TEXTURES TO BEGIN A CONVERSATION</small>
+        <small>OUR HOMEPAGE · WWW.APEXCURTAINS.COM</small>
       </div>
       <section
         className="at-brochure-page at-brochure-dedication"
@@ -127,6 +128,44 @@ export default function BrochurePreview({
           <br />
           <em>The Apex Curtains team</em>
         </p>
+      </section>
+      <section className="at-brochure-page at-brochure-headings">
+        <Motif name="cloth" />
+        <span className="at-eyebrow">THE LANGUAGE OF FOLDS</span>
+        <h3>
+          Three headings.
+          <br />
+          <em>Each with its own character.</em>
+        </h3>
+        <p>
+          A small guide to the finishing styles on our website. These examples
+          illustrate the headings; your selected style, cloth and colour remain
+          those recorded in your room specification.
+        </p>
+        {headingGallery.map((item, i) => (
+          <figure className="at-brochure-feature" key={item.id}>
+            <img
+              src={item.image}
+              alt={`${item.name} curtain heading example`}
+              loading="lazy"
+              style={{
+                objectPosition: item.id === "pencil" ? "50% 70%" : undefined,
+              }}
+            />
+            <figcaption>
+              <span className="at-eyebrow">0{i + 1} / HEADING STUDY</span>
+              <h4>{item.name}</h4>
+              <p>{item.description}</p>
+            </figcaption>
+          </figure>
+        ))}
+        <a
+          href={`${apexWebsite}/curtain-headings`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Explore our heading guide
+        </a>
       </section>
       <section className="at-brochure-page at-brochure-promise">
         <Motif name="home" />
@@ -162,6 +201,12 @@ export default function BrochurePreview({
           {data.windows.length === 1 ? "window" : "windows"}, individually
           considered
         </p>
+        <img
+          className="at-brochure-editorial"
+          src={brochureImages.swatches}
+          alt="An arrangement of fabric swatches, an invitation to explore texture and colour"
+          loading="lazy"
+        />
         <ol className="at-brochure-contents">
           {data.windows.map((w) => (
             <li key={w.id}>
@@ -381,6 +426,12 @@ export default function BrochurePreview({
             : "Your installation arrangements will be confirmed with Apex."}{" "}
           A little preparation makes space for the final details.
         </p>
+        <img
+          className="at-brochure-editorial"
+          src={brochureImages.making}
+          alt="Fabric and sewing tools in the Apex website workroom photograph"
+          loading="lazy"
+        />
         {installationGuide.map((item, i) => (
           <div className="at-arrival-step" key={item.label}>
             <span>0{i + 1}</span>
@@ -391,21 +442,20 @@ export default function BrochurePreview({
           </div>
         ))}
       </section>
-      {careGuide.map((group) => (
+      {brochureCareGuide.map((group) => (
         <section className="at-brochure-page" key={group.id}>
-          <Motif name={group.id === "cleaning" ? "care" : "cloth"} />
           <span className="at-eyebrow">{group.eyebrow}</span>
           <h3>{group.title}</h3>
           <p>{group.introduction}</p>
-          {group.sections.map((section, index) => (
-            <div
-              className={`at-brochure-care ${group.id === "cleaning" && index === 0 ? "at-care-highlight" : ""}`}
-              key={section.title}
-            >
-              <h4>{section.title}</h4>
-              <p>{section.text}</p>
-            </div>
-          ))}
+          <div className="at-brochure-care-grid">
+            {group.sections.map((section) => (
+              <div className="at-brochure-care-card" key={section.title}>
+                <Motif name={section.icon} />
+                <h4>{section.title}</h4>
+                <p>{section.text}</p>
+              </div>
+            ))}
+          </div>
         </section>
       ))}
       {additionalCareWindows(data.windows).length ? (
@@ -430,44 +480,6 @@ export default function BrochurePreview({
           ))}
         </section>
       ) : null}
-      <section className="at-brochure-page at-brochure-headings">
-        <Motif name="cloth" />
-        <span className="at-eyebrow">THE LANGUAGE OF FOLDS</span>
-        <h3>
-          Three headings.
-          <br />
-          <em>Each with its own character.</em>
-        </h3>
-        <p>
-          A small guide to the finishing styles on our website. These examples
-          illustrate the headings; your selected style, cloth and colour remain
-          those recorded in your room specification.
-        </p>
-        {headingGallery.map((item, i) => (
-          <figure className="at-brochure-feature" key={item.id}>
-            <img
-              src={item.image}
-              alt={`${item.name} curtain heading example`}
-              loading="lazy"
-              style={{
-                objectPosition: item.id === "pencil" ? "50% 70%" : undefined,
-              }}
-            />
-            <figcaption>
-              <span className="at-eyebrow">0{i + 1} / HEADING STUDY</span>
-              <h4>{item.name}</h4>
-              <p>{item.description}</p>
-            </figcaption>
-          </figure>
-        ))}
-        <a
-          href={`${apexWebsite}/curtain-headings`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Explore our heading guide
-        </a>
-      </section>
       <section className="at-brochure-page at-brochure-discover">
         <Motif name="globe" />
         <span className="at-eyebrow">MORE TO DISCOVER ONLINE</span>

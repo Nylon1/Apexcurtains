@@ -70,6 +70,8 @@ Lining automatically uses **the same finished drop and total making allowance as
 
 ## Verification
 
+The brochure cover uses a bundled screenshot of the Apex homepage. The three heading examples follow the customer dedication on page 3. Fabric and workroom photography separate the editorial sections, and three illustrated care spreads use concise cards from `brochure-care.ts`; the full standard policy remains in `care.ts`. HTML and generated PDFs share the same content and icons. Customer photographs and recorded specifications still take precedence in the individual room pages.
+
 `npm run test:atelier` checks the core calculations and release validation. `npm run build` and targeted ESLint check the application.
 
 `scripts/atelier-integration.mts` is opt-in with `ATELIER_INTEGRATION=1` and an optional `ATELIER_TEST_URL`. It creates a temporary fictitious user/job, verifies auth, persistence, photo storage, concurrency, approval snapshots, PDF generation and handover, then removes its fixtures. It never sends an email. Run only against the intended Apex database/environment.
