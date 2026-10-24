@@ -1,6 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  brochurePalette,
+  brochureSpecification,
+  customerDetails,
+} from "../lib/atelier/brochure";
+import {
   calculateWindow,
   sampleJob,
   jobDataSchema,
@@ -17,6 +22,133 @@ test("apex material uses a full rectangle at the longest drop", () => {
   assert.equal(
     calculateWindow({ ...w, leftDropMm: 1000, rightDropMm: 1500 }).fabricMetres,
     q.fabricMetres,
+  );
+});
+
+test("brochure palette follows the current colour and preserves consultant overrides", () => {
+  const w = sampleJob().data.windows[0];
+  for (const [colour, key] of [
+    ["Warm flax", "linen"],
+    ["Soft sage", "sage"],
+    ["Terracotta", "clay"],
+    ["Midnight navy", "ink"],
+    ["Dusty blush", "rose"],
+    ["Silver grey", "slate"],
+    ["Muted mauve", "plum"],
+    ["Golden ochre", "ochre"],
+  ]) {
+    const palette = brochurePalette({ ...w, colour });
+    assert.equal(palette.key, key);
+    assert.ok(palette.basis.includes(colour));
+    assert.equal(palette.needsReview, false);
+  }
+  const manual = brochurePalette({
+    ...w,
+    colour: "Soft sage",
+    palette: "ink",
+    paletteMode: "manual",
+  });
+  assert.equal(manual.key, "ink");
+  assert.ok(manual.finishingAdvice.includes(w.trackColour));
+  assert.ok(manual.finishingAdvice.includes(w.hookColour));
+  for (const colour of ["Collection 742", "Blue and pink", ""]) {
+    const unknown = brochurePalette({ ...w, colour });
+    assert.equal(unknown.key, "linen");
+    assert.equal(unknown.needsReview, true);
+  }
+});
+
+test("existing saved palettes survive schema upgrades without inventing a track finish", () => {
+  const data = sampleJob().data;
+  const { paletteMode, trackColour, ...legacy } = data.windows[0];
+  void paletteMode;
+  void trackColour;
+  const restored = jobDataSchema.parse({
+    ...data,
+    windows: [{ ...legacy, palette: "clay" }],
+  }).windows[0];
+  assert.equal(restored.paletteMode, "manual");
+  assert.equal(brochurePalette(restored).key, "clay");
+  assert.equal(restored.trackColour, "");
+  assert.ok(
+    brochureSpecification(restored).some(
+      (d) =>
+        d.label === "Track colour / finish" && d.value === "To be confirmed",
+    ),
+  );
+  assert.ok(
+    approvalIssues({ ...data, windows: [restored] }).some((s) =>
+      s.includes("track colour"),
+    ),
+  );
+});
+
+test("client brochure includes personal details and chosen finishes without internal recipients", () => {
+  const data = {
+    ...sampleJob().data,
+    customerEmail: "client@example.invalid",
+    workshopEmail: "private-workshop@example.invalid",
+    fitterEmail: "private-fitter@example.invalid",
+  };
+  const identity = customerDetails(data)
+    .map((d) => d.value)
+    .join("\n");
+  for (const value of [data.customerName, data.address, data.customerEmail])
+    assert.ok(identity.includes(value));
+  assert.ok(!identity.includes(data.workshopEmail));
+  assert.ok(!identity.includes(data.fitterEmail));
+  const w = {
+    ...data.windows[1],
+    pattern: "straight" as const,
+    repeatMm: 640,
+    direction: "Nap down",
+    patternNotes: "Centre the floral motif",
+    trackComponents: "Brass finials",
+    interlining: "Cotton bump",
+    tiebackPosition: "900 mm from floor",
+  };
+  const spec = brochureSpecification(w)
+    .map((d) => d.value)
+    .join("\n");
+  for (const value of [
+    w.supplier,
+    w.fabricCode,
+    w.colour,
+    w.heading,
+    w.opening,
+    w.track,
+    w.trackColour,
+    w.liningCode,
+    w.liningColour,
+    w.tiebacks,
+    w.tiebackColour,
+    w.hooks,
+    w.hookColour,
+    w.interlining,
+    w.direction,
+    w.patternNotes,
+    w.trackComponents,
+    w.tiebackPosition,
+    "640 mm",
+  ])
+    assert.ok(spec.includes(value), value);
+  const none = brochureSpecification({
+    ...w,
+    lining: "none",
+    tiebackCount: 0,
+    hookCount: 0,
+  });
+  assert.equal(
+    none.find((d) => d.label === "Lining & colour")?.value,
+    "Unlined",
+  );
+  assert.equal(
+    none.find((d) => d.label === "Tiebacks")?.value,
+    "None selected",
+  );
+  assert.equal(
+    none.find((d) => d.label === "Hooks / holdbacks")?.value,
+    "None selected",
   );
 });
 test("straight repeats round every cut up and include extra allowances", () => {

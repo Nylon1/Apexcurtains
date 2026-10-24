@@ -12,6 +12,12 @@ Private staff workspace: `/admin/atelier`. The fictional, local-only walkthrough
 
 The onsite workflow requires an internet connection. Unsaved changes are shown and browser navigation warns before leaving them.
 
+### Personalised brochures
+
+The screen preview and PDF use the same customer and window specification. Each includes the customer's name, installation address and entered contact details, plus every room/window's fabric reference and colour, heading/fullness, opening, length, track and track finish, lining, interlining, pattern details, tiebacks and hooks. Workshop and fitter email addresses stay out of the client brochure. Track colour is required before a new release and also appears in the workroom and fitter documents.
+
+New windows suggest an interior palette from the entered fabric colour, with room-specific advice referencing the recorded hardware and tieback finishes. Eight curated colour families cover neutrals, greens, earth tones, blues, rose, greys, plum and ochre. Ambiguous or supplier-only colour names receive an explicitly labelled neutral starting point for consultant review. Select a palette manually to override the suggestion, or enable automatic suggestions again. Older saved collections retain their selected palettes. Swatches are complementary interior suggestions, never claimed as exact fabric or paint matches.
+
 ## Material method
 
 Every face-fabric width uses the longest finished drop plus top and bottom allowances, treating an apex as a full rectangle. No triangular offcuts are subtracted. Width allocation is conservative per panel, including side hems, seams, fullness, returns and overlap. Straight repeats round each cut up; half-drop and horizontal matches require a workroom-approved cutting plan and total that covers the rectangular baseline. Lining uses its own roll width and finished drop. Extras are added separately. Offcuts are available for suitable tiebacks after grain, pattern and size checks.

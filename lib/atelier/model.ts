@@ -21,6 +21,7 @@ export const windowSchema = z.object({
   measuredConfirmed: yes,
   measurementNotes: text(2500),
   track: text(),
+  trackColour: text(150),
   trackComponents: text(2000),
   panelCount: z.union([z.literal(1), z.literal(2)]).default(2),
   opening: text(150),
@@ -70,7 +71,11 @@ export const windowSchema = z.object({
   fittingNotes: text(2500),
   careInstructions: text(2500),
   careSource: text(300),
-  palette: z.enum(["linen", "sage", "clay", "ink"]).default("linen"),
+  palette: z
+    .enum(["linen", "sage", "clay", "ink", "rose", "slate", "plum", "ochre"])
+    .default("linen"),
+  // Preserve the explicitly selected palette in older saved collections.
+  paletteMode: z.enum(["auto", "manual"]).default("manual"),
   designNotes: text(2000),
 });
 export const jobDataSchema = z.object({
@@ -147,6 +152,7 @@ export function newWindow(
     sideHemMm: 40,
     seamMm: 15,
     liningAllowanceMm: 150,
+    paletteMode: "auto",
   });
 }
 export function newJobData(id: string): JobData {
@@ -184,6 +190,34 @@ export const palettes = {
     names: ["Pale stone", "Slate blue", "Midnight ink"],
     advice:
       "Set deeper blue against pale stone for a composed contrast. Warm timber and softly textured upholstery keep the palette inviting. Repeat the darkest tone sparingly in a frame, lamp or accent chair to give the room a gentle rhythm.",
+  },
+  rose: {
+    name: "Soft rose & stone",
+    colours: ["#EDE2D9", "#C7A1A0", "#77645F"],
+    names: ["Porcelain", "Dusty rose", "Smoked taupe"],
+    advice:
+      "Give pink and blush tones a quiet setting with warm off-white walls and softly grained timber. A deeper taupe adds definition; small accents in brushed metal bring a little light without competing with the fabric.",
+  },
+  slate: {
+    name: "Tailored greys",
+    colours: ["#E6E4DE", "#A6A7A5", "#444A4C"],
+    names: ["Pale chalk", "Silver grey", "Soft charcoal"],
+    advice:
+      "Layer grey with chalk and charcoal, then soften the composition with wool, linen and natural timber. Compare the undertones of paint and upholstery beside your fabric: some greys lean blue, while others carry a warmer stone note.",
+  },
+  plum: {
+    name: "Plum & parchment",
+    colours: ["#E9E0D5", "#AA929F", "#604553"],
+    names: ["Parchment", "Muted mauve", "Deep plum"],
+    advice:
+      "Let plum and mauve sit beside parchment walls, warm woods and softly textured neutrals. Echo the richer tone in a small artwork or cushion, leaving enough quiet space for the curtain fabric to feel considered and generous.",
+  },
+  ochre: {
+    name: "Golden warmth",
+    colours: ["#EEE4D0", "#C5A45D", "#6B684D"],
+    names: ["Warm cream", "Soft ochre", "Olive shadow"],
+    advice:
+      "Ground golden tones with warm cream, natural oak and a little muted olive. Choose tactile, matt finishes for larger pieces and use the richer colour in smaller accents to keep the room balanced in both daylight and lamplight.",
   },
 } as const;
 export const toolsChecklist = [
@@ -342,6 +376,8 @@ export function approvalIssues(data: JobData, assets: Asset[] = []) {
       issues.push(
         `${label}: complete the heading, track, fixing surface and access height.`,
       );
+    if (!w.trackColour)
+      issues.push(`${label}: confirm the track colour or finish.`);
     if (w.lengthStyle !== "touching" && !w.lengthDetail)
       issues.push(
         `${label}: specify the puddle allowance or mid-length endpoint.`,
@@ -389,6 +425,7 @@ export function sampleJob(): Job {
     liningWidthMm: 1400,
     liningDropMm: 3550,
     track: "Made-to-measure apex track",
+    trackColour: "Warm white",
     mountingSurface: "To be confirmed onsite",
     tiebacks: "Matching fabric",
     tiebackColour: "Warm flax",
@@ -410,13 +447,18 @@ export function sampleJob(): Job {
     longDropMm: 2600,
     liningDropMm: 2550,
     colour: "Soft sage",
+    tiebackColour: "Soft sage",
     palette: "sage" as const,
     track: "Ceiling-mounted track",
+    trackColour: "Matt white",
+    designNotes:
+      "Gentle sage and beautifully structured folds bring a restful rhythm to the bedroom. Ivory blackout lining completes the specification, with matching tiebacks and antique brass details.",
   };
   Object.assign(data, {
     title: "The garden house",
-    customerName: "An illustrative client",
-    address: "Sample project · no customer information",
+    customerName: "Alex & Morgan Taylor (fictional clients)",
+    address:
+      "The Garden House\n12 Example Lane\nSample Village\nIllustrative address only",
     surveyor: "Apex design team",
     windows: [first, second],
   });
