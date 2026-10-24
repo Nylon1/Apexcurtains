@@ -1,5 +1,11 @@
 import React from "react";
 import { selectedTrack } from "./tracks";
+import {
+  shapeName,
+  windowOutline,
+  geometryMeasurements,
+  geometrySlants,
+} from "./geometry";
 /* React PDF images are not HTML elements. */
 /* eslint-disable jsx-a11y/alt-text */
 import {
@@ -251,31 +257,39 @@ function Field({ label, value }: { label: string; value: string | number }) {
     </View>
   );
 }
-function WindowDrawing({ w }: { w: SurveyWindow }) {
+function WindowDrawing({
+  w,
+  compact = false,
+}: {
+  w: SurveyWindow;
+  compact?: boolean;
+}) {
+  const outline = windowOutline(w);
+  const path =
+    outline
+      ?.map(([x, y], i) => `${i ? "L" : "M"}${30 + x * 180} ${15 + y * 100}`)
+      .join(" ") + " Z";
   return (
     <View style={{ marginTop: 10, marginBottom: 12 }}>
-      <Svg width="240" height="135" viewBox="0 0 240 135">
-        <Path
-          d={
-            w.type === "apex"
-              ? "M30 115 V55 L120 15 L210 55 V115 Z"
-              : "M30 115 V20 H210 V115 Z"
-          }
-          stroke={C.gold}
-          strokeWidth="1.4"
-          fill="none"
-        />
-        <Line
-          x1="120"
-          y1="20"
-          x2="120"
-          y2="115"
-          stroke={C.line}
-          strokeWidth="1"
-        />
-      </Svg>
+      {outline ? (
+        <Svg width="240" height={compact ? "105" : "135"} viewBox="0 0 240 135">
+          <Path d={path} stroke={C.gold} strokeWidth="1.4" fill="none" />
+          <Line
+            x1="120"
+            y1="20"
+            x2="120"
+            y2="115"
+            stroke={C.line}
+            strokeWidth="1"
+          />
+        </Svg>
+      ) : (
+        <Text style={s.body}>
+          Custom shape: refer to the typed measurements and site photographs.
+        </Text>
+      )}
       <Text style={s.small}>
-        Shape guide only · use the recorded site dimensions
+        {shapeName(w)} · shape guide only · use the recorded site dimensions
       </Text>
     </View>
   );
@@ -331,7 +345,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
       <Page size="A4" style={s.page}>
         <Brand />
         <Text style={s.kicker}>
-          {w.name} · {w.type === "apex" ? "Apex window" : "Standard window"}
+          {w.name} · {shapeName(w)}
         </Text>
         <Text style={s.title}>{w.room}</Text>
         <Image
@@ -434,6 +448,23 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
         ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
+      {w.type === "apex" && w.apexShape === "other" ? (
+        <Page size="A4" style={s.page}>
+          <Brand />
+          <Text style={s.kicker}>
+            {w.room} · {w.name}
+          </Text>
+          <Text style={s.title}>Your window, in detail.</Text>
+          <Text style={s.body}>
+            The individual proportions recorded for your bespoke window.
+          </Text>
+          <Text style={s.h2} minPresenceAhead={40}>
+            Other shape measurements
+          </Text>
+          <Text style={s.body}>{w.otherShapeMeasurements}</Text>
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ) : null}
       {track && p.trackPhotos?.[track.id] && imageFor(p, w, "fabric") ? (
         <Page size="A4" style={s.page}>
           <Brand />
@@ -598,8 +629,7 @@ function Brochure(p: Props) {
               {w.room}
             </Text>
             <Text style={s.small}>
-              {w.name} · {w.type === "apex" ? "Apex window" : "Standard window"}{" "}
-              · {w.colour}
+              {w.name} · {shapeName(w)} · {w.colour}
             </Text>
           </View>
         ))}
@@ -783,22 +813,22 @@ function Workroom(p: Props) {
                 src={imageFor(p, w)!}
                 style={{
                   width: "100%",
-                  height: 180,
+                  height: 150,
                   objectFit: "contain",
                   marginBottom: 12,
                 }}
               />
             ) : (
-              <WindowDrawing w={w} />
+              <WindowDrawing w={w} compact />
             )}
             <View style={s.grid}>
               <Field
                 label="Coverage and finished drops"
-                value={`${w.widthMm} mm coverage; longest ${w.longDropMm} mm; left ${w.leftDropMm} mm; right ${w.rightDropMm} mm`}
+                value={geometryMeasurements(w)}
               />
               <Field
-                label="Apex and track"
-                value={`${w.type === "apex" ? `Apex offset ${w.apexOffsetMm} mm; slopes ${w.leftSlopeMm} / ${w.rightSlopeMm} mm. ` : ""}${w.track} · ${w.trackColour || "Track colour to be confirmed"}`}
+                label="Slants and track"
+                value={`${geometrySlants(w)} ${w.track} · ${w.trackColour || "Track colour to be confirmed"}`}
               />
               <Field
                 label="Fabric"
@@ -837,6 +867,14 @@ function Workroom(p: Props) {
                 value={`${w.tiebackCount} × ${w.tiebacks} ${w.tiebackColour}; ${w.hookCount} × ${w.hooks} ${w.hookColour}`}
               />
             </View>
+            {w.type === "apex" && w.apexShape === "other" ? (
+              <>
+                <Text style={s.h2} minPresenceAhead={40}>
+                  Other shape measurements
+                </Text>
+                <Text style={s.body}>{w.otherShapeMeasurements}</Text>
+              </>
+            ) : null}
             {[
               w.direction,
               w.patternNotes,
@@ -911,7 +949,7 @@ function Fitter(p: Props) {
             />
             <Field
               label="Dimensions"
-              value={`${w.widthMm} mm coverage; longest ${w.longDropMm} mm${w.type === "apex" ? `; left/right drops ${w.leftDropMm}/${w.rightDropMm} mm; apex offset ${w.apexOffsetMm} mm; slopes ${w.leftSlopeMm}/${w.rightSlopeMm} mm` : ""}`}
+              value={`${geometryMeasurements(w)}. ${geometrySlants(w)}`}
             />
             <Field
               label="Access and fixings"
@@ -928,6 +966,14 @@ function Fitter(p: Props) {
             />
           </View>
           <Text style={s.h2}>Window instructions</Text>
+          {w.type === "apex" && w.apexShape === "other" ? (
+            <>
+              <Text style={s.h2} minPresenceAhead={40}>
+                Other shape measurements
+              </Text>
+              <Text style={s.body}>{w.otherShapeMeasurements}</Text>
+            </>
+          ) : null}
           <Text style={s.body}>
             {[
               w.trackComponents,

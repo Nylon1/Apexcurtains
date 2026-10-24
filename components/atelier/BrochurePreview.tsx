@@ -1,6 +1,7 @@
 /* Photographs are served through the staff-checked asset endpoint. */
 /* eslint-disable @next/next/no-img-element */
 import { selectedTrack } from "@/lib/atelier/tracks";
+import { shapeName } from "@/lib/atelier/geometry";
 import {
   selectedFabricPhoto,
   type JobData,
@@ -110,8 +111,7 @@ export default function BrochurePreview({
               <a href={`#brochure-${w.id}`}>
                 <b>{w.room || "Room"}</b>
                 <span>
-                  {w.name || "Window"} ·{" "}
-                  {w.type === "apex" ? "Apex window" : "Standard window"}
+                  {w.name || "Window"} · {shapeName(w)}
                 </span>
               </a>
             </li>
@@ -132,8 +132,7 @@ export default function BrochurePreview({
             key={w.id}
           >
             <span className="at-eyebrow">
-              {String(index + 1).padStart(2, "0")} / {w.name} ·{" "}
-              {w.type === "apex" ? "APEX WINDOW" : "STANDARD WINDOW"}
+              {String(index + 1).padStart(2, "0")} / {w.name} · {shapeName(w)}
             </span>
             <h3>{w.room || "Your room"}</h3>
             <img
@@ -158,6 +157,14 @@ export default function BrochurePreview({
             <p className="at-brochure-intro">{roomIntroduction(w)}</p>
             <span className="at-eyebrow">YOUR CHOSEN DETAILS</span>
             <Details items={brochureSpecification(w)} />
+            {w.type === "apex" && w.apexShape === "other" ? (
+              <div className="at-custom-shape-notes">
+                <span className="at-eyebrow">
+                  YOUR WINDOW · RECORDED MEASUREMENTS
+                </span>
+                <p>{w.otherShapeMeasurements}</p>
+              </div>
+            ) : null}
             {track ? (
               <figure className="at-brochure-track">
                 <img
