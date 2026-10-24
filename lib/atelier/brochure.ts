@@ -7,6 +7,17 @@ import {
 import { shapeName } from "./geometry";
 
 export type BrochureDetail = { label: string; value: string };
+
+export function brochureRooms(windows: SurveyWindow[]) {
+  const rooms = new Map<string, { room: string; windows: SurveyWindow[] }>();
+  for (const window of windows) {
+    const room = window.room.trim() || "Your room";
+    const key = room.toLocaleLowerCase("en-GB");
+    if (!rooms.has(key)) rooms.set(key, { room, windows: [] });
+    rooms.get(key)!.windows.push(window);
+  }
+  return [...rooms.values()];
+}
 const join = (...values: string[]) => values.filter(Boolean).join(" · ");
 const recorded = (value: string) => value || "To be confirmed";
 
@@ -104,6 +115,56 @@ export function brochureSpecification(w: SurveyWindow): BrochureDetail[] {
 }
 
 type PaletteKey = keyof typeof palettes;
+
+/** Keep each recorded choice once, in a clearly named reading section. */
+export function brochureSpecificationSections(w: SurveyWindow) {
+  const details = brochureSpecification(w);
+  const groups = [
+    {
+      id: "fabric",
+      title: "Your fabric",
+      labels: ["Your fabric", "Fabric colour", "Pattern matching"],
+    },
+    {
+      id: "fit",
+      title: "Heading & fit",
+      labels: [
+        "Heading design",
+        "Curtain arrangement",
+        "Length finish",
+        "Finished measurements",
+      ],
+    },
+    {
+      id: "lining",
+      title: "Your lining",
+      labels: ["Lining & colour", "Interlining"],
+    },
+    {
+      id: "finishing",
+      title: "Finishing touches",
+      labels: ["Tiebacks", "Hooks / holdbacks"],
+    },
+    {
+      id: "track",
+      title: "Your track",
+      labels: ["Track design", "Track colour / finish"],
+    },
+  ];
+  const grouped = groups.map(({ id, title, labels }) => ({
+    id,
+    title,
+    items: details.filter((item) => labels.includes(item.label)),
+  }));
+  const assigned = new Set(groups.flatMap((group) => group.labels));
+  const notes = details.filter((item) => !assigned.has(item.label));
+  return notes.length
+    ? [
+        ...grouped,
+        { id: "notes", title: "The individual details", items: notes },
+      ]
+    : grouped;
+}
 const colourFamilies: [PaletteKey, RegExp][] = [
   [
     "linen",
@@ -216,6 +277,18 @@ export function interiorGuide(w: SurveyWindow): BrochureDetail[] {
   ];
 }
 
+export function interiorExample(w: SurveyWindow) {
+  const p = brochurePalette(w);
+  const bedroom = /bed|nursery|guest/i.test(w.room);
+  return {
+    title: `An example for ${w.room || "your room"}`,
+    text: `With ${w.colour || "your chosen"} curtains, try ${p.names[0].toLowerCase()} walls, ${p.names[1].toLowerCase()} ${bedroom ? "bedding or a textured throw" : "upholstery or a textured rug"}, and a small ${p.names[2].toLowerCase()} accent in ${bedroom ? "a cushion and bedside ceramic" : "a cushion and a piece of artwork"}. ${w.pattern === "plain" ? "Vary the textures to keep the scheme interesting." : "Keep the larger furnishings plain so the curtain pattern has room to be seen."}`,
+    light:
+      "Place paint, upholstery and curtain samples together at the window. Check them in daylight and under your evening lamps before committing.",
+    finish: p.finishingAdvice,
+  };
+}
+
 export const installationGuide: BrochureDetail[] = [
   {
     label: "Before we arrive",
@@ -242,7 +315,7 @@ export const brochureImages = {
   homepage: "/atelier-images/apex-homepage.webp",
   swatches: "/atelier-images/fabric-swatch-still-life.webp",
   voucher: "/atelier-images/apex-voucher.webp",
-  making: "/journey/make-beautifully.jpeg",
+  studio: "/atelier-images/apex-colour-studio.webp",
   colour: "/guides/colour-wheel.svg",
   fabric: "/fabrics/oslo/linen.jpg",
   pencil: "/headings/pencil-pleat.jpeg",
@@ -298,14 +371,14 @@ export const headingGallery = [
 
 export const websiteFeatures = [
   {
-    id: "making",
-    title: "The art of making",
-    path: "/services/design-make-curtains",
-    image: brochureImages.making,
-    alt: "Fabric, sewing tools and cloth in the workroom image from the Apex website",
+    id: "studio",
+    title: "Find your palette",
+    path: "/curtain-colours-and-tones#colour-explorer",
+    image: brochureImages.studio,
+    alt: "Screenshot of the Apex colour studio with its colour wheel and neutral interior palette",
     description:
-      "Follow the details that turn a measured window into an individually made curtain.",
-    caption: "From the Apex design & manufacture pages",
+      "Explore colour families and discover how fabric, walls and furnishings can work together.",
+    caption: "From our online colour studio · an illustrative palette",
   },
   {
     id: "fabric",
@@ -320,8 +393,8 @@ export const websiteFeatures = [
   },
   {
     id: "colour",
-    title: "Colour for the whole room",
-    path: "/curtain-colours-and-tones",
+    title: "Colour relationships",
+    path: "/curtain-colours-and-tones#colour-wheel",
     image: brochureImages.colour,
     alt: "The colour wheel from the Apex Colour & Interiors guide",
     description:

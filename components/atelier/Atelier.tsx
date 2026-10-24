@@ -973,8 +973,8 @@ export default function Atelier({
                   </div>
                   <aside className="at-editor-aside">
                     <img
-                      src="/journey/make-beautifully.jpeg"
-                      alt="Curtain making details from the Apex collection"
+                      src="/atelier-images/fabric-swatch-still-life.webp"
+                      alt="Fabric swatches from the Apex brochure collection"
                     />
                     <span className="at-eyebrow">MADE PERSONAL</span>
                     <h3>

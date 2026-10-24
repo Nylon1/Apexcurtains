@@ -10,7 +10,6 @@ const nextConfig: NextConfig = {
       "./public/atelier-products/forest-ks-white.webp",
       "./public/atelier-products/forest-cs-white.webp",
       "./public/atelier-images/*.webp",
-      "./public/journey/make-beautifully.jpeg",
       "./public/guides/colour-wheel.svg",
       "./public/fabrics/oslo/linen.jpg",
       "./public/headings/pencil-pleat.jpeg",
