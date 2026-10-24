@@ -232,6 +232,13 @@ export default function Atelier({
     setDraft((d) => (d ? { ...d, [key]: value } : d));
     setSavingFailed(false);
     setMessage("");
+    clearSaveError();
+  }
+  function clearSaveError() {
+    const previous = saveErrorRef.current;
+    if (!previous) return;
+    setError((current) => (current === previous ? "" : current));
+    saveErrorRef.current = "";
   }
   function updateWindow<K extends keyof SurveyWindow>(
     key: K,
@@ -302,6 +309,7 @@ export default function Atelier({
     );
     setSavingFailed(false);
     setMessage("");
+    clearSaveError();
   }
   const active =
     draft?.windows.find((w) => w.id === windowId) ?? draft?.windows[0];
