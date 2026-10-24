@@ -14,6 +14,12 @@ The onsite workflow requires an internet connection. Unsaved changes are shown a
 
 ### Personalised brochures
 
+The customer's name and installation address have a dedicated page with a personal dedication, separate from the room and window specifications.
+
+Use **Fabric & finish → Your fabric photograph** to upload the customer's actual fabric image. The most recent fabric photo for that window appears beside its name, reference and colour in the brochure. Older images remain attached to the project and approved revisions keep their original selection. JPG, PNG and WebP are supported, within the existing six-photo limit per window.
+
+New selections offer **Standard** or **Blackout** lining, with a separate lining colour. Tiebacks are **Matching** (following the chosen fabric colour) or **Other** (enter the design and colour); quantity zero means none required. Tieback hook finishes are **Bronze**, **Silver chrome** or **Black**. Historical specifications remain readable, with current choices required before a new release.
+
 The screen preview and PDF use the same customer and window specification. Each includes the customer's name, installation address and entered contact details, plus every room/window's fabric reference and colour, heading/fullness, opening, length, track and track finish, lining, interlining, pattern details, tiebacks and hooks. Workshop and fitter email addresses stay out of the client brochure. Track colour is required before a new release and also appears in the workroom and fitter documents.
 
 New windows suggest an interior palette from the entered fabric colour, with room-specific advice referencing the recorded hardware and tieback finishes. Eight curated colour families cover neutrals, greens, earth tones, blues, rose, greys, plum and ochre. Ambiguous or supplier-only colour names receive an explicitly labelled neutral starting point for consultant review. Select a palette manually to override the suggestion, or enable automatic suggestions again. Older saved collections retain their selected palettes. Swatches are complementary interior suggestions, never claimed as exact fabric or paint matches.

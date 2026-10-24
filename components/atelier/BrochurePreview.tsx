@@ -1,6 +1,10 @@
 /* Photographs are served through the staff-checked asset endpoint. */
 /* eslint-disable @next/next/no-img-element */
-import { type JobData, type Asset } from "@/lib/atelier/model";
+import {
+  selectedFabricPhoto,
+  type JobData,
+  type Asset,
+} from "@/lib/atelier/model";
 import {
   customerDetails,
   brochureSpecification,
@@ -33,6 +37,7 @@ export default function BrochurePreview({
   assets: Asset[];
   reference: string;
 }) {
+  const [client, address, ...contactDetails] = customerDetails(data);
   return (
     <article
       className="at-brochure"
@@ -59,6 +64,33 @@ export default function BrochurePreview({
         />
         <small>INTERIOR INSPIRATION · THE APEX COLLECTION</small>
       </div>
+      <section
+        className="at-brochure-page at-brochure-dedication"
+        aria-label="A dedication to your home"
+      >
+        <span className="at-eyebrow">AN INDIVIDUAL COMMISSION</span>
+        <h3>
+          Your home.
+          <br />
+          <em>Your collection.</em>
+        </h3>
+        <div className="at-brochure-identity">
+          <span className="at-eyebrow">PREPARED EXCLUSIVELY FOR</span>
+          <h4>{client.value}</h4>
+          <address>{address.value}</address>
+        </div>
+        <p className="at-brochure-intro">
+          A home is made personal by the things chosen with care. This
+          collection has been composed for yours, with every fabric, fold and
+          finishing touch considered together.
+        </p>
+        {contactDetails.length ? <Details items={contactDetails} /> : null}
+        <p className="at-brochure-signature">
+          With warmest wishes,
+          <br />
+          <em>The Apex Curtains team</em>
+        </p>
+      </section>
       <section className="at-brochure-page">
         <span className="at-eyebrow">EVERY DETAIL, CHOSEN WITH INTENTION</span>
         <h3>A collection for your home.</h3>
@@ -66,7 +98,6 @@ export default function BrochurePreview({
           {data.welcomeNote ||
             "The most inviting rooms are shaped by thoughtful details: the fall of a fabric, the warmth of a colour, the way light moves through a window."}
         </p>
-        <Details items={customerDetails(data)} />
         <p>
           {reference} · {data.windows.length}{" "}
           {data.windows.length === 1 ? "window" : "windows"}, individually
@@ -91,9 +122,7 @@ export default function BrochurePreview({
         const photo = assets.find(
           (a) => a.window_id === w.id && a.kind === "window",
         );
-        const fabric = assets.find(
-          (a) => a.window_id === w.id && a.kind === "fabric",
-        );
+        const fabric = selectedFabricPhoto(assets, w.id);
         return (
           <section
             className="at-brochure-page at-brochure-window"
@@ -136,6 +165,8 @@ export default function BrochurePreview({
                 />
                 <figcaption>
                   {w.fabric} · {w.colour}
+                  <br />
+                  {w.fabricCode}
                   <br />
                   Your physical sample is the closest guide to colour and
                   texture.

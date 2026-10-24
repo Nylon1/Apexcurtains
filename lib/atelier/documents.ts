@@ -7,6 +7,7 @@ import {
   type Asset,
   type DocumentKind,
   jobDataSchema,
+  selectedFabricPhoto,
 } from "./model";
 import { renderJobPdf } from "./pdf";
 import { service, getAssets, AtelierError } from "./server";
@@ -45,10 +46,11 @@ export async function generateDocument(
   const selected = source.assets.filter(
     (a, i, all) =>
       kind !== "brochure" ||
-      (all.findIndex(
-        (b) => b.window_id === a.window_id && b.kind === a.kind,
-      ) === i &&
-        ["window", "fabric"].includes(a.kind)),
+      (a.kind === "fabric"
+        ? selectedFabricPhoto(all, a.window_id)?.id === a.id
+        : all.findIndex(
+            (b) => b.window_id === a.window_id && b.kind === a.kind,
+          ) === i && a.kind === "window"),
   );
   for (let i = 0; i < selected.length; i += 5) {
     await Promise.all(

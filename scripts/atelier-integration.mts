@@ -123,6 +123,30 @@ try {
     w.careSource = "Fixture supplier record";
   }
   await call(`/api/atelier/photos/${assetIds[0]}`, "GET", undefined, 401, true);
+  // A later fabric photograph is the one used in the brochure; both remain private.
+  for (const background of ["#e82e35", "#264ecb"]) {
+    const fabricPhoto = await sharp({
+      create: { width: 240, height: 180, channels: 3, background },
+    })
+      .jpeg()
+      .toBuffer();
+    const form = new FormData();
+    form.set(
+      "file",
+      new Blob([fabricPhoto], { type: "image/jpeg" }),
+      "fabric-fixture.jpg",
+    );
+    form.set("windowId", data.windows[0].id);
+    form.set("kind", "fabric");
+    form.set("caption", "Temporary fabric photograph");
+    const asset = (
+      await (
+        await call(`/api/atelier/jobs/${jobId}/photos`, "POST", form)
+      ).json()
+    ).asset;
+    storagePaths.push(asset.path);
+    await call(`/api/atelier/photos/${asset.id}`, "GET", undefined, 401, true);
+  }
   const photoResponse = await call(`/api/atelier/photos/${assetIds[0]}`);
   assert.equal(photoResponse.headers.get("content-type"), "image/jpeg");
   data.choicesConfirmed = true;

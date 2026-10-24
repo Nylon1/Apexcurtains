@@ -943,6 +943,57 @@
   color: #64716a;
   margin: 16px 0 22px;
 }
+.at-fabric-upload {
+  margin: 30px 0;
+  padding: 24px;
+  border: 1px solid var(--at-border);
+  background: #f7f3ec;
+}
+.at-fabric-upload h3 {
+  font:
+    27px/1.3 Georgia,
+    serif;
+  margin: 12px 0;
+}
+.at-fabric-upload > p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #667271;
+}
+.at-fabric-upload .at-upload {
+  min-height: 130px;
+}
+.at-fabric-upload-preview {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin: 20px 0;
+}
+.at-fabric-upload-preview img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: #fff;
+}
+.at-fabric-upload-preview figcaption {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.at-fabric-upload-preview span,
+.at-fabric-upload-preview small {
+  display: block;
+  margin-top: 5px;
+}
+.at-fabric-upload-preview small {
+  color: #667271;
+}
+.at-selection-note {
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 12px 0;
+}
 .at-palette-options button {
   padding: 14px;
   border: 1px solid var(--at-border);
@@ -1138,6 +1189,48 @@
   font-size: 34px;
   margin: 15px 0 22px;
 }
+.at-brochure-dedication {
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 65px;
+}
+.at-brochure-dedication h3 {
+  font-size: 42px;
+  line-height: 1.15;
+  margin: 24px 0 34px;
+}
+.at-brochure-dedication em {
+  font-weight: 400;
+}
+.at-brochure-identity {
+  border-top: 1px solid #c4af86;
+  border-bottom: 1px solid #c4af86;
+  padding: 30px 10px;
+  margin-bottom: 28px;
+}
+.at-brochure-identity h4 {
+  font:
+    29px/1.3 Georgia,
+    serif;
+  margin: 20px 0;
+}
+.at-brochure-identity address {
+  font-style: normal;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #667271;
+  white-space: pre-line;
+}
+.at-brochure-dedication .at-brochure-spec {
+  text-align: left;
+}
+.at-brochure-dedication .at-brochure-signature {
+  font:
+    15px/1.8 Georgia,
+    serif;
+  color: #263c43;
+  margin-top: 30px;
+}
 .at-brochure-page > p {
   color: #778074;
   font-size: 12px;
@@ -1221,9 +1314,9 @@
   margin: 0 0 40px;
 }
 .at-brochure-fabric img {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
 }
 .at-brochure-fabric figcaption {
   font-size: 11px;

@@ -15,6 +15,7 @@ import {
 } from "@react-pdf/renderer";
 import {
   calculateWindow,
+  selectedFabricPhoto,
   lengthLabel,
   checklist,
   type Job,
@@ -278,7 +279,10 @@ function WindowDrawing({ w }: { w: SurveyWindow }) {
   );
 }
 function imageFor(p: Props, w: SurveyWindow, kind = "window") {
-  const a = p.assets.find((a) => a.window_id === w.id && a.kind === kind);
+  const a =
+    kind === "fabric"
+      ? selectedFabricPhoto(p.assets, w.id)
+      : p.assets.find((a) => a.window_id === w.id && a.kind === kind);
   return a ? p.photos[a.id] : undefined;
 }
 function IntroPage(p: Props) {
@@ -384,10 +388,12 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
           >
             <Image
               src={imageFor(p, w, "fabric")!}
-              style={{ width: 65, height: 65, objectFit: "cover" }}
+              style={{ width: 110, height: 110, objectFit: "contain" }}
             />
-            <Text style={[s.small, { width: 370, marginTop: 10 }]}>
+            <Text style={[s.body, { width: 340, marginTop: 10 }]}>
               {w.fabric} · {w.colour}
+              {"\n"}
+              {w.fabricCode}
               {"\n"}Your physical fabric sample is the closest guide to colour
               and texture.
             </Text>
@@ -401,6 +407,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
 
 function Brochure(p: Props) {
   const d = p.job.data;
+  const [client, address, ...contactDetails] = customerDetails(d);
   return (
     <Document
       title={`${d.title} — Your Apex Curtains Collection`}
@@ -408,6 +415,88 @@ function Brochure(p: Props) {
       language="en-GB"
     >
       <IntroPage {...p} />
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <View
+          style={{
+            marginTop: 38,
+            paddingVertical: 30,
+            borderTopWidth: 0.6,
+            borderBottomWidth: 0.6,
+            borderColor: C.gold,
+            alignItems: "center",
+          }}
+        >
+          <Text style={[s.kicker, { textAlign: "center" }]}>
+            An individual commission
+          </Text>
+          <Text
+            style={[
+              s.title,
+              { textAlign: "center", fontSize: 40, lineHeight: 1.1 },
+            ]}
+          >
+            Your home.{"\n"}Your collection.
+          </Text>
+          <Text
+            style={[
+              s.label,
+              { textAlign: "center", marginTop: 14, marginBottom: 12 },
+            ]}
+          >
+            Prepared exclusively for
+          </Text>
+          <Text
+            style={{
+              fontFamily: "Times-Roman",
+              fontSize: 27,
+              lineHeight: 1.25,
+              textAlign: "center",
+              color: C.navy,
+              marginBottom: 18,
+            }}
+          >
+            {client.value}
+          </Text>
+          <Text
+            style={{
+              fontSize: 12,
+              lineHeight: 1.7,
+              textAlign: "center",
+              color: C.muted,
+            }}
+          >
+            {address.value}
+          </Text>
+        </View>
+        <Text
+          style={[
+            s.quote,
+            {
+              fontSize: 17,
+              lineHeight: 1.5,
+              textAlign: "center",
+              marginTop: 28,
+              marginBottom: 16,
+            },
+          ]}
+        >
+          A home is made personal by the things chosen with care. This
+          collection has been composed for yours, with every fabric, fold and
+          finishing touch considered together.
+        </Text>
+        {contactDetails.length ? (
+          <View style={s.grid}>
+            {contactDetails.map((detail) => (
+              <Field key={detail.label} {...detail} />
+            ))}
+          </View>
+        ) : null}
+        <Text style={[s.body, { textAlign: "center", marginTop: 22 }]}>
+          With warmest wishes,{"\n"}The Apex Curtains team
+        </Text>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
       <Page size="A4" style={s.page}>
         <Brand />
         <Text style={s.kicker}>A note for your home</Text>
@@ -421,11 +510,6 @@ function Brochure(p: Props) {
           record the choices made for your home, with a little inspiration to
           help you carry the look into the rest of the room.
         </Text>
-        <View style={s.grid}>
-          {customerDetails(d).map((detail) => (
-            <Field key={detail.label} {...detail} />
-          ))}
-        </View>
         <Text style={s.h2} minPresenceAhead={70}>
           Your rooms
         </Text>
@@ -481,8 +565,8 @@ function Brochure(p: Props) {
         <View wrap={false}>
           <Text style={s.h2}>Here when you need us</Text>
           <Text style={s.body}>
-            If you are unsure about cleaning, operating your track or adjusting a
-            tieback, speak to our team before proceeding. We can refer to your
+            If you are unsure about cleaning, operating your track or adjusting
+            a tieback, speak to our team before proceeding. We can refer to your
             original specification and help you find the appropriate next step.
           </Text>
           <Text style={s.body}>
