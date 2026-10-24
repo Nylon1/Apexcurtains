@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
       "./public/visualiser/double-pinch-gable-desktop.webp",
       "./public/atelier-products/forest-ks-white.webp",
       "./public/atelier-products/forest-cs-white.webp",
+      "./public/atelier-images/*.webp",
+      "./public/journey/make-beautifully.jpeg",
+      "./public/guides/colour-wheel.svg",
+      "./public/fabrics/oslo/linen.jpg",
+      "./public/headings/pencil-pleat.jpeg",
+      "./public/headings/pinch-pleat.jpg",
+      "./public/headings/wave-pleat.jpg",
     ],
   },
   async redirects() {

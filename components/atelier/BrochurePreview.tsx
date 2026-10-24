@@ -3,7 +3,11 @@
 import { Fragment } from "react";
 import { selectedTrack } from "@/lib/atelier/tracks";
 import { careGuide, additionalCareWindows } from "@/lib/atelier/care";
-import { shapeName } from "@/lib/atelier/geometry";
+import { shapeName, windowOutline } from "@/lib/atelier/geometry";
+import {
+  brochureIcons,
+  type BrochureIconName,
+} from "@/lib/atelier/brochure-icons";
 import {
   selectedFabricPhoto,
   type JobData,
@@ -18,8 +22,34 @@ import {
   designStory,
   interiorGuide,
   installationGuide,
+  apexWebsite,
+  brochureImages,
+  homePromise,
+  websiteFeatures,
+  headingGallery,
   type BrochureDetail,
 } from "@/lib/atelier/brochure";
+
+function Motif({ name }: { name: BrochureIconName }) {
+  return (
+    <svg
+      className="at-brochure-icon"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.1"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {brochureIcons[name].map((d, i) => (
+        <path key={i} d={d} />
+      ))}
+    </svg>
+  );
+}
 
 function Details({ items }: { items: BrochureDetail[] }) {
   return (
@@ -65,10 +95,10 @@ export default function BrochurePreview({
           </p>
         </div>
         <img
-          src="/visualiser/double-pinch-gable-desktop.webp"
-          alt="Apex interior inspiration"
+          src={brochureImages.swatches}
+          alt="An editorial arrangement of curtain fabric swatches in soft neutrals, sage and navy"
         />
-        <small>INTERIOR INSPIRATION · THE APEX COLLECTION</small>
+        <small>FABRIC INSPIRATION · TEXTURES TO BEGIN A CONVERSATION</small>
       </div>
       <section
         className="at-brochure-page at-brochure-dedication"
@@ -82,7 +112,9 @@ export default function BrochurePreview({
         </h3>
         <div className="at-brochure-identity">
           <span className="at-eyebrow">PREPARED EXCLUSIVELY FOR</span>
+          <Motif name="scroll" />
           <h4>{client.value}</h4>
+          <Motif name="home" />
           <address>{address.value}</address>
         </div>
         <p className="at-brochure-intro">
@@ -90,14 +122,35 @@ export default function BrochurePreview({
           collection has been composed for yours, with every fabric, fold and
           finishing touch considered together.
         </p>
-        {contactDetails.length ? <Details items={contactDetails} /> : null}
         <p className="at-brochure-signature">
           With warmest wishes,
           <br />
           <em>The Apex Curtains team</em>
         </p>
       </section>
+      <section className="at-brochure-page at-brochure-promise">
+        <Motif name="home" />
+        <span className="at-eyebrow">OUR PROMISE TO YOU</span>
+        <h3>
+          Respect for
+          <br />
+          <em>your home.</em>
+        </h3>
+        <p className="at-brochure-intro">{homePromise.introduction}</p>
+        <div className="at-brochure-promises">
+          {homePromise.details.map((item, i) => (
+            <div key={item.label}>
+              <Motif name={(["care", "sparkle", "home"] as const)[i]} />
+              <div>
+                <h4>{item.label}</h4>
+                <p>{item.value}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
       <section className="at-brochure-page">
+        <Motif name="scroll" />
         <span className="at-eyebrow">EVERY DETAIL, CHOSEN WITH INTENTION</span>
         <h3>A collection for your home.</h3>
         <p className="at-brochure-intro">
@@ -121,6 +174,7 @@ export default function BrochurePreview({
             </li>
           ))}
         </ol>
+        {contactDetails.length ? <Details items={contactDetails} /> : null}
       </section>
       {data.windows.map((w, index) => {
         const palette = brochurePalette(w);
@@ -143,24 +197,53 @@ export default function BrochurePreview({
               </div>
               <h3>{w.room || "Your room"}</h3>
               <figure className="at-brochure-room-figure">
-                <img
-                  className={`at-brochure-room ${photo ? "at-site-photograph" : ""}`}
-                  src={
-                    photo
-                      ? `/api/atelier/photos/${photo.id}`
-                      : "/visualiser/double-pinch-gable-desktop.webp"
-                  }
-                  alt={
-                    photo
-                      ? `${w.room} · ${w.name}`
-                      : "Apex interior inspiration"
-                  }
-                  loading="lazy"
-                />
+                {photo ? (
+                  <img
+                    className={`at-brochure-room ${photo ? "at-site-photograph" : ""}`}
+                    src={
+                      photo
+                        ? `/api/atelier/photos/${photo.id}`
+                        : "/visualiser/double-pinch-gable-desktop.webp"
+                    }
+                    alt={
+                      photo
+                        ? `${w.room} · ${w.name}`
+                        : "Apex interior inspiration"
+                    }
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="at-brochure-window-drawing">
+                    {windowOutline(w) ? (
+                      <svg
+                        viewBox="0 0 240 150"
+                        role="img"
+                        aria-label={`${shapeName(w)} shape guide`}
+                      >
+                        <path
+                          d={
+                            windowOutline(w)!
+                              .map(
+                                ([x, y], i) =>
+                                  `${i ? "L" : "M"}${30 + x * 180} ${15 + y * 110}`,
+                              )
+                              .join(" ") + " Z"
+                          }
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.2"
+                        />
+                      </svg>
+                    ) : (
+                      <Motif name="home" />
+                    )}
+                    <span>{shapeName(w)}</span>
+                  </div>
+                )}
                 <figcaption>
                   {photo
                     ? "Your window · photographed during your consultation"
-                    : "Interior inspiration from Apex · not your completed installation"}
+                    : "Your window shape · your chosen design is recorded on the following pages"}
                 </figcaption>
               </figure>
               <p className="at-brochure-intro">{roomIntroduction(w)}</p>
@@ -174,6 +257,7 @@ export default function BrochurePreview({
               </div>
             </section>
             <section className="at-brochure-page at-brochure-record">
+              <Motif name="scroll" />
               <span className="at-eyebrow">
                 {w.room} / THE INDIVIDUAL SPECIFICATION
               </span>
@@ -210,6 +294,7 @@ export default function BrochurePreview({
               ) : null}
             </section>
             <section className="at-brochure-page at-brochure-mood">
+              <Motif name="palette" />
               <span className="at-eyebrow">
                 {w.room} / COLOUR, TEXTURE & ATMOSPHERE
               </span>
@@ -283,6 +368,7 @@ export default function BrochurePreview({
         );
       })}
       <section className="at-brochure-page at-brochure-arrival">
+        <Motif name="home" />
         <span className="at-eyebrow">FROM OUR WORKROOM TO YOUR HOME</span>
         <h3>
           The day it all
@@ -307,6 +393,7 @@ export default function BrochurePreview({
       </section>
       {careGuide.map((group) => (
         <section className="at-brochure-page" key={group.id}>
+          <Motif name={group.id === "cleaning" ? "care" : "cloth"} />
           <span className="at-eyebrow">{group.eyebrow}</span>
           <h3>{group.title}</h3>
           <p>{group.introduction}</p>
@@ -319,13 +406,6 @@ export default function BrochurePreview({
               <p>{section.text}</p>
             </div>
           ))}
-          {group.id === "living" ? (
-            <p>
-              Here when you need us.
-              <br />
-              hello@apexcurtains.com · 0800 772 0367
-            </p>
-          ) : null}
         </section>
       ))}
       {additionalCareWindows(data.windows).length ? (
@@ -350,22 +430,119 @@ export default function BrochurePreview({
           ))}
         </section>
       ) : null}
-      <section className="at-brochure-page">
-        <div className="at-brochure-voucher">
-          <span className="at-eyebrow">
-            WITH OUR THANKS, {data.customerName || "FROM APEX"}
-          </span>
-          <h4>10% off</h4>
-          <p>any future order</p>
-          <small>APEX10-{reference.replace(/^APX-/, "")}</small>
-        </div>
+      <section className="at-brochure-page at-brochure-headings">
+        <Motif name="cloth" />
+        <span className="at-eyebrow">THE LANGUAGE OF FOLDS</span>
+        <h3>
+          Three headings.
+          <br />
+          <em>Each with its own character.</em>
+        </h3>
         <p>
-          Quote your personal voucher code when arranging your next order with
-          Apex Curtains.
+          A small guide to the finishing styles on our website. These examples
+          illustrate the headings; your selected style, cloth and colour remain
+          those recorded in your room specification.
+        </p>
+        {headingGallery.map((item, i) => (
+          <figure className="at-brochure-feature" key={item.id}>
+            <img
+              src={item.image}
+              alt={`${item.name} curtain heading example`}
+              loading="lazy"
+              style={{
+                objectPosition: item.id === "pencil" ? "50% 70%" : undefined,
+              }}
+            />
+            <figcaption>
+              <span className="at-eyebrow">0{i + 1} / HEADING STUDY</span>
+              <h4>{item.name}</h4>
+              <p>{item.description}</p>
+            </figcaption>
+          </figure>
+        ))}
+        <a
+          href={`${apexWebsite}/curtain-headings`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Explore our heading guide
+        </a>
+      </section>
+      <section className="at-brochure-page at-brochure-discover">
+        <Motif name="globe" />
+        <span className="at-eyebrow">MORE TO DISCOVER ONLINE</span>
+        <h3>
+          Ideas for a home
+          <br />
+          <em>that feels like you.</em>
+        </h3>
+        <p>
+          A few pages from our website to return to whenever you are gathering
+          ideas. Explore the textures, colours and careful making behind the
+          collection.
+        </p>
+        {websiteFeatures.map((item) => (
+          <figure className="at-brochure-feature" key={item.id}>
+            <img
+              src={item.image}
+              alt={item.alt}
+              loading="lazy"
+              style={{ objectFit: item.id === "colour" ? "contain" : "cover" }}
+            />
+            <figcaption>
+              <h4>{item.title}</h4>
+              <p>{item.description}</p>
+              <a
+                href={`${apexWebsite}${item.path}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Visit this page
+              </a>
+              <small>{item.caption}</small>
+            </figcaption>
+          </figure>
+        ))}
+      </section>
+      <section className="at-brochure-page at-brochure-ending">
+        <Motif name="gift" />
+        <span className="at-eyebrow">A LITTLE SOMETHING FOR ANOTHER ROOM</span>
+        <h3>
+          Your next
+          <br />
+          <em>beautiful idea.</em>
+        </h3>
+        <p>
+          {data.customerName
+            ? `${data.customerName}, this is for you.`
+            : "A personal gift from Apex."}{" "}
+          When another room calls for a little care, we would love to be part of
+          its story.
+        </p>
+        <figure className="at-brochure-voucher-picture">
+          <img
+            src={brochureImages.voucher}
+            alt="Apex Curtains voucher: 10% off any future order, with our compliments"
+            loading="lazy"
+          />
+          <figcaption>
+            <span className="at-eyebrow">YOUR PERSONAL VOUCHER CODE</span>
+            <strong>APEX10-{reference.replace(/^APX-/, "")}</strong>
+          </figcaption>
+        </figure>
+        <p>
+          Quote your code when arranging your next order with Apex Curtains.
         </p>
         {data.voucherDetails ? (
           <p className="at-fine-print">{data.voucherDetails}</p>
         ) : null}
+        <div className="at-brochure-website">
+          <Motif name="globe" />
+          <a href={apexWebsite} target="_blank" rel="noreferrer">
+            www.apexcurtains.com
+          </a>
+          <p>hello@apexcurtains.com · 0800 772 0367</p>
+        </div>
       </section>
     </article>
   );

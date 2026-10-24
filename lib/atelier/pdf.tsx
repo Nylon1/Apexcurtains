@@ -26,6 +26,7 @@ import {
   Svg,
   Path,
   Line,
+  Link,
 } from "@react-pdf/renderer";
 import {
   calculateWindow,
@@ -47,7 +48,12 @@ import {
   designStory,
   interiorGuide,
   installationGuide,
+  apexWebsite,
+  homePromise,
+  websiteFeatures,
+  headingGallery,
 } from "./brochure";
+import { brochureIcons, type BrochureIconName } from "./brochure-icons";
 
 const C = {
   navy: "#102C3B",
@@ -139,7 +145,6 @@ const s = StyleSheet.create({
   footer: {
     position: "absolute",
     top: 800,
-    height: 22,
     left: 42,
     right: 42,
     borderTopWidth: 0.5,
@@ -198,6 +203,7 @@ type Props = {
   photos: Photos;
   inspiration: Buffer;
   trackPhotos?: Record<string, Buffer>;
+  illustrations?: Record<string, Buffer>;
   draft?: boolean;
 };
 const safe = (v: string | number | undefined | null) =>
@@ -206,9 +212,7 @@ function Footer({ job, draft }: { job: Job; draft?: boolean }) {
   return (
     <>
       <View fixed style={s.footer}>
-        <Text
-          style={{ fontSize: 7.5, lineHeight: 1.2, height: 12, width: 440 }}
-        >
+        <Text style={{ fontSize: 7.5, lineHeight: 1.2, flex: 1 }}>
           {job.reference} · Version {job.version}
           {draft ? " · DRAFT FOR REVIEW" : ""}
         </Text>
@@ -216,14 +220,11 @@ function Footer({ job, draft }: { job: Job; draft?: boolean }) {
       <Text
         fixed
         style={{
-          fontSize: 7.5,
-          lineHeight: 1.2,
-          height: 12,
-          width: 65,
-          textAlign: "right",
           position: "absolute",
           top: 809,
           right: 42,
+          fontSize: 8,
+          color: C.muted,
         }}
         render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
       />
@@ -231,7 +232,33 @@ function Footer({ job, draft }: { job: Job; draft?: boolean }) {
   );
 }
 function Brand() {
-  return <Text style={s.brand}>APEX CURTAINS</Text>;
+  return (
+    <Text fixed style={s.brand}>
+      APEX CURTAINS
+    </Text>
+  );
+}
+function Motif({ name, size = 25 }: { name: BrochureIconName; size?: number }) {
+  return (
+    <Svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      style={{ marginBottom: 12 }}
+    >
+      {brochureIcons[name].map((d, i) => (
+        <Path
+          key={i}
+          d={d}
+          stroke={C.gold}
+          strokeWidth={1.1}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ))}
+    </Svg>
+  );
 }
 function AdditionalPhotos({ p, w }: { p: Props; w: SurveyWindow }) {
   const first = p.assets.find(
@@ -322,16 +349,17 @@ function IntroPage(p: Props) {
         {safe(p.job.data.title)}
       </Text>
       <Image
-        src={p.inspiration}
+        src={p.illustrations?.swatches || p.inspiration}
         style={{ width: "100%", height: 290, objectFit: "cover" }}
       />
       <Text style={{ fontSize: 7, color: "#C5C7C0", marginTop: 8 }}>
-        Interior inspiration from the Apex collection
+        Fabric inspiration · textures to begin a conversation
       </Text>
       <Text
+        hyphenationCallback={(word) => [word]}
         style={{
           fontFamily: "Times-Roman",
-          fontSize: 24,
+          fontSize: p.job.data.customerName.length > 80 ? 18 : 24,
           lineHeight: 1.2,
           marginTop: 24,
         }}
@@ -374,19 +402,33 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
         <Text style={[s.title, { fontSize: 42, marginBottom: 14 }]}>
           {w.room}
         </Text>
-        <Image
-          src={sitePhoto || p.inspiration}
-          style={{
-            width: "100%",
-            height: 235,
-            objectFit: sitePhoto ? "contain" : "cover",
-            backgroundColor: "#E9E5DD",
-          }}
-        />
+        {sitePhoto ? (
+          <Image
+            src={sitePhoto}
+            style={{
+              width: "100%",
+              height: 235,
+              objectFit: sitePhoto ? "contain" : "cover",
+              backgroundColor: "#E9E5DD",
+            }}
+          />
+        ) : (
+          <View
+            style={{
+              height: 180,
+              padding: 20,
+              backgroundColor: "#EDE7DB",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <WindowDrawing w={w} compact />
+          </View>
+        )}
         <Text style={[s.small, { marginTop: 7 }]}>
           {sitePhoto
             ? "Your window · photographed during your consultation"
-            : "Interior inspiration from Apex · not your completed installation"}
+            : "Your window shape · the chosen design is recorded on the following pages"}
         </Text>
         <Text
           style={[
@@ -421,6 +463,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
       </Page>
       <Page size="A4" style={s.page}>
         <Brand />
+        <Motif name="scroll" />
         <Text style={s.kicker}>{w.room} / THE INDIVIDUAL SPECIFICATION</Text>
         <Text style={s.title}>Every choice, together.</Text>
         <Text style={s.body}>
@@ -473,6 +516,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
       </Page>
       <Page size="A4" style={s.page}>
         <Brand />
+        <Motif name="palette" />
         <Text style={s.kicker}>{w.room} / COLOUR, TEXTURE & ATMOSPHERE</Text>
         <Text style={s.title}>The room beyond the curtains.</Text>
         <Text style={[s.h2, { marginTop: 0, fontSize: 20 }]}>
@@ -489,7 +533,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
                 src={fabricPhoto}
                 style={{
                   width: "100%",
-                  height: 164,
+                  height: 140,
                   objectFit: "contain",
                   backgroundColor: "#E9E5DD",
                 }}
@@ -497,7 +541,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             ) : (
               <View
                 style={{
-                  height: 164,
+                  height: 140,
                   padding: 22,
                   backgroundColor: C.navy,
                   justifyContent: "center",
@@ -556,7 +600,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
         <Text
           style={[
             s.quote,
-            { fontSize: 14, lineHeight: 1.45, marginTop: 4, marginBottom: 14 },
+            { fontSize: 13, lineHeight: 1.4, marginTop: 4, marginBottom: 10 },
           ]}
         >
           {palette.advice}
@@ -569,8 +613,8 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
               style={{
                 borderTopWidth: 0.5,
                 borderColor: C.line,
-                paddingTop: 10,
-                paddingBottom: 7,
+                paddingTop: 8,
+                paddingBottom: 5,
                 width: "50%",
                 paddingRight: i % 2 === 0 ? 18 : 0,
                 paddingLeft: i % 2 === 1 ? 10 : 0,
@@ -583,7 +627,7 @@ function BrochureWindow({ p, w }: { p: Props; w: SurveyWindow }) {
             </View>
           ))}
         </View>
-        <Text style={[s.small, { marginTop: 14 }]}>{paletteSampleNote}</Text>
+        <Text style={[s.small, { marginTop: 8 }]}>{paletteSampleNote}</Text>
         <Footer job={p.job} draft={p.draft} />
       </Page>
     </>
@@ -604,8 +648,8 @@ function Brochure(p: Props) {
         <Brand />
         <View
           style={{
-            marginTop: 38,
-            paddingVertical: 30,
+            marginTop: 10,
+            paddingVertical: 18,
             borderTopWidth: 0.6,
             borderBottomWidth: 0.6,
             borderColor: C.gold,
@@ -618,7 +662,7 @@ function Brochure(p: Props) {
           <Text
             style={[
               s.title,
-              { textAlign: "center", fontSize: 40, lineHeight: 1.1 },
+              { textAlign: "center", fontSize: 32, lineHeight: 1.15 },
             ]}
           >
             Your home.{"\n"}Your collection.
@@ -626,16 +670,18 @@ function Brochure(p: Props) {
           <Text
             style={[
               s.label,
-              { textAlign: "center", marginTop: 14, marginBottom: 12 },
+              { textAlign: "center", marginTop: 8, marginBottom: 10 },
             ]}
           >
             Prepared exclusively for
           </Text>
+          <Motif name="scroll" size={28} />
           <Text
+            hyphenationCallback={(word) => [word]}
             style={{
               fontFamily: "Times-Roman",
-              fontSize: 27,
-              lineHeight: 1.25,
+              fontSize: client.value.length > 80 ? 21 : 25,
+              lineHeight: 1.2,
               textAlign: "center",
               color: C.navy,
               marginBottom: 18,
@@ -643,10 +689,11 @@ function Brochure(p: Props) {
           >
             {client.value}
           </Text>
+          <Motif name="home" size={27} />
           <Text
             style={{
-              fontSize: 12,
-              lineHeight: 1.7,
+              fontSize: 10.5,
+              lineHeight: 1.5,
               textAlign: "center",
               color: C.muted,
             }}
@@ -658,10 +705,10 @@ function Brochure(p: Props) {
           style={[
             s.quote,
             {
-              fontSize: 17,
-              lineHeight: 1.5,
+              fontSize: 16,
+              lineHeight: 1.4,
               textAlign: "center",
-              marginTop: 28,
+              marginTop: 20,
               marginBottom: 16,
             },
           ]}
@@ -670,16 +717,51 @@ function Brochure(p: Props) {
           collection has been composed for yours, with every fabric, fold and
           finishing touch considered together.
         </Text>
-        {contactDetails.length ? (
-          <View style={s.grid}>
-            {contactDetails.map((detail) => (
-              <Field key={detail.label} {...detail} />
-            ))}
-          </View>
-        ) : null}
         <Text style={[s.body, { textAlign: "center", marginTop: 22 }]}>
           With warmest wishes,{"\n"}The Apex Curtains team
         </Text>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: 30,
+            paddingBottom: 26,
+            borderBottomWidth: 0.6,
+            borderColor: C.gold,
+          }}
+        >
+          <Motif name="home" size={42} />
+          <Text style={[s.kicker, { marginTop: 12 }]}>OUR PROMISE TO YOU</Text>
+          <Text style={[s.title, { textAlign: "center", fontSize: 44 }]}>
+            Respect for{"\n"}your home.
+          </Text>
+          <Text
+            style={[
+              s.quote,
+              { fontSize: 17, textAlign: "center", marginBottom: 0 },
+            ]}
+          >
+            {homePromise.introduction}
+          </Text>
+        </View>
+        {homePromise.details.map((item, i) => (
+          <View
+            key={item.label}
+            wrap={false}
+            style={{ flexDirection: "row", gap: 18, paddingTop: 25 }}
+          >
+            <Motif name={(["care", "sparkle", "home"] as const)[i]} size={27} />
+            <View style={{ flex: 1 }}>
+              <Text style={[s.h2, { fontSize: 20, marginTop: 0 }]}>
+                {item.label}
+              </Text>
+              <Text style={s.body}>{item.value}</Text>
+            </View>
+          </View>
+        ))}
         <Footer job={p.job} draft={p.draft} />
       </Page>
       <Page size="A4" style={s.page}>
@@ -722,6 +804,13 @@ function Brochure(p: Props) {
             </Text>
           </View>
         ))}
+        {contactDetails.length ? (
+          <View style={s.grid}>
+            {contactDetails.map((detail) => (
+              <Field key={detail.label} {...detail} />
+            ))}
+          </View>
+        ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
       {d.windows.map((w) => (
@@ -729,18 +818,9 @@ function Brochure(p: Props) {
       ))}
       <Page size="A4" style={s.page}>
         <Brand />
+        <Motif name="home" />
         <Text style={s.kicker}>FROM OUR WORKROOM TO YOUR HOME</Text>
         <Text style={s.title}>The day it all comes together.</Text>
-        <Image
-          src={p.inspiration}
-          style={{
-            width: "100%",
-            height: 180,
-            objectFit: "cover",
-            marginBottom: 8,
-          }}
-        />
-        <Text style={s.small}>Interior inspiration · the Apex collection</Text>
         <Text style={s.body}>
           {d.fittingDate
             ? `Your recorded installation arrangements: ${d.fittingDate}.`
@@ -782,6 +862,7 @@ function Brochure(p: Props) {
       {careGuide.map((group) => (
         <Page size="A4" style={s.page} key={group.id}>
           <Brand />
+          <Motif name={group.id === "cleaning" ? "care" : "cloth"} />
           <Text
             style={[
               s.kicker,
@@ -814,11 +895,6 @@ function Brochure(p: Props) {
               <Text style={[s.body, { marginBottom: 5 }]}>{section.text}</Text>
             </View>
           ))}
-          {group.id === "living" ? (
-            <Text style={[s.small, { marginTop: 18 }]}>
-              Here when you need us: hello@apexcurtains.com · 0800 772 0367
-            </Text>
-          ) : null}
           <Footer job={p.job} draft={p.draft} />
         </Page>
       ))}
@@ -850,66 +926,177 @@ function Brochure(p: Props) {
       ) : null}
       <Page size="A4" style={s.page}>
         <Brand />
-        <Image
-          src={p.inspiration}
-          style={{
-            width: "100%",
-            height: 200,
-            objectFit: "cover",
-            marginBottom: 26,
-          }}
-        />
-        <Text style={s.kicker}>With our thanks</Text>
-        <Text style={s.title}>For the next chapter{"\n"}of your home.</Text>
-        <Text style={s.body}>
-          {d.customerName ? `${d.customerName}, thank you` : "Thank you"} for
-          choosing Apex Curtains. Whether you are finishing another room or
-          returning with a new idea, we would love to help.
+        <Motif name="cloth" />
+        <Text style={s.kicker}>THE LANGUAGE OF FOLDS</Text>
+        <Text style={s.title}>
+          Three headings. Each with its own character.
         </Text>
-        <View style={s.voucher}>
-          <Text
+        <Text style={s.body}>
+          A small guide to the finishing styles on our website. These examples
+          illustrate the headings; your selected style, cloth and colour remain
+          those recorded in your room specification.
+        </Text>
+        {headingGallery.map((item, i) => (
+          <View
+            key={item.id}
+            wrap={false}
             style={{
-              fontFamily: "Times-Roman",
-              fontSize: 57,
-              lineHeight: 1.1,
-              color: C.navy,
+              flexDirection: "row",
+              gap: 20,
+              paddingVertical: 13,
+              borderTopWidth: 0.6,
+              borderColor: C.line,
             }}
           >
-            10% off
+            {p.illustrations?.[item.id] ? (
+              <Image
+                src={p.illustrations[item.id]}
+                style={{
+                  width: 210,
+                  height: 130,
+                  objectFit: "cover",
+                  objectPositionY: item.id === "pencil" ? "70%" : "50%",
+                }}
+              />
+            ) : null}
+            <View style={{ flex: 1, paddingTop: 8 }}>
+              <Text style={s.label}>0{i + 1} / HEADING STUDY</Text>
+              <Text style={[s.h2, { fontSize: 21, marginTop: 6 }]}>
+                {item.name}
+              </Text>
+              <Text style={s.body}>{item.description}</Text>
+            </View>
+          </View>
+        ))}
+        <Link
+          src={`${apexWebsite}/curtain-headings`}
+          style={[s.small, { marginTop: 12, color: C.navy }]}
+        >
+          Explore the heading guide at apexcurtains.com/curtain-headings
+        </Link>
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <Motif name="globe" />
+        <Text style={s.kicker}>MORE TO DISCOVER ONLINE</Text>
+        <Text style={s.title}>Ideas for a home that feels like you.</Text>
+        <Text style={s.body}>
+          A few pages from our website to return to whenever you are gathering
+          ideas. Explore the textures, colours and careful making behind the
+          collection.
+        </Text>
+        {websiteFeatures.map((item) => (
+          <View
+            key={item.id}
+            wrap={false}
+            style={{
+              flexDirection: "row",
+              gap: 20,
+              paddingVertical: 16,
+              borderTopWidth: 0.6,
+              borderColor: C.line,
+            }}
+          >
+            {p.illustrations?.[item.id] ? (
+              <Image
+                src={p.illustrations[item.id]}
+                style={{
+                  width: 205,
+                  height: 125,
+                  objectFit: item.id === "colour" ? "contain" : "cover",
+                }}
+              />
+            ) : null}
+            <View style={{ flex: 1 }}>
+              <Text style={[s.h2, { fontSize: 21, marginTop: 0 }]}>
+                {item.title}
+              </Text>
+              <Text style={[s.body, { fontSize: 9.2 }]}>
+                {item.description}
+              </Text>
+              <Link
+                src={`${apexWebsite}${item.path}`}
+                style={{ fontSize: 8.5, color: C.navy, marginBottom: 6 }}
+              >
+                Visit this page
+              </Link>
+              <Text style={[s.small, { fontSize: 7 }]}>{item.caption}</Text>
+            </View>
+          </View>
+        ))}
+        <Footer job={p.job} draft={p.draft} />
+      </Page>
+      <Page size="A4" style={s.page}>
+        <Brand />
+        <View style={{ alignItems: "center", marginTop: 12 }}>
+          <Motif name="gift" size={30} />
+          <Text style={s.kicker}>A LITTLE SOMETHING FOR ANOTHER ROOM</Text>
+          <Text style={[s.title, { textAlign: "center", fontSize: 36 }]}>
+            Your next beautiful idea.
           </Text>
-          <Text
-            style={{
-              fontFamily: "Times-Roman",
-              fontSize: 24,
-              lineHeight: 1.2,
-              marginBottom: 17,
-            }}
-          >
-            any future order
-          </Text>
-          <Text style={s.label}>Your personal voucher code</Text>
-          <Text
-            style={{
-              fontSize: 14,
-              lineHeight: 1.3,
-              letterSpacing: 1,
-              color: C.navy,
-            }}
-          >
-            APEX10-{p.job.reference.replace(/^APX-/, "")}
+          <Text style={[s.body, { textAlign: "center", marginBottom: 15 }]}>
+            {d.customerName
+              ? `${d.customerName}, this is for you.`
+              : "A personal gift from Apex."}{" "}
+            When another room calls for a little care, we would love to be part
+            of its story.
           </Text>
         </View>
-        <Text style={s.body}>
-          Quote your voucher code when contacting Apex Curtains to arrange your
-          future order. Our team will apply your 10% discount.
-        </Text>
+        <View wrap={false}>
+          {p.illustrations?.voucher ? (
+            <Image
+              src={p.illustrations.voucher}
+              style={{
+                width: "100%",
+                height: d.voucherDetails.length > 250 ? 190 : 260,
+                objectFit: "contain",
+              }}
+            />
+          ) : (
+            <Text style={s.title}>10% off any future order</Text>
+          )}
+          <View
+            style={{
+              alignItems: "center",
+              paddingVertical: 16,
+              borderBottomWidth: 0.6,
+              borderColor: C.gold,
+            }}
+          >
+            <Text style={s.label}>YOUR PERSONAL VOUCHER CODE</Text>
+            <Text style={{ fontSize: 13, letterSpacing: 1, marginTop: 4 }}>
+              APEX10-{p.job.reference.replace(/^APX-/, "")}
+            </Text>
+          </View>
+          <Text style={[s.small, { marginTop: 10, textAlign: "center" }]}>
+            Quote your code when arranging your next order with Apex Curtains.
+          </Text>
+        </View>
         {d.voucherDetails ? (
           <Text style={s.small}>{d.voucherDetails}</Text>
         ) : null}
-        <Text style={s.small}>hello@apexcurtains.com · 0800 772 0367</Text>
-        <Text style={s.small}>
-          Image: interior inspiration from the Apex collection.
-        </Text>
+        <View wrap={false} style={{ alignItems: "center", marginTop: 18 }}>
+          <Motif name="globe" size={22} />
+          <Text
+            style={{
+              fontFamily: "Times-Roman",
+              fontSize: 25,
+              lineHeight: 1.3,
+              color: C.navy,
+              textDecoration: "none",
+              marginBottom: 10,
+            }}
+          >
+            <Link
+              src={apexWebsite}
+              style={{ color: C.navy, textDecoration: "none" }}
+            >
+              www.apexcurtains.com
+            </Link>
+          </Text>
+          <Text style={s.small}>hello@apexcurtains.com · 0800 772 0367</Text>
+        </View>
         <Footer job={p.job} draft={p.draft} />
       </Page>
     </Document>
