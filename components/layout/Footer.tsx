@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { InstallApp } from "@/components/web-app/WebApp";
 
 const exploreLinks = [
   { label: "Room Visualiser", href: "/room-visualiser" },
@@ -183,6 +184,9 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="mt-8">
+          <InstallApp kind="public" />
+        </div>
         <div className="mt-12 grid gap-6 border-t border-white/10 pt-6 text-sm text-white/70 sm:grid-cols-[1fr_auto] sm:items-center">
           <span>
             © {new Date().getFullYear()} Apex Curtains. All rights reserved.

@@ -1,16 +1,23 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./editorial.css";
 import "./collections.css";
 import "./colour-studio.css";
 import "./site-navigation.css";
+import "./web-app.css";
+import { WebAppProvider } from "@/components/web-app/WebApp";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import PublicPresentation from "@/components/layout/PublicPresentation";
 import { SERVICE_AREAS } from "@/lib/service-area";
 
 const SITE_URL = "https://www.apexcurtains.com";
+export const viewport: Viewport = {
+  themeColor: "#1b3430",
+  width: "device-width",
+  initialScale: 1,
+};
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +26,13 @@ const geistSans = Geist({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  manifest: "/web-apps/apex.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "Apex Curtains",
+    statusBarStyle: "default",
+  },
+  icons: { apple: [{ url: "/web-apps/public-180.png", sizes: "180x180" }] },
   title: {
     default:
       "Apex Curtains | Curtains for Apex, Triangular & Architectural Windows",
@@ -88,11 +102,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}
         />
-        <PublicPresentation>
-          <Navbar />
-          {children}
-          <Footer />
-        </PublicPresentation>
+        <WebAppProvider>
+          <PublicPresentation>
+            <Navbar />
+            {children}
+            <Footer />
+          </PublicPresentation>
+        </WebAppProvider>
       </body>
     </html>
   );

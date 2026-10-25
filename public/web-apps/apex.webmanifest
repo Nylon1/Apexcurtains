@@ -1,0 +1,26 @@
+{
+  "id": "/?app=apex-curtains",
+  "name": "Apex Curtains",
+  "short_name": "Apex Curtains",
+  "description": "Curtain inspiration, fabrics, colour ideas and beautifully considered homes.",
+  "lang": "en-GB",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#1b3430",
+  "icons": [
+    {
+      "src": "/web-apps/public-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-apps/public-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

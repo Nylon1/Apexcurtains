@@ -16,6 +16,7 @@ on:
       - "scripts/specialist-guidance-check.mjs"
       - "scripts/visualiser-check.mjs"
       - "scripts/prepare-visualiser-assets.mjs"
+      - "scripts/web-app-check.mjs"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -47,6 +48,9 @@ jobs:
 
       - name: Sitemap serialization checks
         run: npm run test:sitemap
+
+      - name: Installable app and private-cache checks
+        run: npm run test:web-app
 
       - name: Production build
         run: npm run build

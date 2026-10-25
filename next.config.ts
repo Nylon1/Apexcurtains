@@ -4,6 +4,31 @@ import legacyUrls from "./lib/legacy-redirects.json";
 const nextConfig: NextConfig = {
   turbopack: { root: process.cwd() },
   outputFileTracingRoot: process.cwd(),
+  async headers() {
+    return [
+      {
+        source: "/apex-sw.js",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+          {
+            key: "Content-Type",
+            value: "application/javascript; charset=utf-8",
+          },
+          { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+      {
+        source: "/web-apps/:file*.webmanifest",
+        headers: [
+          { key: "Content-Type", value: "application/manifest+json" },
+          { key: "Cache-Control", value: "no-cache" },
+        ],
+      },
+    ];
+  },
   outputFileTracingIncludes: {
     "/api/atelier/**/*": [
       "./public/visualiser/double-pinch-gable-desktop.webp",

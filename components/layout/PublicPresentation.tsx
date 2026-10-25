@@ -20,10 +20,12 @@ export default function PublicPresentation({
     <div
       className={
         path.startsWith("/admin/atelier")
-          ? "atelier-presentation"
-          : operational
-            ? undefined
-            : "public-presentation"
+          ? "admin-presentation atelier-presentation"
+          : path === "/admin" || path.startsWith("/admin/")
+            ? "admin-presentation"
+            : operational
+              ? undefined
+              : "public-presentation"
       }
     >
       {children}

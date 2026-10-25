@@ -1,0 +1,31 @@
+{
+  "id": "/admin?app=apex-admin",
+  "name": "Apex Admin",
+  "short_name": "Apex Admin",
+  "description": "The private Apex workspace for surveys, client collections, gallery projects and advice posts.",
+  "lang": "en-GB",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#1b3430",
+  "icons": [
+    {
+      "src": "/web-apps/admin-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-apps/admin-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "The Atelier", "url": "/admin/atelier" },
+    { "name": "Gallery projects", "url": "/admin/projects" },
+    { "name": "Advice posts", "url": "/admin/posts" }
+  ]
+}

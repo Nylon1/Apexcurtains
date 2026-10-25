@@ -59,9 +59,10 @@ export default function AdminHomePage() {
 
           <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="text-4xl font-semibold">Content Admin</h1>
+              <h1 className="text-4xl font-semibold">Your Apex workspace</h1>
               <p className="mt-3 max-w-2xl text-white/65">
-                Manage gallery projects and advice posts from one place.
+                Manage onsite surveys, client collections, gallery projects and
+                advice posts from one place.
               </p>
               {email && (
                 <p className="mt-2 text-sm text-white/45">
