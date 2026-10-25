@@ -298,7 +298,7 @@ export const installationGuide: BrochureDetail[] = [
   {
     label: "At your handover",
     value:
-      "Ask your fitter to show you how your particular track operates, which panels move and which remain fixed, and how to release the tiebacks and dress the folds. Review the heading, opening and hem position together against your chosen specification.",
+      "Your fitter will show you how to open and close the moving panels gently by hand, which panels remain fixed, and how to release the tiebacks and dress the folds. Review the heading, opening and hem position together against your chosen specification.",
   },
   {
     label: "As the curtains settle",

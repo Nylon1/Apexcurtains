@@ -69,7 +69,7 @@ const cards: Record<
     {
       icon: "track",
       title: "Easy movement",
-      text: "Release tiebacks and use the controls shown at fitting. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels stay fixed. Never force movement, pull the hem or oil the track.",
+      text: "Release tiebacks and gently draw the moving panels by hand, holding the leading edge rather than the hem. If the fabric catches, check for trapped folds or nearby furniture. Some apex panels stay fixed. Never force movement or oil the track.",
     },
     {
       icon: "light",
