@@ -49,7 +49,7 @@ export const careGuide = [
       },
       {
         title: "04 / Creases need patience",
-        text: "Packing and handling creases may soften as the curtains hang. Avoid home steam cleaning or ironing unless Apex has confirmed a suitable method for the complete curtain. Heat and moisture can mark a face fabric or damage a lining. If creases persist, send us a photograph so we can advise.",
+        text: "Packing and handling can leave temporary creases that may soften as the curtains hang. Allow the fabric to fall naturally and gently guide the folds during everyday use. Do not tug the hem or stretch the cloth. Avoid home steaming or ironing; heat and moisture can mark a face fabric or damage a lining.",
       },
     ],
   },
@@ -58,34 +58,38 @@ export const careGuide = [
     eyebrow: "LIVING BEAUTIFULLY WITH YOUR CURTAINS",
     title: "Small questions, thoughtful answers.",
     introduction:
-      "Curtains are made from flexible textiles, so their appearance can change with light, handling and the room around them. Here is what to watch for, and when to ask us for help.",
+      "Curtains are made from flexible textiles, so their appearance can change with light, handling and the room around them. These simple routines help you enjoy their natural character and keep them looking their best.",
     sections: [
       {
-        title: "Settling, changing length or an uneven hem",
-        text: "Fabric can relax after hanging, and humidity or professional cleaning may affect its dimensions. If a hem changes noticeably, a panel hangs unevenly or the lining begins to show, photograph it and contact Apex. Do not trim, stretch or reposition the hooks yourself; we can check the original fitting and specification.",
+        title: "A little time to settle",
+        text: "Fabric can relax after hanging, and humidity or professional cleaning may affect its dimensions. Allow the curtains to hang freely, release tight tiebacks and gently arrange the folds. Check that the cloth is not caught behind furniture. Small changes are part of living with textiles; avoid stretching, trimming the hem or repositioning hooks to chase a temporary change.",
       },
       {
         title: "Texture, sheen and pressure marks",
-        text: "Slubs and slight variations can be part of a natural weave. Velvet and other pile fabrics can look lighter or darker as the light and pile direction change. Avoid rubbing or pressing a patch that looks different. Send a close-up and a wider photograph if you notice a new mark, snag or loose thread; do not pull the thread.",
+        text: "Slubs and slight variations can be part of a natural weave. Velvet and other pile fabrics can look lighter or darker as the light, folds and pile direction change. This is part of the fabric's character. Avoid rubbing or pressing a patch that looks different, and never pull a snag or loose thread.",
       },
       {
         title: "Sunlight, condensation and warmth",
-        text: "Protect the fabric from prolonged strong sunlight where possible, and keep it away from hot surfaces, damp glass and cleaning sprays. Ventilate the room and address condensation promptly. If you see mould or persistent damp, seek advice before cleaning; do not apply bleach to the curtain or lining.",
+        text: "Protect the fabric from prolonged strong sunlight where possible, and keep it away from hot surfaces, damp glass and cleaning sprays. Ventilate the room and wipe condensation from the glass, keeping the curtains dry. Do not apply bleach to the curtain or lining. Any mould or staining should be assessed by a professional curtain cleaner rather than treated at home.",
       },
       {
         title: "Movement, tracks and tiebacks",
-        text: "Use the wand, cord, motor control or leading edge demonstrated at fitting. Release tiebacks before closing, keep the track clear and never force a snagging curtain. Some apex panels are fixed in place. If movement becomes difficult, stop and contact Apex; do not pull on the hem or apply household oil to the track.",
+        text: "Use the wand, cord, motor control or leading edge demonstrated at fitting. Release tiebacks before closing and keep the track clear. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels are fixed in place. Never force movement, pull on the hem or apply household oil to the track.",
       },
       {
         title: "Blackout lining and edge light",
-        text: "Blackout lining limits light passing through the fabric, but light may still enter around the top, sides or centre opening. If the overlap changes or a gap looks unusual, check that tiebacks are released and contact Apex for a fitting review. Do not pin, tape or glue the lining to the window.",
+        text: "Blackout lining limits light passing through the fabric, but some light around the top, sides or centre opening is normal. Release tiebacks, close the moving panels fully and gently arrange the centre overlap. Do not try to move fixed apex panels or pin, tape or glue the lining to the window.",
+      },
+      {
+        title: "A little care, often",
+        text: "Regular care and good maintenance are the key. Follow the gentle dust-removal routine, keep tracks clear and release tiebacks before closing. Guide the folds back into place after use and allow the fabric to hang naturally. Small, consistent habits help preserve the appearance and easy operation of your curtains.",
       },
     ],
   },
 ] as const;
 
 export const careHandover =
-  "Show the customer how to operate the track, release tiebacks and gently dress the folds. Explain Dry clean only, the gentle dust-removal routine, and the complete care guide in their brochure. Refer cleaning, persistent creases or changes in the hang to Apex before treatment or adjustment.";
+  "Show the customer how to operate the track, release tiebacks and gently dress the folds. Explain Dry clean only, the gentle dust-removal routine, and the complete care guide in their brochure. Reassure them about normal settling, handling creases, texture variations and edge light. Demonstrate simple checks for an occasional catch and emphasise regular care, clear tracks and gentle operation without forcing the curtain.";
 
 export function additionalCareWindows<
   T extends { careInstructions: string; careSource: string },
