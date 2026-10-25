@@ -74,7 +74,7 @@ export const careGuide = [
       },
       {
         title: "Movement, tracks and tiebacks",
-        text: "Use the wand, cord, motor control or leading edge demonstrated at fitting. Release tiebacks before closing and keep the track clear. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels are fixed in place. Never force movement, pull on the hem or apply household oil to the track.",
+        text: "Open and close the moving curtain panels manually by hand, holding the leading edge rather than pulling on the hem. Release tiebacks before closing and keep the track clear. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels are fixed in place and should not be moved. Never force movement or apply household oil to the track.",
       },
       {
         title: "Blackout lining and edge light",
@@ -89,7 +89,7 @@ export const careGuide = [
 ] as const;
 
 export const careHandover =
-  "Show the customer how to operate the track, release tiebacks and gently dress the folds. Explain Dry clean only, the gentle dust-removal routine, and the complete care guide in their brochure. Reassure them about normal settling, handling creases, texture variations and edge light. Demonstrate simple checks for an occasional catch and emphasise regular care, clear tracks and gentle operation without forcing the curtain.";
+  "Demonstrate opening and closing moving panels gently by hand, releasing tiebacks and dressing the folds. Identify fixed apex panels. Explain Dry clean only and the brochure's care guide. Reassure the customer about normal settling, creases, texture and edge light. Show checks for occasional catches and stress regular dusting, clear tracks and gentle movement.";
 
 export function additionalCareWindows<
   T extends { careInstructions: string; careSource: string },
