@@ -13,6 +13,7 @@
     "test:sitemap": "node --test scripts/sitemap-check.mjs",
     "test:redirects": "node --test scripts/legacy-redirect-check.mjs",
     "test:atelier": "tsx --test scripts/atelier-check.test.ts",
+    "test:web-app": "node --test scripts/web-app-check.mjs",
     "seo:crawl": "node scripts/public-seo-audit.mjs"
   },
   "dependencies": {

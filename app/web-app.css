@@ -1,0 +1,257 @@
+.admin-presentation > header,
+.admin-presentation > footer {
+  display: none !important;
+}
+.apx-admin-shell {
+  min-height: 100svh;
+  background: #f7f5f0;
+}
+.apx-admin-chrome {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+}
+.apx-admin-shell:has(.at-sidebar) .apx-admin-chrome {
+  margin-left: 238px;
+}
+.apx-admin-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  padding: max(12px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right)) 12px
+    max(24px, env(safe-area-inset-left));
+  color: #f7f5f0;
+  background: #1b3430;
+  border-bottom: 1px solid #c5ab7355;
+}
+.apx-admin-name {
+  font:
+    22px Georgia,
+    serif;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+}
+.apx-admin-name span {
+  font:
+    9px Arial,
+    sans-serif;
+  letter-spacing: 0.16em;
+  color: #d7c397;
+}
+.apx-admin-bar nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.apx-admin-bar nav a {
+  font-size: 12px;
+  padding: 12px 10px;
+  color: #eee9df;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.apx-admin-bar nav a[aria-current="page"] {
+  background: #ffffff17;
+  color: #e2ca98;
+}
+.apx-admin-bar .apx-install {
+  margin-left: auto;
+}
+.apx-install-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 15px;
+  border: 1px solid #c5ab7370;
+  border-radius: 6px;
+  background: #ffffff08;
+  color: #f7f5f0;
+  font:
+    13px/1.4 var(--font-geist-sans),
+    Arial,
+    sans-serif;
+  cursor: pointer;
+}
+.apx-install-trigger:hover {
+  background: #ffffff18;
+}
+.apx-install-dialog {
+  width: min(560px, calc(100% - 28px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #c4b99e;
+  border-radius: 16px;
+  background: #f7f5f0;
+  color: #1b3430;
+  box-shadow: 0 20px 100px #0005;
+  font:
+    14px/1.65 var(--font-geist-sans),
+    Arial,
+    sans-serif;
+  overflow-y: auto;
+  text-align: left;
+}
+.apx-install-dialog::backdrop {
+  background: #102b3bd1;
+}
+html:has(.apx-install-dialog[open]) {
+  overflow: hidden;
+}
+.apx-install-dialog h2 {
+  font:
+    32px/1.15 Georgia,
+    serif;
+  margin: 10px 0 16px;
+  letter-spacing: -0.025em;
+}
+.apx-install-dialog p {
+  margin: 0 0 14px;
+}
+.apx-install-dialog .apx-install-eyebrow {
+  margin: 18px 0 0;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a673f;
+}
+.apx-install-icon {
+  border-radius: 14px;
+  display: block;
+}
+.apx-install-close {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  color: #1b3430;
+  border: 0;
+  cursor: pointer;
+}
+.apx-install-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  margin: 18px 0;
+  border: 0;
+  border-radius: 6px;
+  background: #1b3430;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.apx-install-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.apx-install-steps {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+.apx-install-steps section {
+  background: #e6eadf;
+  padding: 16px;
+  border-left: 3px solid #a48b5f;
+}
+.apx-install-steps h3 {
+  font:
+    20px Georgia,
+    serif;
+  margin: 0 0 8px;
+}
+.apx-install-steps p {
+  margin: 0;
+  font-size: 13px;
+}
+.apx-install-dialog .apx-install-online {
+  font-size: 12px;
+  color: #52645a;
+  margin: 0;
+}
+.apx-install-status {
+  padding-top: 12px;
+  font-size: 13px;
+}
+.apx-connection {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 24px;
+  color: #634619;
+  background: #fff1d4;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.apx-connection svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.apx-connection p {
+  margin: 0;
+}
+.apx-admin-bar a:focus-visible,
+.apx-install button:focus-visible {
+  outline: 2px solid #b89c61;
+  outline-offset: 4px;
+}
+@media (max-width: 1150px) {
+  .apx-admin-shell:has(.at-sidebar) .apx-admin-chrome {
+    margin-left: 205px;
+  }
+}
+@media (max-width: 680px) {
+  .apx-admin-shell:has(.at-sidebar) .apx-admin-chrome {
+    margin-left: 0;
+  }
+  .apx-admin-bar {
+    gap: 8px 12px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .apx-admin-bar nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .apx-admin-bar nav a {
+    padding: 10px 8px;
+  }
+  .apx-install-trigger {
+    font-size: 12px;
+    padding: 9px 12px;
+  }
+  .apx-install-dialog {
+    padding: 24px 20px;
+  }
+  .apx-install-dialog h2 {
+    font-size: 29px;
+  }
+  .atelier input,
+  .atelier select,
+  .atelier textarea {
+    font-size: 16px;
+  }
+}
+@media (display-mode: standalone) {
+  .apx-install {
+    display: none;
+  }
+}
+@media print {
+  .apx-admin-chrome,
+  .apx-install {
+    display: none;
+  }
+}
