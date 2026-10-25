@@ -47,39 +47,39 @@ const cards: Record<
     {
       icon: "clock",
       title: "04 / Give creases time",
-      text: "Handling creases may soften as the curtains hang. Do not steam or iron without Apex confirming a method for the complete curtain: heat and moisture can damage cloth or lining. Send us a photograph if creases persist.",
+      text: "Packing and handling can leave temporary creases. Allow the curtains to hang naturally and gently guide the folds during everyday use. Avoid tugging, home steaming or ironing; heat and moisture can damage the cloth or lining.",
     },
   ],
   living: [
     {
       icon: "clock",
-      title: "A changing hem",
-      text: "Fabric can relax; humidity and cleaning can affect length. Photograph an uneven hem or showing lining and contact Apex. Do not trim, stretch or move hooks yourself.",
+      title: "A little time to settle",
+      text: "Fabric can relax after hanging, and humidity can affect its length. Let the curtains hang freely, release tight tiebacks and gently arrange the folds. Small changes are part of living with textiles; avoid stretching or trimming the hem.",
     },
     {
       icon: "cloth",
       title: "Texture and sheen",
-      text: "Slubs and pile shading can be natural. Do not rub or press a different-looking patch or pull loose threads. Send a close-up and wider photo of new marks or snags.",
+      text: "Small slubs and variations can be part of the weave. Pile fabrics may look lighter or darker as the light and folds change. Enjoy this natural character; avoid rubbing pressure marks or pulling loose threads.",
     },
     {
       icon: "sun",
       title: "Light, warmth and damp",
-      text: "Limit prolonged strong sun. Keep cloth away from heat, damp glass and sprays. Ventilate and address condensation. Ask for advice about mould; never apply bleach.",
+      text: "Limit prolonged strong sun and keep the cloth clear of heaters, damp glass and cleaning sprays. Ventilate the room and wipe condensation from the glass, keeping the curtains dry. Never apply bleach to the fabric or lining.",
     },
     {
       icon: "track",
       title: "Easy movement",
-      text: "Use the controls shown at fitting. Release tiebacks and keep tracks clear. Some apex panels stay fixed. Stop if a curtain snags; contact Apex. Never pull the hem or oil the track.",
+      text: "Release tiebacks and use the controls shown at fitting. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels stay fixed. Never force movement, pull the hem or oil the track.",
     },
     {
       icon: "light",
       title: "Light around the edges",
-      text: "Blackout lining reduces light through the cloth; edges can still admit light. For unusual gaps, release tiebacks and ask Apex to review. Never pin, tape or glue lining to glass.",
+      text: "Blackout lining reduces light through the cloth; some light at the top, sides or centre is normal. Release tiebacks, close the moving panels fully and gently arrange the centre overlap. Never pin, tape or glue lining to the glass.",
     },
     {
       icon: "home",
-      title: "We are here to help",
-      text: "Keep your collection reference and fabric details to hand. A full-window photo and a close-up help us understand what you are seeing. Contact hello@apexcurtains.com or 0800 772 0367.",
+      title: "A little care, often",
+      text: "Regular care and good maintenance are the key. Dust gently, keep tracks clear and release tiebacks before closing. Guide the folds back into place after use and let the fabric hang naturally. Small, consistent habits keep your curtains looking their best.",
     },
   ],
 };
@@ -91,6 +91,6 @@ export const brochureCareGuide = careGuide.map((group) => ({
       ? "A few gentle habits keep your collection looking beautifully at home."
       : group.id === "dressing"
         ? "Four gentle steps to a beautiful fall. Follow the heading, and let the fabric lead."
-        : "A quick visual guide to everyday changes, with Apex here when you need us.",
+        : "Natural changes, gentle routines and simple ways to keep your curtains looking their best.",
   sections: cards[group.id],
 }));

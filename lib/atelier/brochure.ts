@@ -303,7 +303,7 @@ export const installationGuide: BrochureDetail[] = [
   {
     label: "As the curtains settle",
     value:
-      "Allow the fabric to hang naturally and follow the dressing guide in this collection. If the hem, folds or movement need attention, send Apex a full-window photograph and a close-up, quoting your collection reference. Keep this booklet with your fabric details for future advice.",
+      "Allow the fabric to hang naturally and follow the dressing guide in this collection. Gentle daily use helps the folds settle; release tiebacks and keep the cloth clear of nearby furniture. Keep this booklet with your fabric details for everyday care and future reference.",
   },
 ];
 
