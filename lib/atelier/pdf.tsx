@@ -1611,7 +1611,7 @@ function Fitter(p: Props) {
             />
             <Field
               label="Access and fixings"
-              value={`${w.accessHeightMm} mm working height; track height ${w.trackHeightMm || "confirm onsite"} mm; ${w.mountingSurface}`}
+              value={`${w.accessHeightMm} mm working height; ${w.mountingSurface}`}
             />
             <Field
               label="Curtains"

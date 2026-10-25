@@ -296,9 +296,6 @@ export default function WindowEditor({
               ])
             )}
             {fields([
-              ["trackHeightMm", "Track mounting height", "number"],
-              ["returnsMm", "Total returns allowance", "number"],
-              ["overlapMm", "Total overlap allowance", "number"],
               [
                 "lengthStyle",
                 "Length finish",
