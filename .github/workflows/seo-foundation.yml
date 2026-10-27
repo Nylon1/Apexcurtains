@@ -17,6 +17,7 @@ on:
       - "scripts/visualiser-check.mjs"
       - "scripts/prepare-visualiser-assets.mjs"
       - "scripts/web-app-check.mjs"
+      - "scripts/atelier-check.test.ts"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -51,6 +52,9 @@ jobs:
 
       - name: Installable app and private-cache checks
         run: npm run test:web-app
+
+      - name: Atelier material calculations and release validation
+        run: npm run test:atelier
 
       - name: Production build
         run: npm run build

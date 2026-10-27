@@ -338,7 +338,7 @@ export default function WindowEditor({
                   "fabricWidthMm",
                   "Usable fabric width",
                   "number",
-                  "After selvedges; seam allowance is deducted separately.",
+                  "137 cm = 1370 mm. Use the roll width for ordering; no further seam deduction is applied.",
                 ],
                 [
                   "heading",
@@ -447,8 +447,18 @@ export default function WindowEditor({
                   hint="26 cm = 260 mm total extra for every fabric width, including heading and bottom hem. Added to the longest finished drop before pattern matching."
                 />
                 {fields([
-                  ["sideHemMm", "Each outside side hem", "number"],
-                  ["seamMm", "Each joining seam", "number"],
+                  [
+                    "sideHemMm",
+                    "Each outside side hem",
+                    "number",
+                    "Making note only; not added to the width calculation.",
+                  ],
+                  [
+                    "seamMm",
+                    "Each joining seam",
+                    "number",
+                    "Making note only; not deducted from the usable roll width.",
+                  ],
                   ["extraFabricMetres", "Additional fabric metres", "number"],
                   ["extraLiningMetres", "Additional lining metres", "number"],
                 ])}
@@ -474,7 +484,7 @@ export default function WindowEditor({
                         "repeatMm",
                         "Vertical repeat",
                         "number",
-                        "Leave blank if unknown; release waits for confirmation.",
+                        "Enter millimetres: 47.7 cm = 477 mm. Leave blank if unknown; release waits for confirmation.",
                       ],
                       ["horizontalRepeatMm", "Horizontal repeat", "number"],
                       ["motifAllowanceMm", "Initial motif allowance", "number"],
@@ -1081,7 +1091,11 @@ export default function WindowEditor({
             </small>
           ) : (
             <small>
-              {q.widths} fabric widths · {q.cutMm} mm cut drop
+              {q.widths} fabric widths · {Number(q.cutMm.toFixed(2))} mm cut
+              drop
+              <br />
+              Window width × fullness ÷ usable roll width. Fractions below 0.4
+              round down; 0.4 and above round up. Minimum 1 width per window.
             </small>
           )}
         </div>

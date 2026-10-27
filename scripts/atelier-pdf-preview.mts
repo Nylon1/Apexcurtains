@@ -19,6 +19,32 @@ async function main() {
   const shapes = process.argv.includes("--shapes");
   const long = process.argv.includes("--long");
   const multi = process.argv.includes("--multi");
+  const widthCheck = process.argv.includes("--width-check");
+  if (widthCheck) {
+    const first = job.data.windows[0];
+    job.data.windows = [
+      [1410, 2140, 1615, 47.7],
+      [1370, 2090, 1615, 477],
+      [1360, 1470, 1020, 477],
+    ].map(([widthMm, longDropMm, sideDrop, repeatMm], index) => ({
+      ...first,
+      id: `width-check-${index}`,
+      name: `Allowance example ${index + 1}`,
+      widthMm,
+      longDropMm,
+      leftDropMm: sideDrop,
+      rightDropMm: sideDrop,
+      fabricWidthMm: 1370,
+      liningWidthMm: 1370,
+      pattern: "straight" as const,
+      repeatMm,
+      heading: "Pencil pleat",
+      fabricCode:
+        "https://example.com/fabric-library?view=browse-fabrics&query=illustrative-fabric&page=1",
+      designNotes:
+        "Illustrative calculation check. Pattern repeats are intentionally different to verify the entered values are preserved.",
+    }));
+  }
   if (multi) {
     const [apex, standard] = job.data.windows;
     job.data.windows = Array.from({ length: 6 }, (_, i) => ({
@@ -100,7 +126,7 @@ async function main() {
       draft: true,
     });
     await writeFile(
-      `${out}/${multi ? "multi-" : long ? "long-" : shapes ? "shapes-" : ""}${kind}.pdf`,
+      `${out}/${widthCheck ? "width-check-" : multi ? "multi-" : long ? "long-" : shapes ? "shapes-" : ""}${kind}.pdf`,
       bytes,
     );
     console.log(`${kind}: ${bytes.length} bytes`);
