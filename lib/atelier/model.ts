@@ -387,6 +387,15 @@ export type SurveyCheck = {
   section?: WindowSection;
 };
 
+function orderWidths(windowWidth: number, fullness: number, rollWidth: number) {
+  if (!(windowWidth > 0) || !(rollWidth > 0)) return 0;
+  const required = (windowWidth * fullness) / rollWidth;
+  const whole = Math.floor(required);
+  // Compare against the threshold directly: 2.4 - 2 is slightly less than
+  // 0.4 in floating-point arithmetic. A valid window always needs a width.
+  return Math.max(1, required >= whole + 0.4 ? whole + 1 : whole);
+}
+
 export function calculateWindow(w: SurveyWindow) {
   w = normaliseGeometry(w);
   const issues: string[] = [];
@@ -395,14 +404,10 @@ export function calculateWindow(w: SurveyWindow) {
     issues.push(message);
     checks.push({ section, message });
   };
-  const effectiveWidth = w.fabricWidthMm - 2 * w.seamMm;
-  const flatWidthPerPanel =
-    ((w.widthMm + w.returnsMm + w.overlapMm) / w.panelCount) * w.fullness +
-    2 * w.sideHemMm;
-  const widths =
-    effectiveWidth > 0 && w.widthMm > 0
-      ? Math.ceil(flatWidthPerPanel / effectiveWidth) * w.panelCount
-      : 0;
+  // Apex ordering method: window width × fullness ÷ usable roll width.
+  // Round the whole window once at 0.4; the workroom can split widths.
+  // Side hems/seams and legacy returns/overlap remain making notes only.
+  const widths = orderWidths(w.widthMm, w.fullness, w.fabricWidthMm);
   const hemAllowanceMm =
     w.hemAllowanceMm ?? w.topAllowanceMm + w.bottomAllowanceMm;
   const baseCut = w.longDropMm + hemAllowanceMm;
@@ -410,7 +415,7 @@ export function calculateWindow(w: SurveyWindow) {
     w.pattern === "plain"
       ? baseCut
       : w.repeatMm > 0
-        ? Math.ceil(baseCut / w.repeatMm) * w.repeatMm
+        ? Number((Math.ceil(baseCut / w.repeatMm) * w.repeatMm).toFixed(6))
         : 0;
   const manual =
     w.pattern === "half-drop" ||
@@ -440,10 +445,9 @@ export function calculateWindow(w: SurveyWindow) {
       ((manual ? w.manualFabricMetres : baseMetres) + w.extraFabricMetres) *
         100,
     ) / 100;
-  const liningEffective = w.liningWidthMm - 2 * w.seamMm;
   const liningWidths =
-    w.lining !== "none" && liningEffective > 0 && w.widthMm > 0
-      ? Math.ceil(flatWidthPerPanel / liningEffective) * w.panelCount
+    w.lining !== "none"
+      ? orderWidths(w.widthMm, w.fullness, w.liningWidthMm)
       : 0;
   const { liningDropMm, liningAllowanceMm } = liningMeasurements(w);
   const liningCutMm = liningDropMm + liningAllowanceMm;

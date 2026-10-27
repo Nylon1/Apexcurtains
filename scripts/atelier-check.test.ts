@@ -172,7 +172,7 @@ test("Other shape preserves typed measurements without inventing a diagram or sl
   assert.deepEqual(windowGeometry(w).issues, []);
   assert.equal(windowGeometry(w).leftSlant, null);
   assert.equal(windowOutline(w), null);
-  assert.equal(calculateWindow(w).fabricMetres, 23.16);
+  assert.equal(calculateWindow(w).fabricMetres, 19.3);
   assert.equal(
     jobDataSchema.parse({ ...data, windows: [w] }).windows[0]
       .otherShapeMeasurements,
@@ -363,13 +363,96 @@ test("Forest track illustrations follow the chosen system and legacy tracks rema
   );
 });
 
+test("whole-window widths use Apex's 0.4 threshold without rounding each panel", () => {
+  const w = {
+    ...sampleJob().data.windows[0],
+    fabricWidthMm: 1370,
+    liningWidthMm: 1370,
+  };
+  for (const [widthMm, expected] of [
+    [1410, 2],
+    [1370, 2],
+    [1360, 2],
+    [1637.15, 2],
+    [1644, 3],
+    [2330, 4],
+    [2328, 3],
+    [3014, 5],
+  ] as const) {
+    for (const panelCount of [1, 2] as const) {
+      const q = calculateWindow({ ...w, widthMm, panelCount });
+      assert.equal(
+        q.widths,
+        expected,
+        `window ${widthMm}, panels ${panelCount}`,
+      );
+      assert.equal(q.liningWidths, expected);
+    }
+  }
+  // Exact thresholds at 1.4, 2.4, 3.4 and 4.4 must round up, not be lost to
+  // floating-point subtraction. Values just below remain on the lower width.
+  for (const whole of [1, 2, 3, 4]) {
+    const thresholdWidth = ((whole + 0.4) * 1000) / 2;
+    assert.equal(
+      calculateWindow({ ...w, widthMm: thresholdWidth, fabricWidthMm: 1000 })
+        .widths,
+      whole + 1,
+    );
+    assert.equal(
+      calculateWindow({
+        ...w,
+        widthMm: thresholdWidth - 0.01,
+        fabricWidthMm: 1000,
+      }).widths,
+      whole,
+    );
+  }
+  assert.equal(calculateWindow({ ...w, widthMm: 100 }).widths, 1);
+  assert.equal(calculateWindow({ ...w, widthMm: 0 }).widths, 0);
+  assert.equal(calculateWindow({ ...w, fabricWidthMm: 0 }).widths, 0);
+  assert.equal(calculateWindow({ ...w, widthMm: 1410, fullness: 3 }).widths, 3);
+  assert.equal(
+    calculateWindow({
+      ...w,
+      widthMm: 1410,
+      returnsMm: 200,
+      overlapMm: 100,
+      seamMm: 50,
+      sideHemMm: 100,
+    }).widths,
+    2,
+  );
+});
+
+test("137 cm roll examples retain longest drops, 26 cm hems and entered pattern repeats", () => {
+  const w = {
+    ...sampleJob().data.windows[0],
+    type: "standard" as const,
+    fabricWidthMm: 1370,
+    liningWidthMm: 1370,
+    pattern: "straight" as const,
+  };
+  for (const [widthMm, longDropMm, repeatMm, expectedCut, expectedMetres] of [
+    [1410, 2140, 47.7, 2432.7, 4.87],
+    [1410, 2140, 477, 2862, 5.73],
+    [1370, 2090, 477, 2385, 4.77],
+    [1360, 1470, 477, 1908, 3.82],
+  ]) {
+    const q = calculateWindow({ ...w, widthMm, longDropMm, repeatMm });
+    assert.equal(q.widths, 2);
+    assert.equal(q.cutMm, expectedCut);
+    assert.equal(q.fabricMetres, expectedMetres);
+    assert.equal(q.liningMetres, expectedMetres);
+  }
+});
+
 test("apex material uses a full rectangle at the longest drop", () => {
   const w = sampleJob().data.windows[0];
   const q = calculateWindow(w);
-  assert.equal(q.widths, 6);
+  assert.equal(q.widths, 5);
   assert.equal(q.cutMm, 3860);
-  assert.equal(q.fabricMetres, 23.16);
-  assert.equal(q.liningMetres, 23.16);
+  assert.equal(q.fabricMetres, 19.3);
+  assert.equal(q.liningMetres, 19.3);
   assert.equal(
     calculateWindow({ ...w, leftDropMm: 1000, rightDropMm: 1500 }).fabricMetres,
     q.fabricMetres,
@@ -568,7 +651,7 @@ test("straight repeats round every cut up and include extra allowances", () => {
   };
   const q = calculateWindow(w);
   assert.equal(q.cutMm, 4480);
-  assert.equal(q.fabricMetres, 28.18);
+  assert.equal(q.fabricMetres, 23.7);
   assert.ok(
     calculateWindow({ ...w, repeatMm: 0 }).issues.some((i) =>
       i.includes("repeat"),
@@ -608,13 +691,13 @@ test("lining cutting uses its roll width while ordering matches curtain fabric i
     liningWidthMm: 2800,
   };
   const q = calculateWindow(w);
-  assert.equal(q.liningWidths, 4);
+  assert.equal(q.liningWidths, 2);
   assert.equal(q.liningDropMm, 3600);
   assert.equal(q.liningAllowanceMm, 260);
   assert.equal(q.liningCutMm, 3860);
-  assert.equal(q.liningCuttingMetres, 15.44);
+  assert.equal(q.liningCuttingMetres, 7.72);
   assert.equal(q.liningMetres, q.fabricMetres);
-  assert.equal(q.liningMetres, 26.88);
+  assert.equal(q.liningMetres, 22.4);
   assert.equal(calculateWindow({ ...w, lining: "none" }).liningMetres, 0);
 });
 
@@ -657,14 +740,11 @@ test("lining follows changed curtain drop and allowance, checks narrow rolls and
     ],
   });
   assert.equal(calculateWindow(legacy.windows[0]).liningCutMm, 3100);
-  assert.equal(
-    calculateWindow(legacy.windows[0]).liningMetres,
-    Math.ceil(18.6 * 100) / 100,
-  );
+  assert.equal(calculateWindow(legacy.windows[0]).liningMetres, 15.5);
   const draft = applyDraftAllowances(legacy);
   assert.equal(draft.windows[0].liningDropMm, 3000);
   assert.equal(draft.windows[0].liningAllowanceMm, 300);
-  assert.equal(calculateWindow(draft.windows[0]).liningMetres, 19.8);
+  assert.equal(calculateWindow(draft.windows[0]).liningMetres, 16.5);
   assert.equal(legacy.windows[0].liningDropMm, 2950);
 });
 test("an oversized width blocks navigation with a usable units message", () => {

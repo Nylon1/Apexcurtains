@@ -1329,8 +1329,10 @@ function Workroom(p: Props) {
         ))}
         <Text style={[s.small, { marginTop: 16 }]}>
           Confirm supplier order increments, required batch and availability
-          before ordering. Full-width panel allocation is conservative; any
-          alternative layout must be reviewed by the workroom.
+          before ordering. Widths = window width × fullness ÷ usable roll width,
+          calculated once per window. Fractions below 0.4 round down; 0.4 and
+          above round up, with a minimum of one width. Share widths between
+          panels as required by the workroom cutting plan.
         </Text>
         <View wrap={false}>
           <Text style={s.h2}>Standard curtain care</Text>
@@ -1365,8 +1367,8 @@ function Workroom(p: Props) {
             `${w.pattern}; vertical repeat ${w.repeatMm} mm; horizontal ${w.horizontalRepeatMm} mm; motif allowance ${w.motifAllowanceMm} mm${q.manual ? ". Use the approved matching plan in the reference notes." : ""}`,
           ],
           [
-            "Width allowances",
-            `Side hems ${w.sideHemMm} mm; seams ${w.seamMm} mm; returns ${w.returnsMm} mm; overlap ${w.overlapMm} mm`,
+            "Making notes",
+            `Side hems ${w.sideHemMm} mm; seams ${w.seamMm} mm. Not added to width quantities.${w.returnsMm || w.overlapMm ? ` Recorded returns ${w.returnsMm} mm; overlap ${w.overlapMm} mm (not included).` : ""}`,
           ],
           [
             "Length & lining",
@@ -1402,7 +1404,7 @@ function Workroom(p: Props) {
                   flexDirection: "row",
                   gap: 14,
                   marginTop: 8,
-                  marginBottom: 20,
+                  marginBottom: 12,
                 }}
               >
                 {[
@@ -1431,7 +1433,7 @@ function Workroom(p: Props) {
                     key={item.label}
                     style={{
                       flex: 1,
-                      padding: 17,
+                      padding: 13,
                       backgroundColor: "#F4F3EF",
                       borderTopWidth: 2,
                       borderColor: C.gold,
@@ -1456,10 +1458,17 @@ function Workroom(p: Props) {
                         marginBottom: 8,
                       }}
                     >
-                      {item.widths} widths × {item.cut} mm
+                      {item.widths} widths × {Number(item.cut.toFixed(2))} mm
                     </Text>
                     <Text style={{ fontSize: 9, lineHeight: 1.6 }}>
                       {`Roll width: ${item.roll} mm\nFinished drop: ${item.drop} mm\nTop + bottom allowance: ${item.allowance} mm\nExtra ordered: ${item.extra} m`}
+                    </Text>
+                    <Text
+                      style={{ fontSize: 8, lineHeight: 1.4, marginTop: 6 }}
+                    >
+                      {item.roll > 0
+                        ? `${w.widthMm} × ${w.fullness} ÷ ${item.roll} = ${((w.widthMm * w.fullness) / item.roll).toFixed(3)} widths before rounding`
+                        : "Enter the usable roll width."}
                     </Text>
                   </View>
                 ))}
@@ -1468,14 +1477,16 @@ function Workroom(p: Props) {
                 {w.automaticLining
                   ? `Lining order matches face fabric${w.extraLiningMetres ? " plus the recorded extra lining" : ""}. Lining cutting requirement: ${q.liningCuttingMetres.toFixed(2)} m. `
                   : ""}
-                Use the longest drop across the full rectangle. Do not deduct
-                apex offcuts. Pattern cuts include the recorded matching
-                allowance.
+                Width fractions below 0.4 round down; 0.4 and above round up.
+                Quantities are per window, shared between panels. Every cut uses
+                the longest drop plus hems and any pattern allowance.
               </Text>
               <Text style={[s.h2, { fontSize: 18, marginTop: 12 }]}>
                 01 / Window measurements
               </Text>
-              <Text style={s.body}>{geometryMeasurements(w)}.</Text>
+              <Text style={[s.body, { marginBottom: 6 }]}>
+                {geometryMeasurements(w)}.
+              </Text>
               <Text style={s.small}>{geometrySlants(w)}</Text>
               <Text style={[s.h2, { fontSize: 18, marginTop: 10 }]}>
                 02 / Making & finishing
@@ -1486,7 +1497,7 @@ function Workroom(p: Props) {
                   wrap={false}
                   style={{
                     flexDirection: "row",
-                    paddingVertical: 8,
+                    paddingVertical: 6,
                     borderBottomWidth: 0.5,
                     borderColor: C.line,
                   }}
@@ -1494,8 +1505,19 @@ function Workroom(p: Props) {
                   <Text style={{ width: 120, fontSize: 9, color: C.muted }}>
                     {label}
                   </Text>
-                  <Text style={{ flex: 1, fontSize: 10, lineHeight: 1.45 }}>
-                    {value}
+                  <Text style={{ flex: 1, fontSize: 9.5, lineHeight: 1.35 }}>
+                    {label === "Fabric" &&
+                    /^https?:\/\//i.test(w.fabricCode) ? (
+                      <>
+                        {w.supplier} · {w.fabric} · {w.colour}
+                        {"\n"}
+                        <Link src={w.fabricCode} style={{ color: C.forest }}>
+                          View supplier fabric reference
+                        </Link>
+                      </>
+                    ) : (
+                      value
+                    )}
                   </Text>
                 </View>
               ))}
