@@ -3,7 +3,7 @@ import Link from "next/link";
 import { categories, HEALTHCARE_ROOT } from "@/lib/healthcare/catalogue";
 import { sectors, moreSettings, serviceSteps } from "@/lib/healthcare/content";
 import SettingPhotography, { PhotoCredit, SettingImage } from "@/components/healthcare/SettingPhotography";
-import { sectorPhotographs } from "@/lib/healthcare/settings-photography";
+import { sectionPhotographs, sectorPhotographs } from "@/lib/healthcare/settings-photography";
 import {
   Breadcrumbs,
   HealthcareCta,
@@ -65,30 +65,39 @@ export default function Page() {
           </p>
         </div>
         <div className="hc-category-grid">
-          {categories.map((c, i) => (
-            <Link
-              className="hc-category"
-              key={c.id}
-              href={`${HEALTHCARE_ROOT}/${c.slug}`}
-            >
-              <span className="hc-number">0{i + 1}</span>
-              <p className="hc-eyebrow">{c.supplier}</p>
-              <h3>{c.title}</h3>
-              <p>{c.text}</p>
-              <span className="hc-text-link">
-                Explore{" "}
-                {i === 0
-                  ? "curtains"
-                  : i === 1
-                    ? "tracks"
-                    : i === 2
-                      ? "blinds"
-                      : "disposables"}{" "}
-                →
-              </span>
-            </Link>
-          ))}
+          {categories.map((c, i) => {
+            const photo = sectionPhotographs[c.slug];
+            return (
+              <article className="hc-category" key={c.id}>
+                <Link href={`${HEALTHCARE_ROOT}/${c.slug}`}>
+                  <SettingImage photo={photo} sizes="(max-width: 530px) 100vw, (max-width: 1100px) 50vw, 25vw" />
+                  <div className="hc-category-copy">
+                    <span className="hc-number">0{i + 1}</span>
+                    <p className="hc-eyebrow">{c.supplier}</p>
+                    <h3>{c.title}</h3>
+                    <p>{c.text}</p>
+                    <span className="hc-text-link">
+                      Explore{" "}
+                      {i === 0
+                        ? "curtains"
+                        : i === 1
+                          ? "tracks"
+                          : i === 2
+                            ? "blinds"
+                            : "disposables"}{" "}
+                      →
+                    </span>
+                  </div>
+                </Link>
+                <PhotoCredit photo={photo} />
+              </article>
+            );
+          })}
         </div>
+        <p className="hc-small hc-category-note">
+          Supplier and licensed setting photographs are illustrative. They are
+          not Apex installations or identified examples of every product shown.
+        </p>
       </section>
       <section className="hc-fabric-feature">
         <div className="hc-texture-panel">
