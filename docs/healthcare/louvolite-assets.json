@@ -1,0 +1,265 @@
+{
+  "supplier": "Louvolite",
+  "range": "Ex-Lite",
+  "verifiedAt": "2026-11-11",
+  "rights": {
+    "status": "owner-attested",
+    "basis": "Apex owner confirmed existing written permission to republish supplier product images on 2026-11-11.",
+    "agreementLocation": null
+  },
+  "technicalSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+  "colourNaming": "Website Healthcare Blue/Healthcare Green correspond to Blue/Green in the current technical card.",
+  "notes": [
+    "Roll widths describe fabric supply, not maximum finished blind sizes.",
+    "Roomset is supplier photography and must not be represented as an Apex-completed installation."
+  ],
+  "assets": [
+    {
+      "name": "Ex-Lite Anthracite",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_ANTHRACITE-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-anthracite/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022299A2000",
+        "2500": "1022299A2500",
+        "3000": "1022299A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-anthracite.webp",
+      "alt": "Ex-Lite Anthracite fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 45280
+    },
+    {
+      "name": "Ex-Lite Bisque",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_BISQUE-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-bisque/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022234A2000",
+        "2500": "1022234A2500",
+        "3000": "1022234A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-bisque.webp",
+      "alt": "Ex-Lite Bisque fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 39430
+    },
+    {
+      "name": "Ex-Lite Black",
+      "sourceURL": "https://www.louvolite.com/wp-content/uploads/EX-LITE_BLACK-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-black/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "102299A2000",
+        "2500": "102299A2500",
+        "3000": "102299A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-black.webp",
+      "alt": "Ex-Lite Black fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 21188
+    },
+    {
+      "name": "Ex-Lite Canvas",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_CANVAS-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-canvas/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022412A2000",
+        "2500": "1022412A2500",
+        "3000": "1022412A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-canvas.webp",
+      "alt": "Ex-Lite Canvas fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 38110
+    },
+    {
+      "name": "Ex-Lite Cream",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_CREAM-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-cream/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "102212A2000",
+        "2500": "102212A2500",
+        "3000": "102212A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-cream.webp",
+      "alt": "Ex-Lite Cream fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 63764
+    },
+    {
+      "name": "Ex-Lite Healthcare Blue",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_BO_HEALTHCARE_BLUE-rotated.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-healthcare-blue-2/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022172A2000",
+        "2500": "1022172A2500",
+        "3000": "1022172A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-healthcare-blue.webp",
+      "alt": "Ex-Lite Healthcare Blue fabric swatch, Louvolite supplier image",
+      "width": 1001,
+      "height": 1001,
+      "bytes": 72070
+    },
+    {
+      "name": "Ex-Lite Healthcare Green",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_BO_HEALTHCARE_GREEN.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-healthcare-green-2/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022265A2000",
+        "2500": "1022265A2500",
+        "3000": "1022265A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-healthcare-green.webp",
+      "alt": "Ex-Lite Healthcare Green fabric swatch, Louvolite supplier image",
+      "width": 1001,
+      "height": 1001,
+      "bytes": 34534
+    },
+    {
+      "name": "Ex-Lite Light Grey",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_LIGHT_GREY-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-light-grey/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022928A2000",
+        "2500": "1022928A2500",
+        "3000": "1022928A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-light-grey.webp",
+      "alt": "Ex-Lite Light Grey fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 33386
+    },
+    {
+      "name": "Ex-Lite Navy",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_NAVY-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-navy/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022892A2000",
+        "2500": "1022892A2500",
+        "3000": "1022892A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-navy.webp",
+      "alt": "Ex-Lite Navy fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 33832
+    },
+    {
+      "name": "Ex-Lite Putty",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_BO_PUTTY.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-putty-2/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022430A2000",
+        "2500": "1022430A2500",
+        "3000": "1022430A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-putty.webp",
+      "alt": "Ex-Lite Putty fabric swatch, Louvolite supplier image",
+      "width": 1001,
+      "height": 1001,
+      "bytes": 93644
+    },
+    {
+      "name": "Ex-Lite Slate",
+      "sourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "productURL": "https://www.louvolite.com/product/ex-lite-slate/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022974A2000",
+        "2500": "1022974A2500",
+        "3000": "1022974A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "sourcePage": 2,
+      "sourceMethod": "Rendered the original Slate swatch rectangle only, preserving supplier colour/opacity.",
+      "localPath": "/healthcare/louvolite/ex-lite-slate.png",
+      "alt": "Ex-Lite Slate fabric swatch, Louvolite supplier image",
+      "width": 264,
+      "height": 265,
+      "bytes": 14766
+    },
+    {
+      "name": "Ex-Lite Snow",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_SNOW-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-snow/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "1022100A2000",
+        "2500": "1022100A2500",
+        "3000": "1022100A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-snow.webp",
+      "alt": "Ex-Lite Snow fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 3730
+    },
+    {
+      "name": "Ex-Lite White",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX-LITE_WHITE-1.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-white/",
+      "kind": "fabric-swatch",
+      "referenceByRollerWidthMm": {
+        "2000": "102290A2000",
+        "2500": "102290A2500",
+        "3000": "102290A3000"
+      },
+      "referenceSourceURL": "https://www.louvolitecommercial.com/wp-content/uploads/2018/04/2026_LL_Ex-Lite_FR_Commercial-Card_A4_Low-Res.pdf",
+      "referenceSourcePage": 2,
+      "localPath": "/healthcare/louvolite/ex-lite-white.webp",
+      "alt": "Ex-Lite White fabric swatch, Louvolite supplier image",
+      "width": 500,
+      "height": 500,
+      "bytes": 16370
+    },
+    {
+      "name": "Ex-Lite Slate roomset",
+      "sourceURL": "https://www.louvolite.com/wp-content/webp-express/webp-images/uploads/EX_LITE_SLATE_ROOMSET-2.jpg.webp",
+      "productURL": "https://www.louvolite.com/product/ex-lite-slate/",
+      "localPath": "/healthcare/louvolite/ex-lite-slate-roomset.webp",
+      "kind": "supplier-roomset",
+      "alt": "Louvolite supplier roomset showing Ex-Lite Slate roller blinds; not an Apex installation",
+      "width": 1000,
+      "height": 1000,
+      "bytes": 60298
+    }
+  ]
+}

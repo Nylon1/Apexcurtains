@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export const professionalLinks = [
   { href: "/professionals", label: "Professional hub" },
+  { href: "/professionals/healthcare", label: "Healthcare screening" },
   { href: "/professionals/architects", label: "Architects" },
   { href: "/professionals/interior-designers", label: "Interior designers" },
   { href: "/professionals/developers-housebuilders", label: "Developers" },

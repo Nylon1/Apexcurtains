@@ -16,6 +16,8 @@ on:
       - "scripts/specialist-guidance-check.mjs"
       - "scripts/visualiser-check.mjs"
       - "scripts/prepare-visualiser-assets.mjs"
+      - "scripts/healthcare*"
+      - "supabase/migrations/**"
       - "scripts/web-app-check.mjs"
       - "scripts/atelier-check.test.ts"
       - "package.json"
@@ -50,6 +52,9 @@ jobs:
       - name: Sitemap serialization checks
         run: npm run test:sitemap
 
+      - name: Healthcare catalogue and private enquiry checks
+        run: npm run healthcare:check && npm run test:healthcare
+
       - name: Installable app and private-cache checks
         run: npm run test:web-app
 
@@ -58,6 +63,9 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Healthcare rendered routes, sitemap and access boundaries
+        run: npm run test:healthcare-routes
 
       - name: Legacy URL migration and destination checks
         run: npm run test:redirects
