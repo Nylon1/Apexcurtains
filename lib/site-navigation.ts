@@ -228,6 +228,11 @@ export const navigationGroups: NavigationGroup[] = [
     imageAlt: "Architectural window shapes illustrated for planning",
     links: [
       {
+        label: "Healthcare screening",
+        href: "/professionals/healthcare",
+        note: "Clinical curtains, tracks, blinds & replacement",
+      },
+      {
         label: "Architects",
         href: "/professionals/architects",
         note: "Geometry, recesses and fixing provisions",

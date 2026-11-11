@@ -5,6 +5,7 @@ import { AdminConnectionNotice, InstallApp } from "./WebApp";
 const sections = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/atelier", label: "The Atelier" },
+  { href: "/admin/healthcare", label: "Healthcare enquiries" },
   { href: "/admin/projects", label: "Gallery" },
   { href: "/admin/posts", label: "Advice posts" },
 ];

@@ -38,6 +38,8 @@ The site uses a www canonical origin, split XML sitemap index, structured author
 
 ## Validation
 
+Healthcare Screening Solutions is implemented under `/professionals/healthcare`. Catalogue governance, supplier evidence, the private enquiry migration and release dependencies are documented in [the healthcare release record](docs/healthcare/implementation-and-release.md). The catalogue and enquiry checks run with `npm run healthcare:check` and `npm run test:healthcare`; after building, run `npm run test:healthcare-routes`.
+
 Run:
 
 ```bash

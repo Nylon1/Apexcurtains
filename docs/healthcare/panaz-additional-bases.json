@@ -1,0 +1,194 @@
+{
+  "supplier": "Panaz",
+  "collection": "Base Cloth",
+  "sourceURL": "https://panaz.com/wp-content/uploads/2025/09/Curtain-Basecloth-card-Sept.2025-WEB.pdf",
+  "verificationDate": "2026-11-11",
+  "verificationMethod": "Visually read the complete standard-width and wide-width specification tables and matched each photograph to its page-one label.",
+  "imageRights": {
+    "status": "owner-attested",
+    "attestedAt": "2026-11-11",
+    "agreementLocation": null,
+    "provenanceFile": "docs/healthcare/panaz-image-provenance.json"
+  },
+  "scope": "Additional basecloth records, not printed design/colourway combinations. Do not claim these are the full Panaz healthcare catalogue.",
+  "common": {
+    "widthBasis": "Minimum width stated by manufacturer",
+    "weightTolerancePercent": 5,
+    "fireEvidence": "Manufacturer specification table; no separate test certificate obtained",
+    "antimicrobialClaim": null,
+    "patternRepeat": null,
+    "printedColourwaysVerified": 0,
+    "commercialAvailability": "Confirm current supply, lead time and price with Panaz",
+    "applicationCaveat": "Facility-specific privacy, cleaning, fire and operational requirements must be checked before specification.",
+    "imageCaveat": "Genuine supplier basecloth texture; not a printed colourway. Native source images have limited resolution."
+  },
+  "careProfiles": {
+    "thermal30": {
+      "routineWashSymbolCelsius": 30,
+      "thermalDisinfectionSymbolCelsius": 71,
+      "customerText": "Manufacturer care chart includes thermal disinfection. Full laundering instructions available on request.",
+      "unresolved": ["Disinfection time and complete cycle", "Permitted chemicals and concentrations", "Full interpretation of remaining care symbols"]
+    },
+    "thermal40": {
+      "routineWashSymbolCelsius": 40,
+      "thermalDisinfectionSymbolCelsius": 71,
+      "customerText": "Manufacturer care chart includes thermal disinfection. Full laundering instructions available on request.",
+      "unresolved": ["Disinfection time and complete cycle", "Permitted chemicals and concentrations", "Full interpretation of remaining care symbols"]
+    },
+    "lineDryThermal30": {
+      "routineWashSymbolCelsius": 30,
+      "thermalDisinfectionSymbolCelsius": 71,
+      "drying": "Line drying recommended",
+      "customerText": "Line drying recommended. Manufacturer care chart includes thermal disinfection; obtain the full laundering protocol.",
+      "unresolved": ["Disinfection time and complete cycle", "Permitted chemicals and concentrations", "Full interpretation of remaining care symbols"]
+    }
+  },
+  "records": [
+    {
+      "reference": "459",
+      "name": "Diamond Weave",
+      "widthCm": 138,
+      "weightGsm": 240,
+      "composition": "100% FR polyester",
+      "classification": "Curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "sourcePage": 2,
+      "image": "/healthcare/panaz/diamond-weave-base.jpeg",
+      "imageSharedWithReferences": ["083"],
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "083",
+      "name": "Diamond Weave - wide width",
+      "widthCm": 276,
+      "weightGsm": 240,
+      "composition": "100% FR polyester",
+      "classification": "Curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "careEvidenceNote": "Shared care-table cell with Satin Filament 436",
+      "sourcePage": 3,
+      "image": "/healthcare/panaz/diamond-weave-base.jpeg",
+      "imageSharedWithReferences": ["459"],
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "222",
+      "name": "Plainweave Light",
+      "widthCm": 138,
+      "weightGsm": 145,
+      "composition": "100% FR polyester",
+      "classification": "Curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "sourcePage": 2,
+      "image": "/healthcare/panaz/plainweave-light-base.jpeg",
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "288",
+      "name": "Twill Pinstripe",
+      "widthCm": 138,
+      "weightGsm": 230,
+      "composition": "FR polyester blend",
+      "classification": "Curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "sourcePage": 2,
+      "image": "/healthcare/panaz/twill-pinstripe-base.jpeg",
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "436",
+      "name": "Satin Filament - wide width",
+      "widthCm": 276,
+      "weightGsm": 230,
+      "composition": "FR polyester blend",
+      "classification": "Curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "sourcePage": 3,
+      "image": "/healthcare/panaz/satin-filament-base.jpeg",
+      "imageSharedWithReferences": ["009", "093"],
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "447",
+      "name": "Duo Blackout - wide width",
+      "widthCm": 276,
+      "weightGsm": 250,
+      "composition": "100% polyester with laminate FR blackout",
+      "classification": "Blackout",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "lineDryThermal30",
+      "sourcePage": 3,
+      "image": "/healthcare/panaz/duo-blackout-base.jpeg",
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    },
+    {
+      "reference": "333",
+      "name": "Panama Weave",
+      "widthCm": 138,
+      "weightGsm": 250,
+      "composition": "100% FR polyester",
+      "classification": "Dual-purpose curtain basecloth; opacity specification on request",
+      "intendedApplications": ["Cubicle curtains", "Window curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal40",
+      "sourcePage": 2,
+      "image": "/healthcare/panaz/panama-weave-base.jpeg",
+      "publicationReadiness": "Sufficient verified information for a basecloth-only record"
+    }
+  ],
+  "candidates": [
+    {
+      "reference": "317",
+      "name": "Cambric Light Sheer",
+      "widthCm": 138,
+      "weightGsm": 60,
+      "composition": "100% Trevira CS",
+      "classification": "Sheer",
+      "manufacturerMarkedApplications": ["Window curtains", "Sheers", "Cubicle curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal40",
+      "sourcePage": 2,
+      "image": "/healthcare/panaz/cambric-light-base.jpeg",
+      "status": "awaiting-technical-confirmation",
+      "gap": "Sheer fabric: clinical privacy-screen suitability is not established. Do not market as a sole patient-privacy screen."
+    },
+    {
+      "reference": "437",
+      "name": "Cambric Light Sheer - wide width",
+      "widthCm": 276,
+      "weightGsm": 60,
+      "composition": "100% Trevira CS",
+      "classification": "Sheer",
+      "manufacturerMarkedApplications": ["Window curtains", "Sheers", "Cubicle curtains"],
+      "listedFireStandards": ["BS 5867 Part 2 Type B", "BS 5867 Part 2 Type C"],
+      "careProfile": "thermal30",
+      "sourcePage": 3,
+      "image": "/healthcare/panaz/cambric-light-base.jpeg",
+      "status": "awaiting-technical-confirmation",
+      "gap": "Sheer fabric: clinical privacy-screen suitability is not established. Do not market as a sole patient-privacy screen."
+    }
+  ],
+  "exclusions": [
+    {"reference": "190", "name": "Allure Matt Velvet", "reason": "Current card marks window curtains but not cubicle curtains; not added as clinical screening."},
+    {"reference": "096", "name": "Bali", "reason": "Current card marks window curtains but not cubicle curtains; not added as clinical screening."},
+    {"reference": "161", "name": "Suri Natural Linen Effect", "reason": "Current card marks window curtains but not cubicle curtains; not added as clinical screening."}
+  ],
+  "unresolvedForAll": [
+    "Exact printed design/basecloth/colourway availability and pattern repeat",
+    "Current supply and any trade restrictions",
+    "Full product-specific fire certificates",
+    "Complete laundering and disinfection protocol",
+    "High-resolution supplier image originals"
+  ]
+}

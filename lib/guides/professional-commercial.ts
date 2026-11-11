@@ -18,6 +18,18 @@ export const commercialGuide = professionalGuide({
   image: airportProfessionalImage,
   sections: [
     {
+      id: "healthcare-screening",
+      title: "Healthcare screening, from manufacture to replacement",
+      paragraphs: [
+        "Apex's healthcare service brings together in-house reusable curtain manufacture using suitable Panaz fabrics, Forest medical tracks, Louvolite Ex-Lite clinical roller blinds and Behrens disposable-curtain sourcing. Plan the survey, specification, installation and future replacement as one package.",
+        "Explore guidance for dental practices, GP surgeries, hospitals, private clinics, physiotherapy and care homes, with product evidence and compatibility checked for the individual setting.",
+      ],
+      links: [
+        { href: "/professionals/healthcare", label: "Explore Healthcare Screening Solutions" },
+        { href: "/professionals/healthcare/quotation", label: "Request a healthcare project quotation" },
+      ],
+    },
+    {
       id: "manchester-airport",
       title: "Manchester Airport lounge: a completed installation",
       paragraphs: [

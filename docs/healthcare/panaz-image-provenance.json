@@ -1,0 +1,25 @@
+{
+  "supplier": "Panaz",
+  "verifiedAt": "2026-11-11",
+  "source": "https://panaz.com/wp-content/uploads/2025/09/Curtain-Basecloth-card-Sept.2025-WEB.pdf",
+  "sourcePage": 1,
+  "rights": {
+    "status": "owner-attested",
+    "basis": "Apex owner confirmed existing written permission to republish supplier product images on 2026-11-11.",
+    "agreementLocation": null,
+    "scopeReviewRequiredForFutureUses": true
+  },
+  "method": "Original embedded image bytes extracted without retouching; labels visually matched on source page.",
+  "usage": "Basecloth texture photographs only. Not printed colourway or completed-installation photography. Native resolution is limited; obtain larger originals for detailed zoom.",
+  "assets": [
+    {"path": "/healthcare/panaz/satin-filament-base.jpeg", "references": ["009", "093", "436"], "pdfImageXref": 121, "width": 244, "height": 238, "alt": "Panaz Satin Filament basecloth texture, supplier photograph shared for references 009, 093 and 436"},
+    {"path": "/healthcare/panaz/super-soft-dimout-base.jpeg", "references": ["036", "076"], "pdfImageXref": 117, "width": 246, "height": 240, "alt": "Panaz Super Soft Dimout basecloth texture, supplier photograph shared for references 036 and 076"},
+    {"path": "/healthcare/panaz/matt-slub-effect-base.jpeg", "references": ["094"], "pdfImageXref": 123, "width": 244, "height": 238, "alt": "Panaz Matt Slub Effect 094 basecloth texture"},
+    {"path": "/healthcare/panaz/diamond-weave-base.jpeg", "references": ["459", "083"], "pdfImageXref": 119, "width": 244, "height": 238, "alt": "Panaz Diamond Weave basecloth texture, supplier photograph shared for references 459 and 083"},
+    {"path": "/healthcare/panaz/plainweave-light-base.jpeg", "references": ["222"], "pdfImageXref": 93, "width": 244, "height": 238, "alt": "Panaz Plainweave Light 222 basecloth texture"},
+    {"path": "/healthcare/panaz/cambric-light-base.jpeg", "references": ["317", "437"], "pdfImageXref": 99, "width": 507, "height": 240, "alt": "Panaz Cambric Light sheer basecloth texture, supplier photograph shared for references 317 and 437"},
+    {"path": "/healthcare/panaz/panama-weave-base.jpeg", "references": ["333"], "pdfImageXref": 103, "width": 244, "height": 238, "alt": "Panaz Panama Weave 333 basecloth texture"},
+    {"path": "/healthcare/panaz/twill-pinstripe-base.jpeg", "references": ["288"], "pdfImageXref": 105, "width": 244, "height": 238, "alt": "Panaz Twill Pinstripe 288 basecloth texture"},
+    {"path": "/healthcare/panaz/duo-blackout-base.jpeg", "references": ["447"], "pdfImageXref": 115, "width": 244, "height": 238, "alt": "Panaz Duo Blackout 447 basecloth texture"}
+  ]
+}

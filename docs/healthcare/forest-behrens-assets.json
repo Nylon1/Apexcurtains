@@ -1,0 +1,54 @@
+[
+  {
+    "supplier": "forest",
+    "productName": "MTS Standard profile",
+    "sourceUrl": "https://www.forestgroup.co.uk/user_files/blocks/4/image/mts-standard-profile-rail.webp",
+    "localPath": "/healthcare/forest/mts-standard-profile.webp",
+    "permissionStatus": "owner-confirmed",
+    "permissionEvidence": "Apex owner attestation in task conversation on 2026-11-11; underlying agreement not supplied",
+    "verificationDate": "2026-11-11",
+    "bytes": 12078,
+    "width": 488,
+    "height": 209,
+    "visuallyInspected": true
+  },
+  {
+    "supplier": "forest",
+    "productName": "MTS Flat profile",
+    "sourceUrl": "https://www.forestgroup.co.uk/user_files/blocks/4/image/mts-flat-profile-rail.webp",
+    "localPath": "/healthcare/forest/mts-flat-profile.webp",
+    "permissionStatus": "owner-confirmed",
+    "permissionEvidence": "Apex owner attestation in task conversation on 2026-11-11; underlying agreement not supplied",
+    "verificationDate": "2026-11-11",
+    "bytes": 8850,
+    "width": 488,
+    "height": 209,
+    "visuallyInspected": true
+  },
+  {
+    "supplier": "forest",
+    "productName": "MTS Round profile",
+    "sourceUrl": "https://www.forestgroup.co.uk/user_files/blocks/4/image/mts-round-profile-rail.webp",
+    "localPath": "/healthcare/forest/mts-round-profile.webp",
+    "permissionStatus": "owner-confirmed",
+    "permissionEvidence": "Apex owner attestation in task conversation on 2026-11-11; underlying agreement not supplied",
+    "verificationDate": "2026-11-11",
+    "bytes": 11650,
+    "width": 488,
+    "height": 209,
+    "visuallyInspected": true
+  },
+  {
+    "supplier": "forest",
+    "productName": "MTS system overview",
+    "sourceUrl": "https://www.forestgroup.co.uk/user_files/blocks/4/image/MTS-590-v01.png",
+    "localPath": "/healthcare/forest/mts-system-overview.png",
+    "permissionStatus": "owner-confirmed",
+    "permissionEvidence": "Apex owner attestation in task conversation on 2026-11-11; underlying agreement not supplied",
+    "verificationDate": "2026-11-11",
+    "bytes": 154413,
+    "width": 590,
+    "height": 479,
+    "visuallyInspected": true
+  }
+]
