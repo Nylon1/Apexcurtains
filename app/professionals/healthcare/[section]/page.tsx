@@ -4,6 +4,8 @@ import { pages } from "@/lib/healthcare/content";
 import { publishedProducts, HEALTHCARE_ROOT } from "@/lib/healthcare/catalogue";
 import CatalogueBrowser from "@/components/healthcare/CatalogueBrowser";
 import TechnicalNotes from "@/components/healthcare/TechnicalNotes";
+import SettingPhotography from "@/components/healthcare/SettingPhotography";
+import { sectionPhotographs } from "@/lib/healthcare/settings-photography";
 import {
   Breadcrumbs,
   HealthcareCta,
@@ -48,14 +50,17 @@ export default async function Page({
   const products = publishedProducts.filter((v) => v.category === p.category);
   return (
     <>
-      <div className="hc-page-header">
-        <Breadcrumbs current={p.eyebrow} path={section} />
-        <p className="hc-eyebrow">{p.eyebrow}</p>
-        <h1>{p.title}</h1>
-        <p className="hc-lede">{p.intro}</p>
-        <Link className="hc-button" href={`${HEALTHCARE_ROOT}/quotation`}>
-          Discuss your requirements →
-        </Link>
+      <div className="hc-visual-header">
+        <div className="hc-page-header">
+          <Breadcrumbs current={p.eyebrow} path={section} />
+          <p className="hc-eyebrow">{p.eyebrow}</p>
+          <h1>{p.title}</h1>
+          <p className="hc-lede">{p.intro}</p>
+          <Link className="hc-button" href={`${HEALTHCARE_ROOT}/quotation`}>
+            Discuss your requirements →
+          </Link>
+        </div>
+        <SettingPhotography photo={sectionPhotographs[section]} priority />
       </div>
       <div className="hc-content-sections">
         {p.sections.map((s) => (

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { categories, HEALTHCARE_ROOT } from "@/lib/healthcare/catalogue";
 import { sectors, moreSettings, serviceSteps } from "@/lib/healthcare/content";
+import SettingPhotography, { PhotoCredit, SettingImage } from "@/components/healthcare/SettingPhotography";
+import { sectorPhotographs } from "@/lib/healthcare/settings-photography";
 import {
   Breadcrumbs,
   HealthcareCta,
@@ -42,19 +44,7 @@ export default function Page() {
             </a>
           </div>
         </div>
-        <div className="hc-hero-visual">
-          <Image
-            src="/healthcare/louvolite/ex-lite-slate-roomset.webp"
-            alt="Louvolite supplier interior showing Ex-Lite Slate roller blinds"
-            fill
-            sizes="(max-width: 800px) 100vw, 55vw"
-            priority
-          />
-          <div className="hc-hero-caption">
-            LOUVOLITE EX-LITE / SLATE
-            <span>Supplier room setting · not an Apex project</span>
-          </div>
-        </div>
+        <SettingPhotography photo="ward" priority className="hc-hero-visual" />
       </section>
       <div className="hc-promise">
         <span>In-house curtain manufacture</span>
@@ -143,14 +133,24 @@ export default function Page() {
             is personal. Start with the way your rooms are used.
           </p>
         </div>
+        <p className="hc-small hc-settings-note">
+          Real settings, shown for inspiration. Supplier and licensed photographs
+          are credited below and are not Apex installations.
+        </p>
         <div className="hc-sector-grid">
           {sectors.map((s, i) => (
-            <Link href={`${HEALTHCARE_ROOT}/settings/${s.slug}`} key={s.slug}>
-              <span className="hc-number">0{i + 1}</span>
-              <h3>{s.short}</h3>
-              <p>{s.intro}</p>
-              <span aria-hidden="true">↗</span>
-            </Link>
+            <article className="hc-sector-card" key={s.slug}>
+              <Link href={`${HEALTHCARE_ROOT}/settings/${s.slug}`}>
+                <SettingImage photo={sectorPhotographs[s.slug]} sizes="(max-width: 530px) 100vw, (max-width: 800px) 50vw, 33vw" />
+                <div className="hc-sector-copy">
+                  <span className="hc-number">0{i + 1}</span>
+                  <h3>{s.short}</h3>
+                  <p>{s.intro}</p>
+                  <span className="hc-sector-arrow" aria-hidden="true">↗</span>
+                </div>
+              </Link>
+              <PhotoCredit photo={sectorPhotographs[s.slug]} />
+            </article>
           ))}
         </div>
         <div className="hc-more-settings">
@@ -160,6 +160,23 @@ export default function Page() {
             Share the use of the room, the cleaning requirements and the
             screening needed. We will assess the appropriate specification.
           </p>
+        </div>
+      </section>
+      <section className="hc-section hc-settings-stories">
+        <div className="hc-section-heading">
+          <div>
+            <p className="hc-eyebrow">Privacy in the spaces people use</p>
+            <h2>Clinical purpose.<br />A more human setting.</h2>
+          </div>
+          <p>
+            The route of a curtain, the light at a window, the feeling of a shared
+            room. We consider the practical details alongside the experience of
+            the people who spend time there.
+          </p>
+        </div>
+        <div className="hc-photo-pair">
+          <SettingPhotography photo="tracks" />
+          <SettingPhotography photo="careLounge" />
         </div>
       </section>
       <section className="hc-service">

@@ -14,9 +14,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             APEX <span>HEALTHCARE</span>
           </Link>
           <nav aria-label="Healthcare">
-            <Link href={`${HEALTHCARE_ROOT}#solutions`}>Solutions</Link>
+            <a href={`${HEALTHCARE_ROOT}#solutions`}>Solutions</a>
             <Link href={`${HEALTHCARE_ROOT}/fabrics`}>Fabric collection</Link>
-            <Link href={`${HEALTHCARE_ROOT}#settings`}>Clinical settings</Link>
+            <a href={`${HEALTHCARE_ROOT}#settings`}>Clinical settings</a>
             <Link href={`${HEALTHCARE_ROOT}/survey-installation`}>
               Our service
             </Link>

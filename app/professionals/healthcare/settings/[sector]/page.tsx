@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { sectors } from "@/lib/healthcare/content";
 import { categories, HEALTHCARE_ROOT } from "@/lib/healthcare/catalogue";
+import SettingPhotography from "@/components/healthcare/SettingPhotography";
+import { sectorPhotographs } from "@/lib/healthcare/settings-photography";
 import {
   Breadcrumbs,
   HealthcareCta,
@@ -29,11 +31,14 @@ export default async function Page({
   if (!s) notFound();
   return (
     <>
-      <div className="hc-page-header">
-        <Breadcrumbs current={s.short} path={`settings/${s.slug}`} />
-        <p className="hc-eyebrow">Healthcare settings / {s.short}</p>
-        <h1>{s.title}.</h1>
-        <p className="hc-lede">{s.intro}</p>
+      <div className="hc-visual-header">
+        <div className="hc-page-header">
+          <Breadcrumbs current={s.short} path={`settings/${s.slug}`} />
+          <p className="hc-eyebrow">Healthcare settings / {s.short}</p>
+          <h1>{s.title}.</h1>
+          <p className="hc-lede">{s.intro}</p>
+        </div>
+        <SettingPhotography photo={sectorPhotographs[s.slug]} priority />
       </div>
       <div className="hc-content-sections">
         <section>
@@ -69,6 +74,26 @@ export default async function Page({
           </div>
         </section>
       </div>
+      {s.slug === "care-homes" && (
+        <section className="hc-setting-feature hc-section">
+          <SettingPhotography photo="careLounge" />
+          <div>
+            <p className="hc-eyebrow">A familiar feel</p>
+            <h2>Comfort belongs in the specification.</h2>
+            <p>
+              Warm colours, natural light and thoughtful screening can help a care
+              environment feel more like home. Bring your interior scheme to the
+              conversation alongside the practical requirements for personal care,
+              cleaning and access.
+            </p>
+            <p className="hc-small">
+              The photograph is from Panaz’s De Vijverhof retirement-home project.
+              It is an interior reference; the upholstery shown is not part of
+              our curtain catalogue.
+            </p>
+          </div>
+        </section>
+      )}
       <section className="hc-section">
         <h2>Build the right package.</h2>
         <div className="hc-category-grid">

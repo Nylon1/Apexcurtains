@@ -115,3 +115,13 @@ The original full-catalogue definition of done is **not yet met**. This implemen
 - Hosted database success, actual inbox delivery and authenticated staff operations remain release gates. Production data and deployment have not been changed.
 
 Temporary supplier research downloads under `tmp/healthcare-louvolite` remain untracked and excluded from the PR. Automatic approval review blocked their removal.
+
+## Real-setting photography update — 11 November 2026
+
+Added nine photographs to the healthcare hub, all five setting pages and all six product/service headers. The hero now shows a Forest hospital setting; setting cards feature a dental surgery, examination room, hospital, physiotherapy room and documented Panaz retirement-home project. Additional track and care-home photographs provide room context alongside the catalogue imagery.
+
+Five images use the owner's confirmed supplier permissions; four use explicit Unsplash, Pixabay or CC BY licences. Source links, credits, licence details and limitations are maintained in [settings-photography.md](settings-photography.md) and `lib/healthcare/settings-photography.ts`. Photographs are not represented as Apex installations or as evidence that a particular fabric/blind is shown. All nine WebPs together are approximately 564 KiB before responsive delivery. Published product and colourway counts are unchanged.
+
+The clinical-settings and solutions jump links use native anchors so selecting the current fragment scrolls to the intended section reliably. The existing draft PR and backend/supplier release gates above remain in place.
+
+Validation for this update: production build (197 pages), targeted ESLint and all three rendered healthcare checks passed. Browser review covered 390 px mobile and 768 px tablet layouts, dental-page navigation, image loading and horizontal overflow; desktop photography was also visually reviewed. All nine original WebP assets are served successfully. This update does not change the enquiry backend.
