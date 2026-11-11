@@ -77,6 +77,7 @@ export default async function Page({
                   ))}
                 </ul>
               )}
+              {s.photo && <SettingPhotography photo={s.photo} className="hc-process-detail" />}
             </div>
           </section>
         ))}

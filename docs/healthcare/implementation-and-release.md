@@ -125,3 +125,11 @@ Five images use the owner's confirmed supplier permissions; four use explicit Un
 The clinical-settings and solutions jump links use native anchors so selecting the current fragment scrolls to the intended section reliably. The existing draft PR and backend/supplier release gates above remain in place.
 
 Validation for this update: production build (197 pages), targeted ESLint and all three rendered healthcare checks passed. Browser review covered 390 px mobile and 768 px tablet layouts, dental-page navigation, image loading and horizontal overflow; desktop photography was also visually reviewed. All nine original WebP assets are served successfully. This update does not change the enquiry backend.
+
+## Process photography update — 11 November 2026
+
+Added four licensed photographs for survey, sewing, fitting and project planning. The four-step service section on the hub is now a responsive photographic gallery at `#process`. The survey and maintenance headers use relevant process images, with further photographs beside specification, making and installation content. The reusable-curtain page also illustrates the making process. Rights and source details are in [settings-photography.md](settings-photography.md).
+
+All four photographs are explicitly illustrative: they are not presented as Apex staff or healthcare installations, and the visible fabric and window fittings are not identified as supplier catalogue products. No product data, prices, enquiry integrations or production data are changed.
+
+Validation: production build, targeted ESLint, all three rendered healthcare route checks and all four new image URLs passed. Browser review confirmed the four-column desktop, two-column tablet (768 px) and single-column mobile (390 px) process gallery, the mobile survey page, loaded images and no horizontal page overflow.

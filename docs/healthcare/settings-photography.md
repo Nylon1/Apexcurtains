@@ -34,3 +34,18 @@ The dental and examination-room blinds are not identified as Louvolite Ex-Lite. 
 Images are converted to WebP without enlarging the originals; Next Image supplies responsive sizes. The nine source WebPs total 577,504 bytes. Only the above-the-fold photograph is prioritised; other images load lazily. Mobile crops preserve the main room feature. The hero, all five setting cards/pages and six product/service headers now include room photography, alongside existing genuine catalogue imagery.
 
 To replace a photograph, verify the source and rights, inspect the actual image, optimise it, update the manifest and check both desktop and mobile crops. Do not infer a fabric, product model or clinical certification from a setting photograph. Do not replace these with generated or watermarked stock assets.
+
+## Process photography — 11 November 2026
+
+Four further real photographs illustrate the service journey. Each primary Pexels page identifies the photographer, free licence and camera capture; the [Pexels licence](https://www.pexels.com/license/) permits incorporated commercial website use. Images were visually inspected, resized to 1440 × 961 and encoded as WebP. No scene elements were generated or altered. The four files total 183,784 bytes.
+
+| Asset below `public/healthcare/process/` | Photographer / primary source | Display purpose |
+| --- | --- | --- |
+| `survey.webp` | [Ksenia Chernaya — measuring a window frame](https://www.pexels.com/photo/faceless-workman-measuring-window-with-ruler-in-flat-5691540/) | Survey step and survey/installation page header |
+| `making.webp` | [Pavel Danilyuk — sewing fabric](https://www.pexels.com/photo/person-sewing-cloth-on-a-sewing-machine-6461163/) | Manufacturing step, reusable-curtain page and survey/installation page |
+| `fitting.webp` | [Ksenia Chernaya — window-frame fitting](https://www.pexels.com/photo/workman-screwing-window-frame-during-housework-5768107/) | Installation step, installation planning and maintenance sections |
+| `planning.webp` | [Anete Lusina — measuring tools on a floor plan](https://www.pexels.com/photo/instruments-prepared-for-measurements-in-house-4792479/) | Repeat-supply records step, specification planning and maintenance page header |
+
+These are credited illustrative process photographs, not Apex staff, Apex workshops or completed healthcare projects. The fitting image shows window work, not a Forest medical track being installed. The sewing image does not establish a Panaz fabric or clinical manufacturing configuration. The floor plan is generic residential stock photography, not a customer's healthcare plan. Context is displayed beside the larger photographs and immediately below the four-step gallery.
+
+The central manifest records exact original URLs, rights and alt text. `serviceSteps` and relevant service-content sections select photographs by typed manifest key. The existing nine setting images remain available; catalogue product/colourway counts are unchanged.

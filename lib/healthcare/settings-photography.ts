@@ -4,7 +4,7 @@ export type SettingPhotograph = {
   title: string;
   credit: string;
   source: string;
-  permission: "owner-confirmed" | "unsplash-licence" | "pixabay-licence" | "cc-by-2.0";
+  permission: "owner-confirmed" | "unsplash-licence" | "pixabay-licence" | "pexels-licence" | "cc-by-2.0";
   rightsEvidence: string;
   licenceLabel?: string;
   adaptation?: string;
@@ -23,6 +23,54 @@ const panazBrochure = "https://panaz.com/wp-content/uploads/2023/07/Case-Studies
 // Setting photography is intentionally separate from verified catalogue imagery.
 // A curtain, blind or fabric visible in a setting does not establish its product identity.
 export const settingPhotographs = {
+  survey: {
+    src: "/healthcare/process/survey.webp",
+    alt: "Hands checking a window-frame measurement with a metal ruler and pencil",
+    title: "Every detail starts with a careful measure",
+    credit: "Ksenia Chernaya / Pexels",
+    source: "https://www.pexels.com/photo/faceless-workman-measuring-window-with-ruler-in-flat-5691540/",
+    original: "https://images.pexels.com/photos/5691540/pexels-photo-5691540.jpeg",
+    permission: "pexels-licence",
+    rightsEvidence: "https://www.pexels.com/license/",
+    context: "Illustrative measuring photograph · not an Apex site survey",
+    verifiedAt: "2026-11-11",
+  },
+  making: {
+    src: "/healthcare/process/making.webp",
+    alt: "Hands guiding pale fabric through a sewing machine",
+    title: "Care in every seam",
+    credit: "Pavel Danilyuk / Pexels",
+    source: "https://www.pexels.com/photo/person-sewing-cloth-on-a-sewing-machine-6461163/",
+    original: "https://images.pexels.com/photos/6461163/pexels-photo-6461163.jpeg",
+    permission: "pexels-licence",
+    rightsEvidence: "https://www.pexels.com/license/",
+    context: "Illustrative sewing photograph · fabric and workshop are not Apex or Panaz references",
+    verifiedAt: "2026-11-11",
+  },
+  fitting: {
+    src: "/healthcare/process/fitting.webp",
+    alt: "A fitter using a cordless drill at a white window frame",
+    title: "Practical skill, carefully applied",
+    credit: "Ksenia Chernaya / Pexels",
+    source: "https://www.pexels.com/photo/workman-screwing-window-frame-during-housework-5768107/",
+    original: "https://images.pexels.com/photos/5768107/pexels-photo-5768107.jpeg",
+    permission: "pexels-licence",
+    rightsEvidence: "https://www.pexels.com/license/",
+    context: "Illustrative window-fitting photograph · not a clinical track installation",
+    verifiedAt: "2026-11-11",
+  },
+  planning: {
+    src: "/healthcare/process/planning.webp",
+    alt: "A tape measure and pen resting on an architectural floor plan",
+    title: "A clear record for the next visit",
+    credit: "Anete Lusina / Pexels",
+    source: "https://www.pexels.com/photo/instruments-prepared-for-measurements-in-house-4792479/",
+    original: "https://images.pexels.com/photos/4792479/pexels-photo-4792479.jpeg",
+    permission: "pexels-licence",
+    rightsEvidence: "https://www.pexels.com/license/",
+    context: "Illustrative project-planning photograph · not a customer room plan",
+    verifiedAt: "2026-11-11",
+  },
   ward: {
     src: "/healthcare/settings/forest-daylit-ward.webp",
     alt: "A daylit hospital ward with ceiling tracks and privacy curtains around the beds",
@@ -149,6 +197,6 @@ export const sectionPhotographs: Record<string, SettingPhotoKey> = {
   "medical-tracks": "tracks",
   "roller-blinds": "dental",
   "disposable-curtains": "clinic",
-  "survey-installation": "tracks",
-  "replacement-maintenance": "ward",
+  "survey-installation": "survey",
+  "replacement-maintenance": "planning",
 };

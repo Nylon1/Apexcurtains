@@ -344,20 +344,47 @@
 .hc-service {
   padding: 70px 6vw;
   background: #e9ede7;
+  scroll-margin-top: 110px;
 }
 .hc-steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 35px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
   margin: 40px 0;
 }
-.hc-steps > div > span {
-  font-family: Georgia, serif;
-  font-size: 1.8rem;
-  color: #887858;
+.hc-process-card {
+  min-width: 0;
+  background: #fcfaf6;
+  border: 1px solid var(--hc-line);
+}
+.hc-process-card figure {
+  margin: 0;
+}
+.hc-process-card .hc-setting-image {
+  aspect-ratio: 4 / 3;
+}
+.hc-process-card figcaption {
+  padding: 12px 18px 0;
+}
+.hc-process-copy {
+  padding: 18px 22px 24px;
+}
+.hc-process-copy p:last-child {
+  margin-bottom: 0;
+}
+.hc-process-note {
+  max-width: 760px;
+}
+.healthcare .hc-process-detail {
+  margin-top: 28px;
 }
 .hc-steps p {
   font-size: 0.9rem;
+}
+@media (min-width: 801px) and (max-width: 1000px) {
+  .hc-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 .hc-cta {
   display: grid;

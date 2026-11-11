@@ -1,9 +1,11 @@
+import type { SettingPhotoKey } from "./settings-photography";
+
 export type HealthcarePage = {
   slug: string;
   eyebrow: string;
   title: string;
   intro: string;
-  sections: { title: string; paragraphs: string[]; points?: string[] }[];
+  sections: { title: string; paragraphs: string[]; points?: string[]; photo?: SettingPhotoKey }[];
   category?: "reusable" | "tracks" | "blinds" | "disposable";
 };
 export const pages: HealthcarePage[] = [
@@ -17,6 +19,7 @@ export const pages: HealthcarePage[] = [
     sections: [
       {
         title: "The fabric is only the beginning",
+        photo: "making",
         paragraphs: [
           "Choose a verified curtain base cloth, then agree the design, dimensions, heading, fullness and finishing. A healthcare collection can also contain upholstery: we only specify cloth supported for the proposed curtain application.",
           "The base-cloth photographs in our collection show the substrate. Printed designs, their colours and any additional treatments need confirmation for that particular base before manufacture.",
@@ -161,12 +164,21 @@ export const pages: HealthcarePage[] = [
       },
       {
         title: "Agree the complete package",
+        photo: "planning",
         paragraphs: [
           "Define the curtain, track, blind, brackets and controls together. Confirm product evidence, care instructions, working dimensions and the party responsible for each approval. Supply-only orders use approved measurements and specifications.",
         ],
       },
       {
+        title: "Made to your agreed specification",
+        photo: "making",
+        paragraphs: [
+          "Apex manufactures reusable curtains to the approved dimensions, heading and finish. The making specification brings the selected fabric, track arrangement and care requirements together before work begins.",
+        ],
+      },
+      {
         title: "Plan around clinical operations",
+        photo: "fitting",
         paragraphs: [
           "Agree access windows, room closures, dust and noise controls, protection and phasing with the facility. RAMS, insurance and other applicable project documentation can be coordinated where required; share your requirements before the visit.",
         ],
@@ -194,6 +206,7 @@ export const pages: HealthcarePage[] = [
       },
       {
         title: "Maintain the moving parts",
+        photo: "fitting",
         paragraphs: [
           "Report stiff travel, missing stops, damaged carriers, loose supports and blind-control faults. We assess repair against replacement, subject to identification and availability of the correct components.",
         ],
@@ -299,24 +312,20 @@ export const moreSettings = [
   "Rehabilitation & wellbeing clinics",
 ];
 export const serviceSteps = [
-  [
-    "01",
-    "Survey & specify",
-    "Understand the room, its structure and the people who use it.",
-  ],
-  [
-    "02",
-    "Make & source",
-    "Apex-made curtains, carefully matched specialist systems.",
-  ],
-  [
-    "03",
-    "Install & hand over",
-    "Coordinate access, fit the package and check its operation.",
-  ],
-  [
-    "04",
-    "Maintain & repeat",
-    "A clear record for repairs, replacements and future orders.",
-  ],
-];
+  {
+    number: "01", title: "Survey & specify", photo: "survey",
+    text: "Understand the room, its structure and the people who use it.",
+  },
+  {
+    number: "02", title: "Make & source", photo: "making",
+    text: "Apex-made curtains, carefully matched specialist systems.",
+  },
+  {
+    number: "03", title: "Install & hand over", photo: "fitting",
+    text: "Coordinate access, fit the package and check its operation.",
+  },
+  {
+    number: "04", title: "Maintain & repeat", photo: "planning",
+    text: "A clear record for repairs, replacements and future orders.",
+  },
+] satisfies { number: string; title: string; text: string; photo: SettingPhotoKey }[];

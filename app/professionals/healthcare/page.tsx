@@ -179,18 +179,28 @@ export default function Page() {
           <SettingPhotography photo="careLounge" />
         </div>
       </section>
-      <section className="hc-service">
+      <section className="hc-service" id="process">
         <p className="hc-eyebrow">The Apex way</p>
         <h2>Made. Fitted. Looked after.</h2>
         <div className="hc-steps">
-          {serviceSteps.map(([n, title, text]) => (
-            <div key={n}>
-              <span>{n}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </div>
+          {serviceSteps.map((step) => (
+            <article className="hc-process-card" key={step.number}>
+              <figure>
+                <SettingImage photo={step.photo} sizes="(max-width: 530px) 100vw, (max-width: 1000px) 50vw, 25vw" />
+                <figcaption><PhotoCredit photo={step.photo} /></figcaption>
+              </figure>
+              <div className="hc-process-copy">
+                <span className="hc-number">{step.number}</span>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </div>
+            </article>
           ))}
         </div>
+        <p className="hc-small hc-process-note">
+          Illustrative photography of measuring, sewing, window fitting and project planning.
+          These are not photographs of Apex staff or healthcare projects.
+        </p>
         <Link
           className="hc-text-link"
           href={`${HEALTHCARE_ROOT}/survey-installation`}
