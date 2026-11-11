@@ -2,6 +2,15 @@
 
 Prepared 11 November 2026 on `feat/healthcare-screening`, based on current `origin/main` (`cebf62b`). This is a review implementation, not a production release. The owner's later direction selects **Louvolite Ex-Lite** as the initial roller-blind range and a luxury clinical presentation.
 
+- Draft pull request: https://github.com/Nylon1/Apexcurtains/pull/39
+- Review preview: https://apexcurtains-43nc-63x7uv1x2-hamzas-projects-4ef62f35.vercel.app/professionals/healthcare
+- Fabric browser: https://apexcurtains-43nc-63x7uv1x2-hamzas-projects-4ef62f35.vercel.app/professionals/healthcare/fabrics
+- Louvolite range: https://apexcurtains-43nc-63x7uv1x2-hamzas-projects-4ef62f35.vercel.app/professionals/healthcare/roller-blinds
+- Dental settings: https://apexcurtains-43nc-63x7uv1x2-hamzas-projects-4ef62f35.vercel.app/professionals/healthcare/settings/dental-practices
+- Enquiry preview: https://apexcurtains-43nc-63x7uv1x2-hamzas-projects-4ef62f35.vercel.app/professionals/healthcare/quotation
+
+These immutable preview links show application commit `b4b5cd6`. Existing Vercel protection is unchanged. The preview built successfully and the hub was verified in Chrome and with an authenticated HTTP 200 response. GitHub workflow run [42991662359](https://github.com/Nylon1/Apexcurtains/actions/runs/42991662359) passed. The subsequent documentation commit records these results without changing application code. The PR is draft, unmerged, and not authorised for production release.
+
 ## Architecture and scope
 
 The existing Next.js App Router, Apex public editorial palette, navigation and commercial guide are retained. Healthcare lives under `/professionals/healthcare`; no separate Site or CurtainsUK implementation was created. Existing enquiry/Arlo/Atelier endpoints are unchanged. Healthcare uses the existing Supabase/Resend technology and existing `apex_atelier_staff` membership check, with separate private tables, storage bucket and enquiry endpoint.
