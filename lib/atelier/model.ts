@@ -137,7 +137,7 @@ export const jobDataSchema = z.object({
   paymentNotes: text(1000),
   agreedLimitations: text(2000),
   termsVersion: text(40),
-  termsText: text(16000),
+  termsText: text(20000),
   termsProvided: yes,
   termsAccepted: yes,
   termsAcceptedOn: text(30),
