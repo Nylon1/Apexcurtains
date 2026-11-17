@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-12";
+export const atelierTermsVersion = "2026-11-17-13";
 
 export const atelierTermsClauses = [
   {
@@ -57,7 +57,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Installation, dressing and aftercare",
-    body: "At handover we will demonstrate operation and discuss care, curtain dressing and any outstanding snags. Curtains may need careful dressing and time to settle into their natural folds. Follow the sewn-in care labels and the aftercare guide; contact us before attempting an unsuitable cleaning or alteration. We welcome prompt reports of concerns, ideally with photographs, so they can be assessed efficiently. No short reporting period or handover sign-off removes your statutory rights.",
+    body: "Making and fitting bespoke curtains, particularly for large, angled or complex windows, is a delicate and skilled craft involving careful work with fabric, hand-finishing and individual window shapes. We invite customers to work with our team to understand the natural behaviour of their chosen materials and to have realistic expectations of the finished appearance. A very large curtain can have a substantial visual presence in a room, and newly hung fabric may need a reasonable period to relax, settle and form its natural drape. Pleats may benefit from gentle dressing and training, as demonstrated by our installation team, and occasional readjustment after opening or closing the curtains. At handover we will demonstrate how to operate and dress the curtains safely, explain appropriate pleat care and discuss any outstanding snags. We ask customers to allow reasonable time for normal settling while keeping us informed of any concerns so we can assess them and make suitable adjustments where needed. Please follow the sewn-in care labels and the aftercare guide, and contact us before attempting unsuitable cleaning or alterations. Normal fabric settling or pleat training does not excuse incorrect measurements, defective making or fitting, or a failure to meet the agreed specification. Customers do not need to wait for the fabric to settle before reporting a possible defect. We welcome prompt reports of concerns, ideally with photographs, so they can be assessed efficiently. No short reporting period or handover sign-off removes your statutory rights.",
   },
   {
     title: "Customer satisfaction, concerns and statutory rights",
