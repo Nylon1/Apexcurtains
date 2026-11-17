@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-06";
+export const atelierTermsVersion = "2026-11-17-07";
 
 export const atelierTermsClauses = [
   {
@@ -21,7 +21,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Blackout lining and light control",
-    body: "Blackout lining is designed to reduce light transmission through the lined fabric. Unless a specific light-sealing system and performance standard are expressly included in the written order, some daylight may remain around curtain edges, above the track, at joins and where curtains meet walls or floors, particularly in strong sunlight or on complex apex glazing. We will supply the lining and coverage stated in the agreed specification; this explanation does not excuse defective materials or fitting.",
+    body: "Blackout lining is designed to improve the light-blocking performance of curtains by reducing the amount of light passing through the fabric. However, blackout lining does not guarantee complete blackout or total darkness within a room. The overall effectiveness of blackout-lined curtains can be influenced by the size and position of the windows, the intensity and direction of natural sunlight, and the curtain design and installation. In particular, large windows and windows exposed to strong, direct sunlight may experience noticeable light entering around the curtain edges, above the tracks, at the sides, or between curtain panels. This can affect the overall level of darkness achieved, even when blackout lining has been used. This is particularly relevant to apex, triangular and gable-end windows, where the shape and size of the glazing can make complete light exclusion more challenging. Unless a specific light-sealing system and performance standard have been expressly agreed in writing, Apex Curtains does not guarantee complete room blackout. This does not affect our responsibility to supply the agreed lining and install the curtains with reasonable care and skill, or the customer’s statutory rights concerning faulty goods or services.",
   },
   {
     title: "Price and payments",
