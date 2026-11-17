@@ -20,6 +20,9 @@ import {
 import {
   calculateWindow,
   applyDraftAllowances,
+  moneyPence,
+  priceSummary,
+  formatGBP,
   sampleJob,
   jobDataSchema,
   approvalIssues,
@@ -27,6 +30,59 @@ import {
   selectedFabricPhoto,
   type Asset,
 } from "../lib/atelier/model";
+
+
+test("pricing uses integer pence, calculates the remaining balance and rejects overpayment", () => {
+  assert.equal(moneyPence("2470.50"), 247050);
+  assert.equal(moneyPence("0.9"), 90);
+  assert.equal(moneyPence(""), null);
+  assert.equal(moneyPence("12.123"), null);
+  const data = sampleJob().data;
+  data.totalPrice = "2470.00";
+  data.paidAmount = "1235.50";
+  const summary = priceSummary(data);
+  assert.equal(summary.totalPence, 247000);
+  assert.equal(summary.paidPence, 123550);
+  assert.equal(summary.remainingPence, 123450);
+  assert.equal(formatGBP(summary.remainingPence), "£1,234.50");
+  data.paidAmount = "2500.00";
+  assert.ok(approvalChecklist(data).some((c) => c.step === "pricing" && c.message.includes("cannot exceed")));
+});
+
+test("approval requires documented pre-order terms, exact price and explicit acceptance", () => {
+  const data = sampleJob().data;
+  data.totalPrice = "";
+  data.termsProvided = false;
+  data.termsAccepted = false;
+  data.termsAcceptedOn = "";
+  data.termsEvidence = "";
+  const checks = approvalChecklist(data).filter((c) => c.step === "pricing");
+  assert.ok(checks.some((c) => c.message.includes("total price")));
+  assert.ok(checks.some((c) => c.message.includes("received the terms")));
+  assert.ok(checks.some((c) => c.message.includes("explicitly accepted")));
+  assert.ok(checks.some((c) => c.message.includes("acceptance")));
+  data.totalPrice = "3500";
+  data.termsProvided = true;
+  data.termsAccepted = true;
+  data.termsAcceptedOn = "2026-11-17";
+  data.termsEvidence = "Client confirmation by email on 17 Nov, archive ref 123";
+  assert.equal(approvalChecklist(data).filter((c) => c.step === "pricing").length, 0);
+});
+
+test("saved legacy jobs remain readable and historical terms are never silently replaced", () => {
+  const data = sampleJob().data;
+  const { totalPrice, paidAmount, termsVersion, termsText, termsProvided, termsAccepted, termsAcceptedOn, termsEvidence, ...legacy } = data;
+  void totalPrice; void paidAmount; void termsVersion; void termsText;
+  void termsProvided; void termsAccepted; void termsAcceptedOn; void termsEvidence;
+  const restored = jobDataSchema.parse(legacy);
+  assert.equal(restored.totalPrice, "");
+  assert.equal(restored.termsVersion, "");
+  assert.equal(restored.termsText, "");
+  assert.ok(approvalChecklist(restored).some((c) => c.step === "pricing"));
+  const historic = jobDataSchema.parse({ ...data, termsVersion: "2025-01-01", termsText: "Historical customer terms." });
+  assert.equal(historic.termsVersion, "2025-01-01");
+  assert.equal(historic.termsText, "Historical customer terms.");
+});
 
 test("two-sided apex and flat tops use each horizontal run and side height", () => {
   const base = {
