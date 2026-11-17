@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-07";
+export const atelierTermsVersion = "2026-11-17-08";
 
 export const atelierTermsClauses = [
   {
@@ -13,7 +13,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Natural fabric and made-to-measure characteristics",
-    body: "Fabric colour can look different under daylight, artificial light and screen settings. The pile, weave, texture, drape and folds may vary with viewing angle, natural light, fabric weight and settling after installation. Pattern placement, joins and folds depend on the fabric and the dimensions ordered. We will identify material restrictions or conspicuous limitations before you approve an order. This paragraph does not excuse defects, a material mismatch with an agreed sample or a failure to meet the agreed specification.",
+    body: "Fabric colour can look different under daylight, artificial light and screen settings. The pile, weave, texture, drape and folds may vary with viewing angle, natural light, fabric weight and settling after installation. Pattern placement, joins and folds depend on the fabric and the dimensions ordered. We will identify material restrictions or conspicuous limitations before you approve an order. As each curtain is individually hand-sewn and hand-finished, we take care to deliver a high standard of workmanship; however, an occasional small loose finishing thread may remain. A superficial loose thread end can usually be carefully trimmed with small scissors without pulling on the stitching and does not, by itself, affect the quality, durability or operation of the curtain. If the thread appears to be part of a seam, the stitching is coming undone or you are unsure, please contact Apex Curtains rather than cutting it. This paragraph does not excuse loose or defective seams, poor workmanship, a material mismatch with an agreed sample or a failure to meet the agreed specification, and does not affect your statutory rights.",
   },
   {
     title: "Apex, triangular and gable-end windows",
