@@ -18,6 +18,7 @@ import {
   Mail,
   Palette,
   Ruler,
+  ReceiptText,
   Save,
   Search,
   Send,
@@ -31,6 +32,8 @@ import {
   newWindow,
   sampleJob,
   calculateWindow,
+  priceSummary,
+  formatGBP,
   approvalChecklist,
   windowSections,
   type WindowSection,
@@ -48,6 +51,7 @@ import WindowEditor from "./WindowEditor";
 import BrochurePreview from "./BrochurePreview";
 import { normaliseGeometry } from "@/lib/atelier/geometry";
 import { selectedTrack } from "@/lib/atelier/tracks";
+import { atelierTermsText, atelierTermsVersion } from "@/lib/atelier/terms";
 import {
   navigationChecks,
   type SurveyDestination,
@@ -56,6 +60,7 @@ const hero = "/visualiser/double-pinch-gable-desktop.webp";
 const steps = [
   { id: "customer", name: "The client", icon: Home },
   { id: "windows", name: "Rooms & windows", icon: Ruler },
+  { id: "pricing", name: "Pricing & terms", icon: ReceiptText },
   { id: "documents", name: "The collection", icon: FileText },
   { id: "delivery", name: "Review & send", icon: Send },
 ] as const;
@@ -540,6 +545,7 @@ export default function Atelier({
     }
   }
   const issues = draft ? approvalChecklist(draft, assets) : [];
+  const amounts = draft ? priceSummary(draft) : null;
   const navigationIssues =
     draft && navigationAttempt
       ? navigationChecks(draft, assets, navigationAttempt, demo)
@@ -1095,7 +1101,7 @@ export default function Atelier({
                           }
                         : undefined
                     }
-                    onDocuments={() => goToStep("documents")}
+                    onDocuments={() => goToStep("pricing")}
                     onUpload={upload}
                     busy={busy}
                     saving={saving}
@@ -1105,6 +1111,121 @@ export default function Atelier({
                     onPermission={(v) => update("photoPermission", v)}
                   />
                 </>
+              ) : null}
+
+              {step === "pricing" ? (
+                <div className="at-editor-columns">
+                  <div>
+                    <Section
+                      number="01"
+                      title="The agreed price"
+                      description="Record the exact amount agreed with the customer, each payment received and the balance still due. The customer brochure includes these figures."
+                    >
+                      <div className="at-form-grid">
+                        {jf(
+                          "totalPrice",
+                          "Total agreed price (£)",
+                          "money",
+                          false,
+                          "Enter pounds and pence; for example 2470.00.",
+                        )}
+                        {jf(
+                          "paidAmount",
+                          "Paid to date (£)",
+                          "money",
+                          false,
+                          "Include all cleared payments received so far. Enter 0 if none.",
+                        )}
+                      </div>
+                      <div className="at-price-cards" aria-live="polite">
+                        <div><span>Total price</span><strong>{formatGBP(amounts?.totalPence ?? null)}</strong></div>
+                        <div><span>Paid</span><strong>{formatGBP(amounts?.paidPence ?? null)}</strong></div>
+                        <div className="at-price-balance"><span>Remaining balance</span><strong>{formatGBP(amounts?.remainingPence ?? null)}</strong></div>
+                      </div>
+                      {amounts?.remainingPence !== null && amounts?.remainingPence !== undefined && amounts.remainingPence < 0 ? (
+                        <p className="at-warning" role="alert">Payments must not exceed the agreed total. Check the amounts before approval.</p>
+                      ) : null}
+                      <div className="at-form-grid">
+                        {jf(
+                          "paymentNotes",
+                          "Payment reference or agreed payment arrangement",
+                          "textarea",
+                          true,
+                          "Optional: deposit date, invoice reference, or an agreed payment schedule. Avoid entering card details.",
+                        )}
+                      </div>
+                      <p className="at-fine-print">The usual Apex arrangement is a 50% deposit and the balance on installation, unless expressly agreed otherwise. Do not treat a disputed quality issue as waived by payment or handover.</p>
+                    </Section>
+                    <Section
+                      number="02"
+                      title="Made-to-measure terms & conditions"
+                      description="Protect Apex by explaining the actual window limitations, natural fabric behaviour, payment expectations and statutory customer rights before commitment."
+                    >
+                      <div className="at-terms-heading">
+                        <span>Customer terms · Version {draft.termsVersion || "not attached"}</span>
+                        {draft.termsVersion !== atelierTermsVersion || draft.termsText !== atelierTermsText ? (
+                          <Button
+                            secondary
+                            onClick={() => {
+                              setDraft((current) => current ? {
+                                ...current,
+                                termsVersion: atelierTermsVersion,
+                                termsText: atelierTermsText,
+                                termsProvided: false,
+                                termsAccepted: false,
+                                termsAcceptedOn: "",
+                                termsEvidence: "",
+                              } : current);
+                              setSavingFailed(false);
+                              clearSaveError();
+                              setMessage("Terms updated. Reconfirm customer disclosure and acceptance.");
+                            }}
+                          >
+                            Attach current terms
+                          </Button>
+                        ) : null}
+                      </div>
+                      <details className="at-terms-panel">
+                        <summary>Read the exact customer terms included in the brochure</summary>
+                        {draft.termsText ? draft.termsText.split(/\\n\\s*\\n/).filter(Boolean).map((clause, index) => (
+                          <p key={index}>{clause}</p>
+                        )) : (
+                          <p>No terms attached. Use the button above to add the current version.</p>
+                        )}
+                      </details>
+                      <div className="at-terms-confirmation">
+                        <Toggle checked={draft.termsProvided} onChange={(value) => update("termsProvided", value)}>
+                          I confirm the customer was given these exact terms before placing or committing to the order.
+                        </Toggle>
+                        <Toggle checked={draft.termsAccepted} onChange={(value) => update("termsAccepted", value)}>
+                          I have evidence of the customer's explicit acceptance of the agreed specifications, price and terms.
+                        </Toggle>
+                        <div className="at-form-grid">
+                          {jf("termsAcceptedOn", "Date customer accepted", "date")}
+                          {jf(
+                            "termsEvidence",
+                            "Where is acceptance recorded?",
+                            "textarea",
+                            true,
+                            "Required before approval. Record email date, signed order reference or message details. Do not claim acceptance unless you can verify it.",
+                          )}
+                        </div>
+                      </div>
+                      <p className="at-fine-print">The staff checkboxes are an internal audit trail, not the customer's signature. Preserve the actual email, signed order or written message. Changing the terms clears the acknowledgements so they cannot be carried forward silently.</p>
+                    </Section>
+                    <div className="at-survey-footer">
+                      <span className="at-survey-save" role="status">{saveStatus}</span>
+                      <Button onClick={() => goToStep("documents")}>Continue to the collection <ArrowRight size={16}/></Button>
+                    </div>
+                  </div>
+                  <aside className="at-editor-aside at-agreement-aside">
+                    <ShieldCheck size={32}/>
+                    <span className="at-eyebrow">A CLEAR RECORD</span>
+                    <h3>Agreed before we make.</h3>
+                    <p>Attach the agreed specifications, correct price and terms before starting production. Explain apex-specific limitations openly and record any exceptions in the window's fitting notes.</p>
+                    <div className="at-aside-note"><ReceiptText size={19}/><span>Approved revisions preserve the price and wording supplied with the client's collection.</span></div>
+                  </aside>
+                </div>
               ) : null}
               {step === "documents" ? (
                 <>
