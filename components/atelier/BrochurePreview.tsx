@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Fragment } from "react";
 import { selectedTrack } from "@/lib/atelier/tracks";
+import { atelierTermsUrl } from "@/lib/atelier/terms";
 import { additionalCareWindows } from "@/lib/atelier/care";
 import { brochureCareGuide } from "@/lib/atelier/brochure-care";
 import { shapeName, windowOutline } from "@/lib/atelier/geometry";
@@ -241,11 +242,30 @@ export default function BrochurePreview({
           {data.termsText ? (
             <>
               <span className="at-eyebrow">YOUR ORDER TERMS · VERSION {data.termsVersion || "UNRECORDED"}</span>
-              <div className="at-brochure-terms">
-                {data.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
-                  <p key={index}>{clause}</p>
-                ))}
-              </div>
+              {data.termsReferenceOnly ? (
+                <div className="at-brochure-terms">
+                  <p>
+                    Your made-to-measure order is subject to Apex Curtains&apos;
+                    Terms &amp; Conditions. Please read them before confirming
+                    your order at{" "}
+                    <a href={atelierTermsUrl} target="_blank" rel="noopener noreferrer">
+                      {atelierTermsUrl}
+                    </a>.
+                  </p>
+                  <p>
+                    The agreed terms version is {data.termsVersion}.
+                    A separate copy of the exact terms will be provided with
+                    your confirmed order and retained with the order record.
+                    Your statutory consumer rights remain unaffected.
+                  </p>
+                </div>
+              ) : (
+                <div className="at-brochure-terms">
+                  {data.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
+                    <p key={index}>{clause}</p>
+                  ))}
+                </div>
+              )}
               {data.termsAccepted && data.termsAcceptedOn ? (
                 <p className="at-fine-print">Agreement recorded: {data.termsAcceptedOn}</p>
               ) : null}
