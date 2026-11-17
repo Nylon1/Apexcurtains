@@ -1,12 +1,15 @@
 import { z } from "zod";
 import { normaliseGeometry, windowGeometry } from "./geometry";
 import { selectedTrack, trackFinishes } from "./tracks";
+import { atelierTermsText, atelierTermsVersion } from "./terms";
 
 const text = (max = 500) => z.string().trim().max(max).default("");
 const mm = z.number().finite().min(0).max(30000).default(0);
 // A diagonal can exceed either of the two permitted 30 m dimensions.
 const slantMm = z.number().finite().min(0).max(42427).default(0);
 const yes = z.boolean().default(false);
+// Store entered pounds as text to preserve exact pence and partial draft input.
+const money = z.string().trim().max(14).regex(/^\d{0,8}(?:\.\d{0,2})?$/, "Enter an amount in pounds with up to two decimal places.").default("");
 export const windowSchema = z
   .object({
     id: z.string().uuid(),
@@ -128,6 +131,15 @@ export const jobDataSchema = z.object({
   extraTools: text(1500),
   welcomeNote: text(2000),
   voucherDetails: text(700),
+  totalPrice: money,
+  paidAmount: money,
+  paymentNotes: text(1000),
+  termsVersion: text(40),
+  termsText: text(12000),
+  termsProvided: yes,
+  termsAccepted: yes,
+  termsAcceptedOn: text(30),
+  termsEvidence: text(1200),
   choicesConfirmed: yes,
   workroomConfirmed: yes,
   photoPermission: yes,
@@ -142,6 +154,25 @@ export const jobDataSchema = z.object({
 });
 export type SurveyWindow = z.infer<typeof windowSchema>;
 export type JobData = z.infer<typeof jobDataSchema>;
+
+/** Reject incomplete/invalid amounts; never calculate money using binary fractions. */
+export function moneyPence(value: string): number | null {
+  if (!/^\d{1,8}(?:\.\d{0,2})?$/.test(value)) return null;
+  const [pounds, fraction = ""] = value.split(".");
+  return Number(pounds) * 100 + Number((fraction + "00").slice(0, 2));
+}
+export function priceSummary(data: Pick<JobData, "totalPrice" | "paidAmount">) {
+  const totalPence = moneyPence(data.totalPrice);
+  const paidPence = moneyPence(data.paidAmount);
+  return {
+    totalPence,
+    paidPence,
+    remainingPence: totalPence === null || paidPence === null ? null : totalPence - paidPence,
+  };
+}
+export function formatGBP(pence: number | null): string {
+  return pence === null ? "Not recorded" : new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(pence / 100);
+}
 export const standardHemAllowanceMm = 260;
 export function liningMeasurements(w: {
   automaticLining: boolean | null;
@@ -240,6 +271,9 @@ export function newJobData(id: string): JobData {
   return jobDataSchema.parse({
     title: "A new curtain project",
     surveyDate: new Date().toISOString().slice(0, 10),
+    paidAmount: "0",
+    termsVersion: atelierTermsVersion,
+    termsText: atelierTermsText,
     windows: [newWindow(id)],
   });
 }
@@ -382,7 +416,7 @@ export const windowSections = [
 export type WindowSection = (typeof windowSections)[number]["id"];
 export type SurveyCheck = {
   message: string;
-  step: "customer" | "windows" | "delivery";
+  step: "customer" | "windows" | "pricing" | "delivery";
   windowId?: string;
   section?: WindowSection;
 };
@@ -503,6 +537,25 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
   ])
     if (!z.email().safeParse(value).success)
       client(`${label}: enter a valid email address.`);
+  const price = priceSummary(data);
+  const pricing = (message: string) =>
+    issues.push({ step: "pricing", message });
+  if (price.totalPence === null || price.totalPence <= 0)
+    pricing("Enter the agreed total price in pounds.");
+  if (price.paidPence === null)
+    pricing("Record the amount paid, using 0 if no payment has been received.");
+  if (price.remainingPence !== null && price.remainingPence < 0)
+    pricing("The amount paid cannot exceed the total agreed price.");
+  if (!data.termsText.trim() || !data.termsVersion.trim())
+    pricing("Attach the current versioned made-to-measure terms.");
+  if (!data.termsProvided)
+    pricing("Confirm the customer received the terms before committing to the order.");
+  if (!data.termsAccepted)
+    pricing("Confirm the customer has explicitly accepted the agreed terms.");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.termsAcceptedOn))
+    pricing("Record the date of the customer's acceptance.");
+  if (!data.termsEvidence.trim())
+    pricing("Record where the customer's acceptance can be verified (email, signature or message).");
   if (!data.choicesConfirmed)
     issues.push({
       step: "delivery",
@@ -637,6 +690,12 @@ export function sampleJob(): Job {
     address:
       "The Garden House\n12 Example Lane\nSample Village\nIllustrative address only",
     surveyor: "Apex design team",
+    totalPrice: "3970.00",
+    paidAmount: "1985.00",
+    termsProvided: true,
+    termsAccepted: true,
+    termsAcceptedOn: "2026-10-24",
+    termsEvidence: "Fictional demo only: illustration of written acceptance",
     windows: [first, second],
   });
   return {
