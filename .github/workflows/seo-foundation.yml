@@ -61,6 +61,9 @@ jobs:
       - name: Atelier material calculations and release validation
         run: npm run test:atelier
 
+      - name: Render Atelier customer PDF with full made-to-measure terms
+        run: npx tsx scripts/atelier-pdf-preview.mts
+
       - name: Production build
         run: npm run build
 
