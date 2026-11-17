@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-04";
+export const atelierTermsVersion = "2026-11-17-05";
 
 export const atelierTermsClauses = [
   {
@@ -29,7 +29,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Bespoke products and change-of-mind cancellation",
-    body: "Apex curtains are normally manufactured to the measurements and choices specifically agreed for your windows. Under regulation 28(1)(b) of the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, goods genuinely made to your specifications or clearly personalised do not ordinarily carry the standard 14-day change-of-mind cancellation right for distance and off-premises contracts. This exception applies only where its legal conditions are met; standard goods and any separately cancellable services are treated according to the applicable law. If you ask to cancel a bespoke order after placing it, please contact us promptly in writing. We will explain the work and commitments made and consider whether cancellation or a change is practicable. Nothing in this clause affects your rights where goods are faulty, not as described, or services are not performed with reasonable care and skill.",
+    body: "Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind. This applies to products genuinely made to the customer’s individual measurements and specifications, even if manufacture has not yet commenced. Under regulation 28(1)(b) of the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, such bespoke products are exempt from the standard statutory change-of-mind cancellation period for distance and off-premises contracts. Any cancellation of a confirmed bespoke order for change of mind would require Apex Curtains’ express written agreement. If we agree to cancel, any payment reconciliation or compensation will be handled fairly in accordance with section 9 and applicable law; this clause does not automatically make the entire deposit non-refundable. The exception only applies where the goods genuinely meet the legal definition of made-to-specification or clearly personalised goods; any applicable cancellation rights for standard goods or separately cancellable services remain unaffected. Nothing in this clause limits statutory rights concerning faulty or misdescribed goods, inadequate services or a breach of contract by Apex Curtains.",
   },
   {
     title: "Changes to the agreed specification",
