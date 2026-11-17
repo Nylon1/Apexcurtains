@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17";
+export const atelierTermsVersion = "2026-11-17-02";
 
 export const atelierTermsClauses = [
   {
@@ -28,8 +28,28 @@ export const atelierTermsClauses = [
     body: "The agreed total, payments received and remaining balance are shown in your project summary. Our usual arrangement is a 50% deposit to confirm the order and the remainder on installation, unless a different schedule is agreed in writing. We will provide a record of payments. Additional products or work will be charged only if you agree their scope and price in advance. Your legal rights concerning defective goods or services are unaffected.",
   },
   {
-    title: "Changes and cancellation",
-    body: "Please request changes in writing as soon as possible. Once fabric, materials or manufacture have been committed, changes may involve a revised quotation and reasonable, evidenced costs, which we will explain before proceeding. Where the law provides a change-of-mind cancellation right, it remains available. Truly made-to-your-specification goods are normally excluded from the standard 14-day cancellation right for distance and off-premises sales; this exception does not remove your rights if goods are faulty, misdescribed or the service is not performed with reasonable care and skill. Any agreed discretionary cancellation charge will reflect reasonable losses and costs, not an automatic forfeiture of the whole deposit.",
+    title: "Bespoke products and change-of-mind cancellation",
+    body: "Apex curtains are normally manufactured to the measurements and choices specifically agreed for your windows. Under regulation 28(1)(b) of the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, goods genuinely made to your specifications or clearly personalised do not ordinarily carry the standard 14-day change-of-mind cancellation right for distance and off-premises contracts. This exception applies only where its legal conditions are met; standard goods and any separately cancellable services are treated according to the applicable law. If you ask to cancel a bespoke order after placing it, please contact us promptly in writing. We will explain the work and commitments made and consider whether cancellation or a change is practicable. Nothing in this clause affects your rights where goods are faulty, not as described, or services are not performed with reasonable care and skill.",
+  },
+  {
+    title: "Changes to the agreed specification",
+    body: "Please request any changes to measurements, fabrics, colours, headings, linings, tracks, fitting arrangements or other details in writing as early as possible. Once materials have been ordered or manufacturing has begun, a change may not be possible without additional time or costs. We will explain any proposed variation, its price and any revised timescale and obtain your agreement before carrying out extra chargeable work. We will not silently substitute materials or materially alter the agreed design.",
+  },
+  {
+    title: "Our right to end the contract",
+    body: "We may bring the contract to an end by written notice if: (a) you fail to pay an undisputed amount properly due and you still have not paid it within 14 days after a written reminder; (b) despite a reasonable written request and opportunity to respond, you do not provide information needed to measure, manufacture, supply or fit your order within a reasonable time; (c) despite reasonable arrangements, you do not accept or permit delivery within a reasonable time; or (d) despite reasonable arrangements, you do not provide safe and reasonable access required to carry out agreed services within a reasonable time. Before ending the contract under (b), (c) or (d), we will explain the issue in writing and give you a reasonable opportunity to resolve it. We will not use this clause to prevent you exercising statutory rights, including legitimate rights concerning defective goods, services or disputed payment.",
+  },
+  {
+    title: "Payments and compensation when the contract ends",
+    body: "If the contract ends because of a substantial failure by you to meet your contractual obligations, and we are not at fault, we may retain or seek only reasonable sums attributable to our actual, demonstrable net loss arising from that failure. This may include fabric or materials already purchased for your bespoke order, work reasonably undertaken, and any other direct loss we can lawfully recover. We will take reasonable steps to avoid or reduce losses, give you an explanation of the calculation, account for savings or recoveries, and refund any advance payment exceeding the amount properly due. Starting manufacture does not automatically make every advance payment or the full 50% deposit non-refundable. We will not recover the same loss twice or claim an excessive charge. If the contract ends because of our breach, your statutory remedies and any refund rights remain unaffected.",
+  },
+  {
+    title: "If we cannot supply what was agreed",
+    body: "If we cannot supply an agreed fabric, product or service, we will notify you in writing. We may propose an alternative, but we will only provide it if you agree to the substitute and any revised terms. If an agreed item cannot be supplied and you do not accept an alternative, we will refund the sums paid for the item or work that will not be provided, subject to your legal rights and any agreed treatment of completed, separable work. Nothing here limits any additional remedy you may have if we are in breach of contract.",
+  },
+  {
+    title: "Effect of ending the contract",
+    body: "Ending the contract stops future obligations to supply or pay for the cancelled part of the order, except for payments, refunds and other rights or obligations that have already arisen or are intended by their nature to continue. Any lawful claim or remedy arising before the end of the contract remains available to either party. Provisions about payment reconciliation, aftercare, resolving disputes and statutory consumer rights continue so far as applicable.",
   },
   {
     title: "Survey, structure and safe fitting",
