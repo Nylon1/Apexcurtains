@@ -3234,3 +3234,126 @@
     height: 180px;
   }
 }
+
+
+/* Atelier pricing, customer agreement and versioned terms */
+.at-steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.at-price-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0;
+}
+.at-price-cards > div {
+  min-width: 0;
+  border: 1px solid #d9d7cd;
+  padding: 16px 14px;
+  background: #faf8f2;
+}
+.at-price-cards span {
+  display: block;
+  font-size: 11px;
+  color: #60716e;
+  margin-bottom: 9px;
+}
+.at-price-cards strong {
+  display: block;
+  font: 22px/1.2 Georgia, serif;
+  color: #214236;
+  overflow-wrap: anywhere;
+}
+.at-price-cards .at-price-balance {
+  border-color: #b59b6a;
+  background: #ede8dc;
+}
+.at-terms-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: #526860;
+}
+.at-terms-panel {
+  background: #f8f7f1;
+  border: 1px solid #ded8cd;
+  padding: 16px 20px;
+  color: #374f48;
+}
+.at-terms-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.at-terms-panel p {
+  margin: 17px 0 0;
+  white-space: pre-line;
+  font-size: 12px;
+  line-height: 1.75;
+}
+.at-terms-confirmation {
+  padding-top: 22px;
+  display: grid;
+  gap: 18px;
+}
+.at-terms-confirmation .at-form-grid { margin-top: 4px; }
+.at-agreement-aside {
+  padding: 20px;
+  border: 1px solid #d7d5c9;
+  background: #f1f2ea;
+}
+.at-agreement-aside > svg { color: #b59b6a; margin-bottom: 16px; }
+.at-brochure-agreement .at-brochure-contract-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0;
+}
+.at-brochure-contract-summary > div {
+  padding: 17px 12px;
+  background: #f1f0e8;
+  border-top: 3px solid #b59b6a;
+}
+.at-brochure-contract-summary span {
+  display: block;
+  font-size: 11px;
+  color: #62746a;
+}
+.at-brochure-contract-summary strong {
+  display: block;
+  font: 24px Georgia, serif;
+  color: #1b3430;
+  margin-top: 8px;
+}
+.at-brochure-terms {
+  margin-top: 24px;
+  color: #3c5049;
+}
+.at-brochure-terms p {
+  margin: 0 0 20px;
+  white-space: pre-line;
+  font-size: 13px;
+  line-height: 1.75;
+  break-inside: avoid;
+}
+@media (max-width: 680px) {
+  .at-steps {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .at-steps button {
+    flex: 0 0 132px;
+    scroll-snap-align: start;
+    font-size: 11px;
+    padding: 13px 8px;
+  }
+  .at-price-cards, .at-brochure-agreement .at-brochure-contract-summary {
+    grid-template-columns: 1fr;
+  }
+  .at-price-cards strong { font-size: 24px; }
+}
