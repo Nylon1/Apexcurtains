@@ -51,10 +51,13 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsText, /fully manufactured and are ready for installation/);
   assert.match(atelierTermsText, /we will notify you in writing/);
   assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
-  assert.ok(atelierTermsText.length <= 12000);
+  assert.ok(atelierTermsText.length <= 16000);
   assert.match(atelierTermsClauses[1].body, /individually hand-sewn and hand-finished/);
   assert.match(atelierTermsClauses[2].body, /Angled windows are inherently complex to measure, manufacture and fit/);
   assert.match(atelierTermsClauses[2].body, /slight discrepancies in curtain alignment, finished drop, folding or dressing/);
+  assert.match(atelierTermsClauses[2].body, /Pre-existing uneven or sloping floors can make the distance between the curtain hems and the floor appear different/);
+  assert.match(atelierTermsClauses[2].body, /do their best to achieve a smooth and balanced appearance/);
+  assert.match(atelierTermsClauses[2].body, /appropriate dressing or fitting adjustments where practicable/);
   assert.match(atelierTermsClauses[2].body, /notify our installation team of any concerns during fitting or handover/);
   assert.match(atelierTermsClauses[2].body, /contact Apex Curtains afterward/);
   assert.match(atelierTermsClauses[2].body, /does not excuse incorrect measurements, defective work or a failure to meet the agreed specification/);
