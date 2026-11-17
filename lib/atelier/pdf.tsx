@@ -776,6 +776,9 @@ function AgreementPages(p: Props) {
               </View>
             </>
           ) : null}
+          {pageIndex === 0 && d.paymentSchedule ? (
+            <Text style={[s.body, { marginBottom: 16 }]}>Agreed payment schedule: {safe(d.paymentSchedule)}</Text>
+          ) : null}
           {pageIndex === 0 && d.agreedLimitations ? (
             <View style={{ marginBottom: 16, padding: 12, borderWidth: 0.5, borderColor: C.gold }}>
               <Text style={s.label}>PROJECT-SPECIFIC AGREED CONSIDERATIONS</Text>
