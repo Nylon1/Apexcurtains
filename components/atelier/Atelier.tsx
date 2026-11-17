@@ -1210,7 +1210,7 @@ export default function Atelier({
                           </a>
                         </p>
                         <p>
-                          Share this link before the customer confirms the order.
+                          This website link is shown in new customer brochures.
                           The version recorded above is preserved with their project.
                         </p>
                       </div>
@@ -1237,7 +1237,7 @@ export default function Atelier({
                   <aside className="at-editor-aside at-agreement-aside">
                     <ShieldCheck size={32}/>
                     <span className="at-eyebrow">A CLEAR RECORD</span>
-                    <h3>Agreed before we make.</h3>
+                    <h3>A clear project record.</h3>
                     <p>Attach the agreed specifications, correct price and terms before starting production. Explain apex-specific limitations openly and record any exceptions in the window's fitting notes.</p>
                     <div className="at-aside-note"><ReceiptText size={19}/><span>Approved revisions preserve the price and wording supplied with the client's collection.</span></div>
                   </aside>
@@ -1472,8 +1472,8 @@ export default function Atelier({
                         checked={draft.choicesConfirmed}
                         onChange={(v) => update("choicesConfirmed", v)}
                       >
-                        The customer has confirmed the fabric, finish and
-                        accessories.
+                        The selected fabric, finish and accessories match
+                        the recorded order.
                       </Toggle>
                       <Toggle
                         checked={draft.workroomConfirmed}
