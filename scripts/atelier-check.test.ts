@@ -45,6 +45,10 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsClauses[13].body, /inform you as promptly as reasonably possible/);
   assert.match(atelierTermsClauses[13].body, /provide an appropriate solution while minimising any further inconvenience/);
   assert.match(atelierTermsClauses[13].body, /does not affect your statutory consumer rights/);
+  assert.match(atelierTermsClauses[12].body, /raise any concerns with our installation team during fitting or handover/);
+  assert.match(atelierTermsClauses[13].body, /raise them directly with our installation team while they are on site/);
+  assert.match(atelierTermsClauses[13].body, /contact hello@apexcurtains.com with your project reference and a description of the issue/);
+  assert.doesNotMatch(atelierTermsClauses[12].body + atelierTermsClauses[13].body, /photograph/i);
   assert.match(atelierTermsClauses[0].body, /Photographs of previous installations, online images, galleries/);
   assert.match(atelierTermsClauses[0].body, /do not guarantee that curtains made for your own windows will look identical/);
   assert.match(atelierTermsClauses[0].body, /agreed written specification, including any particular appearance or finish expressly agreed/);
@@ -64,7 +68,9 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsClauses[2].body, /Pre-existing uneven or sloping floors can make the distance between the curtain hems and the floor appear different/);
   assert.match(atelierTermsClauses[2].body, /do their best to achieve a smooth and balanced appearance/);
   assert.match(atelierTermsClauses[2].body, /appropriate dressing or fitting adjustments where practicable/);
-  assert.match(atelierTermsClauses[2].body, /notify our installation team of any concerns during fitting or handover/);
+  assert.match(atelierTermsClauses[2].body, /raise any concerns directly with our installation team while they are on site/);
+  assert.match(atelierTermsClauses[2].body, /explain the finished appearance/);
+  assert.match(atelierTermsClauses[2].body, /make suitable adjustments before leaving/);
   assert.match(atelierTermsClauses[2].body, /contact Apex Curtains afterward/);
   assert.match(atelierTermsClauses[2].body, /does not excuse incorrect measurements, defective work or a failure to meet the agreed specification/);
   assert.match(atelierTermsClauses[1].body, /occasional small loose finishing thread may remain/);
