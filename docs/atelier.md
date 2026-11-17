@@ -44,6 +44,20 @@ The screen preview and PDF use the same customer and window specification. Each 
 
 New windows suggest an interior palette from the entered fabric colour, with room-specific advice referencing the recorded hardware and tieback finishes. Eight curated colour families cover neutrals, greens, earth tones, blues, rose, greys, plum and ochre. Ambiguous or supplier-only colour names receive an explicitly labelled neutral starting point for consultant review. Select a palette manually to override the suggestion, or enable automatic suggestions again. Older saved collections retain their selected palettes. Swatches are complementary interior suggestions, never claimed as exact fabric or paint matches.
 
+## Pricing and customer agreement
+
+A dedicated **Pricing & terms** step sits between Rooms & windows and The collection.
+
+- Enter the **total agreed price** and **paid to date** in pounds (maximum two decimals). The **remaining balance** is calculated from integer pence; overpayment blocks approval. Payment references/notes can be recorded internally. Staff must enter `0` if no money has been received.
+- Record **specific agreed limitations** where important (for example, a fixed apex panel, agreed light gap, reduced stack-back, or construction/fixing constraint). These appear in both the customer screen brochure and PDF.
+- New jobs attach the latest **versioned made-to-measure terms** in `lib/atelier/terms.ts`; a copy of the exact text is saved in each job's JSON data and frozen in the approved revision. Earlier saved jobs have empty terms; staff must explicitly attach the current text. Replacing the terms clears prior acceptance confirmations.
+- Before final approval, staff confirm the customer received the terms **before committing**, explicitly accepted them, and record the acceptance date plus a verifiable evidence reference (email, signed order or message). An internal staff tick is **not** a substitute for actual customer acceptance.
+- The brochure and PDF show the agreed total, amount paid, balance, relevant limitations, exact versioned terms, and recorded acceptance date. Staff-only evidence notes do not appear in the customer copy.
+- The usual payment arrangement is 50% on order and 50% on installation unless agreed otherwise. Later payment changes to a job currently create a new draft/revision under the existing Atelier workflow; the approved customer document remains frozen and cannot be silently overwritten.
+- These terms are a starting template for **solicitor review**, not a substitute for legal advice. They preserve statutory remedies, distinguish genuine bespoke goods from standard stock combinations, do not impose a short defects-reporting deadline, and do not call deposits automatically non-refundable.
+
+No SQL migration is required: the additional job fields are stored in the existing JSONB data column and safely default when reading older revisions.
+
 ## Standard curtain care
 
 Every collection automatically includes the same Apex **Dry clean only** guide, so the Colour & care step requires no care source or typed instructions to advance or approve. Optional additional care notes and a supplier reference can still be entered; existing saved notes remain intact and appear in their own brochure section. Blank notes do not generate awaiting-confirmation placeholders or repeated care text for every window.
