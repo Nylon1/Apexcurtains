@@ -229,6 +229,9 @@ export default function BrochurePreview({
             <div><span>Paid to date</span><strong>{formatGBP(amounts.paidPence)}</strong></div>
             <div><span>Balance remaining</span><strong>{formatGBP(amounts.remainingPence)}</strong></div>
           </div>
+          {data.paymentSchedule ? (
+            <p className="at-brochure-intro">Agreed payment schedule: {data.paymentSchedule}</p>
+          ) : null}
           {data.agreedLimitations ? (
             <div className="at-brochure-terms">
               <h4>Project-specific considerations agreed with Apex</h4>
