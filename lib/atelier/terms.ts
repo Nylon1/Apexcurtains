@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-02";
+export const atelierTermsVersion = "2026-11-17-03";
 
 export const atelierTermsClauses = [
   {
@@ -37,7 +37,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Our right to end the contract",
-    body: "We may bring the contract to an end by written notice if: (a) you fail to pay an undisputed amount properly due and you still have not paid it within 14 days after a written reminder; (b) despite a reasonable written request and opportunity to respond, you do not provide information needed to measure, manufacture, supply or fit your order within a reasonable time; (c) despite reasonable arrangements, you do not accept or permit delivery within a reasonable time; or (d) despite reasonable arrangements, you do not provide safe and reasonable access required to carry out agreed services within a reasonable time. Before ending the contract under (b), (c) or (d), we will explain the issue in writing and give you a reasonable opportunity to resolve it. We will not use this clause to prevent you exercising statutory rights, including legitimate rights concerning defective goods, services or disputed payment.",
+    body: "We may bring the contract to an end by written notice if: (a) you fail to pay an undisputed amount properly due after we have notified you in writing of the overdue payment and given you a reasonable opportunity to resolve it; (b) despite a reasonable written request and opportunity to respond, you do not provide information needed to measure, manufacture, supply or fit your order within a reasonable time; (c) despite reasonable arrangements, you do not accept or permit delivery within a reasonable time; or (d) despite reasonable arrangements, you do not provide safe and reasonable access required to carry out agreed services within a reasonable time. Before ending the contract under (b), (c) or (d), we will explain the issue in writing and give you a reasonable opportunity to resolve it. We will not use this clause to prevent you exercising statutory rights, including legitimate rights concerning defective goods, services or disputed payment.",
   },
   {
     title: "Payments and compensation when the contract ends",
