@@ -39,6 +39,10 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.equal(data.termsVersion, atelierTermsVersion);
   assert.equal(data.termsText, atelierTermsText);
   assert.equal(atelierTermsClauses.length, 14);
+  assert.match(atelierTermsClauses[0].body, /Photographs of previous installations, online images, galleries/);
+  assert.match(atelierTermsClauses[0].body, /do not guarantee that curtains made for your own windows will look identical/);
+  assert.match(atelierTermsClauses[0].body, /agreed written specification, including any particular appearance or finish expressly agreed/);
+  assert.match(atelierTermsClauses[0].body, /does not excuse a failure to meet that specification, misleading descriptions or poor workmanship/);
   assert.match(data.paymentSchedule, /remaining 50% is payable on installation day/);
   assert.match(data.paymentSchedule, /outstanding balance exceeds £1,000/);
   assert.match(atelierTermsText, /remaining 50% payable on installation day/);
