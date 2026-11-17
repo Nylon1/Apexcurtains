@@ -150,7 +150,13 @@ test("brochure and email keep the web link while supplying a durable exact-terms
   assert.match(send, /termsPdf = await generateTermsCopy\(source\)/);
   assert.match(send, /\.upload\(termsPdfPath, termsPdf/);
   assert.match(send, /filename: `\$\{job\.reference\}-agreed-terms-v\$\{job\.version\}\.pdf`/);
-  assert.match(staff, /checked=\{draft\.termsReferenceOnly\}/);
+  assert.doesNotMatch(staff, /Download the exact terms copy for this order/);
+  assert.doesNotMatch(staff, /checked=\\{draft\\.termsReferenceOnly\\}/);
+  assert.doesNotMatch(staff, /checked=\\{draft\\.termsProvided\\}/);
+  assert.doesNotMatch(staff, /checked=\\{draft\\.termsAccepted\\}/);
+  assert.doesNotMatch(preview, /Please read them before confirming/);
+  assert.doesNotMatch(renderer, /Please read these terms before confirming your order/);
+  assert.match(staff, /Finalise & send the collection/);
   assert.match(termsRoute, /await requireStaff\(\)/);
   assert.match(termsRoute, /generateTermsCopy\(source\)/);
 });
@@ -172,29 +178,25 @@ test("pricing uses integer pence, calculates the remaining balance and rejects o
   assert.ok(approvalChecklist(data).some((c) => c.step === "pricing" && c.message.includes("cannot exceed")));
 });
 
-test("approval requires documented pre-order terms, exact price and explicit acceptance", () => {
+test("finalisation retains price and versioned terms without customer approval prompts", () => {
   const data = sampleJob().data;
   data.totalPrice = "";
   data.termsProvided = false;
   data.termsAccepted = false;
   data.termsAcceptedOn = "";
   data.termsEvidence = "";
-  const checks = approvalChecklist(data).filter((c) => c.step === "pricing");
-  assert.ok(checks.some((c) => c.message.includes("total price")));
-  assert.ok(checks.some((c) => c.message.includes("received the terms")));
-  assert.ok(checks.some((c) => c.message.includes("explicitly accepted")));
-  assert.ok(checks.some((c) => c.message.includes("acceptance")));
-  // A draft brochure must remain previewable before the customer has signed.
+  const checks = approvalChecklist(data).filter((check) => check.step === "pricing");
+  assert.ok(checks.some((check) => check.message.includes("total price")));
+  assert.ok(checks.every((check) => !/customer received|explicitly accepted|acceptance/i.test(check.message)));
+  // Draft brochures can be previewed without a separate customer approval request.
   assert.equal(
-    navigationChecks(data, [], { step: "documents" }, true).some((c) => c.step === "pricing"),
+    navigationChecks(data, [], { step: "documents" }, true).some((check) => check.step === "pricing"),
     false,
   );
   data.totalPrice = "3500";
-  data.termsProvided = true;
-  data.termsAccepted = true;
-  data.termsAcceptedOn = "2026-11-17";
-  data.termsEvidence = "Client confirmation by email on 17 Nov, archive ref 123";
-  assert.equal(approvalChecklist(data).filter((c) => c.step === "pricing").length, 0);
+  assert.equal(approvalChecklist(data).filter((check) => check.step === "pricing").length, 0);
+  data.termsText = "";
+  assert.ok(approvalChecklist(data).some((check) => check.step === "pricing" && check.message.includes("versioned made-to-measure terms")));
 });
 
 test("saved legacy jobs remain readable and historical terms are never silently replaced", () => {
