@@ -70,6 +70,12 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsClauses[1].body, /occasional small loose finishing thread may remain/);
   assert.match(atelierTermsClauses[1].body, /carefully trimmed with small scissors without pulling on the stitching/);
   assert.match(atelierTermsClauses[1].body, /does not excuse loose or defective seams, poor workmanship/);
+  assert.match(atelierTermsClauses[12].body, /Making and fitting bespoke curtains, particularly for large, angled or complex windows, is a delicate and skilled craft/);
+  assert.match(atelierTermsClauses[12].body, /realistic expectations of the finished appearance/);
+  assert.match(atelierTermsClauses[12].body, /reasonable period to relax, settle and form its natural drape/);
+  assert.match(atelierTermsClauses[12].body, /Pleats may benefit from gentle dressing and training/);
+  assert.match(atelierTermsClauses[12].body, /Customers do not need to wait for the fabric to settle before reporting a possible defect/);
+  assert.match(atelierTermsClauses[12].body, /does not excuse incorrect measurements, defective making or fitting/);
   assert.match(atelierTermsClauses[3].body, /does not guarantee complete blackout or total darkness/);
   assert.match(atelierTermsClauses[3].body, /large windows and windows exposed to strong, direct sunlight/);
   assert.match(atelierTermsClauses[3].body, /light entering around the curtain edges/);
