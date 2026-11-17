@@ -799,10 +799,9 @@ function AgreementPages(p: Props) {
                 {atelierTermsUrl}
               </Link>
               <Text style={[s.small, { color: C.ink }]}>
-                Please read these terms before confirming your order. The applicable
-                version is {d.termsVersion}. A separate PDF copy of this exact
-                agreed version is provided with the order confirmation and
-                retained against your order. Your statutory rights are unaffected.
+                Terms version: {d.termsVersion}. The terms applicable to this
+                order are recorded with your project. Your statutory consumer
+                rights remain unaffected.
               </Text>
             </View>
           ) : null}
@@ -813,7 +812,7 @@ function AgreementPages(p: Props) {
               </Text>
             </View>
           ))}
-          {pageIndex === 0 && d.termsAccepted && d.termsAcceptedOn ? (
+          {pageIndex === 0 && !d.termsReferenceOnly && d.termsAccepted && d.termsAcceptedOn ? (
             <Text style={[s.small, { marginTop: 8 }]}>
               Agreement recorded: {d.termsAcceptedOn}. Your legal rights are unaffected.
             </Text>
