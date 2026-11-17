@@ -28,7 +28,9 @@ export function navigationChecks(
   if (destination.step === "customer" || destination.step === "delivery")
     return [];
   if (destination.step === "pricing") return checks.filter((check) => check.step === "customer" || check.step === "windows");
-  if (destination.step === "documents") return checks;
+  // Draft documents must remain available for the customer to review before accepting.
+  // Pricing/terms evidence is required at approval, not to preview a draft.
+  if (destination.step === "documents") return checks.filter((check) => check.step !== "pricing");
   const index = data.windows.findIndex((w) => w.id === destination.windowId);
   const sectionIndex = windowSections.findIndex(
     (s) => s.id === (destination.section ?? "measure"),
