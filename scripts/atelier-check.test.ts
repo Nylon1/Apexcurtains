@@ -39,6 +39,12 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.equal(data.termsVersion, atelierTermsVersion);
   assert.equal(data.termsText, atelierTermsText);
   assert.equal(atelierTermsClauses.length, 14);
+  assert.equal(atelierTermsClauses[13].title, "Customer satisfaction, concerns and statutory rights");
+  assert.match(atelierTermsClauses[13].body, /take great pride in our workmanship and work tirelessly/);
+  assert.match(atelierTermsClauses[13].body, /unforeseen circumstances beyond our reasonable control/);
+  assert.match(atelierTermsClauses[13].body, /inform you as promptly as reasonably possible/);
+  assert.match(atelierTermsClauses[13].body, /provide an appropriate solution while minimising any further inconvenience/);
+  assert.match(atelierTermsClauses[13].body, /does not affect your statutory consumer rights/);
   assert.match(atelierTermsClauses[0].body, /Photographs of previous installations, online images, galleries/);
   assert.match(atelierTermsClauses[0].body, /do not guarantee that curtains made for your own windows will look identical/);
   assert.match(atelierTermsClauses[0].body, /agreed written specification, including any particular appearance or finish expressly agreed/);
