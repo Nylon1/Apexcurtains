@@ -776,6 +776,12 @@ function AgreementPages(p: Props) {
               </View>
             </>
           ) : null}
+          {pageIndex === 0 && d.agreedLimitations ? (
+            <View style={{ marginBottom: 16, padding: 12, borderWidth: 0.5, borderColor: C.gold }}>
+              <Text style={s.label}>PROJECT-SPECIFIC AGREED CONSIDERATIONS</Text>
+              <Text style={{ fontSize: 9, lineHeight: 1.5 }}>{safe(d.agreedLimitations)}</Text>
+            </View>
+          ) : null}
           <Text style={[s.kicker, { marginTop: 8, marginBottom: 10 }]}>
             CUSTOMER ORDER TERMS · VERSION {d.termsVersion || "NOT RECORDED"}
           </Text>
