@@ -9,7 +9,7 @@ import {
   jobDataSchema,
   selectedFabricPhoto,
 } from "./model";
-import { renderJobPdf } from "./pdf";
+import { renderJobPdf, renderTermsCopyPdf } from "./pdf";
 import { forestTracks } from "./tracks";
 import { loadBrochureImages } from "./brochure-assets";
 import { service, getAssets, AtelierError } from "./server";
@@ -38,6 +38,13 @@ export async function documentSource(job: Job, revision?: number) {
     draft: job.approved_version !== job.version,
   };
 }
+/** The exact agreed terms are retained with the approved revision, not fetched from /terms. */
+export async function generateTermsCopy(source: { job: Job }) {
+  if (!source.job.data.termsText || !source.job.data.termsVersion)
+    throw new AtelierError("The approved terms are missing from this order.", 422);
+  return renderTermsCopyPdf(source.job);
+}
+
 export async function generateDocument(
   kind: DocumentKind,
   source: { job: Job; assets: Asset[]; draft: boolean },
