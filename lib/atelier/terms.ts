@@ -4,12 +4,12 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-08";
+export const atelierTermsVersion = "2026-11-17-09";
 
 export const atelierTermsClauses = [
   {
     title: "Your made-to-measure order",
-    body: "Your order is made individually to the agreed measurements and written specification in your Apex Curtains collection, including window shapes, fabric, lining, heading, tracks, opening arrangement and accessories. Please check those details before authorising production and tell us promptly about any correction required. An illustrative image or design suggestion does not replace the agreed written specification.",
+    body: "Your order is made individually to the agreed measurements and written specification in your Apex Curtains collection, including window shapes, fabric, lining, heading, tracks, opening arrangement and accessories. Please check those details before authorising production and tell us promptly about any correction required. Photographs of previous installations, online images, galleries and examples of our work on our website or social media are provided for inspiration and to illustrate our experience; they do not guarantee that curtains made for your own windows will look identical. Each installation is individually designed and made, and the final appearance may differ because of your window's size, shape, slope, fixing positions, fabric, heading, lining, light conditions, and how the curtains fall, gather and stack. The agreed written specification, including any particular appearance or finish expressly agreed with you, determines what we will supply and fit. This does not excuse a failure to meet that specification, misleading descriptions or poor workmanship.",
   },
   {
     title: "Natural fabric and made-to-measure characteristics",
