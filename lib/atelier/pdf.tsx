@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import React from "react";
 import { selectedTrack } from "./tracks";
+import { atelierTermsUrl } from "./terms";
 import {
   standardCareSummary,
   careHandover,
@@ -739,7 +740,7 @@ function AgreementPages(p: Props) {
   const d = p.job.data;
   if (!d.totalPrice.trim() && !d.termsText.trim()) return null;
   const price = priceSummary(d);
-  const paragraphs = d.termsText.split(/\n\s*\n/).filter(Boolean);
+  const paragraphs = d.termsReferenceOnly ? [] : d.termsText.split(/\n\s*\n/).filter(Boolean);
   const groups: string[][] = [];
   for (let i = 0; i < paragraphs.length; i += 4) {
     groups.push(paragraphs.slice(i, i + 4));
@@ -788,6 +789,23 @@ function AgreementPages(p: Props) {
           <Text style={[s.kicker, { marginTop: 8, marginBottom: 10 }]}>
             CUSTOMER ORDER TERMS · VERSION {d.termsVersion || "NOT RECORDED"}
           </Text>
+          {pageIndex === 0 && d.termsReferenceOnly && d.termsText ? (
+            <View style={{ padding: 16, borderWidth: 0.7, borderColor: C.gold, marginBottom: 18 }}>
+              <Text style={[s.body, { marginBottom: 8 }]}>
+                Your made-to-measure order is subject to the Apex Curtains
+                Terms & Conditions published at:
+              </Text>
+              <Link src={atelierTermsUrl} style={{ fontSize: 12, color: C.forest, marginBottom: 10 }}>
+                {atelierTermsUrl}
+              </Link>
+              <Text style={[s.small, { color: C.ink }]}>
+                Please read these terms before confirming your order. The applicable
+                version is {d.termsVersion}. A separate PDF copy of this exact
+                agreed version is provided with the order confirmation and
+                retained against your order. Your statutory rights are unaffected.
+              </Text>
+            </View>
+          ) : null}
           {clauses.map((clause, index) => (
             <View key={index} wrap={false} style={{ marginBottom: 17 }}>
               <Text style={{ fontSize: 9.4, lineHeight: 1.55, color: C.ink }}>
@@ -1785,6 +1803,51 @@ export function materialTotals(windows: SurveyWindow[]) {
   }
   return [...map.values()];
 }
+/**
+ * Standalone durable contract copy for new link-only customer brochures.
+ * Generated from the frozen order revision, never from the changing website.
+ */
+export async function renderTermsCopyPdf(job: Job) {
+  const d = job.data;
+  const clauses = d.termsText.split(/\n\s*\n/).filter(Boolean);
+  return renderToBuffer(
+    <Document
+      title={`Apex Curtains Order Terms — ${job.reference} — ${d.termsVersion}`}
+      author="Apex Curtains"
+      language="en-GB"
+    >
+      <Page size="A4" style={s.page} wrap>
+        <Brand />
+        <Text style={s.kicker}>APEX CURTAINS · YOUR AGREED CONTRACT TERMS</Text>
+        <Text style={[s.h2, { marginTop: 0, marginBottom: 8 }]}>
+          Made-to-measure Terms & Conditions
+        </Text>
+        <Text style={s.body}>
+          Order reference: {safe(job.reference)}
+        </Text>
+        <Text style={s.body}>
+          Prepared for: {safe(d.customerName)}
+        </Text>
+        <Text style={[s.small, { marginBottom: 18 }]}>
+          Agreed terms version: {safe(d.termsVersion)} · Original reference: {atelierTermsUrl}
+        </Text>
+        <Text style={[s.small, { marginBottom: 20 }]}>
+          This copy records the exact terms applicable to the order reference
+          above. Later amendments to the website do not alter this accepted version.
+        </Text>
+        {clauses.map((clause, index) => (
+          <View key={index} style={{ marginBottom: 15 }}>
+            <Text style={{ fontSize: 9.5, lineHeight: 1.65, color: C.ink }}>
+              {safe(clause)}
+            </Text>
+          </View>
+        ))}
+        <Footer job={job} />
+      </Page>
+    </Document>,
+  );
+}
+
 export async function renderJobPdf(kind: DocumentKind, props: Props) {
   return renderToBuffer(
     kind === "brochure" ? (

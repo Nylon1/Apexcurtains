@@ -51,7 +51,7 @@ import WindowEditor from "./WindowEditor";
 import BrochurePreview from "./BrochurePreview";
 import { normaliseGeometry } from "@/lib/atelier/geometry";
 import { selectedTrack } from "@/lib/atelier/tracks";
-import { atelierTermsText, atelierTermsVersion } from "@/lib/atelier/terms";
+import { atelierTermsText, atelierTermsVersion, atelierTermsUrl } from "@/lib/atelier/terms";
 import {
   navigationChecks,
   type SurveyDestination,
@@ -1201,8 +1201,39 @@ export default function Atelier({
                           </Button>
                         ) : null}
                       </div>
-                      <details className="at-terms-panel">
-                        <summary>Read the exact customer terms included in the brochure</summary>
+                      <div className="at-terms-panel" style={{ marginBottom: 18 }}>
+                        <p>
+                          Customer-facing terms link:{" "}
+                          <a href={atelierTermsUrl} target="_blank" rel="noopener noreferrer">
+                            {atelierTermsUrl}
+                          </a>
+                        </p>
+                        <p>
+                          Share this link before the customer confirms the order.
+                          The version recorded above is preserved with their project.
+                        </p>
+                      </div>
+                      <Toggle
+                        checked={draft.termsReferenceOnly}
+                        onChange={(value) => update("termsReferenceOnly", value)}
+                      >
+                        Show the website link in the client brochure instead
+                        of printing the full terms. When the order is emailed,
+                        the exact approved terms will be attached separately as a PDF.
+                      </Toggle>
+                      {!demo && !dirty && draft.termsText ? (
+                        <p className="at-fine-print" style={{ marginTop: 14 }}>
+                          <a
+                            href={`/api/atelier/jobs/${job.id}/terms?download=1`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Download the exact terms copy for this order (PDF)
+                          </a>
+                        </p>
+                      ) : null}
+                      <details className="at-terms-panel" style={{ marginTop: 16 }}>
+                        <summary>Review the exact full terms stored for this order (staff only)</summary>
                         {draft.termsText ? draft.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
                           <p key={index}>{clause}</p>
                         )) : (
@@ -1227,7 +1258,7 @@ export default function Atelier({
                           )}
                         </div>
                       </div>
-                      <p className="at-fine-print">The staff checkboxes are an internal audit trail, not the customer's signature. Preserve the actual email, signed order or written message. Changing the terms clears the acknowledgements so they cannot be carried forward silently.</p>
+                      <p className="at-fine-print">A website link alone is not a durable copy or proof of acceptance. Preserve the actual email, signed order or written message, and provide the agreed terms PDF. The staff checkboxes are an internal audit trail, not the customer's signature. Updating terms clears earlier acknowledgements.</p>
                     </Section>
                     <div className="at-survey-footer">
                       <span className="at-survey-save" role="status">{saveStatus}</span>

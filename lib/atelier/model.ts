@@ -138,6 +138,8 @@ export const jobDataSchema = z.object({
   agreedLimitations: text(2000),
   termsVersion: text(40),
   termsText: text(20000),
+  // Existing approved revisions retain their full brochure; new jobs use a link plus a separate immutable PDF copy.
+  termsReferenceOnly: yes,
   termsProvided: yes,
   termsAccepted: yes,
   termsAcceptedOn: text(30),
@@ -277,6 +279,7 @@ export function newJobData(id: string): JobData {
     paymentSchedule: "50% deposit to confirm the order. The remaining 50% is payable on installation day. Where the outstanding balance exceeds £1,000, Apex Curtains may require payment up to seven calendar days before installation, once the curtains are fully made and ready for installation, following written confirmation of the amount and due date.",
     termsVersion: atelierTermsVersion,
     termsText: atelierTermsText,
+    termsReferenceOnly: true,
     windows: [newWindow(id)],
   });
 }

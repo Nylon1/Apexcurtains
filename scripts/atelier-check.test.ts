@@ -126,6 +126,35 @@ test("public /terms page renders the same versioned agreement as the Atelier", (
   assert.equal(atelierTermsClauses.length, 16);
 });
 
+test("new Atelier jobs use a website terms reference while historical approvals retain full text", () => {
+  const current = sampleJob().data;
+  assert.equal(current.termsReferenceOnly, true);
+  assert.ok(current.termsText.includes("Roman blinds"));
+  const old = { ...current } as Record<string, unknown>;
+  delete old.termsReferenceOnly;
+  assert.equal(jobDataSchema.parse(old).termsReferenceOnly, false);
+});
+
+test("brochure and email keep the web link while supplying a durable exact-terms PDF", () => {
+  const preview = readFileSync("components/atelier/BrochurePreview.tsx", "utf8");
+  const renderer = readFileSync("lib/atelier/pdf.tsx", "utf8");
+  const send = readFileSync("app/api/atelier/jobs/[id]/send/route.ts", "utf8");
+  const staff = readFileSync("components/atelier/Atelier.tsx", "utf8");
+  const termsRoute = readFileSync("app/api/atelier/jobs/[id]/terms/route.ts", "utf8");
+  assert.match(preview, /data\.termsReferenceOnly \?/);
+  assert.match(preview, /href=\{atelierTermsUrl\}/);
+  assert.match(renderer, /d\.termsReferenceOnly \?/);
+  assert.match(renderer, /<Link src=\{atelierTermsUrl\}/);
+  assert.match(renderer, /export async function renderTermsCopyPdf/);
+  assert.match(renderer, /d\.termsText\.split/);
+  assert.match(send, /termsPdf = await generateTermsCopy\(source\)/);
+  assert.match(send, /\.upload\(termsPdfPath, termsPdf/);
+  assert.match(send, /filename: `\$\{job\.reference\}-agreed-terms-v\$\{job\.version\}\.pdf`/);
+  assert.match(staff, /checked=\{draft\.termsReferenceOnly\}/);
+  assert.match(termsRoute, /await requireStaff\(\)/);
+  assert.match(termsRoute, /generateTermsCopy\(source\)/);
+});
+
 test("pricing uses integer pence, calculates the remaining balance and rejects overpayment", () => {
   assert.equal(moneyPence("2470.50"), 247050);
   assert.equal(moneyPence("0.9"), 90);
