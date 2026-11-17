@@ -4,6 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
+export const atelierTermsUrl = "https://www.apexcurtains.com/terms";
 export const atelierTermsVersion = "2026-11-17-17";
 
 export const atelierTermsClauses = [
