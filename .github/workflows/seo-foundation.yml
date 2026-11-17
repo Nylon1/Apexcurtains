@@ -62,7 +62,7 @@ jobs:
         run: npm run test:atelier
 
       - name: Render Atelier customer PDF with full made-to-measure terms
-        run: npx tsx scripts/atelier-pdf-preview.mts
+        run: node --experimental-default-type=module --import tsx scripts/atelier-pdf-preview.mts
 
       - name: Production build
         run: npm run build
