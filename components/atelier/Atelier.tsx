@@ -1187,7 +1187,7 @@ export default function Atelier({
                       </div>
                       <details className="at-terms-panel">
                         <summary>Read the exact customer terms included in the brochure</summary>
-                        {draft.termsText ? draft.termsText.split(/\\n\\s*\\n/).filter(Boolean).map((clause, index) => (
+                        {draft.termsText ? draft.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
                           <p key={index}>{clause}</p>
                         )) : (
                           <p>No terms attached. Use the button above to add the current version.</p>
