@@ -151,9 +151,9 @@ test("brochure and email keep the web link while supplying a durable exact-terms
   assert.match(send, /\.upload\(termsPdfPath, termsPdf/);
   assert.match(send, /filename: `\$\{job\.reference\}-agreed-terms-v\$\{job\.version\}\.pdf`/);
   assert.doesNotMatch(staff, /Download the exact terms copy for this order/);
-  assert.doesNotMatch(staff, /checked=\\{draft\\.termsReferenceOnly\\}/);
-  assert.doesNotMatch(staff, /checked=\\{draft\\.termsProvided\\}/);
-  assert.doesNotMatch(staff, /checked=\\{draft\\.termsAccepted\\}/);
+  assert.doesNotMatch(staff, /checked=\{draft\.termsReferenceOnly\}/);
+  assert.doesNotMatch(staff, /checked=\{draft\.termsProvided\}/);
+  assert.doesNotMatch(staff, /checked=\{draft\.termsAccepted\}/);
   assert.doesNotMatch(preview, /Please read them before confirming/);
   assert.doesNotMatch(renderer, /Please read these terms before confirming your order/);
   assert.match(staff, /Finalise & send the collection/);
