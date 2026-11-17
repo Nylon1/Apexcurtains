@@ -48,6 +48,10 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsText, /we will notify you in writing/);
   assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
   assert.ok(atelierTermsText.length <= 12000);
+  assert.match(atelierTermsClauses[1].body, /individually hand-sewn and hand-finished/);
+  assert.match(atelierTermsClauses[1].body, /occasional small loose finishing thread may remain/);
+  assert.match(atelierTermsClauses[1].body, /carefully trimmed with small scissors without pulling on the stitching/);
+  assert.match(atelierTermsClauses[1].body, /does not excuse loose or defective seams, poor workmanship/);
   assert.match(atelierTermsClauses[3].body, /does not guarantee complete blackout or total darkness/);
   assert.match(atelierTermsClauses[3].body, /large windows and windows exposed to strong, direct sunlight/);
   assert.match(atelierTermsClauses[3].body, /light entering around the curtain edges/);
