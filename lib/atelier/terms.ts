@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-15";
+export const atelierTermsVersion = "2026-11-17-16";
 
 export const atelierTermsClauses = [
   {
@@ -22,6 +22,10 @@ export const atelierTermsClauses = [
   {
     title: "Roman blinds — white components and rear appearance",
     body: "All Roman blinds supplied by Apex Curtains are made with white tracks, white pockets and white lifting strings/cords as standard, regardless of the colour or pattern of the chosen fabric. These functional components are fitted on the reverse of the blind and may be visible when viewing the back of the blind, including through the window from outside the property. Their visibility can vary with the fabric, lining, lighting and position of the blind. Please consider the appearance of the reverse of the blind before confirming your order. Unless a different arrangement has been expressly agreed in writing, white tracks, pockets and strings/cords form part of the agreed construction. This explanation does not excuse faulty components, poor workmanship or a failure to meet the agreed specification, and does not affect your statutory consumer rights.",
+  },
+  {
+    title: "Roman blinds — measurements, fit and light leakage",
+    body: "Roman blinds are individually made to the measurements provided and agreed for each window. Although we take great care in manufacturing and fitting our Roman blinds, the final appearance may vary depending on the individual window, its dimensions, recess depth, shape, fabric and lining. The way a Roman blind hangs, folds, stacks when raised and sits within the window recess can differ from one installation to another. For Roman blinds fitted inside a window recess, a small clearance is generally required at the sides to allow the blind to operate correctly. As a result, some natural light may enter around the edges, particularly in rooms exposed to strong or direct sunlight. Uneven, irregular or out-of-square window recesses may also affect how the blind sits and the appearance of the gaps around it. A Roman blind fitted inside a recess is not designed to provide a completely sealed or lightproof finish unless a specific light-sealing arrangement has been expressly agreed. We ask customers to raise any concerns with our installation team while they are on site so that we can explain the finished appearance and, where practicable, make suitable adjustments. We remain responsible for manufacturing to the agreed measurements, carrying out any measurements undertaken by Apex Curtains with reasonable care and skill, and fitting the blinds in accordance with the agreed specification. Nothing in this section affects your statutory consumer rights.",
   },
   {
     title: "Blackout lining and light control",
