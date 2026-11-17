@@ -1143,7 +1143,7 @@ export default function Atelier({
                         <div className="at-price-balance"><span>Remaining balance</span><strong>{formatGBP(amounts?.remainingPence ?? null)}</strong></div>
                       </div>
                       {amounts?.remainingPence !== null && amounts?.remainingPence !== undefined && amounts.remainingPence < 0 ? (
-                        <p className="at-warning" role="alert">Payments must not exceed the agreed total. Check the amounts before approval.</p>
+                        <p className="at-warning" role="alert">Payments must not exceed the agreed total. Check the amounts before sending.</p>
                       ) : null}
                       <div className="at-form-grid">
                         {jf(
@@ -1187,6 +1187,7 @@ export default function Atelier({
                                 ...current,
                                 termsVersion: atelierTermsVersion,
                                 termsText: atelierTermsText,
+                                termsReferenceOnly: true,
                                 termsProvided: false,
                                 termsAccepted: false,
                                 termsAcceptedOn: "",
@@ -1194,7 +1195,7 @@ export default function Atelier({
                               } : current);
                               setSavingFailed(false);
                               clearSaveError();
-                              setMessage("Terms updated. Reconfirm customer disclosure and acceptance.");
+                              setMessage("Terms updated. The website link and recorded wording are current.");
                             }}
                           >
                             Attach current terms
@@ -1209,29 +1210,10 @@ export default function Atelier({
                           </a>
                         </p>
                         <p>
-                          Share this link before the customer confirms the order.
+                          This website link is shown in new customer brochures.
                           The version recorded above is preserved with their project.
                         </p>
                       </div>
-                      <Toggle
-                        checked={draft.termsReferenceOnly}
-                        onChange={(value) => update("termsReferenceOnly", value)}
-                      >
-                        Show the website link in the client brochure instead
-                        of printing the full terms. When the order is emailed,
-                        the exact approved terms will be attached separately as a PDF.
-                      </Toggle>
-                      {!demo && !dirty && draft.termsText ? (
-                        <p className="at-fine-print" style={{ marginTop: 14 }}>
-                          <a
-                            href={`/api/atelier/jobs/${job.id}/terms?download=1`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Download the exact terms copy for this order (PDF)
-                          </a>
-                        </p>
-                      ) : null}
                       <details className="at-terms-panel" style={{ marginTop: 16 }}>
                         <summary>Review the exact full terms stored for this order (staff only)</summary>
                         {draft.termsText ? draft.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
@@ -1240,25 +1222,12 @@ export default function Atelier({
                           <p>No terms attached. Use the button above to add the current version.</p>
                         )}
                       </details>
-                      <div className="at-terms-confirmation">
-                        <Toggle checked={draft.termsProvided} onChange={(value) => update("termsProvided", value)}>
-                          I confirm the customer was given these exact terms before placing or committing to the order.
-                        </Toggle>
-                        <Toggle checked={draft.termsAccepted} onChange={(value) => update("termsAccepted", value)}>
-                          I have evidence of the customer's explicit acceptance of the agreed specifications, price and terms.
-                        </Toggle>
-                        <div className="at-form-grid">
-                          {jf("termsAcceptedOn", "Date customer accepted", "date")}
-                          {jf(
-                            "termsEvidence",
-                            "Where is acceptance recorded?",
-                            "textarea",
-                            true,
-                            "Required before approval. Record email date, signed order reference or message details. Do not claim acceptance unless you can verify it.",
-                          )}
-                        </div>
-                      </div>
-                      <p className="at-fine-print">A website link alone is not a durable copy or proof of acceptance. Preserve the actual email, signed order or written message, and provide the agreed terms PDF. The staff checkboxes are an internal audit trail, not the customer's signature. Updating terms clears earlier acknowledgements.</p>
+                      <p className="at-fine-print">
+                        The website link is shown in new customer brochures.
+                        Atelier retains the current versioned terms with the
+                        project record. A copy is included with the order
+                        confirmation email for reference.
+                      </p>
                     </Section>
                     <div className="at-survey-footer">
                       <span className="at-survey-save" role="status">{saveStatus}</span>
@@ -1268,7 +1237,7 @@ export default function Atelier({
                   <aside className="at-editor-aside at-agreement-aside">
                     <ShieldCheck size={32}/>
                     <span className="at-eyebrow">A CLEAR RECORD</span>
-                    <h3>Agreed before we make.</h3>
+                    <h3>A clear project record.</h3>
                     <p>Attach the agreed specifications, correct price and terms before starting production. Explain apex-specific limitations openly and record any exceptions in the window's fitting notes.</p>
                     <div className="at-aside-note"><ReceiptText size={19}/><span>Approved revisions preserve the price and wording supplied with the client's collection.</span></div>
                   </aside>
@@ -1497,14 +1466,14 @@ export default function Atelier({
                     <Section
                       number="01"
                       title="A final, thoughtful check"
-                      description="Release the same approved version to each recipient."
+                      description="Release the same finalised version to each recipient."
                     >
                       <Toggle
                         checked={draft.choicesConfirmed}
                         onChange={(v) => update("choicesConfirmed", v)}
                       >
-                        The customer has confirmed the fabric, finish and
-                        accessories.
+                        The selected fabric, finish and accessories match
+                        the recorded order.
                       </Toggle>
                       <Toggle
                         checked={draft.workroomConfirmed}
@@ -1579,7 +1548,7 @@ export default function Atelier({
                         ) : (
                           <Send size={17} />
                         )}
-                        Approve & send the collection
+                        Finalise & send the collection
                       </Button>
                       <p className="at-fine-print">
                         Each recipient receives a separate email with their PDF.

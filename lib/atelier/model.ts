@@ -555,18 +555,10 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
     pricing("The amount paid cannot exceed the total agreed price.");
   if (!data.termsText.trim() || !data.termsVersion.trim())
     pricing("Attach the current versioned made-to-measure terms.");
-  if (!data.termsProvided)
-    pricing("Confirm the customer received the terms before committing to the order.");
-  if (!data.termsAccepted)
-    pricing("Confirm the customer has explicitly accepted the agreed terms.");
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.termsAcceptedOn))
-    pricing("Record the date of the customer's acceptance.");
-  if (!data.termsEvidence.trim())
-    pricing("Record where the customer's acceptance can be verified (email, signature or message).");
   if (!data.choicesConfirmed)
     issues.push({
       step: "delivery",
-      message: "Confirm the customer's choices.",
+      message: "Verify the selected fabric, finish and accessories match the order.",
     });
   if (!data.workroomConfirmed)
     issues.push({

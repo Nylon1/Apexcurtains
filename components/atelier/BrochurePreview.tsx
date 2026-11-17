@@ -245,17 +245,14 @@ export default function BrochurePreview({
               {data.termsReferenceOnly ? (
                 <div className="at-brochure-terms">
                   <p>
-                    Your made-to-measure order is subject to Apex Curtains&apos;
-                    Terms &amp; Conditions. Please read them before confirming
-                    your order at{" "}
+                    Apex Curtains&apos; Terms &amp; Conditions for your
+                    made-to-measure order are available at{" "}
                     <a href={atelierTermsUrl} target="_blank" rel="noopener noreferrer">
                       {atelierTermsUrl}
                     </a>.
                   </p>
                   <p>
-                    The agreed terms version is {data.termsVersion}.
-                    A separate copy of the exact terms will be provided with
-                    your confirmed order and retained with the order record.
+                    Terms version: {data.termsVersion}.
                     Your statutory consumer rights remain unaffected.
                   </p>
                 </div>
@@ -266,7 +263,7 @@ export default function BrochurePreview({
                   ))}
                 </div>
               )}
-              {data.termsAccepted && data.termsAcceptedOn ? (
+              {!data.termsReferenceOnly && data.termsAccepted && data.termsAcceptedOn ? (
                 <p className="at-fine-print">Agreement recorded: {data.termsAcceptedOn}</p>
               ) : null}
             </>

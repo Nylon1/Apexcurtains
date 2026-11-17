@@ -137,7 +137,7 @@ export async function POST(
               : "Your installation pack";
         const body =
           kind === "brochure"
-            ? `Dear ${job.data.customerName},\n\nThank you for choosing Apex Curtains. Your personal collection is attached, bringing together your chosen details, colour inspiration, aftercare and a 10% voucher for any future order.${termsPdf ? `\n\nYour agreed Terms & Conditions (version ${source.job.data.termsVersion}) are attached separately as a PDF for your records. The current terms are also available at ${atelierTermsUrl}.` : ""}\n\nIf you would like to discuss any detail, simply reply to this email.`
+            ? `Dear ${job.data.customerName},\n\nThank you for choosing Apex Curtains. Your personal collection is attached, bringing together your chosen details, colour inspiration, aftercare and a 10% voucher for any future order.${termsPdf ? `\n\nThe Terms & Conditions applicable to this order (version ${source.job.data.termsVersion}) are attached separately for your records. The current terms are also available at ${atelierTermsUrl}.` : ""}\n\nIf you would like to discuss any detail, simply reply to this email.`
             : `Please find the approved ${kind === "workroom" ? "workroom schedule" : "installation pack"} for ${job.reference}, version ${job.version}. Use the room and window labels throughout. This version supersedes earlier documents for this job.`;
         const attemptRecord = await db
           .from("apex_atelier_deliveries")
