@@ -9,6 +9,7 @@ import {
 } from "../lib/atelier/geometry";
 import { navigationChecks } from "../lib/atelier/navigation";
 import { selectedTrack } from "../lib/atelier/tracks";
+import { atelierTermsClauses, atelierTermsText, atelierTermsVersion } from "../lib/atelier/terms";
 import {
   brochurePalette,
   brochureSpecification,
@@ -31,6 +32,25 @@ import {
   type Asset,
 } from "../lib/atelier/model";
 
+
+
+test("bespoke cancellation and Apex termination wording retains fair consumer safeguards", () => {
+  const data = sampleJob().data;
+  assert.equal(data.termsVersion, atelierTermsVersion);
+  assert.equal(data.termsText, atelierTermsText);
+  assert.equal(atelierTermsClauses.length, 15);
+  assert.ok(atelierTermsText.length <= 12000);
+  assert.match(atelierTermsText, /regulation 28\(1\)\(b\)/);
+  assert.match(atelierTermsText, /14 days after a written reminder/);
+  assert.match(atelierTermsText, /do not provide safe and reasonable access/);
+  assert.match(atelierTermsText, /does not automatically make every advance payment or the full 50% deposit non-refundable/);
+  assert.match(atelierTermsText, /take reasonable steps to avoid or reduce losses/);
+  assert.match(atelierTermsText, /refund any advance payment exceeding the amount properly due/);
+  assert.match(atelierTermsText, /only provide it if you agree to the substitute/);
+  assert.match(atelierTermsText, /additional remedy you may have if we are in breach/);
+  assert.match(atelierTermsText, /faulty, not as described/);
+  assert.doesNotMatch(atelierTermsText, /we will not refund any money you have paid/);
+});
 
 test("pricing uses integer pence, calculates the remaining balance and rejects overpayment", () => {
   assert.equal(moneyPence("2470.50"), 247050);
