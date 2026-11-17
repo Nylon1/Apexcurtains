@@ -133,6 +133,7 @@ export const jobDataSchema = z.object({
   voucherDetails: text(700),
   totalPrice: money,
   paidAmount: money,
+  paymentSchedule: text(700),
   paymentNotes: text(1000),
   agreedLimitations: text(2000),
   termsVersion: text(40),
@@ -273,6 +274,7 @@ export function newJobData(id: string): JobData {
     title: "A new curtain project",
     surveyDate: new Date().toISOString().slice(0, 10),
     paidAmount: "0",
+    paymentSchedule: "50% deposit to confirm the order; remaining balance on installation.",
     termsVersion: atelierTermsVersion,
     termsText: atelierTermsText,
     windows: [newWindow(id)],
@@ -543,6 +545,7 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
     issues.push({ step: "pricing", message });
   if (price.totalPence === null || price.totalPence <= 0)
     pricing("Enter the agreed total price in pounds.");
+  if (!data.paymentSchedule.trim()) pricing("Enter the agreed payment schedule.");
   if (price.paidPence === null)
     pricing("Record the amount paid, using 0 if no payment has been received.");
   if (price.remainingPence !== null && price.remainingPence < 0)
