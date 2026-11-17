@@ -1147,6 +1147,13 @@ export default function Atelier({
                       ) : null}
                       <div className="at-form-grid">
                         {jf(
+                          "paymentSchedule",
+                          "Payment terms agreed with the customer",
+                          "textarea",
+                          true,
+                          "Customer-facing: for example 50% deposit to confirm, remainder on installation. Record any different arrangement.",
+                        )}
+                        {jf(
                           "paymentNotes",
                           "Payment reference or agreed payment arrangement",
                           "textarea",
