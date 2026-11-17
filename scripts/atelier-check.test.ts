@@ -91,7 +91,7 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsClauses[4].body, /alternative blind style, such as a roller blind/);
   assert.match(atelierTermsClauses[4].body, /small clearance is generally required at the sides/);
   assert.match(atelierTermsClauses[4].body, /some natural light may enter around the edges/);
-  assert.match(atelierTermsClauses[4].body, /does not affect your statutory consumer rights/);
+  assert.match(atelierTermsClauses[4].body, /Nothing in this section affects your statutory consumer rights/);
   assert.match(atelierTermsClauses[3].body, /white tracks, white pockets and white lifting strings\/cords/);
   assert.match(atelierTermsClauses[3].body, /may be visible when viewing the back of the blind/);
   assert.match(atelierTermsClauses[3].body, /through the window from outside the property/);
@@ -110,7 +110,7 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsText, /do not provide safe and reasonable access/);
   assert.match(atelierTermsText, /only provide it if you agree to the substitute/);
   assert.match(atelierTermsText, /additional remedy you may have if we are in breach/);
-  assert.match(atelierTermsText, /faulty, not as described/);
+  assert.match(atelierTermsText, /faulty or misdescribed goods/);
   assert.doesNotMatch(atelierTermsText, /we will not refund any money you have paid/);
   assert.doesNotMatch(atelierTermsText, /Payments and compensation when the contract ends/);
   assert.doesNotMatch(atelierTermsText, /in accordance with section 9/);
