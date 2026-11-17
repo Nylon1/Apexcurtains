@@ -1040,7 +1040,7 @@ export default function WindowEditor({
                 ? `Next: ${windowSections[index + 1].name}`
                 : onNextWindow
                   ? "Next window"
-                  : "View the collection"}
+                  : "Continue to pricing"}
               <ArrowRight size={16} />
             </button>
           </div>
@@ -1100,7 +1100,7 @@ export default function WindowEditor({
           )}
         </div>
         <button className="at-text-link" onClick={onDocuments}>
-          See the collection <ArrowRight size={15} />
+          See pricing &amp; terms <ArrowRight size={15} />
         </button>
       </aside>
     </div>

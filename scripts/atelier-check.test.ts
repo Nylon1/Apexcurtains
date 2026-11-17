@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { additionalCareWindows } from "../lib/atelier/care";
 import {
   windowGeometry,
@@ -9,6 +10,7 @@ import {
 } from "../lib/atelier/geometry";
 import { navigationChecks } from "../lib/atelier/navigation";
 import { selectedTrack } from "../lib/atelier/tracks";
+import { atelierTermsClauses, atelierTermsText, atelierTermsVersion } from "../lib/atelier/terms";
 import {
   brochurePalette,
   brochureSpecification,
@@ -20,6 +22,9 @@ import {
 import {
   calculateWindow,
   applyDraftAllowances,
+  moneyPence,
+  priceSummary,
+  formatGBP,
   sampleJob,
   jobDataSchema,
   approvalIssues,
@@ -27,6 +32,156 @@ import {
   selectedFabricPhoto,
   type Asset,
 } from "../lib/atelier/model";
+
+
+
+test("bespoke cancellation and Apex termination wording retains fair consumer safeguards", () => {
+  const data = sampleJob().data;
+  assert.equal(data.termsVersion, atelierTermsVersion);
+  assert.equal(data.termsText, atelierTermsText);
+  assert.equal(atelierTermsClauses.length, 16);
+  assert.equal(atelierTermsClauses[15].title, "Customer satisfaction, concerns and statutory rights");
+  assert.match(atelierTermsClauses[15].body, /take great pride in our workmanship and work tirelessly/);
+  assert.match(atelierTermsClauses[15].body, /unforeseen circumstances beyond our reasonable control/);
+  assert.match(atelierTermsClauses[15].body, /inform you as promptly as reasonably possible/);
+  assert.match(atelierTermsClauses[15].body, /provide an appropriate solution while minimising any further inconvenience/);
+  assert.match(atelierTermsClauses[15].body, /does not affect your statutory consumer rights/);
+  assert.match(atelierTermsClauses[14].body, /raise any concerns with our installation team during fitting or handover/);
+  assert.match(atelierTermsClauses[15].body, /raise them directly with our installation team while they are on site/);
+  assert.match(atelierTermsClauses[15].body, /contact hello@apexcurtains.com with your project reference and a description of the issue/);
+  assert.doesNotMatch(atelierTermsClauses[14].body + atelierTermsClauses[15].body, /photograph/i);
+  assert.match(atelierTermsClauses[0].body, /Photographs of previous installations, online images, galleries/);
+  assert.match(atelierTermsClauses[0].body, /do not guarantee that curtains made for your own windows will look identical/);
+  assert.match(atelierTermsClauses[0].body, /agreed written specification, including any particular appearance or finish expressly agreed/);
+  assert.match(atelierTermsClauses[0].body, /does not excuse a failure to meet that specification, misleading descriptions or poor workmanship/);
+  assert.match(data.paymentSchedule, /remaining 50% is payable on installation day/);
+  assert.match(data.paymentSchedule, /outstanding balance exceeds £1,000/);
+  assert.match(atelierTermsText, /remaining 50% payable on installation day/);
+  assert.match(atelierTermsText, /outstanding balance exceeds £1,000/);
+  assert.match(atelierTermsText, /up to seven calendar days before the confirmed installation date/);
+  assert.match(atelierTermsText, /fully manufactured and are ready for installation/);
+  assert.match(atelierTermsText, /we will notify you in writing/);
+  assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
+  assert.ok(atelierTermsText.length <= 20000);
+  assert.match(atelierTermsClauses[1].body, /individually hand-sewn and hand-finished/);
+  assert.match(atelierTermsClauses[2].body, /Angled windows are inherently complex to measure, manufacture and fit/);
+  assert.match(atelierTermsClauses[2].body, /slight discrepancies in curtain alignment, finished drop, folding or dressing/);
+  assert.match(atelierTermsClauses[2].body, /Pre-existing uneven or sloping floors can make the distance between the curtain hems and the floor appear different/);
+  assert.match(atelierTermsClauses[2].body, /do their best to achieve a smooth and balanced appearance/);
+  assert.match(atelierTermsClauses[2].body, /appropriate dressing or fitting adjustments where practicable/);
+  assert.match(atelierTermsClauses[2].body, /raise any concerns directly with our installation team while they are on site/);
+  assert.match(atelierTermsClauses[2].body, /explain the finished appearance/);
+  assert.match(atelierTermsClauses[2].body, /make suitable adjustments before leaving/);
+  assert.match(atelierTermsClauses[2].body, /If a concern becomes apparent later, please contact Apex Curtains/);
+  assert.match(atelierTermsClauses[2].body, /does not excuse incorrect measurements, defective work or a failure to meet the agreed specification/);
+  assert.match(atelierTermsClauses[1].body, /occasional small loose finishing thread may remain/);
+  assert.match(atelierTermsClauses[1].body, /carefully trimmed with small scissors without pulling on the stitching/);
+  assert.match(atelierTermsClauses[1].body, /does not excuse loose or defective seams, poor workmanship/);
+  assert.match(atelierTermsClauses[14].body, /Making and fitting bespoke curtains, particularly for large, angled or complex windows, is a delicate and skilled craft/);
+  assert.match(atelierTermsClauses[14].body, /realistic expectations of the finished appearance/);
+  assert.match(atelierTermsClauses[14].body, /reasonable period to relax, settle and form its natural drape/);
+  assert.match(atelierTermsClauses[14].body, /Pleats may benefit from gentle dressing and training/);
+  assert.match(atelierTermsClauses[14].body, /Customers do not need to wait for the fabric to settle before reporting a possible defect/);
+  assert.match(atelierTermsClauses[14].body, /does not excuse incorrect measurements, defective making or fitting/);
+  assert.equal(atelierTermsClauses[3].title, "Roman blinds — white components and rear appearance");
+  assert.equal(atelierTermsClauses[4].title, "Roman blinds — measurements, fit and light leakage");
+  assert.match(atelierTermsClauses[4].body, /individually made to the measurements provided and agreed/);
+  assert.match(atelierTermsClauses[4].body, /number, depth, spacing and regularity of the folds can vary/);
+  assert.match(atelierTermsClauses[4].body, /completely smooth, crease-free appearance cannot be guaranteed/);
+  assert.match(atelierTermsClauses[4].body, /alternative blind style, such as a roller blind/);
+  assert.match(atelierTermsClauses[4].body, /small clearance is generally required at the sides/);
+  assert.match(atelierTermsClauses[4].body, /some natural light may enter around the edges/);
+  assert.match(atelierTermsClauses[4].body, /Nothing in this section affects your statutory consumer rights/);
+  assert.match(atelierTermsClauses[3].body, /white tracks, white pockets and white lifting strings\/cords/);
+  assert.match(atelierTermsClauses[3].body, /may be visible when viewing the back of the blind/);
+  assert.match(atelierTermsClauses[3].body, /through the window from outside the property/);
+  assert.match(atelierTermsClauses[3].body, /does not excuse faulty components, poor workmanship/);
+  assert.match(atelierTermsClauses[5].body, /does not guarantee complete blackout or total darkness/);
+  assert.match(atelierTermsClauses[5].body, /large windows and windows exposed to strong, direct sunlight/);
+  assert.match(atelierTermsClauses[5].body, /light entering around the curtain edges/);
+  assert.match(atelierTermsClauses[5].body, /This does not affect our responsibility to supply the agreed lining/);
+  assert.match(atelierTermsText, /regulation 28\(1\)\(b\)/);
+  assert.match(atelierTermsText, /Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind/);
+  assert.match(atelierTermsText, /even if manufacture has not yet commenced/);
+  assert.match(atelierTermsText, /express written agreement/);
+  assert.match(atelierTermsText, /this clause does not automatically make the entire deposit non-refundable/);
+  assert.match(atelierTermsText, /notified you in writing of the overdue payment and given you a reasonable opportunity to resolve it/);
+  assert.doesNotMatch(atelierTermsText, /within 14 days after a written reminder/);
+  assert.match(atelierTermsText, /do not provide safe and reasonable access/);
+  assert.match(atelierTermsText, /only provide it if you agree to the substitute/);
+  assert.match(atelierTermsText, /additional remedy you may have if we are in breach/);
+  assert.match(atelierTermsText, /faulty or misdescribed goods/);
+  assert.doesNotMatch(atelierTermsText, /we will not refund any money you have paid/);
+  assert.doesNotMatch(atelierTermsText, /Payments and compensation when the contract ends/);
+  assert.doesNotMatch(atelierTermsText, /in accordance with section 9/);
+  assert.equal(atelierTermsClauses[10].title, "If we cannot supply what was agreed");
+});
+
+test("public /terms page renders the same versioned agreement as the Atelier", () => {
+  const source = readFileSync("app/terms/page.tsx", "utf8");
+  assert.match(source, /import \{ atelierTermsClauses, atelierTermsVersion \} from "@\/lib\/atelier\/terms"/);
+  assert.match(source, /atelierTermsClauses\.map\(/);
+  assert.match(source, /\{clause\.body\}/);
+  assert.match(source, /\{atelierTermsVersion\}/);
+  assert.equal(atelierTermsClauses.length, 16);
+});
+
+test("pricing uses integer pence, calculates the remaining balance and rejects overpayment", () => {
+  assert.equal(moneyPence("2470.50"), 247050);
+  assert.equal(moneyPence("0.9"), 90);
+  assert.equal(moneyPence(""), null);
+  assert.equal(moneyPence("12.123"), null);
+  const data = sampleJob().data;
+  data.totalPrice = "2470.00";
+  data.paidAmount = "1235.50";
+  const summary = priceSummary(data);
+  assert.equal(summary.totalPence, 247000);
+  assert.equal(summary.paidPence, 123550);
+  assert.equal(summary.remainingPence, 123450);
+  assert.equal(formatGBP(summary.remainingPence), "£1,234.50");
+  data.paidAmount = "2500.00";
+  assert.ok(approvalChecklist(data).some((c) => c.step === "pricing" && c.message.includes("cannot exceed")));
+});
+
+test("approval requires documented pre-order terms, exact price and explicit acceptance", () => {
+  const data = sampleJob().data;
+  data.totalPrice = "";
+  data.termsProvided = false;
+  data.termsAccepted = false;
+  data.termsAcceptedOn = "";
+  data.termsEvidence = "";
+  const checks = approvalChecklist(data).filter((c) => c.step === "pricing");
+  assert.ok(checks.some((c) => c.message.includes("total price")));
+  assert.ok(checks.some((c) => c.message.includes("received the terms")));
+  assert.ok(checks.some((c) => c.message.includes("explicitly accepted")));
+  assert.ok(checks.some((c) => c.message.includes("acceptance")));
+  // A draft brochure must remain previewable before the customer has signed.
+  assert.equal(
+    navigationChecks(data, [], { step: "documents" }, true).some((c) => c.step === "pricing"),
+    false,
+  );
+  data.totalPrice = "3500";
+  data.termsProvided = true;
+  data.termsAccepted = true;
+  data.termsAcceptedOn = "2026-11-17";
+  data.termsEvidence = "Client confirmation by email on 17 Nov, archive ref 123";
+  assert.equal(approvalChecklist(data).filter((c) => c.step === "pricing").length, 0);
+});
+
+test("saved legacy jobs remain readable and historical terms are never silently replaced", () => {
+  const data = sampleJob().data;
+  const { totalPrice, paidAmount, termsVersion, termsText, termsProvided, termsAccepted, termsAcceptedOn, termsEvidence, ...legacy } = data;
+  void totalPrice; void paidAmount; void termsVersion; void termsText;
+  void termsProvided; void termsAccepted; void termsAcceptedOn; void termsEvidence;
+  const restored = jobDataSchema.parse(legacy);
+  assert.equal(restored.totalPrice, "");
+  assert.equal(restored.termsVersion, "");
+  assert.equal(restored.termsText, "");
+  assert.ok(approvalChecklist(restored).some((c) => c.step === "pricing"));
+  const historic = jobDataSchema.parse({ ...data, termsVersion: "2025-01-01", termsText: "Historical customer terms." });
+  assert.equal(historic.termsVersion, "2025-01-01");
+  assert.equal(historic.termsText, "Historical customer terms.");
+});
 
 test("two-sided apex and flat tops use each horizontal run and side height", () => {
   const base = {

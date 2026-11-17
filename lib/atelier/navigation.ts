@@ -8,7 +8,7 @@ import {
 } from "./model";
 
 export type SurveyDestination = {
-  step: "customer" | "windows" | "documents" | "delivery";
+  step: "customer" | "windows" | "pricing" | "documents" | "delivery";
   windowId?: string;
   section?: WindowSection;
 };
@@ -27,13 +27,17 @@ export function navigationChecks(
   );
   if (destination.step === "customer" || destination.step === "delivery")
     return [];
-  if (destination.step === "documents") return checks;
+  if (destination.step === "pricing") return checks.filter((check) => check.step === "customer" || check.step === "windows");
+  // Draft documents must remain available for the customer to review before accepting.
+  // Pricing/terms evidence is required at approval, not to preview a draft.
+  if (destination.step === "documents") return checks.filter((check) => check.step !== "pricing");
   const index = data.windows.findIndex((w) => w.id === destination.windowId);
   const sectionIndex = windowSections.findIndex(
     (s) => s.id === (destination.section ?? "measure"),
   );
   return checks.filter((check) => {
     if (check.step === "customer") return true;
+    if (check.step === "pricing") return false;
     const checkIndex = data.windows.findIndex((w) => w.id === check.windowId);
     return (
       checkIndex < index ||

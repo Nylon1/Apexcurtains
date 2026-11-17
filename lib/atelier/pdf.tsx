@@ -29,6 +29,8 @@ import {
 } from "@react-pdf/renderer";
 import {
   calculateWindow,
+  priceSummary,
+  formatGBP,
   selectedFabricPhoto,
   lengthLabel,
   checklist,
@@ -731,6 +733,80 @@ function BrochureWindow({
   );
 }
 
+
+/** Frozen, customer-facing order statement: terms are stored with each revision. */
+function AgreementPages(p: Props) {
+  const d = p.job.data;
+  if (!d.totalPrice.trim() && !d.termsText.trim()) return null;
+  const price = priceSummary(d);
+  const paragraphs = d.termsText.split(/\n\s*\n/).filter(Boolean);
+  const groups: string[][] = [];
+  for (let i = 0; i < paragraphs.length; i += 4) {
+    groups.push(paragraphs.slice(i, i + 4));
+  }
+  if (!groups.length) groups.push([]);
+  const summaries = [
+    { label: "Total agreed price", amount: price.totalPence },
+    { label: "Paid to date", amount: price.paidPence },
+    { label: "Remaining balance", amount: price.remainingPence },
+  ];
+  return (
+    <Fragment>
+      {groups.map((clauses, pageIndex) => (
+        <Page key={pageIndex} size="A4" style={s.page}>
+          <Brand />
+          <Text style={s.kicker}>YOUR MADE-TO-MEASURE COMMISSION</Text>
+          <Text style={[s.h2, { marginTop: 0 }]}>
+            {pageIndex === 0 ? "Your price & agreement." : "Your agreement · continued."}
+          </Text>
+          {pageIndex === 0 ? (
+            <>
+              <Text style={[s.body, { color: C.muted }]}>
+                {p.job.reference} · Prepared for {safe(d.customerName)}
+              </Text>
+              <View style={[s.grid, { marginTop: 18, marginBottom: 24 }]}>
+                {summaries.map(({ label, amount }) => (
+                  <View key={label} style={{ width: "33.33%", paddingRight: 10, paddingBottom: 12 }}>
+                    <Text style={s.label}>{label}</Text>
+                    <Text style={{ fontFamily: "Times-Roman", fontSize: 18, color: C.forest }}>
+                      {formatGBP(amount)}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            </>
+          ) : null}
+          {pageIndex === 0 && d.paymentSchedule ? (
+            <Text style={[s.body, { marginBottom: 16 }]}>Agreed payment schedule: {safe(d.paymentSchedule)}</Text>
+          ) : null}
+          {pageIndex === 0 && d.agreedLimitations ? (
+            <View style={{ marginBottom: 16, padding: 12, borderWidth: 0.5, borderColor: C.gold }}>
+              <Text style={s.label}>PROJECT-SPECIFIC AGREED CONSIDERATIONS</Text>
+              <Text style={{ fontSize: 9, lineHeight: 1.5 }}>{safe(d.agreedLimitations)}</Text>
+            </View>
+          ) : null}
+          <Text style={[s.kicker, { marginTop: 8, marginBottom: 10 }]}>
+            CUSTOMER ORDER TERMS · VERSION {d.termsVersion || "NOT RECORDED"}
+          </Text>
+          {clauses.map((clause, index) => (
+            <View key={index} wrap={false} style={{ marginBottom: 17 }}>
+              <Text style={{ fontSize: 9.4, lineHeight: 1.55, color: C.ink }}>
+                {safe(clause)}
+              </Text>
+            </View>
+          ))}
+          {pageIndex === 0 && d.termsAccepted && d.termsAcceptedOn ? (
+            <Text style={[s.small, { marginTop: 8 }]}>
+              Agreement recorded: {d.termsAcceptedOn}. Your legal rights are unaffected.
+            </Text>
+          ) : null}
+          <Footer job={p.job} draft={p.draft} />
+        </Page>
+      ))}
+    </Fragment>
+  );
+}
+
 function Brochure(p: Props) {
   const d = p.job.data;
   const rooms = brochureRooms(d.windows);
@@ -948,6 +1024,7 @@ function Brochure(p: Props) {
         ) : null}
         <Footer job={p.job} draft={p.draft} />
       </Page>
+      <AgreementPages {...p} />
       {d.windows.length > 1 ? (
         <Page size="A4" style={s.page}>
           <Brand />

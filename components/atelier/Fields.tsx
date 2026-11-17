@@ -90,10 +90,10 @@ export function Field({
         <input
           aria-label={label}
           aria-required={required}
-          type={type}
+          type={type === "money" ? "text" : type}
           min={type === "number" ? 0 : undefined}
           step={type === "number" ? "any" : undefined}
-          inputMode={type === "number" ? "decimal" : undefined}
+          inputMode={type === "money" || type === "number" ? "decimal" : undefined}
           aria-describedby={hint ? hintId : undefined}
           value={value === 0 && type === "number" && !showZero ? "" : value}
           onChange={(e) => onChange(e.target.value)}
