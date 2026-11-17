@@ -61,6 +61,11 @@ test("approval requires documented pre-order terms, exact price and explicit acc
   assert.ok(checks.some((c) => c.message.includes("received the terms")));
   assert.ok(checks.some((c) => c.message.includes("explicitly accepted")));
   assert.ok(checks.some((c) => c.message.includes("acceptance")));
+  // A draft brochure must remain previewable before the customer has signed.
+  assert.equal(
+    navigationChecks(data, [], { step: "documents" }, true).some((c) => c.step === "pricing"),
+    false,
+  );
   data.totalPrice = "3500";
   data.termsProvided = true;
   data.termsAccepted = true;
