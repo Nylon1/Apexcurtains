@@ -11,6 +11,8 @@ import {
 } from "@/lib/atelier/brochure-icons";
 import {
   selectedFabricPhoto,
+  priceSummary,
+  formatGBP,
   type JobData,
   type Asset,
 } from "@/lib/atelier/model";
@@ -76,6 +78,7 @@ export default function BrochurePreview({
   reference: string;
 }) {
   const [client, address, ...contactDetails] = customerDetails(data);
+  const amounts = priceSummary(data);
   const rooms = brochureRooms(data.windows);
   const orderedWindows = rooms.flatMap((room) => room.windows);
   return (
@@ -212,6 +215,35 @@ export default function BrochurePreview({
         />
         {contactDetails.length ? <Details items={contactDetails} /> : null}
       </section>
+      {data.totalPrice.trim() || data.termsText.trim() ? (
+        <section className="at-brochure-page at-brochure-agreement">
+          <Motif name="scroll" />
+          <span className="at-eyebrow">YOUR MADE-TO-MEASURE ORDER</span>
+          <h3>Price &amp; agreement.</h3>
+          <p className="at-brochure-intro">
+            The price and agreed conditions recorded for your individual Apex
+            Curtains commission. Please retain this copy with your specification.
+          </p>
+          <div className="at-brochure-contract-summary">
+            <div><span>Total agreed price</span><strong>{formatGBP(amounts.totalPence)}</strong></div>
+            <div><span>Paid to date</span><strong>{formatGBP(amounts.paidPence)}</strong></div>
+            <div><span>Balance remaining</span><strong>{formatGBP(amounts.remainingPence)}</strong></div>
+          </div>
+          {data.termsText ? (
+            <>
+              <span className="at-eyebrow">YOUR ORDER TERMS · VERSION {data.termsVersion || "UNRECORDED"}</span>
+              <div className="at-brochure-terms">
+                {data.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
+                  <p key={index}>{clause}</p>
+                ))}
+              </div>
+              {data.termsAccepted && data.termsAcceptedOn ? (
+                <p className="at-fine-print">Agreement recorded: {data.termsAcceptedOn}</p>
+              ) : null}
+            </>
+          ) : null}
+        </section>
+      ) : null}
       {data.windows.length > 1 ? (
         <section className="at-brochure-page at-brochure-directory">
           <Motif name="home" />
