@@ -1151,7 +1151,7 @@ export default function Atelier({
                           "Payment terms agreed with the customer",
                           "textarea",
                           true,
-                          "Customer-facing: for example 50% deposit to confirm, remainder on installation. Record any different arrangement.",
+                          "Customer-facing: 50% deposit, balance on installation day; balances over £1,000 may be due up to 7 days before installation once fully manufactured. Record any agreed exception.",
                         )}
                         {jf(
                           "paymentNotes",
@@ -1161,7 +1161,7 @@ export default function Atelier({
                           "Optional: deposit date, invoice reference, or an agreed payment schedule. Avoid entering card details.",
                         )}
                       </div>
-                      <p className="at-fine-print">The usual Apex arrangement is a 50% deposit and the balance on installation, unless expressly agreed otherwise. Do not treat a disputed quality issue as waived by payment or handover.</p>
+                      <p className="at-fine-print">The standard arrangement is 50% to confirm and 50% on installation day. An outstanding balance over £1,000 may be requested within the 7 days before installation only once manufacture is complete and written notice is given. Prepayment does not remove statutory remedies.</p>
                     </Section>
                     <Section
                       number="02"
