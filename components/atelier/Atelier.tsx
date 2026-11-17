@@ -1214,19 +1214,10 @@ export default function Atelier({
                           The version recorded above is preserved with their project.
                         </p>
                       </div>
-                      <details className="at-terms-panel" style={{ marginTop: 16 }}>
-                        <summary>Review the exact full terms stored for this order (staff only)</summary>
-                        {draft.termsText ? draft.termsText.split(/\n\s*\n/).filter(Boolean).map((clause, index) => (
-                          <p key={index}>{clause}</p>
-                        )) : (
-                          <p>No terms attached. Use the button above to add the current version.</p>
-                        )}
-                      </details>
                       <p className="at-fine-print">
                         The website link is shown in new customer brochures.
-                        Atelier retains the current versioned terms with the
-                        project record. A copy is included with the order
-                        confirmation email for reference.
+                        Atelier retains the applicable versioned terms with the
+                        project record; no separate terms PDF is emailed.
                       </p>
                     </Section>
                     <div className="at-survey-footer">

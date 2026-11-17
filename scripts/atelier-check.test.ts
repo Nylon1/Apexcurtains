@@ -135,7 +135,7 @@ test("new Atelier jobs use a website terms reference while historical approvals 
   assert.equal(jobDataSchema.parse(old).termsReferenceOnly, false);
 });
 
-test("brochure and email keep the web link while supplying a durable exact-terms PDF", () => {
+test("Atelier and customer brochure use a terms website link, with no extra emailed terms PDF", () => {
   const preview = readFileSync("components/atelier/BrochurePreview.tsx", "utf8");
   const renderer = readFileSync("lib/atelier/pdf.tsx", "utf8");
   const send = readFileSync("app/api/atelier/jobs/[id]/send/route.ts", "utf8");
@@ -147,10 +147,13 @@ test("brochure and email keep the web link while supplying a durable exact-terms
   assert.match(renderer, /<Link src=\{atelierTermsUrl\}/);
   assert.match(renderer, /export async function renderTermsCopyPdf/);
   assert.match(renderer, /d\.termsText\.split/);
-  assert.match(send, /termsPdf = await generateTermsCopy\(source\)/);
-  assert.match(send, /\.upload\(termsPdfPath, termsPdf/);
-  assert.match(send, /filename: `\$\{job\.reference\}-agreed-terms-v\$\{job\.version\}\.pdf`/);
+  assert.doesNotMatch(send, /termsPdf|generateTermsCopy|termsPdfPath|agreed-terms-v|atelierTermsUrl/);
+  assert.match(send, /content: pdf/);
+  assert.match(send, /kind === "brochure"/);
   assert.doesNotMatch(staff, /Download the exact terms copy for this order/);
+  assert.match(staff, /href=\{atelierTermsUrl\}/);
+  assert.doesNotMatch(staff, /Review the exact full terms stored for this order/);
+  assert.doesNotMatch(staff, /A copy is included with the order/);
   assert.doesNotMatch(staff, /checked=\{draft\.termsReferenceOnly\}/);
   assert.doesNotMatch(staff, /checked=\{draft\.termsProvided\}/);
   assert.doesNotMatch(staff, /checked=\{draft\.termsAccepted\}/);
