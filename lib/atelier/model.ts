@@ -558,7 +558,7 @@ export function approvalChecklist(data: JobData, assets: Asset[] = []) {
   if (!data.choicesConfirmed)
     issues.push({
       step: "delivery",
-      message: "Confirm the customer's choices.",
+      message: "Verify the selected fabric, finish and accessories match the order.",
     });
   if (!data.workroomConfirmed)
     issues.push({
