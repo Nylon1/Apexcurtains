@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-10";
+export const atelierTermsVersion = "2026-11-17-11";
 
 export const atelierTermsClauses = [
   {
@@ -17,7 +17,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Apex, triangular and gable-end windows",
-    body: "Shaped glazing, angled tracks, unusually high windows and differing drops can affect the way curtains gather, stack back, meet the floor and move. Some shaped installations require fixed sections or a particular opening direction. The actual movement, coverage, tieback positions and any known practical restriction should be recorded in your specification before production. We do not promise a perfectly symmetrical drape where the agreed window geometry is asymmetrical. Angled windows are inherently complex to measure, manufacture and fit. Despite careful workmanship, slight discrepancies in curtain alignment, finished drop, folding or dressing can sometimes occur because of the individual window geometry. Please notify our installation team of any concerns during fitting or handover so they can assess them and do their best to make suitable adjustments or resolve them. You can also contact Apex Curtains afterward if a concern becomes apparent later. This does not excuse incorrect measurements, defective work or a failure to meet the agreed specification, and your statutory rights remain unaffected.",
+    body: "Shaped glazing, angled tracks, unusually high windows and differing drops can affect the way curtains gather, stack back, meet the floor and move. Some shaped installations require fixed sections or a particular opening direction. The actual movement, coverage, tieback positions and any known practical restriction should be recorded in your specification before production. We do not promise a perfectly symmetrical drape where the agreed window geometry is asymmetrical. Angled windows are inherently complex to measure, manufacture and fit. Despite careful workmanship, slight discrepancies in curtain alignment, finished drop, folding or dressing can sometimes occur because of the individual window geometry. Pre-existing uneven or sloping floors can make the distance between the curtain hems and the floor appear different across a window, even when the curtains have been made to the agreed measurements. Our installation team will do their best to achieve a smooth and balanced appearance through appropriate dressing or fitting adjustments where practicable. Please notify our installation team of any concerns during fitting or handover so they can assess them and do their best to make suitable adjustments or resolve them. You can also contact Apex Curtains afterward if a concern becomes apparent later. This does not excuse incorrect measurements, defective work or a failure to meet the agreed specification, and your statutory rights remain unaffected.",
   },
   {
     title: "Blackout lining and light control",
