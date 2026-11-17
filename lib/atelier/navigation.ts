@@ -8,7 +8,7 @@ import {
 } from "./model";
 
 export type SurveyDestination = {
-  step: "customer" | "windows" | "documents" | "delivery";
+  step: "customer" | "windows" | "pricing" | "documents" | "delivery";
   windowId?: string;
   section?: WindowSection;
 };
@@ -27,6 +27,7 @@ export function navigationChecks(
   );
   if (destination.step === "customer" || destination.step === "delivery")
     return [];
+  if (destination.step === "pricing") return checks.filter((check) => check.step === "customer" || check.step === "windows");
   if (destination.step === "documents") return checks;
   const index = data.windows.findIndex((w) => w.id === destination.windowId);
   const sectionIndex = windowSections.findIndex(
@@ -34,6 +35,7 @@ export function navigationChecks(
   );
   return checks.filter((check) => {
     if (check.step === "customer") return true;
+    if (check.step === "pricing") return false;
     const checkIndex = data.windows.findIndex((w) => w.id === check.windowId);
     return (
       checkIndex < index ||
