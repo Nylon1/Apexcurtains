@@ -274,7 +274,7 @@ export function newJobData(id: string): JobData {
     title: "A new curtain project",
     surveyDate: new Date().toISOString().slice(0, 10),
     paidAmount: "0",
-    paymentSchedule: "50% deposit to confirm the order; remaining balance on installation.",
+    paymentSchedule: "50% deposit to confirm the order. The remaining 50% is payable on installation day. Where the outstanding balance exceeds £1,000, Apex Curtains may require payment up to seven calendar days before installation, once the curtains are fully made and ready for installation, following written confirmation of the amount and due date.",
     termsVersion: atelierTermsVersion,
     termsText: atelierTermsText,
     windows: [newWindow(id)],
