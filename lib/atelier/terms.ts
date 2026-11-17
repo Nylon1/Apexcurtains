@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-03";
+export const atelierTermsVersion = "2026-11-17-04";
 
 export const atelierTermsClauses = [
   {
@@ -25,7 +25,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Price and payments",
-    body: "The agreed total, payments received and remaining balance are shown in your project summary. Our usual arrangement is a 50% deposit to confirm the order and the remainder on installation, unless a different schedule is agreed in writing. We will provide a record of payments. Additional products or work will be charged only if you agree their scope and price in advance. Your legal rights concerning defective goods or services are unaffected.",
+    body: "The total agreed price, payments received and outstanding balance are recorded in your Apex Curtains project summary. Our standard payment terms are a 50% deposit to confirm the order, with the remaining 50% payable on installation day. Where the outstanding balance exceeds £1,000, we reserve the right to require payment of that remaining balance up to seven calendar days before the confirmed installation date, but only once the made-to-measure curtains have been fully manufactured and are ready for installation. Where advance payment is required, we will notify you in writing that manufacture is complete, and confirm the outstanding amount and payment due date. This early-payment arrangement forms part of the payment terms disclosed before you confirm your order, and any different arrangement must be agreed in writing. Further products, alterations or services involving additional charges will be agreed with you in advance. Payment before installation does not mean that you accept the quality of the finished installation and does not affect your statutory rights concerning faulty goods or services.",
   },
   {
     title: "Bespoke products and change-of-mind cancellation",
