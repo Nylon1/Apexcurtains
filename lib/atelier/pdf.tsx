@@ -1817,7 +1817,7 @@ export async function renderTermsCopyPdf(job: Job) {
     >
       <Page size="A4" style={s.page} wrap>
         <Brand />
-        <Text style={s.kicker}>APEX CURTAINS · YOUR AGREED CONTRACT TERMS</Text>
+        <Text style={s.kicker}>APEX CURTAINS · TERMS FOR THIS ORDER</Text>
         <Text style={[s.h2, { marginTop: 0, marginBottom: 8 }]}>
           Made-to-measure Terms & Conditions
         </Text>
@@ -1828,11 +1828,11 @@ export async function renderTermsCopyPdf(job: Job) {
           Prepared for: {safe(d.customerName)}
         </Text>
         <Text style={[s.small, { marginBottom: 18 }]}>
-          Agreed terms version: {safe(d.termsVersion)} · Original reference: {atelierTermsUrl}
+          Terms version: {safe(d.termsVersion)} · Website reference: {atelierTermsUrl}
         </Text>
         <Text style={[s.small, { marginBottom: 20 }]}>
           This copy records the exact terms applicable to the order reference
-          above. Later amendments to the website do not alter this accepted version.
+          above. Later amendments to the website do not change this supplied copy.
         </Text>
         {clauses.map((clause, index) => (
           <View key={index} style={{ marginBottom: 15 }}>
