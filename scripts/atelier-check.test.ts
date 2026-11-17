@@ -48,6 +48,10 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsText, /we will notify you in writing/);
   assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
   assert.ok(atelierTermsText.length <= 12000);
+  assert.match(atelierTermsClauses[3].body, /does not guarantee complete blackout or total darkness/);
+  assert.match(atelierTermsClauses[3].body, /large windows and windows exposed to strong, direct sunlight/);
+  assert.match(atelierTermsClauses[3].body, /light entering around the curtain edges/);
+  assert.match(atelierTermsClauses[3].body, /This does not affect our responsibility to supply the agreed lining/);
   assert.match(atelierTermsText, /regulation 28\\(1\\)\\(b\\)/);
   assert.match(atelierTermsText, /Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind/);
   assert.match(atelierTermsText, /even if manufacture has not yet commenced/);
