@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-05";
+export const atelierTermsVersion = "2026-11-17-06";
 
 export const atelierTermsClauses = [
   {
@@ -29,7 +29,7 @@ export const atelierTermsClauses = [
   },
   {
     title: "Bespoke products and change-of-mind cancellation",
-    body: "Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind. This applies to products genuinely made to the customer’s individual measurements and specifications, even if manufacture has not yet commenced. Under regulation 28(1)(b) of the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, such bespoke products are exempt from the standard statutory change-of-mind cancellation period for distance and off-premises contracts. Any cancellation of a confirmed bespoke order for change of mind would require Apex Curtains’ express written agreement. If we agree to cancel, any payment reconciliation or compensation will be handled fairly in accordance with section 9 and applicable law; this clause does not automatically make the entire deposit non-refundable. The exception only applies where the goods genuinely meet the legal definition of made-to-specification or clearly personalised goods; any applicable cancellation rights for standard goods or separately cancellable services remain unaffected. Nothing in this clause limits statutory rights concerning faulty or misdescribed goods, inadequate services or a breach of contract by Apex Curtains.",
+    body: "Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind. This applies to products genuinely made to the customer’s individual measurements and specifications, even if manufacture has not yet commenced. Under regulation 28(1)(b) of the Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013, such bespoke products are exempt from the standard statutory change-of-mind cancellation period for distance and off-premises contracts. Any cancellation of a confirmed bespoke order for change of mind would require Apex Curtains’ express written agreement. If we agree to cancel, the arrangement and any lawful payment consequences will be confirmed in writing; this clause does not automatically make the entire deposit non-refundable. The exception only applies where the goods genuinely meet the legal definition of made-to-specification or clearly personalised goods; any applicable cancellation rights for standard goods or separately cancellable services remain unaffected. Nothing in this clause limits statutory rights concerning faulty or misdescribed goods, inadequate services or a breach of contract by Apex Curtains.",
   },
   {
     title: "Changes to the agreed specification",
@@ -38,10 +38,6 @@ export const atelierTermsClauses = [
   {
     title: "Our right to end the contract",
     body: "We may bring the contract to an end by written notice if: (a) you fail to pay an undisputed amount properly due after we have notified you in writing of the overdue payment and given you a reasonable opportunity to resolve it; (b) despite a reasonable written request and opportunity to respond, you do not provide information needed to measure, manufacture, supply or fit your order within a reasonable time; (c) despite reasonable arrangements, you do not accept or permit delivery within a reasonable time; or (d) despite reasonable arrangements, you do not provide safe and reasonable access required to carry out agreed services within a reasonable time. Before ending the contract under (b), (c) or (d), we will explain the issue in writing and give you a reasonable opportunity to resolve it. We will not use this clause to prevent you exercising statutory rights, including legitimate rights concerning defective goods, services or disputed payment.",
-  },
-  {
-    title: "Payments and compensation when the contract ends",
-    body: "If the contract ends because of a substantial failure by you to meet your contractual obligations, and we are not at fault, we may retain or seek only reasonable sums attributable to our actual, demonstrable net loss arising from that failure. This may include fabric or materials already purchased for your bespoke order, work reasonably undertaken, and any other direct loss we can lawfully recover. We will take reasonable steps to avoid or reduce losses, give you an explanation of the calculation, account for savings or recoveries, and refund any advance payment exceeding the amount properly due. Starting manufacture does not automatically make every advance payment or the full 50% deposit non-refundable. We will not recover the same loss twice or claim an excessive charge. If the contract ends because of our breach, your statutory remedies and any refund rights remain unaffected.",
   },
   {
     title: "If we cannot supply what was agreed",
