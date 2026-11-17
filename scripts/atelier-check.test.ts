@@ -39,6 +39,14 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.equal(data.termsVersion, atelierTermsVersion);
   assert.equal(data.termsText, atelierTermsText);
   assert.equal(atelierTermsClauses.length, 15);
+  assert.match(data.paymentSchedule, /remaining 50% is payable on installation day/);
+  assert.match(data.paymentSchedule, /outstanding balance exceeds £1,000/);
+  assert.match(atelierTermsText, /remaining 50% payable on installation day/);
+  assert.match(atelierTermsText, /outstanding balance exceeds £1,000/);
+  assert.match(atelierTermsText, /up to seven calendar days before the confirmed installation date/);
+  assert.match(atelierTermsText, /fully manufactured and are ready for installation/);
+  assert.match(atelierTermsText, /we will notify you in writing/);
+  assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
   assert.ok(atelierTermsText.length <= 12000);
   assert.match(atelierTermsText, /regulation 28\(1\)\(b\)/);
   assert.match(atelierTermsText, /notified you in writing of the overdue payment and given you a reasonable opportunity to resolve it/);
