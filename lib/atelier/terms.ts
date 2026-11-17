@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-11";
+export const atelierTermsVersion = "2026-11-17-12";
 
 export const atelierTermsClauses = [
   {
@@ -60,8 +60,8 @@ export const atelierTermsClauses = [
     body: "At handover we will demonstrate operation and discuss care, curtain dressing and any outstanding snags. Curtains may need careful dressing and time to settle into their natural folds. Follow the sewn-in care labels and the aftercare guide; contact us before attempting an unsuitable cleaning or alteration. We welcome prompt reports of concerns, ideally with photographs, so they can be assessed efficiently. No short reporting period or handover sign-off removes your statutory rights.",
   },
   {
-    title: "Concerns, remedies and statutory rights",
-    body: "If anything appears wrong, contact hello@apexcurtains.com with your project reference and a description or photographs. We will investigate and arrange an appropriate response. Under the Consumer Rights Act 2015, goods must be of satisfactory quality, fit for purpose and as described; installation services must be performed with reasonable care and skill. Nothing in these terms excludes or restricts your statutory remedies for defects, inadequate services or other legal rights.",
+    title: "Customer satisfaction, concerns and statutory rights",
+    body: "At Apex Curtains, we take great pride in our workmanship and work tirelessly to provide an exemplary service, from initial consultation through to final installation. However, we recognise that unforeseen circumstances beyond our reasonable control may occasionally arise during the manufacture, delivery or installation of bespoke curtains. Should such circumstances occur, we will inform you as promptly as reasonably possible, explain the situation and make every reasonable effort to provide an appropriate solution while minimising any further inconvenience. We are committed to maintaining clear communication throughout the process and resolving any concerns fairly, professionally and with as little disruption as reasonably practicable. This commitment does not affect your statutory consumer rights or our responsibility to provide goods and services in accordance with the agreed contract. If anything appears wrong, contact hello@apexcurtains.com with your project reference and a description or photographs. We will investigate and arrange an appropriate response. Under the Consumer Rights Act 2015, goods must be of satisfactory quality, fit for purpose and as described; installation services must be performed with reasonable care and skill. Nothing in these terms excludes or restricts your statutory remedies for defects, inadequate services or other legal rights.",
   },
 ] as const;
 
