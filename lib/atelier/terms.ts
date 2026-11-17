@@ -4,7 +4,7 @@
  * the exact wording shown to that customer even when the template is updated.
  * Legal review is required before staff use this as a binding contract.
  */
-export const atelierTermsVersion = "2026-11-17-14";
+export const atelierTermsVersion = "2026-11-17-15";
 
 export const atelierTermsClauses = [
   {
@@ -18,6 +18,10 @@ export const atelierTermsClauses = [
   {
     title: "Apex, triangular and gable-end windows",
     body: "Shaped glazing, angled tracks, unusually high windows and differing drops can affect the way curtains gather, stack back, meet the floor and move. Some shaped installations require fixed sections or a particular opening direction. The actual movement, coverage, tieback positions and any known practical restriction should be recorded in your specification before production. We do not promise a perfectly symmetrical drape where the agreed window geometry is asymmetrical. Angled windows are inherently complex to measure, manufacture and fit. Despite careful workmanship, slight discrepancies in curtain alignment, finished drop, folding or dressing can sometimes occur because of the individual window geometry. Pre-existing uneven or sloping floors can make the distance between the curtain hems and the floor appear different across a window, even when the curtains have been made to the agreed measurements. Our installation team will do their best to achieve a smooth and balanced appearance through appropriate dressing or fitting adjustments where practicable. Please raise any concerns directly with our installation team while they are on site so they can explain the finished appearance, discuss the concern with you and, where practicable, make suitable adjustments before leaving. If a concern becomes apparent later, please contact Apex Curtains. This does not excuse incorrect measurements, defective work or a failure to meet the agreed specification, and your statutory rights remain unaffected.",
+  },
+  {
+    title: "Roman blinds — white components and rear appearance",
+    body: "All Roman blinds supplied by Apex Curtains are made with white tracks, white pockets and white lifting strings/cords as standard, regardless of the colour or pattern of the chosen fabric. These functional components are fitted on the reverse of the blind and may be visible when viewing the back of the blind, including through the window from outside the property. Their visibility can vary with the fabric, lining, lighting and position of the blind. Please consider the appearance of the reverse of the blind before confirming your order. Unless a different arrangement has been expressly agreed in writing, white tracks, pockets and strings/cords form part of the agreed construction. This explanation does not excuse faulty components, poor workmanship or a failure to meet the agreed specification, and does not affect your statutory consumer rights.",
   },
   {
     title: "Blackout lining and light control",
