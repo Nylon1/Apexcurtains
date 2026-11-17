@@ -7,7 +7,8 @@ import {
   checkOrigin,
   AtelierError,
 } from "@/lib/atelier/server";
-import { documentSource, generateDocument } from "@/lib/atelier/documents";
+import { documentSource, generateDocument, generateTermsCopy } from "@/lib/atelier/documents";
+import { atelierTermsUrl } from "@/lib/atelier/terms";
 import type { DocumentKind } from "@/lib/atelier/model";
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -107,6 +108,27 @@ export async function POST(
             .eq("id", row.id);
           if (saved.error) throw saved.error;
         }
+        // The brochure links to the live terms page, while this separate PDF
+        // supplies the exact approved version on a durable medium.
+        let termsPdf: Buffer | null = null;
+        if (kind === "brochure" && source.job.data.termsReferenceOnly) {
+          const termsPdfPath = `${job.id}/documents/v${job.version}-terms.pdf`;
+          const storedTerms = await db.storage
+            .from("apex-atelier")
+            .download(termsPdfPath);
+          if (!storedTerms.error && storedTerms.data) {
+            termsPdf = Buffer.from(await storedTerms.data.arrayBuffer());
+          } else {
+            termsPdf = await generateTermsCopy(source);
+            const savedTerms = await db.storage
+              .from("apex-atelier")
+              .upload(termsPdfPath, termsPdf, {
+                contentType: "application/pdf",
+                upsert: true,
+              });
+            if (savedTerms.error) throw savedTerms.error;
+          }
+        }
         const title =
           kind === "brochure"
             ? "Your personal curtain collection"
@@ -115,7 +137,7 @@ export async function POST(
               : "Your installation pack";
         const body =
           kind === "brochure"
-            ? `Dear ${job.data.customerName},\n\nThank you for choosing Apex Curtains. Your personal collection is attached, bringing together your chosen details, colour inspiration, aftercare and a 10% voucher for any future order.\n\nIf you would like to discuss any detail, simply reply to this email.`
+            ? `Dear ${job.data.customerName},\n\nThank you for choosing Apex Curtains. Your personal collection is attached, bringing together your chosen details, colour inspiration, aftercare and a 10% voucher for any future order.${termsPdf ? `\n\nYour agreed Terms & Conditions (version ${source.job.data.termsVersion}) are attached separately as a PDF for your records. The current terms are also available at ${atelierTermsUrl}.` : ""}\n\nIf you would like to discuss any detail, simply reply to this email.`
             : `Please find the approved ${kind === "workroom" ? "workroom schedule" : "installation pack"} for ${job.reference}, version ${job.version}. Use the room and window labels throughout. This version supersedes earlier documents for this job.`;
         const attemptRecord = await db
           .from("apex_atelier_deliveries")
@@ -138,6 +160,12 @@ export async function POST(
                 filename: `${job.reference}-${kind}-v${job.version}.pdf`,
                 content: pdf,
               },
+              ...(termsPdf
+                ? [{
+                    filename: `${job.reference}-agreed-terms-v${job.version}.pdf`,
+                    content: termsPdf,
+                  }]
+                : []),
             ],
           },
           { idempotencyKey: `atelier-${row.id}` },
