@@ -10,8 +10,8 @@ export default function Page() {
       section1Text="Website content is provided for general guidance and may be updated over time. Final specifications and quotations depend on the actual project."
       section2Title="Quotations and advice"
       section2Text="Indicative guidance does not replace a full assessment. Final recommendations may change depending on measurements, window conditions and client choices."
-      section3Title="Limitations"
-      section3Text="We aim to provide clear and accurate information, but bespoke projects vary and final outcomes depend on confirmed details. All defects in made-to-measure products must be reported within 48 hours of installation."
+      section3Title="Made-to-measure orders and consumer rights"
+      section3Text="Bespoke curtain orders are governed by the specific written quotation, agreed window specifications and the customer terms supplied before an order is confirmed. Please tell us promptly about any concerns after installation so we can investigate. No 48-hour reporting deadline limits your statutory rights to satisfactory goods and services performed with reasonable care and skill."
     />
   );
 }
