@@ -1161,6 +1161,15 @@ export default function Atelier({
                       title="Made-to-measure terms & conditions"
                       description="Protect Apex by explaining the actual window limitations, natural fabric behaviour, payment expectations and statutory customer rights before commitment."
                     >
+                      <div className="at-form-grid" style={{ marginBottom: 20 }}>
+                        {jf(
+                          "agreedLimitations",
+                          "Project-specific agreed limitations or special expectations",
+                          "textarea",
+                          true,
+                          "For example: fixed angled panel, light gap at an apex, approved floor clearance or a known structural limitation. This appears in the customer brochure.",
+                        )}
+                      </div>
                       <div className="at-terms-heading">
                         <span>Customer terms · Version {draft.termsVersion || "not attached"}</span>
                         {draft.termsVersion !== atelierTermsVersion || draft.termsText !== atelierTermsText ? (
