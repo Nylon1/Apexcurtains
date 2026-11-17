@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { additionalCareWindows } from "../lib/atelier/care";
 import {
   windowGeometry,
@@ -71,7 +72,7 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsClauses[2].body, /raise any concerns directly with our installation team while they are on site/);
   assert.match(atelierTermsClauses[2].body, /explain the finished appearance/);
   assert.match(atelierTermsClauses[2].body, /make suitable adjustments before leaving/);
-  assert.match(atelierTermsClauses[2].body, /contact Apex Curtains afterward/);
+  assert.match(atelierTermsClauses[2].body, /If a concern becomes apparent later, please contact Apex Curtains/);
   assert.match(atelierTermsClauses[2].body, /does not excuse incorrect measurements, defective work or a failure to meet the agreed specification/);
   assert.match(atelierTermsClauses[1].body, /occasional small loose finishing thread may remain/);
   assert.match(atelierTermsClauses[1].body, /carefully trimmed with small scissors without pulling on the stitching/);
@@ -114,6 +115,15 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.doesNotMatch(atelierTermsText, /Payments and compensation when the contract ends/);
   assert.doesNotMatch(atelierTermsText, /in accordance with section 9/);
   assert.equal(atelierTermsClauses[10].title, "If we cannot supply what was agreed");
+});
+
+test("public /terms page renders the same versioned agreement as the Atelier", () => {
+  const source = readFileSync("app/terms/page.tsx", "utf8");
+  assert.match(source, /import \{ atelierTermsClauses, atelierTermsVersion \} from "@\/lib\/atelier\/terms"/);
+  assert.match(source, /atelierTermsClauses\.map\(/);
+  assert.match(source, /\{clause\.body\}/);
+  assert.match(source, /\{atelierTermsVersion\}/);
+  assert.equal(atelierTermsClauses.length, 16);
 });
 
 test("pricing uses integer pence, calculates the remaining balance and rejects overpayment", () => {
