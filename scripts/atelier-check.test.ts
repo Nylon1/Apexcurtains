@@ -48,7 +48,11 @@ test("bespoke cancellation and Apex termination wording retains fair consumer sa
   assert.match(atelierTermsText, /we will notify you in writing/);
   assert.match(atelierTermsText, /Payment before installation does not mean that you accept the quality/);
   assert.ok(atelierTermsText.length <= 12000);
-  assert.match(atelierTermsText, /regulation 28\(1\)\(b\)/);
+  assert.match(atelierTermsText, /regulation 28\\(1\\)\\(b\\)/);
+  assert.match(atelierTermsText, /Once an order has been confirmed by Apex Curtains, the customer cannot cancel the order simply because they have changed their mind/);
+  assert.match(atelierTermsText, /even if manufacture has not yet commenced/);
+  assert.match(atelierTermsText, /express written agreement/);
+  assert.match(atelierTermsText, /this clause does not automatically make the entire deposit non-refundable/);
   assert.match(atelierTermsText, /notified you in writing of the overdue payment and given you a reasonable opportunity to resolve it/);
   assert.doesNotMatch(atelierTermsText, /within 14 days after a written reminder/);
   assert.match(atelierTermsText, /do not provide safe and reasonable access/);
