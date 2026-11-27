@@ -65,6 +65,10 @@
 .front-expertise dd { color: #eee9df; margin: 0; }
 .front-expertise-links { display: flex; flex-wrap: wrap; gap: .45rem 1.5rem; }
 .front-expertise-links a { text-decoration: underline; text-underline-offset: .25em; padding-block: .4rem; }
+.front-heading-detail { margin-bottom: 1rem; }
+.front-heading-detail summary { width: fit-content; cursor: pointer; padding-block: .5rem; text-underline-offset: .22em; }
+.front-heading-detail summary:hover { text-decoration: underline; }
+.front-heading-detail figure { margin-block: .5rem 1.5rem; }
 .front-demonstration { padding-block: var(--front-space); background: #e9e3d6; }
 .front-demonstration .arch-tool { margin: 0; padding: 0; background: transparent; }
 .front-demonstration .arch-motion-grid { grid-template-columns: 1.35fr 1fr; align-items: center; gap: var(--studio-gap); }

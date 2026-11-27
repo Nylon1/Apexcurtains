@@ -47,9 +47,10 @@ const specialisms = [
   {
     title: "Tall and double-height curtains", href: "/tall-window-curtains",
     detail: "In stairwells and two-storey rooms, the hanging point, finished drop and access are three separate decisions.",
-    src: "/projects/tall-window-curtains-installation.jpg", caption: "Tall residential glazing · Installation and illustrative elevation",
-    width: 720, height: 1280, alt: "Pale floor-length curtains flank tall black-framed glazing in a sunlit sitting room",
-    drawing: { src: "/architecture/tall-glazing-elevation.svg", alt: "Illustration distinguishing curtain drop from the height of the glazed opening" }, film: "/projects/tall-window-curtains-installation.mp4",
+    src: "/projects/tall-dining-room-curtains.jpg", caption: "Double-height dining room · Illustrative elevation alongside",
+    width: 1085, height: 1280, alt: "Tall tied-back curtains reveal a continuous voile behind a dining table, beside a timber wall and an upper landing",
+    drawing: { src: "/architecture/tall-glazing-elevation.svg", alt: "Illustration distinguishing curtain drop from the height of the glazed opening" },
+    film: { src: "/projects/tall-window-curtains-installation.mp4", label: "Watch another tall-window installation · 14 seconds" },
   },
   {
     title: "Motorised curtain systems", href: "/motorised-curtain-systems",
@@ -57,6 +58,7 @@ const specialisms = [
     src: "/projects/curtain-and-voile-layering-study.jpg", caption: "Curtain and voile study · Illustrative track section",
     width: 720, height: 1280, alt: "Daylight filtering through white voile beside a darker full-length curtain",
     drawing: { src: "/architecture/layered-track-section.svg", alt: "Illustration of a curtain and voile suspended from separate level tracks" },
+    film: { src: "/projects/motorised-voiles-two-storey-room.mp4", label: "Watch motorised voiles in a two-storey room · 13 seconds" },
   },
   {
     title: "Oversized architectural curtains", href: "/oversized-architectural-curtains",
@@ -102,7 +104,7 @@ export default function HomePage() {
                 <h3>{item.title}<span aria-hidden="true">↗</span></h3>
               </Link>
               <p>{item.detail}</p>
-              {item.film && <a className="front-film-link" href={item.film}>Watch the installation film · 14 seconds <span aria-hidden="true">↗</span></a>}
+              {item.film && <a className="front-film-link" href={item.film.src}>{item.film.label} <span aria-hidden="true">↗</span></a>}
             </article>
           ))}
         </div>
@@ -121,6 +123,13 @@ export default function HomePage() {
               <div><dt>Workroom and finish</dt><dd>On long drops we set out the fabric joins and pattern repeat before cutting. Across a wide opening, the lining and fullness determine how much cloth the track must carry.</dd></div>
               <div><dt>Tracks and high-level fitting</dt><dd>Our fitting work includes luxury apartments in central London. For each project we assess the fixing surface, track load and access for fitting, dressing and maintenance.</dd></div>
             </dl>
+            <details className="front-heading-detail">
+              <summary>See a pleated heading up close</summary>
+              <figure>
+                <Image src="/projects/pleated-heading-cornice.webp" alt="Pale pleats at either side of a dark pole just below an ornate cornice" width={720} height={408} sizes="(max-width: 760px) 90vw, 40vw" />
+                <figcaption>A separate Apex installation. The pleats set the spacing of the folds below the cornice.</figcaption>
+              </figure>
+            </details>
             <div className="front-expertise-links">
               <Link href="/oversized-curtain-manufacturing">Specialist manufacturing ↗</Link>
               <Link href="/high-level-curtain-installation">High-level installation ↗</Link>
