@@ -22,6 +22,8 @@ The motorised service uses a still from a third owner-cleared installation film 
 
 A separate 13-second film shows motorised voiles covering a two-storey glazed wall. A photograph of white curtains beneath a cornice opens as a close-up under “See a pleated heading up close”. The crop shows the pleats and pole clearly and leaves the embedded social caption outside the frame. The business cleared these subsequent homepage uploads as genuine Apex work.
 
+The 12-second two-storey fitting film follows one room from the fitting team at work to the dressed curtains between two tiers of windows. It has its own link in the installation section. The separate 27-second “When the windows are grand” film shows sheer panels opening while the outer curtains stay in place. It is reserved for a future motorisation guide. Retain its visible on-screen credit if the film is used.
+
 The production baseline is [4e51701](https://github.com/Nylon1/Apexcurtains/commit/4e51701163ed7d6f6881977ddb8f241eecc13b69). Publication requires visual approval of the implemented candidate.
 
 ## Review checks
@@ -31,7 +33,7 @@ The production baseline is [4e51701](https://github.com/Nylon1/Apexcurtains/comm
 | Responsive layout | Chrome checked at 320, 375, 390, 768, 1024, 1440 and 1920 px. The primary consultation link was visible and clickable on entry at every width. No horizontal overflow. |
 | Navigation and enquiries | Mobile menu opened and closed. The hero opened the architectural planner and dispatched the existing conversion event. Specialist, project and enquiry destinations returned 200. |
 | Search and links | All 64 existing homepage link destinations were retained. Title, description, canonical, social metadata and structured data matched production. |
-| Media and controls | All three films played in Chrome. The heading-detail disclosure opened and closed. Independent curtain and voile controls, single-layer operation, draw direction and window selection passed. The opening loaded no film bytes. |
+| Media and controls | All four films played in Chrome. The heading-detail disclosure opened and closed. Independent curtain and voile controls, single-layer operation, draw direction and window selection passed. The opening loaded no film bytes. |
 | Accessibility | Axe reported no WCAG 2 A, AA or WCAG 2.1 A, AA violations in the tested desktop state. |
-| Mobile performance | The final local production build scored 95 performance, 100 accessibility and 100 SEO in Lighthouse. LCP was 2.6 s and CLS was zero. The mobile hero transferred 27 KB. The separate live baseline run scored 94, 100 and 100, with LCP of 2.3 s. Hosting conditions differ and these are lab measurements. |
+| Mobile performance | The final local production build scored 95 performance, 100 accessibility and 100 SEO in Lighthouse. LCP was 2.5 s and CLS was zero. The mobile hero transferred 27 KB. The separate live baseline run scored 94, 100 and 100, with LCP of 2.3 s. Hosting conditions differ and these are lab measurements. |
 | Repository checks | Production build, 18 SEO foundation checks, nine specialist guidance tests and six architectural tests passed. |

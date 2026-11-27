@@ -123,6 +123,7 @@ export default function HomePage() {
               <div><dt>Workroom and finish</dt><dd>On long drops we set out the fabric joins and pattern repeat before cutting. Across a wide opening, the lining and fullness determine how much cloth the track must carry.</dd></div>
               <div><dt>Tracks and high-level fitting</dt><dd>Our fitting work includes luxury apartments in central London. For each project we assess the fixing surface, track load and access for fitting, dressing and maintenance.</dd></div>
             </dl>
+            <a href="/projects/two-storey-curtains-fitting-and-finish.mp4" className="front-process-film">Watch a two-storey room being fitted and dressed · 12 seconds <span aria-hidden="true">↗</span></a>
             <details className="front-heading-detail">
               <summary>See a pleated heading up close</summary>
               <figure>

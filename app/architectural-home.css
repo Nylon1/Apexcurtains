@@ -66,6 +66,7 @@
 .front-expertise-links { display: flex; flex-wrap: wrap; gap: .45rem 1.5rem; }
 .front-expertise-links a { text-decoration: underline; text-underline-offset: .25em; padding-block: .4rem; }
 .front-heading-detail { margin-bottom: 1rem; }
+.front-process-film { display: inline-block; margin-bottom: .5rem; padding-block: .4rem; text-decoration: underline; text-underline-offset: .22em; }
 .front-heading-detail summary { width: fit-content; cursor: pointer; padding-block: .5rem; text-underline-offset: .22em; }
 .front-heading-detail summary:hover { text-decoration: underline; }
 .front-heading-detail figure { margin-block: .5rem 1.5rem; }
