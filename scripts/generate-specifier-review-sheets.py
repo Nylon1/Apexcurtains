@@ -25,6 +25,7 @@ for slug,ref in [('forest-questions','APX-FQ01'),('business-confirmation','APX-B
     doc.styles['Heading 1'].font.size=Pt(13)
     brand=doc.add_paragraph('APEX CURTAINS');brand.runs[0].bold=True
     lines=(ROOT/f'docs/specifier-review/{slug}.md').read_text(encoding='utf8').splitlines()
+    revision=re.search(r'Revision (R\d+)', '\n'.join(lines)).group(1)
     for line in lines:
         if not line.strip():continue
         if line.startswith('# '):doc.add_paragraph(line[2:],'Title');continue
@@ -32,13 +33,13 @@ for slug,ref in [('forest-questions','APX-FQ01'),('business-confirmation','APX-B
             cells=[c.strip() for c in line.strip('|').split('|')]
             if cells[0] in ['Responsibility','---']:continue
             p=doc.add_paragraph(cells[0],style='Heading 1')
-            doc.add_paragraph('Delivery party / scope: [Complete]\nLimits / evidence: [Complete]')
+            doc.add_paragraph('Delivery party / scope: '+cells[1]+'\nLimits / evidence: '+cells[2])
             continue
         line=re.sub(r'\*\*(.*?)\*\*',r'\1',line)
         line=re.sub(r'\[([^\]]+)\]\(([^)]+)\)',r'\1 (\2)',line)
         doc.add_paragraph(line.removeprefix('- '))
     foot=sec.footer.paragraphs[0]
-    foot.add_run(f'{ref} / R01 / 27 November 2026 / REVIEW ONLY\nApex Curtains | hello@apexcurtains.com | 0800 772 0367').font.size=Pt(8)
+    foot.add_run(f'{ref} / {revision} / 27 November 2026 / REVIEW ONLY\nApex Curtains | hello@apexcurtains.com | 0800 772 0367').font.size=Pt(8)
     doc.core_properties.title=lines[0][2:];doc.core_properties.author='Apex Curtains'
     doc.core_properties.created=doc.core_properties.modified=datetime(2026,11,27,tzinfo=timezone.utc)
     out=ROOT/f'docs/specifier-review/{slug}.docx';doc.save(out);print(out)

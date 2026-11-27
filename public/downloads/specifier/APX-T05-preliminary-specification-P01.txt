@@ -1,6 +1,6 @@
 Preliminary curtain specification template
 APX-T05 / P01 / 27 November 2026
-Preliminary coordination - publication approval pending; not for construction
+Preliminary coordination - technical and supplier review pending; not for construction
 Apex Curtains | 0800 772 0367 | hello@apexcurtains.com
 
 APERTURE AND PERFORMANCE BRIEF
@@ -44,6 +44,10 @@ Supplier confirmation / project-specific assessment: ____________________
 Approved drawing and schedule reference / approver / date: ____________________
 Transfer the agreed brief and attachments to the existing professional workspace. Use its revision and export register for controlled project issues; this blank template is not an issued workspace export.
 Do not remove preliminary status until the project team has agreed the survey, materials, system compatibility, support, interfaces and scope. Final manufacture approval must be explicit.
+
+Confirmed business scope and project interfaces
+Apex supplies Forest curtain systems, manufactures specialist curtains, installs manual and motorised tracks, and undertakes motor setup, programming, operational testing, commissioning and customer handover.
+Hardwiring: appropriately qualified electrician, including applicable testing and certification. Third-party smart home/BMS integration: individual assessment. Record project appointments, interfaces and ongoing support terms.
 
 Manufacturer references (checked 27 November 2026):
 Forest KS brochure - September 2026: https://www.forestgroup.com/user_files/download_files/download_2502_FOREST_KS_NEW_EN_150926_WEB.pdf

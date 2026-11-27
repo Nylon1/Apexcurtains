@@ -1,10 +1,10 @@
 # PR 52 preliminary publication candidate
 
-27 November 2026. **P01 is reserved for review, not issued. Technical and publication approval remain pending. Do not merge or publish to production.**
+27 November 2026. **P01 is reserved for review, not issued. Technical and supplier review remain pending; the user has authorised publication once those retained requirements are satisfied. Do not merge or publish to production.**
 
 This is a content and publication-scope revision of the approved five-document collection. There is no new design, feature, workspace change or development programme. [Draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52) remains the review route.
 
-Reviewed implementation: `13ac3939918d0a40079ae49d2f5643c3eec2c0ca`. [READY protected preview](https://apexcurtains-43nc-3pa2k12ej-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources). Full CI and hosted desktop/mobile, download, accessibility and regression checks passed; see [verification](verification.md) for evidence, manifest fingerprint and limits. A scoped share link is supplied separately.
+The business-scope update supersedes the earlier reviewed implementation. See [verification](verification.md) and PR #52 for current checks and preview evidence. No production release is authorised to bypass technical or supplier review.
 
 ## What the preliminary edition contains
 
@@ -17,7 +17,7 @@ Official manufacturer references remain traceable through nine registered source
 ## Review and confirmation pack
 
 - [Forest clarification questions](forest-questions.md) / [editable Word sheet](forest-questions.docx): six questions covering motor datums, recess/access, installed configuration, electrics/controls, support interfaces and handover. Prepared only; not sent.
-- [Business responsibility confirmation](business-confirmation.md) / [editable Word sheet](business-confirmation.docx): installation, electrical work, commissioning, handover and ongoing support, with delivery-party and evidence fields. The confirmed supply of all Forest systems is recorded separately and is not treated as confirmation of these responsibilities.
+- [Business responsibility confirmation](business-confirmation.md) / [editable Word sheet](business-confirmation.docx): installation, electrical work, commissioning, handover and ongoing support, with delivery-party and evidence fields. R02 records confirmed Apex manufacturing, installation, setup, programming, testing, commissioning and handover; required hardwiring/testing/certification is by an appropriately qualified electrician. Third-party integration is assessed individually, and ongoing support terms remain to be agreed.
 - [Document control](document-control.md): revision/update process, evidence requirements and approval against the exact manifest. Changing final status, date or content requires regenerated files and a fresh approval fingerprint.
 - [Desktop library](library-desktop.png), [mobile library](library-mobile.png), [mobile document](mobile-document.png), [PDF overview](pdf-designs.jpg) and [verification](verification.md).
 
@@ -29,12 +29,12 @@ Local archive: `C:/Users/hamza/Apex-Internal-Review/PR52/D01`. It has not been c
 
 ## Approval gates retained
 
-1. Confirm Apex installation, electrical connection, controls commissioning and ongoing support responsibilities, including work by others.
-2. Obtain supplier/competent technical review of the outstanding dimensional discrepancy and approval of its treatment in the preliminary edition.
-3. Record named Apex technical approval, date and evidence against the exact manifest.
-4. Prepare the final issue status/date and obtain authorised publication approval against the regenerated final manifest; nominate a document owner.
+1. Business scope is confirmed and recorded in the R02 register, including electrical work and third-party integration boundaries.
+2. Supplier/competent technical review of the dimensional discrepancy and its treatment remains outstanding.
+3. Named Apex technical approval, date and evidence against the exact manifest remain outstanding.
+4. The user instructed "Publish". This authorisation is recorded against the updated candidate, subject to the retained technical/supplier requirements; it is not a waiver. A document owner still needs to be nominated.
 
-All four remain pending in `lib/specifier-approval.json`. The public-issue check must remain blocked. Withholding specifications does not waive these requirements. Project-specific engineering and supplier confirmation remain necessary after publication.
+The four controls remain intact in `lib/specifier-approval.json`; two now have evidence and two remain pending. The public-issue check blocks on supplierDimensionalReview and apexTechnicalApproval. Project-specific engineering and supplier confirmation remain necessary after publication. Any later document change must be reconciled with the recorded authority and exact manifest before release.
 
 ## Production baseline and limits
 

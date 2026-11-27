@@ -65,7 +65,7 @@ All eight plates are original SVG studies, not to scale. No anchors, fixing cent
 
 ## Confirmation required before final issue
 
-1. **Apex:** Supply of all Forest systems confirmed by the business on 27 November 2026. This collection covers curtain systems only. Installation, electrical connection, controls commissioning and ongoing support responsibilities remain to be confirmed; see [document control](document-control.md).
+1. **Apex:** Supply of all Forest systems confirmed by the business on 27 November 2026. This collection covers curtain systems only. Apex manufacturing, manual/motorised track installation, motor setup/programming/testing, commissioning and handover are confirmed. Qualified electricians undertake required hardwiring and applicable testing/certification. Third-party integration is assessed individually; ongoing support terms remain project-specific. See the [business register](business-confirmation.md) and [document control](document-control.md).
 2. **Forest / supplier:** Match current product codes to the brochure and installation-manual dimensional differences. Confirm the relevant body, assembly, attachment and removal envelopes.
 3. **Forest / supplier:** Exact recess generation, configuration, drawings and native CAD/BIM availability. Confirm any curved arrangement and drive/end components before issuing a ceiling cut-out.
 4. **Apex / workroom / supplier:** Actual curtain weight, heading, full-size stack, route, motor/duty and system suitability. Published limits are not a project selection.

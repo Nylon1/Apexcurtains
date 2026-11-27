@@ -1,7 +1,7 @@
 {
   "revision": "P01",
   "date": "27 November 2026",
-  "status": "Preliminary coordination - publication approval pending; not for construction",
+  "status": "Preliminary coordination - technical and supplier review pending; not for construction",
   "sources": [
     {
       "id": "ks",
@@ -129,7 +129,11 @@
       "title": "Architectural curtain planning",
       "subtitle": "Geometry, double-height glazing and the cloth envelope",
       "summary": "Establish the open view, finished drop and retained cloth before fixing the ceiling or interior layout.",
-      "stages": ["concept", "development", "technical"],
+      "stages": [
+        "concept",
+        "development",
+        "technical"
+      ],
       "anchor": "geometry-and-operation",
       "pages": [
         {
@@ -152,7 +156,9 @@
               ]
             }
           ],
-          "sources": ["fabric-height"]
+          "sources": [
+            "fabric-height"
+          ]
         },
         {
           "title": "A shaped opening is an operating decision",
@@ -174,7 +180,11 @@
               ]
             }
           ],
-          "sources": ["ks", "cs", "shuttle"]
+          "sources": [
+            "ks",
+            "cs",
+            "shuttle"
+          ]
         },
         {
           "title": "Allow for the cloth as well as the track",
@@ -196,7 +206,10 @@
               ]
             }
           ],
-          "sources": ["pelmet", "fabric-height"]
+          "sources": [
+            "pelmet",
+            "fabric-height"
+          ]
         }
       ]
     },
@@ -206,7 +219,11 @@
       "title": "Tracks, pockets and structural interfaces",
       "subtitle": "Coordinate the entire assembly before the ceiling closes",
       "summary": "Single and independent double tracks, recessed pockets, mounting arrangements and the information needed to assess support.",
-      "stages": ["development", "technical", "construction"],
+      "stages": [
+        "development",
+        "technical",
+        "construction"
+      ],
       "anchor": "track-and-support",
       "pages": [
         {
@@ -230,7 +247,12 @@
               ]
             }
           ],
-          "sources": ["ks", "cs", "shuttle", "pelmet"]
+          "sources": [
+            "ks",
+            "cs",
+            "shuttle",
+            "pelmet"
+          ]
         },
         {
           "title": "Mounting, recess and finish coordination",
@@ -252,7 +274,11 @@
               ]
             }
           ],
-          "sources": ["shuttle", "recess-gen2", "pelmet"]
+          "sources": [
+            "shuttle",
+            "recess-gen2",
+            "pelmet"
+          ]
         },
         {
           "title": "Information needed for a fixing assessment",
@@ -275,7 +301,11 @@
               ]
             }
           ],
-          "sources": ["ks", "cs", "assembly"]
+          "sources": [
+            "ks",
+            "cs",
+            "assembly"
+          ]
         }
       ]
     },
@@ -308,13 +338,16 @@
               ]
             },
             {
-              "title": "Apex assessment still required",
+              "title": "Apex scope and project assessment",
               "items": [
-                "Apex supplies the Forest curtain systems covered here. Supply availability does not establish stock, lead time or project suitability. Agree the exact product code, regional variant, current instructions, installation and commissioning responsibilities before procurement."
+                "Apex supplies Forest curtain systems and undertakes specialist curtain manufacturing, manual and motorised track installation, motor setup, programming, operational testing, commissioning and customer handover.",
+                "Supply availability does not establish stock, lead time or project suitability. Confirm exact product codes, regional variants and current instructions before procurement."
               ]
             }
           ],
-          "sources": ["shuttle"]
+          "sources": [
+            "shuttle"
+          ]
         },
         {
           "title": "Electrical and control interface schedule",
@@ -324,21 +357,24 @@
               "title": "Power is model-specific",
               "items": [
                 "Identify the exact motor, power supply and control components by product code before planning electrical work. Obtain the current regional instructions from Forest for that combination.",
-                "The electrical contractor must confirm the supply, isolation, cable route, protection, connections and any separate power-supply location for the individual project. No electrical ratings or wiring instructions are prescribed in this edition.",
-                "Record who supplies, connects, configures and tests each component. Resolve those responsibilities before procurement or installation; a general system description is not an electrical design."
+                "Where electrical hardwiring is required, an appropriately qualified electrician undertakes it, including applicable electrical testing and certification. Confirm supply, isolation, protection, cable routes and connections for the individual project; no electrical ratings or wiring instructions are prescribed here.",
+                "Apex undertakes motor setup, programming, operational testing and commissioning. Record the electrician appointment and each connection/interface responsibility before installation; curtain commissioning does not replace applicable electrical testing and certification."
               ]
             },
             {
               "title": "Agree the interface with the integrator",
               "items": [
-                "Record local switching, remote operation, building automation, app use and independent curtain/voile control. Identify who supplies and configures each interface.",
+                "Third-party smart home and building management integration requirements are assessed individually. Record local switching, remote operation, automation and independent curtain/voile control; agree who supplies, integrates and configures each interface.",
                 "Ask Forest and the controls integrator to confirm the required interface and any receiver, adaptor, actuator or third-party equipment for the selected variant. Compatibility must be checked for the complete project configuration.",
                 "Record supply position, accessible isolation, cable route, connector access, control protocol and commissioning responsibilities. Keep mains power and low-voltage control connections clearly distinguished.",
                 "Refer to the supplied motor manual for switching and power-continuity requirements. Do not use supply interruption as a substitute for a confirmed control command."
               ]
             }
           ],
-          "sources": ["shuttle", "motor-manual"]
+          "sources": [
+            "shuttle",
+            "motor-manual"
+          ]
         },
         {
           "title": "Reserve access around the motor",
@@ -361,7 +397,12 @@
               ]
             }
           ],
-          "sources": ["shuttle", "motor-manual", "pelmet", "recess-gen2"]
+          "sources": [
+            "shuttle",
+            "motor-manual",
+            "pelmet",
+            "recess-gen2"
+          ]
         }
       ]
     },
@@ -371,7 +412,12 @@
       "title": "Site readiness, installation and maintenance",
       "subtitle": "A practical hold-point record for the contractor and project manager",
       "summary": "Resolve access, support evidence, protection and commissioning, then preserve a workable route for future maintenance.",
-      "stages": ["procurement", "construction", "installation", "handover"],
+      "stages": [
+        "procurement",
+        "construction",
+        "installation",
+        "handover"
+      ],
       "anchor": "delivery-and-care",
       "pages": [
         {
@@ -396,7 +442,9 @@
               ]
             }
           ],
-          "sources": ["assembly"]
+          "sources": [
+            "assembly"
+          ]
         },
         {
           "title": "Handover with a maintainable installation",
@@ -405,8 +453,10 @@
             {
               "title": "Installation and commissioning record",
               "items": [
+                "Apex undertakes specialist curtain manufacturing, manual and motorised track installation, motor setup, programming, operational testing, commissioning and customer handover. Record the agreed project scope and work by others.",
                 "Confirm smooth full travel and the agreed open/closed positions. Check clearances around cloth, handles, returns and other finishes. For motorised systems, confirm limits and the intended controls with the installer.",
-                "Record dressing, outstanding defects, user instruction and completion evidence. Identify who accepts the work and who closes remaining actions."
+                "Record dressing, outstanding defects, user instruction and completion evidence. Identify who accepts the work and who closes remaining actions.",
+                "Where hardwiring is required, retain the appropriately qualified electrician's applicable electrical testing and certification. Assess third-party smart home and building management integration individually."
               ]
             },
             {
@@ -419,7 +469,10 @@
               ]
             }
           ],
-          "sources": ["motor-manual", "assembly"]
+          "sources": [
+            "motor-manual",
+            "assembly"
+          ]
         }
       ]
     },
@@ -429,7 +482,11 @@
       "title": "Preliminary curtain specification template",
       "subtitle": "An editable coordination brief, before survey and manufacture approval",
       "summary": "Use a consistent aperture reference, record assumptions and allocate outstanding decisions without creating a second project database.",
-      "stages": ["concept", "technical", "procurement"],
+      "stages": [
+        "concept",
+        "technical",
+        "procurement"
+      ],
       "anchor": "project-record",
       "pages": [
         {
@@ -465,7 +522,10 @@
               ]
             }
           ],
-          "sources": ["fabric-height", "pelmet"]
+          "sources": [
+            "fabric-height",
+            "pelmet"
+          ]
         },
         {
           "title": "Interfaces, responsibility and release",
@@ -498,9 +558,20 @@
                 "Transfer the agreed brief and attachments to the existing professional workspace. Use its revision and export register for controlled project issues; this blank template is not an issued workspace export.",
                 "Do not remove preliminary status until the project team has agreed the survey, materials, system compatibility, support, interfaces and scope. Final manufacture approval must be explicit."
               ]
+            },
+            {
+              "title": "Confirmed business scope and project interfaces",
+              "items": [
+                "Apex supplies Forest curtain systems, manufactures specialist curtains, installs manual and motorised tracks, and undertakes motor setup, programming, operational testing, commissioning and customer handover.",
+                "Hardwiring: appropriately qualified electrician, including applicable testing and certification. Third-party smart home/BMS integration: individual assessment. Record project appointments, interfaces and ongoing support terms."
+              ]
             }
           ],
-          "sources": ["ks", "cs", "shuttle"]
+          "sources": [
+            "ks",
+            "cs",
+            "shuttle"
+          ]
         }
       ]
     }

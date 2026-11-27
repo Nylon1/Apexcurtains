@@ -1,7 +1,7 @@
 {
   "revision": "P01",
   "date": "27 November 2026",
-  "contentSha256": "edfe429d0cb9b65ee0efc9f1934d88e3294b581500738caf53b399fe4aa47002",
+  "contentSha256": "2f00d1a93cff6300dffc0b83193a9e264cb7f93efdd9c76c4fdcb0943baa602e",
   "files": [
     {
       "reference": "APX-T01",
@@ -30,8 +30,8 @@
       "format": "PDF",
       "pages": 3,
       "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-P01.pdf",
-      "bytes": 127545,
-      "sha256": "428eaf7a3da0fc6c846b01f0dc2c379ddcfbf4560856f4b9fe5b06081343bff3"
+      "bytes": 127741,
+      "sha256": "e5b6653d1045c4c3dd52cd4f2f0823c45a1302cc137d14339261305a24fafd16"
     },
     {
       "reference": "APX-T04",
@@ -40,8 +40,8 @@
       "format": "PDF",
       "pages": 2,
       "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-P01.pdf",
-      "bytes": 120111,
-      "sha256": "45e616becfd2da1b36d3172eff91d99393193043df5fb1e864c5fbbff6f30c75"
+      "bytes": 120396,
+      "sha256": "df00f19957fa4eae8a4b1e50d06b9ea7c4e6839ab0d84fe6579502f67e2daa22"
     },
     {
       "reference": "APX-T05",
@@ -50,8 +50,8 @@
       "format": "PDF",
       "pages": 2,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.pdf",
-      "bytes": 119992,
-      "sha256": "eb6d3472c48dd8d7eb9af5ebf19097c7132b8a5c7a10988726e5c0b929de9780"
+      "bytes": 120337,
+      "sha256": "e48232fb9ecd073867ea1432a2f4783ce282ba38e9f0346c9afac8532cd923e9"
     },
     {
       "reference": "APX-T05",
@@ -60,8 +60,8 @@
       "format": "DOCX",
       "pages": 2,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.docx",
-      "bytes": 39354,
-      "sha256": "3346bde5b154959295f016c5551ed7986b22769f1ded5438e0defd968f1e3fa1"
+      "bytes": 39580,
+      "sha256": "80becfd0153c4c81e85f93043948909e2ef2609e9fd63563bf0e853ced95ba1a"
     },
     {
       "reference": "APX-T05",
@@ -70,8 +70,8 @@
       "format": "TXT",
       "pages": null,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.txt",
-      "bytes": 3607,
-      "sha256": "70bbe4db919422e64670aea13d554d10230d034ad27d3e0369ca2d0f41dc140e"
+      "bytes": 4101,
+      "sha256": "39b28dd6a55d29628eea7e72cebaf9747e39e6838522c4f3ed2c950b0c088c98"
     }
   ]
 }

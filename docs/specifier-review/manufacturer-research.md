@@ -1,6 +1,6 @@
 # Manufacturer references for the preliminary edition
 
-27 November 2026 · P01 candidate · Technical and publication approval pending
+27 November 2026 · P01 candidate · Technical and supplier review pending; publication instruction recorded
 
 The proposed public edition uses official Forest documentation as a route to product-specific information. It deliberately withholds numerical profile and recess dimensions, motor body and assembly sizes, attachment allowances, track configuration limits, motor capacities and electrical ratings. These are not reproduced as preliminary project specifications.
 

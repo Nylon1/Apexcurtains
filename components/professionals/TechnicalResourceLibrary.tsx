@@ -164,7 +164,7 @@ export default function TechnicalResourceLibrary() {
           <p className="resource-draft">
             {data.editionLabel} {data.revision} · {data.date}
             <br />
-            Technical and publication approval pending. Not for construction.
+            Technical approval pending. Not for construction.
           </p>
         </div>
         <figure className="resource-hero-image">
@@ -421,8 +421,8 @@ export default function TechnicalResourceLibrary() {
             <p>
               Official Forest documentation reviewed on 27 November 2026. Check
               the current revision and the exact supplied variant when
-              specifying. Inclusion here does not confirm Apex supply or project
-              suitability.
+              specifying. A manufacturer reference does not establish project
+              suitability or approval of an installed system.
             </p>
           </div>
           <div className="resource-reference-list">
@@ -462,15 +462,19 @@ export default function TechnicalResourceLibrary() {
               <span aria-hidden="true">+</span>
             </summary>
             <p>
-              Apex supplies the Forest curtain systems covered in this
-              collection. Selection and suitability depend on the individual
-              project; agree installation, electrical connection, controls
-              commissioning and support responsibilities in the project scope.
+              Apex supplies Forest curtain systems and undertakes specialist
+              curtain manufacturing, manual and motorised track installation,
+              motor setup, programming, operational testing, commissioning and
+              customer handover. Where hardwiring is required, an appropriately
+              qualified electrician undertakes it, including applicable
+              electrical testing and certification. Third-party smart home and
+              building management integration requirements are assessed
+              individually.
             </p>
             <ul>
               <li>
-                Installation, electrical connection, controls commissioning and
-                ongoing support responsibilities.
+                Project appointments, electrical connection interfaces, access
+                arrangements and ongoing support terms.
               </li>
               <li>
                 The exact motor product code, assembly and service clearance.

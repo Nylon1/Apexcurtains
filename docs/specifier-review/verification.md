@@ -1,3 +1,17 @@
+# Business responsibility update verification
+
+27 November 2026. This update supersedes the earlier candidate evidence below for changed document content. P01 remains unissued. Apex business responsibilities and the user publication instruction are recorded; supplier review and named Apex technical approval remain pending. The release-check implementation is unchanged and blocks on those two gates.
+
+Current manifest SHA-256: `e63a1e380984adcfabbf5e9cdf9f2b7b9f66e7e1420e480729c89492eb652203`.
+
+Updated APX-T03, T04 and T05 PDF content, editable T05 and R02 business sheet were regenerated and A4 rendered. The collection remains 13 PDF pages; both Word documents remain two pages. All PDF pages and updated Word pages were visually checked. All nine official manufacturer files retain their registered hashes and index links. Current source/download integrity passes.
+
+Current local checks passed: production build/TypeScript (205 pages), targeted ESLint, 18 SEO checks, nine specialist/homepage/gallery regressions, and full desktop/mobile library checks (seven downloads and hashes, seven retired D01 404s, seven stages, eight drawings, 50 destinations, 33 checklist items, preserved metadata). No runtime errors, overflow or axe violations in the three tested states. The expanded responsibility wording was also captured and inspected at desktop and mobile. PR reviews were checked and contain no technical approval.
+
+## Earlier candidate evidence
+
+The following historical results apply to the preceding implementation only. Updated browser/build/CI results are recorded in PR #52 and the current verification.json; historical fingerprints are not approval of changed files.
+
 # Preliminary publication candidate verification
 
 27 November 2026. P01 is an unissued candidate. This record supersedes the earlier D01 verification; previous evidence is retained in the local D01 archive and Git history.
