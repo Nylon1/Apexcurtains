@@ -1,5 +1,13 @@
 # Draft verification record
 
+## Final release candidate review
+
+The final review supersedes the initial evidence below. See [release-candidate.md](release-candidate.md) for changes, exact implementation commit and unresolved approvals. `verification.json` and the desktop/mobile screenshots now represent the hosted final candidate at `9bfd5b418f146ee3dd887f8a3c3d6daa9d386f5e`: 50 internal links, seven exact download fingerprints, seven stage selections, eight drawings, no overflow/runtime errors and no reported axe violations in the three tested states. GitHub run `46072432307` passed its complete CI workflow, including the new specifier integrity check, build, SEO, sitemap, legacy redirects, architectural, healthcare, app, atelier and visualiser regressions. Targeted local ESLint also passed.
+
+Production and GitHub main were rechecked after preview verification and remain at `0fcaef8df8f56c4fb5dd3de5e2d80b68de9acaba`, production deployment `dpl_91dqB5wGDA1husj9Qz26EXp2oT34`. PR #52 remains draft and unmerged. The public-issue approval check remains blocked as intended.
+
+## Initial implementation evidence
+
 27 November 2026. Production remains on the existing specialist-page release; this branch is a proposal for review only.
 
 ## Passed locally

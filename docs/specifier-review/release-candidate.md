@@ -2,6 +2,12 @@
 
 27 November 2026. Status: **D01 technical review candidate — not approved for public issue; do not merge.** The professional workspace and specialist-page programmes remain unchanged.
 
+Candidate implementation: `9bfd5b418f146ee3dd887f8a3c3d6daa9d386f5e`. Controlled download-manifest SHA-256 (UTF-8, LF): `f37131534d5ab6ba7f0b3678f4a42b88abc2c7cef9591e12ca39634a45a34598`.
+
+[Draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52) · [Vercel review preview](https://apexcurtains-43nc-40mpxtcr7-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources). Preview is READY with no production target. A scoped seven-day review share link is supplied separately; no access token is committed.
+
+Visual evidence: [desktop library](library-desktop.png), [mobile library](library-mobile.png), [desktop downloads](desktop-downloads.png), [mobile downloads](mobile-downloads.png) and [PDF design overview](pdf-designs.jpg).
+
 ## Completed refinement
 
 - Reviewed all five PDFs, 13 A4 pages, for typography, spacing, illustration readability and page boundaries. Body text increased from 10 to 10.5 pt with 14.5 pt leading. Embedded fonts, vector drawings, source hyperlinks, page numbering, revision/date, preliminary status and contact details retained.
@@ -29,6 +35,8 @@ The Shuttle brochure-versus-manual dimensional discrepancy remains disclosed; it
 - A4 PDF checks: 13 pages, embedded fonts, selectable text and linked references, no page-boundary overflow. PDFs are not represented as PDF/UA; equivalent structured HTML remains available.
 - Word: generated with managed workspace python-docx. The standard renderer was attempted and reported missing LibreOffice on Windows. Installed Microsoft Word exported the document to PDF for two-page A4 visual review. No macros or editing restriction were added. Microsoft Word editing and print pagination are distinct from the fixed PDF edition.
 - Draft integrity check passed. Public-issue check intentionally blocks pending the records below.
+- The full hosted review passed on the candidate Vercel preview. GitHub CI run `46072432307` passed all workflow steps, including the new download/source integrity check and the existing regression suites. Word downloads return the correct Office Open XML MIME type; all seven download hashes match the reviewed files.
+- Additional narrow-screen check at 320 px: no horizontal overflow; native keyboard activation of the stage selector exercised. Desktop and mobile download metadata screenshots were inspected separately.
 
 ## Outstanding approval requirements
 

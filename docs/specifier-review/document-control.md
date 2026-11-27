@@ -10,6 +10,7 @@ On 27 November 2026 the business confirmed in this project conversation: “We s
 
 - `lib/specifier-resources.json` owns document content, references, revision and issue date. The web page, PDF and editable template are generated from it.
 - `lib/specifier-downloads.json` records actual page counts, formats, sizes and SHA-256 fingerprints. Plain text is unpaginated. The Word count describes the blank A4 template before editing; user additions can change pagination.
+- JSON content/manifest fingerprints use UTF-8 with LF newlines for cross-platform reproducibility. Published artifact fingerprints use exact bytes; `.gitattributes` prevents newline conversion in the download directory.
 - `lib/specifier-approval.json` records business scope and outstanding approvals. Approval must identify the approver, date, evidence and exact download manifest fingerprint. No approval is inferred from a product brochure, a successful build or a visual review.
 - `docs/specifier-review/source-verification.json` records official index membership, source URLs and file fingerprints. The manufacturer source PDFs are research material and are not republished.
 
