@@ -1,0 +1,37 @@
+[
+  {
+    "file": "APX-T01-architectural-planning-P01.pdf",
+    "pages": 3,
+    "A4": true,
+    "embeddedFonts": true,
+    "allPagesWithinBounds": true
+  },
+  {
+    "file": "APX-T02-track-pocket-support-P01.pdf",
+    "pages": 3,
+    "A4": true,
+    "embeddedFonts": true,
+    "allPagesWithinBounds": true
+  },
+  {
+    "file": "APX-T03-motor-electrical-coordination-P01.pdf",
+    "pages": 3,
+    "A4": true,
+    "embeddedFonts": true,
+    "allPagesWithinBounds": true
+  },
+  {
+    "file": "APX-T04-site-readiness-maintenance-P01.pdf",
+    "pages": 2,
+    "A4": true,
+    "embeddedFonts": true,
+    "allPagesWithinBounds": true
+  },
+  {
+    "file": "APX-T05-preliminary-specification-P01.pdf",
+    "pages": 2,
+    "A4": true,
+    "embeddedFonts": true,
+    "allPagesWithinBounds": true
+  }
+]

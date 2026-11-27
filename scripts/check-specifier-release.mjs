@@ -1,0 +1,57 @@
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+const read=(p)=>JSON.parse(fs.readFileSync(p,'utf8'));
+const hash=(p)=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const textHash=(p)=>crypto.createHash('sha256').update(fs.readFileSync(p,'utf8').replace(/\r\n/g,'\n')).digest('hex');
+const data=read('lib/specifier-resources.json');
+const manifest=read('lib/specifier-downloads.json');
+const approval=read('lib/specifier-approval.json');
+assert.equal(manifest.revision,data.revision);
+assert.equal(manifest.date,data.date);
+assert.equal(approval.revision,data.revision);
+assert.equal(manifest.contentSha256,textHash('lib/specifier-resources.json'),'Content changed: regenerate and review downloads');
+assert.equal(manifest.files.length,7);
+assert.deepEqual(fs.readdirSync('public/downloads/specifier').sort(),manifest.files.map(f=>f.href.split('/').at(-1)).sort(),'Unregistered or internal draft files in public downloads');
+if(data.revision.startsWith('P')){
+  const guidance=data.resources.flatMap(r=>r.pages.flatMap(p=>p.sections.flatMap(s=>s.items))).join('\n');
+  assert.doesNotMatch(guidance,/\b\d+(?:[.,]\d+)?\s*(?:mm|kg|hz|volts?|amps?|v\b|m\b|a\b)/i,'Numerical product specifications must remain withheld from the preliminary edition');
+  assert.ok(data.status.includes('not for construction'));
+}
+for(const file of manifest.files){
+  assert.equal(file.revision,data.revision);assert.equal(file.date,data.date);
+  assert.ok(data.resources.some(r=>r.id===file.reference));
+  assert.equal(file.sha256,hash('public'+file.href),'Unreviewed artifact: '+file.href);
+  assert.equal(file.bytes,fs.statSync('public'+file.href).size);
+  assert.ok(file.format==='TXT'?file.pages===null:Number.isInteger(file.pages)&&file.pages>0);
+}
+const sourceReview=read('docs/specifier-review/source-verification.json');
+assert.equal(sourceReview.sources.length,data.sources.length);
+for(const source of data.sources){
+  const checked=sourceReview.sources.find(s=>s.id===source.id);
+  assert.ok(checked?.unchanged&&checked.isPdf&&checked.listedOn.length);
+  assert.equal(source.sha256,checked.sha256);assert.equal(source.url,checked.url);
+}
+console.log('Draft integrity passed: 7 downloads, metadata and 9 official source fingerprints.');
+if(process.argv.includes('--public-issue')){
+  const digest=textHash('lib/specifier-downloads.json');
+  const pending=[];
+  // P01 publication-only change explicitly authorised by the project owner.
+  // Technical/supplier records remain pending; this never represents their approval.
+  const change=approval.publicationControlChange;
+  const removed=new Set(change?.removedPublicationPrerequisites||[]);
+  const authorisedPreliminaryChange=data.revision==='P01'&&change?.revision===data.revision
+    &&change?.date&&change?.authorisedBy&&change?.evidence&&change?.manifestSha256===digest
+    &&removed.size===2&&removed.has('supplierDimensionalReview')&&removed.has('apexTechnicalApproval');
+  for(const key of ['installationAndCommissioningScope','supplierDimensionalReview']){
+    if(authorisedPreliminaryChange&&removed.has(key))continue;
+    if(approval[key].status!=='confirmed'||!approval[key].evidence)pending.push(key);
+  }
+  for(const key of ['apexTechnicalApproval','publicIssueApproval']){
+    if(authorisedPreliminaryChange&&removed.has(key))continue;
+    const record=approval[key];
+    if(record.status!=='approved'||!record.approver||!record.date||!record.evidence||record.manifestSha256!==digest)pending.push(key);
+  }
+  if(pending.length){console.error('PUBLIC ISSUE BLOCKED: '+pending.join(', '));process.exitCode=1;}
+  else console.log('Publication authority and integrity verified for this exact manifest. P01 publication controls reflect the recorded user instruction; project technical approval is not implied.');
+}
