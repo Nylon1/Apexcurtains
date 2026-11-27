@@ -1,6 +1,6 @@
 # Specialist service pages — design review
 
-Prepared 27 November 2026. Status: local review build only. No production deployment, main-branch merge or database change.
+Prepared 27 November 2026. Status: Vercel preview ready for final visual approval; see [final review and online screenshots](README.md). No production deployment, main-branch merge or database change.
 
 Scope: the seven existing specialist routes below. Homepage and 31-project gallery were reviewed as visual and editorial references and remain unchanged. The other service pages, quotation tools, navigation and operational workflows remain outside this change.
 
