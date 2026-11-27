@@ -1,0 +1,144 @@
+{
+  "preview": "https://apexcurtains-43nc-ch11j7tes-hamzas-projects-4ef62f35.vercel.app",
+  "checkedAt": "2026-11-27T19:57:16.125Z",
+  "pages": [
+    {
+      "route": "apex-curtains",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/apex-curtains",
+      "images": 4,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "apex-curtains",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/apex-curtains",
+      "images": 4,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "gable-end-curtains",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/gable-end-curtains",
+      "images": 4,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "gable-end-curtains",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/gable-end-curtains",
+      "images": 4,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "tall-window-curtains",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/tall-window-curtains",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "tall-window-curtains",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/tall-window-curtains",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "oversized-architectural-curtains",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/oversized-architectural-curtains",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "oversized-architectural-curtains",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/oversized-architectural-curtains",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "motorised-curtain-systems",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/motorised-curtain-systems",
+      "images": 2,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "motorised-curtain-systems",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/motorised-curtain-systems",
+      "images": 2,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "high-level-curtain-installation",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/high-level-curtain-installation",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "high-level-curtain-installation",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/high-level-curtain-installation",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "oversized-curtain-manufacturing",
+      "size": "desktop",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/oversized-curtain-manufacturing",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    },
+    {
+      "route": "oversized-curtain-manufacturing",
+      "size": "mobile",
+      "status": 200,
+      "canonical": "https://www.apexcurtains.com/oversized-curtain-manufacturing",
+      "images": 3,
+      "diagramLabels": "inside viewBox"
+    }
+  ],
+  "portfolioLinks": [
+    "/gallery/jesmond",
+    "/gallery/hemel-hempstead",
+    "/gallery/rickmansworth",
+    "/gallery/windermere",
+    "/gallery/cotswold",
+    "/gallery/beeston",
+    "/gallery/double-height-dining-room",
+    "/gallery/two-storey-curtain-installation",
+    "/gallery/tall-black-framed-window",
+    "/gallery/motorised-architectural-voiles",
+    "/gallery/manchester-airport-lounge",
+    "/gallery/five-metre-motorised-curtains",
+    "/gallery/london-apartment-installation",
+    "/gallery/warwickshire",
+    "/gallery/norwich"
+  ],
+  "interactions": [
+    "both motorisation films play",
+    "curtain and voile controls",
+    "draw selection",
+    "FAQ",
+    "trade planner"
+  ],
+  "enquiriesSubmitted": 0,
+  "pageErrors": []
+}

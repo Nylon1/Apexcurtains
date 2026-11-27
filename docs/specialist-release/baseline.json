@@ -1,0 +1,133 @@
+{
+  "capturedAt": "2026-11-27T20:10:40.265Z",
+  "commit": "474ccf0225e958fb6e948d27df3f9e81432b8262",
+  "tag": "baseline/pre-specialist-release-2026-11-27",
+  "deployment": "dpl_FLPbSvvxtGGs17rNAN1M1ufUuFxV",
+  "deploymentUrl": "https://apexcurtains-43nc-j3dzn5er2-hamzas-projects-4ef62f35.vercel.app",
+  "pages": [
+    {
+      "route": "apex-curtains",
+      "status": 200,
+      "title": "Apex Window Curtains | Measured &amp; Installed | Apex Curtains",
+      "description": "Curtains for apex windows, measured and installed across England and Wales. Explore made-to-measure designs, shaped tracks, linings and real Apex projects.",
+      "canonical": "https://www.apexcurtains.com/apex-curtains",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Apex Window Curtains | Measured &amp; Installed | Apex Curtains\"/>",
+        "<meta property=\"og:description\" content=\"Curtains for apex windows, measured and installed across England and Wales. Explore made-to-measure designs, shaped tracks, linings and real Apex projects.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/apex-curtains\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>"
+      ]
+    },
+    {
+      "route": "gable-end-curtains",
+      "status": 200,
+      "title": "Gable End Curtains | Tall &amp; Double-Height Windows | Apex Curtains",
+      "description": "Bespoke gable-end curtains for tall glazing and double-height rooms. Explore fabric weight, shaped tracks, fixing support and professional high-level installation.",
+      "canonical": "https://www.apexcurtains.com/gable-end-curtains",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Gable End Curtains | Tall &amp; Double-Height Windows | Apex Curtains\"/>",
+        "<meta property=\"og:description\" content=\"Bespoke gable-end curtains for tall glazing and double-height rooms. Explore fabric weight, shaped tracks, fixing support and professional high-level installation.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/gable-end-curtains\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>"
+      ]
+    },
+    {
+      "route": "tall-window-curtains",
+      "status": 200,
+      "title": "Tall and double-height window curtains | Apex Curtains",
+      "description": "Made-to-measure curtains for two-storey glazing, high ceilings, stairwells and mezzanines. Explore how drop, fabric, tracks and fitting are assessed together.",
+      "canonical": "https://www.apexcurtains.com/tall-window-curtains",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Tall and double-height window curtains\"/>",
+        "<meta property=\"og:description\" content=\"Made-to-measure curtains for two-storey glazing, high ceilings, stairwells and mezzanines. Explore how drop, fabric, tracks and fitting are assessed together.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/tall-window-curtains\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "oversized-architectural-curtains",
+      "status": 200,
+      "title": "Oversized architectural curtains | Apex Curtains",
+      "description": "Specialist curtains and tall voiles for expansive glazing, luxury apartments and hospitality interiors. Plan large panels, heavy linings, track and stack-back.",
+      "canonical": "https://www.apexcurtains.com/oversized-architectural-curtains",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Oversized architectural curtains\"/>",
+        "<meta property=\"og:description\" content=\"Specialist curtains and tall voiles for expansive glazing, luxury apartments and hospitality interiors. Plan large panels, heavy linings, track and stack-back.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/oversized-architectural-curtains\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "motorised-curtain-systems",
+      "status": 200,
+      "title": "Motorised curtain systems for large and high windows | Apex Curtains",
+      "description": "Explore heavy-duty electric tracks, Forest FMS and FMS Plus, Shuttle motors and smart controls for tall glazing, luxury apartments and architectural voiles.",
+      "canonical": "https://www.apexcurtains.com/motorised-curtain-systems",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Motorised curtain systems for large and high windows\"/>",
+        "<meta property=\"og:description\" content=\"Explore heavy-duty electric tracks, Forest FMS and FMS Plus, Shuttle motors and smart controls for tall glazing, luxury apartments and architectural voiles.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/motorised-curtain-systems\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "high-level-curtain-installation",
+      "status": 200,
+      "title": "Specialist high-level curtain installation | Apex Curtains",
+      "description": "Plan surveying, access, structural fixings, handling, motor commissioning and aftercare for tall windows, stairwells and difficult curtain installations.",
+      "canonical": "https://www.apexcurtains.com/high-level-curtain-installation",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Specialist high-level curtain installation\"/>",
+        "<meta property=\"og:description\" content=\"Plan surveying, access, structural fixings, handling, motor commissioning and aftercare for tall windows, stairwells and difficult curtain installations.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/high-level-curtain-installation\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "oversized-curtain-manufacturing",
+      "status": 200,
+      "title": "Specialist manufacturing for oversized curtains | Apex Curtains",
+      "description": "A workroom guide to extra-long curtain panels, fabric joins, pattern matching, linings, fullness, weight and delivery for architectural projects.",
+      "canonical": "https://www.apexcurtains.com/oversized-curtain-manufacturing",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Specialist manufacturing for oversized curtains\"/>",
+        "<meta property=\"og:description\" content=\"A workroom guide to extra-long curtain panels, fabric joins, pattern matching, linings, fullness, weight and delivery for architectural projects.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/oversized-curtain-manufacturing\"/>",
+        "<meta property=\"og:site_name\" content=\"Apex Curtains\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "",
+      "status": 200,
+      "title": "Apex Curtains | Apex, Gable &amp; Architectural Window Curtains",
+      "description": "UK specialists in complex, oversized and high-level curtain installations, from apex and gable windows to double-height glazing. Survey and fitting across England and Wales.",
+      "canonical": "https://www.apexcurtains.com",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Apex Curtains | Exceptional Curtains for Exceptional Windows\"/>",
+        "<meta property=\"og:description\" content=\"Specialist survey, manufacture and installation for apex, gable, double-height and oversized windows across England and Wales.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com\"/>",
+        "<meta property=\"og:image\" content=\"https://www.apexcurtains.com/projects/pinch-pleat-curtains-oxford-oxford.jpeg\"/>",
+        "<meta property=\"og:image:alt\" content=\"Sweeping curtains frame an Oxford gable and the view beyond its glazed doors\"/>",
+        "<meta property=\"og:type\" content=\"website\"/>"
+      ]
+    },
+    {
+      "route": "gallery",
+      "status": 200,
+      "title": "Curtain Projects &amp; Interiors | Apex Curtains Gallery",
+      "description": "Explore real Apex curtain installations: shaped windows, tall glazing, motorised curtains and hospitality interiors. Technical detail, considered interiors and installation films.",
+      "canonical": "https://www.apexcurtains.com/gallery",
+      "openGraph": [
+        "<meta property=\"og:title\" content=\"Curtain projects, considered from every angle\"/>",
+        "<meta property=\"og:description\" content=\"Real installations. Individual interiors. Explore the Apex Curtains portfolio.\"/>",
+        "<meta property=\"og:url\" content=\"https://www.apexcurtains.com/gallery\"/>",
+        "<meta property=\"og:image\" content=\"https://www.apexcurtains.com/projects/portfolio/windermere-2.webp\"/>"
+      ]
+    }
+  ]
+}
