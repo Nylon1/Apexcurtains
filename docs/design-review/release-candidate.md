@@ -30,15 +30,15 @@ The motorised plan labels the main curtain on the room side and the voile neares
 | Accessibility and performance | The preceding design review tested 11 full pages at two widths with axe. Mobile Lighthouse samples measured 94 for the homepage and 98 for motorised systems. The desktop homepage measured 100. These are lab samples. Field Core Web Vitals and Search Console data are outstanding. |
 | Visual evidence | 79 images in the [before-and-after review](README.md). This final inspection adds 18 images of nine views, each at 390px and 1440px. |
 
-The final application build and TypeScript check passed, as did the specialist HTML, architecture, redirects, visualiser, sitemap and SEO checks. The homepage retains its tested made-to-measure wording. The final screenshot run decoded visible images and checked the heading and horizontal fit on each of its 18 views.
+The clean final build passed all 408 route and width checks. The authenticated preview returned 200 for all 194 sitemap pages and robots.txt. Link verification found no missing fragments or destinations among the 585 checked. The final application build and TypeScript check passed, as did the specialist HTML, architecture, redirects, visualiser, sitemap and SEO checks. The homepage retains its tested made-to-measure wording. The final screenshot run decoded visible images and checked the heading and horizontal fit on each of its 18 views.
 
 ## Business inbox
 
-Resend recorded delivery to the receiving server for `hello@apexcurtains.com` at the provider level. The labelled enquiry was sent on 27 November 2026 at 11:10 GMT, subject **Architectural curtain enquiry – Private residence**, reference `APEX-PREVIEW-QA-20261127`. An exact Message-ID search and reference search returned no copy in the connected Gmail account. The receiving domain uses IONOS. Actual folder placement requires direct mailbox evidence or confirmation from its operator. No additional live enquiry was sent for this review.
+Verified directly in IONOS Mail Business. The **Inbox** for `hello@apexcurtains.com` contained **Architectural curtain enquiry – Private residence** at 11:10 GMT on 27 November 2026. The opened message showed the matching test reference `APEX-PREVIEW-QA-20261127` in the submitted name and project notes. This confirms mailbox receipt for the labelled preview enquiry. The design review used simulated submissions for upload and retry checks.
 
 ## Release decision
 
-Submit for final owner approval with the mailbox check called out. The published guides assess curtain drop, cloth, track, structure and access per project. Forest motor capacities are manufacturer figures qualified by the specified configuration. Trade responsibilities remain subject to agreement. The London and five-metre-window stories are unpublished pending records and permissions. Additional photography can follow launch.
+Ready for final owner approval. The published guides assess curtain drop, cloth, track, structure and access per project. Forest motor capacities are manufacturer figures qualified by the specified configuration. Trade responsibilities remain subject to agreement. The London and five-metre-window stories are unpublished pending records and permissions. Additional photography can follow launch.
 
 ## Rollback plan
 
