@@ -98,7 +98,9 @@ The current Apex visualiser uses authored room scenes, masks and lighting maps f
 
 Next growth priorities are an approved large-window evidence series, a specifier detail sheet for recess and maintenance coordination, and a controlled trade pilot with documented handover and outcomes. This gives the business material to substantiate additional claims and content.
 
-## Quality assurance record
+## Strategic expansion QA
+
+These figures describe the expansion before the design pass. See the [release candidate review](design-review/release-candidate.md) for later checks and the labelled live enquiry.
 
 | Check | Result |
 | --- | --- |

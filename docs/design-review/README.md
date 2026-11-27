@@ -1,5 +1,7 @@
 # Apex visual review
 
+For the final finishing pass, see the [release candidate, current screenshots and rollback plan](release-candidate.md).
+
 These Chromium captures compare the approved strategic expansion at `a92f870` with the premium design at `385f927`. Paired captures use a 1440px desktop or 390px mobile viewport. Detail captures start farther down the page to show selected projects, the gallery and the interactive curtain elevation.
 
 | View | Desktop before and after | Mobile before and after |

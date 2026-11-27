@@ -77,7 +77,7 @@ See the [screenshot index](design-review/README.md) for the desktop and mobile c
 | Enquiry and original customer paths | The planner passed desktop and mobile validation, project-type branching, Back state, upload limits, photo and drawing submission, simulated provider rejection, retry and confirmation. The trade URL opened with the relevant pathway, and the original guided quote remained reachable. The prior preview’s labelled live test was reported delivered by Resend. Mailbox placement remains unverified. |
 | Interactive tools | The two curtain layers, opening modes, weight estimator, navigation, homepage disclosures and mobile interaction passed. The existing visualiser checks also passed. |
 | Build and regression | The production build, targeted ESLint, SEO assertions, architecture, visualiser, sitemap, redirect, specialist, healthcare route, web-app and Atelier checks passed. |
-| Protected preview crawl | The design preview passed the crawl of 194 sitemap URLs and 391 internal destinations, with zero reported canonical, metadata, target or fragment issues. |
+| Protected preview crawl | The design preview passed the crawl of 194 sitemap URLs and 391 internal destinations before the keyboard skip link, then 585 destinations after it, with zero reported canonical, metadata, target or fragment issues. |
 
 ### Lighthouse lab samples
 
@@ -93,4 +93,4 @@ Runs used Chromium with Lighthouse throttling against a local production build. 
 
 ### Release status
 
-The draft PR and protected preview are ready for visual approval. Confirm the workroom and installation capabilities and the trade scope before releasing the strategic expansion. The proposed central London and five-metre-window case studies still need approved images and documented details. Keep those stories unpublished until the records and privacy permissions are available. Search Console and real-user Core Web Vitals remain open.
+The current decision, enquiry evidence, reconciled test counts and recovery instructions are in the [release candidate review](design-review/release-candidate.md). Proposed project stories can follow once Apex has approved the records and photography.
