@@ -133,6 +133,10 @@ test("enquiry counters accept only known same-origin stages with no payload or q
   for (const event of ["guided-start", "guided-complete", "planner-start", "planner-complete"]) {
     assert.equal((await count(event)).status, 204);
   }
+  const emptyPost = new Request("https://example.test/api/enquiry-count/guided-start", {
+    method: "POST", headers: { "sec-fetch-site": "same-origin" }, body: new Blob([]),
+  });
+  assert.equal((await countEnquiry(emptyPost, { params: Promise.resolve({ event: "guided-start" }) })).status, 204);
   assert.equal((await count("unknown")).status, 404);
   assert.equal((await count("guided-start", "cross-site")).status, 403);
   assert.equal((await count("guided-start", "same-origin", "?extra=1")).status, 400);
