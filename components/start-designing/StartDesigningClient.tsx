@@ -308,6 +308,7 @@ export default function StartDesigningPage() {
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+    if (current.key !== "review" || submitting) return;
     setSubmitting(true);
 
     try {
@@ -654,6 +655,7 @@ export default function StartDesigningPage() {
 
               {step < totalSteps - 1 ? (
                 <button
+                  key="next"
                   type="button"
                   onClick={nextStep}
                   disabled={!canProceed}
@@ -664,6 +666,7 @@ export default function StartDesigningPage() {
                 </button>
               ) : (
                 <button
+                  key="submit"
                   type="submit"
                   disabled={submitting}
                   className="inline-flex items-center justify-center rounded-full bg-[#f5d38a] px-4 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476] disabled:cursor-not-allowed disabled:opacity-40 sm:px-6"
