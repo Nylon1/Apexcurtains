@@ -42,7 +42,7 @@ The public token source is [`app/studio.css`](../app/studio.css). The architectu
 | Type scale | Display 51–116px, section heading 41–83px and smaller display headings 26–46px. Individual guide and article templates constrain headings further. Body leading is typically 1.6–1.76 with a 66-character reading measure. |
 | Colour | Warm paper `#f7f3eb`, stone `#ece5d9`, ink `#24352e`, muted ink `#536057`, pine `#203b33`, night `#172c25`, bronze `#795b33`, rule `#c4bbae`. Pine is used for signature actions and transitions. |
 | Layout | Fluid gutters from 18px, a 1472px maximum for editorial content, shared vertical spacing from 51–128px and widths constrained by the photograph or reading task. Mobile stacks figures and copy according to their narrative role. |
-| Actions | Solid, square primary actions and underlined secondary links. The consistent visible focus state works with native disclosures, dialogs, tabs and forms. |
+| Actions | Solid, square primary actions and underlined secondary links. The consistent visible focus state works with native disclosures, dialogs, tabs and forms. A keyboard skip link bypasses the site navigation. |
 | Forms | Field labels stay in view. One stage is shown at a time, with optional technical fields inside disclosures. Previously entered data and attachments survive stage changes and retry. The original lead endpoint and Resend integration are used. |
 | Photography and icons | Native image aspect ratios, responsive source sizes, stable reserved dimensions and descriptive captions. Direction arrows are supplementary. Line drawings use a limited stroke palette and explanatory text. |
 | Technical content | Neutral backgrounds, ruled tables, concise subsections, descriptive diagrams and text equivalents. Measurements and system examples are illustrative and remain subject to survey. |
@@ -66,3 +66,31 @@ The priority photography brief is a daylit double-height interior with the full 
 ## Screenshots and verification
 
 See the [screenshot index](design-review/README.md) for the desktop and mobile comparison, representative templates and interactive consultation states.
+
+### Browser and regression results
+
+| Check | Result |
+| --- | --- |
+| Full public route review | Chromium rendered 204 destinations at both 390px and 1440px, for 408 layout checks. The set includes 194 sitemap routes, nine linked public or enquiry routes and the planner’s trade entry. All returned 200 with one main heading and zero horizontal overflow. The pre-design sweep covered 390 layouts. |
+| Responsive and visual review | 77 representative render checks across 320, 390, 430, 768, 1024, 1440 and 1920px. The review covered image framing, text and button hierarchy, drawing labels and navigation. The indexed comparison contains 79 screenshots. All 14 images in the separate gallery contact-sheet audit loaded. |
+| Automated accessibility | Axe reported zero violations in the main content of 11 representative pages at both 390px and 1440px. Keyboard focus, mobile touch controls and the reduced-motion mode were also exercised. |
+| Enquiry and original customer paths | The planner passed desktop and mobile validation, project-type branching, Back state, upload limits, photo and drawing submission, simulated provider rejection, retry and confirmation. The trade URL opened with the relevant pathway, and the original guided quote remained reachable. The prior preview’s labelled live test was reported delivered by Resend. Mailbox placement remains unverified. |
+| Interactive tools | The two curtain layers, opening modes, weight estimator, navigation, homepage disclosures and mobile interaction passed. The existing visualiser checks also passed. |
+| Build and regression | The production build, targeted ESLint, SEO assertions, architecture, visualiser, sitemap, redirect, specialist, healthcare route, web-app and Atelier checks passed. |
+| Protected preview crawl | The design preview passed the crawl of 194 sitemap URLs and 391 internal destinations, with zero reported canonical, metadata, target or fragment issues. |
+
+### Lighthouse lab samples
+
+Runs used Chromium with Lighthouse throttling against a local production build. Scores are out of 100. LCP is Largest Contentful Paint, TBT is Total Blocking Time and CLS is Cumulative Layout Shift. The table records individual samples. Production field measurements remain pending.
+
+| Page and preset | Performance | Accessibility | SEO | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Homepage, mobile pre-design | 84 | 100 | 100 | 3.30 s | 370 ms | 0 |
+| Homepage, mobile redesign | 94 | 100 | 100 | 2.68 s | 178 ms | 0 |
+| Homepage, desktop redesign | 100 | 100 | 100 | 0.79 s | 11 ms | 0 |
+| Motorised systems, mobile pre-design | 98 | 100 | 100 | 1.10 s | 170 ms | 0 |
+| Motorised systems, mobile redesign | 98 | 100 | 100 | 1.22 s | 138 ms | 0 |
+
+### Release status
+
+The draft PR and protected preview are ready for visual approval. Confirm the workroom and installation capabilities and the trade scope before releasing the strategic expansion. The proposed central London and five-metre-window case studies still need approved images and documented details. Keep those stories unpublished until the records and privacy permissions are available. Search Console and real-user Core Web Vitals remain open.

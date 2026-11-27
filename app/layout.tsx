@@ -112,8 +112,9 @@ export default function RootLayout({
         />
         <WebAppProvider>
           <PublicPresentation>
+            <a href="#page-content" className="studio-skip-link">Skip to content</a>
             <Navbar />
-            {children}
+            <div id="page-content" tabIndex={-1}>{children}</div>
             <Footer />
           </PublicPresentation>
         </WebAppProvider>
