@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import sharp from "sharp";
+import { POST as countEnquiry } from "../app/api/enquiry-count/[event]/route";
+import { reviewedAdvice } from "../lib/advice-editorial";
 import { POST } from "../app/api/send-lead/route";
 import { architecturalGuides } from "../lib/architectural-curtains";
 import { MAX_PROJECT_UPLOAD_BYTES, parseArchitecturalEnquiry, resolveProjectType } from "../lib/architectural-enquiry";
@@ -121,4 +123,34 @@ test("the existing lead endpoint validates attachments and handles provider succ
   reject = false;
   assert.equal((await submit(legacy)).status, 200);
   assert.match(String(calls[3].text), /Window Type: Apex/);
+});
+
+test("enquiry counters accept only known same-origin stages with no payload or query", async () => {
+  const count = (event: string, site = "same-origin", query = "", body?: string) =>
+    countEnquiry(new Request(`https://example.test/api/enquiry-count/${event}${query}`, {
+      method: "POST", headers: { "sec-fetch-site": site, origin: "null" }, body,
+    }), { params: Promise.resolve({ event }) });
+  for (const event of ["guided-start", "guided-complete", "planner-start", "planner-complete"]) {
+    assert.equal((await count(event)).status, 204);
+  }
+  assert.equal((await count("unknown")).status, 404);
+  assert.equal((await count("guided-start", "cross-site")).status, 403);
+  assert.equal((await count("guided-start", "same-origin", "?extra=1")).status, 400);
+  assert.equal((await count("guided-start", "same-origin", "", "extra")).status, 400);
+});
+
+test("CMS revisions are stable when republished and respect later editorial changes", () => {
+  for (const [slug, content] of [
+    ["best-curtains-for-apex-windows-styles-that-actually-work", "taller windows need heavier fabrics"],
+    ["how-much-do-apex-window-curtains-cost-in-the-uk-full-2026-pricing-guide", "£7,000+"],
+    ["why-most-apex-curtain-installations-fail-and-how-to-get-it-right-first-time", "installations replaced"],
+  ]) {
+    const row = reviewedAdvice({ slug, content, title: "Legacy", excerpt: "", meta_title: "", meta_description: "", published: true });
+    assert.equal(row.meta_title, row.title + " | Apex Curtains");
+    assert.equal(row.meta_description, row.excerpt);
+    assert.ok(row.content.startsWith("## "));
+    assert.equal(reviewedAdvice(row), row);
+    const edited = { ...row, content: "Subsequent approved editorial text" };
+    assert.equal(reviewedAdvice(edited), edited);
+  }
 });

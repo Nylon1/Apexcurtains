@@ -521,3 +521,20 @@
   font-size: var(--studio-caption);
   letter-spacing: .055em;
 }
+.public-presentation label.enquiry-count-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: .75rem;
+  margin-block: 1.25rem;
+  font-size: .9rem;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.public-presentation .enquiry-count-choice input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  min-height: 0;
+  margin-top: .16rem;
+  flex: none;
+}
