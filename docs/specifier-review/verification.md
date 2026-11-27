@@ -28,4 +28,14 @@
 
 Business/supplier confirmations are listed in the audit and visible resource page, particularly supply scope, motor dimensions and exact recess generation. No structural calculation, equipment method statement, electrical installation design or product approval has been issued. Workspace access control and private export workflows were source-audited only and remain unchanged.
 
-Hosted preview and draft PR references are recorded in the handover once available. Do not merge or promote this branch until the visual and technical review is approved.
+## Hosted review
+
+- Draft pull request: https://github.com/Nylon1/Apexcurtains/pull/52
+- Verified implementation commit: `5df6352a526e09e143fb6a1cd49b3b0b76513c74`.
+- READY Vercel preview: `dpl_7muqRtF3fDYMUHurkUQRsKKXEYtR` (preview target, no production alias).
+- Preview: https://apexcurtains-43nc-o2ls6z8cn-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources
+- This preview uses Vercel protection. A separate seven-day share link was provided in the user handover; its access token is deliberately excluded from the repository.
+- The complete browser review was repeated on the hosted preview: seven stages, all five online documents/eight drawings, 49 internal links/downloads, metadata/anchors, checklist and login all passed; no page errors, mobile overflow or reported axe A/AA violations. `verification.json` now records this hosted run. Review screenshots represent the hosted page.
+- Production remains `0fcaef8df8f56c4fb5dd3de5e2d80b68de9acaba`, deployment `dpl_91dqB5wGDA1husj9Qz26EXp2oT34`, with the existing production domains. GitHub main was rechecked and remains at that commit.
+
+Do not merge or promote this branch until the visual and technical review is approved.

@@ -84,4 +84,4 @@ Run the drawing generator before the PDF generator. The web and PDF content come
 
 ## Review assets and verification
 
-Desktop/mobile images and the final verification record are added alongside this audit before the draft PR is handed over. Approval is required before merge or production deployment. No analytics, advertising, outreach, new service programme or roller-blind expansion is included.
+Review [draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52), the [desktop](library-desktop.png) and [mobile](library-mobile.png) designs, [mobile document](mobile-document.png), [PDF design overview](pdf-designs.jpg) and [verification record](verification.md). The Vercel preview and hosted checks are recorded in the verification report. Approval is required before merge or production deployment. No analytics, advertising, outreach, new service programme or roller-blind expansion is included.
