@@ -66,7 +66,10 @@
 .spec-technical { border-top:1px solid #c8bdab; }
 .spec-technical-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem 4rem; }
 .spec-technical-grid section { border-top:1px solid #c8bdab; padding-top:1.5rem; }
+.spec-technical-grid h3 { font-size:clamp(1.7rem,2vw,2.1rem); line-height:1.25; }
 .spec-technical-grid p { margin-top:1.2rem; font-size:1rem; max-width:63ch; }
+.spec-technical-grid p + p { margin-top:1rem; }
+.spec-page :is(a,button,summary,select,input):focus-visible { outline:2px solid currentColor; outline-offset:4px; }
 .spec-faq { max-width:960px; margin-top:3rem; }
 .spec-faq details { border-bottom:1px solid #c8bdab; padding-block:1rem; }
 .spec-faq summary { cursor:pointer; font-size:1.1rem; padding-block:.3rem; }
@@ -161,7 +164,7 @@
  .spec-statement { padding-block:3rem; gap:1.5rem; }
 }
 @media(max-width:540px) {
- .spec-breadcrumb { padding-block:1.1rem 1.5rem; font-size:.75rem; }
+ .spec-breadcrumb { padding-block:1.1rem 1.3rem; font-size:.75rem; }
  .spec-page h1 { font-size:2.65rem; line-height:1.06; }
  .spec-hero .spec-service-name { margin-bottom:1rem; }
  .spec-hero .spec-lead { font-size:1.05rem; line-height:1.65; margin-top:1.25rem!important; }
@@ -173,7 +176,8 @@
  .spec-gable .spec-open-closed img { height:auto; }
  .spec-photo figcaption { font-size:.78rem; }
  .spec-open-closed figcaption a { display:block; margin-left:0; }
- .spec-hero-grid { gap:2rem; }
+ .spec-hero-grid { gap:1.6rem; }
+ .spec-technical-grid { gap:2rem; }
  .spec-film-layout { gap:2rem; }
  .spec-drawing { padding:1rem; }
  .spec-process { display:grid; gap:.5rem; padding-block:1.5rem; }

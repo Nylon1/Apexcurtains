@@ -57,7 +57,7 @@ export const specialistEditions: Record<SpecialistKey, SpecialistEdition> = {
     consultation: "Tell us which height you have measured.", prepare: ["Window height and room height, labelled separately", "A proposed hanging point and hem position, if known", "Photographs of the floor, stairs or landing below"],
   },
   scale: {
-    path: "/oversized-architectural-curtains", label: "Oversized architectural curtains", title: "A larger canvas", accent: "for the interior.",
+    path: "/oversized-architectural-curtains", label: "Oversized architectural curtains", title: "Oversized curtains,", accent: "considered with the interior.",
     intro: "Across expansive glazing, curtain depth and rhythm become part of the architecture. Plan panel divisions, layers and stack-back alongside the ceiling, joinery and circulation through the room.",
     hero: { slug: "manchester-airport-lounge" }, heroNote: "Manchester Airport lounge · Measuring, curtain and track supply, installation and final dressing.", diagram: "stack",
     principle: { title: "Design the space the curtains occupy.", text: "The closed width is only part of the brief. Fold depth, gathered panels and independent layers all need space within the finished interior.", points: [
@@ -70,7 +70,7 @@ export const specialistEditions: Record<SpecialistKey, SpecialistEdition> = {
     consultation: "Bring the curtain into the architectural brief.", prepare: ["Window elevations and ceiling or recess drawings", "Panel divisions, fabric intent and the view to preserve", "Programme, delivery access and project-team contacts"],
   },
   motors: {
-    path: "/motorised-curtain-systems", label: "Motorised curtain systems", title: "High above you.", accent: "Operated from here.",
+    path: "/motorised-curtain-systems", label: "Motorised curtain systems", title: "Motorised curtains.", accent: "Operated from here.",
     intro: "See remote operation on a five-metre-high residential window, then plan the track, controls and service access for your own room. The complete system is selected around the curtain and its route.",
     hero: { slug: "five-metre-motorised-curtains" }, heroNote: "Five metres describes the confirmed window height, not a certified curtain drop or system capacity.", diagram: "layers",
     principle: { title: "Specify the movement before the motor.", text: "Start with the route, panel weight and draw arrangement. Then coordinate the power supply, controls and access needed to keep the chosen system usable.", points: [
