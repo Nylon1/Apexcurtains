@@ -83,9 +83,7 @@ export default function Page() {
             to <em>final fitting.</em>
           </h1>
           <p className="guide-intro">
-            A calm, guided approach to extraordinary windows. Explore the
-            decisions behind the beauty, from the first room photographs to the
-            finished fold.
+            See what happens at survey, what needs agreeing before the fabric is cut, and what to expect when your curtains are fitted.
           </p>
           <a className="editorial-button" href="#service-stages">
             Explore the service ↓
@@ -149,9 +147,7 @@ export default function Page() {
       <section className="service-decisions">
         <p className="editorial-eyebrow">Understand the details</p>
         <h2>
-          Beautiful curtains.
-          <br />
-          Informed decisions.
+          Specifying your curtains
         </h2>
         <div>
           {[
@@ -175,6 +171,16 @@ export default function Page() {
               title: "Finishing details",
               text: "Tiebacks, hooks and supporting hardware, proportioned to the curtain and the room.",
             },
+            {
+              href: "/oversized-curtain-manufacturing",
+              title: "Long drops & wide panels",
+              text: "See how fabric widths, joins and lining affect the finished weight and the space curtains occupy when open.",
+            },
+            {
+              href: "/high-level-curtain-installation",
+              title: "Surveying high windows",
+              text: "Find out what to share about stairs, floors and fixing positions so access can be assessed for your project.",
+            },
           ].map((item) => (
             <Link href={item.href} key={item.href}>
               <h3>{item.title} ↗</h3>
@@ -195,8 +201,9 @@ export default function Page() {
           you explore the next step.
         </p>
         <Link className="editorial-button" href="/start-designing">
-          Start your curtain journey ↗
+          Request a curtain quote ↗
         </Link>
+        <Link className="editorial-text-link" href="/architectural-curtain-project-planner">Plan an architectural project</Link>
         <Link className="editorial-text-link" href="/arlo-curtain-advisor">
           Ask Arlo
         </Link>

@@ -1,3 +1,4 @@
+import { legacyAdviceDestinations, reviewedAdvice } from "@/lib/advice-editorial";
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import AdvicePostPageClient from "@/components/advice/AdvicePostPageClient";
@@ -47,7 +48,7 @@ async function getPostBySlug(slug: string) {
 
   if (error || !data) return null;
 
-  const row = data as AdvicePostRow;
+  const row = reviewedAdvice(data as AdvicePostRow);
 
   return {
     id: Number(row.id),
@@ -72,11 +73,12 @@ async function getRelatedPosts(currentSlug: string, category: string) {
     .from("advice_posts")
     .select("*")
     .neq("slug", currentSlug)
+    .not("slug", "in", `(${Object.keys(legacyAdviceDestinations).join(",")})`)
     .eq("category", category)
     .eq("published", true)
     .limit(3);
 
-  return ((data || []) as AdvicePostRow[]).map((item) => ({
+  return ((data || []) as AdvicePostRow[]).map(reviewedAdvice).map((item) => ({
     id: Number(item.id),
     title: item.title || "",
     slug: item.slug || "",

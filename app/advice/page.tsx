@@ -1,3 +1,4 @@
+import { legacyAdviceDestinations, reviewedAdvice } from "@/lib/advice-editorial";
 import AdvicePageClient from "@/components/advice/AdvicePageClient";
 import { createClient } from "@/lib/supabase/server";
 import type { AdvicePost } from "@/lib/advice-posts";
@@ -35,7 +36,7 @@ export default async function AdvicePage() {
     console.error("Supabase error:", error);
   }
 
-  const posts: AdvicePost[] = ((data || []) as AdvicePostRow[]).map((item) => ({
+  const posts: AdvicePost[] = ((data || []) as AdvicePostRow[]).filter(post => post.slug && !legacyAdviceDestinations[post.slug]).map(reviewedAdvice).map((item) => ({
     id: String(item.id),
     title: item.title || "",
     slug: item.slug || "",

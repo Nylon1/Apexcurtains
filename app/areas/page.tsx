@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
-import { cityPages } from "@/lib/cities";
+import { cityPages, regionAnchor } from "@/lib/cities";
 
 const SITE_URL = "https://www.apexcurtains.com";
 const canonicalUrl = `${SITE_URL}/areas`;
@@ -62,90 +61,30 @@ export default function AreasPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <section className="relative mx-auto max-w-7xl px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-36">
-        <nav aria-label="Breadcrumb" className="mb-8 flex items-center gap-2 text-sm">
-          <Link href="/" className="text-white/45 transition hover:text-white">
-            Home
-          </Link>
-          <span className="text-white/25">/</span>
-          <span className="text-[#d6b56b]">Areas</span>
+      <section className="studio-wrap areas-intro">
+        <nav aria-label="Breadcrumb" className="guide-breadcrumb"><Link href="/">Home</Link><span>/</span><span aria-current="page">Areas</span></nav>
+        <h1>Specialist curtains across England and Wales</h1>
+        <p>Find local guidance on shaped windows, surveying and installation. If your town is missing, <Link className="studio-link" href="/start-designing">send us your postcode and window details</Link> so we can discuss your project.</p>
+        <nav className="region-index" aria-label="Jump to a region">
+          <details><summary>Find your region</summary>
+            <ul>{regionGroups.map(([region]) => <li key={region}><a href={`#${regionAnchor(region)}`}>{region}</a></li>)}</ul>
+          </details>
         </nav>
-
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#d6b56b]/25 bg-[#d6b56b]/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#d6b56b]">
-            <MapPin className="h-4 w-4" />
-            England and Wales
-          </div>
-
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
-            Specialist curtains for difficult windows across England and Wales
-          </h1>
-
-          <p className="mt-6 max-w-3xl text-base leading-8 text-[#C8D1D8] sm:text-lg">
-            We survey, design, manufacture and professionally install curtains throughout England and Wales, from city homes to rural properties. Wherever your project is based, we plan the window geometry, fabric, track, fixing points and installation access together.
-          </p>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-[#C8D1D8] sm:text-lg">
-            Your town does not need to be listed below. {" "}
-            <Link href="/start-designing" className="underline underline-offset-4 hover:text-white">
-              Tell us about your window
-            </Link>{" "}
-            and include your postcode so we can discuss a survey and the installation requirements.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            ["/window-types", "Start with the window", "Apex, triangular, gable-end, barn conversion and large glazing."],
-            ["/curtain-design-guide", "Build the specification", "Heading, fabric, lining, accessories and practical design choices."],
-            ["/curtain-tracks", "Plan the track", "Track route, fixing surface, curtain weight and operation."],
-            ["/gallery", "See recorded projects", "Use real case studies where the stored project data supports the comparison."],
-          ].map(([href, title, text]) => (
-            <Link
-              key={href}
-              href={href}
-              className="rounded-[26px] border border-white/10 bg-[#1B405B] p-6 transition hover:-translate-y-0.5 hover:border-[#d6b56b]/35"
-            >
-              <h2 className="text-xl font-semibold text-[#F4F0E8]">{title}</h2>
-              <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">{text}</p>
-            </Link>
-          ))}
-        </div>
       </section>
-
-      <section className="mx-auto max-w-7xl space-y-12 px-4 pb-24 sm:px-6 lg:px-8">
+      <section className="studio-wrap areas-directory" aria-label="Areas by region">
         {regionGroups.map(([region, cities]) => (
-          <div key={region}>
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-5">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d6b56b]">
-                  Service region
-                </p>
-                <h2 className="mt-2 text-3xl font-semibold text-[#F4F0E8]">{region}</h2>
-              </div>
-              <p className="text-sm text-[#C8D1D8]">
-                {cities.length} {cities.length === 1 ? "area" : "areas"}
-              </p>
-            </div>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {cities.map((city) => (
-                <Link
-                  key={city.slug}
-                  href={`/areas/${city.slug}`}
-                  className="group rounded-[26px] border border-white/10 bg-white/[0.04] p-6 transition hover:border-[#d6b56b]/35 hover:bg-white/[0.06]"
-                >
-                  <h3 className="text-2xl font-semibold text-[#F4F0E8]">{city.name}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#C8D1D8]">{city.seoBlurb}</p>
-                  <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-[#d6b56b]">
-                    View local guidance
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
+          <section key={region} id={regionAnchor(region)} className="area-region">
+            <h2>{region}</h2>
+            <ul className="areas-city-list">{cities.map(city => (
+              <li key={city.slug}><Link href={`/areas/${city.slug}`}>{city.name}<span aria-hidden="true">↗</span></Link></li>
+            ))}</ul>
+          </section>
         ))}
       </section>
+      <nav className="studio-wrap areas-related" aria-label="Plan your curtains">
+        <Link href="/window-types">Window shapes</Link><Link href="/curtain-design-guide">Curtain design guide</Link>
+        <Link href="/curtain-tracks">Track options</Link><Link href="/gallery">Completed installations</Link>
+      </nav>
     </main>
   );
 }
