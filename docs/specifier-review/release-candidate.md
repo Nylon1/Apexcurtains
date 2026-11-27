@@ -4,6 +4,8 @@
 
 This is a content and publication-scope revision of the approved five-document collection. There is no new design, feature, workspace change or development programme. [Draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52) remains the review route.
 
+Reviewed implementation: `13ac3939918d0a40079ae49d2f5643c3eec2c0ca`. [READY protected preview](https://apexcurtains-43nc-3pa2k12ej-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources). Full CI and hosted desktop/mobile, download, accessibility and regression checks passed; see [verification](verification.md) for evidence, manifest fingerprint and limits. A scoped share link is supplied separately.
+
 ## What the preliminary edition contains
 
 Five PDF documents (13 A4 pages), the editable two-page APX-T05 Word template and its unpaginated text version. Reference, P01 revision, date, page count and format remain beside each download. Eight existing illustrative, not-to-scale drawings use project-specific variables; none is an approved construction drawing.

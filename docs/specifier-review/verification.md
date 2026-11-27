@@ -18,6 +18,16 @@
 
 Controlled manifest SHA-256 (UTF-8, LF): `4fd528fcf0e3d860a96d5435ec4c35621d28034cab4db6e7993f83bc34134506`.
 
+## Hosted candidate
+
+Implementation commit: `13ac3939918d0a40079ae49d2f5643c3eec2c0ca`. [GitHub CI run 46075045976](https://github.com/Nylon1/Apexcurtains/actions/runs/46075045976) passed the full workflow, including build, source/download integrity and existing regressions.
+
+READY preview deployment: `dpl_2Sg94AkJAQCTqY1Ba3oXb7Y9V3DE`, with no production target. [Preview library](https://apexcurtains-43nc-3pa2k12ej-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources). A separate seven-day protected share link is supplied in the handover; access tokens are not committed.
+
+The full browser review also passed on this hosted candidate: all seven P01 hashes/metadata, all seven D01 404s, 50 internal destinations, seven stages, eight diagrams, checklist and login. No runtime errors, overflow or reported axe violations in the three tested states. A further 320 px check and native keyboard stage activation passed. Current screenshots and `verification.json` represent the hosted candidate. Screenshot capture waits for immediate scroll positioning and paint, preventing an incomplete first-frame image capture; website behaviour is unchanged.
+
+GitHub main and the latest production deployment were rechecked after hosted verification and still match the baseline below.
+
 ## Evidence and scope
 
 `verification.json` records the latest browser run and checked destinations; `print-verification.json` records PDF measurements. Desktop/mobile screenshots and the five-document PDF overview are in this folder. Review-only Forest and business sheets are not website downloads.

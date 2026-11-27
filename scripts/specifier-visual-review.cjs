@@ -29,15 +29,15 @@ const out='docs/specifier-review';
  const stages=['Concept design','Design development','Technical design','Procurement','Construction','Installation','Handover'];
  for(const s of stages){await page.getByRole('button',{name:new RegExp(s+'$')}).click();assert.ok(await page.locator('.resource-stage-result li').count());assert.equal(await page.getByRole('button',{name:new RegExp(s+'$')}).getAttribute('aria-pressed'),'true');}
  await page.getByRole('button',{name:/Concept design$/}).click();
- await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0)});await page.screenshot({path:out+'/library-desktop.png',fullPage:true});
- await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0)});await page.screenshot({path:out+'/desktop-opening.png'});
+ await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo({top:0,behavior:"instant"})});await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));await page.screenshot({path:out+'/library-desktop.png',fullPage:true});
+ await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo({top:0,behavior:"instant"})});await page.screenshot({path:out+'/desktop-opening.png'});
  await page.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
  const accessibility=[];accessibility.push({viewport:'desktop',...(await page.evaluate(async()=>{const r=await axe.run('main',{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return {violations:r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))};}))});
  for(const d of await page.locator('.resource-document-content').all()){await d.locator('summary').click();assert.equal(await d.getAttribute('open'),'');}
  const allDrawings=await page.locator('.resource-reader .resource-drawing').count();assert.equal(allDrawings,8);
  accessibility.push({viewport:'desktop-expanded',...(await page.evaluate(async()=>{const r=await axe.run('main',{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return {violations:r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))};}))});
  for(const d of await page.locator('.resource-document-content').all())await d.locator('summary').click();
- await page.setViewportSize({width:390,height:844});await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0)});await page.screenshot({path:out+'/library-mobile.png',fullPage:true});await page.screenshot({path:out+'/mobile-opening.png'});
+ await page.setViewportSize({width:390,height:844});await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo({top:0,behavior:"instant"})});await page.screenshot({path:out+'/library-mobile.png',fullPage:true});await page.screenshot({path:out+'/mobile-opening.png'});
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);assert.equal(overflow,false);
  await page.locator('.resource-document-content').first().locator('summary').click();await page.locator('.resource-reader').first().screenshot({path:out+'/mobile-document.png',style:'.site-header { visibility: hidden !important; }'});
  accessibility.push({viewport:'mobile-expanded',...(await page.evaluate(async()=>{const r=await axe.run('main',{runOnly:{type:'tag',values:['wcag2a','wcag2aa','wcag21aa']}});return {violations:r.violations.map(v=>({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))};}))});
