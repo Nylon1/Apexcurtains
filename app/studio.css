@@ -450,7 +450,7 @@
 @media (max-width: 600px) {
   .studio-section-heading { align-items: start; flex-direction: column; gap: .45rem; }
   .studio-project-pair { grid-template-columns: minmax(0,1fr); gap: 2.1rem; }
-  .studio-project-pair article:first-child img { aspect-ratio: 1; }
+  .studio-project-pair article:first-child img { aspect-ratio: 4/5; object-position: center top; }
   .public-presentation .site-header-bar .site-project-button { padding: .55rem .65rem; font-size: .75rem; }
   .public-presentation .site-header-bar .site-project-button svg { display: none; }
 }

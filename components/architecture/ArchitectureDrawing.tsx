@@ -4,7 +4,7 @@ const details: Record<DrawingKind, { title: string; note: string }> = {
   height: { title: "Opening height and curtain drop", note: "The opening, hanging point and finished hem are separate survey references." },
   fullness: { title: "Track width and flat fabric width", note: "The same covered width takes more cloth as fullness increases. The drawing illustrates two times fullness." },
   stack: { title: "Stack-back and clear glazing", note: "Allow room beside the glazing for the folded panels to collect." },
-  layers: { title: "Curtain and voile on separate tracks", note: "Plan enough depth in the recess for both headings and their movement." },
+  layers: { title: "Curtain and voile on separate tracks", note: "Here the voile sits nearest the glass, with the main curtain on the room side. Allow space for both headings to move." },
   access: { title: "High-level survey and access planning", note: "Review the working area, the route into the room and the intended track line before choosing access equipment." },
   making: { title: "Pattern alignment across fabric widths", note: "Plan seam positions and match the repeat before the fabric is cut." },
   fixing: { title: "Track support and fixing substrate", note: "Confirm the load path into suitable structure behind the ceiling finish." },
@@ -36,8 +36,8 @@ const drawing: Record<DrawingKind, React.ReactNode> = {
     <path className="draw-heavy" d="M49 65H371m-302 22h282M69 129h282M110 181h200m-200 10h200" />
     <path className="draw-fabric" d="M80 92q13-17 26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0 M80 136q13-20 26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0t26 0" />
     <text x="210" y="46" textAnchor="middle">Ceiling recess · plan</text>
-    <text x="210" y="119" textAnchor="middle">Voile rail</text>
-    <text x="210" y="166" textAnchor="middle">Curtain rail</text>
+    <text x="210" y="119" textAnchor="middle">Curtain rail</text>
+    <text x="210" y="166" textAnchor="middle">Voile rail</text>
     <text x="210" y="217" textAnchor="middle">Glazing</text>
   </>,
   access: <>

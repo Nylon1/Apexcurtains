@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
           <div className="arch-planner-intro">
             <div>
               <h1>Architectural curtain project planner</h1>
-              <p>Tell us about the window and how you want to use the room. A photo or a rough measurement is enough to start the conversation.</p>
+              <p>Start with the window shape and project postcode. Measurements, photos and drawings are optional.</p>
               <a href="#project-details" className="studio-link">Start the consultation <span aria-hidden="true">↓</span></a>
             </div>
             <details className="studio-disclosure arch-measurement-help">

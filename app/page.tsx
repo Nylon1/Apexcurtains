@@ -77,8 +77,8 @@ export default function HomePage() {
         <div className="studio-wrap studio-split">
           <div>
             <p className="studio-kicker">Specialisms</p>
-            <h2 id="home-specialisms">When the window sets the brief.</h2>
-            <p>Height, shape and scale affect how a curtain falls, opens and fixes to the building. We consider those details together, from the first survey to the final dressing.</p>
+            <h2 id="home-specialisms">Curtains for challenging windows</h2>
+            <p>A sloping roofline changes where the curtain can hang. A tall or wide window changes how much cloth the track must carry and where it can gather when open.</p>
           </div>
           <div className="studio-service-list">
             {specialisms.map(({ title, detail, href }) => (
@@ -97,8 +97,8 @@ export default function HomePage() {
         </figure>
         <div>
           <p className="studio-kicker">Survey, make and fit</p>
-          <h2 id="home-craft">The work behind the fold.</h2>
-          <p>A curtain’s scale is felt in its seams, lining, heading and hardware. We plan those details alongside access for fitting and future care.</p>
+          <h2 id="home-craft">From workroom to window</h2>
+          <p>On a long drop, a small mismatch at a seam can carry through the whole panel. We plan the joins and lining with the heading, then assess how the finished curtains can be fitted and dressed on site.</p>
           <div className="studio-reading-links">
             <Link href="/oversized-curtain-manufacturing" className="studio-link">Specialist manufacturing <span aria-hidden="true">↗</span></Link>
             <Link href="/high-level-curtain-installation" className="studio-link">High-level installation <span aria-hidden="true">↗</span></Link>
@@ -113,7 +113,7 @@ export default function HomePage() {
             <HomeWindowDiscovery />
             <ul className="studio-resource-links">{guides.map(({ href, label }) => <li key={href}><Link href={href} prefetch={false}>{label} <span aria-hidden="true">↗</span></Link></li>)}</ul>
             <details className="studio-disclosure">
-              <summary>Explore the fabric personality quiz</summary>
+              <summary>Find your fabric style</summary>
               <LazyFabricQuiz />
             </details>
           </div>

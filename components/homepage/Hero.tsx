@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="studio-hero-copy">
         <p className="studio-kicker">Architectural curtains</p>
         <h1>Exceptional Curtains for Exceptional Windows.</h1>
-        <p>Specialist made-to-measure curtains for apex, double-height and oversized glazing. Designed, made and fitted around the architecture.</p>
+        <p>Specialist made-to-measure curtains for apex and gable windows, double-height rooms and wide glazing. We advise on motorised tracks for curtains beyond easy reach.</p>
         <div className="studio-actions">
           <TrackedLink href="/architectural-curtain-project-planner" eventName="architectural_project_planner_click" eventData={{ source: "homepage_hero" }} className="studio-button">
             Discuss your project
