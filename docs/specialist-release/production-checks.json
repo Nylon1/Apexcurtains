@@ -1,0 +1,322 @@
+{
+  "base": "https://www.apexcurtains.com",
+  "checkedAt": "2026-11-27T20:17:40.453Z",
+  "pages": [
+    {
+      "route": "apex-curtains",
+      "size": "desktop",
+      "status": 200,
+      "images": 4,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "apex-curtains",
+      "size": "mobile",
+      "status": 200,
+      "images": 4,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "gable-end-curtains",
+      "size": "desktop",
+      "status": 200,
+      "images": 4,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "gable-end-curtains",
+      "size": "mobile",
+      "status": 200,
+      "images": 4,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "tall-window-curtains",
+      "size": "desktop",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "tall-window-curtains",
+      "size": "mobile",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "oversized-architectural-curtains",
+      "size": "desktop",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "oversized-architectural-curtains",
+      "size": "mobile",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "motorised-curtain-systems",
+      "size": "desktop",
+      "status": 200,
+      "images": 2,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "motorised-curtain-systems",
+      "size": "mobile",
+      "status": 200,
+      "images": 2,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "high-level-curtain-installation",
+      "size": "desktop",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "high-level-curtain-installation",
+      "size": "mobile",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "oversized-curtain-manufacturing",
+      "size": "desktop",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    },
+    {
+      "route": "oversized-curtain-manufacturing",
+      "size": "mobile",
+      "status": 200,
+      "images": 3,
+      "diagramLabels": "within viewBox",
+      "violations": []
+    }
+  ],
+  "metadata": "exact baseline match across nine routes",
+  "links": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/curtain-solutions",
+      "status": 200
+    },
+    {
+      "path": "/architectural-curtain-project-planner",
+      "status": 200
+    },
+    {
+      "path": "/gallery/jesmond",
+      "status": 200
+    },
+    {
+      "path": "/gallery",
+      "status": 200
+    },
+    {
+      "path": "/gallery/hemel-hempstead",
+      "status": 200
+    },
+    {
+      "path": "/gallery/rickmansworth",
+      "status": 200
+    },
+    {
+      "path": "/curtain-tracks",
+      "status": 200
+    },
+    {
+      "path": "/curtain-linings",
+      "status": 200
+    },
+    {
+      "path": "/curtain-headings",
+      "status": 200
+    },
+    {
+      "path": "/curtain-tiebacks",
+      "status": 200
+    },
+    {
+      "path": "/start-designing",
+      "status": 200
+    },
+    {
+      "path": "/contact",
+      "status": 200
+    },
+    {
+      "path": "/reviews#customer-stories",
+      "status": 200
+    },
+    {
+      "path": "/gallery/windermere",
+      "status": 200
+    },
+    {
+      "path": "/gallery/cotswold",
+      "status": 200
+    },
+    {
+      "path": "/gallery/beeston",
+      "status": 200
+    },
+    {
+      "path": "/gallery/double-height-dining-room",
+      "status": 200
+    },
+    {
+      "path": "/gallery/two-storey-curtain-installation",
+      "status": 200
+    },
+    {
+      "path": "/projects/two-storey-curtains-fitting-and-finish.mp4",
+      "status": 200
+    },
+    {
+      "path": "/gallery/tall-black-framed-window",
+      "status": 200
+    },
+    {
+      "path": "/gallery/motorised-architectural-voiles",
+      "status": 200
+    },
+    {
+      "path": "/apex-curtains",
+      "status": 200
+    },
+    {
+      "path": "/gable-end-curtains",
+      "status": 200
+    },
+    {
+      "path": "/barn-conversion-curtains",
+      "status": 200
+    },
+    {
+      "path": "/oversized-architectural-curtains",
+      "status": 200
+    },
+    {
+      "path": "/motorised-curtain-systems",
+      "status": 200
+    },
+    {
+      "path": "/high-level-curtain-installation",
+      "status": 200
+    },
+    {
+      "path": "/gallery/manchester-airport-lounge",
+      "status": 200
+    },
+    {
+      "path": "/projects/motorised-voiles-two-storey-room.mp4",
+      "status": 200
+    },
+    {
+      "path": "/tall-window-curtains",
+      "status": 200
+    },
+    {
+      "path": "/large-window-curtains",
+      "status": 200
+    },
+    {
+      "path": "/curtain-weight-and-structure",
+      "status": 200
+    },
+    {
+      "path": "/professionals/trade-partnerships",
+      "status": 200
+    },
+    {
+      "path": "/architectural-curtain-project-planner?type=trade",
+      "status": 200
+    },
+    {
+      "path": "/projects/motorised-high-window.mp4",
+      "status": 200
+    },
+    {
+      "path": "/gallery/five-metre-motorised-curtains",
+      "status": 200
+    },
+    {
+      "path": "/room-visualiser",
+      "status": 200
+    },
+    {
+      "path": "/gallery/london-apartment-installation",
+      "status": 200
+    },
+    {
+      "path": "/gallery/warwickshire",
+      "status": 200
+    },
+    {
+      "path": "/gallery/norwich",
+      "status": 200
+    },
+    {
+      "path": "/services/measure-consultation",
+      "status": 200
+    },
+    {
+      "path": "/services/premium-installation",
+      "status": 200
+    },
+    {
+      "path": "/services/design-make-curtains",
+      "status": 200
+    }
+  ],
+  "films": [
+    "https://www.apexcurtains.com/projects/two-storey-curtains-fitting-and-finish.mp4",
+    "https://www.apexcurtains.com/projects/motorised-voiles-two-storey-room.mp4",
+    "https://www.apexcurtains.com/projects/motorised-high-window.mp4"
+  ],
+  "interactions": [
+    "curtain close/open",
+    "voile open",
+    "one-way draw",
+    "FAQ",
+    "consultation routes",
+    "mobile navigation",
+    "31 gallery projects",
+    "gallery filter/search/empty reset",
+    "project photograph lightbox/Escape"
+  ],
+  "responsiveWidths": [
+    320,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "pageErrors": [],
+  "enquiriesSubmitted": 0
+}

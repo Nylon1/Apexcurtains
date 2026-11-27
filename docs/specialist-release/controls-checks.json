@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-11-27T20:23:25.409Z",
+  "motorControls": [
+    "wide elevation",
+    "single layer",
+    "double layer",
+    "one-way draw",
+    "keyboard close curtain with reduced motion"
+  ],
+  "consultation": "visible keyboard focus and Enter navigates to planner",
+  "homepageShapes": [],
+  "homepageRoomVisualiser": "loaded via Try tall windows",
+  "enquiriesSubmitted": 0
+}
