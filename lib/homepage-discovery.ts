@@ -129,7 +129,7 @@ export const homeServiceSteps = [
     title: "Professional installation",
     text: "Fit the specified track and curtains using suitable fixing points and a planned access method for the room.",
     detail:
-      "MiTOWER or other high-level access where the site assessment requires it.",
+      "High-level access planned around the window and the working area.",
     href: "/services/premium-installation#mitower-access",
   },
   {

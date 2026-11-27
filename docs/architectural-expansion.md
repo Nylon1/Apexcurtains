@@ -14,11 +14,11 @@ Prepared 27 November 2026. Review branch `feat/architectural-curtain-expansion`.
 | Interactive tools | Arlo, Start Designing, fabric quiz, Oslo colour and lighting tools. Illustrated room scenes show shaped curtains tied back. | Adds a textile mass estimator and independently operated curtain and voile elevation. Links the elevation and the existing room visualiser. |
 | Search and discovery | www canonicals, permanent legacy redirects, four sitemaps, entity, service and project markup and linked educational hubs. Live crawl passed 186 of 186 listed URLs across pages (91), projects (14), areas (71) and advice (10). | Eight additional sitemap paths. New guide titles, descriptions, semantic sections, canonical metadata, service or article and breadcrumb markup. New links from menus, quotation, professional, large-window, survey, manufacturing and track guides. |
 
-The live audit used HTTPS status, robots, the complete sitemap crawl, canonical matching, index directives, titles, descriptions, headings and JSON-LD parsing. The repository review included public pages, related guides, project asset provenance, visualiser inputs, commercial and professional flows, enquiry handlers and the existing regression suites. Private project records and customer messages were outside the audit; public gallery records and business-provided experience define the available project evidence.
+The live audit used HTTPS status, robots, the complete sitemap crawl, canonical matching, index directives, titles, descriptions, headings and JSON-LD parsing. The repository review included public pages, related guides, project asset provenance, visualiser inputs, commercial and professional flows, enquiry handlers and the existing regression suites. Project evidence comes from public gallery records and business-provided experience.
 
 ## Search architecture and demand
 
-These clusters combine qualitative UK search-result observations and intent. Search Console returned no connected property through Windsor. There were no verified keyword volumes or ranking baselines. Public search results indicate the types of pages competing for a query; they do not give search volume or Apex performance.
+These clusters combine qualitative UK search-result observations and intent. Search Console returned no connected property through Windsor. Verified keyword volumes and ranking baselines are pending. Public search results indicate the types of pages competing for a query.
 
 | Cluster | Destination | Positioning |
 | --- | --- | --- |
@@ -89,11 +89,31 @@ The current Apex visualiser uses authored room scenes, masks and lighting maps f
 
 ## Release readiness
 
-- Reviewers can validate the specialist pages, planner and tooling on the feature branch before considering a production release.
+- Reviewers can validate the specialist pages, planner and tooling in [draft pull request #45](https://github.com/Nylon1/Apexcurtains/pull/45) and its access-controlled Vercel preview. Production remains on the previous release.
 - Confirm trade intake, geographic coverage and the proposed service scope with the business. Keep manufacture-only, installed and subcontracted agreements conditional. Agree named responsibility for qualification, survey, measurement, control integration and handover.
 - Verify the accepted project-size envelope, workroom setup, approved access suppliers, qualifications and current insurance before adding any equipment claim or maximum to public copy.
-- Record production mailbox receipt and staff handling of drawings. The preview tests exercise the endpoint and the provider boundary using a local test receiver.
+- Record production mailbox receipt and staff handling of drawings. Browser tests used simulated delivery responses. The separate route test invoked the real endpoint and Resend SDK with an intercepted provider call, including acceptance, rejection, request-size limits, file checks and idempotency.
 - Approve photographic rights and specification evidence before adding any central London or five-metre-window case. These records are not required to review the current featured installations.
 - Capture Search Console, Analytics and field Core Web Vitals when the business account or sufficient field data is available. Monitor leads by project type and qualify which work warrants distinct portfolio and service content.
 
 Next growth priorities are an approved large-window evidence series, a specifier detail sheet for recess and maintenance coordination, and a controlled trade pilot with documented handover and outcomes. This gives the business material to substantiate additional claims and content.
+
+## Quality assurance record
+
+| Check | Result |
+| --- | --- |
+| Production build and TypeScript | Passed with Next.js 16.4.6. The repository had been pinned to 16.4.3, which the first build flagged. The release branch updates Next and its ESLint config together. |
+| Public metadata and crawl | Live baseline passed 186 sitemap URLs. The authenticated Vercel preview passed all 194 sitemap URLs, including 99 pages, 14 projects, 71 areas and 10 advice entries. The crawl checked HTTP status, sitemap XML, canonical URLs, index directives, titles, descriptions, a single H1 and JSON-LD parsing. Vercel protects the preview from anonymous requests. |
+| Internal links | Checked 391 unique internal path and fragment destinations across the 194 crawled pages. The 16 linked routes outside those sitemaps also responded successfully or redirected as expected. No missing destinations or fragments were found. |
+| Existing journeys | Local rendered specialist checks and legacy redirects passed, including existing URLs, fragment links, metadata and advice links. Healthcare’s public render, product asset and private-file access checks passed. Separate Atelier, healthcare, visualiser, sitemap and web app suites passed. |
+| Chrome layouts and accessibility | 27 baseline and 51 candidate page/viewport combinations at 390, 768 and 1440 pixels. Candidate checks found no horizontal overflow or uncaught browser errors. Axe WCAG A/AA checks on the homepage and eight new main regions were clear after matching the visualiser link’s accessible name to its visible label. Chrome viewport checks are browser emulation. |
+| Interactive browser flows | Menu and homepage entry, independent curtain and voile controls, centre/one-way mode, textile mass calculation, trade preselection, commercial and residential field changes, multipart files, size error and retry state. No live enquiry was sent. |
+| Dependency audit | The Next.js advisory set was removed by the patch. npm reported six moderate advisories in the existing shadcn tooling dependency tree and zero high or critical findings. The repository-wide lint audit still reports existing findings in older files. Targeted checks cover new code. [Next.js security advisories](https://github.com/vercel/next.js/security/advisories) |
+
+Single Chrome Lighthouse mobile lab samples are shown below. The baseline ran against the production domain and the candidate ran from a local production build. The origin, network and sample timing differ. Confirm any production performance change with repeated tests and field Core Web Vitals.
+
+| Page | Performance | Accessibility | SEO | LCP | Total blocking time | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Live homepage baseline | 76 | 100 | 100 | 2.3 s | 980 ms | 0 |
+| Candidate homepage | 84 | 100 | 100 | 3.3 s | 370 ms | 0 |
+| Candidate motorised systems | 98 | 100 | 100 | 1.1 s | 170 ms | 0 |

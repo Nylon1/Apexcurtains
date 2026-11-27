@@ -161,7 +161,7 @@ export const commercialGuide = professionalGuide({
       paragraphs: [
         "For occupied lounges, hotels or workplaces, discuss permitted hours, guest/public separation, security, noise or dust restrictions, delivery routes and temporary storage. Phasing should make clear which areas must remain available and when curtains or tracks can be taken out of service.",
         "High-level installation needs a task-specific access plan that fits the available floor area and route to the work. Confirm equipment suitability, competent use and protection of finished surfaces with the project team. Do not assume the method used on one site transfers unchanged to another.",
-        "For suitable commercial projects, RAMS, risk assessments, method statements and public liability insurance details can be provided where required. Share the site requirements early so the relevant documents, permits and induction arrangements can be coordinated before attendance.",
+        "Share the site’s requirements for risk assessments, method statements, public liability insurance, permits and induction early. The project team can then confirm which documents and cover apply to the proposed scope before attendance.",
       ],
       links: [
         {
@@ -236,7 +236,7 @@ export const commercialGuide = professionalGuide({
     {
       question: "Are RAMS and insurance details available?",
       answer:
-        "For suitable commercial projects, RAMS, risk assessments, method statements and public liability insurance details can be provided where required. Share site-specific documentation and attendance requirements early.",
+        "Share any requirements for risk assessments, method statements or insurance details. Confirm the applicable documentation for the agreed scope before attendance.",
     },
     {
       question: "Do you supply ceiling tracks, wave curtains and voiles?",
