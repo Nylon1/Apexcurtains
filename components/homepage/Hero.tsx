@@ -6,22 +6,21 @@ import { studioPhotos } from "@/lib/studio-photography";
 export default function Hero() {
   const { src, alt, width, height, caption } = studioPhotos.oxford;
   return (
-    <header className="studio-hero" id="home-hero">
-      <div className="studio-hero-copy">
-        <p className="studio-kicker">Architectural curtains</p>
-        <h1>Exceptional Curtains for Exceptional Windows.</h1>
-        <p>Specialist made-to-measure curtains for apex and gable windows, double-height rooms and wide glazing. We advise on motorised tracks for curtains beyond easy reach.</p>
+    <header className="architectural-hero" id="home-hero">
+      <figure>
+        <Image src={src} alt={alt} width={width} height={height} fetchPriority="high" loading="eager" sizes="100vw" />
+        <figcaption><Link href="/gallery/pinch-pleat-curtains-oxford-oxford" prefetch={false}>{caption} <span aria-hidden="true">↗</span></Link></figcaption>
+      </figure>
+      <div className="architectural-hero-copy">
+        <h1><span>Exceptional Curtains</span>{" "}<span>for Exceptional Windows.</span></h1>
+        <p>UK specialists in complex, oversized and high-level curtain installations.</p>
         <div className="studio-actions">
           <TrackedLink href="/architectural-curtain-project-planner" eventName="architectural_project_planner_click" eventData={{ source: "homepage_hero" }} className="studio-button">
-            Discuss your project
+            Discuss your project <span aria-hidden="true">↗</span>
           </TrackedLink>
           <a href="#real-projects" className="studio-link">Selected projects <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <figure className="studio-hero-photo">
-        <Image src={src} alt={alt} width={width} height={height} fetchPriority="high" loading="eager" sizes="(max-width: 800px) 100vw, 63vw" />
-        <figcaption><Link href="/gallery/pinch-pleat-curtains-oxford-oxford" prefetch={false}>{caption} <span aria-hidden="true">↗</span></Link></figcaption>
-      </figure>
     </header>
   );
 }

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 490" role="img" aria-labelledby="t d">
+  <title id="t">Separate curtain and voile tracks</title><desc id="d">Illustrative cutaway of two level tracks beneath a ceiling. Carriers suspend an opaque curtain on the room side and a lighter voile near the glass.</desc>
+  <defs><pattern id="h" width="10" height="10" patternUnits="userSpaceOnUse"><path d="m0 10 10-10" stroke="#a99576" stroke-width="1"/></pattern></defs>
+  <path fill="#ded8cb" d="M0 0h720v490H0z"/>
+  <g stroke="#425248" stroke-width="2" fill="none"><path d="M82 117h546v-22H82z" fill="url(#h)"/><path d="M82 117h546M572 127v239m8-239v239" stroke-width="3"/>
+    <g id="track"><path d="M200 120h84v40h-31v-8h23v-24h-68v24h23v8h-31z" fill="#727b6a"/><path d="M239 144h7v37h-7z" fill="#e9dfce"/><path d="M230 142a7 7 0 1 0 14 0a7 7 0 1 0-14 0m15 0a7 7 0 1 0 14 0a7 7 0 1 0-14 0" fill="#c1bca9"/></g>
+    <use href="#track" x="160"/><path d="M236 182q8-7 15 0l7 151q-16-8-39 2z" fill="#647469"/><path d="M399 182q5-4 10 0l10 151q-12-4-24 1z" fill="#ece7da"/>
+    <path d="M226 280h-70v50m261-60h73v61" stroke="#846c47"/>
+  </g><g fill="#273b31" font-family="Arial,sans-serif" font-size="20"><text x="101" y="360">Curtain</text><text x="465" y="360">Voile</text></g>
+</svg>

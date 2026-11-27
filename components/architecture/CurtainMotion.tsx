@@ -11,7 +11,7 @@ function CurtainLayer({ open, stack, voile = false }: { open: boolean; stack: st
   );
 }
 
-export default function CurtainMotion() {
+export default function CurtainMotion({ introduction = "Compare centre-opening and one-way movement on tall rectangular or wide glazing. With two tracks, try operating the voile and curtain independently." }: { introduction?: string }) {
   const [shape, setShape] = useState("tall");
   const [stack, setStack] = useState("centre");
   const [layers, setLayers] = useState("double");
@@ -21,7 +21,7 @@ export default function CurtainMotion() {
   return (
     <section id="technical-tool" className="arch-tool arch-motion arch-section" aria-labelledby="motion-title">
       <h2 id="motion-title">See how the curtains move</h2>
-      <p>Compare centre-opening and one-way movement on tall rectangular or wide glazing. With two tracks, try operating the voile and curtain independently.</p>
+      <p>{introduction}</p>
       <div className="arch-motion-grid">
         <figure className="arch-motion-scene">
           <div className="arch-stage" data-shape={shape} aria-hidden="true">
