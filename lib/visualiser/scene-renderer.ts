@@ -3,6 +3,7 @@ import { preparePixels, relight } from "./relight";
 import {
   roomPalettes,
   roomSurfaces,
+  tranquilColour,
   type RoomDesign,
   type RoomSurface,
 } from "./room-design";
@@ -72,6 +73,9 @@ export async function loadScene(scene: Scene, size: "mobile" | "desktop") {
     return ctx!.getImageData(0, 0, canvas.width, canvas.height).data;
   }
   const curtainMask = maskFor(scene.paths);
+  const uncovered = new Path2D();
+  uncovered.rect(0, 0, scene.width, scene.height);
+  for (const outline of scene.paths) uncovered.addPath(new Path2D(outline));
   const surfaceMasks = Object.fromEntries(
     roomSurfaces.map((key) => [key, maskFor(material[key])]),
   ) as Record<RoomSurface, Uint8ClampedArray>;
@@ -135,6 +139,8 @@ export async function loadScene(scene: Scene, size: "mobile" | "desktop") {
     surfaces,
     lighting,
     lights: material.lights,
+    voilePath: new Path2D(scene.voilePath),
+    uncovered,
   };
 }
 export function paintScene(
@@ -158,6 +164,28 @@ export function paintScene(
   relight(scene.pixels, rgb, output);
   if (design.lights === "off") lightsOff(output, scene.lighting);
   context.putImageData(new ImageData(output, scene.width, scene.height), 0, 0);
+  const voile = tranquilColour(design.voile);
+  if (voile) {
+    context.save();
+    context.scale(scene.width / scene.sourceWidth, scene.height / scene.sourceHeight);
+    context.clip(scene.voilePath);
+    context.clip(scene.uncovered, "evenodd");
+    const fold = scene.sourceWidth / 48;
+    const tint = voile.rgb.join(", ");
+    const highlight = voile.rgb.map(channel => Math.min(255, channel + 19)).join(",");
+    // Translucent folds allow the mullions, outdoor view and daylight to remain visible.
+    for (let x = 0; x < scene.sourceWidth; x += fold) {
+      const shading = context.createLinearGradient(x, 0, x + fold, 0);
+      shading.addColorStop(0, `rgba(${tint}, .38)`);
+      shading.addColorStop(.28, `rgba(${tint}, .66)`);
+      shading.addColorStop(.53, `rgba(${highlight}, .62)`);
+      shading.addColorStop(.82, `rgba(${tint}, .47)`);
+      shading.addColorStop(1, `rgba(${tint}, .38)`);
+      context.fillStyle = shading;
+      context.fillRect(x, 0, fold + .1, scene.sourceHeight);
+    }
+    context.restore();
+  }
   if (design.lights === "off") {
     context.save();
     context.scale(

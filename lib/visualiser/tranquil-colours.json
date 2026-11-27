@@ -1,0 +1,233 @@
+[
+  {
+    "id": "anthracite",
+    "name": "Anthracite",
+    "reference": "2031/916",
+    "rgb": [
+      82,
+      82,
+      82
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-916%20tranquil%20anthracite.jpg"
+  },
+  {
+    "id": "apple",
+    "name": "Apple",
+    "reference": "2031/603",
+    "rgb": [
+      206,
+      212,
+      176
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-603%20tranquil%20apple.jpg"
+  },
+  {
+    "id": "cloud",
+    "name": "Cloud",
+    "reference": "2031/272",
+    "rgb": [
+      190,
+      190,
+      190
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-272%20tranquil%20cloud.jpg"
+  },
+  {
+    "id": "coconut",
+    "name": "Coconut",
+    "reference": "2031/479",
+    "rgb": [
+      242,
+      242,
+      236
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-479%20tranquil%20coconut.jpg"
+  },
+  {
+    "id": "earth",
+    "name": "Earth",
+    "reference": "2031/116",
+    "rgb": [
+      137,
+      123,
+      111
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-116%20tranquil%20earth.jpg"
+  },
+  {
+    "id": "flax",
+    "name": "Flax",
+    "reference": "2031/135",
+    "rgb": [
+      222,
+      209,
+      197
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-135%20tranquil%20flax.jpg"
+  },
+  {
+    "id": "honey",
+    "name": "Honey",
+    "reference": "2031/511",
+    "rgb": [
+      167,
+      137,
+      83
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-511%20tranquil%20honey.jpg"
+  },
+  {
+    "id": "leaf",
+    "name": "Leaf",
+    "reference": "2031/662",
+    "rgb": [
+      129,
+      131,
+      82
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-662%20tranquil%20leaf.jpg"
+  },
+  {
+    "id": "linen",
+    "name": "Linen",
+    "reference": "2031/031",
+    "rgb": [
+      221,
+      212,
+      197
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-031%20tranquil%20linen.jpg"
+  },
+  {
+    "id": "moss",
+    "name": "Moss",
+    "reference": "2031/634",
+    "rgb": [
+      116,
+      114,
+      95
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-634%20tranquil%20moss.jpg"
+  },
+  {
+    "id": "parchment",
+    "name": "Parchment",
+    "reference": "2031/022",
+    "rgb": [
+      231,
+      221,
+      212
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-022%20tranquil%20parchment.jpg"
+  },
+  {
+    "id": "petal",
+    "name": "Petal",
+    "reference": "2031/213",
+    "rgb": [
+      240,
+      222,
+      216
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-213%20tranquil%20petal.jpg"
+  },
+  {
+    "id": "porcelain",
+    "name": "Porcelain",
+    "reference": "2031/047",
+    "rgb": [
+      151,
+      169,
+      186
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-047%20tranquil%20porcelain.jpg"
+  },
+  {
+    "id": "rattan",
+    "name": "Rattan",
+    "reference": "2031/490",
+    "rgb": [
+      123,
+      104,
+      92
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-490%20tranquil%20rattan.jpg"
+  },
+  {
+    "id": "redwood",
+    "name": "Redwood",
+    "reference": "2031/327",
+    "rgb": [
+      119,
+      92,
+      75
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-327%20tranquil%20redwood.jpg"
+  },
+  {
+    "id": "rosebud",
+    "name": "Rosebud",
+    "reference": "2031/210",
+    "rgb": [
+      237,
+      194,
+      187
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-210%20tranquil%20rosebud.jpg"
+  },
+  {
+    "id": "seafoam",
+    "name": "Seafoam",
+    "reference": "2031/723",
+    "rgb": [
+      195,
+      215,
+      206
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-723%20tranquil%20seafoam.jpg"
+  },
+  {
+    "id": "sky",
+    "name": "Sky",
+    "reference": "2031/714",
+    "rgb": [
+      181,
+      199,
+      207
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-714%20tranquil%20sky.jpg"
+  },
+  {
+    "id": "snow-drop",
+    "name": "Snow Drop",
+    "reference": "2031/062",
+    "rgb": [
+      251,
+      248,
+      241
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-062%20tranquil%20snow%20drop.jpg"
+  },
+  {
+    "id": "storm",
+    "name": "Storm",
+    "reference": "2031/928",
+    "rgb": [
+      137,
+      138,
+      141
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-928%20tranquil%20storm.jpg"
+  },
+  {
+    "id": "sunset",
+    "name": "Sunset",
+    "reference": "2031/517",
+    "rgb": [
+      178,
+      103,
+      74
+    ],
+    "swatch": "https://www.prestigious.co.uk/wp-content/uploads/product_images/thumbs/2031-517%20tranquil%20sunset.jpg"
+  }
+]

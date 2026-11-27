@@ -478,7 +478,8 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
+  max-height: 75svh;
+  object-fit: contain;
   background: #d9d6cc;
 }
 .rv-dialog p {
@@ -643,4 +644,20 @@
   font-size: 0.7rem;
   color: #526052;
   margin: 0 0 1rem;
+}
+
+.rv-voile-control { padding-block: 1rem; border-top: 1px solid #cfcbbb; }
+.rv-voile-control label { display: block; font-weight: 600; margin-bottom: .4rem; }
+.rv-voile-control > div { display: flex; align-items: center; gap: .65rem; }
+.rv-voile-control span { width: 1.55rem; height: 1.55rem; border: 1px solid #79796e; flex: none; }
+.rv-voile-control select { min-width: 0; flex: 1; padding: .55rem; border: 1px solid #79796e; background: #fffaf1; color: #203c35; font: inherit; }
+.rv-voile-control p { font-size: .85rem; line-height: 1.5; margin-top: .5rem; }
+.rv-tall-stage { background: #d8cfc0; }
+@media(max-width: 800px) and (orientation: portrait) {
+  .rv-stage.rv-tall-stage { width: min(100%, 28svh); aspect-ratio: 9 / 16; margin-inline: auto; }
+  .rv-layout:has(.rv-tall-stage) .rv-options :is(button, select, a) { scroll-margin-top: calc(50svh + 95px); }
+}
+@media(min-width: 801px) {
+  .rv-layout:has(.rv-tall-stage) { grid-template-columns: minmax(0,min(32rem,42vh)) minmax(18rem,23rem); }
+  .rv-tall-stage { aspect-ratio: 9 / 16; }
 }

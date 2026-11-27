@@ -114,8 +114,8 @@ export default function RoomPaletteControls({
                 : active === "furniture"
                   ? furnitureLabel
                   : active === "wall"
-                    ? "Walls & vaulted ceiling"
-                    : "Timber floor tone"}
+                    ? "Wall and ceiling tone"
+                    : "Floor tone"}
             </small>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function RoomPaletteControls({
             : active === "furniture"
               ? "Explore the main upholstery. Timber, accent cushions and decorative details keep their original finish."
               : active === "floor"
-                ? "Explore timber tones while keeping the grain, rug and natural shadows."
+                ? "Explore floor tones with the texture and shadows of this room."
                 : "Explore a wall and ceiling colour together, with the room’s architectural shadows preserved."}
         </p>
       </div>

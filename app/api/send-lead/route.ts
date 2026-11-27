@@ -59,7 +59,7 @@ export async function POST(req: Request) {
     const suggestedLining = String(formData.get("suggestedLining") || "");
     const recommendationTitle = String(formData.get("recommendationTitle") || "");
     const photoName = String(formData.get("photoName") || "");
-    const visualiserLook = visualiserContext(formData.get("visualiserRoom"), formData.get("visualiserColour"), { wall: formData.get("visualiser-wall"), floor: formData.get("visualiser-floor"), furniture: formData.get("visualiser-furniture"), lights: formData.get("visualiser-lights") });
+    const visualiserLook = visualiserContext(formData.get("visualiserRoom"), formData.get("visualiserColour"), { wall: formData.get("visualiser-wall"), floor: formData.get("visualiser-floor"), furniture: formData.get("visualiser-furniture"), lights: formData.get("visualiser-lights"), voile: formData.get("visualiser-voile") });
 
     const uploaded = formData.get("imageFile");
 
