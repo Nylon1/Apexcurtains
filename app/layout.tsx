@@ -75,7 +75,7 @@ const globalSchema = {
       telephone: "+448007720367",
       email: "hello@apexcurtains.com",
       description:
-        "Specialists in curtains for apex, triangular, gable end and architectural windows across England and Wales.",
+        "Specialists in complex, oversized and high-level curtain installations, including apex, triangular and gable end windows. Survey and installation across England and Wales.",
       areaServed: SERVICE_AREAS,
     },
     {

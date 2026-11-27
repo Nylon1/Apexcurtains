@@ -42,6 +42,14 @@ export default function Page() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <TrackedLink
+                href="/architectural-curtain-project-planner"
+                eventName="architectural_project_planner_click"
+                eventData={{ source: "get-curtain-quote" }}
+                className="rounded-full border border-[#d6b56b]/50 px-6 py-3 text-sm font-semibold"
+              >
+                Plan a tall or complex project
+              </TrackedLink>
+              <TrackedLink
                 href="/start-designing"
                 eventName="quote_start_designing"
                 eventData={{ source: "get-curtain-quote" }}

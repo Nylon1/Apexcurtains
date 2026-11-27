@@ -73,7 +73,11 @@ export const surveyGuide: SpecialistGuide = {
         },
         {
           href: "/services/premium-installation#mitower-access",
-          label: "MiTOWER and high-level access",
+          label: "High-level access planning",
+        },
+        {
+          href: "/architectural-curtain-project-planner",
+          label: "Share approximate dimensions and survey information",
         },
         {
           href: "/professionals",

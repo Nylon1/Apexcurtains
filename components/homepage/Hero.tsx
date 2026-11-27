@@ -13,24 +13,30 @@ export default function Hero() {
         sizes="100vw"
       />
       <div className="home-hero-copy">
-        <p className="editorial-eyebrow">
-          Apex Curtains / Made for your architecture
-        </p>
         <h1>
-          Curtains engineered for <em>extraordinary windows.</em>
+          Exceptional Curtains for <em>Exceptional Windows.</em>
         </h1>
         <p>
-          We survey, design, manufacture and professionally install
-          made-to-measure curtains for apex, triangular, angled and gable-end
-          windows across England and Wales.
+          UK specialists in complex, oversized and high-level curtain installations.
+          From apex and gable windows to double-height glazing, we bring together
+          architectural design, specialist manufacturing, advanced tracks and
+          professional installation.
         </p>
         <div className="home-actions">
           <a
-            href="#discover-your-window"
+            href="#architectural-curtains"
             className="home-button home-button-light"
           >
-            Explore your window <span aria-hidden="true">↓</span>
+            Explore our specialisms <span aria-hidden="true">↓</span>
           </a>
+          <TrackedLink
+            href="/architectural-curtain-project-planner"
+            eventName="architectural_project_planner_click"
+            eventData={{ source: "homepage_hero" }}
+            className="home-button home-button-glass"
+          >
+            Plan your project <span aria-hidden="true">↗</span>
+          </TrackedLink>
           <TrackedLink
             href="/start-designing"
             eventName="curtain_journey_start_click"
@@ -41,9 +47,7 @@ export default function Hero() {
           </TrackedLink>
         </div>
       </div>
-      <p className="home-photo-credit">
-        An Apex installation · Real homes, individually dressed
-      </p>
+      <p className="home-photo-credit">A completed Apex gable installation</p>
     </header>
   );
 }

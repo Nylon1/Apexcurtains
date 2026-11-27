@@ -77,6 +77,14 @@ export const tracksGuide: SpecialistGuide = {
       ],
       links: [
         {
+          href: "/curtain-weight-and-structure",
+          label: "Estimate textile mass and understand track loads",
+        },
+        {
+          href: "/motorised-curtain-systems",
+          label: "Forest FMS and FMS Plus motorised tracks",
+        },
+        {
           href: "/curtain-linings",
           label: "How lining changes weight and drape",
         },

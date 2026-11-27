@@ -57,12 +57,12 @@ export default function ApexEntryScreen() {
         />
         <p className="apex-entry-kicker">Made for your architecture</p>
         <h2 id="apex-entry-title">
-          Extraordinary windows.
+          Exceptional Curtains
           <br />
-          Beautifully dressed.
+          for Exceptional Windows.
         </h2>
         <p className="apex-entry-offer" id="apex-entry-description">
-          Specialist curtains, made for your home.
+          UK specialists in complex, oversized and high-level curtain installations.
         </p>
         <button
           type="button"

@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { sendArchitecturalLead } from "@/lib/architectural-lead";
 import { visualiserContext } from "@/lib/visualiser/enquiry-context";
 
 function toBase64(buffer: ArrayBuffer) {
@@ -29,6 +30,12 @@ export async function POST(req: Request) {
 
     const resend = new Resend(resendApiKey);
     const formData = await req.formData();
+    if (formData.get("journey") === "architectural") {
+      if (req.headers.get("sec-fetch-site") === "cross-site") {
+        return Response.json({ ok: false, error: "Please submit your enquiry from the Apex website." }, { status: 403 });
+      }
+      return await sendArchitecturalLead(resend, formData, req.headers.get("idempotency-key"));
+    }
 
     const name = String(formData.get("name") || "");
     const email = String(formData.get("email") || "");
@@ -132,15 +139,21 @@ Attachment included: ${uploaded instanceof File ? "Yes" : "No"}
       attachments,
     });
 
+    if (emailResult.error || !emailResult.data?.id) {
+      return Response.json(
+        { ok: false, error: "Your enquiry could not be sent. Please try again or contact Apex directly." },
+        { status: 502 },
+      );
+    }
     return Response.json({
       ok: true,
       email: emailResult,
     });
-  } catch (error) {
+  } catch {
     return Response.json(
       {
         ok: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: "Your enquiry could not be processed. Please try again or contact Apex directly.",
       },
       { status: 500 }
     );

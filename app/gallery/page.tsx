@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import GalleryCollection from "@/components/gallery/GalleryCollection";
 import { getGalleryProjects } from "@/lib/gallery-projects";
 
@@ -32,6 +33,23 @@ export default async function GalleryPage() {
           <Link href="/window-types">Explore your window shape ↗</Link>
         </div>
       </header>
+      <section className="gallery-wrap" aria-labelledby="featured-installations">
+        <h2 id="featured-installations" className="text-3xl">Selected architectural installations</h2>
+        <div className="mt-5 grid gap-7 sm:grid-cols-2">
+          <article>
+            <Image src="/projects/pinch-pleat-curtains-oxford-oxford.jpeg" alt="Shaped curtains frame a broad residential gable with matching tiebacks" width={1600} height={1200} sizes="(max-width: 640px) 90vw, (max-width: 1200px) 45vw, 560px" className="aspect-[4/3] w-full object-cover" />
+            <h3 className="mt-4 text-xl">Oxford residential gable</h3>
+            <p className="mt-2">A shaped curtain line follows the glazed gable. Tiebacks gather the curtains to frame the view.</p>
+            <Link className="editorial-text-link" href="/gallery/pinch-pleat-curtains-oxford-oxford">View the Oxford installation ↗</Link>
+          </article>
+          <article>
+            <Image src="/images/commercial/airport-lounge-main.jpeg" alt="Curtains installed in the finished Manchester Airport lounge interior" width={1824} height={1026} sizes="(max-width: 640px) 90vw, (max-width: 1200px) 45vw, 560px" className="aspect-[4/3] w-full object-cover" />
+            <h3 className="mt-4 text-xl">Manchester Airport lounge</h3>
+            <p className="mt-2">Commercial curtain and track installation coordinated with a finished hospitality interior.</p>
+            <Link className="editorial-text-link" href="/commercial-curtain-track-installation#manchester-airport">View the airport lounge project ↗</Link>
+          </article>
+        </div>
+      </section>
       <section
         className="gallery-wrap"
         aria-label="Curtain installation projects"

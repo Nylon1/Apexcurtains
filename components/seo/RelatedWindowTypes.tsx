@@ -31,6 +31,11 @@ const windowTypeLinks = [
     title: "Large Window Curtains",
     desc: "Curtains for wide glazing, patio doors and floor-to-ceiling glass.",
   },
+  {
+    href: "/tall-window-curtains",
+    title: "Tall and Double-Height Curtains",
+    desc: "Curtains for two-storey glazing, stairwells and high ceilings.",
+  },
 ];
 
 export default function RelatedWindowTypes({

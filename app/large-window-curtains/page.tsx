@@ -389,6 +389,14 @@ export default function LargeWindowCurtainsPage() {
           </div>
         </div>
       </section>
+      <section className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-semibold">When the glazing needs a specialist review</h2>
+        <div className="mt-4 flex flex-wrap gap-5">
+          <Link className="underline underline-offset-4" href="/tall-window-curtains">Tall and double-height windows</Link>
+          <Link className="underline underline-offset-4" href="/oversized-architectural-curtains">Oversized architectural curtains and voiles</Link>
+          <Link className="underline underline-offset-4" href="/motorised-curtain-systems">Motorised curtain systems</Link>
+        </div>
+      </section>
       <RelatedWindowTypes currentHref="/large-window-curtains" />
     </main>
   );

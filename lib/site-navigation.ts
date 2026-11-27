@@ -42,9 +42,19 @@ export const navigationGroups: NavigationGroup[] = [
         note: "Single slopes and asymmetric shapes",
       },
       {
-        label: "Tall & large windows",
+        label: "Large and wide windows",
         href: "/large-window-curtains",
-        note: "Scale, weight and generous glazing",
+        note: "Expansive glazing and patio doors",
+      },
+      {
+        label: "Tall and double-height windows",
+        href: "/tall-window-curtains",
+        note: "Two-storey glazing, mezzanines and stairwells",
+      },
+      {
+        label: "Oversized architectural curtains",
+        href: "/oversized-architectural-curtains",
+        note: "Large panels, voiles and luxury apartments",
       },
       {
         label: "Barn conversions",
@@ -111,6 +121,16 @@ export const navigationGroups: NavigationGroup[] = [
         label: "Curtain tracks",
         href: "/curtain-tracks",
         note: "Forest KS / CS, white and black finishes",
+      },
+      {
+        label: "Motorised curtain systems",
+        href: "/motorised-curtain-systems",
+        note: "Electric tracks and ground-level controls",
+      },
+      {
+        label: "High-level installation",
+        href: "/high-level-curtain-installation",
+        note: "Survey, difficult access and commissioning",
       },
       {
         label: "Linings & blackout",
@@ -231,6 +251,11 @@ export const navigationGroups: NavigationGroup[] = [
         label: "Healthcare screening",
         href: "/professionals/healthcare",
         note: "Clinical curtains, tracks, blinds & replacement",
+      },
+      {
+        label: "Trade curtain partnerships",
+        href: "/professionals/trade-partnerships",
+        note: "Workrooms, retailers and specialist subcontract projects",
       },
       {
         label: "Architects",

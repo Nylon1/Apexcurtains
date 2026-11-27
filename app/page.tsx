@@ -1,5 +1,6 @@
 import ApexEntryScreen from "@/components/ApexEntryScreen";
 import Hero from "@/components/homepage/Hero";
+import HomeArchitecturalSpecialisms from "@/components/homepage/HomeArchitecturalSpecialisms";
 import HomeWindowDiscovery from "@/components/homepage/HomeWindowDiscovery";
 import HomeRoomVisualiser from "@/components/homepage/HomeRoomVisualiser";
 import HomeColourStudio from "@/components/homepage/HomeColourStudio";
@@ -18,17 +19,19 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  title: { absolute: "Apex Curtains | Apex, Gable & Architectural Window Curtains" },
+  description: "UK specialists in complex, oversized and high-level curtain installations, from apex and gable windows to double-height glazing. Survey and fitting across England and Wales.",
   openGraph: {
-    title: "Apex Curtains | Curtains for Extraordinary Windows",
-    description: "Specialist survey, design, manufacture and installation for apex, triangular, angled and gable-end curtains across England and Wales.",
+    title: "Apex Curtains | Exceptional Curtains for Exceptional Windows",
+    description: "Specialist survey, manufacture and installation for apex, gable, double-height and oversized windows across England and Wales.",
     url: "https://www.apexcurtains.com",
     type: "website",
     images: [{ url: "/window-types/apex-hero.jpg", alt: "A completed Apex gable curtain installation" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Apex Curtains | Curtains for Extraordinary Windows",
-    description: "Made-to-measure curtains for apex, triangular, angled and gable-end windows.",
+    title: "Apex Curtains | Exceptional Curtains for Exceptional Windows",
+    description: "Made-to-measure curtains for apex, gable, double-height and oversized windows.",
     images: ["/window-types/apex-hero.jpg"],
   },
 };
@@ -39,10 +42,11 @@ export default function HomePage() {
       <ApexEntryScreen />
       <main className="home-experience">
         <Hero />
+        <HomeArchitecturalSpecialisms />
         <HomeWindowDiscovery />
+        <HomeProjectStories />
         <HomeRoomVisualiser />
         <HomeColourStudio />
-        <HomeProjectStories />
         <HomeExpertise />
         <HomeDetailComparisons />
         <HomeServiceJourney />

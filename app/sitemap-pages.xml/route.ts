@@ -2,12 +2,14 @@ import { NextResponse } from "next/server";
 import { buildXml, baseUrl } from "@/lib/sitemap-utils";
 import { HEALTHCARE_ROOT, publishedProducts, productUrl } from "@/lib/healthcare/catalogue";
 import { pages, sectors } from "@/lib/healthcare/content";
+import { architecturalGuides, architecturalPlannerPath } from "@/lib/architectural-curtains";
 
 // This inventory changes with a deployment, not with each crawler request.
 export const dynamic = "force-static";
 
 export async function GET() {
   const urls = [
+    ...[...Object.values(architecturalGuides).map((guide) => guide.path), architecturalPlannerPath].map((path) => ({ loc: `${baseUrl}${path}` })),
     ...[HEALTHCARE_ROOT, `${HEALTHCARE_ROOT}/fabrics`, `${HEALTHCARE_ROOT}/quotation`, ...pages.map(p => `${HEALTHCARE_ROOT}/${p.slug}`), ...sectors.map(s => `${HEALTHCARE_ROOT}/settings/${s.slug}`), ...publishedProducts.map(productUrl)].map(path => ({ loc: `${baseUrl}${path}`, lastmod: "2026-11-11", changefreq: "monthly", priority: "0.80" })),
     {
       loc: `${baseUrl}/room-visualiser`,
