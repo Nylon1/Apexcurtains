@@ -1,152 +1,54 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type { Project } from "@/lib/gallery-projects";
+import type { ProjectMedia } from "@/lib/portfolio-types";
 
-function ProjectPreview({
-  project,
-  onClose,
-}: {
-  project: Project;
-  onClose: () => void;
-}) {
-  const dialog = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
-    dialog.current?.showModal();
-  }, []);
-  return (
-    <dialog
-      ref={dialog}
-      className="project-dialog"
-      onClose={onClose}
-      aria-labelledby="project-preview-title"
-    >
-      <button
-        className="dialog-close"
-        onClick={() => dialog.current?.close()}
-        aria-label="Close project preview"
-      >
-        Close ×
-      </button>
-      {project.image_url && (
-        <Image
-          src={project.image_url}
-          alt={project.title}
-          width={1200}
-          height={900}
-          unoptimized
-        />
-      )}
-      <div className="project-dialog-copy">
-        <p className="editorial-eyebrow">
-          {[project.room, project.location].filter(Boolean).join(" / ")}
-        </p>
-        <h2 id="project-preview-title">{project.title}</h2>
-        {project.summary && <p>{project.summary}</p>}
-        <dl className="project-facts">
-          {[
-            ["Window", project.category],
-            ["Heading", project.heading],
-            ["Lining", project.lining],
-          ]
-            .filter(([, value]) => value)
-            .map(([label, value]) => (
-              <div key={label}>
-                <dt>{label}</dt>
-                <dd>{value}</dd>
-              </div>
-            ))}
-        </dl>
-        {project.slug && (
-          <Link href={`/gallery/${project.slug}`} className="editorial-button">
-            Explore this project <span aria-hidden="true">↗</span>
-          </Link>
-        )}
-      </div>
-    </dialog>
-  );
-}
+export type GalleryCard = {
+  slug: string;
+  title: string;
+  label: string;
+  summary: string;
+  themes: string[];
+  image: ProjectMedia;
+  hasFilm: boolean;
+};
 
-export default function GalleryCollection({
-  projects,
-}: {
-  projects: Project[];
-}) {
-  const [filter, setFilter] = useState("All rooms");
-  const [active, setActive] = useState<Project | null>(null);
-  const rooms = [
-    "All rooms",
-    ...Array.from(new Set(projects.map((p) => p.room?.trim()).filter(Boolean))),
-  ];
-  const visible = projects.filter(
-    (p) => filter === "All rooms" || p.room?.trim() === filter,
+export default function GalleryCollection({ projects }: { projects: GalleryCard[] }) {
+  const [filter, setFilter] = useState("All projects");
+  const [query, setQuery] = useState("");
+  const themes = ["All projects", "Shaped windows", "Tall glazing", "Layered curtains", "Motorised", "Installation", "Hospitality"];
+  const term = query.trim().toLowerCase();
+  const visible = projects.filter((project) =>
+    (filter === "All projects" || project.themes.includes(filter)) &&
+    (!term || `${project.label} ${project.title} ${project.summary}`.toLowerCase().includes(term)),
   );
   return (
     <>
-      <div className="gallery-filter" aria-label="Filter projects by room">
-        {rooms.map((room) => (
-          <button
-            key={room}
-            aria-pressed={filter === room}
-            onClick={() => setFilter(room)}
-          >
-            {room}
-          </button>
-        ))}
+      <div className="portfolio-toolbar">
+        <div className="portfolio-filters" role="group" aria-label="Filter by installation">
+          {themes.map((theme) => <button type="button" key={theme} aria-pressed={filter === theme} onClick={() => setFilter(theme)}>{theme}</button>)}
+        </div>
+        <label className="portfolio-search">Find a project
+          <input type="search" placeholder="Search place or detail" value={query} onChange={(event) => setQuery(event.target.value)} />
+        </label>
       </div>
-      <p className="gallery-count" aria-live="polite">
-        {visible.length} {visible.length === 1 ? "project" : "projects"}
-      </p>
-      <div className="gallery-collection">
-        {visible.map((project, index) => (
-          <article key={project.id}>
-            {project.image_url && (
-              <button
-                className="gallery-image"
-                onClick={() => setActive(project)}
-                aria-label={`View photograph and details for ${project.title}`}
-              >
-                <Image
-                  src={project.image_url}
-                  alt={project.title}
-                  width={1200}
-                  height={1000}
-                  sizes="(max-width: 800px) 100vw, 50vw"
-                  unoptimized
-                  priority={index < 2}
-                />
-                <span>View photograph and details <span aria-hidden="true">↗</span></span>
-              </button>
-            )}
-            <div className="gallery-project-copy">
-              <p className="editorial-eyebrow">
-                {[project.location, project.room].filter(Boolean).join(" / ")}
-              </p>
-              <h2>
-                {project.slug ? (
-                  <Link href={`/gallery/${project.slug}`}>{project.title}</Link>
-                ) : (
-                  project.title
-                )}
-              </h2>
-              {project.summary && <p>{project.summary}</p>}
-              {project.slug && (
-                <Link
-                  className="editorial-text-link"
-                  href={`/gallery/${project.slug}`}
-                >
-                  Read the project story <span aria-hidden="true">↗</span>
-                </Link>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-      {active && (
-        <ProjectPreview project={active} onClose={() => setActive(null)} />
-      )}
+      <p className="portfolio-count" aria-live="polite" aria-atomic="true">{visible.length} {visible.length === 1 ? "project" : "projects"}{filter !== "All projects" ? ` · ${filter}` : ""}</p>
+      {visible.length ? <div className="portfolio-grid">
+        {visible.map((project) => <article className="portfolio-card" key={project.slug}>
+          <Link href={`/gallery/${project.slug}`} className="portfolio-card-image" aria-label={`Explore ${project.label}: ${project.title}`}>
+            <Image src={project.image.src} alt={project.image.alt} width={project.image.width} height={project.image.height} sizes="(max-width: 650px) 90vw, (max-width: 1050px) 44vw, 29vw" unoptimized={project.image.src.startsWith("http")} />
+            {project.hasFilm && <span className="portfolio-film-badge">Includes installation film</span>}
+          </Link>
+          <div className="portfolio-card-copy">
+            <p className="portfolio-eyebrow">{project.label}</p>
+            <h3><Link href={`/gallery/${project.slug}`}>{project.title}</Link></h3>
+            <p>{project.summary}</p>
+            <Link className="portfolio-text-link" href={`/gallery/${project.slug}`}>Explore the project</Link>
+          </div>
+        </article>)}
+      </div> : <div className="portfolio-empty"><h3>No projects match that search.</h3><p>Try another place or explore the complete collection.</p><button type="button" className="studio-button" onClick={() => { setFilter("All projects"); setQuery(""); }}>Show all projects</button></div>}
     </>
   );
 }
