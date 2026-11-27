@@ -12,19 +12,21 @@
 
 [Desktop opening](opening-1440.jpg) · [Mobile opening](opening-390.jpg) · [Full desktop page](candidate-1440.jpg) · [Full mobile page](candidate-390.jpg)
 
-The Oxford opening from A gives a recognisable silhouette even on a small phone. The four service destinations pair completed installations with B’s technical approach. The Cambridge detail from C closes the project selection. The header and opening retain direct routes to a consultation.
+The Oxford opening from A gives a recognisable silhouette even on a small phone. Four large photographs introduce the specialist services. The technical drawings have their own section after the installation story. The Cambridge detail from C closes the project selection. The header and opening retain direct routes to a consultation.
 
 The installation section shows the fitting team at work on tall windows in a luxury London apartment. The separate motorisation section pairs a real, user-operated film with the interactive curtain and voile demonstration. The owner cleared the London photograph and the film for website use and confirmed the filmed residential window is five metres high. The film carries no audio or location label. Its caption describes the movement for readers who choose to skip playback. The stated height refers to the window. Fabric, motor model and finished curtain drop are undocumented.
 
-The tall-window service pairs the owner-cleared double-height dining-room photograph with an annotated elevation. A separate 14-second film of pale curtains on black-framed glazing is available on demand. Both installations carry descriptive captions without a specific measurement, location or automation claim. The portfolio also links to the Peterborough bedroom and the Manchester Airport lounge. The two service illustrations describe geometry and layering.
+The tall-window service leads with the owner-cleared double-height dining-room photograph. A separate 14-second film of pale curtains on black-framed glazing is available on demand. Both installations carry descriptive captions without a specific measurement, location or automation claim. The portfolio also links to the Peterborough bedroom and the Manchester Airport lounge. The technical section shows the complete glazing elevation and the section through separate curtain and voile tracks.
 
-The motorised service uses a still from a third owner-cleared installation film to show daylight passing through voile beside an outer curtain. The adjacent drawing illustrates one possible track arrangement. The actual drive and track specification for the pictured layers are unconfirmed.
+The motorised service uses a full-room still from the approved film of motorised voiles in a two-storey living room. Visitors can play the sequence on demand.
 
 A separate 13-second film shows motorised voiles covering a two-storey glazed wall. A photograph of white curtains beneath a cornice opens as a close-up under “See a pleated heading up close”. The crop shows the pleats and pole clearly and leaves the embedded social caption outside the frame. The business cleared these subsequent homepage uploads as genuine Apex work.
 
 The 12-second two-storey fitting film follows one room from the fitting team at work to the dressed curtains between two tiers of windows. It has its own link in the installation section. The separate 27-second “When the windows are grand” film shows sheer panels opening while the outer curtains stay in place. It is reserved for a future motorisation guide. Retain its visible on-screen credit if the film is used.
 
 The production baseline is [4e51701](https://github.com/Nylon1/Apexcurtains/commit/4e51701163ed7d6f6881977ddb8f241eecc13b69). Publication requires visual approval of the implemented candidate.
+
+[Service photography on laptop](architectural-curtains-1366.jpg) · [Service photography on mobile](architectural-curtains-390.jpg) · [Drawings on laptop](technical-drawings-1366.jpg) · [Drawings on mobile](technical-drawings-390.jpg)
 
 ## Review checks
 

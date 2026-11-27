@@ -49,17 +49,15 @@ const specialisms = [
   {
     title: "Tall and double-height curtains", href: "/tall-window-curtains",
     detail: "In stairwells and two-storey rooms, the hanging point, finished drop and access are three separate decisions.",
-    src: "/projects/tall-dining-room-curtains.jpg", caption: "Double-height dining room · Illustrative elevation alongside",
+    src: "/projects/tall-dining-room-curtains.jpg", caption: "Double-height dining room",
     width: 1085, height: 1280, alt: "Tall tied-back curtains reveal a continuous voile behind a dining table, beside a timber wall and an upper landing",
-    drawing: { src: "/architecture/tall-glazing-elevation.svg", alt: "Illustration distinguishing curtain drop from the height of the glazed opening" },
     film: { src: "/projects/tall-window-curtains-installation.mp4", label: "Watch another tall-window installation · 14 seconds" },
   },
   {
     title: "Motorised curtain systems", href: "/motorised-curtain-systems",
     detail: "Operate large or inaccessible curtains from floor level. Each track is assessed for its load, route and draw direction.",
-    src: "/projects/curtain-and-voile-layering-study.jpg", caption: "Curtain and voile study · Illustrative track section",
-    width: 720, height: 1280, alt: "Daylight filtering through white voile beside a darker full-length curtain",
-    drawing: { src: "/architecture/layered-track-section.svg", alt: "Illustration of a curtain and voile suspended from separate level tracks" },
+    src: "/projects/two-storey-motorised-voiles.webp", caption: "Two-storey living room",
+    width: 720, height: 1280, alt: "Daylight filtered through motorised voiles spanning two tiers of living-room glazing",
     film: { src: "/projects/motorised-voiles-two-storey-room.mp4", label: "Watch motorised voiles in a two-storey room · 13 seconds" },
   },
   {
@@ -67,6 +65,11 @@ const specialisms = [
     detail: "For wide glazing and hospitality interiors, we plan panel widths, heavy linings and the space the open curtains need.",
     ...studioPhotos.lounge,
   },
+];
+
+const technicalDrawings = [
+  { title: "Window height and curtain drop", src: "/architecture/tall-glazing-elevation.svg", alt: "Elevation with separate dimensions for the glazed opening and the curtain from hanging point to hem", detail: "The height of the glass is one measurement. The curtain drop runs from its hanging point to the intended hem." },
+  { title: "Curtain and voile tracks", src: "/architecture/layered-track-section.svg", alt: "Section showing the voile on a track beside the glass and the outer curtain on a second track facing the room", detail: "A separate track for each layer lets the voile filter daylight while the outer curtain stays open." },
 ];
 
 const guides = [
@@ -90,20 +93,17 @@ export default function HomePage() {
       <section className="studio-wrap front-section" id="architectural-curtains" aria-labelledby="home-specialisms">
         <div className="front-intro">
           <h2 id="home-specialisms">Curtains for challenging windows</h2>
-          <p>Specialist made-to-measure curtains for apex and gable windows, double-height rooms and wide glazing. A sloping roofline changes where a curtain can hang. Height and width change what the track must carry.</p>
+          <p>Explore made-to-measure curtains for apex and gable windows, double-height rooms and wide architectural glazing.</p>
         </div>
         <div className="front-specialisms">
           {specialisms.map(item => (
             <article key={item.href}>
-              <Link href={item.href} prefetch={false}>
-                <figure>
-                  <div className={item.drawing ? "front-paired-view" : undefined}>
-                    <Image src={item.src} alt={item.alt} width={item.width} height={item.height} sizes={item.drawing ? "(max-width: 560px) 42vw, 22vw" : "(max-width: 700px) 92vw, (max-width: 1400px) 50vw, 720px"} />
-                    {item.drawing && <Image src={item.drawing.src} alt={item.drawing.alt} width={720} height={490} />}
-                  </div>
-                  <figcaption>{item.caption}</figcaption>
-                </figure>
-                <h3>{item.title}<span aria-hidden="true">↗</span></h3>
+              <Link className="front-service-photo" href={item.href} prefetch={false}>
+                <Image src={item.src} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 700px) 92vw, (max-width: 1600px) 52vw, 800px" />
+                <div className="front-service-title">
+                  <span>{item.caption}</span>
+                  <h3>{item.title} <span aria-hidden="true">↗</span></h3>
+                </div>
               </Link>
               <p>{item.detail}</p>
               {item.film && <a className="front-film-link" href={item.film.src}>{item.film.label} <span aria-hidden="true">↗</span></a>}
@@ -140,6 +140,23 @@ export default function HomePage() {
               <Link href="/professionals">Architects, designers and trade ↗</Link>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="studio-wrap front-drawings" id="technical-drawings" aria-labelledby="home-drawings">
+        <div className="front-intro">
+          <h2 id="home-drawings">Technical drawings</h2>
+          <p>Illustrative details. Final dimensions, track spacing and fixing positions are assessed for each installation.</p>
+        </div>
+        <div className="front-drawing-pair">
+          {technicalDrawings.map(drawing => (
+            <figure key={drawing.src}>
+              <Image src={drawing.src} alt={drawing.alt} width={720} height={490} />
+              <figcaption>
+                <h3>{drawing.title}</h3>
+                <p>{drawing.detail}</p>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </section>
       <div className="front-demonstration">

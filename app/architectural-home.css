@@ -32,26 +32,45 @@
 .front-intro h2 { max-width: 15ch; }
 .front-intro p, .front-specialisms p, .front-expertise p, .front-expertise dd { font-size: var(--studio-body); line-height: 1.58; }
 .front-intro p { max-width: 54ch; }
-.front-specialisms { display: grid; grid-template-columns: repeat(12,minmax(0,1fr)); gap: clamp(2.1rem,4vw,4rem) var(--studio-gap); }
-.front-specialisms article { grid-column: span 5; }
-.front-specialisms article:first-child,.front-specialisms article:last-child { grid-column: span 7; }
-.front-specialisms article a { display: block; }
-.front-specialisms figure { margin: 0; }
-.front-specialisms figure img { width: 100%; height: clamp(12rem,24vw,23.5rem); object-fit: cover; }
-.front-specialisms article:first-child figure img { object-position: 50% 26%; }
-.front-specialisms img[src$=".svg"] { object-fit: contain; background: #233d37; }
-.front-specialisms article:nth-child(3) figure img { background: #ded8cb; }
-.front-paired-view { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1fr); align-items: stretch; background: #233d37; }
-.front-specialisms .front-paired-view img { height: clamp(12rem,24vw,23.5rem); aspect-ratio: auto; }
-.front-specialisms .front-film-link { display: inline-block; margin-top: .45rem; padding-block: .35rem; text-decoration: underline; text-underline-offset: .22em; }
-.front-specialisms figcaption,.front-expertise figcaption { margin-top: .55rem; font-size: .84rem; line-height: 1.45; color: var(--studio-muted); }
-.architectural-home .front-specialisms h3 {
-  display: flex; justify-content: space-between; align-items: baseline; gap: .7rem;
-  font-size: clamp(1.8rem,2.6vw,3rem); margin: .95rem 0 .55rem;
+.front-specialisms {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0,1fr));
+  gap: clamp(2.5rem,4vw,4.5rem) clamp(1.1rem,2.2vw,2.6rem);
 }
-.front-specialisms h3 span { font: 400 .65em/1 var(--studio-sans); color: var(--studio-bronze); }
-.front-specialisms a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
-.front-specialisms p { max-width: 53ch; }
+.front-specialisms article { grid-column: span 6; min-width: 0; }
+.front-specialisms article:nth-child(3) { grid-column: span 5; }
+.front-specialisms article:nth-child(4) { grid-column: span 7; }
+.front-service-photo {
+  position: relative; display: grid; align-items: end; isolation: isolate;
+  height: clamp(24rem,45vw,43rem); color: #fffaf1; background: #26352d;
+}
+.front-service-photo > img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.front-specialisms article:first-child img { object-position: 50% 25%; }
+.front-specialisms article:nth-child(2) img { object-position: 52% 42%; }
+.front-specialisms article:nth-child(n+3) .front-service-photo { height: clamp(20rem,32vw,32rem); }
+.front-service-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(0deg,rgba(15,25,20,.89),rgba(15,25,20,.68) 13%,rgba(15,25,20,.13) 36%,transparent 53%);
+}
+.front-service-title { position: relative; z-index: 1; padding: clamp(1.1rem,2.3vw,2.6rem); }
+.front-service-title > span { display: block; font-size: .9rem; line-height: 1.4; }
+.architectural-home .front-service-title h3 {
+  display: flex; justify-content: space-between; align-items: end; gap: .6rem;
+  margin: .35rem 0 0; color: inherit; font-size: clamp(2rem,3.1vw,3.65rem); line-height: 1.02;
+}
+.front-service-title h3 span { font: 400 .54em/1.25 var(--studio-sans); }
+.front-service-photo:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .14em; }
+.front-specialisms article > p { max-width: 54ch; margin-top: .85rem; }
+.front-specialisms .front-film-link { display: inline-block; margin-top: .25rem; padding-block: .35rem; text-decoration: underline; text-underline-offset: .22em; }
+.front-expertise figcaption { margin-top: .55rem; font-size: .84rem; line-height: 1.45; }
+.front-drawings { padding-block: var(--front-space); }
+.front-drawing-pair { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: var(--studio-gap); }
+.front-drawing-pair figure { margin: 0; }
+.front-drawing-pair img { display: block; width: 100%; height: auto; }
+.front-drawing-pair h3 { margin: .85rem 0 .45rem; font-size: clamp(1.7rem,2.3vw,2.6rem); }
+.front-drawing-pair p { max-width: 52ch; line-height: 1.55; }
 .front-expertise { background: #20382f; color: #fbf4e6; padding-block: var(--front-space); }
 .front-expertise-layout { display: grid; grid-template-columns: minmax(0,.78fr) minmax(0,1fr); gap: clamp(2rem,6vw,7rem); align-items: center; }
 .front-expertise figure { margin: 0; }
@@ -101,17 +120,16 @@
   .architectural-hero figcaption a { background: transparent; padding: .35rem 0; }
   .front-intro,.front-expertise-layout,.front-motion-layout,.front-demonstration .arch-motion-grid { grid-template-columns: 1fr; }
   .front-intro h2 { max-width: 18ch; }
-  .front-specialisms { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  .front-specialisms article,.front-specialisms article:first-child,.front-specialisms article:last-child { grid-column: auto; }
   .front-projects { grid-template-columns: 1fr; gap: 2.2rem; }
   .front-projects article:last-child { padding-top: 0; }
   .front-projects article:last-child img { aspect-ratio: 6/5; }
   .front-expertise-layout { gap: 1.5rem; }
 }
-@media(max-width: 560px) {
-  .front-specialisms { grid-template-columns: minmax(0,1fr); }
-  .front-specialisms figure img { height: auto; aspect-ratio: 1.65; }
-  .front-specialisms .front-paired-view img { height: clamp(13rem,64vw,21rem); }
+@media(max-width: 700px) {
+  .front-specialisms,.front-drawing-pair { grid-template-columns: minmax(0,1fr); }
+  .front-specialisms article:nth-child(n) { grid-column: auto; }
+  .front-specialisms article:nth-child(n) .front-service-photo { height: auto; aspect-ratio: 4/5; }
+  .front-specialisms article:last-child .front-service-photo { aspect-ratio: 6/5; }
 }
 @media(max-width: 360px) { .architectural-hero .studio-actions { gap: .5rem; } }
 
