@@ -10,6 +10,7 @@
   min-height: clamp(36rem, 78svh, 52rem); color: #fff9ec; background: #17271f;
 }
 .architectural-hero figure { position: absolute; inset: 0; margin: 0; }
+.architectural-hero picture { display: block; height: 100%; }
 .architectural-hero figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
 .architectural-hero figure::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
@@ -40,6 +41,9 @@
 .front-specialisms article:first-child figure img { object-position: 50% 26%; }
 .front-specialisms img[src$=".svg"] { object-fit: contain; background: #233d37; }
 .front-specialisms article:nth-child(3) figure img { background: #ded8cb; }
+.front-paired-view { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1fr); align-items: stretch; background: #233d37; }
+.front-specialisms .front-paired-view img { height: clamp(12rem,24vw,23.5rem); aspect-ratio: auto; }
+.front-specialisms .front-film-link { display: inline-block; margin-top: .45rem; padding-block: .35rem; text-decoration: underline; text-underline-offset: .22em; }
 .front-specialisms figcaption,.front-expertise figcaption { margin-top: .55rem; font-size: .84rem; line-height: 1.45; color: var(--studio-muted); }
 .architectural-home .front-specialisms h3 {
   display: flex; justify-content: space-between; align-items: baseline; gap: .7rem;
@@ -102,5 +106,6 @@
 @media(max-width: 560px) {
   .front-specialisms { grid-template-columns: minmax(0,1fr); }
   .front-specialisms figure img { height: auto; aspect-ratio: 1.65; }
+  .front-specialisms .front-paired-view img { height: clamp(13rem,64vw,21rem); }
 }
 @media(max-width: 360px) { .architectural-hero .studio-actions { gap: .5rem; } }

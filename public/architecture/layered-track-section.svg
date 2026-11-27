@@ -6,5 +6,5 @@
     <g id="track"><path d="M200 120h84v40h-31v-8h23v-24h-68v24h23v8h-31z" fill="#727b6a"/><path d="M239 144h7v37h-7z" fill="#e9dfce"/><path d="M230 142a7 7 0 1 0 14 0a7 7 0 1 0-14 0m15 0a7 7 0 1 0 14 0a7 7 0 1 0-14 0" fill="#c1bca9"/></g>
     <use href="#track" x="160"/><path d="M236 182q8-7 15 0l7 151q-16-8-39 2z" fill="#647469"/><path d="M399 182q5-4 10 0l10 151q-12-4-24 1z" fill="#ece7da"/>
     <path d="M226 280h-70v50m261-60h73v61" stroke="#846c47"/>
-  </g><g fill="#273b31" font-family="Arial,sans-serif" font-size="20"><text x="101" y="360">Curtain</text><text x="465" y="360">Voile</text></g>
+  </g><g fill="#273b31" font-family="Arial,sans-serif" font-size="32"><text x="101" y="372">Curtain</text><text x="465" y="372">Voile</text></g>
 </svg>

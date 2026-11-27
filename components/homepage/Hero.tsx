@@ -8,7 +8,10 @@ export default function Hero() {
   return (
     <header className="architectural-hero" id="home-hero">
       <figure>
-        <Image src={src} alt={alt} width={width} height={height} fetchPriority="high" loading="eager" sizes="100vw" />
+        <picture>
+          <source media="(max-width: 760px)" type="image/avif" srcSet="/projects/oxford-gable-480.avif 480w, /projects/oxford-gable-800.avif 800w, /projects/oxford-gable-1200.avif 1200w" sizes="100vw" />
+          <Image src={src} alt={alt} width={width} height={height} fetchPriority="high" loading="eager" sizes="100vw" />
+        </picture>
         <figcaption><Link href="/gallery/pinch-pleat-curtains-oxford-oxford" prefetch={false}>{caption} <span aria-hidden="true">↗</span></Link></figcaption>
       </figure>
       <div className="architectural-hero-copy">

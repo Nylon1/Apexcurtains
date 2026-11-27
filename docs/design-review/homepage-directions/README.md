@@ -16,6 +16,20 @@ The Oxford opening from A gives a recognisable silhouette even on a small phone.
 
 The installation section shows the fitting team at work on tall windows in a luxury London apartment. The separate motorisation section pairs a real, user-operated film with the interactive curtain and voile demonstration. The owner cleared the London photograph and the film for website use and confirmed the filmed residential window is five metres high. The film carries no audio or location label. Its caption describes the movement for readers who choose to skip playback. The stated height refers to the window. Fabric, motor model and finished curtain drop are undocumented.
 
-The portfolio also links to the Peterborough bedroom and the Manchester Airport lounge. The two annotated service illustrations describe geometry and layering. Each is identified on the page as an illustration.
+The tall-window service pairs a still from a second owner-cleared Apex installation film with an annotated elevation. The 14-second film is available on demand. This installation carries no measurement, location or automation claim. The portfolio also links to the Peterborough bedroom and the Manchester Airport lounge. The two service illustrations describe geometry and layering.
+
+The motorised service uses a still from a third owner-cleared installation film to show daylight passing through voile beside an outer curtain. The adjacent drawing illustrates one possible track arrangement. The actual drive and track specification for the pictured layers are unconfirmed.
 
 The production baseline is [4e51701](https://github.com/Nylon1/Apexcurtains/commit/4e51701163ed7d6f6881977ddb8f241eecc13b69). Publication requires visual approval of the implemented candidate.
+
+## Review checks
+
+| Check | Result |
+| --- | --- |
+| Responsive layout | Chrome checked at 320, 375, 390, 768, 1024, 1440 and 1920 px. The primary consultation link was visible and clickable on entry at every width. No horizontal overflow. |
+| Navigation and enquiries | Mobile menu opened and closed. The hero opened the architectural planner and dispatched the existing conversion event. Specialist, project and enquiry destinations returned 200. |
+| Search and links | All 64 existing homepage link destinations were retained. Title, description, canonical, social metadata and structured data matched production. |
+| Media and controls | Five-metre-window film playback, independent curtain and voile controls, single-layer operation, draw direction and window selection passed. The opening loaded no film bytes. |
+| Accessibility | Axe reported no WCAG 2 A, AA or WCAG 2.1 A, AA violations in the tested desktop state. |
+| Mobile performance | The local production build scored 96 performance, 100 accessibility and 100 SEO in Lighthouse. LCP was 2.7 s and CLS was zero. The mobile hero transferred 27 KB. The separate live baseline run scored 94, 100 and 100, with LCP of 2.3 s. Hosting conditions differ and these are lab measurements. |
+| Repository checks | Production build, 18 SEO foundation checks, nine specialist guidance tests and six architectural tests passed. |

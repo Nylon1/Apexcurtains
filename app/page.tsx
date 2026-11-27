@@ -35,6 +35,8 @@ const selectedProjects = [
   { photo: studioPhotos.cambridge, name: "The folds and the finishing", href: "/gallery/cambridge-apex-curtains-cambridge" },
 ];
 
+const installationFilmLoading = { loading: "lazy", preload: "none" } as const;
+
 const specialisms = [
   {
     title: "Apex and shaped curtains", href: "/apex-curtains",
@@ -45,14 +47,16 @@ const specialisms = [
   {
     title: "Tall and double-height curtains", href: "/tall-window-curtains",
     detail: "In stairwells and two-storey rooms, the hanging point, finished drop and access are three separate decisions.",
-    src: "/architecture/tall-glazing-elevation.svg", caption: "Illustrated elevation · Tall rectangular glazing",
-    width: 720, height: 490, alt: "Elevation distinguishing the curtain drop from the height of the glazed opening",
+    src: "/projects/tall-window-curtains-installation.jpg", caption: "Tall residential glazing · Installation and illustrative elevation",
+    width: 720, height: 1280, alt: "Pale floor-length curtains flank tall black-framed glazing in a sunlit sitting room",
+    drawing: { src: "/architecture/tall-glazing-elevation.svg", alt: "Illustration distinguishing curtain drop from the height of the glazed opening" }, film: "/projects/tall-window-curtains-installation.mp4",
   },
   {
     title: "Motorised curtain systems", href: "/motorised-curtain-systems",
     detail: "Operate large or inaccessible curtains from floor level. Each track is assessed for its load, route and draw direction.",
-    src: "/architecture/layered-track-section.svg", caption: "Illustrated section · Independent curtain and voile",
-    width: 720, height: 490, alt: "Cutaway showing a curtain and a voile suspended from separate level tracks",
+    src: "/projects/curtain-and-voile-layering-study.jpg", caption: "Curtain and voile study · Illustrative track section",
+    width: 720, height: 1280, alt: "Daylight filtering through white voile beside a darker full-length curtain",
+    drawing: { src: "/architecture/layered-track-section.svg", alt: "Illustration of a curtain and voile suspended from separate level tracks" },
   },
   {
     title: "Oversized architectural curtains", href: "/oversized-architectural-curtains",
@@ -87,14 +91,18 @@ export default function HomePage() {
         <div className="front-specialisms">
           {specialisms.map(item => (
             <article key={item.href}>
-              <Link href={item.href} prefetch={false} aria-label={item.title}>
+              <Link href={item.href} prefetch={false}>
                 <figure>
-                  <Image src={item.src} alt={item.alt} width={item.width} height={item.height} sizes="(max-width: 700px) 92vw, (max-width: 1400px) 50vw, 720px" />
+                  <div className={item.drawing ? "front-paired-view" : undefined}>
+                    <Image src={item.src} alt={item.alt} width={item.width} height={item.height} sizes={item.drawing ? "(max-width: 560px) 42vw, 22vw" : "(max-width: 700px) 92vw, (max-width: 1400px) 50vw, 720px"} />
+                    {item.drawing && <Image src={item.drawing.src} alt={item.drawing.alt} width={720} height={490} />}
+                  </div>
                   <figcaption>{item.caption}</figcaption>
                 </figure>
                 <h3>{item.title}<span aria-hidden="true">↗</span></h3>
               </Link>
               <p>{item.detail}</p>
+              {item.film && <a className="front-film-link" href={item.film}>Watch the installation film · 14 seconds <span aria-hidden="true">↗</span></a>}
             </article>
           ))}
         </div>
@@ -124,7 +132,7 @@ export default function HomePage() {
       <div className="front-demonstration">
         <div className="studio-wrap front-motion-layout">
           <figure className="front-installation-film">
-            <video playsInline controls preload="none" width={576} height={1024} poster="/projects/motorised-high-window-poster.webp" aria-labelledby="home-film-caption">
+            <video playsInline controls {...installationFilmLoading} width={576} height={1024} poster="/projects/motorised-high-window-poster.webp" aria-labelledby="home-film-caption">
               <source src="/projects/motorised-high-window.mp4" type="video/mp4" />
               <a href="/projects/motorised-high-window.mp4">Watch the installation film</a>
             </video>
