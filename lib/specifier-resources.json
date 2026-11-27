@@ -1,7 +1,7 @@
 {
-  "revision": "D01",
+  "revision": "P01",
   "date": "27 November 2026",
-  "status": "Draft for technical review - not for construction",
+  "status": "Preliminary coordination - publication approval pending; not for construction",
   "sources": [
     {
       "id": "ks",
@@ -218,14 +218,15 @@
               "items": [
                 "Start with the exact track and carrier, then allow for the selected heading, folds, lining, wall clearance and any projecting handles. Confirm the working envelope in plan and section.",
                 "For independent curtain and voile movement, specify two separate operating lines. Record which is nearest the glazing, each draw direction and each stack position. Coordinate motor and power access separately where both are motorised.",
-                "A twin-channel product is not automatically two independently controlled layers. Forest describes FMS Dual as one motor operating two channels for an overlap arrangement; do not substitute it for independent curtain and voile tracks."
+                "Specify and verify independent operation for each curtain and voile layer. Do not infer independent movement from the number of channels in a track profile; confirm the complete arrangement with the supplier."
               ]
             },
             {
-              "title": "Manufacturer reference dimensions - not pocket sizes",
+              "title": "Product drawings before setting the pocket",
               "items": [
-                "KS: 20 mm wide x 14 mm high. CS: 20 x 20 mm. FMS: 20 x 20 mm. FMS Plus: 19.6 mm wide x 30 mm high. These are profile sizes, not the complete installed envelope.",
-                "KS and CS have different recess variants. Obtain the exact profile, carrier, bracket and end-component drawings before completing the ceiling detail."
+                "Select the exact Forest track, carrier, bracket and end components before reserving installation space. Obtain their current product drawings and identify the revision used.",
+                "A profile drawing alone does not define the complete installation envelope. Confirm cloth movement, bracket projection, drive ends, connections and safe removal with the selected arrangement.",
+                "This preliminary edition does not publish profile, recess or cut-out dimensions. Confirm the complete pocket detail individually before the ceiling layout or finishes are released."
               ]
             }
           ],
@@ -245,9 +246,9 @@
             {
               "title": "Recessed track coordination",
               "items": [
-                "Distinguish a general ceiling pocket from a manufacturer's recess extrusion. The pocket must accommodate cloth, brackets, drive ends, assembly and service access, not only the rail.",
-                "Forest FMS Plus Recess is shown as a 26 mm body, 32.2 mm high, with a 40 mm flange. Use the supplier's current generation-specific cut-out drawing for end pulleys and motor openings.",
-                "Forest's GEN2 straight pleated-curtain drawing is not a universal pocket detail. Do not transfer its allowances to GEN1, a bend, another heading or another motor arrangement. Agree finishing sequence with the ceiling contractor and the selected system instructions."
+                "Distinguish a general ceiling pocket from a manufacturer recess extrusion. The pocket must accommodate cloth, brackets, drive ends, assembly and service access, not only the rail.",
+                "Obtain the supplier drawing for the exact track generation, heading and drive-end arrangement. Confirm all pocket dimensions, openings, motor orientation and installation access for this project.",
+                "A drawing for one straight or curved arrangement is not a universal pocket detail. Agree the finishing sequence with the ceiling contractor and the selected system instructions before concealment."
               ]
             }
           ],
@@ -283,7 +284,7 @@
       "slug": "motor-electrical-coordination",
       "title": "Motorised tracks and electrical coordination",
       "subtitle": "Select the system, then coordinate power, controls and access",
-      "summary": "A source-led Forest comparison and coordination brief for the curtain specialist, electrical contractor and controls integrator.",
+      "summary": "A preliminary coordination brief for the curtain specialist, electrical contractor and controls integrator, with official Forest references for product selection.",
       "stages": [
         "development",
         "technical",
@@ -300,10 +301,10 @@
             {
               "title": "Track configuration and load",
               "items": [
-                "Forest publishes FMS lengths up to 14 m, with single stack up to 10 m, and one-piece lengths of 7 m. These are published configuration limits, not an assurance for every curtain, curve or motor.",
-                "The November 2026 brochure describes 200 mm-radius bends for FMS and FMS Plus, excluding the recess profile, and a continuous-curve diagram with a 500 mm minimum radius. Obtain a supplier layout for bends, joins and drive ends.",
-                "Published Shuttle curtain capacities without curves: M 70 kg; L 40 kg; AC 40 kg; Go 35 kg; iOn 25 kg. These are total curtain figures, not kg per metre. Confirm the actual motor, geometry, friction, heading and duty before selection.",
-                "The load assessment includes the track, carriers, brackets, fixings and structure. A motor capacity is not approval of the installed assembly."
+                "Record the intended track route, overall length, draw direction, joints and curves. Ask Forest to confirm the complete configuration and its suitability for the project.",
+                "Confirm the actual made-up curtain weight, heading, lining, friction and expected duty with the proposed motor and track. This edition does not publish motor capacities, track length limits or bend radii.",
+                "Published manufacturer limits are reference information for a defined product and configuration. They do not approve the actual installed system or replace a project-specific assessment.",
+                "The load assessment includes the track, carriers, brackets, fixings and structure. A motor rating is not approval of the installed assembly."
               ]
             },
             {
@@ -322,16 +323,16 @@
             {
               "title": "Power is model-specific",
               "items": [
-                "Shuttle M: 24 V DC motor with an external supply; the current brochure lists supply input 100-240 V AC, 50-60 Hz and output 24 V DC, 2.7 A. Provide accessible space for the supply as well as the motor.",
-                "Shuttle L and AC: the current brochure lists 100-240 V AC, 50-60 Hz. AC is a distinct controls variant; do not infer the same input wiring or control interface as M/L.",
-                "The current Go and iOn models have different power arrangements. Record the exact motor and its instructions before the electrical contractor designs the circuit. No wiring diagram in this guide authorises electrical installation."
+                "Identify the exact motor, power supply and control components by product code before planning electrical work. Obtain the current regional instructions from Forest for that combination.",
+                "The electrical contractor must confirm the supply, isolation, cable route, protection, connections and any separate power-supply location for the individual project. No electrical ratings or wiring instructions are prescribed in this edition.",
+                "Record who supplies, connects, configures and tests each component. Resolve those responsibilities before procurement or installation; a general system description is not an electrical design."
               ]
             },
             {
               "title": "Agree the interface with the integrator",
               "items": [
                 "Record local switching, remote operation, building automation, app use and independent curtain/voile control. Identify who supplies and configures each interface.",
-                "Forest's connectivity matrix is conditional on the motor variant and, in some cases, a dongle, receiver, actuator or third-party hub. Compatibility with one configuration is not universal compatibility.",
+                "Ask Forest and the controls integrator to confirm the required interface and any receiver, adaptor, actuator or third-party equipment for the selected variant. Compatibility must be checked for the complete project configuration.",
                 "Record supply position, accessible isolation, cable route, connector access, control protocol and commissioning responsibilities. Keep mains power and low-voltage control connections clearly distinguished.",
                 "Refer to the supplied motor manual for switching and power-continuity requirements. Do not use supply interruption as a substitute for a confirmed control command."
               ]
@@ -344,12 +345,12 @@
           "diagram": "",
           "sections": [
             {
-              "title": "Published body sizes are not service clearances",
+              "title": "Confirm the complete installation and removal envelope",
               "items": [
-                "The November 2026 brochure lists M 70 x 50 x 250 mm; L and AC 70 x 50 x 280 mm. Its dimensions describe the motor body and must not be used as a ceiling opening or removal envelope.",
-                "The October 2025 S/M/L installation manual shows different dimensioned assemblies: M Receiver H270 / B1 77 / B2 49 mm and L H305 / B1 77 / B2 49 mm. Confirm the applicable product and datum with Forest before issuing construction dimensions.",
-                "Forest's August 2026 pelmet protocol identifies a 92 mm motor attachment allowance for the listed motorised arrangements. Check applicability, rotation, connectors and removal against the supplied assembly; this is not a universal pocket width.",
-                "Show the drive end, motor orientation, power supply if separate, cable bend space and removal route. Do not bury equipment behind a permanently closed ceiling."
+                "Motor body dimensions, assembly dimensions and maintenance clearances are different information. This edition withholds numerical motor dimensions and attachment allowances pending supplier clarification.",
+                "Obtain a current, product-specific assembly drawing from Forest. Confirm its measurement datums, mounting orientation, drive end, connectors, cable bend space and any separate power supply.",
+                "Agree the space needed to fit, connect, rotate or detach the motor and to remove it for service. Confirm the resulting pocket and access openings individually; no standard clearance is prescribed here.",
+                "Show the agreed access arrangement on the coordinated project drawings. Keep equipment accessible and obtain acceptance before the ceiling or finishes conceal the installation."
               ]
             },
             {
@@ -413,7 +414,7 @@
               "items": [
                 "Keep a practical route for safe curtain removal, track inspection, drive-end access and motor or power-supply replacement. Record any removable panels and the equipment access strategy.",
                 "Issue the care instructions for the actual textile and the manufacturer instructions for the installed track/motor. Do not apply one lubricant or service interval to every product.",
-                "The Forest S/M/L manual includes periodic operation checks and lubrication instructions for its stated FMS assembly. Confirm that manual applies to the supplied variant before including a maintenance schedule.",
+                "Confirm the inspection, servicing and lubrication requirements for the exact installed products with the supplier. Agree who provides ongoing support; this edition sets no universal maintenance interval or lubricant.",
                 "Retain product codes, serial numbers, control configuration, isolation position, supplier documents and warranties in the handover record. Reassess access if the room layout or finishes change."
               ]
             }
@@ -503,5 +504,7 @@
         }
       ]
     }
-  ]
+  ],
+  "editionLabel": "Preliminary public edition candidate",
+  "footerStatus": "PRELIMINARY / APPROVAL PENDING / NOT FOR CONSTRUCTION"
 }

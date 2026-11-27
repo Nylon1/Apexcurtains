@@ -1,52 +1,39 @@
-# PR 52 final release candidate
+# PR 52 preliminary publication candidate
 
-27 November 2026. Status: **D01 technical review candidate — not approved for public issue; do not merge.** The professional workspace and specialist-page programmes remain unchanged.
+27 November 2026. **P01 is reserved for review, not issued. Technical and publication approval remain pending. Do not merge or publish to production.**
 
-Candidate implementation: `9bfd5b418f146ee3dd887f8a3c3d6daa9d386f5e`. Controlled download-manifest SHA-256 (UTF-8, LF): `f37131534d5ab6ba7f0b3678f4a42b88abc2c7cef9591e12ca39634a45a34598`.
+This is a content and publication-scope revision of the approved five-document collection. There is no new design, feature, workspace change or development programme. [Draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52) remains the review route.
 
-[Draft PR #52](https://github.com/Nylon1/Apexcurtains/pull/52) · [Vercel review preview](https://apexcurtains-43nc-40mpxtcr7-hamzas-projects-4ef62f35.vercel.app/professionals/specifier-resources). Preview is READY with no production target. A scoped seven-day review share link is supplied separately; no access token is committed.
+## What the preliminary edition contains
 
-Visual evidence: [desktop library](library-desktop.png), [mobile library](library-mobile.png), [desktop downloads](desktop-downloads.png), [mobile downloads](mobile-downloads.png) and [PDF design overview](pdf-designs.jpg).
+Five PDF documents (13 A4 pages), the editable two-page APX-T05 Word template and its unpaginated text version. Reference, P01 revision, date, page count and format remain beside each download. Eight existing illustrative, not-to-scale drawings use project-specific variables; none is an approved construction drawing.
 
-## Completed refinement
+The edition withholds numerical product specifications: profile/recess sizes, motor body/assembly dimensions and clearance allowances, track-length/bend-radius limits, motor load capacities and electrical ratings. It also withholds any implied universal mounting capacity, maintenance interval or lubricant prescription. Exact product codes, installed configuration, motor removal/access envelope, electrical requirements, structural support and installation details must be confirmed for each project.
 
-- Reviewed all five PDFs, 13 A4 pages, for typography, spacing, illustration readability and page boundaries. Body text increased from 10 to 10.5 pt with 14.5 pt leading. Embedded fonts, vector drawings, source hyperlinks, page numbering, revision/date, preliminary status and contact details retained.
-- Added a native editable two-page A4 APX-T05 Word template. Paragraphs and placeholders can be edited in Word; pagination may change after completion. It is not a protected or rasterised form. PDF and plain text remain available.
-- Added reference, revision, date, format and page count beside all seven technical downloads. Plain text is explicitly unpaginated. The existing commercial profile is separately labelled as seven pages, with no invented reference, revision or issue date.
-- Rechecked all nine official Forest sources. Replaced the curtain-height chart and general overview links with the currently indexed files. The remaining seven fingerprints were unchanged. The newer height-chart filename and its older printed document code are both disclosed.
-- Recorded the business confirmation that Apex supplies all Forest systems. The resources cover curtain systems only; supply is not represented as project suitability or a commitment on stock, lead time, electrical work or commissioning.
-- Added a controlled download manifest and integrity check to CI, plus an explicit public-issue approval check. Changes to content or delivered files invalidate the recorded fingerprint. See [document control](document-control.md) for revision, approval and update responsibilities.
+Official manufacturer references remain traceable through nine registered source URLs, document titles/editions, page references and SHA-256 fingerprints. A manufacturer reference is not approval of an Apex document or of an installed system. See [manufacturer research](manufacturer-research.md) and the [source check](source-verification.json).
 
-## Technical assessment
+## Review and confirmation pack
 
-No generic anchor capacity, bracket spacing, recess width or motor clearance has been introduced. Track profile/body dimensions remain identified as manufacturer reference dimensions, not complete installation envelopes. Eight schematic drawings use variable dimensions and are marked illustrative/not to scale. Engineering, load paths, fixing selection, curved tracks, control compatibility and safe access remain project-specific assessments.
+- [Forest clarification questions](forest-questions.md) / [editable Word sheet](forest-questions.docx): six questions covering motor datums, recess/access, installed configuration, electrics/controls, support interfaces and handover. Prepared only; not sent.
+- [Business responsibility confirmation](business-confirmation.md) / [editable Word sheet](business-confirmation.docx): installation, electrical work, commissioning, handover and ongoing support, with delivery-party and evidence fields. The confirmed supply of all Forest systems is recorded separately and is not treated as confirmation of these responsibilities.
+- [Document control](document-control.md): revision/update process, evidence requirements and approval against the exact manifest. Changing final status, date or content requires regenerated files and a fresh approval fingerprint.
+- [Desktop library](library-desktop.png), [mobile library](library-mobile.png), [mobile document](mobile-document.png), [PDF overview](pdf-designs.jpg) and [verification](verification.md).
 
-The Shuttle brochure-versus-manual dimensional discrepancy remains disclosed; it has not been resolved by selecting a preferred figure. Official manufacturer information is not technical approval of the Apex publication or an individual installation.
+## D01 preservation
 
-## Checks
+The seven original D01 downloads were copied to the local internal-review archive outside the repository and web root, together with source data, generators, diagrams and the previous review pack. All seven archived download hashes were verified against the original D01 manifest before removal from current public assets.
 
-- Production build and TypeScript: passed, 205 generated pages.
-- Targeted component/page ESLint: passed.
-- SEO foundation: 18/18 passed. Existing title, description, canonical and schema retained.
-- Specialist/homepage/portfolio guidance regressions: 9/9 passed.
-- Architectural brief, weight and lead-delivery regressions: 6/6 passed with mocked provider responses; no real enquiry sent.
-- Desktop and mobile library checks: seven stage controls, five HTML documents, eight drawings, 50 internal destinations and all seven downloaded file fingerprints checked. No horizontal overflow or browser runtime errors.
-- Automated WCAG A/AA and WCAG 2.1 AA main-content scans: zero violations in desktop collapsed, desktop expanded and mobile expanded states. This is not a full accessibility conformance certification.
-- A4 PDF checks: 13 pages, embedded fonts, selectable text and linked references, no page-boundary overflow. PDFs are not represented as PDF/UA; equivalent structured HTML remains available.
-- Word: generated with managed workspace python-docx. The standard renderer was attempted and reported missing LibreOffice on Windows. Installed Microsoft Word exported the document to PDF for two-page A4 visual review. No macros or editing restriction were added. Microsoft Word editing and print pagination are distinct from the fixed PDF edition.
-- Draft integrity check passed. Public-issue check intentionally blocks pending the records below.
-- The full hosted review passed on the candidate Vercel preview. GitHub CI run `46072432307` passed all workflow steps, including the new download/source integrity check and the existing regression suites. Word downloads return the correct Office Open XML MIME type; all seven download hashes match the reviewed files.
-- Additional narrow-screen check at 320 px: no horizontal overflow; native keyboard activation of the stage selector exercised. Desktop and mobile download metadata screenshots were inspected separately.
+Local archive: `C:/Users/hamza/Apex-Internal-Review/PR52/D01`. It has not been committed into this public repository. The new candidate serves only P01 downloads; retired D01 paths must return 404. Earlier D01 copies remain in this public repository's Git history and older review deployments. Removal from current downloads does not make earlier copies private. No history rewrite or retrospective confidentiality is claimed.
 
-## Outstanding approval requirements
+## Approval gates retained
 
-1. Confirm Apex's installation, electrical connection, controls commissioning and ongoing support responsibilities, including work by others.
-2. Record a named Apex technical approver, review date and evidence against this exact manifest.
-3. Obtain supplier/competent technical review of the motor dimensional discrepancy and approve its treatment before public issue.
-4. Record authorised public-issue approval and a document owner. Prepare the public revision separately; publication will remain preliminary coordination guidance, never a universal construction specification.
+1. Confirm Apex installation, electrical connection, controls commissioning and ongoing support responsibilities, including work by others.
+2. Obtain supplier/competent technical review of the outstanding dimensional discrepancy and approval of its treatment in the preliminary edition.
+3. Record named Apex technical approval, date and evidence against the exact manifest.
+4. Prepare the final issue status/date and obtain authorised publication approval against the regenerated final manifest; nominate a document owner.
 
-These requirements are recorded in `lib/specifier-approval.json`. Visual direction and supply availability are confirmed; technical and publication approval are not.
+All four remain pending in `lib/specifier-approval.json`. The public-issue check must remain blocked. Withholding specifications does not waive these requirements. Project-specific engineering and supplier confirmation remain necessary after publication.
 
-## Scope and limitations
+## Production baseline and limits
 
-No production deployment, merge, private workspace changes, project-record duplication, new specialist-page work or roller-blind content. The production baseline remains main commit `0fcaef8df8f56c4fb5dd3de5e2d80b68de9acaba`. Private authentication and actual project exports were not exercised; their implementation is unchanged. No physical printer test or supplier approval is claimed.
+Production remains main commit `0fcaef8df8f56c4fb5dd3de5e2d80b68de9acaba`, deployment `dpl_91dqB5wGDA1husj9Qz26EXp2oT34`. No merge, production deployment, supplier outreach, portfolio/specialist programme or roller-blind expansion is included. No physical printer test, private workspace authentication/export test, supplier acceptance or technical approval is claimed.

@@ -147,9 +147,10 @@ export default function TechnicalResourceLibrary() {
             still taking shape.
           </p>
           <p>
-            Technical guidance for complex glazing, tall curtains and layered
-            interiors. Bring Apex into the discussion before ceiling pockets,
-            electrical supplies and finishes are fixed.
+            Preliminary guidance for complex glazing, tall curtains and layered
+            interiors. Confirm exact motor clearance, electrical requirements,
+            structural support and installation details individually before
+            ceiling pockets, supplies and finishes are fixed.
           </p>
           <div className="resource-actions">
             <Link
@@ -161,9 +162,9 @@ export default function TechnicalResourceLibrary() {
             <a href="#resource-register">Explore the documents ↓</a>
           </div>
           <p className="resource-draft">
-            Review edition {data.revision} · {data.date}
+            {data.editionLabel} {data.revision} · {data.date}
             <br />
-            Preliminary coordination. Not for construction.
+            Technical and publication approval pending. Not for construction.
           </p>
         </div>
         <figure className="resource-hero-image">
@@ -222,7 +223,10 @@ export default function TechnicalResourceLibrary() {
           </div>
           <div className="resource-register-note">
             <span>APX TECHNICAL SERIES</span>
-            <span>Revision {data.revision} / Draft for technical review</span>
+            <span>
+              Revision {data.revision} / Preliminary candidate — approval
+              pending
+            </span>
             <span>
               {data.resources.reduce(
                 (sum, resource) => sum + resource.pages.length,
@@ -469,9 +473,10 @@ export default function TechnicalResourceLibrary() {
                 ongoing support responsibilities.
               </li>
               <li>
-                The exact motor product code and assembly: November 2026
-                brochure body sizes differ from the October 2025 manual’s
-                dimensioned assemblies.
+                The exact motor product code, assembly and service clearance.
+                Numerical motor dimensions and attachment allowances are
+                withheld from this preliminary edition pending supplier
+                clarification.
               </li>
               <li>
                 Current recess generation, drive-end openings, motor orientation
@@ -534,8 +539,8 @@ export default function TechnicalResourceLibrary() {
                   construction specification.
                 </p>
                 <p>
-                  PDF · 7 pages · Existing profile; document reference,
-                  revision and issue date not stated.
+                  PDF · 7 pages · Existing profile; document reference, revision
+                  and issue date not stated.
                 </p>
               </div>
               <span aria-hidden="true">↗</span>

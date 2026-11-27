@@ -1,77 +1,77 @@
 {
-  "revision": "D01",
+  "revision": "P01",
   "date": "27 November 2026",
-  "contentSha256": "f666784a723c47330646c50bf59529d1cebe6b37bc89c5a65155b4461b676fca",
+  "contentSha256": "edfe429d0cb9b65ee0efc9f1934d88e3294b581500738caf53b399fe4aa47002",
   "files": [
     {
       "reference": "APX-T01",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "PDF",
       "pages": 3,
-      "href": "/downloads/specifier/APX-T01-architectural-planning-D01.pdf",
-      "bytes": 127985,
-      "sha256": "92ddd0cb9ead6bfb0f33e5710b8f03f7fba3f7abe9871fd200e9e82450594228"
+      "href": "/downloads/specifier/APX-T01-architectural-planning-P01.pdf",
+      "bytes": 128056,
+      "sha256": "007d3126c935f1e20813f93fc15aaa42ffdb0e009a983f3e91c21c5e5d50d22e"
     },
     {
       "reference": "APX-T02",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "PDF",
       "pages": 3,
-      "href": "/downloads/specifier/APX-T02-track-pocket-support-D01.pdf",
-      "bytes": 129600,
-      "sha256": "a98bc366474718073e3732d94fb6b2e4894f0fe78b7be91775b66b20cae6d1f3"
+      "href": "/downloads/specifier/APX-T02-track-pocket-support-P01.pdf",
+      "bytes": 129692,
+      "sha256": "49953e85c1174204f2f54608643aae53882c3410661ceaea93d1e954c569ac3c"
     },
     {
       "reference": "APX-T03",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "PDF",
       "pages": 3,
-      "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-D01.pdf",
-      "bytes": 127731,
-      "sha256": "ff2e6f116802c6e563840a8c7cf0459f332d8d43de80c0b9d36eb033a5935c82"
+      "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-P01.pdf",
+      "bytes": 127545,
+      "sha256": "428eaf7a3da0fc6c846b01f0dc2c379ddcfbf4560856f4b9fe5b06081343bff3"
     },
     {
       "reference": "APX-T04",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "PDF",
       "pages": 2,
-      "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-D01.pdf",
-      "bytes": 120048,
-      "sha256": "ce77899dccb0832d18f052abd68bcba694d98b3d3808be4908b927eda612be6b"
+      "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-P01.pdf",
+      "bytes": 120111,
+      "sha256": "45e616becfd2da1b36d3172eff91d99393193043df5fb1e864c5fbbff6f30c75"
     },
     {
       "reference": "APX-T05",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "PDF",
       "pages": 2,
-      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.pdf",
-      "bytes": 119960,
-      "sha256": "7c8d55d8a6faa10971fb2797636073b9610b6f6a1399d4770ec00b3475ed7a62"
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.pdf",
+      "bytes": 119992,
+      "sha256": "eb6d3472c48dd8d7eb9af5ebf19097c7132b8a5c7a10988726e5c0b929de9780"
     },
     {
       "reference": "APX-T05",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "DOCX",
       "pages": 2,
-      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.docx",
-      "bytes": 39340,
-      "sha256": "8e23fe77b0dc25537e373d2a04ff39163559a3b9ec6842f2c14361fd35c4f1b8"
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.docx",
+      "bytes": 39354,
+      "sha256": "3346bde5b154959295f016c5551ed7986b22769f1ded5438e0defd968f1e3fa1"
     },
     {
       "reference": "APX-T05",
-      "revision": "D01",
+      "revision": "P01",
       "date": "27 November 2026",
       "format": "TXT",
       "pages": null,
-      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.txt",
-      "bytes": 3579,
-      "sha256": "79b0e9c4b557cebed6eb48251ddda704dd91bdce64a393df32b75c3d2bfdbccc"
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.txt",
+      "bytes": 3607,
+      "sha256": "70bbe4db919422e64670aea13d554d10230d034ad27d3e0369ca2d0f41dc140e"
     }
   ]
 }

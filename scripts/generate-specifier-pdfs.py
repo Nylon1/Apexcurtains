@@ -44,7 +44,7 @@ def footer(canvas,doc):
     canvas.drawRightString(556,795,doc.resource['id']+' / '+DATA['revision']+' / '+DATA['date'])
     canvas.setStrokeColor(HexColor('#bfc9c2'));canvas.line(39,59,556,59)
     canvas.setFillColor(GREEN);canvas.setFont('ApexSans',8)
-    canvas.drawString(39,45,'DRAFT FOR TECHNICAL REVIEW / NOT FOR CONSTRUCTION')
+    canvas.drawString(39,45,DATA['footerStatus'])
     canvas.drawRightString(556,45,f'{doc.page} / {len(doc.resource["pages"])}')
     canvas.drawString(39,31,'Apex Curtains | 0800 772 0367 | hello@apexcurtains.com')
     canvas.linkURL('mailto:hello@apexcurtains.com',(210,27,420,39),relative=0)
@@ -56,7 +56,7 @@ class StableCanvas(Canvas):
         kwargs['invariant']=1
         super().__init__(*args,**kwargs)
         self.setAuthor('Apex Curtains')
-        self.setSubject('Preliminary architectural curtain coordination. Draft for technical review; not for construction.')
+        self.setSubject(DATA['status'])
 
 for resource in DATA['resources']:
     doc=SimpleDocTemplate(str(OUT/f'{resource["id"]}-{resource["slug"]}-{DATA["revision"]}.pdf'),pagesize=(595.28,841.89),leftMargin=39,rightMargin=39,topMargin=84,bottomMargin=72,title=resource['title'])

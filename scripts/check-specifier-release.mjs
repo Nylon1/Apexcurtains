@@ -12,6 +12,12 @@ assert.equal(manifest.date,data.date);
 assert.equal(approval.revision,data.revision);
 assert.equal(manifest.contentSha256,textHash('lib/specifier-resources.json'),'Content changed: regenerate and review downloads');
 assert.equal(manifest.files.length,7);
+assert.deepEqual(fs.readdirSync('public/downloads/specifier').sort(),manifest.files.map(f=>f.href.split('/').at(-1)).sort(),'Unregistered or internal draft files in public downloads');
+if(data.revision.startsWith('P')){
+  const guidance=data.resources.flatMap(r=>r.pages.flatMap(p=>p.sections.flatMap(s=>s.items))).join('\n');
+  assert.doesNotMatch(guidance,/\b\d+(?:[.,]\d+)?\s*(?:mm|kg|hz|volts?|amps?|v\b|m\b|a\b)/i,'Numerical product specifications must remain withheld from the preliminary edition');
+  assert.ok(data.status.includes('not for construction'));
+}
 for(const file of manifest.files){
   assert.equal(file.revision,data.revision);assert.equal(file.date,data.date);
   assert.ok(data.resources.some(r=>r.id===file.reference));

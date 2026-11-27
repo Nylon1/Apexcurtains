@@ -1,6 +1,6 @@
 {
-  "revision": "D01",
-  "status": "draft-technical-review",
+  "revision": "P01",
+  "status": "preliminary-public-candidate",
   "supplyScope": {
     "status": "confirmed",
     "evidence": "User confirmation in project conversation, 27 November 2026: We supply all systems they have",
@@ -20,7 +20,7 @@
   "supplierDimensionalReview": {
     "status": "pending",
     "evidence": null,
-    "scope": "Resolve Shuttle brochure body dimensions versus S/M/L manual overall dimensions and confirm applicability by product code before issuing dimensional guidance."
+    "scope": "Numerical motor, assembly, recess, configuration and electrical specifications are withheld from P01. Supplier clarification remains outstanding. The existing confirmation gate is retained; no waiver or technical approval has been recorded."
   },
   "publicIssueApproval": {
     "status": "pending",

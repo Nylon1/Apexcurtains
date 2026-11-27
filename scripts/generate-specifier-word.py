@@ -48,7 +48,7 @@ lang = OxmlElement('w:lang'); lang.set(qn('w:val'), 'en-GB')
 normal.element.get_or_add_rPr().append(lang)
 footer = section.footer.paragraphs[0]
 footer.paragraph_format.space_after = Pt(0)
-r = footer.add_run('DRAFT FOR TECHNICAL REVIEW / NOT FOR CONSTRUCTION\n'); r.bold = True; r.font.size = Pt(8)
+r = footer.add_run(data['footerStatus']+'\n'); r.bold = True; r.font.size = Pt(8)
 footer.add_run(f'APX-T05  /  {data["revision"]}  /  {data["date"]}\n').font.size = Pt(8)
 footer.add_run('Apex Curtains  |  0800 772 0367  |  hello@apexcurtains.com\n').font.size = Pt(8)
 footer.add_run('Project-specific assessment required  /  Page ').font.size = Pt(8)

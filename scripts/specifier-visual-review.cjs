@@ -21,6 +21,10 @@ const out='docs/specifier-review';
   for(const value of [file.reference,file.revision,file.date,file.format,file.pages===null?'Unpaginated text':`${file.pages} A4 pages`])assert.ok(copy.includes(value),file.href+' missing '+value);
   const download=await page.request.get(base+file.href);assert.equal(download.status(),200);
   const bytes=await download.body();assert.equal(require('crypto').createHash('sha256').update(bytes).digest('hex'),file.sha256);
+  if(file.revision!=='D01'){
+   const retired=await page.request.get(base+file.href.replace(`-${file.revision}.`,'-D01.'));
+   assert.equal(retired.status(),404,'Internal D01 still publicly served: '+file.href);
+  }
  }
  const stages=['Concept design','Design development','Technical design','Procurement','Construction','Installation','Handover'];
  for(const s of stages){await page.getByRole('button',{name:new RegExp(s+'$')}).click();assert.ok(await page.locator('.resource-stage-result li').count());assert.equal(await page.getByRole('button',{name:new RegExp(s+'$')}).getAttribute('aria-pressed'),'true');}

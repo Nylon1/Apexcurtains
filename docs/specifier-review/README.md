@@ -1,8 +1,10 @@
-# Architectural technical resources — draft review
+# Architectural technical resources — preliminary publication review
 
-27 November 2026 · D01 · Branch `design/specifier-technical-resources`
+27 November 2026 · P01 candidate — approval pending · Branch `design/specifier-technical-resources`
 
 This proposal strengthens the existing professional library. It does not reopen the 31-project portfolio or the seven specialist service pages, rebuild the workspace, or change production. All five new documents are preliminary coordination material, not construction or manufacture instructions.
+
+The approved design is retained. Numerical product specifications have been withheld from the preliminary candidate; no approval gate has been waived. See [release candidate](release-candidate.md), [Forest questions](forest-questions.docx) and [business confirmation](business-confirmation.docx).
 
 ## Existing resource audit
 
@@ -30,11 +32,11 @@ Source audit included `lib/guides/professional-resources.ts`, `professional-role
 | --- | --- | ---: | --- |
 | APX-T01 | Architectural curtain planning | 3 | Early planning; double-height specification; glass height versus finished drop; shaped retained cloth; fullness, weight and stack-back |
 | APX-T02 | Tracks, pockets and structural interfaces | 3 | Single/double independent tracks; wall/ceiling mounting; pockets/recess profiles; support information checklist |
-| APX-T03 | Motorised tracks and electrical coordination | 3 | FMS/FMS Plus and Shuttle research; load/configuration; motor access; electrical/control interface; commissioning |
+| APX-T03 | Motorised tracks and electrical coordination | 3 | FMS/FMS Plus and Shuttle coordination questions; installed configuration; motor access; electrical/control interface; commissioning. Numerical product specifications withheld. |
 | APX-T04 | Site readiness, installation and maintenance | 2 | Contractor hold points; high-level access; protection; installation; operation and maintenance handover |
 | APX-T05 | Preliminary curtain specification template | 2 | Aperture brief; textiles; geometry; system/interfaces; owners, assumptions and release. Includes editable two-page Word and unpaginated UTF-8 text. |
 
-Total: 13 A4 pages, no marketing cover pages. Every page carries Apex branding, document reference, revision D01, date, preliminary status and contact information. Each document includes project-specific limits and linked official references. HTML counterparts use the same structured content, so the information remains available without a PDF reader. PDFs contain searchable text and vector drawings; they are not represented as tagged PDF/UA documents or fillable forms.
+Total: 13 A4 pages, no marketing cover pages. Every page carries Apex branding, document reference, revision P01, date, preliminary status and contact information. Each document includes project-specific limits and linked official references. HTML counterparts use the same structured content, so the information remains available without a PDF reader. PDFs contain searchable text and vector drawings; they are not represented as tagged PDF/UA documents or fillable forms.
 
 Stages: concept → design development → technical design → procurement → construction → installation → handover. The stage selector recommends existing document anchors; the complete register remains visible and usable without JavaScript. These are coordination stages, not a contractual stage definition.
 
@@ -81,7 +83,7 @@ All eight plates are original SVG studies, not to scale. No anchors, fixing cent
 - Download metadata and fingerprints: `lib/specifier-downloads.json`. Approval evidence and unresolved gates: `lib/specifier-approval.json`.
 - Drawings: `public/guides/specifier/`.
 
-Run the drawing generator before the PDF generator. The web and PDF content come from the same JSON. Do not amend the PDFs manually or silently overwrite an approved revision. D01 is explicitly a review draft.
+Run the drawing generator before the PDF generator. The web and PDF content come from the same JSON. Do not amend the PDFs manually or silently overwrite an approved revision. P01 is reserved for review and has not been issued. The D01 archive is retained outside the repository/web root; earlier public Git history remains. See [release candidate](release-candidate.md) for the publication scope and unchanged approval gates.
 
 ## Review assets and verification
 
