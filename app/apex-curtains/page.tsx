@@ -1,5 +1,4 @@
-import WindowEditorialPage from "@/components/guides/WindowEditorialPage";
-import { windowStories } from "@/lib/window-stories";
+import SpecialistServicePage from "@/components/specialists/SpecialistServicePage";
 export const metadata = {
   title: "Apex Window Curtains | Measured & Installed",
   description:
@@ -57,8 +56,8 @@ const answers = [
 ];
 export default function Page() {
   return (
-    <WindowEditorialPage
-      story={windowStories.apex}
+    <SpecialistServicePage
+      name="apex"
       questions={[
         ...faqs,
         ...answers.map((item) => ({ q: item.question, a: item.answer })),

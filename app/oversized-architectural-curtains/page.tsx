@@ -1,9 +1,10 @@
-import ArchitecturalGuidePage, { architecturalMetadata } from "@/components/architecture/ArchitecturalGuidePage";
+import SpecialistServicePage from "@/components/specialists/SpecialistServicePage";
+import { architecturalMetadata } from "@/components/architecture/ArchitecturalGuidePage";
 import { architecturalGuides } from "@/lib/architectural-curtains";
 
 const guide = architecturalGuides.scale;
 export const metadata = architecturalMetadata(guide);
 
 export default function Page() {
-  return <ArchitecturalGuidePage guide={guide} />;
+  return <SpecialistServicePage name="scale" />;
 }
