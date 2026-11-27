@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Camera, DraftingCompass, Layers, SwatchBook } from "lucide-react";
 import Hero from "@/components/homepage/Hero";
 import HomeWindowDiscovery from "@/components/homepage/HomeWindowDiscovery";
 import HomeRoomVisualiser from "@/components/homepage/HomeRoomVisualiser";
@@ -39,6 +40,23 @@ const selectedProjects = [
 
 const installationFilmLoading = { loading: "lazy", preload: "none" } as const;
 
+type FilmPreviewProps = { src: string; thumbnail: string; title: string; seconds: number };
+
+function FilmPreview({ src, thumbnail, title, seconds }: FilmPreviewProps) {
+  return (
+    <a className="front-film-preview" href={src}>
+      <span className="front-film-still">
+        <Image src={thumbnail} alt="" width={320} height={256} unoptimized />
+        <span className="front-film-play" aria-hidden="true" />
+      </span>
+      <span className="front-film-copy">
+        <span className="front-film-meta">Watch film <span aria-hidden="true">·</span> {seconds} sec</span>
+        <span className="front-film-title">{title}</span>
+      </span>
+    </a>
+  );
+}
+
 const specialisms = [
   {
     title: "Apex and shaped curtains", href: "/apex-curtains",
@@ -51,14 +69,14 @@ const specialisms = [
     detail: "In stairwells and two-storey rooms, the hanging point, finished drop and access are three separate decisions.",
     src: "/projects/tall-dining-room-curtains.jpg", caption: "Double-height dining room",
     width: 1085, height: 1280, alt: "Tall tied-back curtains reveal a continuous voile behind a dining table, beside a timber wall and an upper landing",
-    film: { src: "/projects/tall-window-curtains-installation.mp4", label: "Watch another tall-window installation · 14 seconds" },
+    film: { src: "/projects/tall-window-curtains-installation.mp4", thumbnail: "/projects/tall-window-curtains-installation-thumb.webp", title: "Curtains for a tall window", seconds: 14 },
   },
   {
     title: "Motorised curtain systems", href: "/motorised-curtain-systems",
     detail: "Operate large or inaccessible curtains from floor level. Each track is assessed for its load, route and draw direction.",
     src: "/projects/two-storey-motorised-voiles.webp", caption: "Two-storey living room",
     width: 720, height: 1280, alt: "Daylight filtered through motorised voiles spanning two tiers of living-room glazing",
-    film: { src: "/projects/motorised-voiles-two-storey-room.mp4", label: "Watch motorised voiles in a two-storey room · 13 seconds" },
+    film: { src: "/projects/motorised-voiles-two-storey-room.mp4", thumbnail: "/projects/motorised-voiles-two-storey-room-thumb.webp", title: "Motorised voiles in motion", seconds: 13 },
   },
   {
     title: "Oversized architectural curtains", href: "/oversized-architectural-curtains",
@@ -72,18 +90,24 @@ const technicalDrawings = [
   { title: "Curtain and voile tracks", src: "/architecture/layered-track-section.svg", alt: "Section showing the voile on a track beside the glass and the outer curtain on a second track facing the room", detail: "A separate track for each layer lets the voile filter daylight while the outer curtain stays open." },
 ];
 
-const guides = [
-  { label: "Gable-end curtains", href: "/gable-end-curtains" },
-  { label: "Triangular window curtains", href: "/triangular-window-curtains" },
-  { label: "Angled window curtains", href: "/angled-window-curtains" },
-  { label: "Curtain tracks", href: "/curtain-tracks" },
-  { label: "Linings and blackout", href: "/curtain-linings" },
-  { label: "Installation and aftercare", href: "/services/premium-installation" },
-  { label: "Curtain tiebacks", href: "/curtain-tiebacks" },
-  { label: "Measuring an apex window", href: "/advice/how-to-measure-for-apex-curtains" },
-  { label: "Colour explorer", href: "/curtain-colours-and-tones#colour-explorer" },
-  { label: "Room visualiser", href: "/room-visualiser" },
-  { label: "Client reviews", href: "/reviews" },
+const guideGroups = [
+  { title: "Window shapes", Icon: DraftingCompass, links: [
+    { label: "Gable-end curtains", href: "/gable-end-curtains" },
+    { label: "Triangular window curtains", href: "/triangular-window-curtains" },
+    { label: "Angled window curtains", href: "/angled-window-curtains" },
+    { label: "Measuring an apex window", href: "/advice/how-to-measure-for-apex-curtains" },
+  ] },
+  { title: "Curtain details", Icon: Layers, links: [
+    { label: "Curtain tracks", href: "/curtain-tracks" },
+    { label: "Linings and blackout", href: "/curtain-linings" },
+    { label: "Curtain tiebacks", href: "/curtain-tiebacks" },
+  ] },
+  { title: "Plan your project", Icon: SwatchBook, links: [
+    { label: "Colour explorer", href: "/curtain-colours-and-tones#colour-explorer" },
+    { label: "Room visualiser", href: "/room-visualiser" },
+    { label: "Installation and aftercare", href: "/services/premium-installation" },
+    { label: "Client reviews", href: "/reviews" },
+  ] },
 ];
 
 export default function HomePage() {
@@ -106,39 +130,52 @@ export default function HomePage() {
                 </div>
               </Link>
               <p>{item.detail}</p>
-              {item.film && <a className="front-film-link" href={item.film.src}>{item.film.label} <span aria-hidden="true">↗</span></a>}
+              {item.film && <FilmPreview {...item.film} />}
             </article>
           ))}
         </div>
       </section>
       <HomeRoomVisualiser />
-      <section className="front-expertise" aria-labelledby="home-craft">
-        <div className="studio-wrap front-expertise-layout">
-          <figure>
-            <Image src="/projects/london-apartment-curtain-fitting.jpg" alt="A fitter working at curtain-heading height on an access tower, with a colleague below the tall patterned curtains" width={960} height={1280} sizes="(max-width: 760px) 90vw, 38vw" />
-            <figcaption>Tall windows in a luxury London apartment · Installation in progress</figcaption>
-          </figure>
-          <div>
-            <h2 id="home-craft">When the window shapes the whole installation</h2>
-            <p>A glazed gable above a doorway leaves little room to stack the curtain. A tall stairwell can put the heading out of reach. We work out how the curtain will open, where its weight will sit and how our fitters will reach it.</p>
-            <dl>
-              <div><dt>Geometry and scale</dt><dd>We measure the changing height along a sloping roofline and check the door swing before deciding which sections can move.</dd></div>
-              <div><dt>Workroom and finish</dt><dd>On long drops we set out the fabric joins and pattern repeat before cutting. Across a wide opening, the lining and fullness determine how much cloth the track must carry.</dd></div>
-              <div><dt>Tracks and high-level fitting</dt><dd>Our fitting work includes luxury apartments in central London. For each project we assess the fixing surface, track load and access for fitting, dressing and maintenance.</dd></div>
-            </dl>
-            <a href="/projects/two-storey-curtains-fitting-and-finish.mp4" className="front-process-film">Watch a two-storey room being fitted and dressed · 12 seconds <span aria-hidden="true">↗</span></a>
-            <details className="front-heading-detail">
-              <summary>See a pleated heading up close</summary>
+      <section id="survey-and-fitting" className="front-expertise" aria-labelledby="home-craft">
+        <div className="studio-wrap">
+          <header className="front-intro">
+            <h2 id="home-craft">From survey to final fitting</h2>
+            <p>A sloping roofline changes where a curtain can hang. A tall stairwell changes how we reach it. We plan the cloth, track and access together.</p>
+          </header>
+          <div className="front-expertise-layout">
+            <article className="front-fitting-story">
               <figure>
-                <Image src="/projects/pleated-heading-cornice.webp" alt="Pale pleats at either side of a dark pole just below an ornate cornice" width={720} height={408} sizes="(max-width: 760px) 90vw, 40vw" />
-                <figcaption>A separate Apex installation. The pleats set the spacing of the folds below the cornice.</figcaption>
+                <Image src="/projects/london-apartment-curtain-fitting.jpg" alt="A fitter on an access tower beside tall patterned curtains, with a colleague below" width={960} height={1280} sizes="(max-width: 760px) 90vw, 45vw" />
+                <figcaption>On site in a London apartment</figcaption>
               </figure>
-            </details>
-            <div className="front-expertise-links">
-              <Link href="/oversized-curtain-manufacturing">Specialist manufacturing ↗</Link>
-              <Link href="/high-level-curtain-installation">High-level installation ↗</Link>
-              <Link href="/professionals">Architects, designers and trade ↗</Link>
+              <h3>Fitting at height</h3>
+              <p>Our work includes luxury apartments in central London. For each project we assess the fixings, track load and access for fitting, dressing and maintenance.</p>
+              <Link className="front-craft-link" href="/high-level-curtain-installation">High-level installation <ArrowRight aria-hidden="true" /></Link>
+            </article>
+            <div className="front-craft-notes">
+              <article>
+                <Image className="front-craft-photo" src={studioPhotos.oxford.src} alt={studioPhotos.oxford.alt} width={1600} height={1200} sizes="(max-width: 760px) 90vw, 40vw" />
+                <h3>Measuring the roofline</h3>
+                <p>Along a gable, we measure the changing height and check the door swing to find where the curtains can gather when open.</p>
+              </article>
+              <article>
+                <Image className="front-craft-photo front-cloth-detail" src={studioPhotos.cambridge.src} alt={studioPhotos.cambridge.alt} width={900} height={1600} sizes="(max-width: 760px) 90vw, 40vw" />
+                <h3>Cutting for a long drop</h3>
+                <p>We set out the joins and pattern repeat before cutting. The fullness and lining determine how much weight the track will carry.</p>
+                <details className="front-heading-detail">
+                  <summary>See a pleated heading up close</summary>
+                  <figure>
+                    <Image src="/projects/pleated-heading-cornice.webp" alt="Pale pleats at either side of a dark pole just below an ornate cornice" width={720} height={408} sizes="(max-width: 760px) 90vw, 40vw" />
+                    <figcaption>The pleats set the spacing of the folds below the cornice.</figcaption>
+                  </figure>
+                </details>
+                <Link className="front-craft-link" href="/oversized-curtain-manufacturing">Specialist manufacturing <ArrowRight aria-hidden="true" /></Link>
+              </article>
             </div>
+          </div>
+          <div className="front-craft-footer">
+            <FilmPreview src="/projects/two-storey-curtains-fitting-and-finish.mp4" thumbnail="/projects/two-storey-curtains-fitting-and-finish-thumb.webp" title="Fitting a two-storey room" seconds={12} />
+            <Link className="front-craft-link" href="/professionals">Architects, designers and trade <ArrowRight aria-hidden="true" /></Link>
           </div>
         </div>
       </section>
@@ -191,12 +228,23 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-      <section className="studio-wrap studio-resources" aria-label="Design resources">
+      <section id="design-resources" className="studio-wrap studio-resources" aria-label="Design resources">
         <details className="studio-disclosure">
           <summary>Explore window shapes and design resources</summary>
           <div className="home-experience studio-discovery">
             <HomeWindowDiscovery />
-            <ul className="studio-resource-links">{guides.map(({ href, label }) => <li key={href}><Link href={href} prefetch={false}>{label} <span aria-hidden="true">↗</span></Link></li>)}</ul>
+            <nav aria-label="Curtain guides and planning tools" className="front-guide-index">
+              {guideGroups.map(({ title, Icon, links }) => (
+                <div key={title}>
+                  <h3><Icon aria-hidden="true" />{title}</h3>
+                  <ul>
+                    {links.map(({ href, label }) => (
+                      <li key={href}><Link href={href} prefetch={false}>{label}<ArrowRight aria-hidden="true" /></Link></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </nav>
             <details className="studio-disclosure">
               <summary>Find your fabric style</summary>
               <LazyFabricQuiz />
@@ -204,14 +252,16 @@ export default function HomePage() {
           </div>
         </details>
       </section>
-      <section className="studio-section studio-enquiry">
-        <div className="studio-wrap studio-split">
-          <div><h2>Tell us about your window.</h2><p>A photograph, a drawing or the dimensions you know are enough to begin.</p></div>
-          <div className="studio-actions">
-            <Link href="/architectural-curtain-project-planner" className="studio-button">Discuss your project</Link>
-            <Link href="/start-designing" className="studio-link">Start with a window photo <span aria-hidden="true">↗</span></Link>
+      <section id="project-enquiry" className="studio-enquiry front-consultation" aria-labelledby="home-enquiry">
+        <div className="front-consultation-copy">
+          <h2 id="home-enquiry">Tell us about your window.</h2>
+          <p>A photograph, a drawing or a few measurements are enough to begin.</p>
+          <div className="front-consultation-actions">
+            <Link href="/architectural-curtain-project-planner" className="studio-button">Discuss your project <ArrowRight aria-hidden="true" /></Link>
+            <Link href="/start-designing" className="front-photo-link"><Camera aria-hidden="true" />Start with a window photo</Link>
           </div>
         </div>
+        <Image className="front-consultation-photo" src="/projects/tall-window-finished-room.webp" width={720} height={1280} sizes="(max-width: 760px) 100vw, 50vw" alt="Pale curtains framing tall black-framed glazing in a sunlit living room" />
       </section>
     </main>
   );
