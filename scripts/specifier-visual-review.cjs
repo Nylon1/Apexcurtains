@@ -9,11 +9,19 @@ const out='docs/specifier-review';
  const page=await browser.newPage({viewport:{width:1440,height:1000}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const route='/professionals/specifier-resources';
- const response=await page.goto(base+route,{waitUntil:'networkidle'});assert.equal(response.status(),200);
+ const response=await page.goto(process.env.SPECIFIER_ENTRY||base+route,{waitUntil:'networkidle'});assert.equal(response.status(),200);
  await page.evaluate(async()=>{await document.fonts.ready;for(const i of document.querySelectorAll('main img')){i.loading='eager';await i.decode().catch(()=>{});}});
  const meta=await page.evaluate(()=>({title:document.title,description:document.querySelector('meta[name=description]')?.content,canonical:document.querySelector('link[rel=canonical]')?.href,h1:document.querySelectorAll('h1').length}));
  assert.equal(meta.canonical,'https://www.apexcurtains.com'+route);assert.equal(meta.h1,1);
  const anchors=['geometry-and-operation','track-and-support','textile-specification','delivery-and-care','project-record','questions'];for(const a of anchors)assert.equal(await page.locator('#'+a).count(),1,a);
+ const manifest=JSON.parse(fs.readFileSync('lib/specifier-downloads.json','utf8'));
+ for(const file of manifest.files){
+  const entry=page.locator('.resource-download-entry').filter({has:page.locator(`a[href="${file.href}"]`)});
+  const copy=await entry.innerText();
+  for(const value of [file.reference,file.revision,file.date,file.format,file.pages===null?'Unpaginated text':`${file.pages} A4 pages`])assert.ok(copy.includes(value),file.href+' missing '+value);
+  const download=await page.request.get(base+file.href);assert.equal(download.status(),200);
+  const bytes=await download.body();assert.equal(require('crypto').createHash('sha256').update(bytes).digest('hex'),file.sha256);
+ }
  const stages=['Concept design','Design development','Technical design','Procurement','Construction','Installation','Handover'];
  for(const s of stages){await page.getByRole('button',{name:new RegExp(s+'$')}).click();assert.ok(await page.locator('.resource-stage-result li').count());assert.equal(await page.getByRole('button',{name:new RegExp(s+'$')}).getAttribute('aria-pressed'),'true');}
  await page.getByRole('button',{name:/Concept design$/}).click();
@@ -34,6 +42,6 @@ const out='docs/specifier-review';
  await page.goto(base+'/professionals/specifier-resources/project-information-checklist',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('input[type=checkbox]').count(),33);await page.locator('input[type=checkbox]').first().check();assert.ok(await page.locator('input[type=checkbox]').first().isChecked());
  await page.goto(base+'/professionals/workspace/login',{waitUntil:'domcontentloaded'});assert.match(await page.locator('h1').innerText(),/Sign in/);
  assert.equal(errors.length,0);for(const scan of accessibility)assert.equal(scan.violations.length,0,scan.viewport);
- const result={base,meta,stages:7,drawings:allDrawings,overflow,errors,accessibility,links:linkResults,checklist:33,workspace:'public login renders; no authentication or private exports exercised'};
+ const result={base,meta,downloadsVerified:manifest.files.length,stages:7,drawings:allDrawings,overflow,errors,accessibility,links:linkResults,checklist:33,workspace:'public login renders; no authentication or private exports exercised'};
  fs.writeFileSync(out+'/verification.json',JSON.stringify(result,null,2));console.log(JSON.stringify({meta,errors,accessibility,links:linkResults.length,overflow},null,2));await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

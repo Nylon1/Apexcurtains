@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import data from "@/lib/specifier-resources.json";
+import downloads from "@/lib/specifier-downloads.json";
 import { portfolio } from "@/lib/portfolio";
 import { resourcesGuide } from "@/lib/guides/professional-resources";
 import { SITE_URL } from "@/lib/seo-metadata";
@@ -160,7 +161,7 @@ export default function TechnicalResourceLibrary() {
             <a href="#resource-register">Explore the documents ↓</a>
           </div>
           <p className="resource-draft">
-            Review edition D01 · 27 November 2026
+            Review edition {data.revision} · {data.date}
             <br />
             Preliminary coordination. Not for construction.
           </p>
@@ -221,8 +222,14 @@ export default function TechnicalResourceLibrary() {
           </div>
           <div className="resource-register-note">
             <span>APX TECHNICAL SERIES</span>
-            <span>Revision D01 / Draft for technical review</span>
-            <span>13 pages across 5 documents</span>
+            <span>Revision {data.revision} / Draft for technical review</span>
+            <span>
+              {data.resources.reduce(
+                (sum, resource) => sum + resource.pages.length,
+                0,
+              )}{" "}
+              PDF pages across 5 documents
+            </span>
           </div>
           {data.resources.map((resource) => (
             <article
@@ -250,21 +257,37 @@ export default function TechnicalResourceLibrary() {
               </div>
               <div className="resource-doc-summary">
                 <p>{resource.summary}</p>
-                <a
-                  className="resource-download"
-                  href={`/downloads/specifier/${resource.id}-${resource.slug}-D01.pdf`}
-                >
-                  Download {resource.id} <span>PDF ↓</span>
-                </a>
-                {resource.id === "APX-T05" && (
-                  <a
-                    className="resource-text-download"
-                    href="/downloads/specifier/APX-T05-preliminary-specification-D01.txt"
-                    download
-                  >
-                    Editable plain-text template ↓
-                  </a>
-                )}
+                {downloads.files
+                  .filter((file) => file.reference === resource.id)
+                  .map((file) => (
+                    <div className="resource-download-entry" key={file.href}>
+                      <a
+                        className="resource-download"
+                        href={file.href}
+                        download={file.format !== "PDF"}
+                        aria-describedby={`${resource.id}-${file.format}-metadata`}
+                      >
+                        {file.format === "PDF"
+                          ? `Download ${resource.id}`
+                          : file.format === "DOCX"
+                            ? "Editable Word template"
+                            : "Editable plain-text template"}
+                        <span>{file.format} ↓</span>
+                      </a>
+                      <p
+                        id={`${resource.id}-${file.format}-metadata`}
+                        className="resource-download-metadata"
+                      >
+                        {file.reference} · Rev {file.revision} · {file.date}
+                        <br />
+                        {file.format} ·{" "}
+                        {file.pages === null
+                          ? "Unpaginated text"
+                          : `${file.pages} A4 pages`}
+                        {file.format === "DOCX" && " before editing"}
+                      </p>
+                    </div>
+                  ))}
               </div>
               <details className="resource-document-content">
                 <summary>
@@ -434,10 +457,16 @@ export default function TechnicalResourceLibrary() {
               Technical matters still requiring confirmation{" "}
               <span aria-hidden="true">+</span>
             </summary>
+            <p>
+              Apex supplies the Forest curtain systems covered in this
+              collection. Selection and suitability depend on the individual
+              project; agree installation, electrical connection, controls
+              commissioning and support responsibilities in the project scope.
+            </p>
             <ul>
               <li>
-                Apex’s current FMS, FMS Plus and Shuttle supply, installation
-                and support scope.
+                Installation, electrical connection, controls commissioning and
+                ongoing support responsibilities.
               </li>
               <li>
                 The exact motor product code and assembly: November 2026
@@ -503,6 +532,10 @@ export default function TechnicalResourceLibrary() {
                   The existing capability and project evidence PDF. Read
                   alongside the technical documents, rather than as a
                   construction specification.
+                </p>
+                <p>
+                  PDF · 7 pages · Existing profile; document reference,
+                  revision and issue date not stated.
                 </p>
               </div>
               <span aria-hidden="true">↗</span>

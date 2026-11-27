@@ -27,7 +27,7 @@ styles={
  'title':ParagraphStyle('title',fontName='ApexDisplay',fontSize=24,leading=28,textColor=GREEN,spaceAfter=10),
  'deck':ParagraphStyle('deck',fontName='ApexSans',fontSize=11,leading=15,textColor=GREEN,spaceAfter=12),
  'h2':ParagraphStyle('h2',fontName='ApexBold',fontSize=11,leading=15,textColor=GREEN,spaceBefore=9,spaceAfter=5),
- 'body':ParagraphStyle('body',fontName='ApexSans',fontSize=10,leading=14,textColor=HexColor('#27332f'),spaceAfter=6),
+ 'body':ParagraphStyle('body',fontName='ApexSans',fontSize=10.5,leading=14.5,textColor=HexColor('#27332f'),spaceAfter=6),
  'ref':ParagraphStyle('ref',fontName='ApexSans',fontSize=8,leading=11,textColor=GREEN,spaceBefore=3),
 }
 source_map={s['id']:s for s in DATA['sources']}
@@ -59,7 +59,7 @@ class StableCanvas(Canvas):
         self.setSubject('Preliminary architectural curtain coordination. Draft for technical review; not for construction.')
 
 for resource in DATA['resources']:
-    doc=SimpleDocTemplate(str(OUT/f'{resource["id"]}-{resource["slug"]}-D01.pdf'),pagesize=(595.28,841.89),leftMargin=39,rightMargin=39,topMargin=84,bottomMargin=72,title=resource['title'])
+    doc=SimpleDocTemplate(str(OUT/f'{resource["id"]}-{resource["slug"]}-{DATA["revision"]}.pdf'),pagesize=(595.28,841.89),leftMargin=39,rightMargin=39,topMargin=84,bottomMargin=72,title=resource['title'])
     doc.resource=resource
     story=[]
     for index,p in enumerate(resource['pages']):
@@ -75,12 +75,12 @@ for resource in DATA['resources']:
             story.append(Paragraph(escape(s['title']),styles['h2']))
             for item in s['items']:story.append(Paragraph(escape(item),styles['body']))
         story.append(Spacer(1,6))
-        story.append(Paragraph('Manufacturer references (links; checked 27 November 2026):',styles['ref']))
+        story.append(Paragraph('Manufacturer references (links; checked '+DATA['date']+'):',styles['ref']))
         for key in p['sources']:
             s=source_map[key]
             story.append(Paragraph(f'<link href="{escape(s["url"],quote=True)}">{escape(s["title"])} - pp. {s["referencePages"]}</link>',styles['ref']))
     doc.build(story,onFirstPage=footer,onLaterPages=footer,canvasmaker=StableCanvas)
-    print(OUT/f'{resource["id"]}-{resource["slug"]}-D01.pdf')
+    print(OUT/f'{resource["id"]}-{resource["slug"]}-{DATA["revision"]}.pdf')
 
 template=DATA['resources'][-1]
 text=[template['title'],template['id']+' / '+DATA['revision']+' / '+DATA['date'],DATA['status'],'Apex Curtains | 0800 772 0367 | hello@apexcurtains.com','']
@@ -89,5 +89,5 @@ for p in template['pages']:
     for s in p['sections']:
         text.extend(['',s['title'],*s['items']])
     text.append('')
-text.extend(['Manufacturer references (checked 27 November 2026):',*[f'{s["title"]}: {s["url"]}' for s in DATA['sources'] if s['id'] in {'ks','cs','shuttle','fabric-height','pelmet'}]])
-(OUT/'APX-T05-preliminary-specification-D01.txt').write_text('\n'.join(text)+'\n',encoding='utf8')
+text.extend(['Manufacturer references (checked '+DATA['date']+'):',*[f'{s["title"]}: {s["url"]}' for s in DATA['sources'] if s['id'] in {'ks','cs','shuttle','fabric-height','pelmet'}]])
+(OUT/f'APX-T05-preliminary-specification-{DATA["revision"]}.txt').write_text('\n'.join(text)+'\n',encoding='utf8',newline='\n')

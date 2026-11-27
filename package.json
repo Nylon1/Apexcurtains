@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "seo:check": "node scripts/seo-foundation-check.mjs",
+    "test:specifier": "node scripts/check-specifier-release.mjs",
+    "specifier:public-issue": "node scripts/check-specifier-release.mjs --public-issue",
     "test:specialist": "node --test scripts/specialist-guidance-check.mjs",
     "test:visualiser": "node --test scripts/visualiser-check.mjs",
     "test:sitemap": "node --test scripts/sitemap-check.mjs",

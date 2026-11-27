@@ -1,0 +1,32 @@
+{
+  "revision": "D01",
+  "status": "draft-technical-review",
+  "supplyScope": {
+    "status": "confirmed",
+    "evidence": "User confirmation in project conversation, 27 November 2026: We supply all systems they have",
+    "scope": "All Forest systems; this collection covers curtain systems only. Supply availability does not establish suitability for a particular installation."
+  },
+  "installationAndCommissioningScope": {
+    "status": "pending",
+    "evidence": null
+  },
+  "apexTechnicalApproval": {
+    "status": "pending",
+    "approver": null,
+    "date": null,
+    "evidence": null,
+    "manifestSha256": null
+  },
+  "supplierDimensionalReview": {
+    "status": "pending",
+    "evidence": null,
+    "scope": "Resolve Shuttle brochure body dimensions versus S/M/L manual overall dimensions and confirm applicability by product code before issuing dimensional guidance."
+  },
+  "publicIssueApproval": {
+    "status": "pending",
+    "approver": null,
+    "date": null,
+    "evidence": null,
+    "manifestSha256": null
+  }
+}

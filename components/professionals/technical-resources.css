@@ -285,6 +285,15 @@
 .resource-download span {
   font-size: 10px;
 }
+.resource-download-entry + .resource-download-entry {
+  margin-top: 18px;
+}
+.resource-doc-summary .resource-download-metadata {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 8px 0 0;
+  color: #354b42;
+}
 .resource-text-download {
   font-size: 11px;
   display: block;

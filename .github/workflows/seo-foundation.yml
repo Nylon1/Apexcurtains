@@ -21,6 +21,8 @@ on:
       - "scripts/web-app-check.mjs"
       - "scripts/atelier-check.test.ts"
       - "scripts/architectural-curtains.test.ts"
+      - "scripts/*specifier*"
+      - "docs/specifier-review/source-verification.json"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -49,6 +51,9 @@ jobs:
 
       - name: SEO static acceptance checks
         run: npm run seo:check
+
+      - name: Specifier document and source integrity
+        run: npm run test:specifier
 
       - name: Sitemap serialization checks
         run: npm run test:sitemap

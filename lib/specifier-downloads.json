@@ -1,0 +1,77 @@
+{
+  "revision": "D01",
+  "date": "27 November 2026",
+  "contentSha256": "f666784a723c47330646c50bf59529d1cebe6b37bc89c5a65155b4461b676fca",
+  "files": [
+    {
+      "reference": "APX-T01",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "PDF",
+      "pages": 3,
+      "href": "/downloads/specifier/APX-T01-architectural-planning-D01.pdf",
+      "bytes": 127985,
+      "sha256": "92ddd0cb9ead6bfb0f33e5710b8f03f7fba3f7abe9871fd200e9e82450594228"
+    },
+    {
+      "reference": "APX-T02",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "PDF",
+      "pages": 3,
+      "href": "/downloads/specifier/APX-T02-track-pocket-support-D01.pdf",
+      "bytes": 129600,
+      "sha256": "a98bc366474718073e3732d94fb6b2e4894f0fe78b7be91775b66b20cae6d1f3"
+    },
+    {
+      "reference": "APX-T03",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "PDF",
+      "pages": 3,
+      "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-D01.pdf",
+      "bytes": 127731,
+      "sha256": "ff2e6f116802c6e563840a8c7cf0459f332d8d43de80c0b9d36eb033a5935c82"
+    },
+    {
+      "reference": "APX-T04",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "PDF",
+      "pages": 2,
+      "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-D01.pdf",
+      "bytes": 120048,
+      "sha256": "ce77899dccb0832d18f052abd68bcba694d98b3d3808be4908b927eda612be6b"
+    },
+    {
+      "reference": "APX-T05",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "PDF",
+      "pages": 2,
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.pdf",
+      "bytes": 119960,
+      "sha256": "7c8d55d8a6faa10971fb2797636073b9610b6f6a1399d4770ec00b3475ed7a62"
+    },
+    {
+      "reference": "APX-T05",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "DOCX",
+      "pages": 2,
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.docx",
+      "bytes": 39340,
+      "sha256": "8e23fe77b0dc25537e373d2a04ff39163559a3b9ec6842f2c14361fd35c4f1b8"
+    },
+    {
+      "reference": "APX-T05",
+      "revision": "D01",
+      "date": "27 November 2026",
+      "format": "TXT",
+      "pages": null,
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.txt",
+      "bytes": 3579,
+      "sha256": "79b0e9c4b557cebed6eb48251ddda704dd91bdce64a393df32b75c3d2bfdbccc"
+    }
+  ]
+}

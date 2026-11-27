@@ -68,19 +68,19 @@
     },
     {
       "id": "fabric-height",
-      "url": "https://forestgroup.com/user_files/download_files/download_2341_FOREST_hoogtemaat%20gordijnstof%20folder_ENG_280526_WEB.pdf",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2532_FOREST_Curtainheight%20Chart_ENG_161026_WEB.pdf",
       "pages": 4,
-      "sha256": "0fd19ee20bf41f6b8bfe4cc2623557f68540d94a503709189b305ab33aba3a05",
-      "title": "Forest fabric-height guide - May 2026",
+      "sha256": "22d15ff9fca28568dbd6ab5c4ac58e7a39f5913c1c81b638116f7092174148f4",
+      "title": "Forest curtain-height chart - October 2026 file / BR0024EN_280526",
       "referencePages": "1-4",
       "checked": "2026-11-27"
     },
     {
       "id": "overview",
-      "url": "https://www.forestgroup.com/user_files/download_files/download_1795_FOREST_ALGEMEEN_Overview_GB_240425_WEB.pdf",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2252_FOREST_ALGEMEEN_Overview_GB_241225_WEB.pdf",
       "pages": 8,
-      "sha256": "54a471d77b8dff768d6965b2605ea07fd008bfd69feb0d694dfbd3b815ce5eab",
-      "title": "Forest overview - April 2025 (CAD availability only)",
+      "sha256": "6048f5490226931607123b846ac0341fc083818a79d4e0a2316e0385ee2676ce",
+      "title": "Forest overview - December 2025 (CAD availability only)",
       "referencePages": "8",
       "checked": "2026-11-27"
     }
@@ -309,7 +309,7 @@
             {
               "title": "Apex assessment still required",
               "items": [
-                "The inclusion of a Forest product in this research is not confirmation of Apex supply, stock or suitability. Agree the exact product code, regional variant, current instructions and project configuration before procurement."
+                "Apex supplies the Forest curtain systems covered here. Supply availability does not establish stock, lead time or project suitability. Agree the exact product code, regional variant, current instructions, installation and commissioning responsibilities before procurement."
               ]
             }
           ],

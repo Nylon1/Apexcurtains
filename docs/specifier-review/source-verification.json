@@ -1,0 +1,95 @@
+{
+  "checkedAt": "2026-11-27T21:35:24.941596+00:00",
+  "sources": [
+    {
+      "id": "ks",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2502_FOREST_KS_NEW_EN_150926_WEB.pdf",
+      "sha256": "af923c0c3712c08ca78b3ae48d26f590a0d9a7c8339a682df3bed0b6d947d357",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/brochures"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "cs",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2452_FOREST_CS_EN_270726_WEB.pdf",
+      "sha256": "f3c864774529c2f2a3603cdfdf09e5558eee5165ebd179dd366b571b206c968f",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/brochures"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "shuttle",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2545_FOREST_ShuttleSeries_NEW_EN_201126_WEB.pdf",
+      "sha256": "27291a5e22393968c09b25d230d19af5a799ca7faa1b1c6d2808669ca868c753",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/brochures"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "motor-manual",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2180_FOREST_manualA5_shuttle_ENG_021025_DRUK.pdf",
+      "sha256": "31bce30cf18efb9e1e21adff87605724320bfbb17d74777c9e96ed33af71a1ba",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/technical-documents"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "recess-gen2",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_1969_FMS%20PLUS%20Recess_GEN2_Pleat%20curtain_Straight_A4.pdf",
+      "sha256": "3c00f8e8d88802056c2e5c2353303dbf7da5d7c5dbaff108b3615ef3016ce03a",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/technical-documents"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "pelmet",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2469_technische%20leaflet_EN_Koofprotocol_190826.pdf",
+      "sha256": "b999aaee307653b144e82d360a3f23c8d76ad5a5c6e4b4fff7659e8d05435fb8",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/technical-documents"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "assembly",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_634_FMS_Manual_V1_1.pdf",
+      "sha256": "d7b22e123357fea506d29b940f7ab38a6dc52fcc17bea154414965886acccfeb",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/technical-documents"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "fabric-height",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2532_FOREST_Curtainheight%20Chart_ENG_161026_WEB.pdf",
+      "sha256": "22d15ff9fca28568dbd6ab5c4ac58e7a39f5913c1c81b638116f7092174148f4",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/technical-documents"
+      ],
+      "isPdf": true
+    },
+    {
+      "id": "overview",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2252_FOREST_ALGEMEEN_Overview_GB_241225_WEB.pdf",
+      "sha256": "6048f5490226931607123b846ac0341fc083818a79d4e0a2316e0385ee2676ce",
+      "unchanged": true,
+      "listedOn": [
+        "https://www.forestgroup.com/en/downloads/brochures"
+      ],
+      "isPdf": true
+    }
+  ]
+}

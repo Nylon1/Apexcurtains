@@ -1,11 +1,12 @@
 {
-  "base": "https://apexcurtains-43nc-o2ls6z8cn-hamzas-projects-4ef62f35.vercel.app",
+  "base": "http://localhost:3100",
   "meta": {
     "title": "Curtain Specifier Resources for Architects & Interior Designers | Apex Curtains",
     "description": "A decision-led curtain specification library: geometry, tracks, fixing zones, textiles, linings, access and project information for professional teams.",
     "canonical": "https://www.apexcurtains.com/professionals/specifier-resources",
     "h1": 1
   },
+  "downloadsVerified": 7,
   "stages": 7,
   "drawings": 8,
   "overflow": false,
@@ -106,9 +107,14 @@
       "type": "application/pdf"
     },
     {
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.docx",
+      "status": 200,
+      "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    {
       "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.txt",
       "status": 200,
-      "type": "text/plain; charset=utf-8"
+      "type": "text/plain; charset=UTF-8"
     },
     {
       "href": "/gallery",
