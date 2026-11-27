@@ -47,7 +47,9 @@ function Navigation({ pathname }: { pathname: string }) {
     }
     document.addEventListener("pointerdown", outside);
     document.addEventListener("keydown", escape);
-    const desktopSize = window.matchMedia("(min-width: 1280px)");
+    const desktopSize = window.matchMedia(
+      node?.closest(".public-presentation") ? "(min-width: 960px)" : "(min-width: 1280px)",
+    );
     const closeMobileAtDesktop = () => {
       if (desktopSize.matches) mobile.current?.close();
     };
