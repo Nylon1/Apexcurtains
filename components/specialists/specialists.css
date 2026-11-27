@@ -31,7 +31,9 @@
 .spec-drawing { background:#ece7dc; padding:1.5rem; }
 .spec-drawing .arch-drawing { border:0; background:transparent; padding:0; margin:0; }
 .spec-drawing .arch-drawing svg { width:100%; }
+.spec-drawing .arch-drawing text { font-size:17px; }
 .spec-elevation svg { width:100%; height:auto; }
+.spec-elevation svg text { font-size:22px; }
 .spec-elevation figcaption { font-size:.85rem; line-height:1.6; border-top:1px solid #c8bdab; padding-top:1.2rem; }
 .spec-elevation strong { display:block; font-weight:500; margin-bottom:.4rem; }
 .spec-brass { stroke:#a2865d; }
@@ -159,7 +161,12 @@
  .spec-statement { padding-block:3rem; gap:1.5rem; }
 }
 @media(max-width:540px) {
- .spec-breadcrumb { padding-top:1.3rem; font-size:.75rem; }
+ .spec-breadcrumb { padding-block:1.1rem 1.5rem; font-size:.75rem; }
+ .spec-page h1 { font-size:2.65rem; line-height:1.06; }
+ .spec-hero .spec-service-name { margin-bottom:1rem; }
+ .spec-hero .spec-lead { font-size:1.05rem; line-height:1.65; margin-top:1.25rem!important; }
+ .spec-hero .spec-actions { margin-top:1.5rem; gap:.85rem; }
+ .spec-elevation svg text { font-size:24px; }
  .spec-project-grid { grid-template-columns:1fr; gap:3rem; }
  .spec-project-grid .spec-photo img,.spec-workroom .spec-project-grid .spec-photo img { height:auto; max-height:600px; }
  .spec-open-closed { gap:.65rem; }
