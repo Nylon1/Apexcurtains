@@ -1,0 +1,276 @@
+{
+  "base": "http://localhost:3100",
+  "meta": {
+    "title": "Curtain Specifier Resources for Architects & Interior Designers | Apex Curtains",
+    "description": "A decision-led curtain specification library: geometry, tracks, fixing zones, textiles, linings, access and project information for professional teams.",
+    "canonical": "https://www.apexcurtains.com/professionals/specifier-resources",
+    "h1": 1
+  },
+  "stages": 7,
+  "drawings": 8,
+  "overflow": false,
+  "errors": [],
+  "accessibility": [
+    {
+      "viewport": "desktop",
+      "violations": []
+    },
+    {
+      "viewport": "desktop-expanded",
+      "violations": []
+    },
+    {
+      "viewport": "mobile-expanded",
+      "violations": []
+    }
+  ],
+  "links": [
+    {
+      "href": "/professionals",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/project-review",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/gallery/pinch-pleat-curtains-oxford-oxford",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/downloads/specifier/APX-T01-architectural-planning-D01.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/guides/specifier/height-drop.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/guides/specifier/apex.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/guides/specifier/stack-back.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/downloads/specifier/APX-T02-track-pocket-support-D01.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/guides/specifier/single-double.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/guides/specifier/mounting-recess.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/guides/specifier/support.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-D01.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/guides/specifier/motor-clearance.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-D01.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/guides/specifier/access.svg",
+      "status": 200,
+      "type": "image/svg+xml"
+    },
+    {
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/downloads/specifier/APX-T05-preliminary-specification-D01.txt",
+      "status": 200,
+      "type": "text/plain; charset=UTF-8"
+    },
+    {
+      "href": "/gallery",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/gallery/jesmond",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/gallery/norwich",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/specifier-resources/project-information-checklist",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/workspace/login",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/downloads/Apex-Curtains-Commercial-Project-Profile.pdf",
+      "status": 200,
+      "type": "application/pdf"
+    },
+    {
+      "href": "/apex-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/gable-end-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/triangular-window-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/angled-window-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/advice/how-to-measure-for-apex-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-tiebacks",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-tracks",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-tracks#structure-and-brackets",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-headings#tracks-and-space",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/architects#recess-and-clearance",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-fabrics",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-headings",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-linings",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/services/design-make-curtains",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-colours-and-tones",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/curtain-accessories",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/services/premium-installation#mitower-access",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/services/premium-installation",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/contractors-fit-out#site-readiness",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/commercial-curtain-track-installation",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/healthcare",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/architects",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/interior-designers",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/developers-housebuilders",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/contractors-fit-out",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    },
+    {
+      "href": "/professionals/specifier-resources",
+      "status": 200,
+      "type": "text/html; charset=utf-8"
+    }
+  ],
+  "checklist": 33,
+  "workspace": "public login renders; no authentication or private exports exercised"
+}

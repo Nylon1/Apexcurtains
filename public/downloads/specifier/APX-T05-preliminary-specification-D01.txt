@@ -1,0 +1,53 @@
+Preliminary curtain specification template
+APX-T05 / D01 / 27 November 2026
+Draft for technical review - not for construction
+Apex Curtains | 0800 772 0367 | hello@apexcurtains.com
+
+APERTURE AND PERFORMANCE BRIEF
+
+Document control - complete for the project
+Project / location: ____________________    Aperture / room: ____________________
+Prepared by / date: ____________________    Drawing revision: ____________________
+Issue purpose: PRELIMINARY COORDINATION. Not a manufacture or construction instruction.
+
+Geometry and appearance
+Plan/elevation/section references: ____________________
+Dimension source and status (design / surveyed / verified): ____________________
+Glazing outline, track route and finished floor datum: ____________________
+Curtain top / finished lower edge / intended drop: ____________________
+Open view, retained cloth, stack location and door clearance: ____________________
+
+Textile and operation
+Fabric / colour / usable width / heading / fullness: ____________________
+Lining / interlining / joins / sample approval reference: ____________________
+Estimated made-up weight and calculation basis: ____________________
+Light control, privacy, acoustic or fire performance required and evidence: ____________________
+Manual or motorised; single or independent layers; draw direction: ____________________
+
+INTERFACES, RESPONSIBILITY AND RELEASE
+
+Track, support and electrical schedule
+Track / carrier / bracket / motor product codes and source revision: ____________________
+Pocket / clearances / drive-end access / removal route: ____________________
+Substrate evidence / backing detail / fixing assessment owner: ____________________
+Power supply / isolation / cable route / control interface: ____________________
+Electrical contractor / controls integrator / commissioning owner: ____________________
+
+Installation and handover
+Survey / design approval / procurement / installation dates: ____________________
+Access assessment / site readiness / protection responsibilities: ____________________
+Care, operating instruction and maintenance access requirements: ____________________
+
+Outstanding decisions and release
+Decision / owner / evidence required / due date: ____________________
+Supplier confirmation / project-specific assessment: ____________________
+Approved drawing and schedule reference / approver / date: ____________________
+Transfer the agreed brief and attachments to the existing professional workspace. Use its revision and export register for controlled project issues; this blank template is not an issued workspace export.
+Do not remove preliminary status until the project team has agreed the survey, materials, system compatibility, support, interfaces and scope. Final manufacture approval must be explicit.
+
+Manufacturer references (checked 27 November 2026):
+Forest KS brochure - September 2026: https://www.forestgroup.com/user_files/download_files/download_2502_FOREST_KS_NEW_EN_150926_WEB.pdf
+Forest CS brochure - July 2026: https://www.forestgroup.com/user_files/download_files/download_2452_FOREST_CS_EN_270726_WEB.pdf
+Forest Shuttle Series / FMS - November 2026: https://www.forestgroup.com/user_files/download_files/download_2545_FOREST_ShuttleSeries_NEW_EN_201126_WEB.pdf
+Forest Pelmet Protocol - August 2026: https://www.forestgroup.com/user_files/download_files/download_2469_technische%20leaflet_EN_Koofprotocol_190826.pdf
+Forest fabric-height guide - May 2026: https://forestgroup.com/user_files/download_files/download_2341_FOREST_hoogtemaat%20gordijnstof%20folder_ENG_280526_WEB.pdf

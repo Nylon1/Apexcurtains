@@ -1,0 +1,102 @@
+[
+  {
+    "path": "/professionals",
+    "status": 200,
+    "title": "Architectural Curtain Specialists for Designers, Architects & Developers | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals",
+    "h1": [
+      "Specialist curtains, considered with the architecture."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/architects",
+    "status": 200,
+    "title": "Architectural Curtain & Track Specification Support for Architects | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/architects",
+    "h1": [
+      "Curtain specification for architects."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/interior-designers",
+    "status": 200,
+    "title": "Curtain Specification Support for Interior Designers | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/interior-designers",
+    "h1": [
+      "Curtain specification for interior designers."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/developers-housebuilders",
+    "status": 200,
+    "title": "Curtain & Track Packages for Developers and Housebuilders | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/developers-housebuilders",
+    "h1": [
+      "Curtain packages for developers & housebuilders."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/contractors-fit-out",
+    "status": 200,
+    "title": "Curtain Track Installation for Contractors & Fit-out Teams | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/contractors-fit-out",
+    "h1": [
+      "Curtains for contractors & fit-out teams."
+    ],
+    "checkboxes": 7
+  },
+  {
+    "path": "/professionals/specifier-resources",
+    "status": 200,
+    "title": "Curtain Specifier Resources for Architects & Interior Designers | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/specifier-resources",
+    "h1": [
+      "A practical library for curtain specification."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/specifier-resources/project-information-checklist",
+    "status": 200,
+    "title": "Curtain Project Information Checklist | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/specifier-resources/project-information-checklist",
+    "h1": [
+      "Curtain & track project information checklist."
+    ],
+    "checkboxes": 33
+  },
+  {
+    "path": "/professionals/workspace",
+    "status": 200,
+    "title": "Apex Professional Project Workspace | Apex Curtains | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/workspace",
+    "h1": [
+      "One project record from geometry to handover."
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/workspace/login",
+    "status": 200,
+    "title": "Apex Curtains | Curtains for Apex, Triangular & Architectural Windows",
+    "canonical": null,
+    "h1": [
+      "Sign in to your project workspace"
+    ],
+    "checkboxes": 0
+  },
+  {
+    "path": "/professionals/project-review",
+    "status": 200,
+    "title": "Professional Curtain Project Review | Apex Curtains",
+    "canonical": "https://www.apexcurtains.com/professionals/project-review",
+    "h1": [
+      "Let’s review the curtain brief."
+    ],
+    "checkboxes": 0
+  }
+]

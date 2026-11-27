@@ -1,0 +1,507 @@
+{
+  "revision": "D01",
+  "date": "27 November 2026",
+  "status": "Draft for technical review - not for construction",
+  "sources": [
+    {
+      "id": "ks",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2502_FOREST_KS_NEW_EN_150926_WEB.pdf",
+      "pages": 8,
+      "sha256": "af923c0c3712c08ca78b3ae48d26f590a0d9a7c8339a682df3bed0b6d947d357",
+      "title": "Forest KS brochure - September 2026",
+      "referencePages": "2-4",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "cs",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2452_FOREST_CS_EN_270726_WEB.pdf",
+      "pages": 8,
+      "sha256": "f3c864774529c2f2a3603cdfdf09e5558eee5165ebd179dd366b571b206c968f",
+      "title": "Forest CS brochure - July 2026",
+      "referencePages": "2-4",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "shuttle",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2545_FOREST_ShuttleSeries_NEW_EN_201126_WEB.pdf",
+      "pages": 16,
+      "sha256": "27291a5e22393968c09b25d230d19af5a799ca7faa1b1c6d2808669ca868c753",
+      "title": "Forest Shuttle Series / FMS - November 2026",
+      "referencePages": "5-9",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "motor-manual",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2180_FOREST_manualA5_shuttle_ENG_021025_DRUK.pdf",
+      "pages": 14,
+      "sha256": "31bce30cf18efb9e1e21adff87605724320bfbb17d74777c9e96ed33af71a1ba",
+      "title": "Forest Shuttle S/M/L installation manual - October 2025",
+      "referencePages": "12-14",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "recess-gen2",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_1969_FMS%20PLUS%20Recess_GEN2_Pleat%20curtain_Straight_A4.pdf",
+      "pages": 1,
+      "sha256": "3c00f8e8d88802056c2e5c2353303dbf7da5d7c5dbaff108b3615ef3016ce03a",
+      "title": "Forest FMS Plus Recess GEN2 - straight pleated curtain, V2.1025",
+      "referencePages": "1",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "pelmet",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_2469_technische%20leaflet_EN_Koofprotocol_190826.pdf",
+      "pages": 1,
+      "sha256": "b999aaee307653b144e82d360a3f23c8d76ad5a5c6e4b4fff7659e8d05435fb8",
+      "title": "Forest Pelmet Protocol - August 2026",
+      "referencePages": "1",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "assembly",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_634_FMS_Manual_V1_1.pdf",
+      "pages": 19,
+      "sha256": "d7b22e123357fea506d29b940f7ab38a6dc52fcc17bea154414965886acccfeb",
+      "title": "Forest FMS assembly and installation manual - V1.1",
+      "referencePages": "12-17",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "fabric-height",
+      "url": "https://forestgroup.com/user_files/download_files/download_2341_FOREST_hoogtemaat%20gordijnstof%20folder_ENG_280526_WEB.pdf",
+      "pages": 4,
+      "sha256": "0fd19ee20bf41f6b8bfe4cc2623557f68540d94a503709189b305ab33aba3a05",
+      "title": "Forest fabric-height guide - May 2026",
+      "referencePages": "1-4",
+      "checked": "2026-11-27"
+    },
+    {
+      "id": "overview",
+      "url": "https://www.forestgroup.com/user_files/download_files/download_1795_FOREST_ALGEMEEN_Overview_GB_240425_WEB.pdf",
+      "pages": 8,
+      "sha256": "54a471d77b8dff768d6965b2605ea07fd008bfd69feb0d694dfbd3b815ce5eab",
+      "title": "Forest overview - April 2025 (CAD availability only)",
+      "referencePages": "8",
+      "checked": "2026-11-27"
+    }
+  ],
+  "stages": [
+    {
+      "id": "concept",
+      "label": "Concept design",
+      "decision": "Agree the opening, the view and the intended movement."
+    },
+    {
+      "id": "development",
+      "label": "Design development",
+      "decision": "Reserve space for cloth, tracks, motors and future access."
+    },
+    {
+      "id": "technical",
+      "label": "Technical design",
+      "decision": "Coordinate the structure, pocket, electrics and controlled specification."
+    },
+    {
+      "id": "procurement",
+      "label": "Procurement",
+      "decision": "Confirm product codes, responsibilities and release conditions."
+    },
+    {
+      "id": "construction",
+      "label": "Construction",
+      "decision": "Verify backing, finishes and readiness before concealment."
+    },
+    {
+      "id": "installation",
+      "label": "Installation",
+      "decision": "Confirm access, fit, travel and commissioning."
+    },
+    {
+      "id": "handover",
+      "label": "Handover",
+      "decision": "Record operation, care and a workable maintenance route."
+    }
+  ],
+  "resources": [
+    {
+      "id": "APX-T01",
+      "slug": "architectural-planning",
+      "title": "Architectural curtain planning",
+      "subtitle": "Geometry, double-height glazing and the cloth envelope",
+      "summary": "Establish the open view, finished drop and retained cloth before fixing the ceiling or interior layout.",
+      "stages": ["concept", "development", "technical"],
+      "anchor": "geometry-and-operation",
+      "pages": [
+        {
+          "title": "Set the curtain datum",
+          "diagram": "height-drop",
+          "sections": [
+            {
+              "title": "Record the opening, then the curtain",
+              "items": [
+                "Give every aperture a reference. Supply a plan, elevation and section with drawing revision, orientation and the source of each dimension. Mark dimensions as design, site-measured or still to be verified.",
+                "Record finished floor level, ceiling or track datum, glazing head, sill, doors, handles, opening lights, radiators and furniture. Window height is not the finished curtain drop.",
+                "Agree the heading and carrier connection before establishing the curtain top. Set the lower edge against the verified finished floor or sill and the intended clearance or pooling. Do not use a universal deduction."
+              ]
+            },
+            {
+              "title": "Double-height review",
+              "items": [
+                "Confirm whether the curtain is reachable for operation, dressing and removal. Establish the installation route and future access before the space is furnished.",
+                "Record textile width, joins, lining, interlining and heading with the workroom. A small fabric sample cannot establish the behaviour or load of a complete tall curtain."
+              ]
+            }
+          ],
+          "sources": ["fabric-height"]
+        },
+        {
+          "title": "A shaped opening is an operating decision",
+          "diagram": "apex",
+          "sections": [
+            {
+              "title": "Agree what stays in view",
+              "items": [
+                "Show the proposed track route separately from the glass outline. Identify changing drops and each slope; do not assume symmetry.",
+                "Draw the open and closed arrangements. Identify retained upper cloth, tieback positions and the client's required clear view. A shaped curtain need not clear the whole apex when open.",
+                "A bent track is not evidence that a motorised curtain can travel on an incline. Agree the arrangement and operating method with Apex and the supplier before specifying a motor."
+              ]
+            },
+            {
+              "title": "Design review information",
+              "items": [
+                "Share the latest elevation and section, desired open view, privacy and light-control priorities, fabric intentions, floor finish and programme.",
+                "Keep provisional geometry separate from an instruction to manufacture. Final survey and coordinated approval must resolve the dimensions and operation."
+              ]
+            }
+          ],
+          "sources": ["ks", "cs", "shuttle"]
+        },
+        {
+          "title": "Allow for the cloth as well as the track",
+          "diagram": "stack-back",
+          "sections": [
+            {
+              "title": "Fullness, weight and stack-back",
+              "items": [
+                "Fullness describes cloth width relative to the covered width; the required allowance depends on the chosen heading and textile. Confirm it with the workroom rather than applying a universal ratio.",
+                "Estimate each textile layer from its cut area and supplier mass per area; include hems, headings, joins and accessories in the completed curtain assessment. Record assumptions and replace the estimate with the agreed made-up weight.",
+                "Stack-back is the space occupied along the track when open. Fold depth projects into the room. They are different dimensions and both affect the recess and clear view.",
+                "Confirm the stack using the actual heading, layers and fullness. Do not promise a fixed percentage of the window width. Check handles and opening doors in both operating states."
+              ]
+            },
+            {
+              "title": "Release point",
+              "items": [
+                "Agree the open elevation and stack allowance with the interior designer, then coordinate the track and pocket using APX-T02. Keep the approved textile reference with the aperture record."
+              ]
+            }
+          ],
+          "sources": ["pelmet", "fabric-height"]
+        }
+      ]
+    },
+    {
+      "id": "APX-T02",
+      "slug": "track-pocket-support",
+      "title": "Tracks, pockets and structural interfaces",
+      "subtitle": "Coordinate the entire assembly before the ceiling closes",
+      "summary": "Single and independent double tracks, recessed pockets, mounting arrangements and the information needed to assess support.",
+      "stages": ["development", "technical", "construction"],
+      "anchor": "track-and-support",
+      "pages": [
+        {
+          "title": "Single and independent double tracks",
+          "diagram": "single-double",
+          "sections": [
+            {
+              "title": "Build the envelope from the inside out",
+              "items": [
+                "Start with the exact track and carrier, then allow for the selected heading, folds, lining, wall clearance and any projecting handles. Confirm the working envelope in plan and section.",
+                "For independent curtain and voile movement, specify two separate operating lines. Record which is nearest the glazing, each draw direction and each stack position. Coordinate motor and power access separately where both are motorised.",
+                "A twin-channel product is not automatically two independently controlled layers. Forest describes FMS Dual as one motor operating two channels for an overlap arrangement; do not substitute it for independent curtain and voile tracks."
+              ]
+            },
+            {
+              "title": "Manufacturer reference dimensions - not pocket sizes",
+              "items": [
+                "KS: 20 mm wide x 14 mm high. CS: 20 x 20 mm. FMS: 20 x 20 mm. FMS Plus: 19.6 mm wide x 30 mm high. These are profile sizes, not the complete installed envelope.",
+                "KS and CS have different recess variants. Obtain the exact profile, carrier, bracket and end-component drawings before completing the ceiling detail."
+              ]
+            }
+          ],
+          "sources": ["ks", "cs", "shuttle", "pelmet"]
+        },
+        {
+          "title": "Mounting, recess and finish coordination",
+          "diagram": "mounting-recess",
+          "sections": [
+            {
+              "title": "Ceiling or wall mounted",
+              "items": [
+                "Select the bracket and projection for the whole curtain envelope. Record the supporting construction behind the visible finish and the load path from track to building.",
+                "Bracket capacity varies with the component and projection. Do not infer fixing centres, anchor sizes or substrate capacity from a track weight rating. Obtain a project-specific fixing assessment."
+              ]
+            },
+            {
+              "title": "Recessed track coordination",
+              "items": [
+                "Distinguish a general ceiling pocket from a manufacturer's recess extrusion. The pocket must accommodate cloth, brackets, drive ends, assembly and service access, not only the rail.",
+                "Forest FMS Plus Recess is shown as a 26 mm body, 32.2 mm high, with a 40 mm flange. Use the supplier's current generation-specific cut-out drawing for end pulleys and motor openings.",
+                "Forest's GEN2 straight pleated-curtain drawing is not a universal pocket detail. Do not transfer its allowances to GEN1, a bend, another heading or another motor arrangement. Agree finishing sequence with the ceiling contractor and the selected system instructions."
+              ]
+            }
+          ],
+          "sources": ["shuttle", "recess-gen2", "pelmet"]
+        },
+        {
+          "title": "Information needed for a fixing assessment",
+          "diagram": "support",
+          "sections": [
+            {
+              "title": "Structural support checklist",
+              "items": [
+                "Identify substrate material, thickness, condition and location; include structural drawings and photographs before concealment. Label evidence with aperture and revision.",
+                "Record proposed track length, curtain weight and layers, operation, bracket projection, junctions and the position of motors or concentrated loads.",
+                "Identify service zones and penetrations, edge distances and any restrictions on drilling. Confirm who assesses anchors, brackets and supporting structure.",
+                "Record backing continuity, accessible fixing zones and the responsible designer's acceptance. A ceiling finish or lining alone is not evidence of suitable support."
+              ]
+            },
+            {
+              "title": "Hold point before closure",
+              "items": [
+                "Resolve the support and access detail before lining or plaster closes the interface. Keep acceptance and photographs in the existing project workspace.",
+                "This guide does not prescribe anchor types, screw sizes, bracket spacing, design loads or structural adequacy. These depend on the actual assembly and building."
+              ]
+            }
+          ],
+          "sources": ["ks", "cs", "assembly"]
+        }
+      ]
+    },
+    {
+      "id": "APX-T03",
+      "slug": "motor-electrical-coordination",
+      "title": "Motorised tracks and electrical coordination",
+      "subtitle": "Select the system, then coordinate power, controls and access",
+      "summary": "A source-led Forest comparison and coordination brief for the curtain specialist, electrical contractor and controls integrator.",
+      "stages": [
+        "development",
+        "technical",
+        "procurement",
+        "installation",
+        "handover"
+      ],
+      "anchor": "motorisation",
+      "pages": [
+        {
+          "title": "Select a system against the actual curtain",
+          "diagram": "motor-clearance",
+          "sections": [
+            {
+              "title": "Track configuration and load",
+              "items": [
+                "Forest publishes FMS lengths up to 14 m, with single stack up to 10 m, and one-piece lengths of 7 m. These are published configuration limits, not an assurance for every curtain, curve or motor.",
+                "The November 2026 brochure describes 200 mm-radius bends for FMS and FMS Plus, excluding the recess profile, and a continuous-curve diagram with a 500 mm minimum radius. Obtain a supplier layout for bends, joins and drive ends.",
+                "Published Shuttle curtain capacities without curves: M 70 kg; L 40 kg; AC 40 kg; Go 35 kg; iOn 25 kg. These are total curtain figures, not kg per metre. Confirm the actual motor, geometry, friction, heading and duty before selection.",
+                "The load assessment includes the track, carriers, brackets, fixings and structure. A motor capacity is not approval of the installed assembly."
+              ]
+            },
+            {
+              "title": "Apex assessment still required",
+              "items": [
+                "The inclusion of a Forest product in this research is not confirmation of Apex supply, stock or suitability. Agree the exact product code, regional variant, current instructions and project configuration before procurement."
+              ]
+            }
+          ],
+          "sources": ["shuttle"]
+        },
+        {
+          "title": "Electrical and control interface schedule",
+          "diagram": "",
+          "sections": [
+            {
+              "title": "Power is model-specific",
+              "items": [
+                "Shuttle M: 24 V DC motor with an external supply; the current brochure lists supply input 100-240 V AC, 50-60 Hz and output 24 V DC, 2.7 A. Provide accessible space for the supply as well as the motor.",
+                "Shuttle L and AC: the current brochure lists 100-240 V AC, 50-60 Hz. AC is a distinct controls variant; do not infer the same input wiring or control interface as M/L.",
+                "The current Go and iOn models have different power arrangements. Record the exact motor and its instructions before the electrical contractor designs the circuit. No wiring diagram in this guide authorises electrical installation."
+              ]
+            },
+            {
+              "title": "Agree the interface with the integrator",
+              "items": [
+                "Record local switching, remote operation, building automation, app use and independent curtain/voile control. Identify who supplies and configures each interface.",
+                "Forest's connectivity matrix is conditional on the motor variant and, in some cases, a dongle, receiver, actuator or third-party hub. Compatibility with one configuration is not universal compatibility.",
+                "Record supply position, accessible isolation, cable route, connector access, control protocol and commissioning responsibilities. Keep mains power and low-voltage control connections clearly distinguished.",
+                "Refer to the supplied motor manual for switching and power-continuity requirements. Do not use supply interruption as a substitute for a confirmed control command."
+              ]
+            }
+          ],
+          "sources": ["shuttle", "motor-manual"]
+        },
+        {
+          "title": "Reserve access around the motor",
+          "diagram": "",
+          "sections": [
+            {
+              "title": "Published body sizes are not service clearances",
+              "items": [
+                "The November 2026 brochure lists M 70 x 50 x 250 mm; L and AC 70 x 50 x 280 mm. Its dimensions describe the motor body and must not be used as a ceiling opening or removal envelope.",
+                "The October 2025 S/M/L installation manual shows different dimensioned assemblies: M Receiver H270 / B1 77 / B2 49 mm and L H305 / B1 77 / B2 49 mm. Confirm the applicable product and datum with Forest before issuing construction dimensions.",
+                "Forest's August 2026 pelmet protocol identifies a 92 mm motor attachment allowance for the listed motorised arrangements. Check applicability, rotation, connectors and removal against the supplied assembly; this is not a universal pocket width.",
+                "Show the drive end, motor orientation, power supply if separate, cable bend space and removal route. Do not bury equipment behind a permanently closed ceiling."
+              ]
+            },
+            {
+              "title": "Procurement and commissioning hold points",
+              "items": [
+                "Release only after product codes, load, route, mounting, control compatibility and access are confirmed. Agree power-on readiness and limits-setting with the installer.",
+                "At handover, record operating limits, control pairing, independent layer operation, isolation location and service access. Attach the actual supplier instructions and serial/product references to the workspace record."
+              ]
+            }
+          ],
+          "sources": ["shuttle", "motor-manual", "pelmet", "recess-gen2"]
+        }
+      ]
+    },
+    {
+      "id": "APX-T04",
+      "slug": "site-readiness-maintenance",
+      "title": "Site readiness, installation and maintenance",
+      "subtitle": "A practical hold-point record for the contractor and project manager",
+      "summary": "Resolve access, support evidence, protection and commissioning, then preserve a workable route for future maintenance.",
+      "stages": ["procurement", "construction", "installation", "handover"],
+      "anchor": "delivery-and-care",
+      "pages": [
+        {
+          "title": "Check readiness before booking installation",
+          "diagram": "access",
+          "sections": [
+            {
+              "title": "Contractor readiness record",
+              "items": [
+                "Record project, aperture references, revision, responsible person and proposed installation date. For each item below mark Confirmed / Outstanding / Not applicable, with owner and evidence.",
+                "Support: accepted backing/fixing detail and photographs available; hidden services identified; agreed fixing positions accessible.",
+                "Dimensions and finishes: final survey agreed; floor and ceiling datums confirmed; wet and dusty work complete; recess and finish match the coordinated detail.",
+                "Access: installer has assessed equipment, delivery route, floor conditions and loading, working space, exclusion zones and restrictions. Keep the area clear of furniture and other trades.",
+                "Protection and power: protection responsibilities agreed; suitable power and controls ready where required; accessible isolation identified; commissioning attendance booked."
+              ]
+            },
+            {
+              "title": "Hold point",
+              "items": [
+                "Unresolved support, dimensions, electrical interfaces or safe access must be reviewed before attendance or manufacture is treated as released. Record the decision and responsible person in the workspace.",
+                "This checklist supports coordination. It is not a method statement, equipment selection or working-at-height assessment."
+              ]
+            }
+          ],
+          "sources": ["assembly"]
+        },
+        {
+          "title": "Handover with a maintainable installation",
+          "diagram": "",
+          "sections": [
+            {
+              "title": "Installation and commissioning record",
+              "items": [
+                "Confirm smooth full travel and the agreed open/closed positions. Check clearances around cloth, handles, returns and other finishes. For motorised systems, confirm limits and the intended controls with the installer.",
+                "Record dressing, outstanding defects, user instruction and completion evidence. Identify who accepts the work and who closes remaining actions."
+              ]
+            },
+            {
+              "title": "Maintenance and future access",
+              "items": [
+                "Keep a practical route for safe curtain removal, track inspection, drive-end access and motor or power-supply replacement. Record any removable panels and the equipment access strategy.",
+                "Issue the care instructions for the actual textile and the manufacturer instructions for the installed track/motor. Do not apply one lubricant or service interval to every product.",
+                "The Forest S/M/L manual includes periodic operation checks and lubrication instructions for its stated FMS assembly. Confirm that manual applies to the supplied variant before including a maintenance schedule.",
+                "Retain product codes, serial numbers, control configuration, isolation position, supplier documents and warranties in the handover record. Reassess access if the room layout or finishes change."
+              ]
+            }
+          ],
+          "sources": ["motor-manual", "assembly"]
+        }
+      ]
+    },
+    {
+      "id": "APX-T05",
+      "slug": "preliminary-specification",
+      "title": "Preliminary curtain specification template",
+      "subtitle": "An editable coordination brief, before survey and manufacture approval",
+      "summary": "Use a consistent aperture reference, record assumptions and allocate outstanding decisions without creating a second project database.",
+      "stages": ["concept", "technical", "procurement"],
+      "anchor": "project-record",
+      "pages": [
+        {
+          "title": "Aperture and performance brief",
+          "diagram": "",
+          "sections": [
+            {
+              "title": "Document control - complete for the project",
+              "items": [
+                "Project / location: ____________________    Aperture / room: ____________________",
+                "Prepared by / date: ____________________    Drawing revision: ____________________",
+                "Issue purpose: PRELIMINARY COORDINATION. Not a manufacture or construction instruction."
+              ]
+            },
+            {
+              "title": "Geometry and appearance",
+              "items": [
+                "Plan/elevation/section references: ____________________",
+                "Dimension source and status (design / surveyed / verified): ____________________",
+                "Glazing outline, track route and finished floor datum: ____________________",
+                "Curtain top / finished lower edge / intended drop: ____________________",
+                "Open view, retained cloth, stack location and door clearance: ____________________"
+              ]
+            },
+            {
+              "title": "Textile and operation",
+              "items": [
+                "Fabric / colour / usable width / heading / fullness: ____________________",
+                "Lining / interlining / joins / sample approval reference: ____________________",
+                "Estimated made-up weight and calculation basis: ____________________",
+                "Light control, privacy, acoustic or fire performance required and evidence: ____________________",
+                "Manual or motorised; single or independent layers; draw direction: ____________________"
+              ]
+            }
+          ],
+          "sources": ["fabric-height", "pelmet"]
+        },
+        {
+          "title": "Interfaces, responsibility and release",
+          "diagram": "",
+          "sections": [
+            {
+              "title": "Track, support and electrical schedule",
+              "items": [
+                "Track / carrier / bracket / motor product codes and source revision: ____________________",
+                "Pocket / clearances / drive-end access / removal route: ____________________",
+                "Substrate evidence / backing detail / fixing assessment owner: ____________________",
+                "Power supply / isolation / cable route / control interface: ____________________",
+                "Electrical contractor / controls integrator / commissioning owner: ____________________"
+              ]
+            },
+            {
+              "title": "Installation and handover",
+              "items": [
+                "Survey / design approval / procurement / installation dates: ____________________",
+                "Access assessment / site readiness / protection responsibilities: ____________________",
+                "Care, operating instruction and maintenance access requirements: ____________________"
+              ]
+            },
+            {
+              "title": "Outstanding decisions and release",
+              "items": [
+                "Decision / owner / evidence required / due date: ____________________",
+                "Supplier confirmation / project-specific assessment: ____________________",
+                "Approved drawing and schedule reference / approver / date: ____________________",
+                "Transfer the agreed brief and attachments to the existing professional workspace. Use its revision and export register for controlled project issues; this blank template is not an issued workspace export.",
+                "Do not remove preliminary status until the project team has agreed the survey, materials, system compatibility, support, interfaces and scope. Final manufacture approval must be explicit."
+              ]
+            }
+          ],
+          "sources": ["ks", "cs", "shuttle"]
+        }
+      ]
+    }
+  ]
+}
