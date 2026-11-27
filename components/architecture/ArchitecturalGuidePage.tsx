@@ -72,6 +72,8 @@ export default async function ArchitecturalGuidePage({ guide }: { guide: Archite
             <ul>
               {Tool && <li><a href="#technical-tool">{guide.tool === "motion" ? "Try the demonstration" : "Estimate curtain weight"}</a></li>}
               {guide.sections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.title}</a></li>)}
+              <li><a href="#common-question">{feature.question}</a></li>
+              {guide.sources && <li><a href="#technical-references">Technical references</a></li>}
             </ul>
           </nav>
         </aside>
@@ -92,7 +94,7 @@ export default async function ArchitecturalGuidePage({ guide }: { guide: Archite
             </details>
           </section>
           {guide.sources && (
-            <section className="arch-section">
+            <section className="arch-section" id="technical-references">
               <h2>Technical references</h2>
               <ul>{guide.sources.map(({ href, label }) => <li key={href}><a href={href}>{label}</a></li>)}</ul>
             </section>

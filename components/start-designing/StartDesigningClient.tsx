@@ -1,5 +1,6 @@
 "use client";
 
+import { CountPreference, useEnquiryCounts } from "@/components/analytics/EnquiryCounts";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
@@ -189,6 +190,7 @@ const screenMeta = [
 ] as const;
 
 export default function StartDesigningPage() {
+  const counts = useEnquiryCounts("guided");
   const searchParams = useSearchParams();
   const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(searchParams.get("visualiserRoom"), searchParams.get("visualiserColour"), roomDesignFromParams(searchParams, "visualiser-")));
   useEffect(() => {
@@ -283,6 +285,7 @@ export default function StartDesigningPage() {
 
   function nextStep() {
     if (!canProceed || step >= totalSteps - 1) return;
+    if (step === 0) counts.record("start");
     setDirection(1);
     setStep((s) => s + 1);
   }
@@ -353,6 +356,7 @@ export default function StartDesigningPage() {
         throw new Error(result.error || "Failed to send lead");
       }
 
+      counts.record("complete");
       setSubmitted(true);
     } catch (error) {
       alert(
@@ -642,6 +646,7 @@ export default function StartDesigningPage() {
               </AnimatePresence>
             </div>
 
+            <CountPreference checked={counts.allowed} onChange={counts.setAllowed} />
             <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:flex sm:items-center sm:justify-between sm:gap-4">
               <button
                 type="button"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { reviewedAdvice } from "@/lib/advice-editorial";
 import { createClient } from "@/lib/supabase/client";
 
 const BUCKET_NAME = "Gallery";
@@ -84,7 +85,7 @@ export default function AdminPostsPage() {
 
       if (error) throw error;
 
-      const mapped: AdvicePost[] = (data || []).map((item: any) => ({
+      const mapped: AdvicePost[] = (data || []).map(reviewedAdvice).map((item: any) => ({
         id: Number(item.id),
         title: item.title || "",
         slug: item.slug || "",
@@ -235,7 +236,7 @@ export default function AdminPostsPage() {
     setSaving(true);
 
     try {
-      const payload = {
+      const payload = reviewedAdvice({
         title: form.title,
         slug: makeSlug(form.slug),
         category: form.category,
@@ -249,7 +250,7 @@ export default function AdminPostsPage() {
         focus_keyword: form.focusKeyword,
         related_service: form.relatedService,
         updated_at: new Date().toISOString(),
-      };
+      });
 
       if (editingId !== null) {
         const { error } = await supabase
@@ -331,7 +332,7 @@ export default function AdminPostsPage() {
           focus_keyword: item.focusKeyword || item.focus_keyword || "",
           related_service: item.relatedService || item.related_service || "",
           updated_at: new Date().toISOString(),
-        }));
+        })).map(reviewedAdvice);
 
         const { error } = await supabase
           .from("advice_posts")

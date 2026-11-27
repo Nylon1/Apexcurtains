@@ -939,3 +939,6 @@ export const cityPages: CityPage[] = [
 export function getCityBySlug(slug: string): CityPage | undefined {
   return cityPages.find((city) => city.slug === slug);
 }
+export function regionAnchor(region: string) {
+  return `region-${region.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "")}`;
+}

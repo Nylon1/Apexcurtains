@@ -1,5 +1,6 @@
 "use client";
 
+import { CountPreference, useEnquiryCounts } from "@/components/analytics/EnquiryCounts";
 import Link from "next/link";
 import { useRef, useState, type FormEvent } from "react";
 import { MAX_PROJECT_FILES, MAX_PROJECT_UPLOAD_BYTES, projectTypes, resolveProjectType, type ProjectType } from "@/lib/architectural-enquiry";
@@ -34,6 +35,7 @@ const steps = [
 ];
 
 export default function ProjectPlanner({ initialType }: { initialType: ProjectType }) {
+  const counts = useEnquiryCounts("planner");
   const [stage, setStage] = useState(0);
   const [type, setType] = useState(initialType);
   const [operation, setOperation] = useState("");
@@ -72,6 +74,7 @@ export default function ProjectPlanner({ initialType }: { initialType: ProjectTy
       return;
     }
     if (!finalStage) {
+      if (stage === 0) counts.record("start");
       moveTo(stage + 1);
       return;
     }
@@ -94,11 +97,9 @@ export default function ProjectPlanner({ initialType }: { initialType: ProjectTy
         setError(result?.error ?? "Your enquiry could not be sent. Please try again or contact Apex directly.");
         return;
       }
+      counts.record("complete");
       setSent(true);
       requestAnimationFrame(() => stepHeading.current?.focus());
-      const detail = { event: "architectural_project_enquiry_sent", project_type: type };
-      window.dataLayer?.push(detail);
-      window.dispatchEvent(new CustomEvent("apex:conversion", { detail }));
     } catch {
       setError("The connection was interrupted. Your details are still here for you to try again.");
     } finally {
@@ -206,12 +207,13 @@ export default function ProjectPlanner({ initialType }: { initialType: ProjectTy
                   <label>Window photos and drawings (optional)
                     <input name="projectFiles" type="file" accept=".jpg,.jpeg,.png,.pdf" multiple aria-describedby="project-upload-help" onChange={(event) => setFileNames(Array.from(event.target.files ?? [], ({ name }) => name))} />
                   </label>
-                  <p id="project-upload-help" className="arch-hint">Up to three JPEG, PNG or PDF files, 3 MB in total. Upload only material you are permitted to share.</p>
+                  <p id="project-upload-help" className="arch-hint">Up to three JPEG, PNG or PDF files, 3 MB in total. Include only the relevant window or drawing. Remove names, addresses and unrelated details where possible.</p>
                   <div role="status">{fileNames.length > 0 && <ul>{fileNames.map((name,index) => <li key={`${index}-${name}`}>{name}</li>)}</ul>}</div>
                 </div>
               </div>
               <p className="arch-privacy">We use these details to respond to your enquiry. Read our <Link href="/privacy-policy">privacy policy</Link>. Initial assessments are subject to a professional survey.</p>
             </fieldset>
+            <CountPreference checked={counts.allowed} onChange={counts.setAllowed} />
             {error && <p role="alert">{error} <Link href="/contact">Contact Apex</Link></p>}
             <div className="arch-step-actions">
               {stage > 0 && <button type="button" className="studio-link" disabled={sending} onClick={() => moveTo(stage - 1)}>Back</button>}

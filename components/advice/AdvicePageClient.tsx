@@ -9,11 +9,7 @@ import {
   ArrowRight,
   ChevronDown,
   Lightbulb,
-  Ruler,
   Sparkles,
-  ShieldCheck,
-  Layers3,
-  PenTool,
 } from "lucide-react";
 
 import { type AdvicePost } from "@/lib/advice-posts";
@@ -155,7 +151,8 @@ export default function AdvicePageClient({ posts }: Props) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const featuredPosts = posts.filter((post) => post.featured).slice(0, 4);
-  const libraryPosts = posts.slice(0, 9);
+  const featuredIds = new Set(featuredPosts.map(post => post.id));
+  const libraryPosts = posts.filter(post => !featuredIds.has(post.id));
 
   const filteredFaqs = useMemo(() => {
     if (activeCategory === "All") return faqs;
@@ -237,9 +234,7 @@ export default function AdvicePageClient({ posts }: Props) {
           </h1>
 
           <p className="mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
-            Explore guides, practical answers and curtain design advice for
-            difficult window shapes. Built to help visitors trust the process
-            and move toward the right solution.
+            Start with the shape of the glazing, the light you want to control and where the open curtains will sit. The guides below explain what to decide before a survey.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -260,142 +255,28 @@ export default function AdvicePageClient({ posts }: Props) {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-4">
-          <MiniStat
-            icon={<Ruler className="h-5 w-5" />}
-            label="Measuring guides"
-          />
-          <MiniStat
-            icon={<Layers3 className="h-5 w-5" />}
-            label="Track advice"
-          />
-          <MiniStat
-            icon={<PenTool className="h-5 w-5" />}
-            label="Style comparisons"
-          />
-          <MiniStat
-            icon={<ShieldCheck className="h-5 w-5" />}
-            label="Practical answers"
-          />
-        </div>
+        <nav className="advice-paths" aria-label="Practical curtain guides">
+          <Link href="/advice/how-to-measure-for-apex-curtains">Measure a shaped window</Link>
+          <Link href="/curtain-tracks">Plan the track</Link>
+          <Link href="/curtain-linings">Compare linings</Link>
+          <Link href="/curtain-headings">Choose a heading</Link>
+        </nav>
       </section>
 
-      <section className="relative mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
-            Featured Guides
-          </div>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">
-            Start with the big questions
-          </h2>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
-          {featuredPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: index * 0.05 }}
-              className="group relative overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.05] p-6 shadow-[0_25px_80px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1 hover:border-[#f5d38a]/30 hover:shadow-[0_35px_100px_rgba(0,0,0,0.45)]"
-            >
-              <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f5d38a]/10 via-transparent to-[#f5d38a]/10 blur-3xl" />
-              </div>
-
-              <div className="relative z-10">
-                <div className="inline-flex rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-[#f5d38a]">
-                  {post.category}
-                </div>
-
-                <h3 className="mt-5 text-2xl font-semibold leading-tight">
-                  {post.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-8 text-white/72">
-                  {post.excerpt}
-                </p>
-
-                <Link
-                  href={`/advice/${post.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm text-[#f5d38a]"
-                >
-                  Read guide
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
-            Advice Library
-          </div>
-          <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">
-            Premium curtain advice posts
-          </h2>
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {libraryPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.35, delay: (index % 3) * 0.04 }}
-              className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.25)] transition duration-300 hover:-translate-y-1 hover:border-[#f5d38a]/25 hover:bg-white/[0.055]"
-            >
-              <div className="absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#f5d38a]/8 via-transparent to-[#f5d38a]/8 blur-3xl" />
-              </div>
-
-              <div className="relative z-10">
-                <div className="inline-flex rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-[#f5d38a]">
-                  {post.category}
-                </div>
-
-                <h3 className="mt-4 text-2xl font-semibold leading-tight">
-                  {post.title}
-                </h3>
-
-                <p className="mt-4 text-sm leading-8 text-white/72">
-                  {post.excerpt}
-                </p>
-
-                <Link
-                  href={`/advice/${post.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm text-[#f5d38a]"
-                >
-                  Explore topic
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
-      <section className="relative mx-auto max-w-7xl px-4 pb-14 sm:px-6 lg:px-8">
-        <div className="grid gap-5 lg:grid-cols-3">
-          <ExpertTip
-            title="Designer Tip"
-            text="For many apex spaces, the curtain scheme should be considered as part of the room architecture, not as an afterthought to the glass."
-          />
-          <ExpertTip
-            title="Practical Tip"
-            text="Bedrooms with unusual glazing often benefit from blackout lining, especially where tall glass admits early light."
-          />
-          <ExpertTip
-            title="Style Tip"
-            text="Wave pleat often suits contemporary glazing beautifully, while pinch pleat can add warmth and refinement in more classic interiors."
-          />
-        </div>
-      </section>
-
+      {[
+        { title: "Selected reading", articles: featuredPosts },
+        { title: "Advice library", articles: libraryPosts },
+      ].filter(group => group.articles.length > 0).map(group => (
+        <section key={group.title} className="studio-wrap advice-reading">
+          <h2>{group.title}</h2>
+          <ul>{group.articles.map(post => (
+            <li key={post.id}>
+              <h3><Link href={`/advice/${post.slug}`}>{post.title}</Link></h3>
+              {post.excerpt && <p>{post.excerpt}</p>}
+            </li>
+          ))}</ul>
+        </section>
+      ))}
       <section className="relative mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mb-8">
           <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
@@ -561,27 +442,5 @@ export default function AdvicePageClient({ posts }: Props) {
       </section>
       <GuidesPreview />
     </main>
-  );
-}
-
-function MiniStat({ icon, label }: { icon: React.ReactNode; label: string }) {
-  return (
-    <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_14px_50px_rgba(0,0,0,0.22)]">
-      <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 text-[#f5d38a]">
-        {icon}
-      </div>
-      <div className="mt-4 text-sm text-white/75">{label}</div>
-    </div>
-  );
-}
-
-function ExpertTip({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-[26px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_18px_60px_rgba(0,0,0,0.25)]">
-      <div className="text-xs uppercase tracking-[0.2em] text-[#f5d38a]">
-        {title}
-      </div>
-      <div className="mt-4 text-sm leading-8 text-white/72">{text}</div>
-    </div>
   );
 }

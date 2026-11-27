@@ -244,12 +244,6 @@ export default async function GalleryPage({ params }: PageProps) {
               <p>{text}</p>
             </section>
           ))}
-          {!story.length && data.summary && (
-            <section className="guide-section">
-              <h2>The project</h2>
-              <p>{data.summary}</p>
-            </section>
-          )}
           <section className="guide-section">
             <p className="editorial-eyebrow">
               Bring the detail into your own room
@@ -271,13 +265,12 @@ export default async function GalleryPage({ params }: PageProps) {
         </div>
       </div>
       <section className="editorial-cta">
-        <p className="editorial-eyebrow">Your own perspective</p>
-        <h2>Every window starts a new story.</h2>
+        <h2>Planning curtains for a similar window?</h2>
         <p>
-          Share a photograph of your room and the feeling you want to achieve.
+          For tall or shaped glazing, share the window shape and how you want the curtains to open. Approximate dimensions and photographs are optional.
         </p>
-        <Link href="/start-designing" className="editorial-button">
-          Start your project ↗
+        <Link href="/architectural-curtain-project-planner" className="editorial-button">
+          Discuss an architectural project ↗
         </Link>
         <Link href="/gallery" className="editorial-text-link">
           Continue exploring the portfolio

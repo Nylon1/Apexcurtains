@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { studioPhotos, type StudioPhoto } from "@/lib/studio-photography";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowRight,
-  GalleryVertical,
-  MapPin,
-  MessageSquare,
-  Sparkles,
-} from "lucide-react";
-import { getCityBySlug } from "@/lib/cities";
+import { getCityBySlug, regionAnchor } from "@/lib/cities";
 
 const SITE_URL = "https://www.apexcurtains.com";
 
@@ -16,13 +11,19 @@ type PageProps = {
   params: Promise<{ city: string }>;
 };
 
+const localProjects: Partial<Record<string, { photo: StudioPhoto; href: string }>> = {
+  oxford: { photo: studioPhotos.oxford, href: "/gallery/pinch-pleat-curtains-oxford-oxford" },
+  cambridge: { photo: studioPhotos.cambridge, href: "/gallery/cambridge-apex-curtains-cambridge" },
+  peterborough: { photo: studioPhotos.peterborough, href: "/gallery/peterborough-bedroom-blackout-curtains-peterborough" },
+};
+
 const windowTypes = [
   { label: "Apex windows", href: "/apex-curtains" },
   { label: "Triangular windows", href: "/triangular-window-curtains" },
-  { label: "Angled windows", href: "/window-types" },
+  { label: "Angled windows", href: "/angled-window-curtains" },
   { label: "Gable end glazing", href: "/gable-end-curtains" },
   { label: "Large feature windows", href: "/large-window-curtains" },
-  { label: "Vaulted room glazing", href: "/window-types" },
+  { label: "Tall and double-height glazing", href: "/tall-window-curtains" },
 ];
 
 const faqs = [
@@ -84,6 +85,7 @@ export default async function AreaCityPage({ params }: PageProps) {
 
   if (!cityData) notFound();
 
+  const localProject = localProjects[cityData.slug];
   const canonicalUrl = `${SITE_URL}/areas/${cityData.slug}`;
   const localRepresentativeId = `${canonicalUrl}#local-representative`;
   const serviceId = `${canonicalUrl}#service`;
@@ -159,168 +161,58 @@ export default async function AreaCityPage({ params }: PageProps) {
   };
 
   return (
-    <main className="studio-paper-page min-h-screen overflow-hidden bg-apex-navy-900 text-white">
+    <main className="area-page studio-paper-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      <div className="pointer-events-none fixed inset-0">
-        <div className="absolute left-[8%] top-[8%] h-[320px] w-[320px] rounded-full bg-[#f5d38a]/10 blur-[120px]" />
-        <div className="absolute right-[10%] top-[22%] h-[280px] w-[280px] rounded-full bg-sky-400/10 blur-[120px]" />
-        <div className="absolute bottom-[8%] left-[35%] h-[260px] w-[260px] rounded-full bg-[#f5d38a]/8 blur-[120px]" />
-      </div>
-
-      <section className="relative mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 lg:px-8">
-        <div className="max-w-4xl">
-          <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-2 text-sm">
-            <Link href="/" className="text-white/45 transition hover:text-white">
-              Home
-            </Link>
-            <span className="text-white/25">/</span>
-            <Link href="/areas" className="text-white/45 transition hover:text-white">
-              Areas
-            </Link>
-            <span className="text-white/25">/</span>
-            <span className="text-[#f5d38a]">{cityData.name}</span>
+      <div className="studio-wrap area-guide">
+        <nav className="guide-breadcrumb" aria-label="Breadcrumb">
+          <Link href="/">Home</Link><span>/</span><Link href="/areas">Areas</Link><span>/</span><span aria-current="page">{cityData.name}</span>
+        </nav>
+        <header className="area-opening">
+          <div>
+            <h1>Apex window curtains in {cityData.name}</h1>
+            <p>{cityData.intro}</p>
+          </div>
+          <aside>
+            <h2>Planning a survey</h2>
+            <p>Share your postcode, window shape and what you want the curtains to do. A photo from floor level can help us see the glazing and the space around it.</p>
+            <Link href="/architectural-curtain-project-planner" className="studio-button">Discuss your project</Link>
+          </aside>
+        </header>
+        <div className="area-body">
+          <section>
+            <h2>Curtains for your space</h2>
+            <p>{cityData.propertyFocus}</p><p>{cityData.styleFocus}</p>
+            <p>For a bedroom, consider light around the edges as well as the lining. In a living space, decide how much of the view you want to keep when the curtains are open.</p>
+            {localProject ? (
+              <figure className="area-project">
+                <Image src={localProject.photo.src} alt={localProject.photo.alt} width={localProject.photo.width} height={localProject.photo.height} sizes="(max-width: 760px) 90vw, 45vw" />
+                <figcaption><Link className="studio-link" href={localProject.href}>See the {cityData.name} installation</Link></figcaption>
+              </figure>
+            ) : <Link href="/gallery" className="studio-link">See completed installations</Link>}
+          </section>
+          <nav aria-label="Window guides">
+            <h2>Find your window shape</h2>
+            <ul className="area-links">{windowTypes.map(item => <li key={item.href}><Link href={item.href}>{item.label}<span aria-hidden="true">↗</span></Link></li>)}</ul>
           </nav>
-
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#f5d38a]">
-            <MapPin className="h-4 w-4" />
-            {cityData.name}
-          </div>
-
-          <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-7xl">
-            Apex window curtains in {cityData.name}
-          </h1>
-
-          <p className="mt-6 max-w-3xl text-base leading-8 text-white/65 sm:text-lg">
-            {cityData.intro}
-          </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/arlo-curtain-advisor"
-              className="inline-flex items-center gap-2 rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
-            >
-              Ask Arlo
-              <Sparkles className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/start-designing"
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white/85 transition hover:bg-white/10"
-            >
-              Start Designing
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <section>
+            <h2>Questions before a survey</h2>
+            {faqs.map(faq => <details key={faq.q} className="area-question"><summary>{faq.q}</summary><p>{faq.a}</p></details>)}
+          </section>
+          <section>
+            <h2>Start with what you know</h2>
+            <ul className="area-links">
+              <li><Link href="/start-designing">Request a curtain quote <span aria-hidden="true">↗</span></Link></li>
+              <li><Link href="/curtain-design-guide">Explore fabrics, linings and headings <span aria-hidden="true">↗</span></Link></li>
+              <li><Link href="/arlo-curtain-advisor">Ask Arlo about your window <span aria-hidden="true">↗</span></Link></li>
+              <li><Link href={`/areas#${regionAnchor(cityData.region)}`}>View areas in {cityData.region} <span aria-hidden="true">↗</span></Link></li>
+            </ul>
+          </section>
         </div>
-
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="space-y-6">
-            <section className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <h2 className="text-2xl font-semibold text-white">
-                Specialist curtain advice in {cityData.name}
-              </h2>
-              <p className="mt-4 text-sm leading-8 text-white/72">{cityData.propertyFocus}</p>
-              <p className="mt-4 text-sm leading-8 text-white/72">{cityData.styleFocus}</p>
-              <p className="mt-4 text-sm leading-8 text-white/72">
-                Whether your priority is privacy, blackout, warmth or a more elegant finish, the curtain specification needs to work with the architecture, track route and daily use of the room.
-              </p>
-            </section>
-
-            <section className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <h2 className="text-2xl font-semibold text-white">
-                Window types we can plan for in {cityData.name}
-              </h2>
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                {windowTypes.map((item) => (
-                  <Link
-                    key={`${item.href}-${item.label}`}
-                    href={item.href}
-                    className="rounded-[20px] border border-white/10 bg-black/20 p-4 text-sm text-white/80 transition hover:border-[#f5d38a]/25 hover:text-[#f5d38a]"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <h2 className="text-2xl font-semibold text-white">Frequently asked questions</h2>
-              <div className="mt-6 space-y-4">
-                {faqs.map((faq) => (
-                  <article key={faq.q} className="rounded-[22px] border border-white/10 bg-black/20 p-5">
-                    <h3 className="text-lg font-medium text-white">{faq.q}</h3>
-                    <p className="mt-3 text-sm leading-8 text-white/72">{faq.a}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          <div className="space-y-6">
-            <section className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">
-                What the design needs to solve
-              </div>
-              <ul className="mt-5 space-y-4 text-sm leading-8 text-white/75">
-                <li>• Difficult apex or angled geometry</li>
-                <li>• Privacy without hiding the architecture</li>
-                <li>• Blackout requirements where appropriate</li>
-                <li>• Thermal comfort around large areas of glazing</li>
-                <li>• Track, stack and installation constraints</li>
-              </ul>
-            </section>
-
-            <section className="rounded-[30px] border border-white/10 bg-white/[0.04] p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">Next step</div>
-              <p className="mt-4 text-sm leading-8 text-white/72">
-                Start with a clear photo, approximate dimensions and how the room is used. From there you can explore the full curtain specification or send the project details for specialist advice.
-              </p>
-              <div className="mt-6 flex flex-col gap-3">
-                <Link
-                  href="/curtain-design-guide"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
-                >
-                  Build the curtain specification
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/start-designing"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white/85 transition hover:bg-white/10"
-                >
-                  Start Designing
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/arlo-curtain-advisor"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white/85 transition hover:bg-white/10"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  Ask Arlo
-                </Link>
-                <Link
-                  href="/gallery"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white/85 transition hover:bg-white/10"
-                >
-                  <GalleryVertical className="h-4 w-4" />
-                  View Gallery
-                </Link>
-              </div>
-            </section>
-
-            <section className="rounded-[30px] border border-[#f5d38a]/20 bg-[#f5d38a]/8 p-7 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-              <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">
-                Service-area relationships
-              </div>
-              <p className="mt-4 text-sm leading-8 text-white/72">
-                Other service-area links are shown below only when they share the same recorded region. We do not label arbitrary cities as nearby when geographical proximity is not encoded in the site data.
-              </p>
-            </section>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
   );
 }

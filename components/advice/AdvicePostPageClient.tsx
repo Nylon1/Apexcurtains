@@ -28,6 +28,7 @@ export default function AdvicePostPageClient({
   post: AdvicePost;
   relatedPosts: AdvicePost[];
 }) {
+  const paragraphs = post.content.trim().split(/\r?\n\s*\r?\n/);
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -59,7 +60,7 @@ export default function AdvicePostPageClient({
     headline: post.title,
     description: post.excerpt,
     articleSection: post.category,
-    image: post.image ? [`https://www.apexcurtains.com${post.image}`] : [],
+    image: post.image ? [new URL(post.image, "https://www.apexcurtains.com").href] : [],
     mainEntityOfPage: `https://www.apexcurtains.com/advice/${post.slug}`,
     author: {
       "@type": "Organization",
@@ -76,11 +77,11 @@ export default function AdvicePostPageClient({
     <main className="studio-article studio-paper-page min-h-screen overflow-hidden bg-apex-navy-900 text-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }}
       />
 
       <div className="pointer-events-none fixed inset-0">
@@ -119,7 +120,13 @@ export default function AdvicePostPageClient({
             <img src={post.image} alt={post.title} />
           </figure>
         )}
-        <article className="studio-article-body whitespace-pre-line">{post.content}</article>
+        <article className="studio-article-body">
+          {paragraphs.map((block, i) => {
+            if (!block || (i === 0 && block.trim() === post.title.trim())) return null;
+            if (block.startsWith("## ")) return <h2 key={i}>{block.slice(3)}</h2>;
+            return <p key={i} className="whitespace-pre-line">{block}</p>;
+          })}
+        </article>
         <section className="mt-10 rounded-[30px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)] sm:p-8">
           <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
             Explore Solutions
