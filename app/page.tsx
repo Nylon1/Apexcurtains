@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 const selectedProjects = [
   { photo: studioPhotos.peterborough, name: "A bedroom beneath the eaves", href: "/gallery/peterborough-bedroom-blackout-curtains-peterborough" },
-  { photo: { ...studioPhotos.lounge, src: "/images/commercial/airport-lounge-curtains.jpeg", alt: "Completed commercial curtains in the Manchester Airport lounge interior" }, name: "Curtains for an airport lounge", href: "/commercial-curtain-track-installation#manchester-airport" },
+  { photo: { ...studioPhotos.lounge, src: "/images/commercial/airport-lounge-curtains.jpeg", alt: "Completed commercial curtains in the Manchester Airport lounge interior" }, name: "Curtains for an airport lounge", href: "/gallery/manchester-airport-lounge" },
   { photo: studioPhotos.cambridge, name: "The folds and the finishing", href: "/gallery/cambridge-apex-curtains-cambridge" },
 ];
 

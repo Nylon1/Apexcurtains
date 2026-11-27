@@ -1,0 +1,1759 @@
+{
+  "projects": {
+    "beeston": {
+      "title": "Layers beneath the gable",
+      "label": "Beeston",
+      "summary": "A shaped outer heading, a sheer layer and a coordinated adjacent window bring two curtain treatments into one bedroom.",
+      "category": "Shaped glazing",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows",
+        "Layered curtains"
+      ],
+      "technical": {
+        "title": "Two layers at the gable",
+        "text": "Two curtain layers meet the geometry of this bedroom gable. The outer heading follows both ceiling slopes, while the tied-back panels reveal a sheer layer across the glazing. An adjacent rectangular opening carries a coordinated curtain treatment."
+      },
+      "interior": {
+        "title": "Texture in a pale palette",
+        "text": "The pale palette connects the two window shapes within the room. Fuller outer folds and finer translucent cloth introduce different textures, with the tieback detail showing how the layers sit together."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        },
+        {
+          "label": "Layers",
+          "value": "Outer curtains and sheer"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/beeston-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "Beeston: outer curtains and a sheer layer beneath the gable",
+          "caption": "Outer curtains and a sheer layer beneath the gable"
+        },
+        {
+          "src": "/projects/portfolio/beeston-5.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Beeston: the tieback brings the two cloths into close view",
+          "caption": "The tieback brings the two cloths into close view"
+        },
+        {
+          "src": "/projects/portfolio/beeston-4.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Beeston: the curtain fall beside the shaped opening",
+          "caption": "The curtain fall beside the shaped opening"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "windermere": {
+      "title": "A gable, open and closed",
+      "label": "Windermere",
+      "summary": "Golden curtains follow a pitched ceiling between timber beams, shown both tied back and closed.",
+      "category": "Shaped glazing",
+      "room": "Living room",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Across the shaped opening",
+        "text": "The open and closed photographs document two states of the same shaped curtain installation. The heading follows the pitched ceiling, and the closed view shows fabric extending across the opening beneath the apex. Tiebacks hold the open panels at either side."
+      },
+      "interior": {
+        "title": "Gold beside timber",
+        "text": "Golden cloth sits alongside exposed timber beams and a dark window frame. Open, the curtains frame the trees beyond. Closed, their broad surface of colour and long folds becomes a prominent part of the room."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Living room"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/windermere-2.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Windermere: tied back to frame the trees beyond",
+          "caption": "Tied back to frame the trees beyond"
+        },
+        {
+          "src": "/projects/portfolio/windermere-3.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Windermere: closed across the glazing beneath the apex",
+          "caption": "Closed across the glazing beneath the apex"
+        },
+        {
+          "src": "/projects/portfolio/windermere-1.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Windermere: a closer view of the golden folds",
+          "caption": "A closer view of the golden folds"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "rickmansworth": {
+      "title": "Green curtains beneath the eaves",
+      "label": "Rickmansworth",
+      "summary": "Green curtains beneath the eaves and patterned cloth beside seating give two rooms their own character.",
+      "category": "Shaped glazing",
+      "room": "Residential interiors",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "A treatment for each opening",
+        "text": "The green bedroom curtains follow the sloping opening, with matching tiebacks gathering the panels clear of the central glazing. A second room has a wider curtain treatment behind the seating, giving the project two different window arrangements."
+      },
+      "interior": {
+        "title": "Colour in one room, pattern in another",
+        "text": "In the bedroom, deep green cloth echoes the bed and bedside furniture. In the second room, patterned curtains add detail behind the seating. The story brings the shape and placement of each treatment together with its particular use of colour or pattern."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interiors"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/rickmansworth-1.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Rickmansworth: deep green curtains frame the bedroom glazing",
+          "caption": "Deep green curtains frame the bedroom glazing"
+        },
+        {
+          "src": "/projects/portfolio/rickmansworth-2.webp",
+          "width": 1280,
+          "height": 960,
+          "alt": "Rickmansworth: patterned curtains beside the seating",
+          "caption": "Patterned curtains beside the seating"
+        }
+      ],
+      "services": [
+        {
+          "href": "/angled-window-curtains",
+          "label": "Curtains for angled windows"
+        },
+        {
+          "href": "/curtain-colours-and-tones",
+          "label": "Colour and tone"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        }
+      ]
+    },
+    "solihull": {
+      "title": "Following a single sloping roofline",
+      "label": "Solihull",
+      "summary": "An exterior-to-interior study of glazing beneath one long roof slope.",
+      "category": "Shaped glazing",
+      "room": "Residential interior",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Reading a single slope",
+        "text": "A single roof slope crosses the glazing in this Solihull home. The exterior and interior photographs establish larger and smaller openings beneath that angled line, with a full-length curtain visible beside the larger opening."
+      },
+      "interior": {
+        "title": "A diagonal through the room",
+        "text": "The architectural view gives the curtain its context: an extended diagonal across the room and glazing of different sizes below it. The exterior and interior photographs connect the roofline to the visible curtain fall beside the larger opening."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interior"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/solihull-5.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Solihull: the roofline and glazing from outside",
+          "caption": "The roofline and glazing from outside"
+        },
+        {
+          "src": "/projects/portfolio/solihull-3.webp",
+          "width": 1280,
+          "height": 720,
+          "alt": "Solihull: the larger and smaller openings beneath the slope",
+          "caption": "The larger and smaller openings beneath the slope"
+        },
+        {
+          "src": "/projects/portfolio/solihull-2.webp",
+          "width": 720,
+          "height": 1280,
+          "alt": "Solihull: the curtain beside the larger opening",
+          "caption": "The curtain beside the larger opening"
+        }
+      ],
+      "services": [
+        {
+          "href": "/angled-window-curtains",
+          "label": "Curtains for angled windows"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "london-apartment-installation": {
+      "title": "Fitting beneath the cornice",
+      "label": "London apartment",
+      "summary": "A tall curtain fitting in a London apartment, with the heading positioned beneath an ornate cornice.",
+      "category": "Tall glazing",
+      "room": "Residential interior",
+      "themes": [
+        "Tall glazing",
+        "Installation"
+      ],
+      "technical": {
+        "title": "Fitting beneath the cornice",
+        "text": "The installation photograph shows a fitter working beside the curtain heading from an access tower, with a colleague below. The curtain position sits beneath an ornate cornice, placing fitting height and the relationship to the ceiling detail at the centre of this project account."
+      },
+      "interior": {
+        "title": "Pattern and plasterwork",
+        "text": "Patterned curtains introduce fabric and vertical folds beneath the decorative plasterwork of this luxury London apartment. The photograph connects the practical fitting stage to the room’s tall proportions and existing ornament."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interior"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Tall-window curtains"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/london-apartment-curtain-fitting.jpg",
+          "width": 960,
+          "height": 1280,
+          "alt": "London apartment: fitting tall patterned curtains beneath the cornice",
+          "caption": "Fitting tall patterned curtains beneath the cornice"
+        }
+      ],
+      "services": [
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        },
+        {
+          "href": "/high-level-curtain-installation",
+          "label": "High-level installation"
+        }
+      ]
+    },
+    "five-metre-motorised-curtains": {
+      "title": "Operation from the room below",
+      "label": "Five-metre window",
+      "summary": "Patterned curtains on a five-metre-high window, filmed closing at the centre and drawing open by handheld remote.",
+      "category": "Tall glazing",
+      "room": "Residential interior",
+      "themes": [
+        "Tall glazing",
+        "Motorised"
+      ],
+      "technical": {
+        "title": "Centre opening, remote control",
+        "text": "A handheld remote operates the curtains across this confirmed five-metre-high residential window. The film records the two panels meeting at the centre, then returning towards the sides, demonstrating the opening arrangement from within the room."
+      },
+      "interior": {
+        "title": "The room in motion",
+        "text": "The patterned panels change the appearance of the glazed wall as they move. Open, they frame the glazing. Closed, the cloth spans the view, giving the film both a practical account of operation and a view of the room’s changing fabric composition."
+      },
+      "facts": [
+        {
+          "label": "Window height",
+          "value": "Five metres"
+        },
+        {
+          "label": "Operation",
+          "value": "Handheld remote"
+        },
+        {
+          "label": "Draw",
+          "value": "Centre opening"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/motorised-high-window-poster.webp",
+          "width": 480,
+          "height": 853,
+          "alt": "Five-metre window: the five-metre-high residential window",
+          "caption": "The five-metre-high residential window"
+        }
+      ],
+      "services": [
+        {
+          "href": "/motorised-curtain-systems",
+          "label": "Motorised curtain systems"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        },
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        }
+      ],
+      "film": {
+        "src": "/projects/motorised-high-window.mp4",
+        "poster": "/projects/motorised-high-window-poster.webp",
+        "description": "A handheld remote closes the patterned curtains at the centre and draws them open again on a five-metre-high residential window."
+      }
+    },
+    "double-height-dining-room": {
+      "title": "Layers through two storeys",
+      "label": "Double-height dining room",
+      "summary": "Long outer panels and a pale inner layer connect two levels of glazing beside a dining table and mezzanine.",
+      "category": "Tall glazing",
+      "room": "Dining room",
+      "themes": [
+        "Tall glazing",
+        "Layered curtains"
+      ],
+      "technical": {
+        "title": "Layers through two levels",
+        "text": "Two visible curtain layers extend through two levels of glazing. The outer panels are held back, revealing a pale inner layer across the tall opening. The photograph establishes the extent of the treatment and its position beside the mezzanine."
+      },
+      "interior": {
+        "title": "At the scale of the dining room",
+        "text": "Below, the dining table gives the curtain scale a familiar reference. Timber wall surfaces, the upper level and the long fabric folds form one architectural composition, with the window treatment connecting the dining space to the height above."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Dining room"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Tall-window curtains"
+        },
+        {
+          "label": "Layers",
+          "value": "Outer curtains and sheer"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/tall-dining-room-curtains.jpg",
+          "width": 1085,
+          "height": 1280,
+          "alt": "Double-height dining room: layered curtains beside the dining table and upper level",
+          "caption": "Layered curtains beside the dining table and upper level"
+        }
+      ],
+      "services": [
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        },
+        {
+          "href": "/high-level-curtain-installation",
+          "label": "High-level installation"
+        }
+      ]
+    },
+    "tall-black-framed-window": {
+      "title": "From the whole room to the cloth",
+      "label": "Tall black-framed window",
+      "summary": "A filmed study moves from the complete tall-window installation to its heading and cloth.",
+      "category": "Tall glazing",
+      "room": "Living room",
+      "themes": [
+        "Tall glazing"
+      ],
+      "technical": {
+        "title": "From heading to curtain fall",
+        "text": "The supplied film moves from the full tall-window installation to the heading and cloth. Those closer views place the curtain’s upper detail and fabric fall within the same account as the complete opening."
+      },
+      "interior": {
+        "title": "Pale folds, dark frame",
+        "text": "Pale folds stand against the dark glazing frame, making the window’s outline legible within the living space. Moving from room to material allows the story to show both the architectural contrast and the surface of the cloth."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Living room"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Tall-window curtains"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/tall-window-finished-room.webp",
+          "width": 720,
+          "height": 1280,
+          "alt": "Tall black-framed window: the completed curtain treatment beside dark-framed glazing",
+          "caption": "The completed curtain treatment beside dark-framed glazing"
+        }
+      ],
+      "services": [
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        },
+        {
+          "href": "/high-level-curtain-installation",
+          "label": "High-level installation"
+        }
+      ],
+      "film": {
+        "src": "/projects/tall-window-curtains-installation.mp4",
+        "poster": "/projects/tall-window-curtains-installation-thumb.webp",
+        "description": "The camera moves from the tall black-framed opening to the heading and fabric, showing the completed curtain arrangement and its details."
+      }
+    },
+    "motorised-architectural-voiles": {
+      "title": "Daylight across a glazed wall",
+      "label": "Architectural voiles",
+      "summary": "Motorised voiles move across two tiers of living-room glazing, changing the appearance of the light and outlook.",
+      "category": "Tall glazing",
+      "room": "Living room",
+      "themes": [
+        "Tall glazing",
+        "Motorised",
+        "Layered curtains"
+      ],
+      "technical": {
+        "title": "Movement across the window wall",
+        "text": "The motorised voile film records fabric moving across two tiers of living-room glazing. Its changing positions demonstrate movement across the window wall, with the full-room view establishing the extent of the installation."
+      },
+      "interior": {
+        "title": "Daylight through the cloth",
+        "text": "As the pale cloth moves, the view beyond becomes more or less visible through the layered surface. The sequence shows the voile’s role in the room’s daylight appearance and the contrast between exposed glazing and translucent folds."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Living room"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Tall-window curtains"
+        },
+        {
+          "label": "Layers",
+          "value": "Architectural voiles"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/two-storey-motorised-voiles.webp",
+          "width": 720,
+          "height": 1280,
+          "alt": "Architectural voiles: voiles spanning two tiers of living-room glazing",
+          "caption": "Voiles spanning two tiers of living-room glazing"
+        }
+      ],
+      "services": [
+        {
+          "href": "/motorised-curtain-systems",
+          "label": "Motorised curtain systems"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        },
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        }
+      ],
+      "film": {
+        "src": "/projects/motorised-voiles-two-storey-room.mp4",
+        "poster": "/projects/motorised-voiles-two-storey-room-thumb.webp",
+        "description": "Pale motorised voiles move across two tiers of living-room glazing. The film shows the changing visibility of the view through the cloth."
+      }
+    },
+    "two-storey-curtain-installation": {
+      "title": "The installation taking shape",
+      "label": "Two-storey fitting",
+      "summary": "A short film follows the fitting activity and dressed curtain arrangement within one two-storey room.",
+      "category": "Tall glazing",
+      "room": "Residential interior",
+      "themes": [
+        "Tall glazing",
+        "Installation"
+      ],
+      "technical": {
+        "title": "From fitting to dressing",
+        "text": "The short film records fitting activity followed by dressed curtains beside two tiers of glazing. Keeping those stages together allows the installation account to follow visible work through to the final curtain arrangement in the footage."
+      },
+      "interior": {
+        "title": "Folds beside tall glazing",
+        "text": "The finished folds bring a softer surface alongside the tall glazing. The room view shows their scale, while the earlier activity explains how that final appearance emerged during the documented fitting sequence."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interior"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Tall-window curtains"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/two-storey-curtains-fitting-and-finish-thumb.webp",
+          "width": 320,
+          "height": 256,
+          "alt": "Two-storey fitting: the two-storey curtain installation shown in the film",
+          "caption": "The two-storey curtain installation shown in the film"
+        }
+      ],
+      "services": [
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        },
+        {
+          "href": "/high-level-curtain-installation",
+          "label": "High-level installation"
+        }
+      ],
+      "film": {
+        "src": "/projects/two-storey-curtains-fitting-and-finish.mp4",
+        "poster": "/projects/two-storey-curtains-fitting-and-finish-thumb.webp",
+        "description": "The film shows fitting activity and then the dressed curtains beside two tiers of glazing."
+      }
+    },
+    "manchester-airport-lounge": {
+      "title": "Curtains within a hospitality interior",
+      "label": "Manchester Airport",
+      "summary": "Curtains and tracks coordinated with ceiling details, timber partitions and lounge seating.",
+      "category": "Hospitality",
+      "room": "Hospitality lounge",
+      "themes": [
+        "Hospitality",
+        "Installation"
+      ],
+      "technical": {
+        "title": "From measuring to final dressing",
+        "text": "The recorded Apex package included measuring, curtain and track supply, installation, ceiling-track alignment and final dressing. These connected tasks provide the technical account behind the curtain run within the airport lounge."
+      },
+      "interior": {
+        "title": "Within the hospitality interior",
+        "text": "Dark curtains sit alongside curved seating, ceiling details and timber partitions. The full-room and closer photographs show how the rhythm of the folds relates to the hospitality fit-out, with the curtain line contributing to the room’s overall composition."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Hospitality lounge"
+        },
+        {
+          "label": "Scope",
+          "value": "Measuring, curtain and track supply, installation and dressing"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/airport-lounge-curtains.webp",
+          "width": 1800,
+          "height": 1012,
+          "alt": "Manchester Airport: curtains within the complete lounge interior",
+          "caption": "Curtains within the complete lounge interior"
+        },
+        {
+          "src": "/projects/portfolio/airport-lounge-main.webp",
+          "width": 1800,
+          "height": 1012,
+          "alt": "Manchester Airport: the curtain run alongside curved seating",
+          "caption": "The curtain run alongside curved seating"
+        },
+        {
+          "src": "/projects/portfolio/airport-lounge-finish.webp",
+          "width": 1026,
+          "height": 1824,
+          "alt": "Manchester Airport: fabric folds within the hospitality fit-out",
+          "caption": "Fabric folds within the hospitality fit-out"
+        },
+        {
+          "src": "/projects/portfolio/airport-lounge-track.webp",
+          "width": 1026,
+          "height": 1824,
+          "alt": "Manchester Airport: installation-stage view with access equipment",
+          "caption": "Installation-stage view with access equipment"
+        }
+      ],
+      "services": [
+        {
+          "href": "/commercial-curtain-track-installation",
+          "label": "Commercial curtain installation"
+        },
+        {
+          "href": "/oversized-architectural-curtains",
+          "label": "Oversized architectural curtains"
+        }
+      ]
+    },
+    "warwickshire": {
+      "title": "Fitting the gable from inside and out",
+      "label": "Warwickshire",
+      "summary": "Installation photographs show a shaped curtain treatment at room scale and within the wider facade.",
+      "category": "Shaped glazing",
+      "room": "Residential interior",
+      "themes": [
+        "Shaped windows",
+        "Installation"
+      ],
+      "technical": {
+        "title": "Open, closed and being fitted",
+        "text": "The photographs record a shaped curtain installation in tied-back and closed positions, with an access tower in place during fitting. The closed view shows the fabric extending beneath both slopes, while the detail follows the folds through the tieback towards the hem."
+      },
+      "interior": {
+        "title": "The gable from inside and out",
+        "text": "Inside, the curtains sit beside dark glazing and pendant lights. The exterior photograph shows the treatment within the glazed peak of the facade, connecting its room-scale appearance to the building’s wider proportions."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interior"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/warwickshire-2.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Warwickshire: curtains tied back during installation",
+          "caption": "Curtains tied back during installation"
+        },
+        {
+          "src": "/projects/portfolio/warwickshire-4.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Warwickshire: closed across the opening, with access equipment in place",
+          "caption": "Closed across the opening, with access equipment in place"
+        },
+        {
+          "src": "/projects/portfolio/warwickshire-3.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Warwickshire: the tieback and curtain fall",
+          "caption": "The tieback and curtain fall"
+        },
+        {
+          "src": "/projects/portfolio/warwickshire-5.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Warwickshire: the glazed gable from outside during the building work",
+          "caption": "The glazed gable from outside during the building work"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "norwich": {
+      "title": "Olive folds against a glazed gable",
+      "label": "Norwich",
+      "summary": "Olive-green folds and a gathered heading bring material detail to a tall, dark-framed gable.",
+      "category": "Shaped glazing",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows",
+        "Installation"
+      ],
+      "technical": {
+        "title": "A gathered heading along the slope",
+        "text": "A gathered heading follows the sloping line beside the dark-framed glazing in this Norwich project. The detail photographs show the heading and long curtain folds. A separate installation-stage view establishes the full gable with access equipment in the room."
+      },
+      "interior": {
+        "title": "Olive cloth against dark glazing",
+        "text": "Olive-green cloth introduces a strong natural colour beside the dark frame and the trees and fields beyond. Close views make the fabric surface central to the story, while the full-window photograph provides its architectural scale."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/norwich-1.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Norwich: olive cloth and gathered heading beside the glazing",
+          "caption": "Olive cloth and gathered heading beside the glazing"
+        },
+        {
+          "src": "/projects/portfolio/norwich-3.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Norwich: the full gable during installation, before curtains are visible",
+          "caption": "The full gable during installation, before curtains are visible"
+        },
+        {
+          "src": "/projects/portfolio/norwich-2.webp",
+          "width": 1125,
+          "height": 2000,
+          "alt": "Norwich: the side panel and the outlook beyond",
+          "caption": "The side panel and the outlook beyond"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "hemel-hempstead": {
+      "title": "Two shapes beneath the eaves",
+      "label": "Hemel Hempstead",
+      "summary": "A broad bedroom gable and a narrower sloping window call for two different curtain outlines.",
+      "category": "Shaped glazing",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Two different upper profiles",
+        "text": "Two different upper profiles shape this project’s curtain arrangements. At the broad bedroom gable, gathered headings follow both slopes. At the narrower window, a single panel follows one rising slope and a short upper section. Tiebacks gather the visible cloth to the sides."
+      },
+      "interior": {
+        "title": "A quiet palette beneath the eaves",
+        "text": "Pale neutral curtains sit beside white glazing and light walls, carrying a similar palette through the two settings. The main bedroom view shows how the paired panels frame the bed position, while the narrower opening gives the folds a more vertical presence."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/hemel-hempstead-3.webp",
+          "width": 1500,
+          "height": 2000,
+          "alt": "Hemel Hempstead: the broad bedroom gable with the room being arranged",
+          "caption": "The broad bedroom gable with the room being arranged"
+        },
+        {
+          "src": "/projects/portfolio/hemel-hempstead-5.webp",
+          "width": 1500,
+          "height": 2000,
+          "alt": "Hemel Hempstead: gathered heading, folds and matching tieback",
+          "caption": "Gathered heading, folds and matching tieback"
+        },
+        {
+          "src": "/projects/portfolio/hemel-hempstead-6.webp",
+          "width": 1500,
+          "height": 2000,
+          "alt": "Hemel Hempstead: a single panel following the narrower window",
+          "caption": "A single panel following the narrower window"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "jesmond": {
+      "title": "Daylight from the gable and rooflights",
+      "label": "Jesmond",
+      "summary": "Pleated outer curtains and a horizontal sheer layer sit beneath twin rooflights in this Jesmond room.",
+      "category": "Shaped glazing",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows",
+        "Layered curtains"
+      ],
+      "technical": {
+        "title": "Two distinct curtain lines",
+        "text": "The outer curtains follow the gable’s angled outline, with repeated pleats along the heading and matching tiebacks below. A separate sheer layer hangs horizontally beneath the triangular glazing and is partly drawn in the supplied photographs."
+      },
+      "interior": {
+        "title": "Daylight from above and ahead",
+        "text": "The wider view places these two curtain lines beneath twin rooflights. Taupe cloth, pale carpet and black radiators surround the opening, bringing the layered treatment into a room with daylight entering from both the gable and overhead."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        },
+        {
+          "label": "Layers",
+          "value": "Outer curtains and sheer"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/jesmond-2.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Jesmond: layered curtains beneath twin rooflights",
+          "caption": "Layered curtains beneath twin rooflights"
+        },
+        {
+          "src": "/projects/portfolio/jesmond-1.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Jesmond: the sheer partly drawn beneath the apex",
+          "caption": "The sheer partly drawn beneath the apex"
+        },
+        {
+          "src": "/projects/portfolio/jesmond-detail-3.webp",
+          "width": 1500,
+          "height": 2000,
+          "alt": "Jesmond: grouped pleats following the sloping heading",
+          "caption": "Grouped pleats following the sloping heading"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "twilight": {
+      "title": "A softer frame for the bedroom",
+      "label": "Twilight",
+      "summary": "Grey outer curtains and a pale sheer layer sit within a bedroom of related tones and textures.",
+      "category": "Shaped glazing",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows",
+        "Layered curtains"
+      ],
+      "technical": {
+        "title": "Following the ceiling profile",
+        "text": "The outer curtain line follows the sloping sides around a central upper section in this bedroom. Matching tiebacks hold the grey panels open, revealing a pale sheer layer that extends towards the floor. The photograph shows how the two layers occupy the broad opening."
+      },
+      "interior": {
+        "title": "A softer frame for the bedroom",
+        "text": "Daylight passes through the sheer, leaving trees softly visible beyond. Grey carpet, an upholstered bed and a textured throw echo the outer curtain colour, placing the window treatment within a furnished interior of related tones and textures."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        },
+        {
+          "label": "Layers",
+          "value": "Outer curtains and sheer"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/twilight-1.webp",
+          "width": 720,
+          "height": 1280,
+          "alt": "Twilight: grey curtains and a pale sheer within the furnished bedroom",
+          "caption": "Grey curtains and a pale sheer within the furnished bedroom"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "cotswold": {
+      "title": "Two rooms, two ways to frame a gable",
+      "label": "Cotswold",
+      "summary": "A bedroom outlook and a broader glazed doorway show two ways to frame a gable within a furnished room.",
+      "category": "Shaped glazing",
+      "room": "Residential interiors",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Two openings, different proportions",
+        "text": "The two rooms present different curtain proportions beneath shaped ceilings. In the first, gathered headings follow a steep gable beside a window sill and radiator. In the second, the curtains sweep more broadly from the peak towards side tiebacks around glazed doors."
+      },
+      "interior": {
+        "title": "Two furnished rooms",
+        "text": "The first bedroom combines pale cloth, textured bedding and a view into trees. The second places the curtain sweep above two armchairs and a blue patterned rug. Together, the photographs show each treatment within its own arrangement of furniture, colour and outlook."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Residential interiors"
+        },
+        {
+          "label": "Arrangement",
+          "value": "Shaped curtain treatment"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/cotswold-1.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Cotswold: pale curtains framing the bedroom outlook",
+          "caption": "Pale curtains framing the bedroom outlook"
+        },
+        {
+          "src": "/projects/portfolio/cotswold-2.webp",
+          "width": 960,
+          "height": 1280,
+          "alt": "Cotswold: sweeping curtains above glazed doors and a seating area",
+          "caption": "Sweeping curtains above glazed doors and a seating area"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    }
+  },
+  "archive": {
+    "peterborough-bedroom-blackout-curtains-peterborough": {
+      "title": "A dark frame for triangular glazing",
+      "label": "Peterborough",
+      "summary": "The curtain panels frame the triangular upper glazing and gather towards either side of the bedroom opening.",
+      "category": "Triangular",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Following the triangular outline",
+        "text": "The curtain panels frame the triangular upper glazing and gather towards either side of the bedroom opening. The visible heading and curtain fall trace the shape of the window."
+      },
+      "interior": {
+        "title": "Deep colour beside timber",
+        "text": "Deep-coloured fabric stands against pale walls and warm timber glazing. The folds give the opening a strong frame within the bedroom."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Triangular"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/peterborough-bedroom-blackout-curtains-peterborough.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Peterborough curtain installation: a dark frame for triangular glazing",
+          "caption": "Peterborough · A dark frame for triangular glazing"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "newcastle-apex-bedroom-blackout-curtains-newcastle": {
+      "title": "Curtains around a bedroom gable",
+      "label": "Newcastle",
+      "summary": "The curtain arrangement follows the shaped bedroom opening, with panels framing the central glazing.",
+      "category": "Gable End",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "A shaped bedroom treatment",
+        "text": "The curtain arrangement follows the shaped bedroom opening, with panels framing the central glazing. The room photograph establishes the relationship between the curtain line and the roofline."
+      },
+      "interior": {
+        "title": "The window behind the bed",
+        "text": "The window sits behind the bed, bringing the curtain proportions into the bedroom layout. The folds soften the outline of the glazing within the room."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Gable End"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/newcastle-apex-bedroom-blackout-curtains-newcastle.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Newcastle curtain installation: curtains around a bedroom gable",
+          "caption": "Newcastle · Curtains around a bedroom gable"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "cambridge-large-apex-bedroom-curtains-cambridge": {
+      "title": "Pattern across a shaped opening",
+      "label": "Cambridge",
+      "summary": "The patterned curtain panels sit against the angled outline of this large bedroom window.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Pattern within the curtain panels",
+        "text": "The patterned curtain panels sit against the angled outline of this large bedroom window. The folds show how the cloth reads across a shaped treatment."
+      },
+      "interior": {
+        "title": "Detail at the scale of the room",
+        "text": "The repeated pattern adds surface detail to the opening. Seen within the room, its rhythm sits alongside the larger geometry of the roofline."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/cambridge-large-apex-bedroom-curtains-cambridge.webp",
+          "width": 1600,
+          "height": 1200,
+          "alt": "Cambridge curtain installation: pattern across a shaped opening",
+          "caption": "Cambridge · Pattern across a shaped opening"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "wales-apex-bedroom-blackout-curtains-wales": {
+      "title": "The window within the bedroom",
+      "label": "Wales",
+      "summary": "The photograph places the curtain treatment around the shaped bedroom glazing.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Framing the shaped glazing",
+        "text": "The photograph places the curtain treatment around the shaped bedroom glazing. The panel arrangement follows the opening and frames the visible glass."
+      },
+      "interior": {
+        "title": "A bedroom beneath the roofline",
+        "text": "The room view gives the curtain scale its context. Fabric folds provide a softer edge beside the architectural outline of the window."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/wales-apex-bedroom-blackout-curtains-wales.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Wales curtain installation: the window within the bedroom",
+          "caption": "Wales · The window within the bedroom"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "essex-apex-curtains-essex": {
+      "title": "Curtains and the opening beyond",
+      "label": "Essex",
+      "summary": "The curtains sit beside a tall glazed bedroom opening.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "The open curtain position",
+        "text": "The curtains sit beside a tall glazed bedroom opening. Their photographed open position shows the space between the panels and the extent of the glazing."
+      },
+      "interior": {
+        "title": "A view between the panels",
+        "text": "The curtain mass and the view beyond form the composition together. Long folds bring a fabric surface beside the tall opening."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/essex-apex-curtains-essex.webp",
+          "width": 1425,
+          "height": 1900,
+          "alt": "Essex curtain installation: curtains and the opening beyond",
+          "caption": "Essex · Curtains and the opening beyond"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "cambridge-apex-curtains-cambridge": {
+      "title": "The folds at the tieback",
+      "label": "Cambridge",
+      "summary": "The close photograph shows the curtain gathered at a tieback.",
+      "category": "Gable End",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Where the folds gather",
+        "text": "The close photograph shows the curtain gathered at a tieback. Broad folds narrow towards this point, making the relationship between the panel and tieback visible."
+      },
+      "interior": {
+        "title": "Cloth beside the garden view",
+        "text": "The cloth is brought close to the viewer, with glazing and garden behind it. Texture and the changing width of the folds give this small detail its character."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Gable End"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/cambridge-apex-curtains-cambridge.webp",
+          "width": 900,
+          "height": 1600,
+          "alt": "Cambridge curtain installation: the folds at the tieback",
+          "caption": "Cambridge · The folds at the tieback"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "manchester-pinch-pleat-apex-manchester": {
+      "title": "A tailored frame for triangular glass",
+      "label": "Manchester",
+      "summary": "The curtain treatment follows the triangular glazing.",
+      "category": "Triangular",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Pleats around the glazing",
+        "text": "The curtain treatment follows the triangular glazing. Repeated folds run from the upper heading into the panels, giving the shaped opening a defined curtain outline."
+      },
+      "interior": {
+        "title": "A deep-coloured frame",
+        "text": "Deep-coloured cloth gives the window a strong presence within the residential room. The curtain folds soften the geometry of the glass."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Triangular"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/manchester-pinch-pleat-apex-manchester.webp",
+          "width": 1425,
+          "height": 1900,
+          "alt": "Manchester curtain installation: a tailored frame for triangular glass",
+          "caption": "Manchester · A tailored frame for triangular glass"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "cheshire-apex-curtains-cheshire": {
+      "title": "Navy beneath the apex",
+      "label": "Cheshire",
+      "summary": "Two curtain panels follow the shaped bedroom opening.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Paired panels at the apex",
+        "text": "Two curtain panels follow the shaped bedroom opening. Their visible outline establishes the relationship between the curtain heading and the glazing."
+      },
+      "interior": {
+        "title": "Navy against pale surfaces",
+        "text": "Navy fabric gives the folds a clear presence against the pale interior. The colour emphasises the two sides of the apex."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/cheshire-apex-curtains-cheshire.webp",
+          "width": 1425,
+          "height": 1900,
+          "alt": "Cheshire curtain installation: navy beneath the apex",
+          "caption": "Cheshire · Navy beneath the apex"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "pinch-pleat-curtains-oxford-oxford": {
+      "title": "A gable framing the garden",
+      "label": "Oxford",
+      "summary": "Paired curtains follow the gable and sweep towards the sides in the photographed arrangement.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "The shaped opening",
+        "text": "Paired curtains follow the gable and sweep towards the sides in the photographed arrangement. The complete roofline and central glazed doors remain visible between the panels."
+      },
+      "interior": {
+        "title": "The garden within the frame",
+        "text": "Pale folds bring a soft edge to the opening. Their generous sweep frames the garden beyond, connecting the room to its outlook."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/pinch-pleat-curtains-oxford-oxford.webp",
+          "width": 1600,
+          "height": 1200,
+          "alt": "Oxford curtain installation: a gable framing the garden",
+          "caption": "Oxford · A gable framing the garden"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "aberdeen-apex-pencil-pleat-curtains": {
+      "title": "A guest room beneath the gable",
+      "label": "Aberdeen",
+      "summary": "The curtain treatment frames the gable-end opening in this guest room.",
+      "category": "Gable end",
+      "room": "Guest room",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "A gable-end arrangement",
+        "text": "The curtain treatment frames the gable-end opening in this guest room. The photograph shows its scale and position beside the shaped glazing."
+      },
+      "interior": {
+        "title": "Fabric within the guest room",
+        "text": "The folds bring fabric texture into the guest-room setting. The room view connects their proportions with the surrounding interior."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Guest room"
+        },
+        {
+          "label": "Window",
+          "value": "Gable end"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/aberdeen-apex-pencil-pleat-curtains.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Aberdeen curtain installation: a guest room beneath the gable",
+          "caption": "Aberdeen · A guest room beneath the gable"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "apex-window-curtains-elegant-pinch-pleat-nottingham": {
+      "title": "Symmetry around the bedroom window",
+      "label": "Nottingham",
+      "summary": "The photograph records curtains framing both sides of the apex opening.",
+      "category": "Apex",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "A paired curtain arrangement",
+        "text": "The photograph records curtains framing both sides of the apex opening. The paired arrangement makes the relationship between the two panels and the central glazing visible."
+      },
+      "interior": {
+        "title": "Balance within the bedroom",
+        "text": "The symmetrical curtain outline gives the bedroom window a balanced frame. Soft folds sit alongside the straight lines of the shaped glazing."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/apex-window-curtains-elegant-pinch-pleat-nottingham.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Nottingham curtain installation: symmetry around the bedroom window",
+          "caption": "Nottingham · Symmetry around the bedroom window"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "apex-curtains-huddersfield-huddersfield": {
+      "title": "Curtains within a warm-toned interior",
+      "label": "Huddersfield",
+      "summary": "The curtain treatment follows the outline of the shaped window.",
+      "category": "Gable end",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "Following the window outline",
+        "text": "The curtain treatment follows the outline of the shaped window. The photographed arrangement establishes its position along the roofline and beside the glazing."
+      },
+      "interior": {
+        "title": "Warmth around the glazing",
+        "text": "Warm colours surround the opening, placing the fabric within a richly toned room. The folds add a softer surface to the architectural shape."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Gable end"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/apex-curtains-huddersfield-huddersfield.webp",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Huddersfield curtain installation: curtains within a warm-toned interior",
+          "caption": "Huddersfield · Curtains within a warm-toned interior"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "coventry-cottage-wave-pleat-curtains": {
+      "title": "A cottage window in close view",
+      "label": "Coventry",
+      "summary": "The close view shows the curtain folds beside the window edge.",
+      "category": "Gable End",
+      "room": "Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "The curtain beside the window",
+        "text": "The close view shows the curtain folds beside the window edge. It records the fabric fall and its position in relation to the glazing."
+      },
+      "interior": {
+        "title": "Texture and greenery",
+        "text": "Greenery remains visible beyond the cloth. The close viewpoint gives the curtain texture a prominent place in the cottage setting."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Gable End"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/coventry-cottage-wave-pleat-curtains.webp",
+          "width": 900,
+          "height": 1600,
+          "alt": "Coventry curtain installation: a cottage window in close view",
+          "caption": "Coventry · A cottage window in close view"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    },
+    "wave-pleat-apex-curtains-milton-keynes": {
+      "title": "The roofline made visible",
+      "label": "Milton Keynes",
+      "summary": "Pale curtains frame the two slopes of the bedroom apex.",
+      "category": "Apex",
+      "room": "Master Bedroom",
+      "themes": [
+        "Shaped windows"
+      ],
+      "technical": {
+        "title": "A sharply defined apex",
+        "text": "Pale curtains frame the two slopes of the bedroom apex. The symmetrical photograph shows the curtain line following the roofline, with the panels gathered at the sides."
+      },
+      "interior": {
+        "title": "A soft rhythm beneath the eaves",
+        "text": "Repeated folds give the sharply defined geometry a softer edge. The pale cloth keeps the room composition centred on the shape of the opening."
+      },
+      "facts": [
+        {
+          "label": "Setting",
+          "value": "Master Bedroom"
+        },
+        {
+          "label": "Window",
+          "value": "Apex"
+        }
+      ],
+      "media": [
+        {
+          "src": "/projects/portfolio/wave-pleat-apex-curtains-milton-keynes.webp",
+          "width": 899,
+          "height": 1599,
+          "alt": "Milton Keynes curtain installation: the roofline made visible",
+          "caption": "Milton Keynes · The roofline made visible"
+        }
+      ],
+      "services": [
+        {
+          "href": "/gable-end-curtains",
+          "label": "Curtains for gable windows"
+        },
+        {
+          "href": "/curtain-headings",
+          "label": "Curtain headings"
+        },
+        {
+          "href": "/curtain-tracks",
+          "label": "Specialist curtain tracks"
+        }
+      ]
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import type { PortfolioStory } from "@/lib/portfolio-types";
+
 export type Project = {
   id: number;
   title: string;
@@ -14,13 +16,19 @@ export type Project = {
   solution: string;
   result: string;
   tags: string[];
+  created_at?: string;
+  updated_at?: string;
+  story?: PortfolioStory;
 };
 
 import { createClient } from "@/lib/supabase/server";
 import { cache } from "react";
 import { reconcileProject } from "@/lib/project-editorial";
+import { applyPortfolioStory, mergePortfolioProjects, newPortfolioProjects, portfolio } from "@/lib/portfolio";
 
 export const getGalleryProjectBySlug = cache(async (slug: string) => {
+  const curated = newPortfolioProjects.find((project) => project.slug === slug);
+  if (curated) return curated;
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -34,7 +42,7 @@ export const getGalleryProjectBySlug = cache(async (slug: string) => {
     return null;
   }
 
-  return data ? reconcileProject(data) : null;
+  return data ? applyPortfolioStory(reconcileProject(data as Project), portfolio.archive[slug]) : null;
 });
 
 export const getGalleryProjects = cache(async (): Promise<Project[]> => {
@@ -45,7 +53,7 @@ export const getGalleryProjects = cache(async (): Promise<Project[]> => {
     .order("created_at", { ascending: false });
   if (error) {
     console.error("Gallery list fetch error:", error.message);
-    return [];
+    return newPortfolioProjects;
   }
-  return ((data || []) as Project[]).map(reconcileProject);
+  return mergePortfolioProjects(((data || []) as Project[]).map(reconcileProject));
 });
