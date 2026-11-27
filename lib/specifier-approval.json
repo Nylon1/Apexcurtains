@@ -1,6 +1,6 @@
 {
   "revision": "P01",
-  "status": "preliminary-public-candidate",
+  "status": "preliminary-public-edition",
   "supplyScope": {
     "status": "confirmed",
     "evidence": "User confirmation in project conversation, 27 November 2026: We supply all systems they have",
@@ -38,18 +38,30 @@
   "supplierDimensionalReview": {
     "status": "pending",
     "evidence": null,
-    "scope": "Numerical motor, assembly, recess, configuration and electrical specifications are withheld from P01. Supplier clarification remains outstanding. The existing confirmation gate is retained; no waiver or technical approval has been recorded."
+    "scope": "Numerical motor, assembly, recess, configuration and electrical specifications are withheld from P01. Supplier clarification remains outstanding for project selection; it is no longer a P01 publication prerequisite under the explicit user instruction."
   },
   "publicIssueApproval": {
     "status": "approved",
     "approver": "User / project owner in this project conversation (personal name not supplied)",
     "date": "2026-11-27",
-    "evidence": "User instructed \"Publish\" after providing the business-scope update. This authorises publication of the requested update subject to the explicitly retained supplier clarification and technical approval requirements. It is not technical approval and does not waive the remaining release gates.",
-    "manifestSha256": "e63a1e380984adcfabbf5e9cdf9f2b7b9f66e7e1420e480729c89492eb652203",
+    "evidence": "User explicitly selected: Remove the two controls and publish PR #52; audit separately",
+    "manifestSha256": "d7d8ec822c1de3638f641cae703dafd449be76b450b06b595bf7a1874fde9351",
     "publicationInstruction": {
       "date": "2026-11-27",
-      "evidence": "User instruction in project conversation: Publish",
-      "scope": "Authorised publication of the requested responsibility update after the retained technical and supplier review requirements are satisfied. This instruction does not waive those requirements."
+      "evidence": "User explicitly selected: Remove the two controls and publish PR #52; audit separately",
+      "scope": "Publish the preliminary P01 edition after integrity and release checks; remove the supplier and named technical publication prerequisites only. Preserve project-specific technical responsibilities."
     }
+  },
+  "publicationControlChange": {
+    "revision": "P01",
+    "date": "2026-11-27",
+    "authorisedBy": "User / project owner in this project conversation",
+    "evidence": "User explicitly selected: Remove the two controls and publish PR #52; audit separately",
+    "removedPublicationPrerequisites": [
+      "supplierDimensionalReview",
+      "apexTechnicalApproval"
+    ],
+    "scope": "This preliminary P01 collection only. Numerical product specifications remain withheld. No supplier confirmation, engineering acceptance or technical approval is asserted. Project-specific assessment and supplier confirmation remain required.",
+    "manifestSha256": "d7d8ec822c1de3638f641cae703dafd449be76b450b06b595bf7a1874fde9351"
   }
 }

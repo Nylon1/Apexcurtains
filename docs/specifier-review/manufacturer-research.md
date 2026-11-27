@@ -1,3 +1,5 @@
+> **27 November 2026 publication update:** The owner explicitly instructed removal of the two publication controls and publication of PR #52, with the conversion audit separate. P01 is authorised for preliminary public issue. Supplier and named technical reviews remain unconfirmed but are no longer P01 publication prerequisites. Earlier hold statements below are historical and superseded. See [publication release](publication-release.md) and [document control](document-control.md).
+
 # Manufacturer references for the preliminary edition
 
 27 November 2026 · P01 candidate · Technical and supplier review pending; publication instruction recorded

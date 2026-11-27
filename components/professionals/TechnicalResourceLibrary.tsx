@@ -164,7 +164,7 @@ export default function TechnicalResourceLibrary() {
           <p className="resource-draft">
             {data.editionLabel} {data.revision} · {data.date}
             <br />
-            Technical approval pending. Not for construction.
+            Project-specific technical assessment required. Not for construction.
           </p>
         </div>
         <figure className="resource-hero-image">
@@ -224,8 +224,7 @@ export default function TechnicalResourceLibrary() {
           <div className="resource-register-note">
             <span>APX TECHNICAL SERIES</span>
             <span>
-              Revision {data.revision} / Preliminary candidate — approval
-              pending
+              Revision {data.revision} / Preliminary coordination guidance
             </span>
             <span>
               {data.resources.reduce(

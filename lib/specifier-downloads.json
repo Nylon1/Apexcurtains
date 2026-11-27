@@ -1,7 +1,7 @@
 {
   "revision": "P01",
   "date": "27 November 2026",
-  "contentSha256": "2f00d1a93cff6300dffc0b83193a9e264cb7f93efdd9c76c4fdcb0943baa602e",
+  "contentSha256": "3677c3ad7171d643b50b9904d9d10d5be6f7cd62ab494811d84fe0bd2c69956a",
   "files": [
     {
       "reference": "APX-T01",
@@ -10,8 +10,8 @@
       "format": "PDF",
       "pages": 3,
       "href": "/downloads/specifier/APX-T01-architectural-planning-P01.pdf",
-      "bytes": 128056,
-      "sha256": "007d3126c935f1e20813f93fc15aaa42ffdb0e009a983f3e91c21c5e5d50d22e"
+      "bytes": 127991,
+      "sha256": "e9858244b68e2b28032bfbe53080f759ec7c2280fde959d2352ae65cb967b3ee"
     },
     {
       "reference": "APX-T02",
@@ -20,8 +20,8 @@
       "format": "PDF",
       "pages": 3,
       "href": "/downloads/specifier/APX-T02-track-pocket-support-P01.pdf",
-      "bytes": 129692,
-      "sha256": "49953e85c1174204f2f54608643aae53882c3410661ceaea93d1e954c569ac3c"
+      "bytes": 129628,
+      "sha256": "48c41d8e7fbc85c222c75533720bf80c4669da50b38724560384290d0f40b6d2"
     },
     {
       "reference": "APX-T03",
@@ -30,8 +30,8 @@
       "format": "PDF",
       "pages": 3,
       "href": "/downloads/specifier/APX-T03-motor-electrical-coordination-P01.pdf",
-      "bytes": 127741,
-      "sha256": "e5b6653d1045c4c3dd52cd4f2f0823c45a1302cc137d14339261305a24fafd16"
+      "bytes": 127697,
+      "sha256": "24040b38ff922804bcd12c66eb8aa4cdb2c133e013455da6a39efcafa6e831fa"
     },
     {
       "reference": "APX-T04",
@@ -40,8 +40,8 @@
       "format": "PDF",
       "pages": 2,
       "href": "/downloads/specifier/APX-T04-site-readiness-maintenance-P01.pdf",
-      "bytes": 120396,
-      "sha256": "df00f19957fa4eae8a4b1e50d06b9ea7c4e6839ab0d84fe6579502f67e2daa22"
+      "bytes": 120361,
+      "sha256": "5f2c5aae23c205d0102bb5376fc4ae1fdf20c3951ff8586a78ce7ccfa62b9048"
     },
     {
       "reference": "APX-T05",
@@ -50,8 +50,8 @@
       "format": "PDF",
       "pages": 2,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.pdf",
-      "bytes": 120337,
-      "sha256": "e48232fb9ecd073867ea1432a2f4783ce282ba38e9f0346c9afac8532cd923e9"
+      "bytes": 120301,
+      "sha256": "1ac2e4dcbae7b25fa8ef9c193a31d7607c0157f576877c1f3dd45984c560a28b"
     },
     {
       "reference": "APX-T05",
@@ -60,8 +60,8 @@
       "format": "DOCX",
       "pages": 2,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.docx",
-      "bytes": 39580,
-      "sha256": "80becfd0153c4c81e85f93043948909e2ef2609e9fd63563bf0e853ced95ba1a"
+      "bytes": 39552,
+      "sha256": "441b3823ae8a8cd9b36fcafe2edd3bc3ca4a433fbaedccd36ba5dd8709deeba2"
     },
     {
       "reference": "APX-T05",
@@ -70,8 +70,8 @@
       "format": "TXT",
       "pages": null,
       "href": "/downloads/specifier/APX-T05-preliminary-specification-P01.txt",
-      "bytes": 4101,
-      "sha256": "39b28dd6a55d29628eea7e72cebaf9747e39e6838522c4f3ed2c950b0c088c98"
+      "bytes": 4071,
+      "sha256": "a218367ef824ee8176e75713867dc6d15603cb7474b2067b719cd4001f5c46ca"
     }
   ]
 }

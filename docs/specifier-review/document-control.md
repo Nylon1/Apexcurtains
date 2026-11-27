@@ -2,9 +2,9 @@
 
 ## Current status
 
-The working collection is **P01 — preliminary public edition candidate, approval pending, not for construction**. P01 is reserved for review and has not been issued. The detailed D01 pack is retained locally outside the repository/web root. Development and visual approval do not constitute technical approval. PR #52 must remain unmerged until the existing review requirements are satisfied.
+P01 is authorised for preliminary public issue, not for construction. On 27 November 2026 the project owner explicitly instructed: "Remove the two controls and publish PR #52; audit separately". This supersedes the earlier publication hold. Supplier dimensional review and named Apex technical approval are removed as publication prerequisites for this exact P01 manifest only. Their evidence records remain pending: no technical or supplier approval is claimed.
 
-On 27 November 2026 the user confirmed Forest curtain system supply, specialist curtain manufacturing, manual and motorised track installation, motor setup, programming, operational testing, commissioning and customer handover by Apex. Electrical hardwiring is by an appropriately qualified electrician, including applicable electrical testing and certification. Third-party smart home and building management integration is assessed individually. Ongoing support terms and project-specific appointments remain to be agreed. See the R02 business responsibility register. The subsequent instruction “Publish” authorises publication subject to the explicitly retained supplier and technical review requirements; it is not technical sign-off.
+Confirmed business responsibilities remain unchanged. Apex supplies Forest curtain systems, manufactures curtains, installs manual and motorised tracks, sets up and programmes motors, tests, commissions and hands over. Qualified electricians undertake required hardwiring and applicable testing/certification. Third-party integrations and ongoing support terms are assessed individually.
 
 ## Controlled source and outputs
 
@@ -23,16 +23,13 @@ On 27 November 2026 the user confirmed Forest curtain system supply, specialist 
 5. Generate the download manifest with `python scripts/generate-specifier-manifest.py` only after the Word render is current. Run `npm run test:specifier`, the build and the relevant browser/regression checks. Any artifact/content change invalidates earlier manifest-based approval.
 6. Commit the reviewed candidate and record its commit, checks and preview in the release report. Candidate iterations are distinguished by Git commit and manifest hash. D01 was never deployed to production, but earlier copies remain in this public repository's Git history. Removing current downloads is not retrospective confidentiality. Keep the local D01 archive separate from public assets.
 
-## Required approval before public issue
+## Publication control
 
-- Apex business scope: confirmed in the user conversation and recorded in the R02 business register. Continue to allocate project interfaces, access and ongoing support terms individually.
-- Named Apex technical approver: review all five documents and eight drawings against the intended scope, source register and limitations; record approval against the exact manifest hash.
-- Supplier/competent technical reviewer: resolve or explicitly approve the treatment of the Shuttle body-versus-assembly dimensional discrepancy. No construction opening or clearance may be derived by choosing one figure arbitrarily.
-- Publication: the user's “Publish” instruction is recorded against the updated candidate manifest. The supplier and named technical gates remain pending. Run `npm run specifier:public-issue`; it must remain blocked until both are satisfied. This command validates evidence records, not reviewer competence. Any subsequent material change requires approval against the revised manifest.
+The public-issue check still requires business-scope evidence, publication authority against the exact download manifest, registered source fingerprints, artifact integrity and exclusion of numerical product specifications. It recognises the recorded P01-only removal of the supplier and Apex technical publication prerequisites. Future revisions do not inherit that removal automatically. Changed artifacts require a new manifest and publication authorisation.
 
-P01 is currently a reserved public-edition candidate with numerical specifications withheld. After technical review, prepare the final issue status/date and regenerated manifest under the recorded publication instruction, provided the approved scope is unchanged. Record the technical approval and the publication authority against those exact files before merging. The removal of numerical data does not waive any existing gate: installation/commissioning scope, supplier-review evidence, named technical approval and publication approval remain required. Never silently overwrite an issued PDF/DOCX/TXT. Retain prior editions and their source and approval records. Any final wording, status or date change requires a fresh manifest and approval against those exact files.
+Public guidance is not an approved construction specification. Exact motor assembly clearance, electrical requirements, structural support, fixing selection, installation and maintenance access must be confirmed for each project. Forest questions remain open. D01 remains an internal-review archive outside current public downloads; earlier public Git history remains.
 
-**Public coordination guidance is still not an approved construction specification.** Project manufacture/construction releases require their own surveyed geometry, selected products, structural and fixing assessment, electrical/control interfaces, safe access and named approvals in the existing professional workspace. Publication does not discharge those responsibilities.
+Never silently overwrite an issued edition. Increment revision, retain the prior issue and evidence, regenerate and review all outputs and record fresh publication authority. No named engineering approval is inferred from the publication instruction.
 
 ## Review triggers
 

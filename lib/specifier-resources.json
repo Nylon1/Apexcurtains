@@ -1,7 +1,7 @@
 {
   "revision": "P01",
   "date": "27 November 2026",
-  "status": "Preliminary coordination - technical and supplier review pending; not for construction",
+  "status": "Preliminary coordination guidance - not for construction",
   "sources": [
     {
       "id": "ks",
@@ -576,6 +576,6 @@
       ]
     }
   ],
-  "editionLabel": "Preliminary public edition candidate",
-  "footerStatus": "PRELIMINARY / APPROVAL PENDING / NOT FOR CONSTRUCTION"
+  "editionLabel": "Preliminary public edition",
+  "footerStatus": "PRELIMINARY COORDINATION / NOT FOR CONSTRUCTION"
 }

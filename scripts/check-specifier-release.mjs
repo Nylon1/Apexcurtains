@@ -36,13 +36,22 @@ console.log('Draft integrity passed: 7 downloads, metadata and 9 official source
 if(process.argv.includes('--public-issue')){
   const digest=textHash('lib/specifier-downloads.json');
   const pending=[];
+  // P01 publication-only change explicitly authorised by the project owner.
+  // Technical/supplier records remain pending; this never represents their approval.
+  const change=approval.publicationControlChange;
+  const removed=new Set(change?.removedPublicationPrerequisites||[]);
+  const authorisedPreliminaryChange=data.revision==='P01'&&change?.revision===data.revision
+    &&change?.date&&change?.authorisedBy&&change?.evidence&&change?.manifestSha256===digest
+    &&removed.size===2&&removed.has('supplierDimensionalReview')&&removed.has('apexTechnicalApproval');
   for(const key of ['installationAndCommissioningScope','supplierDimensionalReview']){
+    if(authorisedPreliminaryChange&&removed.has(key))continue;
     if(approval[key].status!=='confirmed'||!approval[key].evidence)pending.push(key);
   }
   for(const key of ['apexTechnicalApproval','publicIssueApproval']){
+    if(authorisedPreliminaryChange&&removed.has(key))continue;
     const record=approval[key];
     if(record.status!=='approved'||!record.approver||!record.date||!record.evidence||record.manifestSha256!==digest)pending.push(key);
   }
   if(pending.length){console.error('PUBLIC ISSUE BLOCKED: '+pending.join(', '));process.exitCode=1;}
-  else console.log('Approval evidence recorded for this exact manifest. Manual review and PR approval remain required.');
+  else console.log('Publication authority and integrity verified for this exact manifest. P01 publication controls reflect the recorded user instruction; project technical approval is not implied.');
 }

@@ -1,3 +1,5 @@
+> **27 November 2026 publication update:** The owner explicitly instructed removal of the two publication controls and publication of PR #52, with the conversion audit separate. P01 is authorised for preliminary public issue. Supplier and named technical reviews remain unconfirmed but are no longer P01 publication prerequisites. Earlier hold statements below are historical and superseded. See [publication release](publication-release.md) and [document control](document-control.md).
+
 # Business responsibility update verification
 
 27 November 2026. This update supersedes the earlier candidate evidence below for changed document content. P01 remains unissued. Apex business responsibilities and the user publication instruction are recorded; supplier review and named Apex technical approval remain pending. The release-check implementation is unchanged and blocks on those two gates.

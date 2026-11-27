@@ -1,6 +1,6 @@
 # Apex installation and support confirmation
 
-APX-BC01 · Revision R02 · 27 November 2026 · Confirmed business scope with project-specific items outstanding
+APX-BC01 · Revision R03 · 27 November 2026 · Confirmed business scope with project-specific items outstanding
 
 Evidence: the user confirmed the responsibilities below in the project conversation on 27 November 2026. This register covers curtain systems only. Supply availability does not establish stock, lead time or project suitability.
 
@@ -23,7 +23,7 @@ Complete the outstanding project allocations, exclusions and support terms below
 - Ongoing support contact and agreed service terms: [Complete]
 - Business scope evidence: user instruction in project conversation, 27 November 2026.
 - Apex technical document approver / role: [Complete]
-- Publication instruction: user requested "Publish" on 27 November 2026; supplier and technical approval requirements remain in force.
+- Publication instruction: user explicitly instructed removal of the two publication controls and publication of PR #52 on 27 November 2026. Supplier clarification and project-specific technical assessment remain necessary; this is not engineering approval.
 - Document owner for future source/revision checks: [Complete]
 
 This sheet confirms business responsibilities only. It does not approve a fixing design, electrical installation, product selection, manufacture drawing or publication. Record technical and publication approvals separately against the exact P01 candidate manifest in the existing approval register.
