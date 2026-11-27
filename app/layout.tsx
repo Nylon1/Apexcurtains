@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { Geist, Libre_Caslon_Display } from "next/font/google";
 import "./globals.css";
 import "./editorial.css";
 import "./collections.css";
 import "./colour-studio.css";
 import "./site-navigation.css";
 import "./web-app.css";
+import "./studio.css";
 import { WebAppProvider } from "@/components/web-app/WebApp";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
@@ -22,6 +23,13 @@ export const viewport: Viewport = {
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const caslon = Libre_Caslon_Display({
+  variable: "--font-apex-display",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -97,7 +105,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={geistSans.variable}>
+      <body className={`${geistSans.variable} ${caslon.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalSchema) }}

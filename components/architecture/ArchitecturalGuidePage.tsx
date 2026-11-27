@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { architecturalPlannerPath, type ArchitecturalGuide } from "@/lib/architectural-curtains";
+import { architecturalPresentation } from "@/lib/architectural-presentation";
 import { articleSchema, breadcrumbSchema, serviceSchema } from "@/lib/schema";
+import ArchitectureDrawing from "./ArchitectureDrawing";
 import "./architecture.css";
 
 export function architecturalMetadata(guide: ArchitecturalGuide): Metadata {
@@ -16,6 +19,7 @@ export function architecturalMetadata(guide: ArchitecturalGuide): Metadata {
 }
 
 export default async function ArchitecturalGuidePage({ guide }: { guide: ArchitecturalGuide }) {
+  const feature = architecturalPresentation[guide.path];
   const parent = guide.enquiry === "trade"
     ? { name: "Professionals", url: "/professionals" }
     : { name: "Curtain solutions", url: "/curtain-solutions" };
@@ -35,15 +39,30 @@ export default async function ArchitecturalGuidePage({ guide }: { guide: Archite
       {[schema, breadcrumbSchema(trail)].map((item) => (
         <script key={item["@type"]} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(item).replaceAll("<", "\\u003c") }} />
       ))}
-      <header className="arch-hero">
+      <header className="arch-hero arch-feature" data-art={feature.mode}>
         <div className="arch-wrap">
           <nav aria-label="Breadcrumb" className="arch-crumbs">
             {trail.slice(0, -1).map((crumb) => <Link key={crumb.url} href={crumb.url}>{crumb.name}</Link>)}
             <span aria-current="page">{guide.label}</span>
           </nav>
-          <h1>{guide.title}</h1>
-          <p>{guide.description}</p>
-          <Link className="arch-button" href={planner}>{guide.enquiry === "trade" ? "Discuss a trade project" : "Plan your curtain project"}</Link>
+          <div className="arch-feature-grid">
+            <div className="arch-feature-copy">
+              <h1>{guide.title}</h1>
+              <p>{feature.intro}</p>
+              <div className="arch-actions">
+                <Link className="arch-button" href={planner}>{guide.enquiry === "trade" ? "Discuss a trade project" : "Discuss your project"}</Link>
+                {Tool && <a href="#technical-tool" className="studio-link">{guide.tool === "motion" ? "Try the demonstration" : "Estimate curtain weight"}</a>}
+              </div>
+            </div>
+            {feature.mode === "drawing" ? (
+              <ArchitectureDrawing kind={feature.diagram} />
+            ) : (
+              <figure className="arch-feature-photo">
+                <Image src={feature.photo.src} alt={feature.photo.alt} width={feature.photo.width} height={feature.photo.height} sizes={feature.mode === "wide" ? "90vw" : "(max-width: 900px) 92vw, 48vw"} fetchPriority="high" />
+                <figcaption>{feature.photo.caption}</figcaption>
+              </figure>
+            )}
+          </div>
         </div>
       </header>
       <div className="arch-wrap arch-editorial">
@@ -62,8 +81,16 @@ export default async function ArchitecturalGuidePage({ guide }: { guide: Archite
             <section key={section.id} id={section.id} className="arch-section">
               <h2>{section.title}</h2>
               {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {feature.detail?.section === section.id && <ArchitectureDrawing kind={feature.detail.drawing} />}
             </section>
           ))}
+          <section className="arch-section" id="common-question">
+            <h2>Common question</h2>
+            <details className="studio-disclosure arch-question">
+              <summary>{feature.question}</summary>
+              <p>{feature.answer}</p>
+            </details>
+          </section>
           {guide.sources && (
             <section className="arch-section">
               <h2>Technical references</h2>

@@ -239,7 +239,7 @@ export default function SpecialistGuidePage({
               )}
               {section.diagram && (
                 <figure className="guide-diagram">
-                  <div className="guide-diagram-stage">
+                  <div className="guide-diagram-stage" tabIndex={guide.enhanced ? 0 : undefined} role={guide.enhanced ? "group" : undefined} aria-label={guide.enhanced ? "Scrollable technical diagram" : undefined}>
                     <Image
                       src={section.diagram.src}
                       alt={section.diagram.alt}

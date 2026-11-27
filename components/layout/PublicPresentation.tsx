@@ -8,10 +8,9 @@ export default function PublicPresentation({
   children: ReactNode;
 }) {
   const path = usePathname();
-  const operational = [
-    "/admin",
-    "/auth",
-    "/professionals/workspace",
+  const privateRoute = ["/admin", "/auth", "/professionals/workspace"]
+    .some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
+  const consultationRoute = [
     "/start-designing",
     "/get-curtain-quote",
     "/arlo-curtain-advisor",
@@ -23,9 +22,11 @@ export default function PublicPresentation({
           ? "admin-presentation atelier-presentation"
           : path === "/admin" || path.startsWith("/admin/")
             ? "admin-presentation"
-            : operational
+            : privateRoute
               ? undefined
-              : "public-presentation"
+              : consultationRoute
+                ? "public-presentation studio-consultation"
+                : "public-presentation"
       }
     >
       {children}

@@ -88,13 +88,6 @@ function Navigation({ pathname }: { pathname: string }) {
             />
           </Link>
           <nav className="site-desktop-nav" aria-label="Main navigation">
-            <Link
-              href="/"
-              className="site-home-link"
-              aria-current={current("/")}
-            >
-              Home
-            </Link>
             {navigationGroups.map((group) => (
               <details
                 key={group.id}
@@ -168,25 +161,18 @@ function Navigation({ pathname }: { pathname: string }) {
                 </div>
               </details>
             ))}
-            <Link
-              href="/room-visualiser"
-              className="site-visualiser-link"
-              aria-current={current("/room-visualiser")}
-            >
-              Room visualiser <ArrowUpRight size={14} aria-hidden="true" />
-            </Link>
           </nav>
           <div className="site-header-actions">
             <a href="tel:08007720367" className="site-header-call">
               Call us
             </a>
             <TrackedLink
-              href="/start-designing"
-              eventName="curtain_journey_start_click"
+              href="/architectural-curtain-project-planner"
+              eventName="architectural_project_planner_click"
               eventData={{ source: "main_navigation" }}
               className="site-project-button"
             >
-              Start your project <ArrowUpRight size={16} aria-hidden="true" />
+              Discuss your project <ArrowUpRight size={16} aria-hidden="true" />
             </TrackedLink>
             <button
               type="button"
@@ -303,13 +289,13 @@ function Navigation({ pathname }: { pathname: string }) {
         </nav>
         <div className="site-mobile-contact">
           <TrackedLink
-            href="/start-designing"
-            eventName="curtain_journey_start_click"
+            href="/architectural-curtain-project-planner"
+            eventName="architectural_project_planner_click"
             eventData={{ source: "mobile_navigation" }}
             className="site-project-button"
             onClick={closeMobile}
           >
-            Start your project <ArrowUpRight size={16} aria-hidden="true" />
+            Discuss your project <ArrowUpRight size={16} aria-hidden="true" />
           </TrackedLink>
           <a href="tel:08007720367">Call 0800 772 0367</a>
           <p>

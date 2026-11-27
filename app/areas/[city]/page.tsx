@@ -159,7 +159,7 @@ export default async function AreaCityPage({ params }: PageProps) {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
+    <main className="studio-paper-page min-h-screen overflow-hidden bg-apex-navy-900 text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

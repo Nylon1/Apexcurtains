@@ -81,7 +81,7 @@ export default function CurtainSolutionsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-apex-navy-900 text-white">
+    <main className="studio-paper-page min-h-screen bg-apex-navy-900 text-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
       <section className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pt-36">

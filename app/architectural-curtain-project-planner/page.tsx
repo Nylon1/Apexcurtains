@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ProjectPlanner from "@/components/architecture/ProjectPlanner";
+import ArchitectureDrawing from "@/components/architecture/ArchitectureDrawing";
 import { architecturalPlannerPath } from "@/lib/architectural-curtains";
 import { resolveProjectType } from "@/lib/architectural-enquiry";
 import "@/components/architecture/architecture.css";
@@ -20,16 +21,24 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   const type = resolveProjectType((await searchParams).type);
   return (
     <main className="arch-page">
-      <header className="arch-hero">
+      <header className="arch-hero arch-planner-hero">
         <div className="arch-wrap">
           <nav aria-label="Breadcrumb" className="arch-crumbs">
             <Link href="/">Home</Link>
             <Link href="/get-curtain-quote">Get a curtain quote</Link>
             <span aria-current="page">Project planner</span>
           </nav>
-          <h1>Architectural curtain project planner</h1>
-          <p>Tell us about the window, the curtain you have in mind and any access or fixing constraints. Send what you know and we can discuss the details that need a survey.</p>
-          <a href="#project-details" className="arch-button">Enter project details</a>
+          <div className="arch-planner-intro">
+            <div>
+              <h1>Architectural curtain project planner</h1>
+              <p>Tell us about the window and how you want to use the room. A photo or a rough measurement is enough to start the conversation.</p>
+              <a href="#project-details" className="studio-link">Start the consultation <span aria-hidden="true">↓</span></a>
+            </div>
+            <details className="studio-disclosure arch-measurement-help">
+              <summary>Which measurements are helpful?</summary>
+              <ArchitectureDrawing kind="height" />
+            </details>
+          </div>
         </div>
       </header>
       <ProjectPlanner key={type} initialType={type} />

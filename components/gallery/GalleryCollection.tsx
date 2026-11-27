@@ -106,7 +106,7 @@ export default function GalleryCollection({
               <button
                 className="gallery-image"
                 onClick={() => setActive(project)}
-                aria-label={`Preview ${project.title}`}
+                aria-label={`View photograph and details for ${project.title}`}
               >
                 <Image
                   src={project.image_url}
@@ -117,7 +117,7 @@ export default function GalleryCollection({
                   unoptimized
                   priority={index < 2}
                 />
-                <span>View photograph + details ↗</span>
+                <span>View photograph and details <span aria-hidden="true">↗</span></span>
               </button>
             )}
             <div className="gallery-project-copy">

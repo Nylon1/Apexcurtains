@@ -22,7 +22,6 @@ const cityPage = read("app/areas/[city]/page.tsx");
 const reviewsPage = read("app/reviews/page.tsx");
 const reviewsPreview = read("components/homepage/ReviewsPreview.tsx");
 const mediaPage = read("app/seen-on-tv/page.tsx");
-const entryScreen = read("components/ApexEntryScreen.tsx");
 const proxy = read("proxy.ts");
 const nextConfig = read("next.config.ts");
 
@@ -66,7 +65,7 @@ expect(
 );
 expect(
   "homepage sitemap image uses real asset",
-  sitemapPages.includes('/window-types/apex-hero.jpg'),
+  sitemapPages.includes("studioPhotos.oxford.src"),
   "The homepage image entry must reference an existing asset."
 );
 expect(
@@ -127,13 +126,11 @@ expect(
   "Homepage trust content should link to the curated reviews page without rebuilding a separate generated review wall."
 );
 expect(
-  "lightweight homepage intro preserves rendered content",
-  homePage.includes("ApexEntryScreen") &&
-    entryScreen.includes('/images/apex-entry-poster.jpeg') &&
-    entryScreen.includes("Intro closes automatically") &&
-    !entryScreen.includes("<video") &&
-    !entryScreen.includes("apex-entry.mp4"),
-  "The intro may be visual, but the homepage must remain rendered underneath and must not depend on a heavy autoplay video."
+  "homepage opens directly onto the real architectural project",
+  !homePage.includes("ApexEntryScreen") &&
+    homePage.includes("<Hero />") &&
+    homePage.includes('id="real-projects"'),
+  "The homepage should open directly on the project-led hero with no timed entry modal."
 );
 expect(
   "20MB entry video is removed",

@@ -3,6 +3,7 @@ import { buildXml, baseUrl } from "@/lib/sitemap-utils";
 import { HEALTHCARE_ROOT, publishedProducts, productUrl } from "@/lib/healthcare/catalogue";
 import { pages, sectors } from "@/lib/healthcare/content";
 import { architecturalGuides, architecturalPlannerPath } from "@/lib/architectural-curtains";
+import { studioPhotos } from "@/lib/studio-photography";
 
 // This inventory changes with a deployment, not with each crawler request.
 export const dynamic = "force-static";
@@ -22,7 +23,7 @@ export async function GET() {
       loc: `${baseUrl}/`,
       changefreq: "weekly",
       priority: "1.0",
-      images: [`${baseUrl}/window-types/apex-hero.jpg`],
+      images: [`${baseUrl}${studioPhotos.oxford.src}`],
     },
     {
       loc: `${baseUrl}/about-apex-curtains`,
