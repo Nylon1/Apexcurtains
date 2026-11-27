@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/homepage/Hero";
 import HomeWindowDiscovery from "@/components/homepage/HomeWindowDiscovery";
+import HomeRoomVisualiser from "@/components/homepage/HomeRoomVisualiser";
 import LazyFabricQuiz from "@/components/performance/LazyFabricQuiz";
 import { studioPhotos } from "@/lib/studio-photography";
 import CurtainMotion from "@/components/architecture/CurtainMotion";
 import "@/components/architecture/architecture.css";
 import "./homepage.css";
 import "./architectural-home.css";
+import "./room-visualiser/visualiser.css";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -109,6 +111,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+      <HomeRoomVisualiser />
       <section className="front-expertise" aria-labelledby="home-craft">
         <div className="studio-wrap front-expertise-layout">
           <figure>

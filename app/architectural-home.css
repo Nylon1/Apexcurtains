@@ -114,3 +114,15 @@
   .front-specialisms .front-paired-view img { height: clamp(13rem,64vw,21rem); }
 }
 @media(max-width: 360px) { .architectural-hero .studio-actions { gap: .5rem; } }
+
+.front-room-studio { padding-block: var(--front-space); }
+.front-room-studio > h2 { margin-bottom: var(--studio-gap); }
+.front-room-launch { display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1fr); align-items: center; gap: var(--studio-gap); background: #ede7db; }
+.front-room-launch > img { width: 100%; height: clamp(19rem,36vw,33rem); object-fit: contain; background: #d8cfc0; }
+.front-room-launch > div { padding: var(--studio-gap); }
+.front-room-launch p { max-width: 42ch; margin-block: 1rem 1.6rem; }
+.front-room-launch .studio-actions { margin-bottom: .75rem; }
+.front-room-studio .rv-embedded { padding: 0; background: transparent; }
+@media(max-width: 700px) {
+  .front-room-launch { grid-template-columns: 1fr; gap: 0; }
+}

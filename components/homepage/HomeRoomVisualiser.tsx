@@ -1,66 +1,37 @@
+"use client";
+
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import TrackedLink from "@/components/analytics/TrackedLink";
-import { lookUrl, scenes } from "@/lib/visualiser/catalogue";
+import { useState } from "react";
+
+const RoomVisualiser = dynamic(() => import("@/components/visualiser/RoomVisualiser"), {
+  loading: () => <p role="status">Opening the room visualiser…</p>,
+});
 
 export default function HomeRoomVisualiser() {
+  const [room, setRoom] = useState("");
   return (
-    <section className="home-room-studio" aria-labelledby="home-room-title">
-      <div className="home-room-image">
-        <Link
-          href="/room-visualiser"
-          aria-labelledby="home-room-image-link"
-        >
-          <Image
-            src="/visualiser/double-pinch-gable-desktop.webp"
-            alt="Illustrative gable living room with shaped curtains, warm timber flooring and soft neutral furniture"
-            width={1200}
-            height={900}
-            sizes="(max-width: 800px) 100vw, 62vw"
-          />
-          <span className="home-room-image-link" id="home-room-image-link">
-            Step inside the room <span aria-hidden="true">↗</span>
-          </span>
-        </Link>
-        <p className="home-room-caption">
-          Illustrative room · Explore your own colour scheme
-        </p>
-      </div>
-      <div className="home-room-copy">
-        <p className="editorial-eyebrow">The Apex room visualiser</p>
-        <h2 id="home-room-title">
-          Your curtains.
-          <br />
-          <em>Your whole room.</em>
-        </h2>
-        <p>
-          See how Oslo curtain colours work with your walls, flooring and
-          furniture. Explore three shaped-curtain designs, then switch the
-          lights to discover a different mood.
-        </p>
-        <TrackedLink
-          href="/room-visualiser"
-          eventName="room_visualiser_cta_click"
-          eventData={{ source: "homepage_room_studio" }}
-          className="home-button home-button-light"
-        >
-          Design your room <span aria-hidden="true">↗</span>
-        </TrackedLink>
-        <div
-          className="home-room-headings"
-          aria-label="Explore curtain headings in a room"
-        >
-          {scenes.map((scene) => (
-            <Link key={scene.id} href={lookUrl(scene.id, "linen")}>
-              {scene.heading} <span aria-hidden="true">↗</span>
-            </Link>
-          ))}
+    <section id="room-studio" className="studio-wrap front-room-studio" aria-labelledby="home-room-title">
+      <h2 id="home-room-title">The room visualiser</h2>
+      {room ? (
+        <div className="rv-page rv-embedded">
+          <RoomVisualiser embedded initialRoom={room} initialColour="linen" initialDesign={{ wall: "original", floor: "original", furniture: "original", lights: "on" }} />
         </div>
-        <p className="home-room-note">
-          A little inspiration before your consultation. Screen colours are a
-          guide; explore fabric samples in your own light.
-        </p>
-      </div>
+      ) : (
+        <div className="front-room-launch">
+          <Image src="/visualiser/tall-living-room-mobile.webp" width={720} height={1280} sizes="(max-width: 700px) 92vw, 34vw" alt="Pale curtains framing tall rectangular glazing in the room available to customise" />
+          <div>
+            <h3>See the fabric in the room</h3>
+            <p>Choose a shaped or double-height window. Try Oslo curtains with an optional Tranquil voile, then compare the two layers in your room palette.</p>
+            <div className="studio-actions">
+              <button type="button" className="studio-button" onClick={() => setRoom("tall-living-room")}>Try tall windows</button>
+              <button type="button" className="studio-link" onClick={() => setRoom("double-pinch-gable")}>Try shaped windows</button>
+            </div>
+            <Link className="studio-link" prefetch={false} href="/room-visualiser">Open the full visualiser ↗</Link>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

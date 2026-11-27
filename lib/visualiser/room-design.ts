@@ -1,3 +1,10 @@
+import tranquilColours from "./tranquil-colours.json" with { type: "json" };
+
+export { tranquilColours };
+export function tranquilColour(id: unknown) {
+  return tranquilColours.find((swatch) => swatch.id === id);
+}
+
 // Interior palette adapted locally from the CurtainsUK visualiser's catalog.mjs.
 // These are illustrative interior tones, not paint, flooring or furniture products.
 function options(values: [string, string][]) {
@@ -42,13 +49,15 @@ export const roomPalettes = {
 };
 export type RoomSurface = keyof typeof roomPalettes;
 export const roomSurfaces: RoomSurface[] = ["wall", "floor", "furniture"];
-export type RoomDesign = Record<RoomSurface, string> & { lights: "on" | "off" };
+export type RoomDesign = Record<RoomSurface, string> & { lights: "on" | "off"; voile?: string };
 export type RoomDesignInput = Partial<Record<keyof RoomDesign, unknown>>;
 export function resolveRoomDesign(input: RoomDesignInput = {}): RoomDesign {
   const resolve = (surface: RoomSurface) =>
     roomPalettes[surface].find((option) => option.id === input[surface])?.id ??
     "original";
+  const voile = tranquilColour(input.voile);
   return {
+    ...(voile && { voile: voile.id }),
     wall: resolve("wall"),
     floor: resolve("floor"),
     furniture: resolve("furniture"),
@@ -64,6 +73,7 @@ export function roomDesignFromParams(
     floor: params.get(`${prefix}floor`),
     furniture: params.get(`${prefix}furniture`),
     lights: params.get(`${prefix}lights`),
+    voile: params.get(`${prefix}voile`),
   });
 }
 export function roomDesignParams(design: RoomDesignInput, prefix = "") {
@@ -76,5 +86,7 @@ export function roomDesignSummary(design: RoomDesign) {
   const label = (surface: RoomSurface) =>
     roomPalettes[surface].find((option) => option.id === design[surface])
       ?.name ?? "Original tone";
-  return `Walls: ${label("wall")} · Floor: ${label("floor")} · Main upholstery: ${label("furniture")} · Lights ${design.lights}`;
+  const voile = tranquilColour(design.voile);
+  const layers = voile ? ` · Voile: Prestigious Textiles Tranquil ${voile.name} (${voile.reference})` : "";
+  return `Walls: ${label("wall")} · Floor: ${label("floor")} · Main upholstery: ${label("furniture")} · Lights ${design.lights}${layers}`;
 }

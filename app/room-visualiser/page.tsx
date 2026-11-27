@@ -56,9 +56,8 @@ export default async function Page({
           </h1>
         </div>
         <p>
-          See how a shade changes the feeling of a room. Explore plain Oslo
-          colours in illustrative shaped-curtain interiors, then bring walls,
-          flooring, furniture and warm lighting into the picture.
+          Choose shaped glazing or a double-height living room. Try Oslo curtains
+          with a Tranquil voile, then explore the walls, floor, upholstery and lighting.
         </p>
       </header>
       <RoomVisualiser
@@ -87,7 +86,8 @@ export default async function Page({
             Oslo is a plain collection by Prestigious Textiles. The display
             colours come from the manufacturer swatches in our Oslo records. A
             small sample and a full-height curtain can look different in
-            daylight and evening light.
+            daylight and evening light. The optional voile comes from the same maker.
+            {" "}<a href="https://www.prestigious.co.uk/fabrics/tranquil/">View the Tranquil collection ↗</a>
           </p>
           <nav aria-label="Explore specialist curtain guidance">
             {[

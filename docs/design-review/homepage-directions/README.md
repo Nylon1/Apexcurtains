@@ -28,12 +28,18 @@ The production baseline is [4e51701](https://github.com/Nylon1/Apexcurtains/comm
 
 ## Review checks
 
+The homepage now opens the existing room visualiser inline from “Try tall windows” or “Try shaped windows”. The standalone visualiser and saved looks use the same renderer. Its fourth room is a still from the cleared tall-window film, with separate controls for the Oslo outer curtains and the Tranquil voile. The other three rooms also support the voile overlay. Saved links and quotation enquiries carry the selected colourway and reference.
+
+The 21 Tranquil names and 2031 fabric references were checked against the manufacturer's collection. The catalogue records each official swatch URL. Display colours use median sRGB from the central 60% of each swatch. The simulated folds and transparency are illustrative. [Prestigious Textiles Tranquil](https://www.prestigious.co.uk/fabrics/tranquil/)
+
+[Visualiser on desktop](visualiser-tall-1440.jpg) · [Visualiser on mobile](visualiser-tall-390.jpg)
+
 | Check | Result |
 | --- | --- |
 | Responsive layout | Chrome checked at 320, 375, 390, 768, 1024, 1440 and 1920 px. The primary consultation link was visible and clickable on entry at every width. No horizontal overflow. |
 | Navigation and enquiries | Mobile menu opened and closed. The hero opened the architectural planner and dispatched the existing conversion event. Specialist, project and enquiry destinations returned 200. |
 | Search and links | All 64 existing homepage link destinations were retained. Title, description, canonical, social metadata and structured data matched production. |
 | Media and controls | All four films played in Chrome. The heading-detail disclosure opened and closed. Independent curtain and voile controls, single-layer operation, draw direction and window selection passed. The opening loaded no film bytes. |
-| Accessibility | Axe reported no WCAG 2 A, AA or WCAG 2.1 A, AA violations in the tested desktop state. |
-| Mobile performance | The final local production build scored 95 performance, 100 accessibility and 100 SEO in Lighthouse. LCP was 2.5 s and CLS was zero. The mobile hero transferred 27 KB. The separate live baseline run scored 94, 100 and 100, with LCP of 2.3 s. Hosting conditions differ and these are lab measurements. |
-| Repository checks | Production build, 18 SEO foundation checks, nine specialist guidance tests and six architectural tests passed. |
+| Accessibility | Axe reported no WCAG 2 A, AA or WCAG 2.1 A, AA violations in the tested desktop homepage state and mobile inline visualiser state. |
+| Mobile performance | The final local production build scored 96 performance, 100 accessibility and 100 SEO in Lighthouse. LCP was 2.7 s and CLS was zero. The mobile hero transferred 27 KB. The separate live baseline run scored 94, 100 and 100, with LCP of 2.3 s. Hosting conditions differ and these are lab measurements. |
+| Repository checks | Production build, 18 SEO foundation checks, nine specialist guidance tests, six architectural tests and 11 visualiser tests passed. |

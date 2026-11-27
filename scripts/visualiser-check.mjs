@@ -22,6 +22,22 @@ import { prepareLighting, lightsOff } from "../lib/visualiser/room-lighting.ts";
 import materials from "../lib/visualiser/scene-materials.json" with { type: "json" };
 import manifest from "../lib/visualiser/assets.json" with { type: "json" };
 import palette from "../lib/visualiser/oslo-display-colours.json" with { type: "json" };
+import tranquil from "../lib/visualiser/tranquil-colours.json" with { type: "json" };
+
+test("Tranquil references survive saved looks and the quotation handoff", () => {
+  assert.equal(new Set(tranquil.map(swatch => swatch.reference)).size, 21);
+  for (const swatch of tranquil) {
+    assert.match(swatch.swatch, /^https:\/\/www\.prestigious\.co\.uk\//);
+    const design = resolveRoomDesign({ voile: swatch.id });
+    const look = new URL(lookUrl("tall-living-room", "linen", design), "https://www.apexcurtains.com");
+    assert.equal(roomDesignFromParams(look.searchParams).voile, swatch.id);
+    const params = new URLSearchParams(roomDesignParams(design, "visualiser-"));
+    const enquiry = visualiserContext("tall-living-room", "linen", roomDesignFromParams(params, "visualiser-"));
+    assert.ok(enquiry.designSummary.includes(`Tranquil ${swatch.name} (${swatch.reference})`));
+  }
+  assert.equal(resolveRoomDesign({ voile: "unknown" }).voile, undefined);
+  assert.equal(lookUrl("tall-living-room", "linen").includes("voile="), false);
+});
 
 test("every governed Oslo colour has a traceable display sample, with unchanged source swatch", async () => {
   assert.equal(osloColours.length, 34);
@@ -42,7 +58,7 @@ test("every governed Oslo colour has a traceable display sample, with unchanged 
   }
 });
 test("scene derivatives are complete, bounded and match recorded hashes", async () => {
-  assert.equal(scenes.length, 3);
+  assert.ok(scenes.some((scene) => scene.shape === "tall" && scene.voilePath));
   assert.ok(scenes.some((scene) => scene.heading === "Wave pleat"));
   assert.ok(scenes.some((scene) => scene.heading === "Pencil pleat"));
   assert.ok(scenes.some((scene) => scene.heading === "Double pinch pleat"));
@@ -137,7 +153,7 @@ test("resource cache shares pending work, evicts failed requests and bounds reta
   await cache.get("a");
   assert.equal(calls, before + 1);
 });
-test("all three illustrative scenes retain fold variation across the complete Oslo palette", async () => {
+test("each room retains fold variation across the complete Oslo palette", async () => {
   for (const scene of scenes) {
     const { data, info } = await sharp(
       `public/visualiser/${scene.id}-mobile.webp`,
@@ -219,7 +235,7 @@ test("each furnished scene defines all material masks, bounded lights and useful
       assert.ok(roomPalettes[surface].length >= 6);
       const commands = material[surface].map((path) => path.split(/(?=M)/).filter(Boolean)
         .map((d, index) => `<path fill="${index ? "black" : "white"}" d="${d}"/>`).join("")).join("");
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="270" viewBox="0 0 1448 1086"><defs><mask id="material"><rect width="1448" height="1086" fill="black"/>${commands}</mask></defs><rect width="1448" height="1086" fill="white" mask="url(#material)"/></svg>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="270" preserveAspectRatio="none" viewBox="0 0 ${scene.width} ${scene.height}"><defs><mask id="material"><rect width="100%" height="100%" fill="black"/>${commands}</mask></defs><path d="M0 0H${scene.width}V${scene.height}H0Z" fill="white" mask="url(#material)"/></svg>`;
       const mask = await sharp(Buffer.from(svg)).ensureAlpha().raw().toBuffer();
       let covered = 0;
       for (let i = 3; i < mask.length; i += 4) if (mask[i] > 128) covered++;
