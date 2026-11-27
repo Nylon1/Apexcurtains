@@ -99,6 +99,7 @@ export default async function Page({
               ["Oslo & fabric selection", "/curtain-fabrics#oslo-fabrics"],
               ["Linings & light", "/curtain-linings"],
               ["Specialist tracks", "/curtain-tracks"],
+              ["Tall window curtain movement", "/motorised-curtain-systems#technical-tool"],
               ["Tiebacks & coverage", "/curtain-tiebacks"],
               ["Real projects", "/gallery"],
               ["Book a consultation", "/start-designing"],

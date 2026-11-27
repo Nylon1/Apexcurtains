@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Image from "next/image";
 import RelatedWindowTypes from "@/components/seo/RelatedWindowTypes";
 import { SERVICE_AREAS } from "@/lib/service-area";
+import { studioPhotos } from "@/lib/studio-photography";
 
 export const metadata = {
   title: "Curtains for Large Windows | Floor to Ceiling & Wide Window Curtains UK",
@@ -83,7 +85,7 @@ export default function LargeWindowCurtainsPage() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
+    <main className="studio-paper-page min-h-screen overflow-hidden bg-apex-navy-900 text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
@@ -140,17 +142,9 @@ export default function LargeWindowCurtainsPage() {
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <div className="flex flex-col items-start">
-                <Link
-                  href="/start-designing"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition duration-300 hover:bg-[#e6c476]"
-                >
-                  Start Your Curtain Journey
-                </Link>
-                <span className="mt-2 text-xs text-white/50">
-                  Takes less than a minute • No obligation
-                </span>
-              </div>
+              <Link href="/architectural-curtain-project-planner" className="studio-button">
+                Discuss your project
+              </Link>
 
               <Link
                 href="/arlo-curtain-advisor"
@@ -168,18 +162,22 @@ export default function LargeWindowCurtainsPage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] shadow-[0_30px_100px_rgba(0,0,0,0.32)]">
-            <img
-              src="/window-types/large-window.jpeg"
-              alt="Large window curtains fitted across a wide glazed opening"
-              className="h-full min-h-[460px] w-full object-cover"
+          <figure>
+            <Image
+              src={studioPhotos.oxford.src}
+              alt={studioPhotos.oxford.alt}
+              width={studioPhotos.oxford.width}
+              height={studioPhotos.oxford.height}
+              sizes="(max-width: 1023px) 100vw, 45vw"
+              className="h-auto w-full"
             />
-          </div>
+            <figcaption className="studio-caption">{studioPhotos.oxford.caption}</figcaption>
+          </figure>
         </div>
       </section>
 
       <section className="relative mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="studio-fact-strip grid gap-4 md:grid-cols-3">
           <div className="rounded-[24px] border border-white/10 bg-white/[0.04] p-6">
             <div className="text-xs uppercase tracking-[0.18em] text-white/45">Best for</div>
             <div className="mt-3 text-xl font-semibold text-white">Wide glazing & patio doors</div>
@@ -258,9 +256,12 @@ export default function LargeWindowCurtainsPage() {
 
           <div className="space-y-6">
             <div className="overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.04]">
-              <img
-                src="/window-types/large-window.jpeg"
-                alt="Large window curtain detail across a wide glazed wall"
+              <Image
+                src={studioPhotos.cambridge.src}
+                alt={studioPhotos.cambridge.alt}
+                width={studioPhotos.cambridge.width}
+                height={studioPhotos.cambridge.height}
+                sizes="(max-width: 1023px) 100vw, 35vw"
                 className="h-[280px] w-full object-cover"
               />
               <div className="p-6">
@@ -387,6 +388,14 @@ export default function LargeWindowCurtainsPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="relative mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <h2 className="text-2xl font-semibold">When the glazing needs a specialist review</h2>
+        <div className="mt-4 flex flex-wrap gap-5">
+          <Link className="underline underline-offset-4" href="/tall-window-curtains">Tall and double-height windows</Link>
+          <Link className="underline underline-offset-4" href="/oversized-architectural-curtains">Oversized architectural curtains and voiles</Link>
+          <Link className="underline underline-offset-4" href="/motorised-curtain-systems">Motorised curtain systems</Link>
         </div>
       </section>
       <RelatedWindowTypes currentHref="/large-window-curtains" />

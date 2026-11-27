@@ -63,7 +63,7 @@ export const homeWindowShapes = [
     text: "On very tall windows, fabric drape, joins and the total lined curtain weight matter as much as colour. The track and fixing strategy are selected around the finished curtain.",
     challenge:
       "A sample cannot show the behaviour of a 4–6 metre drop. Safe installation and later maintenance access need planning too.",
-    href: "/large-window-curtains",
+    href: "/tall-window-curtains",
     image: "/window-types/gable-end.jpeg",
     alt: "Long curtain folds beside high architectural glazing",
     example: "/curtain-fabrics",
@@ -78,8 +78,8 @@ export const homeWindowShapes = [
     challenge:
       "More fullness means more cloth, weight and stack. The open curtain needs space as well as the closed curtain.",
     href: "/large-window-curtains",
-    image: "/window-types/large-feature.jpeg",
-    alt: "Wide feature glazing with made-to-measure curtains",
+    image: "/projects/pinch-pleat-curtains-oxford-oxford.jpeg",
+    alt: "Curtains framing the broad glazed gable in Oxford",
     example: "/curtain-headings",
     exampleLabel: "Compare headings and fold styles",
   },
@@ -129,7 +129,7 @@ export const homeServiceSteps = [
     title: "Professional installation",
     text: "Fit the specified track and curtains using suitable fixing points and a planned access method for the room.",
     detail:
-      "MiTOWER or other high-level access where the site assessment requires it.",
+      "High-level access planned around the window and the working area.",
     href: "/services/premium-installation#mitower-access",
   },
   {

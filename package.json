@@ -17,6 +17,7 @@
     "test:healthcare": "node --conditions=react-server --import tsx --test scripts/healthcare-check.test.ts",
     "healthcare:check": "tsx scripts/healthcare-catalogue.ts",
     "test:healthcare-routes": "tsx --test scripts/healthcare-routes.test.ts",
+    "test:architecture": "tsx --test scripts/architectural-curtains.test.ts",
     "seo:crawl": "node scripts/public-seo-audit.mjs"
   },
   "dependencies": {
@@ -27,7 +28,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.36.0",
     "lucide-react": "^0.577.0",
-    "next": "16.4.3",
+    "next": "16.4.6",
     "radix-ui": "^1.4.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
@@ -45,7 +46,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.4.3",
+    "eslint-config-next": "16.4.6",
     "sharp": "0.35.5",
     "tailwindcss": "^4",
     "tsx": "4.23.15",

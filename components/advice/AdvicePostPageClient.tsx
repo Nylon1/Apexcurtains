@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 type AdvicePost = {
   id: number;
@@ -73,7 +73,7 @@ export default function AdvicePostPageClient({
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
+    <main className="studio-article studio-paper-page min-h-screen overflow-hidden bg-apex-navy-900 text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
@@ -107,57 +107,19 @@ export default function AdvicePostPageClient({
           </Link>
         </div>
 
-        {post.image ? (
-          <div className="mt-4 overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] shadow-[0_30px_100px_rgba(0,0,0,0.35)]">
-            <div className="relative h-[420px] sm:h-[520px] lg:h-[620px]">
-              <img
-                src={post.image}
-                alt={post.title}
-                className="h-full w-full object-cover"
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/10" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-transparent to-transparent" />
-
-              <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 lg:p-12">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/30 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#f5d38a] backdrop-blur-sm">
-                  <Sparkles className="h-4 w-4" />
-                  {post.category}
-                </div>
-
-                <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-7xl">
-                  {post.title}
-                </h1>
-
-                <p className="mt-5 max-w-3xl text-base leading-8 text-white/80 sm:text-lg">
-                  {post.excerpt}
-                </p>
-              </div>
-            </div>
-          </div>
-        ) : (
-          <>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#f5d38a]">
-              <Sparkles className="h-4 w-4" />
-              {post.category}
-            </div>
-
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              {post.title}
-            </h1>
-
-            <p className="mt-6 max-w-3xl text-base leading-8 text-white/65 sm:text-lg">
-              {post.excerpt}
-            </p>
-          </>
+        <header className="studio-article-heading">
+          <p className="studio-kicker">{post.category}</p>
+          <h1>{post.title}</h1>
+          <p>{post.excerpt}</p>
+        </header>
+        {post.image && (
+          <figure className="studio-article-image">
+            {/* Article photography is supplied by the existing CMS. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={post.image} alt={post.title} />
+          </figure>
         )}
-
-        <article className="mt-10 rounded-[30px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)] sm:p-8">
-          <div className="whitespace-pre-line text-base leading-9 text-white/78">
-            {post.content}
-          </div>
-        </article>
-
+        <article className="studio-article-body whitespace-pre-line">{post.content}</article>
         <section className="mt-10 rounded-[30px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)] sm:p-8">
           <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
             Explore Solutions

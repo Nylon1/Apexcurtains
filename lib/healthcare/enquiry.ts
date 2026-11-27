@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { getProduct } from "./catalogue";
+import { readBoundedFormData, FormDataReadError } from "../bounded-form-data";
 
 export const enquiryChoices = [
   "Reusable clinical curtains",
@@ -94,33 +95,12 @@ export class EnquiryError extends Error {
 export async function boundedFormData(req: Request) {
   if (!req.headers.get("content-type")?.startsWith("multipart/form-data;"))
     throw new EnquiryError("Please use the healthcare enquiry form.", 415);
-  const reader = req.body?.getReader();
-  if (!reader) throw new EnquiryError("The enquiry is empty.");
-  const chunks: Uint8Array[] = [];
-  let length = 0;
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    length += value.byteLength;
-    if (length > MAX_REQUEST_BYTES) {
-      await reader.cancel();
-      throw new EnquiryError("Files must total 3 MB or less.", 413);
-    }
-    chunks.push(value);
-  }
-  const body = new Uint8Array(length);
-  let offset = 0;
-  for (const c of chunks) {
-    body.set(c, offset);
-    offset += c.length;
-  }
+  if (!req.body) throw new EnquiryError("The enquiry is empty.");
   try {
-    return await new Response(body, {
-      headers: { "Content-Type": req.headers.get("content-type")! },
-    }).formData();
-  } catch {
-    throw new EnquiryError(
-      "The uploaded form could not be read. Please try again.",
-    );
+    return await readBoundedFormData(req, MAX_REQUEST_BYTES);
+  } catch (error) {
+    if (!(error instanceof FormDataReadError)) throw error;
+    if (error.status === 413) throw new EnquiryError("Files must total 3 MB or less.", 413);
+    throw new EnquiryError("The uploaded form could not be read. Please try again.");
   }
 }

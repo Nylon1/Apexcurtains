@@ -607,7 +607,7 @@ export const contractorsGuide = professionalGuide({
       title: "Plan the whole access route",
       paragraphs: [
         "Access planning includes unloading, carrying long track lengths, reaching the room, assembling suitable equipment and working at the fixing position. Check doorways, stairs, lifts, changes in floor level, floor suitability and obstructions above and beside the work.",
-        "A MiTOWER or another access method is selected for the actual task and space. Tower work requires competent assembly/use, suitable support and the relevant inspection arrangements. Coordinate protection, working areas and separation from other trades or occupants through the site plan.",
+        "The access method is selected for the actual task and space. Tower work requires competent assembly and use, suitable support and the relevant inspection arrangements. Coordinate protection, working areas and separation from other trades or occupants through the site plan.",
         "Tell Apex about inductions, permits, security arrangements and any site-specific RAMS requirements early. Access height alone does not establish a safe method, and an item of equipment shown in a guide does not approve its use on a particular site.",
       ],
       links: [
@@ -705,7 +705,7 @@ export const contractorsGuide = professionalGuide({
     {
       question: "Can you coordinate RAMS and site documentation?",
       answer:
-        "For suitable commercial projects, risk assessments, method statements and insurance details can be provided where required. Share the site's documentation, induction and access requirements early so the scope can be agreed.",
+        "Share the site’s requirements for risk assessments, method statements, insurance, induction and access early. Confirm which documents and cover apply when the scope is agreed.",
     },
     {
       question: "Does a checked readiness list approve the installation?",

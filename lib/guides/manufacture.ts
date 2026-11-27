@@ -81,6 +81,10 @@ export const manufactureGuide: SpecialistGuide = {
       },
       links: [
         {
+          href: "/oversized-curtain-manufacturing",
+          label: "Specialist making for extra-long and oversized curtains",
+        },
+        {
           href: "/curtain-fabrics",
           label: "Fabric width, repeats, joins and drape",
         },

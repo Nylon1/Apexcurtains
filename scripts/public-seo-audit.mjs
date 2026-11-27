@@ -64,7 +64,7 @@ await Promise.all(Array.from({length:4}, async () => {
       if (parsed.pathname === "/") {
         const footer = text.match(/<footer[\s\S]*?<\/footer>/)?.[0];
         assert.ok(footer?.includes('href="/room-visualiser"'), "Footer must link to the visualiser");
-        assert.match(text, /<img[^>]+fetchPriority="high"[^>]+apex-hero|<img[^>]+apex-hero[^>]+fetchPriority="high"/i);
+        assert.match(text, /<img[^>]+fetchPriority="high"[^>]+(?:apex-hero|pinch-pleat-curtains-oxford-oxford)|<img[^>]+(?:apex-hero|pinch-pleat-curtains-oxford-oxford)[^>]+fetchPriority="high"/i);
       }
       checked++;
     } catch (error) {

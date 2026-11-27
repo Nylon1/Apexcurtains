@@ -1,49 +1,27 @@
 import Image from "next/image";
+import Link from "next/link";
 import TrackedLink from "@/components/analytics/TrackedLink";
+import { studioPhotos } from "@/lib/studio-photography";
 
 export default function Hero() {
+  const { src, alt, width, height, caption } = studioPhotos.oxford;
   return (
-    <header className="home-hero" id="home-hero">
-      <Image
-        src="/window-types/apex-hero.jpg"
-        alt="Real Apex installation: full-height pale curtains following a wide gable roofline"
-        fill
-        loading="eager"
-        fetchPriority="high"
-        sizes="100vw"
-      />
-      <div className="home-hero-copy">
-        <p className="editorial-eyebrow">
-          Apex Curtains / Made for your architecture
-        </p>
-        <h1>
-          Curtains engineered for <em>extraordinary windows.</em>
-        </h1>
-        <p>
-          We survey, design, manufacture and professionally install
-          made-to-measure curtains for apex, triangular, angled and gable-end
-          windows across England and Wales.
-        </p>
-        <div className="home-actions">
-          <a
-            href="#discover-your-window"
-            className="home-button home-button-light"
-          >
-            Explore your window <span aria-hidden="true">↓</span>
-          </a>
-          <TrackedLink
-            href="/start-designing"
-            eventName="curtain_journey_start_click"
-            eventData={{ source: "homepage_hero" }}
-            className="home-button home-button-glass"
-          >
-            Book a consultation <span aria-hidden="true">↗</span>
+    <header className="studio-hero" id="home-hero">
+      <div className="studio-hero-copy">
+        <p className="studio-kicker">Architectural curtains</p>
+        <h1>Exceptional Curtains for Exceptional Windows.</h1>
+        <p>Specialist made-to-measure curtains for apex and gable windows, double-height rooms and wide glazing. We advise on motorised tracks for curtains beyond easy reach.</p>
+        <div className="studio-actions">
+          <TrackedLink href="/architectural-curtain-project-planner" eventName="architectural_project_planner_click" eventData={{ source: "homepage_hero" }} className="studio-button">
+            Discuss your project
           </TrackedLink>
+          <a href="#real-projects" className="studio-link">Selected projects <span aria-hidden="true">↓</span></a>
         </div>
       </div>
-      <p className="home-photo-credit">
-        An Apex installation · Real homes, individually dressed
-      </p>
+      <figure className="studio-hero-photo">
+        <Image src={src} alt={alt} width={width} height={height} fetchPriority="high" loading="eager" sizes="(max-width: 800px) 100vw, 63vw" />
+        <figcaption><Link href="/gallery/pinch-pleat-curtains-oxford-oxford" prefetch={false}>{caption} <span aria-hidden="true">↗</span></Link></figcaption>
+      </figure>
     </header>
   );
 }

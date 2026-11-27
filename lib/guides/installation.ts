@@ -6,7 +6,7 @@ export const installationGuide: SpecialistGuide = {
   title: "Installation day. Beautifully finished.",
   metaTitle: "Installation Day & Curtain Aftercare for Apex Windows",
   description:
-    "What happens on curtain installation day: specialist fitting, MiTOWER access for high apex and gable windows, dressing, steaming, handover and ongoing curtain care.",
+    "What happens on curtain installation day: specialist fitting, access planning for high apex and gable windows, dressing, handover and ongoing curtain care.",
   eyebrow: "The finishing stage / Installation & aftercare",
   intro:
     "The final visit brings the whole scheme together: the line of the track, the fall of the fabric and the way the room feels when the curtains are dressed. Careful fitting and a thoughtful handover help you enjoy that finish every day.",
@@ -52,7 +52,7 @@ export const installationGuide: SpecialistGuide = {
     },
     {
       id: "mitower-access",
-      title: "MiTOWER access for very high windows",
+      title: "Access planning for very high windows",
       paragraphs: [
         "High apex and gable windows need a working position from which the fitter can reach the track safely and handle the curtain without stretching. A MiTOWER mobile access tower can provide a guarded platform where the room, floor and working height make it suitable. Its suitability is assessed for the individual installation; a compact tower is not automatically the answer to every tall window.",
         "The standard MiTOWER is a one-person tower. The manufacturer lists platform heights of 2, 3 and 4 metres, with nominal working heights of 4–6 metres. Working height is not platform height and does not guarantee a safe reach to a particular peak. The supplied model, configuration and current manual determine the permitted height and loading. People, tools and materials all contribute to that load.",
@@ -68,6 +68,10 @@ export const installationGuide: SpecialistGuide = {
           "Access starts with the room: reach, floor support, stabiliser space and a clear route. No tower assembly or universal reach is implied.",
       },
       links: [
+        {
+          href: "/high-level-curtain-installation",
+          label: "High-level surveys, approved access and motor commissioning",
+        },
         {
           href: "https://www.popupproducts.co.uk/product/mitower/",
           label: "MiTOWER specifications and current instructions",

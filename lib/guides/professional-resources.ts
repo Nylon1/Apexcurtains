@@ -59,6 +59,10 @@ export const professionalHubGuide = professionalGuide({
           href: "/professionals/contractors-fit-out",
           label: "Guidance for contractors and fit-out teams",
         },
+        {
+          href: "/professionals/trade-partnerships",
+          label: "Specialist trade partnerships for workrooms and retailers",
+        },
       ],
     },
     {
@@ -90,6 +94,10 @@ export const professionalHubGuide = professionalGuide({
         {
           href: "/professionals/project-review",
           label: "Start a project conversation",
+        },
+        {
+          href: "/architectural-curtain-project-planner?type=commercial",
+          label: "Send dimensions, drawings and access details",
         },
       ],
     },

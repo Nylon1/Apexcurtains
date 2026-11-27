@@ -190,7 +190,7 @@ export default async function GalleryPage({ params }: PageProps) {
           __html: JSON.stringify(schema).replace(/</g, "\\u003c"),
         }}
       />
-      <section className="guide-hero">
+      <section className="guide-hero studio-case-hero">
         <div className="guide-hero-copy">
           <nav className="guide-breadcrumb" aria-label="Breadcrumb">
             <Link href="/">Home</Link>

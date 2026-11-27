@@ -20,6 +20,7 @@ on:
       - "supabase/migrations/**"
       - "scripts/web-app-check.mjs"
       - "scripts/atelier-check.test.ts"
+      - "scripts/architectural-curtains.test.ts"
       - "package.json"
       - ".github/workflows/seo-foundation.yml"
   push:
@@ -60,6 +61,9 @@ jobs:
 
       - name: Atelier material calculations and release validation
         run: npm run test:atelier
+
+      - name: Architectural brief, weight and lead delivery checks
+        run: npm run test:architecture
 
       - name: Production build
         run: npm run build

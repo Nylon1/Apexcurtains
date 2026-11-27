@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import GalleryCollection from "@/components/gallery/GalleryCollection";
 import { getGalleryProjects } from "@/lib/gallery-projects";
+import { studioPhotos } from "@/lib/studio-photography";
 
 export const metadata: Metadata = {
   title: { absolute: "Curtains in Real Homes | Apex Curtains Project Gallery" },
@@ -13,29 +15,36 @@ export const metadata: Metadata = {
 export default async function GalleryPage() {
   const projects = await getGalleryProjects();
   return (
-    <main className="window-editorial gallery-editorial">
-      <header className="collection-intro">
-        <p className="editorial-eyebrow">The Apex portfolio</p>
-        <h1>
-          Beautiful windows.
-          <br />
-          <em>Individual homes.</em>
-        </h1>
-        <p>
-          Real rooms, carefully dressed. Explore the architecture, proportions
-          and finishing details behind our curtain installations.
-        </p>
-        <div className="guide-inline-links">
-          <Link href="/curtain-colours-and-tones">
-            Find your colour direction ↗
-          </Link>
-          <Link href="/window-types">Explore your window shape ↗</Link>
+    <main className="window-editorial gallery-editorial studio-gallery">
+      <header className="studio-gallery-hero studio-wrap">
+        <div>
+          <p className="studio-kicker">Apex Curtains</p>
+          <h1>Selected curtain installations</h1>
+          <p>Shaped windows, tall glazing and the curtain details that make each room distinct.</p>
+          <Link href="#project-archive" className="studio-link">Browse all projects <span aria-hidden="true">↓</span></Link>
         </div>
+        <Link href="/gallery/pinch-pleat-curtains-oxford-oxford" className="studio-image-link">
+          <figure>
+            <Image src={studioPhotos.oxford.src} alt={studioPhotos.oxford.alt} width={1600} height={1200} sizes="(max-width: 800px) 92vw, 60vw" fetchPriority="high" />
+            <figcaption className="studio-caption">Oxford · Read the residential gable case study <span aria-hidden="true">↗</span></figcaption>
+          </figure>
+        </Link>
       </header>
+      <section className="studio-wrap studio-gallery-feature" aria-labelledby="featured-installations">
+        <figure><Image src={studioPhotos.lounge.src} alt={studioPhotos.lounge.alt} width={1824} height={1026} sizes="(max-width: 800px) 92vw, 54vw" /></figure>
+        <div>
+          <p className="studio-kicker">Hospitality installation</p>
+          <h2 id="featured-installations">Manchester Airport lounge</h2>
+          <p>Commercial curtains and tracks coordinated with a finished hospitality interior.</p>
+          <Link className="studio-link" href="/commercial-curtain-track-installation#manchester-airport">View the project <span aria-hidden="true">↗</span></Link>
+        </div>
+      </section>
       <section
-        className="gallery-wrap"
-        aria-label="Curtain installation projects"
+        className="studio-wrap studio-gallery-archive"
+        id="project-archive"
+        aria-labelledby="archive-title"
       >
+        <h2 id="archive-title">The project archive</h2>
         {projects.length ? (
           <GalleryCollection projects={projects} />
         ) : (
