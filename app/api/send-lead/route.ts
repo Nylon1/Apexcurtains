@@ -1,6 +1,9 @@
 import { Resend } from "resend";
 import { sendArchitecturalLead } from "@/lib/architectural-lead";
+import { readBoundedFormData, FormDataReadError } from "@/lib/bounded-form-data";
 import { visualiserContext } from "@/lib/visualiser/enquiry-context";
+
+const MAX_LEAD_BODY_BYTES = 4.5 * 1024 * 1024;
 
 function toBase64(buffer: ArrayBuffer) {
   return Buffer.from(buffer).toString("base64");
@@ -29,7 +32,7 @@ export async function POST(req: Request) {
     }
 
     const resend = new Resend(resendApiKey);
-    const formData = await req.formData();
+    const formData = await readBoundedFormData(req, MAX_LEAD_BODY_BYTES);
     if (formData.get("journey") === "architectural") {
       if (req.headers.get("sec-fetch-site") === "cross-site") {
         return Response.json({ ok: false, error: "Please submit your enquiry from the Apex website." }, { status: 403 });
@@ -149,7 +152,13 @@ Attachment included: ${uploaded instanceof File ? "Yes" : "No"}
       ok: true,
       email: emailResult,
     });
-  } catch {
+  } catch (error) {
+    if (error instanceof FormDataReadError) {
+      return Response.json(
+        { ok: false, error: error.status === 413 ? "The enquiry is too large. Please reduce the size of the files." : "The enquiry form could not be read. Please try again." },
+        { status: error.status },
+      );
+    }
     return Response.json(
       {
         ok: false,

@@ -9,7 +9,7 @@ export default function HomeRoomVisualiser() {
       <div className="home-room-image">
         <Link
           href="/room-visualiser"
-          aria-label="Open the Apex room visualiser"
+          aria-labelledby="home-room-image-link"
         >
           <Image
             src="/visualiser/double-pinch-gable-desktop.webp"
@@ -18,8 +18,8 @@ export default function HomeRoomVisualiser() {
             height={900}
             sizes="(max-width: 800px) 100vw, 62vw"
           />
-          <span className="home-room-image-link" aria-hidden="true">
-            Step inside the room <span>↗</span>
+          <span className="home-room-image-link" id="home-room-image-link">
+            Step inside the room <span aria-hidden="true">↗</span>
           </span>
         </Link>
         <p className="home-room-caption">

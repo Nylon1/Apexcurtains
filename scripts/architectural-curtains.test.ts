@@ -95,6 +95,8 @@ test("the existing lead endpoint validates attachments and handles provider succ
   const large = brief();
   large.append("projectFiles", new File([Buffer.alloc(MAX_PROJECT_UPLOAD_BYTES + 1)], "too-large.png", { type: "image/png" }));
   assert.equal((await submit(large)).status, 413);
+  const tooLarge = new Blob([new Uint8Array(5 * 1024 * 1024)]);
+  assert.equal((await POST(new Request("http://localhost/api/send-lead", { method: "POST", body: tooLarge }))).status, 413);
   assert.equal(calls.length, 0);
 
   const valid = brief();

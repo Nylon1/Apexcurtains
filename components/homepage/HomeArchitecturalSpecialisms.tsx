@@ -22,13 +22,13 @@ export default function HomeArchitecturalSpecialisms() {
         {pillars.map(({ name, label, href }) => (
           <article key={name}>
             <h3>{name}</h3>
-            <Link href={href} className="home-text-link">{label} <span aria-hidden="true">↗</span></Link>
+            <Link href={href} prefetch={false} className="home-text-link">{label} <span aria-hidden="true">↗</span></Link>
           </article>
         ))}
       </div>
       <div className="home-actions">
-        <Link href="/oversized-architectural-curtains#apartments-and-penthouses" className="home-text-link">Luxury apartments and penthouses ↗</Link>
-        <Link href={architecturalGuides.trade.path} className="home-text-link">Professional and trade partnerships ↗</Link>
+        <Link href="/oversized-architectural-curtains#apartments-and-penthouses" prefetch={false} className="home-text-link">Luxury apartments and penthouses ↗</Link>
+        <Link href={architecturalGuides.trade.path} prefetch={false} className="home-text-link">Professional and trade partnerships ↗</Link>
       </div>
     </section>
   );

@@ -186,7 +186,7 @@ export const architecturalGuides = {
     sections: [
       { id: "scope", title: "Support for workrooms and curtain retailers", paragraphs: [
         "When a brief involves a challenging shape, unusually long fabric widths, a heavy track or difficult access, get in touch early. We can review which elements need specialist input and discuss manufacture-only, track support, surveying, installation or a complete subcontracted project.",
-        "For manufacture-only requests, include finished drop and width, who owns the measurement, fabric weight and usable width, heading and lining, desired fullness, panel split and delivery arrangements. Trade scope, responsibilities and any private-label arrangement are subject to separate agreement.",
+        "For manufacture-only requests, include finished drop and width, who owns the measurement, fabric weight and usable width, heading and lining, desired fullness, panel split and delivery arrangements. Trade scope, responsibilities and any white-label arrangement are subject to separate agreement.",
       ] },
       { id: "specifiers", title: "Architects, designers and project teams", paragraphs: [
         "Architects and interior designers can share elevations, curtain pockets, fabric intent and the expected visual line. Developers and contractors can include fixing details, delivery and access constraints, programme and where the electrical or controls scope sits.",
