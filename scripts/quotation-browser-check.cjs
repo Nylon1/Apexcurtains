@@ -32,6 +32,8 @@ const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42
    return route.abort();
   });
   const p=await ctx.newPage();p.on('pageerror',e=>pageErrors.push(e.message));
+  // Optional temporary preview share URL; never persist its access cookie or token.
+  if(process.env.REVIEW_ACCESS_URL)await p.goto(process.env.REVIEW_ACCESS_URL,{waitUntil:'networkidle'});
   async function shot(name){const y=await p.evaluate(()=>scrollY);await p.evaluate(()=>scrollTo(0,0));await p.screenshot({path:path.join(out,`${name}-${mode}.png`),fullPage:true});await p.evaluate(y=>scrollTo(0,y),y);await p.screenshot({path:path.join(out,`${name}-${mode}-viewport.png`)});}
   async function check(name){
    await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});
@@ -41,6 +43,7 @@ const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42
   const click=label=>p.getByRole('button',{name:label,exact:true}).click();
   // Unconsented start must not send counts.
   await p.goto(base+'/start-designing',{waitUntil:'networkidle'});
+  assert.equal(new URL(p.url()).origin,new URL(base).origin,'Preview access must reach the application, not an authentication page.');
   await check('guided-plain-opening');await shot('guided-plain-opening');await click('Continue without a photo');assert.deepEqual(counts,[]);
   await p.goto(base+'/start-designing?windowType=apex&room=bedroom&priority=privacy&suggestedHeading=wave&recommendationTitle=Example%20recommendation&photoName=Original%20photo%20note&visualiserRoom=tall-living-room&visualiserColour=linen',{waitUntil:'networkidle'});
   await check('guided-opening');await shot('guided-opening');
