@@ -539,9 +539,9 @@ export default function CurtainCarePage() {
           </p>
           <Link
             className="button"
-            href="/downloads/curtain-care/apex-curtain-care-handbook-d01.pdf"
+            href={careDocument.path}
           >
-            Download the care handbook · review edition ↗
+            Download the care handbook ↗
           </Link>
         </div>
       </section>
@@ -553,13 +553,13 @@ export default function CurtainCarePage() {
           Its own instructions.
         </h2>
         <p>
-          The handbook is a review edition. It includes space for your actual
+          The handbook includes space for your actual
           materials, track model, operating method and confirmed care
           instructions. General guidance cannot replace those project details.
         </p>
         <p className="small">
           {careDocument.reference} · {careDocument.revision} · 28 November 2026
-          · {careDocument.pages} A4 pages · PDF · Review edition
+          · {careDocument.pages} A4 pages · PDF · {careDocument.status}
         </p>
         <div className="links">
           <a className="button" href={careDocument.path}>

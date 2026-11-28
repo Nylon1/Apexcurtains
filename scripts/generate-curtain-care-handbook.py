@@ -1,4 +1,4 @@
-"""Generate the coordinated A4 review handbook from exported TypeScript content.
+"""Generate the coordinated A4 handbook from exported TypeScript content.
 Run npm run care:handbook. Requires reportlab, Pillow and svglib.
 Fonts: Windows Georgia/Arial; equivalent DejaVu fallback on Linux.
 """
@@ -14,6 +14,8 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPDF
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics.barcode.qr import QrCodeWidget
 from PIL import Image, ImageOps
 
 root=Path(__file__).resolve().parents[1]
@@ -25,7 +27,7 @@ for name,w,l in [('Serif','georgia.ttf','DejaVuSerif.ttf'),('Sans','arial.ttf','
 W,H=595.276,841.89;ink=HexColor('#203c33');paper=HexColor('#f6f3eb');sage=HexColor('#e6e9df')
 out=root/'public'/doc['path'].lstrip('/');out.parent.mkdir(parents=True,exist_ok=True)
 c=canvas.Canvas(str(out),pagesize=(W,H),invariant=1)
-c.setTitle('Apex Curtain Care Handbook - APX-C01 D01 review edition');c.setAuthor('Apex Curtains')
+c.setTitle(f"Apex Curtain Care Handbook - {doc['reference']} {doc['revision']}");c.setAuthor('Apex Curtains')
 def text(s,x,y,size=11,font='Sans'):
  c.setFillColor(ink);c.setFont(font,size);c.drawString(x,H-y,s)
 def para(s,x,y,w=511,size=10.5):
@@ -44,7 +46,7 @@ def start(n,title,kicker):
  c.setFillColor(paper);c.rect(0,0,W,H,fill=1,stroke=0)
  text('APEX CURTAINS',42,35,10,'Bold');text('CURTAIN CARE & STYLING',370,35,8);line(48)
  text(kicker.upper(),42,80,9,'Bold');text(title,42,122,29,'Serif')
- line(793);text('APX-C01 | D01 | 28 NOV 2026 | REVIEW EDITION',42,811,7.5);text(f'{n} / 8',526,811,8)
+ line(793);text(f"{doc['reference']} | {doc['revision']} | {doc['date']} | {doc['status'].upper()}",42,811,7.5);text(f'{n} / 8',526,811,8)
 def end():c.showPage()
 
 start(1,'A beautiful fall, cared for.','Your curtains / your care instructions')
@@ -110,7 +112,12 @@ for label,count in [('Project / room / window',1),('Face fabric / supplier / pro
  y+=count*18+31
 text('Apex Curtains',42,655,17,'Serif');text('apexcurtains.com/contact  |  0800 772 0367',42,677,10)
 c.linkURL('https://www.apexcurtains.com/contact',(42,H-684,350,H-660),relative=0)
-para('Online care guide: apexcurtains.com/curtain-care-and-styling<br/>QR activation is reserved until the permanent guide is approved and live.',42,691,350,8.5)
+guide_url='https://www.apexcurtains.com'+doc['guidePath']
+para('Online care guide: apexcurtains.com/curtain-care-and-styling<br/>Scan for the online guide. Keep your individual care sheets with this handbook.',42,691,350,8.5)
+c.linkURL(guide_url,(42,H-723,390,H-690),relative=0)
+qr=QrCodeWidget(guide_url);bounds=qr.getBounds();size=67
+d=Drawing(size,size,transform=[size/(bounds[2]-bounds[0]),0,0,size/(bounds[3]-bounds[1]),0,0]);d.add(qr)
+renderPDF.draw(d,c,479,H-722)
 para('Sources checked 28 Nov 2026: PT Oslo product care; Panaz Curtain Basecloth Sept 2025 pp. 2-3; Forest Shuttle S/M/L Oct 2025 p. 14; Shuttle Go V1.1 pp. 19-20; EasyTouch revision 041024. Exact links and scope accompany the online guide and release record.',42,732,511,7.8)
 end();c.save()
-print(f'Generated {out} (8 A4 pages, review edition).')
+print(f"Generated {out} (8 A4 pages, {doc['revision']}, {doc['status']}).")

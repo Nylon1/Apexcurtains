@@ -1,6 +1,6 @@
 # Curtain care, dressing and styling
 
-Approved design direction: 28 November 2026. Implementation review edition: **APX-C01 / D01 / 28 November 2026**. Production publication is not part of this branch. Payment and ordering content, enquiry validation, analytics configuration and professional workspace functionality are unchanged.
+Publication approved by the Apex project owner in this conversation ("Approved"), 28 November 2026. Current issue: **APX-C01 / R01 / 28 November 2026**. Approval covers the reviewed general care content and production release; it does not certify project-specific materials or manufacturer compatibility. Payment and ordering content, enquiry validation, analytics configuration and professional workspace functionality are unchanged.
 
 ## Content and evidence
 
@@ -27,11 +27,11 @@ Any additional lining, interlining or fabric supplier must be verified before su
 
 ## Handbook and revision process
 
-The eight-page A4 PDF is a **review edition**, not a claimed manufacturer-approved instruction. It covers dressing, headings, tiebacks/layers, cleaning, nine fabric/construction categories, operation and a project-specific record. It reserves QR activation until the permanent online guide is approved and live. The online HTML provides the accessible text equivalent; the current PDF is a visual print document, not a fully tagged accessible PDF.
+The eight-page A4 PDF is **published general guidance**, not a claimed manufacturer-approved instruction. It covers dressing, headings, tiebacks/layers, cleaning, nine fabric/construction categories, operation and a project-specific record. Its QR code links to the permanent online care guide. D01 remains unchanged as the historical review archive; new download links use R01. The online HTML provides the accessible text equivalent; the current PDF is a visual print document, not a fully tagged accessible PDF.
 
 Build with `npm run care:handbook`. This exports the shared TypeScript content, then renders the PDF. Python dependencies: ReportLab, Pillow and svglib. Georgia/Arial are used on Windows; DejaVu fonts are the Linux fallback. Render and inspect all eight pages after any content or font change. The checked-in generated content is tested against its TypeScript source to detect stale exports.
 
-Before issuing a publication revision:
+For future publication revisions:
 
 1. Record the content approver and date; confirm that project care instructions reconcile all supplied components.
 2. Confirm any material/system-specific claims against the actual product and current official manual.
@@ -43,6 +43,7 @@ Before issuing a publication revision:
 
 | Revision | Date | Change | Status |
 | --- | --- | --- | --- |
-| D01 | 2026-11-28 | Initial approved-direction implementation; eight-page handbook; aligned shared care advice | Review branch; not deployed to production |
+| D01 | 2026-11-28 | Initial approved-direction implementation; eight-page handbook; aligned shared care advice | Historical review archive |
+| R01 | 2026-11-28 | Owner-approved publication; revision labels and permanent guide QR activated; care advice unchanged | Authorised for production release |
 
 Verification details and rendered evidence are recorded in the PR release notes. No enquiry was submitted during testing.

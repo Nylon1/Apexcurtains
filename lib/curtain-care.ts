@@ -2,12 +2,12 @@
 // Evidence, scope and revision history: docs/care-styling/README.md.
 export const careDocument = {
   reference: "APX-C01",
-  revision: "D01",
+  revision: "R01",
   date: "2026-11-28",
   pages: 8,
-  path: "/downloads/curtain-care/apex-curtain-care-handbook-d01.pdf",
+  path: "/downloads/curtain-care/apex-curtain-care-handbook-r01.pdf",
   guidePath: "/curtain-care-and-styling",
-  status: "Review edition",
+  status: "Published guidance",
 } as const;
 export const carePrinciples = {
   cleaning:
