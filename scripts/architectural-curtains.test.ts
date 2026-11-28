@@ -7,6 +7,7 @@ import { POST } from "../app/api/send-lead/route";
 import { architecturalGuides } from "../lib/architectural-curtains";
 import { MAX_PROJECT_UPLOAD_BYTES, parseArchitecturalEnquiry, resolveProjectType } from "../lib/architectural-enquiry";
 import { estimateCurtainWeight } from "../lib/curtain-weight";
+import { enquiryBodyTooLarge, guidedPhotoError, MAX_LEAD_BODY_BYTES, projectFileError } from "../lib/enquiry-upload";
 
 function brief(type = "residential") {
   const form = new FormData();
@@ -141,6 +142,43 @@ test("enquiry counters accept only known same-origin stages with no payload or q
   assert.equal((await count("guided-start", "cross-site")).status, 403);
   assert.equal((await count("guided-start", "same-origin", "?extra=1")).status, 400);
   assert.equal((await count("guided-start", "same-origin", "", "extra")).status, 400);
+});
+
+test("early file feedback preserves request limits and includes multipart overhead", async () => {
+  const nearLimit = new File([new Uint8Array(MAX_LEAD_BODY_BYTES - 20)], "window.jpg", { type: "image/jpeg" });
+  assert.equal(guidedPhotoError(nearLimit), undefined);
+  const body = new FormData();
+  body.set("name", "A customer's enquiry details"); body.set("imageFile", nearLimit);
+  assert.equal(await enquiryBodyTooLarge(body), true);
+  body.set("imageFile", new File([new Uint8Array(3.5 * 1024 * 1024)], "window.jpg", { type: "image/jpeg" }));
+  assert.equal(await enquiryBodyTooLarge(body), false); // No new 3 MB guided allowance.
+  assert.match(guidedPhotoError(new File(["x"], "photo.heic", { type: "image/heic" }))!, /JPG, PNG or WebP/);
+  assert.match(guidedPhotoError(new File([], "photo.png", { type: "image/png" }))!, /empty/);
+  assert.match(projectFileError(new File(["x"], "drawing.pdf", { type: "image/png" }))!, /plain, unencrypted PDF/);
+  assert.equal(projectFileError(new File(["%PDF-1.4\n%%EOF"], "drawing.pdf", { type: "application/pdf" })), undefined);
+});
+
+test("guided delivery retains brief/context, escaping and a stable namespaced retry key", async (context) => {
+  const priorKey = process.env.RESEND_API_KEY;
+  process.env.RESEND_API_KEY = "key-for-local-test";
+  context.after(() => { if (priorKey === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = priorKey; });
+  const calls: { body: Record<string, unknown>; key: string | null }[] = [];
+  context.mock.method(globalThis, "fetch", async (_url: string, options: RequestInit) => {
+    calls.push({ body: JSON.parse(String(options.body)), key: new Headers(options.headers).get("Idempotency-Key") });
+    return Response.json({ id: "qa-guided" });
+  });
+  const payload = new FormData();
+  for (const [key, value] of Object.entries({ name: "<Customer>", email: "qa@example.com", phone: "07000000000", postcode: "SW1A 1AA", windowType: "Apex", roomType: "Bedroom", purpose: "Privacy", fabricStyle: "Not sure yet", liningType: "Not sure", headingStyle: "Not Sure", contactTime: "Anytime", recommendationTitle: "Arlo test", suggestedHeading: "Wave", photoName: "Original photo note", visualiserRoom: "tall-living-room", visualiserColour: "linen" })) payload.set(key, value);
+  const key = "aef6cf23-ac34-4100-93dd-1eea5d18ef2c";
+  for (let i=0;i<2;i++) assert.equal((await submit(payload, { "Idempotency-Key": key })).status, 200);
+  assert.equal(calls[0].key, `guided-enquiry/${key}`); assert.equal(calls[1].key, calls[0].key);
+  assert.deepEqual(calls[1].body, calls[0].body);
+  assert.match(String(calls[0].body.html), /&lt;Customer&gt;/);
+  assert.match(String(calls[0].body.text), /Original photo note/);
+  assert.match(String(calls[0].body.text), /Room Visualiser:/);
+  assert.match(String(calls[0].body.text), /Best Time to Contact: Anytime/);
+  assert.equal(calls[0].body.reply_to, "qa@example.com");
+  assert.deepEqual(calls[0].body.to, ["hello@apexcurtains.com"]);
 });
 
 test("CMS revisions are stable when republished and respect later editorial changes", () => {

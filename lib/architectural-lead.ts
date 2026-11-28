@@ -33,7 +33,7 @@ export async function sendArchitecturalLead(resend: Resend, form: FormData, requ
   const parsed = parseArchitecturalEnquiry(form);
   if (!parsed.success) {
     const field = parsed.error.issues[0]?.path[0] as keyof typeof projectFields;
-    return Response.json({ ok: false, error: `Check the ${(projectFields[field] ?? "project details").toLowerCase()} field and try again.` }, { status: 400 });
+    return Response.json({ ok: false, field, error: `Check the ${(projectFields[field] ?? "project details").toLowerCase()} field and try again.` }, { status: 400 });
   }
 
   const files = form.getAll("projectFiles").filter((file): file is File => file instanceof File && file.size > 0);

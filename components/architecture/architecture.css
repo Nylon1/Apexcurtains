@@ -274,6 +274,7 @@
 .arch-progress li[aria-current],.arch-progress li[data-complete="true"] { border-color: var(--studio-pine); }
 .arch-progress li[aria-current] { font-weight: 600; color: var(--studio-ink); border-top-width: 3px; }
 .arch-form-heading { margin-bottom: 1.35rem; }
+.arch-progress { scroll-margin-top: 92px; }
 .arch-form-heading p { margin-top: .5rem; color: var(--studio-muted); }
 .arch-form-heading h2,.arch-confirmation h2 { scroll-margin-top: 6rem; }
 .arch-planner fieldset {
@@ -299,6 +300,19 @@
 .arch-planner .arch-hint { color: #43554c; font-size: .88rem; font-weight: 400; }
 .arch-planner [role="alert"] { color: #882c1c; font-weight: 600; }
 .arch-planner .arch-trap { display: none; }
+.arch-brief-check { margin-bottom: 1.5rem; }
+.arch-brief-summary { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; margin-block: 1rem; }
+.arch-brief-summary dt { font-size: .88rem; color: var(--studio-muted); }
+.arch-brief-summary dd { margin-top: .25rem; overflow-wrap: anywhere; }
+.arch-brief-edits { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+.arch-brief-edits button,.arch-files button,.arch-enquiry-error button { min-height: 48px; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.arch-files li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--studio-rule); margin-top: .7rem; }
+.arch-files span { min-width: 0; overflow-wrap: anywhere; }
+.arch-enquiry-error { background: #fff0e6; border-left: 4px solid #8b321b; padding: 1rem 1.25rem; scroll-margin-top: 100px; overflow-wrap: anywhere; }
+.arch-planner .arch-enquiry-error { color: #65240f; font-weight: 400; }
+.arch-enquiry-error p { margin-bottom: .5rem; }
+.arch-planner .arch-fields :is(input,select,textarea) { font-size: 16px; min-height: 48px; }
+@media(max-width:520px) { .arch-brief-summary { grid-template-columns: minmax(0,1fr); } }
 .home-architecture {
   background: #eeede3;
   border-block: 1px solid #b9bbae;
