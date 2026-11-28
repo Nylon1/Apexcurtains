@@ -164,7 +164,7 @@ export const surveyGuide: SpecialistGuide = {
       title: "A clear next step, with the assumptions resolved",
       paragraphs: [
         "The survey informs the recommendation and quotation: curtain arrangement, fabric and lining, heading, track finish, fixing approach and installation access. Clarify what is included, any outstanding building work and decisions still to be confirmed before manufacture.",
-        "Tell us if flooring, ceiling work, doors or furniture positions change afterwards. Those changes may affect the curtain drop, the available clearance or the access plan. Timing, appointments and any survey charges should be confirmed for your project rather than assumed from a general guide.",
+        "Tell us if flooring, ceiling work, doors or furniture positions change afterwards. Those changes may affect the curtain drop, the available clearance or the access plan. Appointment arrangements and programme should be agreed for your project.",
       ],
       links: [
         {
