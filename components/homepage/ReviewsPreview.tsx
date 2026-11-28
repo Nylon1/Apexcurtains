@@ -7,7 +7,7 @@ export default function ReviewsPreview() {
       <figure>
         <Image
           src="/projects/cambridge-apex-curtains-cambridge.jpeg"
-          alt="Completed Cambridge Apex installation with full-height neutral curtains in a gable bedroom"
+          alt="Dressed curtain folds and matching tieback in a Cambridge installation"
           width={1000}
           height={1300}
           sizes="(max-width: 800px) 100vw, 45vw"
@@ -21,18 +21,18 @@ export default function ReviewsPreview() {
         <h2>
           See the rooms.
           <br />
-          Hear from the people
+          Explore the details
           <br />
-          who live in them.
+          that shape them.
         </h2>
         <p>
-          Explore a curated selection of real customer reviews alongside our
-          completed projects. Look closely at the folds, the roofline and the
+          Explore our completed projects while customer stories are being
+          prepared. Look closely at the folds, the roofline and the
           way each curtain sits within the room.
         </p>
         <div className="home-actions">
           <Link href="/reviews" className="home-button">
-            Read customer reviews ↗
+            Reviews and project information ↗
           </Link>
           <Link href="/gallery" className="home-text-link">
             Explore the installations ↗
