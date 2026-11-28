@@ -20,7 +20,8 @@
     "healthcare:check": "tsx scripts/healthcare-catalogue.ts",
     "test:healthcare-routes": "tsx --test scripts/healthcare-routes.test.ts",
     "test:architecture": "tsx --test scripts/architectural-curtains.test.ts",
-    "seo:crawl": "node scripts/public-seo-audit.mjs"
+    "seo:crawl": "node scripts/public-seo-audit.mjs",
+    "care:handbook": "tsx scripts/export-curtain-care.ts && python scripts/generate-curtain-care-handbook.py"
   },
   "dependencies": {
     "@react-pdf/renderer": "4.9.0",

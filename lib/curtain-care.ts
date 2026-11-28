@@ -1,0 +1,180 @@
+// Reviewed care principles shared by the guide and existing handover documents.
+// Evidence, scope and revision history: docs/care-styling/README.md.
+export const careDocument = {
+  reference: "APX-C01",
+  revision: "R01",
+  date: "2026-11-28",
+  pages: 8,
+  path: "/downloads/curtain-care/apex-curtain-care-handbook-r01.pdf",
+  guidePath: "/curtain-care-and-styling",
+  status: "Published guidance",
+} as const;
+export const carePrinciples = {
+  cleaning:
+    "Follow the individual care instructions for the complete curtain. A curtain-cleaning specialist must assess the face fabric, lining, interlining, trims and heading together. Neither washing nor dry cleaning is universally suitable. If instructions are missing or conflict, contact Apex before treatment.",
+  dust: "Where your care instructions allow it, use a clean soft attachment and low suction, supporting the cloth. Avoid trims, loose yarns and strong pulling. Leave high headings alone.",
+  spills:
+    "Follow the supplied care instructions. Do not rub, scrub or add water, sprays or stain remover without material-specific permission. Keep heat away and ask promptly about treatment, especially if the label is missing. Tell the specialist what was spilled and provide the fabric and lining references.",
+  highLevel:
+    "Do not climb, overreach, stand on furniture or remove heavy panels yourself. A specialist should assess the complete curtain and plan suitable access and handling. Professional removal, cleaning coordination, rehanging and maintenance are subject to individual assessment.",
+  initialDressing:
+    "Initial dressing is part of the professional finish: the installer checks the heading, layers, movement and hem. Everyday dressing means gently returning reachable folds to the arrangement shown at handover.",
+  dressing:
+    "Use an open hand to arrange comfortably reachable cloth gently from a stable floor-level position. Follow the established folds without pulling the heading, lining or hem. Leave hooks, carriers and retained apex points in place. Stop if the cloth catches or resists.",
+  settling:
+    "Packing and handling can leave creases. How a curtain settles depends on the weave, finish, weight, lining and interlining; there is no universal number of days. Steaming may be considered professionally only where the exact complete construction permits it. Do not assume a cool setting or a hidden test makes every material safe.",
+  protection:
+    "Keep cloth clear of damp surfaces, hot equipment and cleaning sprays. Manage condensation and ventilate normally, keeping curtains dry. Reduce prolonged strong sunlight where possible; lining can reduce exposure but cannot prevent all fading. Do not treat mould or staining without the actual care guidance.",
+  operation:
+    "Release tiebacks from travelling panels and check the visible route for obstructions. Use the supplied control, baton or demonstrated hand operation. Retained apex sections stay in place. Touch-start and manual override depend on the installed motor and settings; do not pull a motorised curtain to test whether they are enabled.",
+  motorHelp:
+    "Stop if movement is uneven, noisy or obstructed. From floor level, note what happened and check the correct remote channel. Keep the remote dry and protected from impact; follow its exact-model battery instructions. Do not reset limits, change programming, open electrical equipment or spray the track. Contact Apex with the project reference and, if useful, a video taken from a safe position.",
+} as const;
+export const careHeadings = [
+  [
+    "Pencil",
+    "Follow the gathered rhythm below the tape. Do not retension cords or reposition hooks as an everyday adjustment.",
+  ],
+  [
+    "Single pinch",
+    "Guide each sewn pleat into its natural fall. Do not pull open or flatten the stitched pinch.",
+  ],
+  [
+    "Double pinch",
+    "Keep each paired group together and the spaces balanced. Do not make new creases by squeezing the cloth.",
+  ],
+  [
+    "Triple pinch",
+    "Support the fuller grouped folds gently. Avoid crushing the heading or compressing a bulky stack.",
+  ],
+  [
+    "Wave",
+    "Maintain the alternating front-and-back sequence already set at handover. Do not unclip or respace carriers.",
+  ],
+  [
+    "Apex",
+    "Work only with the reachable cloth. Leave retained points and high headings in place; move only the sections demonstrated.",
+  ],
+] as const;
+export const careFabrics = [
+  [
+    "Velvet",
+    "Pile and light can make the same cloth look different across a fold. Avoid pressure, rubbing and brushing against an unconfirmed pile direction. No home steaming or pressing unless the precise fabric and complete curtain instructions expressly allow it.",
+  ],
+  [
+    "Linen & linen blends",
+    "A relaxed surface and changes in hang can be part of the cloth’s character. Moisture and room conditions may affect the drop; do not tug, weight or trim a hem to chase a change. Seek advice if it catches or pulls unevenly.",
+  ],
+  [
+    "Cotton",
+    "Fibre composition alone does not establish a cleaning method. Dyes, prints, finishes and the lining may respond differently to moisture. Keep the complete-curtain instruction with the fabric reference.",
+  ],
+  [
+    "Polyester",
+    "Do not infer that polyester curtains are machine washable, heat-safe or dimensionally fixed. The actual weave, finish, heading and sewn layers determine care.",
+  ],
+  [
+    "Textured woven fabrics",
+    "Avoid snagging floating yarns with jewellery, brushes or vacuum nozzles. Do not pull loose threads or rub a raised area. Ask Apex about a new snag or change in texture.",
+  ],
+  [
+    "Voiles & sheers",
+    "Use clean hands and support the light cloth without pulling seams. Keep each layer clear of the neighbouring track and curtain. Do not use strong suction; washing still depends on the actual made-up curtain.",
+  ],
+  [
+    "Blackout-lined curtains",
+    "Keep coatings away from unapproved heat, moisture, chemicals and friction. Do not scrub, pin or tape a lining to eliminate edge light. Supplier permission for the face cloth does not authorise cleaning the coating.",
+  ],
+  [
+    "Thermal-lined curtains",
+    "Thermal is a performance description, not a care method. Identify the lining product and coating before any treatment; prevent damp hems and contact with hot surfaces.",
+  ],
+  [
+    "Interlined curtains",
+    "Three or more layers can respond differently to moisture and cleaning. Ask a specialist to assess the full construction and handling weight. High or heavy panels need planned removal and rehanging.",
+  ],
+] as const;
+export const careProblems = [
+  [
+    "01",
+    "A fold looks uneven",
+    "Gently arrange reachable cloth without pulling seams. If it resists or returns to an unusual shape, ask Apex.",
+  ],
+  [
+    "02",
+    "The curtain catches",
+    "Stop operating it. Check only visible tiebacks and obstructions from a safe position; do not keep cycling the motor.",
+  ],
+  [
+    "03",
+    "A hem changes height",
+    "Note the change and any room-condition changes. Do not stretch, trim or rehook it yourself.",
+  ],
+  [
+    "04",
+    "A spill, mark or damp patch",
+    "Keep cleaning products and heat away until the actual care requirements are confirmed.",
+  ],
+  [
+    "05",
+    "A bracket moves or a panel drops",
+    "Stop use, keep people clear and contact Apex. Do not test it by pulling or attempt a high-level repair.",
+  ],
+  [
+    "06",
+    "The remote does not respond",
+    "Confirm the correct channel and exact-model battery instructions. Leave pairing, wiring and motor settings to professional advice.",
+  ],
+] as const;
+export const careSources = [
+  {
+    id: "M01",
+    title: "Prestigious Textiles — Oslo Ivory, 7154/007",
+    href: "https://www.prestigious.co.uk/fabrics-detail/oslo-fjord/oslo-oslo-fjord/oslo-ivory/",
+    revision:
+      "Current product page; retrieved 28 Nov 2026. Composition and care-symbol images inspected.",
+    scope:
+      "50% cotton / 50% polyester; face-fabric wash/iron symbols do not authorise treatment of a made-up lined curtain. Oslo is identified in existing Apex fabric guidance.",
+  },
+  {
+    id: "M03",
+    title: "Panaz — Curtain Basecloth card",
+    href: "https://panaz.com/wp-content/uploads/2025/09/Curtain-Basecloth-card-Sept.2025-WEB.pdf",
+    revision: "September 2025; 3 pages; care rows pp. 2–3.",
+    scope:
+      "Product-specific cleaning symbols differ, including dry-cleaning restrictions for certain coated cloths. Panaz appears in Apex commercial product records; these are not universal domestic-curtain instructions.",
+  },
+  {
+    id: "M05",
+    title: "Forest — Technical documents index",
+    href: "https://www.forestgroup.com/en/downloads/technical-documents",
+    revision: "Official index checked 28 Nov 2026.",
+    scope:
+      "Use current links from this index and archive the applicable revision per installed model. Search results can surface older manuals.",
+  },
+  {
+    id: "M06",
+    title: "Forest — Shuttle S/M/L Receiver manual",
+    href: "https://www.forestgroup.com/user_files/download_files/download_2180_FOREST_manualA5_shuttle_ENG_021025_DRUK.pdf",
+    revision: "INST_SHUTTLE_ENG_OCT25; 14 pages; maintenance p. 14.",
+    scope:
+      "Model-specific inspection and maintenance requirements. Do not reproduce a general lubricant recommendation: exact products and wording vary between revisions. Touch control depends on installation/settings.",
+  },
+  {
+    id: "M07",
+    title: "Forest — Shuttle Go manual",
+    href: "https://www.forestgroup.com/user_files/download_files/download_2465_260425%2006014_Forest%20Shuttle%20Go_UM_V1.1_EN.pdf",
+    revision: "V1.1; 22 pages; troubleshooting p. 19, maintenance p. 20.",
+    scope:
+      "Use the exact Go model’s instructions. Resetting travel limits and setup procedures are not included in the customer guide.",
+  },
+  {
+    id: "M08",
+    title: "Forest — EasyTouch remote manual",
+    href: "https://www.forestgroup.com/user_files/download_files/download_1618_handleiding84x178_EasyTouch_EN_041024_WEB.pdf",
+    revision:
+      "File revision 041024; 16 pages; controls/battery pp. 6–8, operation p. 10, troubleshooting p. 14.",
+    scope:
+      "Model-specific channel and battery checks are useful. Do not universalise battery types, LED meanings, pairing or programming across remotes.",
+  },
+] as const;

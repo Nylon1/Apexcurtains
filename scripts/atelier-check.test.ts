@@ -2,6 +2,27 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 import { additionalCareWindows } from "../lib/atelier/care";
+import { careGuide, standardCareSummary, careHandover } from "../lib/atelier/care";
+import { brochureCareGuide } from "../lib/atelier/brochure-care";
+import { careDocument, carePrinciples, careFabrics, careHeadings, careSources } from "../lib/curtain-care";
+
+test("care handover and print exports preserve the reviewed complete-curtain policy", () => {
+  assert.equal(standardCareSummary, carePrinciples.cleaning);
+  for (const group of careGuide) {
+    assert.deepEqual(brochureCareGuide.find((item) => item.id === group.id)?.sections.map(({ title, text }) => ({ title, text })), group.sections);
+  }
+  const wording = JSON.stringify({ careGuide, brochureCareGuide, careHandover });
+  assert.doesNotMatch(wording, /dry clean only|for a day or two|Remove the bands|gently trying again/i);
+  assert.match(wording, /Neither washing nor dry cleaning is universally suitable/);
+  assert.match(wording, /Do not reset limits/);
+  const printed = JSON.parse(readFileSync("docs/care-styling/content-for-handbook.json", "utf8"));
+  assert.deepEqual(printed.document, careDocument);
+  assert.deepEqual(printed.principles, carePrinciples);
+  assert.deepEqual(printed.fabric, careFabrics);
+  assert.deepEqual(printed.headings, careHeadings);
+  assert.deepEqual(printed.sources, careSources);
+  assert.deepEqual(printed.careGuide, careGuide);
+});
 import {
   windowGeometry,
   normaliseGeometry,

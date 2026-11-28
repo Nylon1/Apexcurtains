@@ -162,6 +162,7 @@ export const liningsGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-care-and-styling", label: "Curtain care, dressing and styling" },
     { href: "/curtain-headings#fullness", label: "How layers change the fold" },
     { href: "/curtain-tracks", label: "The right foundation" },
     { href: "/curtain-tiebacks", label: "The finishing touch" },
