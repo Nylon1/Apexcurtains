@@ -201,7 +201,7 @@ export default function WindowEditorialPage({
           </Link>
           <div className="guide-inline-links">
             <Link href="/gallery">More completed rooms ↗</Link>
-            <Link href="/reviews">What our customers say ↗</Link>
+            <Link href="/reviews">Reviews and project information ↗</Link>
           </div>
         </div>
       </section>

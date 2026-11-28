@@ -36,7 +36,7 @@ const hasPermanentHostRedirect =
   nextConfig.includes('value: "apexcurtains.com"') &&
   nextConfig.includes('destination: "https://www.apexcurtains.com/:path*"');
 
-const curatedReviewCount = (reviewsPage.match(/\n    name: "/g) || []).length;
+const embeddedReviewCount = (reviewsPage.match(/\n    name: "/g) || []).length;
 
 expect(
   "final canonical origin is www",
@@ -104,26 +104,31 @@ expect(
   "City pages must preserve the confirmed local address/locality model while connecting it to the main Apex organization."
 );
 expect(
-  "reviews use a curated static selection",
+  "reviews preserve the indexable route without unsupported testimonials",
   !reviewsPage.includes("function makeReviews") &&
     !reviewsPage.includes("sampleTexts") &&
-    curatedReviewCount === 10 &&
+    embeddedReviewCount === 0 &&
+    !reviewsPage.includes("<blockquote") &&
+    !reviewsPage.includes("aggregateRating") &&
+    reviewsPage.includes('id="customer-stories"') &&
+    reviewsPage.includes('canonical: `${SITE_URL}/reviews`') &&
     !reviewsPage.includes("index: false"),
-  "The reviews route should publish a curated set of 10 customer records without regenerating a 100-review wall."
+  "The approved interim reviews page must preserve its canonical and legacy fragment without publishing sample-origin quotes or ratings."
 );
 expect(
-  "curated reviews route is included in sitemap",
+  "reviews route remains included in sitemap",
   sitemapPages.includes('loc: `${baseUrl}/reviews`'),
-  "The indexable curated reviews page should be submitted in the XML sitemap."
+  "The established reviews URL should remain indexable and included in the XML sitemap."
 );
 expect(
-  "homepage points to curated reviews without regenerating review records",
+  "legacy homepage trust component avoids unsupported review claims",
   !reviewsPreview.includes("Sarah L") &&
     !reviewsPreview.includes("David R") &&
     !reviewsPreview.includes("Emma W") &&
     reviewsPreview.includes('href="/reviews"') &&
-    reviewsPreview.includes("curated selection of real customer reviews"),
-  "Homepage trust content should link to the curated reviews page without rebuilding a separate generated review wall."
+    !reviewsPreview.includes("real customer reviews") &&
+    !reviewsPreview.includes("<blockquote"),
+  "The legacy component must not reintroduce unsupported customer testimony when reused."
 );
 expect(
   "homepage opens directly onto the real architectural project",
