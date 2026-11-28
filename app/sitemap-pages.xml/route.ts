@@ -10,6 +10,7 @@ export const dynamic = "force-static";
 
 export async function GET() {
   const urls = [
+    { loc: `${baseUrl}/curtain-care-and-styling`, changefreq: "monthly", priority: "0.80" },
     ...[...Object.values(architecturalGuides).map((guide) => guide.path), architecturalPlannerPath].map((path) => ({ loc: `${baseUrl}${path}` })),
     ...[HEALTHCARE_ROOT, `${HEALTHCARE_ROOT}/fabrics`, `${HEALTHCARE_ROOT}/quotation`, ...pages.map(p => `${HEALTHCARE_ROOT}/${p.slug}`), ...sectors.map(s => `${HEALTHCARE_ROOT}/settings/${s.slug}`), ...publishedProducts.map(productUrl)].map(path => ({ loc: `${baseUrl}${path}`, lastmod: "2026-11-11", changefreq: "monthly", priority: "0.80" })),
     {

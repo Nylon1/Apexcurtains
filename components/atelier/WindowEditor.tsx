@@ -12,7 +12,7 @@ import {
 import { Field, Section, Toggle, WindowDiagram } from "./Fields";
 import ApexMeasurements from "./ApexMeasurements";
 import { shapeName } from "@/lib/atelier/geometry";
-import { careGuide, standardCareSummary } from "@/lib/atelier/care";
+import { careGuide, standardCareSummary, standardCareTitle } from "@/lib/atelier/care";
 import { brochurePalette } from "@/lib/atelier/brochure";
 import {
   forestTracks,
@@ -819,7 +819,7 @@ export default function WindowEditor({
             >
               <div className="at-standard-care">
                 <span className="at-eyebrow">INCLUDED FOR EVERY WINDOW</span>
-                <h3>Dry clean only</h3>
+                <h3>{standardCareTitle}</h3>
                 <p>{standardCareSummary}</p>
                 <p className="at-care-included">
                   Cleaning, dressing the folds and everyday questions are

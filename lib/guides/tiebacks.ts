@@ -125,6 +125,7 @@ export const tiebacksGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-care-and-styling", label: "Curtain care, dressing and styling" },
     { href: "/curtain-linings", label: "The colour behind the folds" },
     {
       href: "/triangular-window-curtains",

@@ -1,30 +1,24 @@
-// Shared wording for the survey, client preview and generated documents.
-// Source review is recorded in docs/atelier.md. This is Apex's standard policy;
-// the professional cleaner must still check the complete curtain construction.
-export const standardCareTitle = "Dry clean only";
-export const standardCareSummary =
-  "Professional dry cleaning only. Do not machine wash, hand wash, soak, bleach or tumble dry. Ask a curtain-cleaning specialist to check the sewn-in care labels, face fabric, lining, interlining and trims before treatment. If a label conflicts with this guide, contact Apex before cleaning.";
-
+import { carePrinciples } from "../curtain-care";
+// Shared by survey, client preview, workroom and fitter handover. No stored notes are changed.
+export const standardCareTitle = "Care for the complete curtain";
+export const standardCareSummary = carePrinciples.cleaning;
 export const careGuide = [
   {
     id: "cleaning",
     eyebrow: "CARING FOR YOUR COLLECTION",
     title: "Beautiful today. Cared for over time.",
     introduction:
-      "A little thoughtful care preserves the softness, shape and quiet beauty of your curtains. These instructions accompany every curtain in your Apex collection.",
+      "Keep the individual care instructions for your complete curtain with your collection. A face-fabric label alone does not determine the care of its sewn layers.",
     sections: [
-      { title: standardCareTitle, text: standardCareSummary },
-      {
-        title: "A gentle everyday routine",
-        text: "Remove loose dust regularly with a clean upholstery brush on the lowest vacuum suction. Support the fabric and work gently downwards without pulling it into the nozzle. Take extra care with delicate weaves, embellishments and velvet pile; ask us if you are unsure which attachment to use.",
-      },
+      { title: "The complete curtain", text: carePrinciples.cleaning },
+      { title: "A gentle everyday routine", text: carePrinciples.dust },
       {
         title: "Spills, marks and accidental splashes",
-        text: "Blot a fresh spill gently with a clean, dry, white cloth. Do not rub, scrub or add water, detergent, stain remover or fabric-freshener spray. Keep the area free of heat and contact a professional cleaner promptly, explaining what was spilled and the curtain's fabric and lining.",
+        text: carePrinciples.spills,
       },
       {
-        title: "Before and after a professional clean",
-        text: "Arrange cleaning of a matching pair together. Photograph the hanging arrangement and label each panel by room, window and side. Ask the cleaner about removable hooks and accessories; do not dismantle sewn headings. Once fully dry and aired, have the curtains rehung and dressed. For heavy or high-level curtains, arrange assistance from Apex.",
+        title: "Professional cleaning and handling",
+        text: carePrinciples.highLevel,
       },
     ],
   },
@@ -33,24 +27,18 @@ export const careGuide = [
     eyebrow: "THE ART OF A BEAUTIFUL FALL",
     title: "Dressing your curtains.",
     introduction:
-      "Dressing simply means encouraging the fabric to follow its intended folds. Work gently, with clean, dry hands, and let the heading guide the shape.",
+      "Initial dressing is part of the professional finish: the installer checks the heading, layers, movement and hem. Everyday dressing means gently returning reachable folds to the arrangement shown at handover.",
     sections: [
       {
-        title: "01 / Find the natural folds",
-        text: "Draw each curtain towards its usual resting position. Starting below the heading, arrange the folds evenly and guide them down towards the hem with an open hand. Follow the pleats already sewn into the heading. For a wave heading, keep the alternating forward and backward folds in their intended sequence.",
+        title: "01 / Notice the rhythm",
+        text: "With clean, dry hands, look at the folds established at handover. Keep sewn pleats together and a wave heading’s alternating sequence intact. Move only the panels demonstrated for your system.",
       },
+      { title: "02 / Guide reachable cloth", text: carePrinciples.dressing },
       {
-        title: "02 / Encourage, never squeeze",
-        text: "For fabrics that can be loosely dressed, hold the arranged folds with broad, soft, clean fabric bands for a day or two. Leave room for the fabric to breathe and remove the bands if marks appear. Do not use string, clips, adhesive tape or tight knots. Ask Apex before banding velvet or delicate, textured or embellished fabrics.",
+        title: "03 / Let the hem rest",
+        text: "Leave each layer and hem free of obstructions. Do not stretch the cloth, tug the hem, bind folds or add weights. Tiebacks should cradle the folds at the agreed position without crushing or pulling sideways.",
       },
-      {
-        title: "03 / Let the hem rest naturally",
-        text: "Remove the bands, open and close the curtains gently, then guide the folds back into place. Do not tug the hem, stretch the cloth or add weights. Arrange a puddled finish loosely on a clean floor. Tiebacks should cradle the folds without pulling the curtain sideways or crushing the fabric.",
-      },
-      {
-        title: "04 / Creases need patience",
-        text: "Packing and handling can leave temporary creases that may soften as the curtains hang. Allow the fabric to fall naturally and gently guide the folds during everyday use. Do not tug the hem or stretch the cloth. Avoid home steaming or ironing; heat and moisture can mark a face fabric or damage a lining.",
-      },
+      { title: "04 / Creases and settling", text: carePrinciples.settling },
     ],
   },
   {
@@ -58,39 +46,34 @@ export const careGuide = [
     eyebrow: "LIVING BEAUTIFULLY WITH YOUR CURTAINS",
     title: "Small questions, thoughtful answers.",
     introduction:
-      "Curtains are made from flexible textiles, so their appearance can change with light, handling and the room around them. These simple routines help you enjoy their natural character and keep them looking their best.",
+      "Notice how your curtains hang and move. Gentle everyday adjustments are different from changing the heading, track or installed motor settings.",
     sections: [
       {
-        title: "A little time to settle",
-        text: "Fabric can relax after hanging, and humidity or professional cleaning may affect its dimensions. Allow the curtains to hang freely, release tight tiebacks and gently arrange the folds. Check that the cloth is not caught behind furniture. Small changes are part of living with textiles; avoid stretching, trimming the hem or repositioning hooks to chase a temporary change.",
+        title: "A change in the hang",
+        text: "Room conditions and the construction can affect the fall. Keep layers free of obstructions; do not stretch, trim or rehook a curtain to chase a change. Contact Apex if a hem begins to catch or the lining pulls unevenly.",
       },
       {
         title: "Texture, sheen and pressure marks",
-        text: "Slubs and slight variations can be part of a natural weave. Velvet and other pile fabrics can look lighter or darker as the light, folds and pile direction change. This is part of the fabric's character. Avoid rubbing or pressing a patch that looks different, and never pull a snag or loose thread.",
+        text: "Slubs and variations can be part of a weave. Pile fabrics can look different as the light and fold direction change. Do not rub a pressure mark, brush an unconfirmed pile direction or pull a snag or loose thread.",
       },
       {
         title: "Sunlight, condensation and warmth",
-        text: "Protect the fabric from prolonged strong sunlight where possible, and keep it away from hot surfaces, damp glass and cleaning sprays. Ventilate the room and wipe condensation from the glass, keeping the curtains dry. Do not apply bleach to the curtain or lining. Any mould or staining should be assessed by a professional curtain cleaner rather than treated at home.",
+        text: carePrinciples.protection,
       },
       {
         title: "Movement, tracks and tiebacks",
-        text: "Open and close the moving curtain panels manually by hand, holding the leading edge rather than pulling on the hem. Release tiebacks before closing and keep the track clear. For an occasional catch, pause and check for trapped folds or nearby furniture before gently trying again. Some apex panels are fixed in place and should not be moved. Never force movement or apply household oil to the track.",
+        text: carePrinciples.operation,
       },
       {
         title: "Blackout lining and edge light",
-        text: "Blackout lining limits light passing through the fabric, but some light around the top, sides or centre opening is normal. Release tiebacks, close the moving panels fully and gently arrange the centre overlap. Do not try to move fixed apex panels or pin, tape or glue the lining to the window.",
+        text: "Blackout lining limits light through the cloth; light around the edges may remain. Close only moving sections as demonstrated and gently arrange reachable overlaps. Never move retained apex points or pin, tape or glue a lining to the window.",
       },
-      {
-        title: "A little care, often",
-        text: "Regular care and good maintenance are the key. Follow the gentle dust-removal routine, keep tracks clear and release tiebacks before closing. Guide the folds back into place after use and allow the fabric to hang naturally. Small, consistent habits help preserve the appearance and easy operation of your curtains.",
-      },
+      { title: "If operation changes", text: carePrinciples.motorHelp },
     ],
   },
 ] as const;
-
 export const careHandover =
-  "Demonstrate opening and closing moving panels gently by hand, releasing tiebacks and dressing the folds. Identify fixed apex panels. Explain Dry clean only and the brochure's care guide. Reassure the customer about normal settling, creases, texture and edge light. Show checks for occasional catches and stress regular dusting, clear tracks and gentle movement.";
-
+  "Demonstrate the installed manual, corded or motorised operating method, releasing tiebacks from travelling panels and keeping the route clear. Identify retained apex sections and show safe, reachable fold adjustments. Provide the actual complete-curtain care instructions and source references; do not infer washing or dry-cleaning permission from the face cloth alone. Explain when to stop operation and ask Apex, and confirm any individually assessed access or maintenance arrangements.";
 export function additionalCareWindows<
   T extends { careInstructions: string; careSource: string },
 >(windows: T[]) {

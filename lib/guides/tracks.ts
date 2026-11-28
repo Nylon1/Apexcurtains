@@ -226,6 +226,7 @@ export const tracksGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-care-and-styling", label: "Curtain care, dressing and styling" },
     {
       href: "/professionals/architects#recess-and-clearance",
       label: "Coordinate recesses and curtain space",

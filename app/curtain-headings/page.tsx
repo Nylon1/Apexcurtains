@@ -573,8 +573,8 @@ export default function Page() {
             access method.
           </p>
           <div className="headings-link-row">
-            <Link href="/services/premium-installation">
-              Installation &amp; aftercare ↗
+            <Link href="/curtain-care-and-styling#heading">
+              Curtain care &amp; dressing ↗
             </Link>
             <Link href="/curtain-tiebacks">
               Tieback sizing &amp; positioning ↗

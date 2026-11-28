@@ -100,7 +100,7 @@ export const architecturalGuides = {
         "Coordinate power, cable routes and future service access with the electrical contractor before ceiling finishes are closed. Commissioning includes testing travel and limits, checking stack positions and clearance, identifying controls and demonstrating normal and power-loss operation for the final configuration.",
       ] },
     ],
-    related: [tall, shaped, { href: "/curtain-tracks", label: "Architectural curtain track guide" }, install, weight, { href: "/room-visualiser", label: "Explore fabric and colour in the room visualiser" }],
+    related: [{ href: "/curtain-care-and-styling#operation", label: "Everyday operation and curtain care" }, tall, shaped, { href: "/curtain-tracks", label: "Architectural curtain track guide" }, install, weight, { href: "/room-visualiser", label: "Explore fabric and colour in the room visualiser" }],
     sources: [
       { href: "https://www.forestgroup.com/uk/products/forest-motorised-track-system", label: "Forest FMS UK specification" },
       { href: "https://forestgroup.com/uk/products/fms-plus-motorised-curtain-track", label: "Forest FMS Plus UK specification" },

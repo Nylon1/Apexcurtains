@@ -1,0 +1,115 @@
+{
+  "base": "http://127.0.0.1:3117",
+  "results": [
+    {
+      "name": "desktop",
+      "status": 200,
+      "overflow": false,
+      "brokenImages": [],
+      "h1": [
+        "Curtain care.A thoughtfuldaily routine."
+      ],
+      "canonical": "https://www.apexcurtains.com/curtain-care-and-styling",
+      "title": "Curtain Care, Dressing & Styling Guide | Apex Curtains",
+      "description": "Visual guidance for dressing curtain folds, caring for fabrics and linings, operating tracks and recognising when tall or motorised curtains need specialist aftercare.",
+      "keyboardDisclosure": true,
+      "axe": [],
+      "enquiryTracking": [
+        {
+          "event": "consultation_cta_click"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "name": "mobile",
+      "status": 200,
+      "overflow": false,
+      "brokenImages": [],
+      "h1": [
+        "Curtain care.A thoughtfuldaily routine."
+      ],
+      "canonical": "https://www.apexcurtains.com/curtain-care-and-styling",
+      "title": "Curtain Care, Dressing & Styling Guide | Apex Curtains",
+      "description": "Visual guidance for dressing curtain folds, caring for fabrics and linings, operating tracks and recognising when tall or motorised curtains need specialist aftercare.",
+      "keyboardDisclosure": true,
+      "axe": [],
+      "enquiryTracking": [
+        {
+          "event": "consultation_cta_click"
+        }
+      ],
+      "pageErrors": []
+    },
+    {
+      "name": "narrow",
+      "status": 200,
+      "overflow": false,
+      "brokenImages": [],
+      "h1": [
+        "Curtain care.A thoughtfuldaily routine."
+      ],
+      "canonical": "https://www.apexcurtains.com/curtain-care-and-styling",
+      "title": "Curtain Care, Dressing & Styling Guide | Apex Curtains",
+      "description": "Visual guidance for dressing curtain folds, caring for fabrics and linings, operating tracks and recognising when tall or motorised curtains need specialist aftercare.",
+      "keyboardDisclosure": true,
+      "axe": [],
+      "enquiryTracking": [
+        {
+          "event": "consultation_cta_click"
+        }
+      ],
+      "pageErrors": []
+    }
+  ],
+  "connections": [
+    {
+      "route": "/services/premium-installation",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/services/premium-installation"
+    },
+    {
+      "route": "/curtain-fabrics",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/curtain-fabrics"
+    },
+    {
+      "route": "/curtain-linings",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/curtain-linings"
+    },
+    {
+      "route": "/curtain-tracks",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/curtain-tracks"
+    },
+    {
+      "route": "/curtain-tiebacks",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/curtain-tiebacks"
+    },
+    {
+      "route": "/curtain-headings",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/curtain-headings"
+    },
+    {
+      "route": "/motorised-curtain-systems",
+      "status": 200,
+      "careLinks": 1,
+      "canonical": "https://www.apexcurtains.com/motorised-curtain-systems"
+    }
+  ],
+  "pdf": {
+    "status": 200,
+    "type": "application/pdf",
+    "bytes": 1335634
+  },
+  "sitemapIncludes": true
+}

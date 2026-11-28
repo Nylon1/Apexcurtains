@@ -167,6 +167,7 @@ export const installationGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-care-and-styling", label: "Curtain care, dressing and styling" },
     {
       href: "/professionals/contractors-fit-out#site-readiness",
       label: "Coordinate site readiness with your team",

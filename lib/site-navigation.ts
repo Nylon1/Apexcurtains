@@ -58,6 +58,7 @@ export const navigationGroups: NavigationGroup[] = [
       { label: "Survey and consultation", href: "/services/measure-consultation", note: "Geometry, fixing surfaces and access" },
       { label: "Design and manufacture", href: "/oversized-curtain-manufacturing", note: "Fabric, construction and workroom planning" },
       { label: "High-level installation", href: "/high-level-curtain-installation", note: "Survey, difficult access and commissioning" },
+      { label: "Curtain care and styling", href: "/curtain-care-and-styling", note: "Dressing, cleaning and everyday operation" },
       { label: "Installation and aftercare", href: "/services/premium-installation", note: "Dressing, handover and care" },
       { label: "Fabric, tracks and headings", href: "/curtain-design-guide", note: "A guide to designing the whole treatment" },
       { label: "Room visualiser", href: "/room-visualiser", note: "Explore curtain colour with room finishes" },

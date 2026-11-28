@@ -141,6 +141,7 @@ export const fabricsGuide: SpecialistGuide = {
     },
   ],
   related: [
+    { href: "/curtain-care-and-styling", label: "Curtain care, dressing and styling" },
     { href: "/curtain-colours-and-tones", label: "Colour in the room" },
     { href: "/curtain-linings", label: "The layer behind the cloth" },
     { href: "/gable-end-curtains", label: "A generous scale" },
