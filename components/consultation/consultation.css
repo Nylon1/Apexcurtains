@@ -1,0 +1,731 @@
+/* The legacy base layer gives every main a dark !important background. */
+@layer base {
+  .public-presentation main.consultation-experience {
+    background-color: var(--studio-paper) !important;
+  }
+}
+.consultation-experience {
+  --paper: #f7f3eb;
+  --stone: #ece5d9;
+  --ink: #24352e;
+  --muted: #536057;
+  --pine: #203b33;
+  --night: #172c25;
+  --bronze: #795b33;
+  --rule: #c4bbae;
+  --white: #fffaf1;
+}
+.consultation-experience * {
+  box-sizing: border-box;
+}
+.consultation-experience {
+  margin: 0;
+  padding-top: 68px;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    16px/1.7 var(--font-geist-sans),
+    Arial,
+    sans-serif;
+}
+.consultation-experience a {
+  color: inherit;
+  text-underline-offset: 5px;
+}
+.consultation-experience a:hover {
+  text-decoration-thickness: 2px;
+}
+.consultation-experience a:focus-visible,
+.consultation-experience summary:focus-visible,
+.consultation-experience input:focus-visible,
+.consultation-experience [tabindex]:focus-visible {
+  outline: 3px solid #a77128;
+  outline-offset: 5px;
+}
+.consultation-experience h1,
+.consultation-experience h2,
+.consultation-experience h3,
+.consultation-experience p,
+.consultation-experience figure {
+  margin: 0;
+}
+.consultation-experience h1,
+.consultation-experience h2,
+.consultation-experience h3 {
+  font-family: var(--font-apex-display), Georgia, serif;
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.026em;
+}
+.consultation-experience h1 {
+  font-size: clamp(44px, 4.6vw, 74px);
+}
+.consultation-experience h2 {
+  font-size: clamp(36px, 3.6vw, 58px);
+}
+.consultation-experience h3 {
+  font-size: clamp(29px, 2.3vw, 37px);
+}
+.consultation-experience p + p {
+  margin-top: 16px;
+}
+.consultation-experience p {
+  max-width: 68ch;
+}
+.consultation-experience h2 + p,
+.consultation-experience h3 + p {
+  margin-top: 22px;
+}
+.consultation-experience img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.consultation-experience figcaption {
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 12px 0;
+  color: var(--muted);
+}
+.consultation-experience .wrap {
+  width: min(1280px, 89%);
+  margin: auto;
+}
+.consultation-experience .section {
+  padding: 88px 0;
+}
+.consultation-experience .compact {
+  padding-bottom: 42px;
+}
+.consultation-experience .eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.consultation-experience .intro {
+  font-size: 19px;
+  line-height: 1.65;
+  margin-top: 25px;
+}
+.consultation-experience .narrow {
+  max-width: 740px;
+}
+.consultation-experience .small {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.consultation-experience .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 49px;
+  padding: 13px 23px;
+  background: var(--pine);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.consultation-experience .button.light {
+  background: #e3d3af;
+  color: var(--night);
+}
+.consultation-experience .text-link {
+  font-size: 14px;
+  display: inline-block;
+  padding: 10px 0;
+  font-weight: 500;
+}
+.consultation-experience .actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 28px 0;
+}
+.consultation-experience .hero {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  align-items: stretch;
+}
+.consultation-experience .hero-copy {
+  padding: 48px 11% 46px 12%;
+}
+.consultation-experience .breadcrumb {
+  font-size: 12px;
+  margin-bottom: 50px;
+  color: var(--muted);
+}
+.consultation-experience .hero-photo {
+  margin: 30px 4vw 30px 0;
+  align-self: center;
+}
+.consultation-experience .hero-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.consultation-experience .hero-photo figcaption {
+  padding-bottom: 0;
+}
+.consultation-experience .hero .intro {
+  max-width: 35ch;
+}
+.consultation-experience .hero h1 em {
+  font-weight: 400;
+}
+.consultation-experience .survey-hero {
+  grid-template-columns: 52% 48%;
+  background: var(--stone);
+}
+.consultation-experience .survey-hero .hero-copy {
+  padding-left: 10.6%;
+  padding-top: 40px;
+}
+.consultation-experience .survey-hero .hero-photo {
+  max-width: 440px;
+  margin: 32px auto;
+}
+.consultation-experience .survey-hero .hero-photo img {
+  max-height: 590px;
+  object-fit: contain;
+}
+.consultation-experience .survey-hero .breadcrumb {
+  margin-bottom: 40px;
+}
+.consultation-experience .journey-block {
+  display: grid;
+  grid-template-columns: 40% 52%;
+  gap: 8%;
+  padding: 40px 0 85px;
+}
+.consultation-experience .journey-aside h2 {
+  font-size: 45px;
+}
+.consultation-experience .journey-aside > p:not(.eyebrow) {
+  margin: 24px 0;
+}
+.consultation-experience .process-photo {
+  max-width: 280px;
+  margin-top: 36px;
+}
+.consultation-experience .material-photo {
+  max-width: 300px;
+  margin-top: 32px;
+}
+.consultation-experience .material-photo img {
+  max-height: 435px;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+}
+.consultation-experience .steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.consultation-experience .steps li {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--rule);
+  padding: 30px 0 36px;
+}
+.consultation-experience .number {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--bronze);
+  padding-top: 6px;
+  display: block;
+}
+.consultation-experience .steps .lead {
+  font-size: 18px;
+  line-height: 1.55;
+  margin-top: 15px;
+}
+.consultation-experience .steps p:not(.lead) {
+  font-size: 15px;
+  margin-top: 12px;
+  color: var(--muted);
+}
+.consultation-experience .steps .text-link {
+  margin-top: 6px;
+}
+.consultation-experience .stone {
+  background: var(--stone);
+}
+.consultation-experience .stone .journey-block {
+  padding-top: 80px;
+}
+.consultation-experience .reassurance {
+  max-width: 950px;
+  text-align: center;
+}
+.consultation-experience .reassurance p {
+  margin: 23px auto;
+}
+.consultation-experience .service-decisions {
+  padding: 70px max(5.5vw, 24px);
+  background: #e5e8dc;
+}
+.consultation-experience .service-decisions > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 55px;
+  margin-top: 35px;
+}
+.consultation-experience .service-decisions > div > a {
+  border-top: 1px solid var(--rule);
+  padding: 24px 0;
+  text-decoration: none;
+}
+.consultation-experience .service-decisions h3 {
+  font-size: 25px;
+}
+.consultation-experience .service-decisions p {
+  font-size: 14px;
+}
+.consultation-experience .closing {
+  background: var(--pine);
+  color: var(--white);
+  padding: 80px 0;
+}
+.consultation-experience .closing .small {
+  color: #e3d7c1;
+}
+.consultation-experience .closing p {
+  margin-top: 24px;
+  max-width: 610px;
+}
+.consultation-experience .closing .eyebrow {
+  margin-top: 0;
+}
+.consultation-experience .closing h2 {
+  font-size: clamp(40px, 4vw, 65px);
+}
+.consultation-experience .jump {
+  padding: 20px 5.5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  background: #e3e6dc;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+.consultation-experience .prepare {
+  display: grid;
+  grid-template-columns: 42% 50%;
+  gap: 8%;
+}
+.consultation-experience .prepare h2 {
+  font-size: 46px;
+}
+.consultation-experience .prepare > div > p {
+  margin-top: 22px;
+}
+.consultation-experience .detail-checklist {
+  border: 1px solid var(--rule);
+  padding: 26px 30px;
+  background: #fffcf6;
+}
+.consultation-experience .detail-checklist fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.consultation-experience .detail-checklist legend {
+  font:
+    29px/1.15 var(--font-apex-display),
+    Georgia,
+    serif;
+  margin-bottom: 15px;
+}
+.consultation-experience .detail-checklist fieldset > p {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.consultation-experience .detail-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding: 15px 0;
+  border-top: 1px solid #dfd8ca;
+  line-height: 1.55;
+  font-size: 15px;
+  cursor: pointer;
+}
+.consultation-experience .detail-checklist input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin-top: 2px;
+  accent-color: var(--pine);
+}
+.consultation-experience .detail-status {
+  font-weight: 600;
+  font-size: 14px;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+}
+.consultation-experience .detail-checklist small {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.consultation-experience .visit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 42px;
+  margin: 45px 0;
+}
+.consultation-experience .visit-grid article {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+}
+.consultation-experience .visit-grid h3 {
+  font-size: 31px;
+  margin-top: 18px;
+}
+.consultation-experience .visit-grid p {
+  font-size: 15px;
+}
+.consultation-experience .evidence-pair {
+  display: grid;
+  grid-template-columns: 38% 54%;
+  gap: 8%;
+  align-items: center;
+}
+.consultation-experience .survey-evidence {
+  max-width: 340px;
+}
+.consultation-experience .technical-layout {
+  display: grid;
+  grid-template-columns: 25% 67%;
+  gap: 8%;
+  padding: 10px 0 60px;
+}
+.consultation-experience .technical-layout aside {
+  align-self: start;
+  position: sticky;
+  top: 90px;
+}
+.consultation-experience .technical-layout aside a {
+  display: block;
+  font-size: 13px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+}
+.consultation-experience .technical-section {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.consultation-experience .technical-section h2 {
+  font-size: 37px;
+}
+.consultation-experience .technical-section p {
+  font-size: 16px;
+}
+.consultation-experience .technical-section details {
+  margin-top: 25px;
+}
+.consultation-experience .technical-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 24px;
+  font-size: 13px;
+}
+.consultation-experience .diagram {
+  margin: 28px 0;
+}
+.consultation-experience .diagram-scroll {
+  overflow: auto;
+  background: #eee8dc;
+}
+.consultation-experience .diagram img {
+  width: 100%;
+  min-width: 600px;
+}
+.consultation-experience .table-scroll {
+  overflow: auto;
+  margin: 28px 0;
+}
+.consultation-experience table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+}
+.consultation-experience caption {
+  text-align: left;
+  padding: 10px 0;
+  font-weight: 600;
+}
+.consultation-experience td,
+.consultation-experience th {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.consultation-experience thead {
+  background: var(--stone);
+}
+.consultation-experience tbody th {
+  font-weight: 500;
+  min-width: 130px;
+}
+.consultation-experience details {
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 18px 0;
+}
+.consultation-experience summary {
+  cursor: pointer;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.consultation-experience details p {
+  margin-top: 18px;
+}
+.consultation-experience details + details {
+  border-top: 0;
+}
+.consultation-experience .questions {
+  max-width: 920px;
+}
+.consultation-experience .questions h2 {
+  margin-bottom: 30px;
+}
+@media (max-width: 800px) {
+  .consultation-experience .hero,
+  .consultation-experience .survey-hero {
+    display: flex;
+    flex-direction: column;
+  }
+  .consultation-experience .hero-copy,
+  .consultation-experience .survey-hero .hero-copy {
+    padding: 27px 5.5% 25px;
+  }
+  .consultation-experience .breadcrumb,
+  .consultation-experience .survey-hero .breadcrumb {
+    margin-bottom: 27px;
+    font-size: 11px;
+  }
+  .consultation-experience h1 {
+    font-size: 46px;
+  }
+  .consultation-experience h2 {
+    font-size: 37px;
+  }
+  .consultation-experience .hero .intro {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-top: 20px;
+    max-width: 40ch;
+  }
+  .consultation-experience .hero .actions {
+    margin: 23px 0 0;
+    gap: 8px 18px;
+  }
+  .consultation-experience .hero-photo,
+  .consultation-experience .survey-hero .hero-photo {
+    margin: 0 5.5% 25px;
+    max-width: none;
+  }
+  .consultation-experience .survey-hero .hero-photo img {
+    max-height: 440px;
+    width: 100%;
+    object-fit: contain;
+    background: #e4dacb;
+  }
+  .consultation-experience .hero-photo figcaption {
+    font-size: 11px;
+  }
+  .consultation-experience .survey-hero .small {
+    margin-top: 19px;
+  }
+  .consultation-experience .section {
+    padding: 53px 0;
+  }
+  .consultation-experience .compact {
+    padding-bottom: 20px;
+  }
+  .consultation-experience .intro {
+    font-size: 17px;
+  }
+  .consultation-experience .journey-block {
+    display: block;
+    padding: 25px 0 45px;
+  }
+  .consultation-experience .journey-aside h2 {
+    font-size: 34px;
+  }
+  .consultation-experience .journey-aside .process-photo {
+    display: none;
+  }
+  .consultation-experience .journey-aside {
+    padding-bottom: 18px;
+  }
+  .consultation-experience .steps li {
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    padding: 26px 0;
+  }
+  .consultation-experience .steps h3 {
+    font-size: 29px;
+  }
+  .consultation-experience .steps .lead {
+    font-size: 17px;
+  }
+  .consultation-experience .steps p:not(.lead) {
+    font-size: 15px;
+  }
+  .consultation-experience .stone .journey-block {
+    padding-top: 45px;
+  }
+  .consultation-experience .material-photo {
+    max-width: 100%;
+    margin: 28px 0 20px;
+  }
+  .consultation-experience .material-photo img {
+    height: 260px;
+    object-position: 50% 18%;
+  }
+  .consultation-experience .service-decisions {
+    padding: 48px 5.5%;
+  }
+  .consultation-experience .service-decisions > div {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .consultation-experience .service-decisions h2 {
+    font-size: 37px;
+  }
+  .consultation-experience .closing {
+    padding: 50px 0;
+  }
+  .consultation-experience .closing h2 {
+    font-size: 43px;
+  }
+  .consultation-experience .closing .actions {
+    display: block;
+  }
+  .consultation-experience .closing .actions a {
+    margin-right: 12px;
+  }
+  .consultation-experience .closing .text-link {
+    margin-top: 14px;
+  }
+  .consultation-experience .closing p {
+    font-size: 16px;
+  }
+  .consultation-experience .closing .small {
+    font-size: 13px;
+  }
+  .consultation-experience .jump {
+    justify-content: flex-start;
+    gap: 8px 22px;
+    font-size: 12px;
+  }
+  .consultation-experience .jump a {
+    padding: 5px 0;
+  }
+  .consultation-experience .prepare {
+    display: block;
+  }
+  .consultation-experience .prepare h2 {
+    font-size: 37px;
+  }
+  .consultation-experience .prepare > div + div {
+    margin-top: 30px;
+  }
+  .consultation-experience .detail-checklist {
+    padding: 23px 20px;
+  }
+  .consultation-experience .detail-checklist legend {
+    font-size: 27px;
+  }
+  .consultation-experience .detail-checklist label {
+    min-height: 52px;
+  }
+  .consultation-experience .visit-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 30px 0;
+  }
+  .consultation-experience .visit-grid article {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+  }
+  .consultation-experience .visit-grid h3 {
+    margin-top: 0;
+    font-size: 29px;
+  }
+  .consultation-experience .visit-grid p {
+    grid-column: 2;
+    margin-top: 0;
+  }
+  .consultation-experience .evidence-pair {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 30px;
+    align-items: stretch;
+  }
+  .consultation-experience .survey-evidence {
+    max-width: 300px;
+    margin: auto;
+  }
+  .consultation-experience .technical-layout {
+    display: block;
+    padding-bottom: 20px;
+  }
+  .consultation-experience .technical-layout aside {
+    position: static;
+    padding-bottom: 30px;
+  }
+  .consultation-experience .technical-layout aside nav {
+    display: none;
+  }
+  .consultation-experience .technical-layout aside .eyebrow {
+    margin: 0;
+  }
+  .consultation-experience .technical-section {
+    padding: 32px 0;
+  }
+  .consultation-experience .technical-section h2 {
+    font-size: 32px;
+  }
+  .consultation-experience .technical-section p {
+    font-size: 15px;
+  }
+  .consultation-experience .technical-links {
+    display: block;
+  }
+  .consultation-experience .technical-links a {
+    display: block;
+    padding: 6px 0;
+  }
+  .consultation-experience .questions {
+    padding-top: 30px;
+  }
+}
+
+.consultation-experience {
+  overflow-wrap: break-word;
+}
+.consultation-experience [id] {
+  scroll-margin-top: 90px;
+}
+.consultation-experience > nav.technical-links {
+  padding-bottom: 45px;
+}
