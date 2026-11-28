@@ -1,23 +1,13 @@
 "use client";
 
 import { CountPreference, useEnquiryCounts } from "@/components/analytics/EnquiryCounts";
-import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { roomDesignFromParams, roomDesignParams } from "@/lib/visualiser/room-design";
 import { visualiserContext } from "@/lib/visualiser/enquiry-context";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  ChevronRight,
-  ImagePlus,
-  Mail,
-  MapPin,
-  Phone,
-  User,
-} from "lucide-react";
+import { enquiryBodyTooLarge, guidedPhotoError } from "@/lib/enquiry-upload";
+import "./quotation.css";
 
 type FormData = {
   windowType: string;
@@ -41,8 +31,6 @@ type FormData = {
   recommendationTitle: string;
   photoName: string;
 };
-
-const totalSteps = 13;
 
 const optionGroups = {
   windowType: [
@@ -108,603 +96,186 @@ const optionGroups = {
   ],
 };
 
-const screenMeta = [
-  {
-    key: "windowType",
-    eyebrow: "Step 1",
-    title: "What type of window do you have?",
-    subtitle: "Choose the option that feels closest to your window.",
-  },
-  {
-    key: "purpose",
-    eyebrow: "Step 2",
-    title: "What is your main goal for the curtains?",
-    subtitle: "This helps guide the right fabric and curtain setup.",
-  },
-  {
-    key: "fabricStyle",
-    eyebrow: "Step 3",
-    title: "What type of fabric style do you prefer?",
-    subtitle: "Tell us the look you’re naturally drawn to.",
-  },
-  {
-    key: "liningType",
-    eyebrow: "Step 4",
-    title: "What type of lining would you prefer?",
-    subtitle: "Choose the level of light control or insulation you want.",
-  },
-  {
-    key: "roomType",
-    eyebrow: "Step 5",
-    title: "Which room is this window in?",
-    subtitle: "The room helps us understand the design and practical needs.",
-  },
-  {
-    key: "headingStyle",
-    eyebrow: "Step 6",
-    title: "Which curtain heading style do you prefer?",
-    subtitle: "This affects both the look and the cost level.",
-  },
-  {
-    key: "imageUpload",
-    eyebrow: "Step 7",
-    title: "Upload a photo of your window",
-    subtitle: "A clear photo is helpful for unusual glazing, but you can continue without one and add it later.",
-  },
-  {
-    key: "name",
-    eyebrow: "Step 8",
-    title: "What is your name?",
-    subtitle: "So we know who to prepare the advice for.",
-  },
-  {
-    key: "email",
-    eyebrow: "Step 9",
-    title: "What is your email address?",
-    subtitle: "We’ll use this to send your design follow-up.",
-  },
-  {
-    key: "phone",
-    eyebrow: "Step 10",
-    title: "What is your phone number?",
-    subtitle: "Useful if we need to discuss your window in more detail.",
-  },
-  {
-    key: "postcode",
-    eyebrow: "Step 11",
-    title: "What is your postcode?",
-    subtitle: "This helps us understand your area and service route.",
-  },
-  {
-    key: "contactTime",
-    eyebrow: "Step 12",
-    title: "When is the best time for us to contact you?",
-    subtitle: "Choose the time that suits you best.",
-  },
-  {
-    key: "review",
-    eyebrow: "Final Step",
-    title: "Review your details",
-    subtitle: "Check everything looks right before submitting.",
-  },
-] as const;
+const stages = [
+  { title: "Start with your window", detail: "Share a photograph if you have one. You can choose fabrics and curtain details with our help." },
+  { title: "Tell us about the window", detail: "Choose the closest options. You do not need to know the technical name." },
+  { title: "Decided on the details?", detail: "Share what you know. ‘Not sure’ is a useful answer." },
+  { title: "How can we reach you?", detail: "Apex Curtains will use these details to respond to your enquiry." },
+  { title: "Check your enquiry", detail: "You can edit any section before sending. This is an initial enquiry, not an order." },
+];
+
+const fieldsByStage = [[], ["windowType", "roomType", "purpose"], ["fabricStyle", "liningType", "headingStyle"], ["name", "email", "phone", "postcode", "contactTime"]] as const;
+type AnswerKey = typeof fieldsByStage[number][number];
+const labels: Record<AnswerKey, string> = { windowType: "Window type", roomType: "Room type", purpose: "Main purpose", fabricStyle: "Fabric style", liningType: "Lining", headingStyle: "Curtain heading", name: "Full name", email: "Email address", phone: "Telephone", postcode: "Project postcode", contactTime: "Best time to contact you" };
 
 export default function StartDesigningPage() {
   const counts = useEnquiryCounts("guided");
-  const searchParams = useSearchParams();
-  const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(searchParams.get("visualiserRoom"), searchParams.get("visualiserColour"), roomDesignFromParams(searchParams, "visualiser-")));
+  const params = useSearchParams();
+  const [visualiserLook, setVisualiserLook] = useState(() => visualiserContext(params.get("visualiserRoom"), params.get("visualiserColour"), roomDesignFromParams(params, "visualiser-")));
   useEffect(() => {
     if (!visualiserLook) return;
     const detail = { event: "room_visualiser_enquiry_context_received", room: visualiserLook.room, colour: visualiserLook.colour, colourReference: visualiserLook.reference };
     window.dataLayer?.push(detail);
     window.dispatchEvent(new CustomEvent("apex:conversion", { detail }));
   }, [visualiserLook]);
-
-  const prefillWindowType = searchParams.get("windowType") || "";
-  const prefillRoom = searchParams.get("room") || "";
-  const prefillPriority = searchParams.get("priority") || "";
-  const prefillStyle = searchParams.get("style") || "";
-  const prefillSuggestedHeading = searchParams.get("suggestedHeading") || "";
-  const prefillSuggestedLining = searchParams.get("suggestedLining") || "";
-  const prefillRecommendationTitle = searchParams.get("recommendationTitle") || "";
-  const prefillPhotoName = searchParams.get("photoName") || "";
-
+  const [form, setForm] = useState<FormData>(() => ({
+    windowType: mapArloWindowTypeToForm(params.get("windowType") || ""),
+    roomType: mapArloRoomToForm(params.get("room") || ""),
+    purpose: mapArloPriorityToForm(params.get("priority") || ""),
+    fabricStyle: "", liningType: mapArloLiningToForm(params.get("suggestedLining") || ""),
+    headingStyle: mapArloHeadingToForm(params.get("suggestedHeading") || ""),
+    imageFile: null, imagePreview: "", name: "", email: "", phone: "", postcode: "", contactTime: "",
+    arloPriority: params.get("priority") || "", arloStyle: params.get("style") || "",
+    suggestedHeading: params.get("suggestedHeading") || "", suggestedLining: params.get("suggestedLining") || "",
+    recommendationTitle: params.get("recommendationTitle") || "", photoName: params.get("photoName") || "",
+  }));
   const [step, setStep] = useState(0);
+  const [editing, setEditing] = useState(false);
+  const [errors, setErrors] = useState<Partial<Record<AnswerKey, string>>>({});
+  const [error, setError] = useState("");
+  const [fileError, setFileError] = useState("");
+  const [checkingFile, setCheckingFile] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [direction, setDirection] = useState(1);
   const [submitted, setSubmitted] = useState(false);
-
-  const [form, setForm] = useState<FormData>({
-    windowType: mapArloWindowTypeToForm(prefillWindowType),
-    purpose: mapArloPriorityToForm(prefillPriority),
-    fabricStyle: "",
-    liningType: mapArloLiningToForm(prefillSuggestedLining),
-    roomType: mapArloRoomToForm(prefillRoom),
-    headingStyle: mapArloHeadingToForm(prefillSuggestedHeading),
-    imageFile: null,
-    imagePreview: "",
-    name: "",
-    email: "",
-    phone: "",
-    postcode: "",
-    contactTime: "",
-    arloPriority: prefillPriority,
-    arloStyle: prefillStyle,
-    suggestedHeading: prefillSuggestedHeading,
-    suggestedLining: prefillSuggestedLining,
-    recommendationTitle: prefillRecommendationTitle,
-    photoName: prefillPhotoName,
-  });
+  const heading = useRef<HTMLHeadingElement>(null);
+  const errorBox = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const sendingLock = useRef(false);
+  const requestKey = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     const preview = form.imagePreview;
-    return () => {
-      if (preview.startsWith("blob:")) URL.revokeObjectURL(preview);
-    };
+    return () => { if (preview.startsWith("blob:")) URL.revokeObjectURL(preview); };
   }, [form.imagePreview]);
 
-  const current = screenMeta[step];
-  const progress = useMemo(() => ((step + 1) / totalSteps) * 100, [step]);
-
-  const canProceed = useMemo(() => {
-    switch (current.key) {
-      case "windowType":
-        return !!form.windowType;
-      case "purpose":
-        return !!form.purpose;
-      case "fabricStyle":
-        return !!form.fabricStyle;
-      case "liningType":
-        return !!form.liningType;
-      case "roomType":
-        return !!form.roomType;
-      case "headingStyle":
-        return !!form.headingStyle;
-      case "imageUpload":
-        return true;
-      case "name":
-        return form.name.trim().length > 1;
-      case "email":
-        return /\S+@\S+\.\S+/.test(form.email);
-      case "phone":
-        return form.phone.trim().length > 5;
-      case "postcode":
-        return form.postcode.trim().length > 2;
-      case "contactTime":
-        return !!form.contactTime;
-      case "review":
-        return true;
-      default:
-        return false;
+  function focusHeading() {
+    requestAnimationFrame(() => { heading.current?.focus({ preventScroll: true }); (heading.current?.closest("main")?.querySelector(".quote-progress") || heading.current)?.scrollIntoView({ block: "start" }); });
+  }
+  function moveTo(next: number) { setStep(next); setError(""); setErrors({}); focusHeading(); }
+  function edit(next: number) { setEditing(true); moveTo(next); }
+  function updateField(key: AnswerKey, value: string) {
+    requestKey.current = undefined;
+    setForm(previous => ({ ...previous, [key]: value }));
+    setErrors(previous => ({ ...previous, [key]: undefined }));
+  }
+  function buildPayload(photo: File | null = form.imageFile) {
+    const body = new globalThis.FormData();
+    for (const [key, value] of Object.entries(form)) {
+      if (typeof value === "string" && key !== "imagePreview") body.append(key, value);
     }
-  }, [current.key, form]);
-
-  function updateField<K extends keyof FormData>(key: K, value: FormData[K]) {
-    setForm((prev) => ({ ...prev, [key]: value }));
+    if (photo) body.append("imageFile", photo);
+    if (visualiserLook) {
+      body.append("visualiserRoom", visualiserLook.room); body.append("visualiserColour", visualiserLook.colour);
+      for (const [key, value] of Object.entries(roomDesignParams(visualiserLook.design, "visualiser-"))) body.append(key, value);
+    }
+    return body;
   }
-
-  function nextStep() {
-    if (!canProceed || step >= totalSteps - 1) return;
-    if (step === 0) counts.record("start");
-    setDirection(1);
-    setStep((s) => s + 1);
+  function removePhoto() {
+    requestKey.current = undefined;
+    setForm(previous => ({ ...previous, imageFile: null, imagePreview: "" })); setFileError("");
+    if (fileInput.current) fileInput.current.value = "";
   }
-
-  function prevStep() {
-    if (step <= 0) return;
-    setDirection(-1);
-    setStep((s) => s - 1);
-  }
-
-  function handleImageChange(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const preview = URL.createObjectURL(file);
-
-    setForm((prev) => ({
-      ...prev,
-      imageFile: file,
-      imagePreview: preview,
-    }));
-  }
-
-  async function handleSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    if (current.key !== "review" || submitting) return;
-    setSubmitting(true);
-
+  async function choosePhoto(event: ChangeEvent<HTMLInputElement>) {
+    const photo = event.target.files?.[0]; event.target.value = "";
+    if (!photo) return;
+    setCheckingFile(true); setFileError("");
     try {
-      const payload = new FormData();
-
-      payload.append("windowType", form.windowType);
-      payload.append("purpose", form.purpose);
-      payload.append("fabricStyle", form.fabricStyle);
-      payload.append("liningType", form.liningType);
-      payload.append("roomType", form.roomType);
-      payload.append("headingStyle", form.headingStyle);
-      payload.append("name", form.name);
-      payload.append("email", form.email);
-      payload.append("phone", form.phone);
-      payload.append("postcode", form.postcode);
-      payload.append("contactTime", form.contactTime);
-
-      payload.append("arloPriority", form.arloPriority);
-      payload.append("arloStyle", form.arloStyle);
-      payload.append("suggestedHeading", form.suggestedHeading);
-      payload.append("suggestedLining", form.suggestedLining);
-      payload.append("recommendationTitle", form.recommendationTitle);
-      payload.append("photoName", form.photoName);
-      if (visualiserLook) {
-        payload.append("visualiserRoom", visualiserLook.room);
-        payload.append("visualiserColour", visualiserLook.colour);
-        for (const [key, value] of Object.entries(roomDesignParams(visualiserLook.design, "visualiser-"))) payload.append(key, value);
-      }
-
-      if (form.imageFile) {
-        payload.append("imageFile", form.imageFile);
-      }
-
-      const response = await fetch("/api/send-lead", {
-        method: "POST",
-        body: payload,
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.ok) {
-        throw new Error(result.error || "Failed to send lead");
-      }
-
-      counts.record("complete");
-      setSubmitted(true);
-    } catch (error) {
-      alert(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong sending the enquiry."
-      );
-    } finally {
-      setSubmitting(false);
+      const invalid = guidedPhotoError(photo);
+      if (invalid) { setFileError(invalid); return; }
+      if (await enquiryBodyTooLarge(buildPayload(photo))) { setFileError(`${photo.name}: choose a smaller photograph. The total enquiry, including your details, must be under 4.5 MB.`); return; }
+      requestKey.current = undefined;
+      setForm(previous => ({ ...previous, imageFile: photo, imagePreview: URL.createObjectURL(photo) }));
+    } catch { setFileError("This photograph could not be read. Choose another file or continue without a photograph."); }
+    finally { setCheckingFile(false); }
+  }
+  function validate(all = false) {
+    const invalid: Partial<Record<AnswerKey, string>> = {};
+    const keys = all ? fieldsByStage.flat() : fieldsByStage[step] || [];
+    for (const key of keys) {
+      const value = form[key].trim();
+      const valid = key === "name" ? value.length > 1 : key === "email" ? /\S+@\S+\.\S+/.test(form.email) : key === "phone" ? value.length > 5 : key === "postcode" ? value.length > 2 : !!value;
+      if (!valid) invalid[key] = key === "email" ? "Enter a valid email address." : `Please ${["name", "phone", "postcode"].includes(key) ? "enter" : "choose"} your ${labels[key].toLowerCase()}.`;
     }
+    setErrors(invalid);
+    const first = Object.keys(invalid)[0] as AnswerKey | undefined;
+    if (!first) return true;
+    if (all) setStep(fieldsByStage.findIndex(keys => (keys as readonly string[]).includes(first)));
+    requestAnimationFrame(() => { const control = formRef.current?.elements.namedItem(first); if (control instanceof HTMLElement) { control.focus({ preventScroll: true }); control.scrollIntoView({ block: "center" }); } });
+    return false;
   }
-
-  if (submitted) {
-    return (
-      <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
-        <div className="fixed inset-0 pointer-events-none">
-          <div className="absolute left-[8%] top-[6%] h-[320px] w-[320px] rounded-full bg-[#f5d38a]/10 blur-[120px]" />
-          <div className="absolute right-[10%] top-[18%] h-[300px] w-[300px] rounded-full bg-sky-400/10 blur-[120px]" />
-          <div className="absolute bottom-[8%] left-[35%] h-[260px] w-[260px] rounded-full bg-[#f5d38a]/8 blur-[120px]" />
-        </div>
-
-        <div className="relative mx-auto flex min-h-screen max-w-5xl items-center justify-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-          <div className="w-full rounded-[30px] border border-white/10 bg-white/[0.04] p-6 text-center shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:rounded-[36px] sm:p-12">
-            <div className="mx-auto inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#f5d38a] text-2xl text-black">
-              ✓
-            </div>
-
-            <div className="mt-6 text-xs uppercase tracking-[0.24em] text-[#f5d38a]">
-              Enquiry Received
-            </div>
-
-            <h1 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-              Thank you for your enquiry
-            </h1>
-
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
-              Your curtain design request has been sent successfully.
-              One of our Apex Window specialists will review your details and contact you shortly.
-            </p>
-
-            <div className="mx-auto mt-8 grid max-w-5xl gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 text-left">
-                <div className="text-sm text-white/50">Your design summary</div>
-
-                {form.recommendationTitle && (
-                  <div className="mt-4 mb-5 rounded-[18px] border border-[#f5d38a]/20 bg-[#f5d38a]/10 p-4">
-                    <div className="text-xs uppercase tracking-[0.14em] text-[#f5d38a]">
-                      Arlo recommendation
-                    </div>
-                    <div className="mt-2 text-base font-medium text-white">
-                      {form.recommendationTitle}
-                    </div>
-                  </div>
-                )}
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <SummaryItem label="Window type" value={form.windowType} />
-                  <SummaryItem label="Main goal" value={form.purpose} />
-                  <SummaryItem label="Fabric style" value={form.fabricStyle} />
-                  <SummaryItem label="Lining type" value={form.liningType} />
-                  <SummaryItem label="Room type" value={form.roomType} />
-                  <SummaryItem label="Heading style" value={form.headingStyle} />
-                  <SummaryItem label="Name" value={form.name} />
-                  <SummaryItem label="Best contact time" value={form.contactTime} />
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-white/10 bg-white/5 p-6 text-left">
-                <div className="text-sm text-white/50">Uploaded window photo</div>
-
-                {form.imagePreview ? (
-                  <div className="mt-4 overflow-hidden rounded-[20px] border border-white/10 bg-black/30">
-                    <img
-                      src={form.imagePreview}
-                      alt="Uploaded window"
-                      className="h-[260px] w-full rounded-xl object-contain sm:h-[360px]"
-                    />
-                  </div>
-                ) : (
-                  <div className="mt-4 text-white/50">No image uploaded</div>
-                )}
-
-                <div className="mt-6 border-t border-white/10 pt-4">
-                  <div className="text-sm text-white/50">What happens next</div>
-
-                  <div className="mt-3 space-y-2 text-sm text-white/80">
-                    <p>• We review your design selections and window photo if supplied</p>
-                    <p>• We prepare the most suitable curtain approach</p>
-                    <p>• We contact you as soon as possible</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 border-t border-white/10 pt-6"></div>
-
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/"
-                className="rounded-full bg-[#f5d38a] px-6 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476]"
-              >
-                Back to Homepage
-              </Link>
-
-              <Link
-                href="/start-designing"
-                className="rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm text-white transition hover:bg-white/10"
-              >
-                Start Another Design
-              </Link>
-            </div>
-          </div>
-        </div>
-      </main>
-    );
+  function showError(message: string) {
+    setError(message); requestAnimationFrame(() => { errorBox.current?.focus({ preventScroll: true }); errorBox.current?.scrollIntoView({ block: "center" }); });
   }
-
-  return (
-    <main className="min-h-screen overflow-hidden bg-apex-navy-900 text-white">
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute left-[8%] top-[6%] h-[320px] w-[320px] rounded-full bg-[#f5d38a]/10 blur-[120px]" />
-        <div className="absolute right-[10%] top-[18%] h-[300px] w-[300px] rounded-full bg-sky-400/10 blur-[120px]" />
-        <div className="absolute bottom-[8%] left-[35%] h-[260px] w-[260px] rounded-full bg-[#f5d38a]/8 blur-[120px]" />
-      </div>
-
-      <div className="relative mx-auto max-w-4xl px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-        <div className="mb-4 flex items-center justify-between gap-4 sm:mb-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 transition hover:bg-white/10"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back
-          </Link>
-
-          <div className="text-sm text-white/45">
-            Step {step + 1} of {totalSteps}
-          </div>
-        </div>
-
-        {visualiserLook && (
-          <aside className="mb-5 border border-[#f5d38a]/30 p-4 text-sm" aria-label="Your visualiser look">
-            <p className="text-[#f5d38a]">Your visualiser look</p>
-            <p className="mt-2">{visualiserLook.roomName} · {visualiserLook.colourName} · {visualiserLook.reference}</p>
-            {visualiserLook.heading && <p className="mt-1">Visualised heading: {visualiserLook.heading}</p>}
-            <p className="mt-1 text-white/70">{visualiserLook.designSummary}</p>
-            <p className="mt-2 text-white/70">We’ll include this room inspiration with your enquiry. Tell us about your own window below.</p>
-            <div className="mt-2 flex flex-wrap gap-4">
-              <Link className="inline-flex min-h-11 items-center underline" href={visualiserLook.url.replace("https://www.apexcurtains.com", "")}>View this look</Link>
-              <button className="min-h-11 underline" type="button" onClick={() => setVisualiserLook(null)}>Remove this look</button>
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (sendingLock.current || checkingFile) return;
+    if (step !== 4) {
+      if (!validate()) return;
+      if (step === 0 && fileError) return;
+      if (step === 0) counts.record("start");
+      moveTo(editing ? 4 : step + 1); setEditing(false); return;
+    }
+    if (!validate(true)) return;
+    sendingLock.current = true; setSubmitting(true); setError("");
+    try {
+      const body = buildPayload();
+      if (await enquiryBodyTooLarge(body)) {
+        setStep(0); setEditing(true); setFileError("The total enquiry is too large. Choose a smaller photograph or remove it to continue."); focusHeading(); return;
+      }
+      requestKey.current ??= globalThis.crypto?.randomUUID?.();
+      const response = await fetch("/api/send-lead", { method: "POST", body, headers: requestKey.current ? { "Idempotency-Key": requestKey.current } : undefined });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.ok !== true) {
+        showError((typeof result?.error === "string" && result.error) || "We couldn’t confirm your enquiry was sent. Your details are still here. Try again or contact Apex."); return;
+      }
+      counts.record("complete"); setSubmitted(true); focusHeading();
+    } catch { showError("We couldn’t confirm your enquiry was sent. Your details are still here. Try again or contact Apex."); }
+    finally { sendingLock.current = false; setSubmitting(false); }
+  }
+  function select(key: AnswerKey, options: readonly string[]) {
+    return <label>{labels[key]}<select name={key} value={form[key]} required aria-invalid={!!errors[key]} aria-describedby={errors[key] ? `${key}-error` : undefined} onChange={event => updateField(key, event.target.value)}><option value="">Please select</option>{options.map(value => <option key={value}>{value}</option>)}</select>{errors[key] && <span className="quote-field-error" id={`${key}-error`}>{errors[key]}</span>}</label>;
+  }
+  const privacy = <p className="quote-privacy">We use these details to respond to your enquiry. Read our <Link href="/privacy-policy">privacy policy</Link>. Initial assessments are subject to a professional survey.</p>;
+  const review = <div className="quote-review">
+    {([
+      ["Your window", `${form.windowType} · ${form.roomType} · ${form.purpose}`, 1],
+      ["Curtain preferences", `${form.fabricStyle} · ${form.liningType} · ${form.headingStyle}`, 2],
+      ["Contact details", `${form.name} · ${form.email} · ${form.phone} · ${form.postcode} · ${form.contactTime}`, 3],
+      ["Photograph", form.imageFile?.name || "No photograph added", 0],
+    ] as const).map(([label, value, target]) => <section key={label}><div><h2>{label}</h2><p>{value}</p></div>{!submitted && <button type="button" disabled={submitting} onClick={() => edit(target)} aria-label={`Edit ${label.toLowerCase()}`}>Edit</button>}</section>)}
+  </div>;
+  return <main className="quotation-journey"><div className="quote-wrap">
+    <div className="quote-progress"><Link href="/get-curtain-quote">Enquiry options</Link><span>{submitted ? "Enquiry sent" : `Step ${step + 1} of 5`}</span></div>
+    <div className="quote-content">
+      <p className="quote-kicker">Guided quotation</p>
+      <h1 ref={heading} tabIndex={-1}>{submitted ? "Your enquiry has been sent" : stages[step].title}</h1>
+      <p className="quote-intro">{submitted ? "Apex Curtains will review your information and contact you about the next step." : stages[step].detail}</p>
+      {visualiserLook && <details className="quote-context"><summary>Your visualiser look</summary><p>{visualiserLook.roomName} · {visualiserLook.colourName} · {visualiserLook.reference}</p>{visualiserLook.heading && <p>Visualised heading: {visualiserLook.heading}</p>}<p>{visualiserLook.designSummary}</p><Link href={visualiserLook.url.replace("https://www.apexcurtains.com", "")}>View this look</Link>{!submitted && <button type="button" disabled={submitting} onClick={() => { requestKey.current = undefined; setVisualiserLook(null); }}>Remove this look</button>}</details>}
+      {form.recommendationTitle && <details className="quote-context"><summary>Arlo recommendation</summary><p>{form.recommendationTitle}</p><p>{form.arloPriority} · {form.arloStyle}</p><p>Suggested heading: {form.suggestedHeading || "To discuss"} · Suggested lining: {form.suggestedLining || "To discuss"}</p>{form.photoName && <p>Photo note: {form.photoName}</p>}</details>}
+      {submitted ? <>{review}{privacy}<p className="quote-finish-links"><Link href="/contact">Contact Apex</Link><Link href="/gallery">Explore finished projects</Link></p></> : <form ref={formRef} onSubmit={submit} noValidate aria-busy={submitting}>
+        <fieldset disabled={submitting || checkingFile}>
+          {step === 0 && <>
+            <div className="quote-upload"><label htmlFor="window-photo">Window photograph (optional)</label><p>A view of the whole window helps us understand its shape.</p><input ref={fileInput} id="window-photo" type="file" accept=".jpg,.jpeg,.png,.webp" aria-describedby="photo-help photo-status" onChange={choosePhoto} /><p id="photo-help">JPG, PNG or WebP. Total enquiry limit: 4.5 MB, including your details. Include only the relevant window and remove personal or unrelated details where possible.</p><div id="photo-status" role="status">{checkingFile ? "Checking photograph…" : form.imageFile ? `${form.imageFile.name} — ready to include` : "You can continue without a photograph."}</div>
+              {form.imagePreview && <>
+                {/* Local object URL: keep the customer photo in this browser, never send it to the image optimiser. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={form.imagePreview} alt="Your selected window photograph" /><button type="button" onClick={removePhoto}>Remove photograph</button></>}
             </div>
-          </aside>
-        )}
-        {form.recommendationTitle && (
-          <div className="mb-5 rounded-[24px] border border-[#f5d38a]/20 bg-[#f5d38a]/10 p-4 shadow-[0_0_30px_rgba(245,211,138,0.08)] sm:mb-6 sm:rounded-[28px] sm:p-5">
-            <div className="text-xs uppercase tracking-[0.18em] text-[#f5d38a]">
-              Arlo recommendation
-            </div>
-
-            <div className="mt-3 text-xl font-semibold text-white sm:text-2xl">
-              {form.recommendationTitle}
-            </div>
-
-            <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <div className="text-sm text-white/75"><span className="text-white/45">Window:</span> {form.windowType || "—"}</div>
-              <div className="text-sm text-white/75"><span className="text-white/45">Room:</span> {form.roomType || "—"}</div>
-              <div className="text-sm text-white/75"><span className="text-white/45">Priority:</span> {form.arloPriority || "—"}</div>
-              <div className="text-sm text-white/75"><span className="text-white/45">Style:</span> {form.arloStyle || "—"}</div>
-              <div className="text-sm text-white/75"><span className="text-white/45">Suggested heading:</span> {form.suggestedHeading || "—"}</div>
-              <div className="text-sm text-white/75"><span className="text-white/45">Suggested lining:</span> {form.suggestedLining || "—"}</div>
-            </div>
-          </div>
-        )}
-
-        <div className="mb-5 h-2 overflow-hidden rounded-full bg-white/10 sm:mb-8">
-          <motion.div
-            className="h-full rounded-full bg-[#f5d38a]"
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.35 }}
-          />
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <div className="flex min-h-[560px] flex-col rounded-[28px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_40px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:min-h-[720px] sm:rounded-[36px] sm:p-8 lg:p-10">
-            <div className="mb-5 sm:mb-8">
-              <div className="text-xs uppercase tracking-[0.24em] text-white/40">
-                Start Designing
-              </div>
-            </div>
-
-            <div className="flex flex-1 items-center">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={current.key}
-                  custom={direction}
-                  variants={screenVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="w-full"
-                >
-                  <div className="mb-7 sm:mb-10">
-                    <div className="text-xs uppercase tracking-[0.22em] text-[#f5d38a]">
-                      {current.eyebrow}
-                    </div>
-                    <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:mt-4 sm:text-4xl lg:text-5xl">
-                      {current.title}
-                    </h1>
-                    <p className="mt-3 max-w-2xl text-sm leading-7 text-white/65 sm:mt-4 sm:text-base sm:leading-8">
-                      {current.subtitle}
-                    </p>
-                  </div>
-
-                  {current.key === "windowType" && <OptionGrid options={optionGroups.windowType} value={form.windowType} onSelect={(value) => updateField("windowType", value)} />}
-                  {current.key === "purpose" && <OptionGrid options={optionGroups.purpose} value={form.purpose} onSelect={(value) => updateField("purpose", value)} />}
-                  {current.key === "fabricStyle" && <OptionGrid options={optionGroups.fabricStyle} value={form.fabricStyle} onSelect={(value) => updateField("fabricStyle", value)} />}
-                  {current.key === "liningType" && <OptionGrid options={optionGroups.liningType} value={form.liningType} onSelect={(value) => updateField("liningType", value)} />}
-                  {current.key === "roomType" && <OptionGrid options={optionGroups.roomType} value={form.roomType} onSelect={(value) => updateField("roomType", value)} />}
-                  {current.key === "headingStyle" && <OptionGrid options={optionGroups.headingStyle} value={form.headingStyle} onSelect={(value) => updateField("headingStyle", value)} />}
-
-                  {current.key === "imageUpload" && (
-                    <div>
-                      <label className="group flex min-h-[240px] cursor-pointer flex-col items-center justify-center rounded-[24px] border border-dashed border-white/15 bg-white/5 p-6 text-center transition hover:border-[#f5d38a]/30 hover:bg-white/10 sm:min-h-[340px] sm:rounded-[28px] sm:p-8">
-                        <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-[#f5d38a]/20 bg-[#f5d38a]/10 text-[#f5d38a] sm:h-16 sm:w-16">
-                          <ImagePlus className="h-7 w-7" />
-                        </div>
-                        <div className="mt-5 text-lg font-medium sm:mt-6 sm:text-xl">
-                          Add your window photo
-                        </div>
-                        <div className="mt-2 text-sm text-white/55">
-                          Optional • JPG, PNG or WebP
-                        </div>
-                        {form.photoName && <div className="mt-4 text-sm text-[#f5d38a]">Arlo note: {form.photoName}</div>}
-                        <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
-                      </label>
-
-                      {form.imagePreview && (
-                        <div className="mt-5 overflow-hidden rounded-[24px] border border-white/10 bg-black/30 sm:mt-6 sm:rounded-[28px]">
-                          <img src={form.imagePreview} alt="Uploaded window preview" className="h-[260px] w-full object-contain sm:h-[360px]" />
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {current.key === "name" && <SingleInput icon={<User className="h-5 w-5" />} type="text" value={form.name} onChange={(value) => updateField("name", value)} placeholder="Enter your full name" />}
-                  {current.key === "email" && <SingleInput icon={<Mail className="h-5 w-5" />} type="email" value={form.email} onChange={(value) => updateField("email", value)} placeholder="Enter your email address" />}
-                  {current.key === "phone" && <SingleInput icon={<Phone className="h-5 w-5" />} type="tel" value={form.phone} onChange={(value) => updateField("phone", value)} placeholder="Enter your phone number" />}
-                  {current.key === "postcode" && <SingleInput icon={<MapPin className="h-5 w-5" />} type="text" value={form.postcode} onChange={(value) => updateField("postcode", value)} placeholder="Enter your postcode" />}
-                  {current.key === "contactTime" && <OptionGrid options={optionGroups.contactTime} value={form.contactTime} onSelect={(value) => updateField("contactTime", value)} />}
-
-                  {current.key === "review" && (
-                    <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-                      <div className="rounded-[24px] border border-white/10 bg-white/5 p-5 sm:rounded-[28px] sm:p-6">
-                        {form.recommendationTitle && (
-                          <div className="mb-5 rounded-[18px] border border-[#f5d38a]/20 bg-[#f5d38a]/10 p-4">
-                            <div className="text-xs uppercase tracking-[0.14em] text-[#f5d38a]">Arlo recommendation</div>
-                            <div className="mt-2 text-base font-medium text-white">{form.recommendationTitle}</div>
-                          </div>
-                        )}
-                        <ReviewItem label="Window type" value={form.windowType} />
-                        <ReviewItem label="Main goal" value={form.purpose} />
-                        <ReviewItem label="Fabric style" value={form.fabricStyle} />
-                        <ReviewItem label="Lining type" value={form.liningType} />
-                        <ReviewItem label="Room type" value={form.roomType} />
-                        <ReviewItem label="Heading style" value={form.headingStyle} />
-                        <ReviewItem label="Name" value={form.name} />
-                        <ReviewItem label="Email" value={form.email} />
-                        <ReviewItem label="Phone" value={form.phone} />
-                        <ReviewItem label="Postcode" value={form.postcode} />
-                        <ReviewItem label="Best contact time" value={form.contactTime} />
-                      </div>
-
-                      <div className="rounded-[24px] border border-white/10 bg-white/5 p-5 sm:rounded-[28px] sm:p-6">
-                        <div className="text-sm text-white/50">Uploaded window photo</div>
-                        {form.imagePreview ? (
-                          <div className="mt-4 overflow-hidden rounded-[22px] border border-white/10 bg-black/30">
-                            <img src={form.imagePreview} alt="Uploaded window" className="h-[260px] w-full object-contain sm:h-[360px]" />
-                          </div>
-                        ) : (
-                          <div className="mt-4 text-white/50">No image uploaded — you can provide one later.</div>
-                        )}
-                      </div>
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            <CountPreference checked={counts.allowed} onChange={counts.setAllowed} />
-            <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:flex sm:items-center sm:justify-between sm:gap-4">
-              <button
-                type="button"
-                onClick={prevStep}
-                disabled={step === 0}
-                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 sm:px-5"
-              >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back
-              </button>
-
-              {step < totalSteps - 1 ? (
-                <button
-                  key="next"
-                  type="button"
-                  onClick={nextStep}
-                  disabled={!canProceed}
-                  className="inline-flex items-center justify-center rounded-full bg-[#f5d38a] px-4 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476] disabled:cursor-not-allowed disabled:opacity-40 sm:px-6"
-                >
-                  {current.key === "imageUpload" && !form.imageFile ? "Skip for now" : "Next"}
-                  <ChevronRight className="ml-2 h-4 w-4" />
-                </button>
-              ) : (
-                <button
-                  key="submit"
-                  type="submit"
-                  disabled={submitting}
-                  className="inline-flex items-center justify-center rounded-full bg-[#f5d38a] px-4 py-3 text-sm font-medium text-black transition hover:bg-[#e6c476] disabled:cursor-not-allowed disabled:opacity-40 sm:px-6"
-                >
-                  {submitting ? "Submitting..." : "Submit enquiry"}
-                  {!submitting && <ArrowRight className="ml-2 h-4 w-4" />}
-                </button>
-              )}
-            </div>
-          </div>
-        </form>
-      </div>
-    </main>
-  );
+            {fileError && <div className="quote-error" role="alert"><p>{fileError}</p><button type="button" onClick={removePhoto}>Continue without a photograph</button>{form.imageFile && <button type="button" onClick={() => setFileError("")}>Keep the previous photograph</button>}</div>}
+          </>}
+          {step === 1 && <div className="quote-fields">{select("windowType", optionGroups.windowType)}{select("roomType", optionGroups.roomType)}{select("purpose", optionGroups.purpose)}</div>}
+          {step === 2 && <><button className="quote-secondary" type="button" onClick={() => { updateField("fabricStyle", "Not sure yet"); updateField("liningType", "Not sure"); updateField("headingStyle", "Not Sure"); }}>I’d like advice on all three</button><div className="quote-fields">{select("fabricStyle", optionGroups.fabricStyle)}{select("liningType", optionGroups.liningType)}{select("headingStyle", optionGroups.headingStyle.map(option => option.label))}</div><p className="quote-help">These are preferences for your enquiry, not a final specification.</p></>}
+          {step === 3 && <><p className="quote-help">All fields on this screen are required.</p><div className="quote-fields">{([ ["name", "text", "name"], ["email", "email", "email"], ["phone", "tel", "tel"], ["postcode", "text", "postal-code"] ] as const).map(([key, type, autoComplete]) => <label key={key}>{labels[key]}<input name={key} type={type} autoComplete={autoComplete} value={form[key]} required aria-invalid={!!errors[key]} aria-describedby={errors[key] ? `${key}-error` : undefined} onChange={event => updateField(key, event.target.value)} />{errors[key] && <span className="quote-field-error" id={`${key}-error`}>{errors[key]}</span>}</label>)}{select("contactTime", optionGroups.contactTime)}</div>{privacy}</>}
+          {step === 4 && <>{review}{privacy}</>}
+        </fieldset>
+        <fieldset disabled={submitting}><CountPreference checked={counts.allowed} onChange={counts.setAllowed} /></fieldset>
+        {error && <div className="quote-error" role="alert" tabIndex={-1} ref={errorBox}><p>{error}</p><Link href="/contact">Contact Apex</Link></div>}
+        <div className="quote-actions">{step > 0 ? <button type="button" disabled={submitting || checkingFile} onClick={() => { if (editing) { setEditing(false); moveTo(4); } else moveTo(step - 1); }}>{editing ? "Back to review" : "Back"}</button> : <Link href="/get-curtain-quote">Back</Link>}<button className="quote-button" type="submit" disabled={submitting || checkingFile}>{submitting ? "Sending your enquiry…" : step === 4 ? error ? "Try again" : "Send enquiry" : editing ? "Return to review" : step === 0 && !form.imageFile ? "Continue without a photo" : "Continue"}</button></div>
+      </form>}
+    </div>
+  </div></main>;
 }
-
-const screenVariants = {
-  enter: (direction: number) => ({
-    x: direction > 0 ? 50 : -50,
-    opacity: 0,
-    filter: "blur(6px)",
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    filter: "blur(0px)",
-  },
-  exit: (direction: number) => ({
-    x: direction > 0 ? -40 : 40,
-    opacity: 0,
-    filter: "blur(6px)",
-  }),
-};
 
 function mapArloWindowTypeToForm(value: string) {
   const v = value.toLowerCase();
@@ -748,101 +319,4 @@ function mapArloLiningToForm(value: string) {
   if (v.includes("blackout")) return "Blackout";
   if (v.includes("thermal")) return "Thermal";
   return "";
-}
-
-function OptionGrid({
-  options,
-  value,
-  onSelect,
-}: {
-  options: Array<string | { label: string; description?: string; image?: string }>;
-  value: string;
-  onSelect: (value: string) => void;
-}) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
-      {options.map((option, index) => {
-        const item = typeof option === "string" ? { label: option, description: "", image: "" } : option;
-        const active = value === item.label;
-
-        return (
-          <motion.button
-            key={`${item.label}-${index}`}
-            type="button"
-            onClick={() => onSelect(item.label)}
-            whileHover={{ y: -4, scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 260, damping: 18 }}
-            className={`rounded-[22px] border p-4 text-left transition sm:rounded-[24px] sm:p-5 ${
-              active
-                ? "border-[#f5d38a]/50 bg-[#f5d38a]/10 shadow-[0_0_30px_rgba(245,211,138,0.12)]"
-                : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-            }`}
-          >
-            {item.image ? <img src={item.image} alt={item.label} loading="lazy" className="mb-4 h-28 w-full rounded-[18px] object-cover sm:h-36" /> : null}
-
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="text-base font-medium sm:text-lg">{item.label}</div>
-                {item.description ? <div className="mt-2 text-sm text-white/60">{item.description}</div> : null}
-              </div>
-
-              {active ? (
-                <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f5d38a] text-black">
-                  <Check className="h-4 w-4" />
-                </div>
-              ) : null}
-            </div>
-          </motion.button>
-        );
-      })}
-    </div>
-  );
-}
-
-function SingleInput({
-  icon,
-  type,
-  value,
-  onChange,
-  placeholder,
-}: {
-  icon: React.ReactNode;
-  type: string;
-  value: string;
-  onChange: (value: string) => void;
-  placeholder: string;
-}) {
-  return (
-    <div className="max-w-2xl">
-      <div className="flex items-center gap-3 rounded-[22px] border border-white/10 bg-white/5 px-4 py-4 sm:gap-4 sm:rounded-[24px] sm:px-5 sm:py-5">
-        <div className="text-[#f5d38a]">{icon}</div>
-        <input
-          type={type}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-          className="w-full bg-transparent text-lg text-white outline-none placeholder:text-white/30 sm:text-xl"
-          autoFocus
-        />
-      </div>
-    </div>
-  );
-}
-
-function ReviewItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="mb-4">
-      <div className="text-sm text-white/50">{label}</div>
-      <div className="mt-1 text-white">{value || "—"}</div>
-    </div>
-  );
-}
-
-function SummaryItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-[18px] border border-white/10 bg-black/20 p-4">
-      <div className="text-xs uppercase tracking-[0.14em] text-white/45">{label}</div>
-      <div className="mt-2 text-sm text-white">{value || "—"}</div>
-    </div>
-  );
 }

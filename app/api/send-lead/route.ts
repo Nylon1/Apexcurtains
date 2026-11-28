@@ -2,8 +2,7 @@ import { Resend } from "resend";
 import { sendArchitecturalLead } from "@/lib/architectural-lead";
 import { readBoundedFormData, FormDataReadError } from "@/lib/bounded-form-data";
 import { visualiserContext } from "@/lib/visualiser/enquiry-context";
-
-const MAX_LEAD_BODY_BYTES = 4.5 * 1024 * 1024;
+import { MAX_LEAD_BODY_BYTES } from "@/lib/enquiry-upload";
 
 function toBase64(buffer: ArrayBuffer) {
   return Buffer.from(buffer).toString("base64");
@@ -76,6 +75,9 @@ export async function POST(req: Request) {
       });
     }
 
+    const requestKey = req.headers.get("idempotency-key");
+    const idempotencyKey = requestKey && /^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(requestKey)
+      ? `guided-enquiry/${requestKey}` : undefined;
     const emailResult = await resend.emails.send({
       from: "Apex Curtains <hello@apexcurtains.com>",
       to: ["hello@apexcurtains.com"],
@@ -140,7 +142,7 @@ Photo Name from Arlo: ${photoName}
 Attachment included: ${uploaded instanceof File ? "Yes" : "No"}
       `.trim(),
       attachments,
-    });
+    }, { idempotencyKey });
 
     if (emailResult.error || !emailResult.data?.id) {
       return Response.json(

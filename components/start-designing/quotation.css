@@ -1,0 +1,64 @@
+.public-presentation .quotation-journey {
+  padding: 100px 24px 64px;
+  min-height: 100vh;
+  background: var(--studio-pine);
+  color: var(--studio-white);
+}
+.quote-wrap { max-width: 1000px; margin-inline: auto; }
+.quote-progress { display: flex; justify-content: space-between; gap: 20px; padding-bottom: 18px; border-bottom: 1px solid #9bab9e; font-size: 14px; }
+.quote-progress { scroll-margin-top: 92px; }
+.quote-content { max-width: 740px; margin: 30px auto 0; }
+.quotation-journey .quote-kicker { color: #e5d3ae; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 12px; }
+.quotation-journey h1 { font-size: 56px; line-height: 1.08; margin-bottom: 18px; scroll-margin-top: 100px; }
+.quote-intro { color: #dce2d8; font-size: 17px; line-height: 1.65; margin-bottom: 28px; }
+.quotation-journey fieldset { border: 0; padding: 0; min-width: 0; }
+.quotation-journey a,.quotation-journey button:not(.quote-button) { text-decoration: underline; text-underline-offset: 4px; }
+.quotation-journey button,.quote-actions a { min-height: 48px; cursor: pointer; }
+.quotation-journey button:disabled { cursor: wait; }
+.quotation-journey :is(button,a,input,select):focus-visible { outline: 3px solid #e5d3ae; outline-offset: 4px; }
+.quote-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
+.quote-fields label { display: block; font-size: 14px; }
+.quote-fields input,.quote-fields select {
+  display: block; width: 100%; min-height: 48px; border: 1px solid #9bab9e;
+  background: #fffaf1; color: #24352e; padding: 12px; margin-top: 7px; border-radius: 0; font-size: 16px;
+}
+.quote-fields [aria-invalid="true"] { border: 2px solid #f5c6aa; }
+.quote-field-error { display: block; margin-top: 8px; color: #ffe1ce; font-size: 14px; }
+.quote-upload { border: 1px dashed #a7b7aa; padding: 26px; background: #29443a; }
+.quote-upload label { display: block; font-size: 18px; font-weight: 500; }
+.quote-upload p,.quote-upload [role="status"] { font-size: 14px; color: #dce2d8; line-height: 1.6; margin-top: 12px; overflow-wrap: anywhere; }
+.quote-upload input[type="file"] { width: 100%; min-height: 48px; margin-top: 18px; font-size: 14px; }
+.quote-upload input::file-selector-button { padding: 12px; margin-right: 12px; border: 1px solid #a7b7aa; background: transparent; color: #fffaf1; cursor: pointer; }
+.quote-upload img { max-height: 300px; width: 100%; object-fit: contain; margin-top: 18px; }
+.quote-upload button { margin-top: 10px; }
+.quote-secondary { border: 1px solid #a7b7aa; padding: 10px 18px; margin-bottom: 24px; }
+.quote-help,.quote-privacy { color: #dce2d8; font-size: 14px; line-height: 1.65; margin-block: 20px; }
+.quote-context { border: 1px solid #9bab9e; padding: 18px; margin-bottom: 24px; font-size: 14px; }
+.quote-context summary { cursor: pointer; min-height: 30px; font-size: 16px; }
+.quotation-journey .quote-context h2 { font: 500 17px var(--studio-sans); margin-bottom: 8px; }
+.quote-context p { margin-block: 6px; overflow-wrap: anywhere; }
+.quote-context button { margin-left: 20px; }
+.quote-review section { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 16px; padding: 18px 0; border-top: 1px solid #9bab9e; }
+.quotation-journey .quote-review h2 { font: 500 17px var(--studio-sans); }
+.quote-review p { margin-top: 6px; color: #dce2d8; overflow-wrap: anywhere; line-height: 1.65; }
+.quote-review button { font-size: 14px; align-self: start; }
+.quotation-journey label.enquiry-count-choice { color: #dce2d8; margin-block: 26px; }
+.quote-error { background: #fff0e6; border-left: 4px solid #8b321b; color: #65240f; padding: 18px 20px; margin: 20px 0; overflow-wrap: anywhere; scroll-margin-top: 100px; }
+.quote-error p { margin-bottom: 8px; }
+.quote-error button { display: block; }
+.quote-error :is(button,a):focus-visible { outline-color: #65240f; }
+.quote-actions { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-top: 1px solid #9bab9e; padding-top: 22px; margin-top: 24px; }
+.quote-actions a { display: inline-flex; align-items: center; }
+.quotation-journey .quote-button { background: #e5d3ae; color: #172c25; padding: 12px 22px; font-weight: 500; min-height: 48px; }
+.quote-finish-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 24px; }
+@media(max-width:650px) {
+  .public-presentation .quotation-journey { padding: 92px 20px 48px; }
+  .quote-content { margin-top: 24px; }
+  .quotation-journey h1 { font-size: 36px; margin-bottom: 14px; }
+  .quote-intro { font-size: 16px; margin-bottom: 20px; }
+  .quote-fields { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .quote-upload { padding: 20px; }
+  .quote-actions { gap: 14px; margin-top: 16px; padding-top: 18px; }
+  .quotation-journey label.enquiry-count-choice { margin-block: 20px; }
+  .quotation-journey .quote-button { padding: 12px 16px; }
+}
